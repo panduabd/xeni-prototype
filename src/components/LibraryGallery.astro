@@ -1,0 +1,110 @@
+---
+const libraryData = [
+  {
+    projectTitle: "Summer Music Festival Poster Concept",
+    date: "Wednesday",
+    files: [
+      { name: "commercial_woman_phone.png", type: "image", icon: "photo-filled" },
+      { name: "promo_spesial_v2.png", type: "image", icon: "photo-filled" },
+      { name: "hero_banner_wide.png", type: "image", icon: "photo-filled" },
+    ]
+  },
+  {
+    projectTitle: "Minimalist Instagram Post Design for T2intelligence",
+    date: "Tuesday",
+    files: [
+      { name: "t2_instagram_3.png", type: "image", icon: "photo-filled" },
+      { name: "t2_instagram_2.png", type: "image", icon: "photo-filled" },
+      { name: "t2_instagram_1.png", type: "image", icon: "photo-filled" },
+      { name: "t2_story_draft.png", type: "image", icon: "photo-filled" },
+    ]
+  }
+];
+---
+
+<div class="flex flex-col h-full bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] p-8 overflow-y-auto" style="scrollbar-width: none;">
+
+  <!-- Page Header -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 shrink-0">
+    
+    <!-- Left: Title -->
+    <h1 class="text-[22px] font-bold text-foreground tracking-tight">Library</h1>
+    
+    <!-- Right: All Controls -->
+    <div class="flex flex-wrap items-center gap-2.5">
+       
+       <!-- Filter Buttons -->
+       <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-black/[0.08] text-[12px] font-semibold text-foreground hover:bg-[#f4f4f4] bg-white transition-all shadow-[0_2px_8px_rgb(0,0,0,0.02)]">
+          <i class="ti ti-adjustments-horizontal text-[14px] text-muted-foreground"></i> All <i class="ti ti-chevron-down text-[12px] opacity-50 ml-1"></i>
+       </button>
+       <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-black/[0.08] text-[12px] font-semibold text-foreground hover:bg-[#f4f4f4] bg-white transition-all shadow-[0_2px_8px_rgb(0,0,0,0.02)] group">
+          <i class="ti ti-star text-[14px] text-muted-foreground group-hover:text-yellow-500 transition-colors"></i> My favorites
+       </button>
+       
+       <!-- Search Block -->
+       <div class="relative w-[240px]">
+          <i class="ti ti-search text-[14px] text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input type="text" placeholder="Search files..." class="w-full h-8 pl-8 pr-3 text-[12px] font-medium rounded-[8px] border border-black/[0.08] bg-white placeholder:text-muted-foreground focus:outline-none focus:border-black/20 focus:shadow-sm transition-all shadow-[0_2px_8px_rgb(0,0,0,0.02)]" />
+       </div>
+       
+       <!-- View Toggle -->
+       <div class="flex items-center rounded-[8px] border border-black/[0.08] overflow-hidden bg-white shadow-[0_2px_8px_rgb(0,0,0,0.02)] h-8">
+          <button class="w-[34px] h-full flex items-center justify-center bg-[#f0f0f0] text-foreground transition-colors"><i class="ti ti-layout-grid text-[15px]"></i></button>
+          <div class="w-[1px] h-full bg-black/5"></div>
+          <button class="w-[34px] h-full flex items-center justify-center text-muted-foreground hover:bg-[#fafafa] transition-colors"><i class="ti ti-list text-[15px]"></i></button>
+       </div>
+    </div>
+  </div>
+
+  <!-- Library Sections -->
+  <div class="flex flex-col gap-10 pb-10">
+     {libraryData.map((section) => (
+       <div>
+          
+          <!-- Section Header -->
+          <div class="flex items-center justify-between mb-4 px-1">
+             <h3 class="text-[14px] font-bold text-foreground tracking-tight">{section.projectTitle}</h3>
+             <span class="text-[12px] font-medium text-muted-foreground">{section.date}</span>
+          </div>
+
+          <!-- Section Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+             {section.files.map((file) => (
+                <div class="flex flex-col bg-[#f9f9f9] border border-black/[0.06] rounded-[12px] overflow-hidden hover:shadow-md hover:border-black/10 transition-all group cursor-pointer">
+                   
+                   <!-- Card Header -->
+                   <div class="flex items-center justify-between px-3 py-2.5 border-b border-black/[0.04] bg-white shrink-0">
+                      <div class="flex items-center gap-2 overflow-hidden min-w-0 pr-2">
+                         <i class={`ti ti-${file.icon} text-orange-400 text-[16px] shrink-0 drop-shadow-sm`}></i>
+                         <span class="text-[11px] font-bold text-foreground truncate">{file.name}</span>
+                      </div>
+                      <button class="text-muted-foreground hover:text-foreground shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                         <i class="ti ti-dots text-[15px]"></i>
+                      </button>
+                   </div>
+                   
+                   <!-- Card Image Box -->
+                   <div class="w-full aspect-square bg-[#f0f0f0] flex items-center justify-center relative overflow-hidden group-hover:bg-[#eaeaea] transition-colors">
+                       <!-- Image Placeholder -->
+                       <i class="ti ti-photo text-[32px] text-black/10 group-hover:text-black/15 transition-colors"></i>
+                       
+                       <!-- Interactive Overlay -->
+                       <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[1px]">
+                          <button class="w-8 h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center backdrop-blur-sm transition-all shadow-lg scale-90 group-hover:scale-100 duration-200">
+                             <i class="ti ti-download text-[14px]"></i>
+                          </button>
+                          <button class="w-8 h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center backdrop-blur-sm transition-all shadow-lg scale-90 group-hover:scale-100 duration-200 delay-75">
+                             <i class="ti ti-arrows-maximize text-[14px]"></i>
+                          </button>
+                       </div>
+                   </div>
+
+                </div>
+             ))}
+          </div>
+
+       </div>
+     ))}
+  </div>
+
+</div>

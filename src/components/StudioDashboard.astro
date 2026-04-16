@@ -1,0 +1,286 @@
+---
+const crew = [
+  {
+    id: "luna",
+    name: "Luna",
+    role: "Copywriter",
+    initial: "L",
+    task: "Writing Summer campaign copy",
+    skills: [
+      { name: "Ad Copywriting", icon: "ti-pencil", desc: "High-converting copy for social & display" },
+      { name: "Brand Voice", icon: "ti-message-2", desc: "Consistent tone across all touchpoints" },
+      { name: "SEO Content", icon: "ti-search", desc: "Keyword-optimised captions & descriptions" },
+      { name: "Social Media Copy", icon: "ti-brand-instagram", desc: "Captions, hashtags & engagement hooks" },
+    ]
+  },
+  {
+    id: "vesna",
+    name: "Vesna",
+    role: "Designer",
+    initial: "V",
+    task: "Building carousel layout",
+    skills: [
+      { name: "Social Media Feeds", icon: "ti-layout-grid", desc: "High-quality feed & carousel layouts" },
+      { name: "Digital Ads", icon: "ti-ad", desc: "Conversion-focused promotional assets" },
+      { name: "Marketplace Banners", icon: "ti-shopping-cart", desc: "Professional store & product banners" },
+      { name: "Campaign Graphics", icon: "ti-speakerphone", desc: "Cohesive visual assets for marketing" },
+    ]
+  },
+];
+
+const recentProjects = [
+  { name: "Summer Drink Campaign", brand: "Fresh Juice Co.", assets: 4, date: "2 mins ago", bg: "bg-[#f4f5f7]", icon: "ti-cup" },
+  { name: "New Arrival Promo",     brand: "Urban Bloom",    assets: 12, date: "1 hr ago",   bg: "bg-[#f4f5f7]", icon: "ti-plant-2" },
+  { name: "Webinar Talk",          brand: "Apex CRM",       assets: 2,  date: "Yesterday",  bg: "bg-[#f4f5f7]", icon: "ti-device-desktop" },
+];
+
+const insight = {
+  label: "Today's Brief",
+  message: "You have 2 active projects running. Luna is drafting copy for Summer Drink Campaign, and Vesna is building the carousel layout. No blockers reported.",
+};
+---
+
+<style>
+  .skill-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+    opacity: 0;
+  }
+  .skill-details.open {
+    max-height: 320px;
+    opacity: 1;
+  }
+  .chevron-icon { transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
+  .chevron-icon.open { transform: rotate(180deg); }
+
+  #project-slider { scroll-behavior: smooth; scrollbar-width: none; }
+  #project-slider::-webkit-scrollbar { display: none; }
+</style>
+
+<div class="h-full w-full bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] p-5 overflow-y-auto flex flex-col gap-4" style="scrollbar-width: none;">
+
+  <!-- Raka Section (Direct / No bounding box) -->
+  <div class="flex flex-col gap-3 px-1 mb-2">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="relative">
+          <div class="w-8 h-8 rounded-full bg-[#f0f0f0] border border-black/[0.08] flex items-center justify-center text-[12px] font-bold text-foreground">R</div>
+          <div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></div>
+        </div>
+        <div>
+          <p class="text-[12.5px] font-semibold text-foreground leading-none">Raka</p>
+          <p class="text-[10px] text-muted-foreground mt-0.5">Creative Manager · AI Crew Lead</p>
+        </div>
+      </div>
+      <span id="brief-label" class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#f4f5f7] border border-black/[0.06] text-[9.5px] font-semibold text-muted-foreground transition-all duration-300">
+        <i class="ti ti-sparkles text-[10px]"></i>
+        {insight.label}
+      </span>
+    </div>
+
+    <!-- Chat bubble -->
+    <div class="bg-[#f8f9fb] border border-black/[0.05] rounded-[10px] rounded-tl-[2px] px-3.5 py-3 shadow-sm flex flex-col gap-2">
+      <p id="brief-message" class="text-[12px] leading-relaxed text-foreground/75 italic transition-all duration-300">
+        "{insight.message}"
+      </p>
+      <div id="brief-action" class="hidden">
+        <button class="w-full mt-1 py-1.5 rounded-[6px] bg-white border border-black/[0.08] text-[10.5px] font-bold text-foreground hover:bg-[#fafafa] transition-all flex items-center justify-center gap-1.5 shadow-sm">
+          <i class="ti ti-checklist text-[12px] text-emerald-500"></i>
+          Check Task
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider Our Crew -->
+  <div class="flex items-center gap-3">
+    <div class="h-px flex-1 bg-black/[0.06]"></div>
+    <span class="text-[10px] font-bold text-muted-foreground uppercase tracking-widest shrink-0">Our AI Crew</span>
+    <div class="h-px flex-1 bg-black/[0.06]"></div>
+  </div>
+
+  <!-- Crew Cards -->
+  <div class="flex flex-col gap-2">
+    {crew.map((member) => (
+      <div class="rounded-[12px] border border-black/[0.07] bg-white overflow-hidden">
+        
+        <button
+          class="crew-toggle w-full flex items-center gap-3 px-4 py-3 hover:bg-[#fafafa] transition-colors text-left"
+          data-target={`crew-${member.id}`}
+        >
+          <div class="relative shrink-0">
+            <div class="w-8 h-8 rounded-full bg-[#f0f0f0] border border-black/[0.08] flex items-center justify-center text-[12px] font-semibold text-foreground">{member.initial}</div>
+            <div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></div>
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <p class="text-[12.5px] font-semibold text-foreground leading-none">{member.name}</p>
+              <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[#f4f5f7] border border-black/[0.05] text-[9px] font-medium text-muted-foreground max-w-[140px]">
+                <i class="ti ti-loader-2 text-[9px] text-emerald-500 shrink-0"></i>
+                <span class="truncate">{member.task}</span>
+              </span>
+            </div>
+            <p class="text-[10px] text-muted-foreground mt-0.5">{member.role} · AI Crew</p>
+          </div>
+
+          <i class="chevron-icon ti ti-chevron-down text-[13px] text-muted-foreground/40 shrink-0"></i>
+        </button>
+
+        <div id={`crew-${member.id}`} class="skill-details">
+          <div class="px-4 pb-4 flex flex-col gap-2.5 border-t border-black/[0.05]">
+
+            <div class="flex items-center gap-1.5 mt-2.5 px-3 py-2 rounded-[8px] bg-emerald-50 border border-emerald-100">
+              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></div>
+              <span class="text-[11px] font-semibold text-emerald-700">{member.task}</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-1.5 mt-0.5">
+              {member.skills.map((skill) => (
+                <div class="flex items-start gap-2 p-2.5 rounded-[10px] bg-[#f8f9fb] border border-black/[0.05]">
+                  <i class={`ti ${skill.icon} text-[13px] text-muted-foreground mt-0.5 shrink-0`}></i>
+                  <div class="min-w-0">
+                    <p class="text-[10.5px] font-semibold text-foreground leading-tight">{skill.name}</p>
+                    <p class="text-[9.5px] text-muted-foreground mt-0.5 leading-snug">{skill.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    ))}
+  </div>
+
+  <!-- Section Header: Recent Projects -->
+  <div class="flex items-center justify-between mt-2 px-1">
+    <h3 class="text-[13px] font-bold text-foreground">Recent Projects</h3>
+    <button class="text-[10px] font-bold text-muted-foreground hover:text-foreground tracking-wider transition-colors">View All</button>
+  </div>
+
+  <!-- Horizontal slider -->
+  <div class="relative">
+    <!-- Prev/Next buttons -->
+    <button id="proj-prev" class="hidden absolute -left-1 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white border border-black/[0.08] shadow-sm flex items-center justify-center hover:bg-[#f4f5f7] transition-colors">
+      <i class="ti ti-chevron-left text-[13px] text-muted-foreground"></i>
+    </button>
+    <button id="proj-next" class="absolute -right-1 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white border border-black/[0.08] shadow-sm flex items-center justify-center hover:bg-[#f4f5f7] transition-colors">
+      <i class="ti ti-chevron-right text-[13px] text-muted-foreground"></i>
+    </button>
+
+    <!-- Slider track -->
+    <div id="project-slider" class="flex gap-3 overflow-x-auto pr-4 py-4 -my-3 cursor-grab active:cursor-grabbing">
+      {recentProjects.map((p) => (
+        <div class="shrink-0 w-[160px] rounded-[12px] border border-black/[0.06] bg-white hover:shadow-[0_4px_16px_rgb(0,0,0,0.06)] hover:-translate-y-0.5 transition-all cursor-pointer overflow-hidden">
+          <!-- Thumbnail -->
+          <div class={`w-full h-[80px] ${p.bg} flex items-center justify-center relative`}>
+            <i class={`ti ${p.icon} text-[32px] text-black/10`}></i>
+            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded-[5px] bg-black/60 text-white text-[9px] font-semibold">{p.date}</div>
+          </div>
+          <!-- Info -->
+          <div class="p-2.5">
+            <p class="text-[11.5px] font-semibold text-foreground leading-tight truncate">{p.name}</p>
+            <p class="text-[10px] text-muted-foreground mt-0.5 truncate">{p.brand}</p>
+            <div class="flex items-center gap-1 mt-2">
+              <i class="ti ti-folder text-[10px] text-muted-foreground/70"></i>
+              <span class="text-[9.5px] text-muted-foreground font-medium">{p.assets} assets</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Accordion
+  document.querySelectorAll('.crew-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.target);
+      const icon  = btn.querySelector('.chevron-icon');
+      const isOpen = panel.classList.contains('open');
+      document.querySelectorAll('.skill-details').forEach(p => p.classList.remove('open'));
+      document.querySelectorAll('.chevron-icon').forEach(i => i.classList.remove('open'));
+      if (!isOpen) { panel.classList.add('open'); icon.classList.add('open'); }
+    });
+  });
+
+  // Slider drag-to-scroll
+  const slider = document.getElementById('project-slider');
+  const prevBtn = document.getElementById('proj-prev');
+  const nextBtn = document.getElementById('proj-next');
+  let isDown = false, startX, scrollLeft;
+
+  function updateButtons() {
+    if (slider.scrollLeft <= 0) {
+      prevBtn.classList.add('hidden');
+    } else {
+      prevBtn.classList.remove('hidden');
+    }
+  }
+
+  slider.addEventListener('scroll', updateButtons);
+
+  slider.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+  slider.addEventListener('mouseleave', () => isDown = false);
+  slider.addEventListener('mouseup', () => isDown = false);
+  slider.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX);
+  });
+
+  // Prev/Next buttons
+  prevBtn.addEventListener('click', () => slider.scrollBy({ left: -185, behavior: 'smooth' }));
+  nextBtn.addEventListener('click', () => slider.scrollBy({ left: 185, behavior: 'smooth' }));
+
+  // Initial check
+  updateButtons();
+
+  // Raka Randomized Brief Logic (Prototype)
+  const briefLabel = document.getElementById('brief-label');
+  const briefMessage = document.getElementById('brief-message');
+  const briefAction = document.getElementById('brief-action');
+
+  const conditions = [
+    {
+      label: "Welcome",
+      message: "Halo! Saya Raka, Creative Manager Anda. Saya di sini untuk membantu mengelola tim AI Crew agar kampanye Anda berjalan lancar. Silakan ketik apa saja di AI Input untuk memulai.",
+      hasAction: false
+    },
+    {
+      label: "Day 2 Update",
+      message: "Selamat pagi! Hari ini kita ada update proyek. Tim sedang standby menunggu arahan baru dari Anda. Apa ada yang bisa saya bantu hari ini?",
+      hasAction: false
+    },
+    {
+      label: "Daily Summary",
+      message: "Kemarin Luna dan Vesna sudah menyelesaikan draft awal untuk Summer Campaign. Semua berjalan sesuai jadwal. Silakan cek detailnya di sini.",
+      hasAction: true
+    }
+  ];
+
+  // Pick a random condition on every refresh
+  const randomIdx = Math.floor(Math.random() * conditions.length);
+  const selected = conditions[randomIdx];
+
+  if (briefLabel && briefMessage && selected) {
+    // Update Label
+    const labelIcon = briefLabel.querySelector('i');
+    briefLabel.innerHTML = '';
+    if (labelIcon) briefLabel.appendChild(labelIcon);
+    briefLabel.appendChild(document.createTextNode(` ${selected.label}`));
+    
+    // Update Message
+    briefMessage.textContent = `"${selected.message}"`;
+    
+    // Handle Action Button
+    if (selected.hasAction && briefAction) {
+      briefAction.classList.remove('hidden');
+    }
+  }
+</script>

@@ -1,26 +1,195 @@
 ---
 import '../styles/global.css';
-// Component Imports
-import Button from '../components/Button.astro';
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+import Shell from '../components/Shell.astro';
+import StudioDashboard from '../components/StudioDashboard.astro';
+import ChatPanel from '../components/ChatPanel.astro';
+import ProjectsList from '../components/ProjectsList.astro';
+import NewProjectModal from '../components/NewProjectModal.astro';
+import BrandDNAList from '../components/BrandDNAList.astro';
+import BrandDNADetail from '../components/BrandDNADetail.astro';
+import LibraryGallery from '../components/LibraryGallery.astro';
+import ProjectWorkspace from '../components/ProjectWorkspace.astro';
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro + TailwindCSS</title>
-	</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <meta name="generator" content={Astro.generator} />
+    <title>OiCrew Studio</title>
+    <meta name="description" content="OiCrew Studio — AI Creative Team." />
+  </head>
 
-	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
-	</body>
+  <body class="overflow-hidden">
+    <Shell>
+      
+      <!-- VIEW: OVERVIEW -->
+      <div id="view-overview" class="w-full h-full flex min-w-0 gap-3 overflow-hidden">
+        <ChatPanel />
+        <div class="w-[340px] xl:w-[380px] shrink-0 h-full overflow-hidden block">
+          <StudioDashboard />
+        </div>
+      </div>
+
+      <!-- VIEW: PROJECTS -->
+      <div id="view-projects" class="hidden w-full h-full flex flex-col min-w-0">
+        <ProjectsList />
+      </div>
+
+      <!-- VIEW: ACTIVE WORKSPACE -->
+      <div id="view-workspace" class="hidden w-full h-full flex flex-col min-w-0">
+        <ProjectWorkspace />
+      </div>
+
+      <!-- VIEW: BRAND DNA -->
+      <div id="view-brand-dna" class="hidden w-full h-full flex flex-col min-w-0 relative">
+        <div id="brand-list-wrapper" class="w-full h-full absolute inset-0">
+          <BrandDNAList />
+        </div>
+        <div id="brand-detail-wrapper" class="hidden w-full h-full absolute inset-0 z-10">
+          <BrandDNADetail />
+        </div>
+      </div>
+
+      <!-- VIEW: LIBRARY -->
+      <div id="view-library" class="hidden w-full h-full flex flex-col min-w-0">
+        <LibraryGallery />
+      </div>
+
+    </Shell>
+    
+    <NewProjectModal />
+
+    <script>
+      const views = {
+        overview: document.getElementById('view-overview'),
+        projects: document.getElementById('view-projects'),
+        workspace: document.getElementById('view-workspace'),
+        'brand-dna': document.getElementById('view-brand-dna'),
+        library: document.getElementById('view-library'),
+      };
+
+      const sidebarBtns = document.querySelectorAll('.sidebar-nav-btn');
+      const promptInput = document.getElementById('prompt-input');
+      const btnSubmitPrompt = document.getElementById('btn-submit-prompt');
+      const examplePrompts = document.querySelectorAll('.example-prompt');
+      
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const btnCloseModal = document.getElementById('btn-close-modal');
+      const btnNewProjectList = document.getElementById('btn-new-project-list');
+      const btnNewProjectGrid = document.getElementById('btn-new-project-grid');
+      const btnNewProjectDash = document.getElementById('btn-new-project');
+      const cardNewProjectDash = document.getElementById('card-new-project');
+      const goalCards = document.querySelectorAll('.goal-card');
+
+      function showView(viewId) {
+        Object.entries(views).forEach(([id, el]) => {
+          if (el) el.classList.toggle('hidden', id !== viewId);
+        });
+
+        // Trigger workspace sequence if opening workspace view
+        if (viewId === 'workspace' && window._startWorkspaceSequence) {
+          window._startWorkspaceSequence();
+        }
+
+          // Update active state in sidebar
+          sidebarBtns.forEach(btn => {
+            const target = btn.getAttribute('data-nav-target');
+            if (!target) return;
+            const isActive = target === viewId;
+            
+            // Active Styles
+            btn.classList.toggle('bg-white', isActive);
+            btn.classList.toggle('shadow-[0_2px_10px_rgb(0,0,0,0.04)]', isActive);
+            btn.classList.toggle('border-[0.5px]', isActive);
+            btn.classList.toggle('border-black/[0.05]', isActive);
+            btn.classList.toggle('text-foreground', isActive);
+            btn.classList.toggle('font-semibold', isActive);
+            
+            // Inactive Styles
+            btn.classList.toggle('text-muted-foreground', !isActive);
+            btn.classList.toggle('hover:bg-[#fafafa]', !isActive);
+            btn.classList.toggle('font-medium', !isActive);
+          });
+        }
+
+      // Sidebar navigation
+      sidebarBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-nav-target');
+          if (target && views[target]) showView(target);
+        });
+      });
+
+      // Submit chat prompt -> Switch to Workspace view (simulating actual generation request)
+      if (btnSubmitPrompt) {
+        btnSubmitPrompt.addEventListener('click', () => {
+          if (promptInput && promptInput.value.trim()) {
+            showView('workspace');
+          }
+        });
+      }
+
+      // Quick feature cards -> Auto fill but wait for user to click send!
+      examplePrompts.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const titleNode = btn.querySelector('.feature-title');
+          const title = titleNode ? titleNode.textContent.trim() : '';
+          if (promptInput && title) {
+             // Only populates the text field, generation starts on send button click
+             promptInput.value = `Create ${title}...`;
+             promptInput.focus();
+          }
+        });
+      });
+
+      // Brand DNA internal routing
+      const brandListWrapper = document.getElementById('brand-list-wrapper');
+      const brandDetailWrapper = document.getElementById('brand-detail-wrapper');
+      const btnCreateBrand = document.getElementById('btn-create-brand');
+      const btnBackBrandList = document.getElementById('btn-back-brand-list');
+      const btnOpenBrandDetails = document.querySelectorAll('.btn-open-brand-detail');
+
+      function showBrandDetail() {
+        if (brandListWrapper) brandListWrapper.classList.add('hidden');
+        if (brandDetailWrapper) brandDetailWrapper.classList.remove('hidden');
+      }
+
+      function showBrandList() {
+        if (brandDetailWrapper) brandDetailWrapper.classList.add('hidden');
+        if (brandListWrapper) brandListWrapper.classList.remove('hidden');
+      }
+
+      if (btnCreateBrand) btnCreateBrand.addEventListener('click', showBrandDetail);
+      if (btnBackBrandList) btnBackBrandList.addEventListener('click', showBrandList);
+      btnOpenBrandDetails.forEach(btn => {
+        btn.addEventListener('click', showBrandDetail);
+      });
+
+      // Simple Modal Logic
+      const openModal = () => { if (modalBackdrop) modalBackdrop.classList.remove('hidden'); };
+      const closeModal = () => { if (modalBackdrop) modalBackdrop.classList.add('hidden'); };
+
+      if (btnNewProjectList) btnNewProjectList.addEventListener('click', () => showView('workspace'));
+      if (btnNewProjectGrid) btnNewProjectGrid.addEventListener('click', () => showView('workspace'));
+      if (btnNewProjectDash) btnNewProjectDash.addEventListener('click', () => showView('workspace'));
+      if (cardNewProjectDash) cardNewProjectDash.addEventListener('click', () => showView('workspace'));
+      if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
+      if (modalBackdrop) {
+        modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+      }
+      goalCards.forEach(card => {
+        card.addEventListener('click', () => { 
+          closeModal(); 
+          showView('workspace'); 
+        });
+      });
+    </script>
+  </body>
 </html>

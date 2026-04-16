@@ -1,0 +1,85 @@
+---
+const brandList = [
+  { name: "Fresh Juice Co.", type: "F&B / Retail", lastUpdated: "Updated 2 days ago", color: "bg-[#7185ff]", txtColor: "text-white", status: "Active", initials: "F" },
+  { name: "Urban Bloom", type: "Coffee Shop", lastUpdated: "Updated 4 days ago", color: "bg-[#e2f17d]", txtColor: "text-[#4a5214]", status: "Draft", initials: "U" },
+  { name: "Apex CRM", type: "SaaS / B2B", lastUpdated: "Updated 1 week ago", color: "bg-[#fdc6e7]", txtColor: "text-[#872e61]", status: "Active", initials: "A" },
+];
+---
+
+<div class="flex flex-col h-full bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] p-8 overflow-y-auto" style="scrollbar-width: none;">
+
+  <!-- Page Header -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 shrink-0">
+    
+    <!-- Left: Title -->
+    <h1 class="text-[22px] font-bold text-foreground tracking-tight">Brand DNA</h1>
+    
+    <!-- Right: All Controls -->
+    <div class="flex flex-wrap items-center gap-2.5">
+       <!-- Create Brand Button -->
+       <button id="btn-create-brand" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-[8px] bg-foreground text-white hover:bg-black font-semibold text-[12px] shadow-[0_2px_8px_rgb(0,0,0,0.08)] transition-all hover:-translate-y-0.5">
+          <i class="ti ti-plus text-[14px]"></i> Create Brand DNA
+       </button>
+       
+       <!-- Search Block -->
+       <div class="relative w-[240px]">
+          <i class="ti ti-search text-[14px] text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input type="text" placeholder="Search brands..." class="w-full h-8 pl-8 pr-3 text-[12px] font-medium rounded-[8px] border border-black/[0.08] bg-white placeholder:text-muted-foreground focus:outline-none focus:border-black/20 focus:shadow-sm transition-all shadow-[0_2px_8px_rgb(0,0,0,0.02)]" />
+       </div>
+    </div>
+  </div>
+
+  <!-- Ticket Layout Gallery -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    {brandList.map((brand) => (
+      <div class="btn-open-brand-detail flex flex-col bg-white rounded-[20px] shadow-[0_8px_24px_rgb(0,0,0,0.04)] border border-black/5 overflow-hidden cursor-pointer group hover:-translate-y-1 transition-all" data-brand-id={brand.name}>
+         
+         <!-- Top Colored Bar -->
+         <div class={`px-5 py-3 ${brand.color} flex items-center justify-end h-[68px]`}>
+            <!-- Removed ID, showing Last Updated precisely on top right -->
+            <span class={`text-[11px] font-bold ${brand.txtColor} opacity-80 mt-[-10px]`}>{brand.lastUpdated}</span>
+         </div>
+
+         <!-- White Body -->
+         <div class="px-5 pb-5 pt-1 relative">
+            
+            <!-- Floating Logo Placeholder -->
+            <div class={`absolute left-5 -top-8 w-[58px] h-[58px] rounded-[16px] border-[4px] border-white shadow-sm flex items-center justify-center text-[22px] font-extrabold ${brand.txtColor} ${brand.color}`}>
+               {brand.initials}
+            </div>
+
+            <div class="mt-9">
+               <span class="text-[10px] font-semibold text-muted-foreground">{brand.type}</span>
+               
+               <div class="flex items-start justify-between mt-0.5 mb-4 space-x-2">
+                  <h3 class="text-[17px] font-bold text-foreground leading-snug">{brand.name}</h3>
+                  <span class={`px-2.5 py-0.5 rounded-full text-[10px] font-bold mt-0.5 shrink-0
+                                ${brand.status === 'Active' ? 'bg-[#eef3ff] text-[#5578f2]' : 'bg-orange-50 text-orange-600'}`}>
+                     {brand.status}
+                  </span>
+               </div>
+
+               <!-- Dashed Divider -->
+               <div class="border-t-[1.5px] border-dashed border-black/[0.08] w-full mb-3"></div>
+
+               <!-- Bottom Action -->
+               <div class="flex items-center justify-between mt-3.5">
+                  <div class="flex items-center gap-1.5">
+                     <span class="text-[16px] font-bold text-foreground">100%</span>
+                     <span class="text-[11px] font-bold text-muted-foreground">Setup</span>
+                  </div>
+                  <button class="px-5 py-2 rounded-full bg-[#111111] text-white text-[11px] font-bold group-hover:bg-primary transition-colors">
+                     View Detail
+                  </button>
+               </div>
+            </div>
+
+         </div>
+
+      </div>
+    ))}
+
+  </div>
+
+</div>
