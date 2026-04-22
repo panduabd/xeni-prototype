@@ -1,178 +1,523 @@
 ---
+
 ---
 
-<div class="flex flex-col h-full bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] overflow-hidden">
-  
-  <!-- Stick Header -->
-  <div class="px-8 py-5 border-b border-black/[0.04] flex items-center justify-between bg-white/80 backdrop-blur-md z-10 shrink-0">
-     <div class="flex items-center gap-4">
-        <button id="btn-back-brand-list" class="w-8 h-8 rounded-full hover:bg-black/5 flex items-center justify-center text-muted-foreground transition-colors group">
-           <i class="ti ti-arrow-left text-[18px] group-hover:-translate-x-0.5 transition-transform"></i>
-        </button>
-        <div>
-           <h1 class="text-[18px] font-bold text-foreground leading-tight flex items-center gap-2">
-             Brand DNA Kit
-             <span class="bg-emerald-50 border border-emerald-100 text-emerald-600 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
-           </h1>
-           <p class="text-[11px] text-muted-foreground mt-0.5">Define core parameters for AI generation</p>
-        </div>
-     </div>
-     <div class="flex items-center gap-3">
-        <button class="px-4 py-2 rounded-[10px] text-[12px] font-bold text-foreground border border-black/10 hover:bg-[#fafafa] bg-white transition-colors shadow-[0_2px_8px_rgb(0,0,0,0.02)]">Discard Changes</button>
-        <button class="px-4 py-2 rounded-[10px] text-[12px] font-bold text-white bg-foreground hover:bg-black transition-colors shadow-sm">Save Brand Kit</button>
-     </div>
+<div
+  class="flex flex-col h-full bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] overflow-hidden"
+>
+  <!-- Sticky Header -->
+  <div class="px-10 py-5 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
+    <div class="flex items-center gap-4">
+      <button
+        id="btn-back-brand-list"
+        class="w-8 h-8 rounded-full hover:bg-slate-50 flex items-center justify-center text-slate-400 transition-colors"
+      >
+        <i class="ti ti-arrow-left text-[18px]"></i>
+      </button>
+      <h1 class="text-[18px] font-bold text-slate-900">
+        [Sample] OiCrew Brand Kit
+      </h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="w-8 h-8 rounded-full hover:bg-slate-50 flex items-center justify-center text-slate-400">
+        <i class="ti ti-dots text-[20px]"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Ready-to-use Banner -->
+  <div class="px-10 py-3 bg-[#eef4ff] flex items-center justify-between border-b border-slate-100">
+    <div class="flex items-center gap-3">
+      <div class="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
+        <i class="ti ti-info-circle text-white text-[12px]"></i>
+      </div>
+      <p class="text-[12px] text-blue-700 font-medium">
+        We've prepared a ready-to-use Brand Kit for you. <br/>
+        <span class="text-[11px] opacity-80">Apply it to a project and start creating on-brand designs instantly.</span>
+      </p>
+    </div>
+    <button class="bg-slate-900 text-white px-4 py-1.5 rounded-md text-[11px] font-bold hover:bg-slate-800 transition-colors">
+      Design with this kit
+    </button>
   </div>
 
   <!-- Scrollable Form Container -->
-  <div class="flex-1 overflow-y-auto p-8" style="scrollbar-width: none;">
-     
-     <div class="w-full max-w-[800px] mx-auto flex flex-col gap-12 pb-20">
+  <div class="flex-1 overflow-y-auto" style="scrollbar-width: none;">
+    <div class="w-full max-w-[1000px] mx-auto flex flex-col gap-10 px-10 py-12 pb-24">
+      <!-- SECTION 1: DESIGN GUIDANCE -->
+      <div class="flex flex-col gap-3">
+        <h2 class="text-[13px] font-semibold text-slate-500">Design Guidance</h2>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 space-y-3">
+          <p class="text-[13px] text-slate-700 leading-relaxed font-medium">
+            <span class="font-bold">Human:</span> A brand built on shared understanding. Lovart acts as a day-to-day partner, not just a tool.
+          </p>
+          <p class="text-[13px] text-slate-700 leading-relaxed font-medium">
+            <span class="font-bold">Creative:</span> Elevating the ceiling of work quality. We ensure that professional-grade design is open to everyone.
+          </p>
+          <p class="text-[13px] text-slate-700 leading-relaxed font-medium">
+            <span class="font-bold">Practical:</span> Innovation backed by utility. Every feature and visual element is designed for real-world functionality.
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 2: VISUAL SPECIFICATIONS -->
+      <div class="flex flex-col gap-10">
         
-        <!-- SECTION 1: IDENTITY -->
-        <div class="flex flex-col gap-5">
-           <h2 class="text-[15px] font-bold border-b border-black/5 pb-2 text-foreground flex items-center gap-2">
-             <i class="ti ti-id"></i> 1. Identity & Context
-           </h2>
-           
-           <div class="grid grid-cols-2 gap-5">
-              <div>
-                 <label class="block text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-1.5 pl-1">Brand Name</label>
-                 <input type="text" value="Fresh Juice Co." class="w-full h-11 px-3.5 rounded-[12px] bg-white border border-black/10 shadow-[0_2px_8px_rgb(0,0,0,0.02)] text-[13px] font-semibold focus:outline-none focus:border-black/30 focus:shadow-md transition-all placeholder:text-muted-foreground/50" />
+        <!-- Logos -->
+        <div class="flex flex-col gap-4">
+          <h2 class="text-[13px] font-semibold text-slate-500">Logo</h2>
+          <div class="flex gap-6">
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-100 transition-colors">
+                <i class="ti ti-brand-abstract text-[40px] text-slate-900"></i>
               </div>
-              <div>
-                 <label class="block text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-1.5 pl-1">Slogan / Tagline</label>
-                 <input type="text" value="Squeeze the day!" class="w-full h-11 px-3.5 rounded-[12px] bg-white border border-black/10 shadow-[0_2px_8px_rgb(0,0,0,0.02)] text-[13px] font-semibold focus:outline-none focus:border-black/30 focus:shadow-md transition-all placeholder:text-muted-foreground/50" />
+              <span class="text-[12px] font-medium text-slate-600">Primary Logo</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-100 transition-colors">
+                <i class="ti ti-hexagon-letter-o text-[40px] text-slate-900"></i>
               </div>
-           </div>
-
-           <div>
-              <label class="block text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-1.5 pl-1">About This Brand (Context for AI)</label>
-              <textarea rows="3" class="w-full p-3.5 rounded-[12px] bg-white border border-black/10 shadow-[0_2px_8px_rgb(0,0,0,0.02)] text-[13px] font-medium resize-none focus:outline-none focus:border-black/30 focus:shadow-md transition-all leading-relaxed">A premium organic juice company targeting health-conscious millennials.</textarea>
-           </div>
+              <span class="text-[12px] font-medium text-slate-600">Symbol</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-100 transition-colors">
+                <p class="text-[20px] font-black tracking-tighter text-slate-900">LOVART</p>
+              </div>
+              <span class="text-[12px] font-medium text-slate-600">Wordmark</span>
+            </div>
+          </div>
         </div>
 
-        <!-- SECTION 2: AI CREATIVE GUIDELINES (VOICE & TONE) -->
-        <div class="flex flex-col gap-5">
-           <div class="border-b border-black/5 pb-2">
-              <h2 class="text-[15px] font-bold text-foreground flex items-center gap-2">
-                <i class="ti ti-message-chatbot"></i> 2. AI Directives
-              </h2>
-              <p class="text-[11px] text-muted-foreground mt-1">Rules shaping how the AI writes and behaves for this brand.</p>
-           </div>
-           
-           <div>
-              <label class="block text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-1.5 pl-1">Brand Voice (Tone & Attitude)</label>
-              <textarea rows="2" class="w-full p-3.5 rounded-[12px] bg-white border border-black/10 shadow-[0_2px_8px_rgb(0,0,0,0.02)] text-[13px] font-medium resize-none focus:outline-none focus:border-black/30 focus:shadow-md transition-all leading-relaxed placeholder:text-muted-foreground/50" placeholder="e.g. Professional and highly academic.">Vibrant, energetic, slightly playful but always welcoming.</textarea>
-           </div>
-           
-           <div>
-              <label class="block text-[11px] font-bold text-red-500 uppercase tracking-wider mb-1.5 pl-1">Negative Guidelines ("Do Nots")</label>
-              <textarea rows="2" class="w-full p-3.5 rounded-[12px] bg-red-50/50 border border-red-100 shadow-[0_2px_8px_rgb(0,0,0,0.02)] text-[13px] font-semibold text-red-900 resize-none focus:outline-none focus:bg-white focus:border-red-300 focus:shadow-md transition-all placeholder:text-red-300/80 leading-relaxed" placeholder="e.g. Do not use dark colors. Never use complex jargon.">Do not use neon or artificial coloring. Never use formal/corporate jargon.</textarea>
-           </div>
+        <!-- Color -->
+        <div class="flex flex-col gap-4">
+          <h2 class="text-[13px] font-semibold text-slate-500">Color</h2>
+          <div class="flex gap-6">
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-[#f4f4f4] border border-slate-100 cursor-pointer hover:scale-105 transition-transform"></div>
+              <span class="text-[12px] font-medium text-slate-600">Cloud</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-[#111111] border border-slate-100 cursor-pointer hover:scale-105 transition-transform"></div>
+              <span class="text-[12px] font-medium text-slate-600">Charcoal</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-[#e5ff80] border border-slate-100 cursor-pointer hover:scale-105 transition-transform"></div>
+              <span class="text-[12px] font-medium text-slate-600">Lime</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-[#ccff00] border border-slate-100 cursor-pointer hover:scale-105 transition-transform"></div>
+              <span class="text-[12px] font-medium text-slate-600">Lightning</span>
+            </div>
+          </div>
         </div>
 
-        <!-- SECTION 3: VISUAL ASSETS -->
-        <div class="flex flex-col gap-5">
-           
-           <div class="border-b border-black/5 pb-2 mb-2">
-             <h2 class="text-[15px] font-bold text-foreground flex items-center gap-2">
-               <i class="ti ti-color-swatch"></i> 3. Visual Specifications
-             </h2>
-             <p class="text-[11px] text-muted-foreground mt-1">Design variables used to structure templates and image generation.</p>
-           </div>
-           
-           <div class="grid grid-cols-2 gap-6">
-               <!-- Color Palette -->
-               <div class="p-5 rounded-[16px] border border-black/5 bg-white shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                  <h3 class="text-[13px] font-bold mb-4 flex items-center justify-between">Color Palette 
-                    <button class="w-6 h-6 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center transition-colors">
-                      <i class="ti ti-plus text-[12px]"></i>
-                    </button>
-                  </h3>
-                  <div class="flex gap-2">
-                     <div class="relative group">
-                       <div class="w-[42px] h-[42px] rounded-full bg-orange-500 shadow-sm border border-black/5 cursor-pointer hover:scale-110 transition-transform"></div>
-                     </div>
-                     <div class="relative group">
-                       <div class="w-[42px] h-[42px] rounded-full bg-emerald-500 shadow-sm border border-black/5 cursor-pointer hover:scale-110 transition-transform"></div>
-                     </div>
-                     <div class="relative group">
-                       <div class="w-[42px] h-[42px] rounded-full bg-[#111111] shadow-sm border border-black/5 cursor-pointer hover:scale-110 transition-transform"></div>
-                     </div>
-                     <div class="relative group">
-                       <div class="w-[42px] h-[42px] rounded-full bg-white shadow-sm border border-black/10 cursor-pointer hover:scale-110 transition-transform"></div>
-                     </div>
-                  </div>
-               </div>
-
-               <!-- Typography -->
-               <div class="p-5 rounded-[16px] border border-black/5 bg-white shadow-[0_2px_12px_rgb(0,0,0,0.02)]">
-                  <h3 class="text-[13px] font-bold mb-4 flex items-center justify-between">Typography 
-                    <button class="text-[11px] font-semibold text-primary/80 hover:text-primary">Edit Fonts</button>
-                  </h3>
-                  <div class="flex flex-col gap-3">
-                     <div>
-                       <span class="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block mb-1">Heading</span>
-                       <p class="text-[16px] font-extrabold text-foreground leading-none" style="font-family: 'Inter', sans-serif;">Inter Bold</p>
-                     </div>
-                     <div>
-                       <span class="text-[9px] font-bold text-muted-foreground uppercase tracking-widest block mb-1">Body Text</span>
-                       <p class="text-[13px] font-medium text-foreground/70" style="font-family: 'Inter', sans-serif;">Inter Medium</p>
-                     </div>
-                  </div>
-               </div>
-           </div>
-
-           <!-- Logos -->
-           <div class="p-5 rounded-[16px] border border-black/5 bg-white shadow-[0_2px_12px_rgb(0,0,0,0.02)] mt-2">
-              <h3 class="text-[13px] font-bold mb-4">Logos & Iconography</h3>
-              <div class="flex gap-4">
-                 <div class="w-[100px] h-[100px] rounded-[14px] bg-[#fafafa] border-2 border-black/5 border-dashed flex flex-col items-center justify-center cursor-pointer hover:border-black/20 hover:bg-[#f0f0f0] transition-colors group">
-                    <i class="ti ti-upload text-[24px] text-black/20 group-hover:text-black/40 mb-1 transition-colors"></i>
-                    <span class="text-[10px] font-bold text-muted-foreground">Primary Logo</span>
-                 </div>
-                 <div class="w-[100px] h-[100px] rounded-[14px] bg-[#fafafa] border-2 border-black/5 border-dashed flex flex-col items-center justify-center cursor-pointer hover:border-black/20 hover:bg-[#f0f0f0] transition-colors group">
-                    <i class="ti ti-upload text-[24px] text-black/20 group-hover:text-black/40 mb-1 transition-colors"></i>
-                    <span class="text-[10px] font-bold text-muted-foreground">Logomark</span>
-                 </div>
+        <!-- Fonts -->
+        <div class="flex flex-col gap-4">
+          <h2 class="text-[13px] font-semibold text-slate-500">Fonts</h2>
+          <div class="flex gap-6">
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-100 transition-colors">
+                <p class="text-[40px] font-serif text-slate-900">Ag</p>
               </div>
-           </div>
-           
-           <!-- Product Reference -->
-           <div class="p-5 rounded-[16px] border border-black/5 bg-white shadow-[0_2px_12px_rgb(0,0,0,0.02)] mt-2">
-              <div class="flex items-center justify-between mb-2">
-                <h3 class="text-[13px] font-bold">Product References</h3>
-                <span class="text-[11px] font-bold bg-black/5 text-foreground px-2 py-0.5 rounded-md">2 Uploaded</span>
+              <span class="text-[12px] font-medium text-slate-600">Feature Display</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center cursor-pointer hover:bg-slate-100 transition-colors">
+                <p class="text-[40px] font-sans text-slate-900">Ag</p>
               </div>
-              <p class="text-[11px] text-muted-foreground mb-4 w-3/4 leading-relaxed">Upload isolated images of your products. The AI will preserve their geometry and labels when generating promotional materials.</p>
-              
-              <div class="flex gap-3">
-                 <!-- Populated Product -->
-                 <div class="w-[84px] h-[84px] rounded-[10px] bg-[#f0f0f0] border border-black/5 flex items-center justify-center relative group overflow-hidden">
-                    <i class="ti ti-bottle text-[24px] text-black/20"></i>
-                    <button class="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-500 transition-all">
-                      <i class="ti ti-x text-[10px] font-bold"></i>
-                    </button>
-                 </div>
-                 
-                 <div class="w-[84px] h-[84px] rounded-[10px] bg-[#f0f0f0] border border-black/5 flex items-center justify-center relative group overflow-hidden">
-                    <i class="ti ti-cookie text-[24px] text-black/20"></i>
-                    <button class="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-500 transition-all">
-                      <i class="ti ti-x text-[10px] font-bold"></i>
-                    </button>
-                 </div>
-
-                 <!-- Add New Product -->
-                 <div class="w-[84px] h-[84px] rounded-[10px] bg-white border-2 border-dashed border-black/10 flex flex-col items-center justify-center cursor-pointer hover:border-black/30 hover:bg-[#fafafa] transition-colors group">
-                    <i class="ti ti-plus text-[20px] text-black/20 group-hover:text-black/40 transition-colors"></i>
-                 </div>
-              </div>
-           </div>
-
+              <span class="text-[12px] font-medium text-slate-600">GT Standard</span>
+            </div>
+          </div>
         </div>
 
-     </div>
+        <!-- Photography -->
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-[13px] font-semibold text-slate-500">Photography</h2>
+            <div class="flex items-center gap-2">
+              <input type="text" placeholder="Add manual style..." class="text-[11px] px-3 py-1.5 rounded-md border border-slate-200 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-slate-300 w-40"/>
+              <button class="bg-slate-900 text-white w-7 h-7 rounded-md flex items-center justify-center hover:bg-slate-800 transition-colors">
+                <i class="ti ti-plus text-[12px]"></i>
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-6 gap-6">
+            <div class="flex flex-col gap-3">
+              <div class="aspect-square rounded-lg bg-slate-100 border border-slate-100 overflow-hidden cursor-pointer group relative">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+              </div>
+              <span class="text-[12px] font-medium text-slate-600">AI Art Style</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="aspect-square rounded-lg bg-slate-100 border border-slate-100 overflow-hidden cursor-pointer group relative">
+                <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+              </div>
+              <span class="text-[12px] font-medium text-slate-600">Creator Photography</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="aspect-square rounded-lg bg-slate-100 border border-slate-100 overflow-hidden cursor-pointer group relative">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+              </div>
+              <span class="text-[12px] font-medium text-slate-600">Product Photography</span>
+            </div>
+          </div>
+        </div>
 
+        <!-- Layout Moodboard -->
+        <div class="flex flex-col gap-4">
+          <h2 class="text-[13px] font-semibold text-slate-500">Layout Moodboard</h2>
+          <div class="flex gap-6">
+            <div class="flex flex-col gap-3">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border-2 border-slate-900 flex items-center justify-center cursor-pointer relative">
+                <div class="w-full h-full p-3 grid grid-cols-2 gap-1.5 opacity-40">
+                  <div class="bg-slate-300 rounded-sm"></div>
+                  <div class="bg-slate-300 rounded-sm"></div>
+                  <div class="bg-slate-300 rounded-sm col-span-2"></div>
+                </div>
+                <div class="absolute top-2 right-2 w-5 h-5 rounded-full bg-slate-900 flex items-center justify-center">
+                  <i class="ti ti-check text-white text-[10px]"></i>
+                </div>
+              </div>
+              <span class="text-[12px] font-bold text-slate-900">Minimalist</span>
+            </div>
+            <div class="flex flex-col gap-3 opacity-60 hover:opacity-100 transition-opacity">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center cursor-pointer relative">
+                <div class="w-full h-full p-3 flex flex-col gap-1.5 opacity-40">
+                  <div class="bg-slate-300 rounded-sm h-4"></div>
+                  <div class="bg-slate-300 rounded-sm flex-1"></div>
+                </div>
+              </div>
+              <span class="text-[12px] font-medium text-slate-600">Creative</span>
+            </div>
+            <div class="flex flex-col gap-3 opacity-60 hover:opacity-100 transition-opacity">
+              <div class="w-32 h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center cursor-pointer relative">
+                <div class="w-full h-full p-3 flex gap-1.5 opacity-40">
+                  <div class="bg-slate-300 rounded-sm w-1/3"></div>
+                  <div class="bg-slate-300 rounded-sm flex-1"></div>
+                </div>
+              </div>
+              <span class="text-[12px] font-medium text-slate-600">Corporate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Reference -->
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-[13px] font-semibold text-slate-500">Product References</h2>
+            <span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded border border-slate-100 uppercase tracking-tighter">AI Training Assets</span>
+          </div>
+          <div class="flex gap-6 flex-wrap">
+            <div class="flex flex-col gap-3">
+              <div class="w-24 h-24 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center relative group">
+                <i class="ti ti-bottle text-[24px] text-slate-300"></i>
+                <button class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-sm">
+                  <i class="ti ti-x text-[10px]"></i>
+                </button>
+              </div>
+              <span class="text-[11px] font-medium text-slate-500">Mango Juice</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="w-24 h-24 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center relative group">
+                <i class="ti ti-cookie text-[24px] text-slate-300"></i>
+                <button class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-sm">
+                  <i class="ti ti-x text-[10px]"></i>
+                </button>
+              </div>
+              <span class="text-[11px] font-medium text-slate-500">Organic Cookie</span>
+            </div>
+
+            <!-- Add New Product (Dropdown Trigger) -->
+            <div class="relative dropdown-container">
+              <div
+                id="btn-add-product-trigger"
+                class="w-24 h-24 rounded-lg bg-white border border-slate-200 border-dashed flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50 transition-all group"
+              >
+                <i class="ti ti-plus text-[18px] text-slate-300 group-hover:text-slate-500 transition-colors"></i>
+              </div>
+              <!-- Dropdown Menu -->
+              <div id="dropdown-product-options" class="absolute top-0 left-full ml-3 w-48 bg-white rounded-lg border border-slate-200 shadow-xl py-1.5 z-[50] hidden opacity-0 transform scale-95 transition-all origin-top-left">
+                <button class="opt-upload w-full text-left px-3 py-2 text-[12px] font-medium text-slate-700 hover:bg-slate-50 flex items-center gap-2.5 transition-colors">
+                  <i class="ti ti-upload text-[14px] text-slate-400"></i> Upload Image
+                </button>
+                <button class="opt-library w-full text-left px-3 py-2 text-[12px] font-medium text-slate-700 hover:bg-slate-50 flex items-center gap-2.5 transition-colors border-t border-slate-50">
+                  <i class="ti ti-photo-star text-[14px] text-slate-400"></i> Select from Library
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: AI DIRECTIVES -->
+      <div class="flex flex-col gap-6">
+        <h2 class="text-[13px] font-semibold text-slate-500">AI Directives</h2>
+        
+        <div class="flex flex-col gap-4">
+          <div class="space-y-1.5">
+            <label class="block text-[12px] font-semibold text-slate-700 ml-0.5">Brand Voice (Tone & Attitude)</label>
+            <textarea
+              rows="2"
+              class="w-full p-3 rounded-md bg-white border border-slate-200 text-[13px] font-medium resize-none focus:outline-none focus:ring-1 focus:ring-slate-400 transition-all leading-relaxed placeholder:text-slate-300"
+              placeholder="e.g. Professional and highly academic."
+              >Vibrant, energetic, slightly playful but always welcoming.</textarea>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-[12px] font-semibold text-slate-900 ml-0.5 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-red-500"></span>
+              Negative Guidelines ("Do Nots")
+            </label>
+            <textarea
+              rows="2"
+              class="w-full p-3 rounded-md bg-slate-50 border border-slate-200 text-[13px] font-medium text-slate-900 resize-none focus:outline-none focus:ring-1 focus:ring-slate-400 transition-all placeholder:text-slate-300 leading-relaxed"
+              placeholder="e.g. Do not use dark colors. Never use complex jargon."
+              >Do not use neon or artificial coloring. Never use formal/corporate jargon.</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
 </div>
+
+<!-- Shadcn-style Modal: Product Details -->
+<div
+  id="modal-product-form"
+  class="fixed inset-0 z-[100] hidden items-center justify-center p-4"
+>
+  <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"></div>
+
+  <div
+    class="relative bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-[500px] transform scale-95 opacity-0 transition-all duration-200 ease-out"
+    id="modal-form-content"
+  >
+    <!-- Header -->
+    <div
+      class="px-6 py-4 border-b border-slate-100 flex items-center justify-between"
+    >
+      <div>
+        <h3 class="text-[16px] font-semibold text-slate-900">
+          Add Product Reference
+        </h3>
+        <p class="text-[12px] text-slate-500">
+          Provide details for your brand asset.
+        </p>
+      </div>
+      <button
+        class="close-form-modal text-slate-400 hover:text-slate-600 transition-colors"
+      >
+        <i class="ti ti-x text-[18px]"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6 space-y-4">
+      <!-- Image Preview Area -->
+      <div
+        class="w-full h-32 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden mb-4"
+      >
+        <img
+          id="form-preview-img"
+          class="h-full w-full object-cover hidden"
+          src=""
+        />
+        <div
+          id="form-preview-placeholder"
+          class="flex flex-col items-center text-slate-400"
+        >
+          <i class="ti ti-photo text-[24px]"></i>
+          <span class="text-[10px] font-medium mt-1">Image Preview</span>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="space-y-1.5">
+          <label class="text-[12px] font-medium text-slate-700 ml-0.5"
+            >Product Title</label
+          >
+          <input
+            type="text"
+            id="inp-prod-title"
+            class="w-full h-9 px-3 rounded-md border border-slate-200 bg-white text-[13px] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-400 transition-all"
+            placeholder="e.g. Premium Mango Juice"
+          />
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-[12px] font-medium text-slate-700 ml-0.5"
+            >Description</label
+          >
+          <textarea
+            id="inp-prod-desc"
+            rows="2"
+            class="w-full px-3 py-2 rounded-md border border-slate-200 bg-white text-[13px] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-400 transition-all resize-none"
+            placeholder="Brief context about the product..."></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="text-[12px] font-medium text-slate-700 ml-0.5"
+              >Category</label
+            >
+            <div class="relative">
+              <select
+                id="inp-prod-cat"
+                class="w-full h-9 pl-3 pr-8 rounded-md border border-slate-200 bg-white text-[13px] focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-400 appearance-none cursor-pointer"
+              >
+                <option value="Digital/SaaS">Digital/SaaS</option>
+                <option value="Food & Beverage">Food & Beverage</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Others">Others</option>
+              </select>
+              <i
+                class="ti ti-chevron-down absolute right-2.5 top-2.5 text-slate-400 text-[12px] pointer-events-none"
+              ></i>
+            </div>
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[12px] font-medium text-slate-700 ml-0.5"
+              >Size (Optional)</label
+            >
+            <input
+              type="text"
+              id="inp-prod-size"
+              class="w-full h-9 px-3 rounded-md border border-slate-200 bg-white text-[13px] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-400 transition-all"
+              placeholder="12 x 10 cm"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div
+      class="px-6 py-4 border-t border-slate-100 flex justify-end gap-2 bg-slate-50/50 rounded-b-xl"
+    >
+      <button
+        class="close-form-modal px-4 py-2 rounded-md text-[12px] font-medium text-slate-600 hover:bg-slate-100 transition-colors"
+        >Cancel</button
+      >
+      <button
+        id="btn-submit-product"
+        class="px-4 py-2 rounded-md text-[12px] font-medium bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-sm"
+        >Save Product</button
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  // UI Selectors
+  const trigger = document.getElementById("btn-add-product-trigger");
+  const dropdown = document.getElementById("dropdown-product-options");
+  const modal = document.getElementById("modal-product-form");
+  const modalContent = document.getElementById("modal-form-content");
+
+  const previewImg = document.getElementById(
+    "form-preview-img",
+  ) as HTMLImageElement;
+  const previewPlaceholder = document.getElementById(
+    "form-preview-placeholder",
+  );
+
+  const titleInp = document.getElementById(
+    "inp-prod-title",
+  ) as HTMLInputElement;
+  const descInp = document.getElementById(
+    "inp-prod-desc",
+  ) as HTMLTextAreaElement;
+  const catInp = document.getElementById("inp-prod-cat") as HTMLSelectElement;
+  const sizeInp = document.getElementById("inp-prod-size") as HTMLInputElement;
+
+  // Toggle Dropdown
+  trigger?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isHidden = dropdown?.classList.contains("hidden");
+    if (isHidden) {
+      dropdown?.classList.remove("hidden");
+      setTimeout(() => {
+        dropdown?.classList.remove("opacity-0", "scale-95");
+      }, 10);
+    } else {
+      hideDropdown();
+    }
+  });
+
+  const hideDropdown = () => {
+    dropdown?.classList.add("opacity-0", "scale-95");
+    setTimeout(() => dropdown?.classList.add("hidden"), 200);
+  };
+
+  // Close dropdown on click outside
+  document.addEventListener("click", () => hideDropdown());
+
+  // Show Modal Flow
+  const openModal = (src: string) => {
+    hideDropdown();
+    previewImg.src = src;
+    previewImg.classList.remove("hidden");
+    previewPlaceholder?.classList.add("hidden");
+
+    modal?.classList.remove("hidden");
+    modal?.classList.add("flex");
+    setTimeout(() => {
+      modalContent?.classList.remove("scale-95", "opacity-0");
+    }, 10);
+  };
+
+  const closeModal = () => {
+    modalContent?.classList.add("scale-95", "opacity-0");
+    setTimeout(() => {
+      modal?.classList.add("hidden");
+      modal?.classList.remove("flex");
+    }, 200);
+  };
+
+  document.querySelectorAll(".close-form-modal").forEach((btn) => {
+    btn.addEventListener("click", closeModal);
+  });
+
+  // Action Buttons
+  document.querySelector(".opt-upload")?.addEventListener("click", () => {
+    openModal(
+      "https://images.unsplash.com/photo-1512149673953-1e251807ec7c?q=80&w=400&auto=format&fit=crop",
+    );
+  });
+
+  document.querySelector(".opt-library")?.addEventListener("click", () => {
+    openModal(
+      "https://images.unsplash.com/photo-1621506289937-4c721a939927?q=80&w=400&auto=format&fit=crop",
+    );
+  });
+
+  document
+    .getElementById("btn-submit-product")
+    ?.addEventListener("click", () => {
+      // Add to list visually (Prototype logic)
+      const container = trigger?.parentElement?.parentElement;
+      const newItem = document.createElement("div");
+      newItem.className =
+        "w-[84px] h-[84px] rounded-[10px] bg-slate-50 border border-slate-200 overflow-hidden relative group cursor-pointer shadow-sm animate-in fade-in zoom-in duration-300";
+      newItem.innerHTML = `
+      <img src="${previewImg.src}" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-2 text-center">
+        <span class="text-[9px] font-bold text-white leading-tight uppercase tracking-tight">${titleInp.value || "Product"}</span>
+      </div>
+      <button class="absolute top-1 right-1 w-5 h-5 rounded-full bg-red-500/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-red-600 transition-all">
+        <i class="ti ti-x text-[10px]"></i>
+      </button>
+    `;
+
+      if (container && trigger?.parentElement) {
+        container.insertBefore(newItem, trigger.parentElement);
+      }
+
+      closeModal();
+
+      // Reset Form
+      titleInp.value = "";
+      descInp.value = "";
+      sizeInp.value = "";
+    });
+</script>

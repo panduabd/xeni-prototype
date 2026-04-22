@@ -1,265 +1,312 @@
 ---
 // ProjectWorkspace.astro
+import AiInput from "./AiInput.astro";
+
+const features = [
+  {
+    title: "Single Feed",
+    desc: "Desain 1:1 statis untuk post",
+    icon: "square",
+  },
+  {
+    title: "Carousel",
+    desc: "Konten multi-slide interaktif",
+    icon: "carousel-horizontal",
+  },
+  { title: "Story", desc: "Format 9:16 layar penuh", icon: "device-mobile" },
+  { title: "Banner", desc: "Grafis lanskap promosi", icon: "rectangle" },
+];
 ---
 
 <!-- BENTO BOX LAYOUT FOR ACTIVE WORKSPACE -->
 <div class="flex h-full w-full overflow-hidden gap-3">
-  
   <!-- LEFT: MAIN DIRECT CHAT (User & Raka) -->
-  <div class="flex-1 min-w-0 bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] flex flex-col h-full overflow-hidden relative z-10">
-    
+  <div
+    class="flex-1 min-w-0 bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] flex flex-col h-full overflow-hidden relative z-10"
+  >
     <!-- Chat Header -->
-    <div class="h-14 px-5 border-b border-black/[0.06] flex items-center gap-3 shrink-0 bg-white/80 backdrop-blur-sm z-20">
-      <div class="w-8 h-8 rounded-full bg-[#f0f0f0] border border-black/[0.08] flex items-center justify-center text-[12px] font-bold text-foreground">R</div>
-      <div class="flex-1 min-w-0">
-        <h3 class="text-[13px] font-semibold text-foreground leading-tight">Raka</h3>
-        <span class="text-[10px] text-emerald-600 font-medium flex items-center gap-1.5 mt-0.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Online
+    <div
+      class="h-14 px-4 border-b border-black/[0.06] flex items-center gap-2.5 shrink-0 bg-white/80 backdrop-blur-sm z-20"
+    >
+      <button
+        id="btn-back-studio"
+        class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-black/5 text-muted-foreground transition-colors shrink-0"
+        title="Back to Studio"
+      >
+        <i class="ti ti-arrow-left text-[18px]"></i>
+      </button>
+      <div
+        class="w-[30px] h-[30px] rounded bg-[#111] flex items-center justify-center text-white shrink-0"
+      >
+        <i class="ti ti-user text-[16px]"></i>
+      </div>
+      <div class="flex-1 min-w-0 flex flex-col justify-center">
+        <h3
+          class="text-[13.5px] font-bold text-foreground leading-tight mb-0.5"
+        >
+          Raka
+        </h3>
+        <span
+          class="text-[9px] text-muted-foreground font-bold uppercase tracking-widest leading-none"
+        >
+          Creative Manager
         </span>
       </div>
+      <!-- Right Side: Online Status -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <span class="text-[11px] font-medium text-muted-foreground">Online</span
+        >
+        <div
+          class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_0_2px_rgba(255,255,255,1)]"
+        >
+        </div>
+      </div>
     </div>
-    
+
     <!-- Main Chat List -->
-    <div id="main-chat-container" class="flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-5">
+    <div
+      id="main-chat-container"
+      class="flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-5"
+    >
       <!-- Injected by JS -->
     </div>
 
-    <!-- CHAT & INPUT SECTION (Identical to Studio ChatPanel) -->
-    <div class="w-full flex flex-col gap-3 shrink-0 z-10 p-6 pt-0">
-
-      <!-- Top Context Row: Brand DNA + Image reference -->
-      <div class="flex items-center gap-2 mb-1">
-
-        <!-- Brand DNA Picker -->
-        <button class="inline-flex items-center gap-1.5 h-7 px-3 rounded-full bg-white border border-black/[0.08] hover:border-black/[0.15] text-foreground/70 text-[10.5px] font-bold transition-all shadow-[0_2px_8px_rgb(0,0,0,0.02)]">
-          <i class="ti ti-dna-2 text-[12px] text-muted-foreground/60"></i>
-          <span class="tracking-tight">Brand DNA</span>
-          <i class="ti ti-chevron-down text-[10px] text-muted-foreground/40 ml-0.5"></i>
-        </button>
-
-        <!-- Image ref badge -->
-        <div class="inline-flex items-center gap-1.5 h-7 pl-1.5 pr-2 rounded-full bg-white border border-black/[0.08] shadow-[0_2px_8px_rgb(0,0,0,0.03)] transition-all hover:border-black/[0.15]">
-          <div class="w-4.5 h-4.5 rounded-full bg-black/[0.04] flex items-center justify-center shrink-0">
-            <i class="ti ti-photo text-[11px] text-muted-foreground opacity-70"></i>
-          </div>
-          <span class="text-[10.5px] font-bold text-foreground/60 tracking-tight">product.jpg</span>
-          <button class="w-4 h-4 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 text-muted-foreground/40 transition-all ml-0.5">
-            <i class="ti ti-x text-[9px]"></i>
-          </button>
-        </div>
-
-      </div>
-
-      <!-- AI Input -->
-      <div class="bg-white rounded-[22px] border border-black/[0.06] flex flex-col focus-within:border-[#7185ff]/30 transition-all p-5 relative shadow-[0_2px_16px_rgb(0,0,0,0.04)] focus-within:shadow-[0_8px_32px_rgb(0,0,0,0.08)]">
-        
-        <textarea 
-          id="ws-prompt-input"
-          rows="1"
-          class="w-full text-[14px] font-medium text-foreground bg-transparent placeholder:text-muted-foreground/45 focus:outline-none resize-none pt-1 pb-6 leading-relaxed"
-          placeholder="Ask Raka to create new projects..."
-          style="min-height: 52px;"
-        ></textarea>
-        
-        <div class="flex items-center justify-between relative z-20">
-          
-          <div class="flex items-center gap-2">
-            
-            <!-- Add Reference -->
-            <button class="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-[7px] bg-white border border-black/[0.08] hover:border-black/[0.16] text-foreground transition-all text-left">
-              <i class="ti ti-plus text-[12px] text-muted-foreground"></i>
-              <span class="text-[11px] font-semibold">Add Reference</span>
-            </button>
-
-            <!-- Select Format -->
-            <button class="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-[7px] bg-white border border-black/[0.08] hover:border-black/[0.16] text-foreground transition-all">
-              <i class="ti ti-layout-board-split text-[12px] text-emerald-600"></i>
-              <span class="text-[11px] font-semibold">Select Format</span>
-            </button>
-
-          </div>
-
-          <button id="ws-btn-send" class="w-8 h-8 rounded-[8px] bg-foreground hover:bg-black flex items-center justify-center text-white transition-all shrink-0">
-            <i class="ti ti-arrow-up text-[15px]"></i>
-          </button>
-        </div>
-
-      </div>
-
-      <!-- Feature Reference Cards -->
-      <div class="grid grid-cols-2 gap-2 mt-1">
-        <!-- Card 1 -->
-        <button class="example-prompt relative flex items-center p-3.5 rounded-[12px] bg-[#f4f5f7] hover:bg-[#ecedf2] border border-black/[0.05] hover:border-black/10 transition-all text-left overflow-hidden group">
-          <div class="relative z-10 w-full pr-10">
-            <div class="flex items-center gap-1.5 mb-0.5">
-               <span class="feature-title text-[12px] font-bold text-foreground">Single Feed</span>
-               <i class="ti ti-chevron-right text-[11px] text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"></i>
-            </div>
-            <p class="text-[10.5px] text-muted-foreground leading-relaxed font-medium line-clamp-1">Desain 1:1 statis untuk post</p>
-          </div>
-          <div class="absolute right-[-10px] bottom-[-14px] w-[52px] h-[52px] bg-black/[0.04] border border-black/[0.05] rounded-[10px] rotate-[-12deg] flex items-start justify-start pt-2 pl-2 group-hover:rotate-[-5deg] group-hover:translate-y-[-3px] transition-all z-0">
-             <i class="ti ti-square text-[20px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-colors"></i>
-          </div>
-        </button>
-        <!-- Card 2 -->
-        <button class="example-prompt relative flex items-center p-3.5 rounded-[12px] bg-[#f4f5f7] hover:bg-[#ecedf2] border border-black/[0.05] hover:border-black/10 transition-all text-left overflow-hidden group">
-          <div class="relative z-10 w-full pr-10">
-            <div class="flex items-center gap-1.5 mb-0.5">
-               <span class="feature-title text-[12px] font-bold text-foreground">Carousel</span>
-               <i class="ti ti-chevron-right text-[11px] text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"></i>
-            </div>
-            <p class="text-[10.5px] text-muted-foreground leading-relaxed font-medium line-clamp-1">Konten multi-slide interaktif</p>
-          </div>
-          <div class="absolute right-[-10px] bottom-[-14px] w-[52px] h-[52px] bg-black/[0.04] border border-black/[0.05] rounded-[10px] rotate-[-12deg] flex items-start justify-start pt-2 pl-2 group-hover:rotate-[-5deg] group-hover:translate-y-[-3px] transition-all z-0">
-             <i class="ti ti-carousel-horizontal text-[20px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-colors"></i>
-          </div>
-        </button>
-        <!-- Card 3 -->
-        <button class="example-prompt relative flex items-center p-3.5 rounded-[12px] bg-[#f4f5f7] hover:bg-[#ecedf2] border border-black/[0.05] hover:border-black/10 transition-all text-left overflow-hidden group">
-          <div class="relative z-10 w-full pr-10">
-            <div class="flex items-center gap-1.5 mb-0.5">
-               <span class="feature-title text-[12px] font-bold text-foreground">Story</span>
-               <i class="ti ti-chevron-right text-[11px] text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"></i>
-            </div>
-            <p class="text-[10.5px] text-muted-foreground leading-relaxed font-medium line-clamp-1">Format 9:16 layar penuh</p>
-          </div>
-          <div class="absolute right-[-10px] bottom-[-14px] w-[52px] h-[52px] bg-black/[0.04] border border-black/[0.05] rounded-[10px] rotate-[-12deg] flex items-start justify-start pt-2 pl-2 group-hover:rotate-[-5deg] group-hover:translate-y-[-3px] transition-all z-0">
-             <i class="ti ti-device-mobile text-[20px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-colors"></i>
-          </div>
-        </button>
-        <!-- Card 4 -->
-        <button class="example-prompt relative flex items-center p-3.5 rounded-[12px] bg-[#f4f5f7] hover:bg-[#ecedf2] border border-black/[0.05] hover:border-black/10 transition-all text-left overflow-hidden group">
-          <div class="relative z-10 w-full pr-10">
-            <div class="flex items-center gap-1.5 mb-0.5">
-               <span class="feature-title text-[12px] font-bold text-foreground">Banner</span>
-               <i class="ti ti-chevron-right text-[11px] text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"></i>
-            </div>
-            <p class="text-[10.5px] text-muted-foreground leading-relaxed font-medium line-clamp-1">Grafis lanskap promosi</p>
-          </div>
-          <div class="absolute right-[-10px] bottom-[-14px] w-[52px] h-[52px] bg-black/[0.04] border border-black/[0.05] rounded-[10px] rotate-[-12deg] flex items-start justify-start pt-2 pl-2 group-hover:rotate-[-5deg] group-hover:translate-y-[-3px] transition-all z-0">
-             <i class="ti ti-rectangle text-[20px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-colors"></i>
-          </div>
-        </button>
-      </div>
-
+    <!-- CHAT & INPUT SECTION (Global AiInput Component) -->
+    <div class="w-full shrink-0 z-10 p-6 pt-0">
+      <AiInput
+        variant="panel"
+        id="ws-ai-input"
+        placeholder="Ask Raka to create new projects..."
+      />
     </div>
   </div>
 
   <!-- RIGHT PANEL: Split Bento Box -->
-  <div class="w-[340px] xl:w-[380px] shrink-0 h-full overflow-hidden flex flex-col gap-3">
-    
+  <div
+    class="w-[340px] xl:w-[380px] shrink-0 h-full overflow-hidden flex flex-col gap-3"
+  >
     <!-- TOP WIDGET: Crew Backstage / Live Canvas -->
-    <div class="flex-[3] min-h-0 bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] flex flex-col overflow-hidden relative">
-      
-    <!-- CREW BACKSTAGE (WhatsApp Style) - Always visible by default -->
-    <div id="ws-crew-backstage" class="w-full h-full flex flex-col bg-[#eef1f6]">
-      <!-- Header WA Style -->
-      <div class="h-14 px-5 bg-white border-b border-black/[0.06] flex items-center justify-between shrink-0 shadow-sm z-10">
-        <div class="flex items-center gap-3">
-          <!-- Stacked avatars -->
-          <div class="flex -space-x-2">
-            <div class="w-8 h-8 rounded-full border-2 border-white bg-[#f0f0f0] flex items-center justify-center text-[11px] font-bold z-30 shadow-sm">R</div>
-            <div class="w-8 h-8 rounded-full border-2 border-white bg-blue-50 flex items-center justify-center text-[11px] font-bold z-20 shadow-sm text-blue-600">L</div>
-            <div class="w-8 h-8 rounded-full border-2 border-white bg-pink-50 flex items-center justify-center text-[11px] font-bold z-10 shadow-sm text-pink-600">V</div>
+    <div
+      class="flex-[3] min-h-0 bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] flex flex-col overflow-hidden relative"
+    >
+      <!-- CREW BACKSTAGE (WhatsApp Style) - Always visible by default -->
+      <div
+        id="ws-crew-backstage"
+        class="w-full h-full flex flex-col bg-[#eef1f6]"
+      >
+        <!-- Header WA Style -->
+        <div
+          class="h-14 px-5 bg-white border-b border-black/[0.06] flex items-center justify-between shrink-0 shadow-sm z-10"
+        >
+          <div class="flex items-center gap-3">
+            <!-- Stacked avatars -->
+            <div class="flex -space-x-2">
+              <div
+                class="w-8 h-8 rounded-full border-2 border-white bg-[#f0f0f0] flex items-center justify-center text-[11px] font-bold z-30 shadow-sm"
+              >
+                R
+              </div>
+              <div
+                class="w-8 h-8 rounded-full border-2 border-white bg-blue-50 flex items-center justify-center text-[11px] font-bold z-20 shadow-sm text-blue-600"
+              >
+                L
+              </div>
+              <div
+                class="w-8 h-8 rounded-full border-2 border-white bg-pink-50 flex items-center justify-center text-[11px] font-bold z-10 shadow-sm text-pink-600"
+              >
+                V
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-0.5">
+                <h3 class="text-[13px] font-bold text-foreground leading-tight">
+                  Summer Campaign Crew
+                </h3>
+              </div>
+              <p class="text-[10px] text-muted-foreground">Raka, Luna, Vesna</p>
+            </div>
           </div>
-          <div>
-            <h3 class="text-[13px] font-bold text-foreground leading-tight">Summer Campaign Crew</h3>
-            <p class="text-[10px] text-muted-foreground mt-0.5">Raka, Luna, Vesna</p>
-          </div>
+          <button
+            class="w-8 h-8 rounded-full hover:bg-black/5 flex items-center justify-center text-muted-foreground"
+          >
+            <i class="ti ti-info-circle text-[16px]"></i>
+          </button>
         </div>
-        <button class="w-8 h-8 rounded-full hover:bg-black/5 flex items-center justify-center text-muted-foreground">
-          <i class="ti ti-info-circle text-[16px]"></i>
-        </button>
-      </div>
-      
-      <!-- Internal Chat History -->
-      <div id="crew-chat-container" class="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-3" style="background-image: radial-gradient(circle, #000000 0.5px, transparent 0.5px); background-size: 16px 16px; background-color: #fafbfc;">
-        <!-- Secure Enclave badge -->
-        <div class="flex justify-center mb-4">
-          <div class="px-3 py-1.5 rounded-md bg-[#fff9c4] border border-[#fbc02d]/30 shadow-sm text-center max-w-[280px]">
-             <p class="text-[10px] text-[#827717] font-medium leading-relaxed">
-               <i class="ti ti-lock text-[10px] mr-1"></i>
-               Pesan dalam grup ini tertutup hanya untuk koordinasi internal kru AI.
-             </p>
+
+        <!-- Internal Chat History -->
+        <div
+          id="crew-chat-container"
+          class="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-3"
+          style="background-image: radial-gradient(circle, #000000 0.5px, transparent 0.5px); background-size: 16px 16px; background-color: #fafbfc;"
+        >
+          <!-- Secure Enclave badge -->
+          <div class="flex justify-center mb-4">
+            <div
+              class="px-3 py-1.5 rounded-md bg-[#fff9c4] border border-[#fbc02d]/30 shadow-sm text-center max-w-[280px]"
+            >
+              <p class="text-[10px] text-[#827717] font-medium leading-relaxed">
+                <i class="ti ti-lock text-[10px] mr-1"></i>
+                Pesan dalam grup ini tertutup hanya untuk koordinasi internal kru
+                AI.
+              </p>
+            </div>
           </div>
+          <!-- Injected by JS -->
         </div>
-        <!-- Injected by JS -->
       </div>
-    </div>
     </div>
 
     <!-- BOTTOM WIDGET: Project History -->
-    <div class="flex-[2] min-h-0 bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] flex flex-col overflow-hidden">
-      <div class="h-10 px-4 border-b border-black/[0.06] flex items-center justify-between shrink-0 bg-[#fafbfd]">
-        <h4 class="text-[11px] font-bold tracking-tight text-foreground uppercase">Project History</h4>
+    <div
+      class="flex-[2] min-h-0 bg-white rounded-[14px] shadow-[0_4px_16px_rgb(0,0,0,0.02)] border-[0.5px] border-black/[0.08] flex flex-col overflow-hidden"
+    >
+      <div
+        class="h-10 px-4 border-b border-black/[0.06] flex items-center justify-between shrink-0 bg-[#fafbfd]"
+      >
+        <h4
+          class="text-[11px] font-bold tracking-tight text-foreground uppercase"
+        >
+          Project History
+        </h4>
       </div>
       <div class="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-2">
         <!-- Auto populated by generation -->
-        <div class="p-2 border border-black/[0.06] rounded-[8px] flex items-center gap-3 hover:bg-[#fafbfd] transition-colors cursor-pointer group">
-          <div class="w-8 h-8 rounded shrink-0 bg-[#f4f5f7] flex items-center justify-center text-muted-foreground"><i class="ti ti-photo"></i></div>
+        <div
+          class="p-2 border border-black/[0.06] rounded-[8px] flex items-center gap-3 hover:bg-[#fafbfd] transition-colors cursor-pointer group"
+        >
+          <div
+            class="w-8 h-8 rounded shrink-0 bg-[#f4f5f7] flex items-center justify-center text-muted-foreground"
+          >
+            <i class="ti ti-photo"></i>
+          </div>
           <div class="flex-1 min-w-0">
-             <p class="text-[11px] font-bold text-foreground truncate">Previous_Generated_IMG_1.png</p>
-             <p class="text-[9px] text-muted-foreground">Yesterday • Created by Vesna</p>
+            <p class="text-[11px] font-bold text-foreground truncate">
+              Previous_Generated_IMG_1.png
+            </p>
+            <p class="text-[9px] text-muted-foreground">
+              Yesterday • Created by Vesna
+            </p>
           </div>
           <div class="flex items-center gap-2 ml-2">
-            <button class="flex items-center text-muted-foreground hover:text-foreground transition-colors" title="View"><i class="ti ti-eye text-[12px]"></i></button>
-            <button class="flex items-center text-muted-foreground hover:text-foreground transition-colors" title="Download"><i class="ti ti-download text-[12px]"></i></button>
+            <button
+              class="flex items-center text-muted-foreground hover:text-foreground transition-colors"
+              title="View"><i class="ti ti-eye text-[12px]"></i></button
+            >
+            <button
+              class="flex items-center text-muted-foreground hover:text-foreground transition-colors"
+              title="Download"
+              ><i class="ti ti-download text-[12px]"></i></button
+            >
           </div>
         </div>
-        <div class="p-2 border border-black/[0.06] rounded-[8px] flex items-center gap-3 hover:bg-[#fafbfd] transition-colors cursor-pointer group">
-          <div class="w-8 h-8 rounded shrink-0 bg-[#f4f5f7] flex items-center justify-center text-muted-foreground"><i class="ti ti-file-text"></i></div>
+        <div
+          class="p-2 border border-black/[0.06] rounded-[8px] flex items-center gap-3 hover:bg-[#fafbfd] transition-colors cursor-pointer group"
+        >
+          <div
+            class="w-8 h-8 rounded shrink-0 bg-[#f4f5f7] flex items-center justify-center text-muted-foreground"
+          >
+            <i class="ti ti-file-text"></i>
+          </div>
           <div class="flex-1 min-w-0">
-             <p class="text-[11px] font-bold text-foreground truncate">Copywriting_Draft.txt</p>
-             <p class="text-[9px] text-muted-foreground">Yesterday • Created by Luna</p>
+            <p class="text-[11px] font-bold text-foreground truncate">
+              Copywriting_Draft.txt
+            </p>
+            <p class="text-[9px] text-muted-foreground">
+              Yesterday • Created by Luna
+            </p>
           </div>
           <div class="flex items-center gap-2 ml-2">
-            <button class="flex items-center text-muted-foreground hover:text-foreground transition-colors" title="View"><i class="ti ti-eye text-[12px]"></i></button>
-            <button class="flex items-center text-muted-foreground hover:text-foreground transition-colors" title="Download"><i class="ti ti-download text-[12px]"></i></button>
+            <button
+              class="flex items-center text-muted-foreground hover:text-foreground transition-colors"
+              title="View"><i class="ti ti-eye text-[12px]"></i></button
+            >
+            <button
+              class="flex items-center text-muted-foreground hover:text-foreground transition-colors"
+              title="Download"
+              ><i class="ti ti-download text-[12px]"></i></button
+            >
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
 <!-- FULLSCREEN CANVAS OVERLAY -->
-<div id="ws-live-canvas" class="hidden fixed inset-0 z-[100] bg-white flex flex-col">
+<div
+  id="ws-live-canvas"
+  class="hidden fixed inset-0 z-[100] bg-white flex flex-col"
+>
   <!-- Canvas Header -->
-  <div class="h-14 border-b border-black/[0.06] px-5 flex items-center justify-between shrink-0 z-10 shadow-sm bg-white">
+  <div
+    class="h-14 border-b border-black/[0.06] px-5 flex items-center justify-between shrink-0 z-10 shadow-sm bg-white"
+  >
     <div class="flex items-center gap-3">
-      <button id="btn-close-canvas" class="flex items-center gap-1.5 h-7 px-2.5 rounded-md hover:bg-black/5 text-muted-foreground hover:text-foreground transition-colors font-medium text-[11px]">
+      <button
+        id="btn-close-canvas"
+        class="flex items-center gap-1.5 h-7 px-2.5 rounded-md hover:bg-black/5 text-muted-foreground hover:text-foreground transition-colors font-medium text-[11px]"
+      >
         <i class="ti ti-arrow-left text-[14px]"></i> Back to Project
       </button>
       <div class="w-px h-4 bg-black/[0.1] mx-1"></div>
-      <h4 class="text-[13px] font-bold tracking-tight text-foreground">Canvas Editor</h4>
-      <span class="text-[9.5px] px-2 py-0.5 bg-[#f4f5f7] text-foreground font-semibold rounded-full border border-black/[0.05]">Instagram Post</span>
+      <h4 class="text-[13px] font-bold tracking-tight text-foreground">
+        Canvas Editor
+      </h4>
+      <span
+        class="text-[9.5px] px-2 py-0.5 bg-[#f4f5f7] text-foreground font-semibold rounded-full border border-black/[0.05]"
+        >Instagram Post</span
+      >
     </div>
     <div class="flex gap-2">
-      <button class="h-7 px-3 rounded-md bg-[#111] text-[11px] font-semibold text-white hover:bg-black transition-colors shadow-sm flex items-center gap-1.5">
+      <button
+        class="h-7 px-3 rounded-md bg-[#111] text-[11px] font-semibold text-white hover:bg-black transition-colors shadow-sm flex items-center gap-1.5"
+      >
         <i class="ti ti-download text-[13px]"></i>
         Download
       </button>
     </div>
   </div>
-  
+
   <!-- Canvas Body -->
-  <div class="flex-1 bg-[#f0f1f3] flex items-center justify-center p-8 relative overflow-hidden" style="background-image: radial-gradient(circle, #d1d5db 0.8px, transparent 0.8px); background-size: 20px 20px;">
-    <div class="w-[500px] h-[500px] bg-white shadow-xl rounded-[16px] overflow-hidden border border-black/[0.05] flex flex-col hover:shadow-2xl transition-shadow cursor-crosshair">
-      <div class="h-[280px] bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center relative group">
+  <div
+    class="flex-1 bg-[#f0f1f3] flex items-center justify-center p-8 relative overflow-hidden"
+    style="background-image: radial-gradient(circle, #d1d5db 0.8px, transparent 0.8px); background-size: 20px 20px;"
+  >
+    <div
+      class="w-[500px] h-[500px] bg-white shadow-xl rounded-[16px] overflow-hidden border border-black/[0.05] flex flex-col hover:shadow-2xl transition-shadow cursor-crosshair"
+    >
+      <div
+        class="h-[280px] bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center relative group"
+      >
         <i class="ti ti-photo text-[64px] text-white opacity-40"></i>
         <!-- selection outline mock -->
-        <div class="absolute inset-0 border-2 border-blue-500 opacity-0 group-hover:opacity-100 z-10 flex items-start justify-end p-2 pointer-events-none">
-          <span class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm">Image Layer</span>
+        <div
+          class="absolute inset-0 border-2 border-blue-500 opacity-0 group-hover:opacity-100 z-10 flex items-start justify-end p-2 pointer-events-none"
+        >
+          <span
+            class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm"
+            >Image Layer</span
+          >
         </div>
       </div>
       <div class="flex-1 p-8 flex flex-col justify-center relative group">
         <div class="w-12 h-1.5 bg-black/80 mb-4 rounded-full"></div>
-        <h3 class="text-[36px] font-extrabold text-[#111] leading-none mb-2 tracking-tight">MANGO<br>MADNESS 🍹</h3>
-        <p class="text-[16px] font-semibold text-foreground/60 leading-tight">Diskon 20% khusus hari ini!</p>
-        
-        <div class="absolute inset-0 border-2 border-blue-500 opacity-0 group-hover:opacity-100 z-10 flex items-start justify-end p-2 pointer-events-none">
-          <span class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm">Text Layer</span>
+        <h3
+          class="text-[36px] font-extrabold text-[#111] leading-none mb-2 tracking-tight"
+        >
+          MANGO<br />MADNESS 🍹
+        </h3>
+        <p class="text-[16px] font-semibold text-foreground/60 leading-tight">
+          Diskon 20% khusus hari ini!
+        </p>
+
+        <div
+          class="absolute inset-0 border-2 border-blue-500 opacity-0 group-hover:opacity-100 z-10 flex items-start justify-end p-2 pointer-events-none"
+        >
+          <span
+            class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-sm"
+            >Text Layer</span
+          >
         </div>
       </div>
     </div>
@@ -269,46 +316,66 @@
 <style is:global>
   /* Base animation tools */
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-  .animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+  .animate-slide-up {
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease forwards;
+  }
 
   /* Chat Bubble Scopes */
-  .chat-bubble-main {
-    max-width: 85%;
-    width: fit-content;
-  }
-  
   .chat-bubble-wa {
     max-width: 75%;
     width: fit-content;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 </style>
 
 <script>
   // DOM Elements
-  const containerMain = document.getElementById('main-chat-container');
-  const containerGroup = document.getElementById('crew-chat-container');
+  const containerMain = document.getElementById("main-chat-container");
+  const containerGroup = document.getElementById("crew-chat-container");
 
-  const stateBackstage = document.getElementById('ws-crew-backstage');
-  const stateCanvas = document.getElementById('ws-live-canvas');
-  const btnCloseCanvas = document.getElementById('btn-close-canvas');
+  const stateBackstage = document.getElementById("ws-crew-backstage");
+  const stateCanvas = document.getElementById("ws-live-canvas");
+  const btnCloseCanvas = document.getElementById("btn-close-canvas");
 
-  btnCloseCanvas?.addEventListener('click', () => {
-    stateCanvas.classList.add('hidden');
+  btnCloseCanvas?.addEventListener("click", () => {
+    stateCanvas.classList.add("hidden");
   });
 
   // Helpers
   function openCanvas() {
-    stateCanvas.classList.remove('hidden');
-    stateCanvas.classList.add('animate-fade-in');
+    stateCanvas.classList.remove("hidden");
+    stateCanvas.classList.add("animate-fade-in");
+  }
+
+  // Back to studio
+  const btnBackStudio = document.getElementById("btn-back-studio");
+  if (btnBackStudio) {
+    btnBackStudio.addEventListener("click", () => {
+      const overviewBtn = document.querySelector(
+        '[data-nav-target="overview"]',
+      );
+      if (overviewBtn) (overviewBtn as HTMLElement).click();
+    });
   }
 
   // Add initial welcome messages to crew group
@@ -325,118 +392,284 @@
   }
 
   // --- Templates ---
-  
+
   function getAvatar(role) {
-    if(role === 'user') return '';
+    if (role === "user") return "";
     const initial = role.charAt(0).toUpperCase();
-    let bg = 'bg-[#f0f0f0] border-black/[0.08] text-foreground';
-    if(role === 'luna') bg = 'bg-blue-50 border-blue-100 text-blue-700';
-    if(role === 'vesna') bg = 'bg-pink-50 border-pink-100 text-pink-700';
-    
+    let bg = "bg-[#f0f0f0] border-black/[0.08] text-foreground";
+    if (role === "dina") bg = "bg-blue-50 border-blue-100 text-blue-700";
+    if (role === "bima") bg = "bg-pink-50 border-pink-100 text-pink-700";
+
     return `<div class="w-6 h-6 rounded-full border ${bg} flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5 shadow-sm">${initial}</div>`;
   }
 
   function addMainMessage(role, text, withAction = null) {
-    const isUser = role === 'user';
-    const alignClass = isUser ? 'self-end' : 'self-start';
-    const layoutClass = isUser ? 'flex-row-reverse' : 'flex-row';
-    const bubbleClass = isUser 
-      ? 'bg-[#111] text-white rounded-[16px] rounded-tr-[4px] px-4 py-2.5 text-[12.5px] leading-relaxed shadow-sm'
-      : 'bg-white border border-black/[0.06] text-foreground rounded-[16px] rounded-tl-[4px] px-4 py-2.5 text-[12.5px] leading-relaxed shadow-[0_2px_8px_rgb(0,0,0,0.02)]';
-    
-    let actionHtml = '';
-    if (withAction === 'acc-brief') {
+    const isUser = role === "user";
+
+    let actionHtml = "";
+
+    if (withAction === "analysis") {
       actionHtml = `
-        <div class="mt-3 flex gap-2 w-full justify-end">
-          <button class="ws-btn-acc-brief px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 text-[11px] font-bold hover:bg-emerald-100 transition-colors shadow-sm">Ya, Lanjut!</button>
+        <div class="mt-4 p-4 rounded-xl border border-border bg-transparent w-full max-w-[320px]">
+          <p class="text-[13px] font-semibold text-foreground mb-3">Analysis Results</p>
+          <div class="space-y-2.5">
+            <div class="flex items-start gap-2.5">
+              <div class="w-1.5 h-1.5 rounded-full bg-foreground mt-1.5 shrink-0"></div>
+              <p class="text-[13px] text-muted-foreground"><strong class="font-medium text-foreground">Objective:</strong> Social Media Campaign</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <div class="w-1.5 h-1.5 rounded-full bg-foreground mt-1.5 shrink-0"></div>
+              <p class="text-[13px] text-muted-foreground"><strong class="font-medium text-foreground">Target:</strong> Gen-Z / Young Adults</p>
+            </div>
+          </div>
         </div>
       `;
-    } else if (withAction === 'acc-copy') {
+    } else if (withAction === "format-selection") {
       actionHtml = `
-        <div class="mt-3 flex gap-2 w-full justify-end">
-          <button class="ws-btn-acc-copy px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 text-[11px] font-bold hover:bg-emerald-100 transition-colors shadow-sm">Pilih Opsi A</button>
+        <div class="mt-4 flex flex-col gap-2">
+          <button class="ws-btn-format flex items-center justify-between w-full max-w-[280px] px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-foreground transition-colors group" data-format="3:4">
+            <div class="flex items-center gap-3">
+              <i class="ti ti-device-mobile text-[18px] text-muted-foreground"></i>
+              <span class="text-[13.5px] font-medium">Portrait (3:4)</span>
+            </div>
+            <i class="ti ti-arrow-right text-[16px] text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity"></i>
+          </button>
+          <button class="ws-btn-format flex items-center justify-between w-full max-w-[280px] px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-foreground transition-colors group" data-format="1:1">
+            <div class="flex items-center gap-3">
+              <i class="ti ti-square text-[18px] text-muted-foreground"></i>
+              <span class="text-[13.5px] font-medium">Square (1:1)</span>
+            </div>
+            <i class="ti ti-arrow-right text-[16px] text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity"></i>
+          </button>
+          <button class="ws-btn-format flex items-center justify-between w-full max-w-[280px] px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-foreground transition-colors group" data-format="9:16">
+            <div class="flex items-center gap-3">
+              <i class="ti ti-device-mobile text-[18px] text-muted-foreground"></i>
+              <span class="text-[13.5px] font-medium">Story (9:16)</span>
+            </div>
+            <i class="ti ti-arrow-right text-[16px] text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity"></i>
+          </button>
         </div>
       `;
-    } else if (withAction === 'check-design') {
+    } else if (withAction === "headline-options") {
       actionHtml = `
-        <div class="mt-3 w-[240px] rounded-xl overflow-hidden border border-black/[0.08] bg-white group cursor-pointer shadow-sm ws-btn-open-canvas">
-          <div class="h-[120px] bg-gradient-to-br from-amber-400 to-orange-500 relative flex items-center justify-center">
-            <h3 class="text-[18px] font-bold text-[#111]">MANGO 🍹</h3>
+        <div class="mt-4 flex flex-col gap-2 w-full max-w-[360px]">
+          <p class="text-[13px] font-medium text-foreground mb-1">Pilih gaya headline utama untuk promo ini:</p>
+          
+          <button class="ws-btn-option-v2 flex items-center justify-between w-full p-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-left transition-colors group" data-val="Playful">
+            <div class="flex-1 pr-4">
+              <p class="text-[13px] font-semibold text-foreground mb-1 label-cat">Playful & Fun</p>
+              <p class="text-[12.5px] text-muted-foreground leading-snug headline-text">"Mango Madness 🍹 Seger Tanpa Batas!"</p>
+            </div>
+            <i class="ti ti-check text-[18px] text-foreground opacity-0 transition-opacity check-icon"></i>
+          </button>
+          
+          <button class="ws-btn-option-v2 flex items-center justify-between w-full p-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-left transition-colors group" data-val="Urgency">
+            <div class="flex-1 pr-4">
+              <p class="text-[13px] font-semibold text-foreground mb-1 label-cat">Urgency & FOMO</p>
+              <p class="text-[12.5px] text-muted-foreground leading-snug headline-text">"Diskon 20% Hari Ini Aja — Jangan Sampe Kelewatan!"</p>
+            </div>
+            <i class="ti ti-check text-[18px] text-foreground opacity-0 transition-opacity check-icon"></i>
+          </button>
+
+          <button class="ws-btn-option-v2 flex items-center justify-between w-full p-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-left transition-colors group" data-val="Premium">
+            <div class="flex-1 pr-4">
+              <p class="text-[13px] font-semibold text-foreground mb-1 label-cat">Premium & Clean</p>
+              <p class="text-[12.5px] text-muted-foreground leading-snug headline-text">"Fresh Mango Juice — Crafted for Your Summer"</p>
+            </div>
+            <i class="ti ti-check text-[18px] text-foreground opacity-0 transition-opacity check-icon"></i>
+          </button>
+        </div>
+      `;
+    } else if (withAction === "plan-concept") {
+      actionHtml = `
+        <div class="mt-4 p-4 rounded-xl border border-border bg-transparent w-full max-w-[360px]">
+          <div class="flex items-center justify-between mb-4">
+             <span class="text-[13px] font-semibold text-foreground">Project Plan</span>
+             <span class="text-[11px] font-medium text-muted-foreground">Ready to Execute</span>
+          </div>
+          <div class="space-y-3 mb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-muted-foreground shrink-0"><i class="ti ti-typography"></i></div>
+              <div>
+                <p class="text-[13px] font-medium text-foreground">Copywriting & Tone</p>
+                <p class="text-[12px] text-muted-foreground">Kasual, bahasa Gen-Z, urgency (Promo)</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-muted-foreground shrink-0"><i class="ti ti-layout-board-split"></i></div>
+              <div>
+                <p class="text-[13px] font-medium text-foreground">Design Components</p>
+                <p class="text-[12px] text-muted-foreground">Portrait 3:4, Hero top, Text bottom, gradient overlay</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-muted-foreground shrink-0"><i class="ti ti-photo"></i></div>
+              <div>
+                <p class="text-[13px] font-medium text-foreground">Image to Generate</p>
+                <p class="text-[12px] text-muted-foreground">Jus mangga segar, visual terang & tropikal</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-muted-foreground shrink-0"><i class="ti ti-dna-2"></i></div>
+              <div>
+                <p class="text-[13px] font-medium text-foreground">Brand DNA</p>
+                <p class="text-[12px] text-muted-foreground">Warm tones (Amber & Orange), Playful font</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-muted-foreground shrink-0"><i class="ti ti-users"></i></div>
+              <div>
+                <p class="text-[13px] font-medium text-foreground">Crew Assigned</p>
+                <p class="text-[12px] text-muted-foreground">Dina (Copy) & Bima (Design)</p>
+              </div>
+            </div>
+          </div>
+          <button class="ws-btn-confirm w-full py-2.5 rounded-lg bg-foreground hover:bg-black text-white text-[13px] font-medium transition-all">
+            Confirm & Start Project
+          </button>
+        </div>
+      `;
+    } else if (withAction === "check-design") {
+      actionHtml = `
+        <div class="mt-4 w-full max-w-[260px] rounded-xl overflow-hidden border border-border bg-transparent group cursor-pointer ws-btn-open-canvas">
+          <div class="h-[140px] bg-gradient-to-br from-amber-400 to-orange-500 relative flex items-center justify-center">
+            <h3 class="text-[20px] font-bold text-[#111]">MANGO 🍹</h3>
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-              <span class="opacity-0 group-hover:opacity-100 px-3 py-1.5 bg-white text-black text-[11px] font-bold rounded-full shadow-lg transition-all transform scale-95 group-hover:scale-100 flex items-center gap-1.5">
-                <i class="ti ti-pencil"></i> Edit Manual
+              <span class="opacity-0 group-hover:opacity-100 px-3 py-1.5 bg-white text-black text-[12px] font-medium rounded shadow-sm transition-all transform scale-95 group-hover:scale-100">
+                Open in Canvas
               </span>
             </div>
           </div>
-          <div class="p-2.5 flex items-center justify-between bg-white border-t border-black/[0.05]">
-             <span class="text-[11px] font-bold text-foreground">Summer_Mango_Final.fig</span>
+          <div class="p-3 bg-white border-t border-border">
+             <span class="text-[13px] font-medium text-foreground">Summer_Mango_Final.png</span>
+          </div>
+        </div>
+      `;
+    } else if (withAction === "delivery-result") {
+      actionHtml = `
+        <div class="mt-4 w-full max-w-[280px]">
+          <div class="mb-2">
+            <span class="inline-flex items-center justify-center rounded-md border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-900 shadow-sm">1</span>
+          </div>
+          
+          <!-- Visual Preview Card with Hover Overlay -->
+          <div class="rounded-xl overflow-hidden border border-border bg-transparent mb-3 group relative cursor-pointer">
+            <div class="aspect-square bg-slate-100 relative flex items-center justify-center transition-colors">
+              <i class="ti ti-photo text-[40px] text-slate-300"></i>
+            </div>
+            
+            <!-- Hover Overlay -->
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2.5 p-6 backdrop-blur-[2px]">
+              <button class="ws-btn-open-canvas w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-white hover:bg-slate-50 text-[13px] font-bold text-foreground shadow-sm transition-all transform translate-y-2 group-hover:translate-y-0 duration-300">
+                <i class="ti ti-artboard text-[15px]"></i>
+                Open in Canvas
+              </button>
+              <button class="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/20 text-[13px] font-bold text-white transition-all transform translate-y-2 group-hover:translate-y-0 duration-300" style="transition-delay: 50ms">
+                <i class="ti ti-calendar-event text-[15px]"></i>
+                Schedule Post
+              </button>
+            </div>
+          </div>
+
+          <!-- Star Rating -->
+          <div class="flex items-center justify-between px-1 py-1">
+            <span class="text-[13px] text-muted-foreground font-medium">How was this result?</span>
+            <div class="flex items-center gap-1 text-black/15 text-[16px]">
+              <i class="ti ti-star-filled hover:text-amber-400 cursor-pointer transition-colors"></i>
+              <i class="ti ti-star-filled hover:text-amber-400 cursor-pointer transition-colors"></i>
+              <i class="ti ti-star-filled hover:text-amber-400 cursor-pointer transition-colors"></i>
+              <i class="ti ti-star-filled hover:text-amber-400 cursor-pointer transition-colors"></i>
+              <i class="ti ti-star-filled hover:text-amber-400 cursor-pointer transition-colors"></i>
+            </div>
           </div>
         </div>
       `;
     }
 
+    const aiHeader = !isUser
+      ? `
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="font-bold text-[13.5px] text-foreground">Raka</span>
+        <span class="px-1.5 py-0.5 rounded text-[9px] font-bold border border-black/10 text-muted-foreground uppercase tracking-widest leading-none">Creative Manager</span>
+      </div>
+    `
+      : "";
+
+    const bubbleClass = isUser
+      ? "bg-[#111] text-white rounded-[18px] rounded-tr-[4px] px-4 py-2.5 text-[13px] leading-relaxed shadow-sm"
+      : "text-[14.5px] leading-relaxed text-foreground/90 mt-1";
+
+    const textHtml = `<div class="${bubbleClass}">${text}</div>`;
+
     const html = `
-      <div class="flex gap-2.5 w-full chat-bubble-main animate-slide-up ${alignClass} ${layoutClass} opacity-0" style="animation-delay: 0.1s">
-        ${!isUser ? getAvatar('raka') : ''}
-        <div class="flex flex-col ${isUser ? 'items-end' : 'items-start'} max-w-[85%]">
-          <div class="${bubbleClass}">
-            ${text}
-          </div>
+      <div class="flex w-full animate-slide-up ${isUser ? "justify-end" : "justify-start"} opacity-0" style="animation-delay: 0.1s;">
+        <div class="flex flex-col ${isUser ? "items-end max-w-[85%]" : "items-start w-full"}">
+          ${aiHeader}
+          ${textHtml}
           ${actionHtml}
         </div>
       </div>
     `;
-    containerMain.insertAdjacentHTML('beforeend', html);
+    containerMain.insertAdjacentHTML("beforeend", html);
     containerMain.scrollTop = containerMain.scrollHeight;
   }
 
   function addGroupMessage(role, text) {
-    const isRaka = role === 'raka';
-    const alignClass = isRaka ? 'self-end' : 'self-start';
-    const layoutClass = isRaka ? 'flex-row-reverse' : 'flex-row';
-    const nameColor = role === 'luna' ? 'text-blue-600' : (role === 'vesna' ? 'text-pink-600' : 'text-emerald-600');
-    
-    // WA Style Bubbles
-    const bubbleBg = isRaka 
-      ? 'bg-[#e7fed2] border-[#cbedaf]' 
-      : 'bg-white border-black/[0.05]';
-    
-    const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    const nameColor =
+      role === "dina"
+        ? "text-blue-600"
+        : role === "bima"
+          ? "text-pink-600"
+          : "text-emerald-600";
+
+    // All bubbles aligned left
+    const bubbleBg =
+      role === "raka"
+        ? "bg-[#e7fed2] border-[#cbedaf]"
+        : "bg-white border-black/[0.05]";
+
+    const time = new Date().toLocaleTimeString("id-ID", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
     const html = `
-      <div class="flex gap-2 w-full chat-bubble-wa animate-slide-up ${alignClass} ${layoutClass} opacity-0" style="animation-delay: 0.1s">
+      <div class="flex gap-2 w-full chat-bubble-wa animate-slide-up self-start flex-row opacity-0" style="animation-delay: 0.1s">
         ${getAvatar(role)}
         <div class="flex flex-col">
-          <div class="rounded-[12px] px-3 py-2 border ${bubbleBg} shadow-sm relative text-[12px] text-foreground leading-snug">
-            ${!isRaka ? `<div class="font-bold text-[10px] mb-0.5 ${nameColor} capitalize">${role}</div>` : ''}
+          <div class="rounded-[12px] px-3 py-2 border ${bubbleBg} shadow-sm relative text-[11px] text-foreground leading-snug">
+            <div class="font-bold text-[9px] mb-0.5 ${nameColor} capitalize">${role}</div>
             <div>${text}</div>
             <div class="text-[9px] text-muted-foreground/60 w-full text-right mt-1 ml-2 inline-flex items-center gap-0.5 justify-end">
-              ${time} ${isRaka ? '<i class="ti ti-check-all text-blue-500"></i>' : ''}
+              ${time} ${role === "raka" ? '<i class="ti ti-check-all text-blue-500"></i>' : ""}
             </div>
           </div>
         </div>
       </div>
     `;
-    containerGroup.insertAdjacentHTML('beforeend', html);
+    containerGroup.insertAdjacentHTML("beforeend", html);
     containerGroup.scrollTop = containerGroup.scrollHeight;
   }
 
   // Initialize crew welcome messages (must be after addGroupMessage is defined)
   addCrewWelcome();
-  addGroupMessage('raka', 'Halo tim! 👋 Standby ya, menunggu instruksi dari bos.');
-  addGroupMessage('luna', 'Siap, Raka! Copywriting engine ready. ✍️');
-  addGroupMessage('vesna', 'Canvas loaded, tinggal tunggu brief. 🎨');
+  addGroupMessage(
+    "raka",
+    "Halo tim! 👋 Standby ya, menunggu instruksi dari bos.",
+  );
+  addGroupMessage("dina", "Siap, Raka! Copywriting engine ready. ✍️");
+  addGroupMessage("bima", "Canvas loaded, tinggal tunggu brief. 🎨");
 
   // --- Sequence Engine ---
-  
+
   let seqTimer = null;
-  
+
   // Expose function globally to start sequence when view opens
-  window._startWorkspaceSequence = function() {
+  window._startWorkspaceSequence = function () {
     if (containerMain.dataset.started === "true") return;
     containerMain.dataset.started = "true";
-    containerMain.innerHTML = '';
-    
+    containerMain.innerHTML = "";
+
     // Reset crew group with secure badge
     const secBadge = `<div class="flex justify-center mb-4">
       <div class="px-3 py-1.5 rounded-md bg-[#fff9c4] border border-[#fbc02d]/30 shadow-sm text-center max-w-[280px]">
@@ -447,87 +680,464 @@
       </div>
     </div>`;
     containerGroup.innerHTML = secBadge;
-    stateCanvas.classList.add('hidden');
+    stateCanvas.classList.add("hidden");
+
+    // Animate AI Input (collapse categories, image, and gradient)
+    const aiInputRoot = document.getElementById("ws-ai-input");
+    if (aiInputRoot) {
+      aiInputRoot.classList.remove("chat-mode-active");
+      // Add small delay to ensure CSS transition fires after element is visible
+      setTimeout(() => {
+        aiInputRoot.classList.add("chat-mode-active");
+      }, 50);
+    }
+
+    function showTyping(layer, role, onComplete) {
+      const isMain = layer === "main";
+      const container = isMain ? containerMain : containerGroup;
+
+      const alignClass = "self-start";
+      const layoutClass = "flex-row";
+      const bubbleClass = isMain
+        ? "text-[14.5px] text-foreground/70 mt-1"
+        : "bg-white border border-black/[0.05] rounded-[12px] px-3 py-2 shadow-sm text-[11px]";
+
+      const aiHeader =
+        isMain && role !== "user"
+          ? `
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="font-bold text-[13.5px] text-foreground capitalize">${role}</span>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold border border-black/10 text-muted-foreground uppercase tracking-widest leading-none">Creative Manager</span>
+        </div>
+      `
+          : "";
+
+      const id = "typing-" + Date.now();
+      const html = `
+        <div id="${id}" class="flex ${isMain ? "w-full flex-col" : "gap-2 w-full chat-bubble-wa flex-row"} ${alignClass} animate-slide-up">
+          ${!isMain ? getAvatar(role) : ""}
+          <div class="flex flex-col ${isMain ? "items-start w-full" : "items-start max-w-[85%]"}">
+            ${aiHeader}
+            <div class="${bubbleClass} flex items-center gap-2">
+              ${isMain ? `<span class="typing-text italic font-medium">Memulai proses...</span>` : ""}
+              <div class="flex gap-1 items-center ${isMain ? "ml-1" : ""}">
+                <div class="w-1.5 h-1.5 bg-foreground/40 rounded-full animate-bounce" style="animation-duration: 1s; animation-delay: 0s"></div>
+                <div class="w-1.5 h-1.5 bg-foreground/40 rounded-full animate-bounce" style="animation-duration: 1s; animation-delay: 0.2s"></div>
+                <div class="w-1.5 h-1.5 bg-foreground/40 rounded-full animate-bounce" style="animation-duration: 1s; animation-delay: 0.4s"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.insertAdjacentHTML("beforeend", html);
+      container.scrollTop = container.scrollHeight;
+
+      const bubbleEl = document.getElementById(id);
+      const textEl = bubbleEl?.querySelector(".typing-text");
+
+      // Only cycle status text in main chat, not in group
+      let cycleInterval = null;
+      if (isMain && textEl) {
+        let statuses = [];
+        if (role === "raka") {
+          statuses = [
+            "Menganalisis konteks...",
+            "Menyusun instruksi...",
+            "Menulis respons...",
+          ];
+        } else if (role === "dina") {
+          statuses = [
+            "Membaca brief...",
+            "Meracik copywriting...",
+            "Memfinalisasi teks...",
+          ];
+        } else {
+          statuses = [
+            "Memproses visual...",
+            "Merender layer...",
+            "Menyimpan aset...",
+          ];
+        }
+
+        let sIdx = 0;
+        textEl.textContent = statuses[0];
+
+        cycleInterval = setInterval(() => {
+          sIdx = (sIdx + 1) % statuses.length;
+          if (textEl) textEl.textContent = statuses[sIdx];
+        }, 700);
+      }
+
+      setTimeout(() => {
+        clearInterval(cycleInterval);
+        if (bubbleEl) bubbleEl.remove();
+        onComplete();
+      }, 2200);
+    }
 
     const runSeq = (steps, index = 0) => {
-      if(index >= steps.length) return;
+      if (index >= steps.length) return;
       const step = steps[index];
-      
-      seqTimer = setTimeout(() => {
-        // Execute step
-        if(step.layer === 'main') {
-          addMainMessage(step.role, step.text, step.action);
-          
-          // Wire up interactions immediately after injecting
-          if(step.action === 'acc-brief') {
-            const btn = document.querySelector('.ws-btn-acc-brief');
-            if(btn) btn.addEventListener('click', () => {
-              btn.parentElement.innerHTML = '<span class="text-[10px] font-bold text-emerald-600 border border-emerald-200 bg-emerald-50 px-2 py-0.5 rounded-md"><i class="ti ti-check"></i> Approved</span>';
-              addMainMessage('user', 'Yak sesuai, Lanjut gas!');
-              runSeq(sequencePart2, 0); // Branch to part 2
-            }, { once: true });
-            return; // Pause sequence here
-          }
-          if(step.action === 'acc-copy') {
-            const btn = document.querySelector('.ws-btn-acc-copy');
-            if(btn) btn.addEventListener('click', () => {
-              btn.parentElement.innerHTML = '<span class="text-[10px] font-bold text-emerald-600 border border-emerald-200 bg-emerald-50 px-2 py-0.5 rounded-md"><i class="ti ti-check"></i> Opsi A Terpilih</span>';
-              addMainMessage('user', 'Opsi A keren banget, vibe-nya dapet. Lanjut ke visual!');
-              runSeq(sequencePart3, 0); // Branch to part 3
-            }, { once: true });
-            return; // Pause sequence here
-          }
-          if(step.action === 'check-design') {
-            const btn = document.querySelector('.ws-btn-open-canvas');
-            if(btn) btn.addEventListener('click', () => {
-              openCanvas();
-            });
-            return; // End of sequence
-          }
 
-        } else if (step.layer === 'cmd') {
-          // no-op, backstage is always visible now
-        } else if (step.layer === 'group') {
+      const executeStep = () => {
+        if (step.layer === "main") {
+          addMainMessage(step.role, step.text, step.action);
+
+          if (step.action === "analysis") {
+            // Wait for user to respond before showing format selection
+            const wsInput = document.querySelector("#ws-ai-input textarea");
+            const wsSubmit =
+              document.querySelector("#ws-ai-input .submit-btn") ||
+              document.querySelector('#ws-ai-input button[type="submit"]');
+
+            const handleUserResponse = () => {
+              const userText = wsInput?.value?.trim() || "Oke, lanjut!";
+              if (wsInput) wsInput.value = "";
+              addMainMessage("user", userText);
+              runSeq(sequencePart1b, 0);
+            };
+
+            // Listen for Enter key on textarea
+            const keyHandler = (e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleUserResponse();
+                wsInput?.removeEventListener("keydown", keyHandler);
+              }
+            };
+            wsInput?.addEventListener("keydown", keyHandler);
+
+            // Also listen for submit button click
+            const allBtns = document.querySelectorAll("#ws-ai-input button");
+            allBtns.forEach((btn) => {
+              btn.addEventListener(
+                "click",
+                (e) => {
+                  e.preventDefault();
+                  handleUserResponse();
+                  wsInput?.removeEventListener("keydown", keyHandler);
+                },
+                { once: true },
+              );
+            });
+            return;
+          }
+          if (step.action === "format-selection") {
+            const btns = document.querySelectorAll(".ws-btn-format");
+            btns.forEach((btn) => {
+              btn.addEventListener(
+                "click",
+                (e) => {
+                  const format = e.target.dataset.format;
+                  addMainMessage("user", `Saya pilih format ${format}`);
+                  runSeq(sequencePart2, 0);
+                },
+                { once: true },
+              );
+            });
+            return;
+          }
+          if (step.action === "headline-options") {
+            const btns = document.querySelectorAll(".ws-btn-option-v2");
+            btns.forEach((btn) => {
+              btn.addEventListener(
+                "click",
+                (e) => {
+                  const target = e.currentTarget;
+                  const val = target.dataset.val;
+
+                  btns.forEach((b) => {
+                    const bEl = b;
+                    const labelCat = bEl.querySelector(".label-cat");
+                    const headlineText = bEl.querySelector(".headline-text");
+                    const checkIcon = bEl.querySelector(".check-icon");
+
+                    if (bEl === target) {
+                      labelCat.classList.remove("text-muted-foreground");
+                      labelCat.classList.add("text-foreground");
+                      headlineText.classList.remove("text-muted-foreground/60");
+                      headlineText.classList.add("text-foreground/80");
+                      checkIcon.classList.remove("opacity-0");
+                      checkIcon.classList.add("opacity-100");
+                    } else {
+                      bEl.style.opacity = "0.35";
+                      bEl.style.pointerEvents = "none";
+                    }
+                  });
+
+                  setTimeout(() => {
+                    addMainMessage("user", `Saya pilih tipe ${val}`);
+                    runSeq(sequencePart3, 0);
+                  }, 600);
+                },
+                { once: true },
+              );
+            });
+            return;
+          }
+          if (step.action === "plan-concept") {
+            const btn = document.querySelector(".ws-btn-confirm");
+            if (btn)
+              btn.addEventListener(
+                "click",
+                () => {
+                  addMainMessage("user", "Mantap! Eksekusi sekarang.");
+                  runSeq(sequencePart4, 0);
+                },
+                { once: true },
+              );
+            return;
+          }
+          if (step.action === "check-design") {
+            const btn = document.querySelector(".ws-btn-open-canvas");
+            if (btn)
+              btn.addEventListener("click", () => {
+                openCanvas();
+              });
+          }
+          if (step.action === "delivery-result") {
+            // Star rating interactions
+            document.querySelectorAll(".ti-star-filled").forEach((star) => {
+              star.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const allStars =
+                  e.currentTarget.parentElement.querySelectorAll(
+                    ".ti-star-filled",
+                  );
+                const clickedIndex = Array.from(allStars).indexOf(
+                  e.currentTarget,
+                );
+                allStars.forEach((s, idx) => {
+                  if (idx <= clickedIndex) {
+                    s.classList.remove("text-black/15");
+                    s.classList.add("text-amber-400");
+                  } else {
+                    s.classList.add("text-black/15");
+                    s.classList.remove("text-amber-400");
+                  }
+                });
+              });
+            });
+
+            // Canvas open handler
+            document.querySelectorAll(".ws-btn-open-canvas").forEach((btn) => {
+              btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openCanvas();
+              });
+            });
+          }
+        } else if (step.layer === "group") {
           addGroupMessage(step.role, step.text);
         }
 
-        // Run next
         runSeq(steps, index + 1);
-      }, step.delay);
+      };
+
+      if (step.role !== "user") {
+        // Typing animation overrides default step delay
+        showTyping(step.layer, step.role, executeStep);
+      } else {
+        seqTimer = setTimeout(executeStep, step.delay);
+      }
     };
 
     // Sequences Definitions
     const sequencePart1 = [
-      { delay: 0, layer: 'main', role: 'user', text: 'bikin promo jus mangga ke anak nongkrong dong cepet yak' },
-      { delay: 500, layer: 'group', role: 'raka', text: 'Tim standby ya! 👋 Brief masuk, aku bikin strategic plan-nya dulu.' },
-      { delay: 800, layer: 'group', role: 'luna', text: 'Siap, Raka! Copywriting engine ready. ✍️' },
-      { delay: 600, layer: 'group', role: 'vesna', text: 'Canvas loaded, nunggu aba-aba. 🎨' },
-      { delay: 1500, layer: 'main', role: 'raka', text: 'Siap! Agar hasilnya berlian, saya bedah dulu instruksi singkat Anda menjadi <b>Strategic Brief</b> yang komprehensif untuk tim:<br><br><div class="p-3 border border-black/10 rounded-md bg-[#fafafa] mt-2 mb-2 space-y-2 text-[12px]"><div class="flex gap-2"><i class="ti ti-target text-emerald-500 mt-0.5"></i><div><b>Objective:</b> Konversi harian (Drive-to-Store/Order) untuk produk Jus Mangga.</div></div><div class="flex gap-2"><i class="ti ti-users text-blue-500 mt-0.5"></i><div><b>Target Audience:</b> Gen-Z & Mahasiswa ("anak nongkrong", usia 18-24) yang butuh penyegaran hemat.</div></div><div class="flex gap-2"><i class="ti ti-message-circle text-orange-500 mt-0.5"></i><div><b>Tone & Angle:</b> Kasual, enerjik, FOMO (Fear Of Missing Out), dan <i>relatable</i>.</div></div><div class="flex gap-2"><i class="ti ti-photo text-purple-500 mt-0.5"></i><div><b>Deliverables:</b> 1x Instagram Feed Post (1:1 Square) lengkap dengan caption.</div></div></div>Apakah arah brief ini sudah sesuai sebelum saya kerahkan kru untuk eksekusi?', action: 'acc-brief' }
+      {
+        delay: 400,
+        layer: "main",
+        role: "user",
+        text: "bikin promo jus mangga buat anak nongkrong yak",
+      },
+      // Backstage: crew gets notified and starts prepping
+      {
+        delay: 0,
+        layer: "group",
+        role: "raka",
+        text: `Heads up tim! Ada brief masuk dari bos. Saya analisa dulu ya, kalian standby. 📋`,
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "luna",
+        text: "Noted, Raka. Copywriting engine warming up... ✍️",
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "vesna",
+        text: "Siap! Canvas & design tools ready to go. 🎨",
+      },
+      // Main chat: Raka delivers analysis
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: `Baik, saya sudah menganalisa brief Anda secara menyeluruh. Berikut temuan saya:
+
+<div class="mt-3 space-y-2">
+  <div class="flex items-start gap-2">
+    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></div>
+    <p class="text-[13px] text-foreground/80"><strong>Objective:</strong> Social media promotion untuk produk minuman — ini cocok untuk pendekatan visual-first dengan warna cerah dan energik.</p>
+  </div>
+  <div class="flex items-start gap-2">
+    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></div>
+    <p class="text-[13px] text-foreground/80"><strong>Target Audience:</strong> Gen-Z / anak nongkrong — artinya tone-of-voice harus kasual, menggunakan bahasa sehari-hari, dan hindari kesan terlalu formal atau korporat.</p>
+  </div>
+  <div class="flex items-start gap-2">
+    <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></div>
+    <p class="text-[13px] text-foreground/80"><strong>Yang belum ada:</strong> Belum ada informasi format spesifik (feed, story, carousel?) dan belum ditentukan gaya headline yang diinginkan. Saya akan bantu tentukan ini di langkah selanjutnya.</p>
+  </div>
+</div>
+
+<p class="mt-3 text-[13px] text-foreground/70">Ada tambahan konteks atau preferensi lain sebelum kita lanjut ke pemilihan format?</p>`,
+        action: "analysis",
+      },
+    ];
+
+    // Part 1b: After user responds to analysis, show format selection
+    const sequencePart1b = [
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: `Baik, noted! Sekarang saya perlu tahu preferensi format konten Anda. Masing-masing format punya kelebihan tersendiri — <strong>Portrait 3:4</strong> optimal untuk feed Instagram, <strong>Square 1:1</strong> fleksibel untuk berbagai platform, dan <strong>Story 9:16</strong> cocok untuk reach yang lebih luas via story/reels. Silakan pilih yang paling sesuai:`,
+        action: "format-selection",
+      },
     ];
 
     const sequencePart2 = [
-      { delay: 800, layer: 'main', role: 'raka', text: 'Sempurna. Saya segera kumpulkan tim copy dan desain. Anda bisa pantau prosesnya di panel kru.' },
-      { delay: 500, layer: 'cmd', cmd: 'open-backstage' },
-      { delay: 1200, layer: 'group', role: 'raka', text: '@Luna bos udah acc brief! Tolong siapkan 2 OPSI copy sosmed. Opsi A: Santai/Relatable. Opsi B: Hard Selling / FOMO.' },
-      { delay: 2000, layer: 'group', role: 'luna', text: 'Roger! 🏃‍♀️ Menganalisis persona Gen-Z dan menyusun hook...' },
-      { delay: 3500, layer: 'group', role: 'luna', text: 'Generate variasi copy... ⏳' },
-      { delay: 5500, layer: 'group', role: 'luna', text: 'Done! Opsi A dan B sudah aku serahkan.' },
-      { delay: 800, layer: 'group', role: 'raka', text: 'Cakep. Biar gue presentasikan ke bos sekarang.' },
-      { delay: 1500, layer: 'main', role: 'raka', text: 'Luna baru saja merampungkan 2 arah copy berdasarkan brief kita:<br><br><div class="flex flex-col gap-2 mt-2"><div class="p-2 border border-black/10 rounded bg-[#fafafa]"><b class="text-emerald-600 text-[11px]">OPSI A (Relatable)</b><br><b class="text-[13px]">MANGO MADNESS 🍹</b><br><span class="text-muted-foreground">Cuaca panas bikin otak ngebul? Dinginin pake yang asli nyegerin harimu tanpa bikin dompet bolong.</span></div><div class="p-2 border border-black/10 rounded bg-[#fafafa]"><b class="text-blue-600 text-[11px]">OPSI B (Hard Selling FOMO)</b><br><b class="text-[13px]">PROMO ALERT: 20% OFF! 🚨</b><br><span class="text-muted-foreground">Daripada jajan sembarangan, sikat diskon spesial varian mangga khusus hari ini aja!</span></div></div><br>Menurut bos, mana yang lebih mewakili kampanye ini?', action: 'acc-copy' }
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: `Pilihan format yang bagus! Saya sudah menginstruksikan <strong>@Dina</strong> untuk menyiapkan beberapa alternatif headline berdasarkan analisis brief tadi. Dina sudah melakukan riset persona audiens dan menghasilkan 3 pendekatan berbeda — masing-masing dengan tone dan strategi persuasi yang unik.
+
+<div class="mt-2 text-[12.5px] text-foreground/60 italic">Catatan: Headline yang Anda pilih nanti akan menjadi acuan utama bagi Bima untuk membangun hierarki visual pada desain akhir.</div>`,
+      },
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: "Berikut 3 opsi headline dari Dina. Setiap opsi sudah disesuaikan dengan persona target (Gen-Z, kasual, energik). Pilih salah satu yang paling resonan dengan brand Anda:",
+        action: "headline-options",
+      },
     ];
 
     const sequencePart3 = [
-      { delay: 800, layer: 'group', role: 'raka', text: '@Vesna bos pilih Opsi A! Sikat visualnya sekarang. Gunakan warna pop-art yang <i>youthful</i> (Kuning/Oranye/Hijau Ceria) dan buat tipografinya super bold.' },
-      { delay: 1500, layer: 'group', role: 'vesna', text: 'Noted chief! 🎨 Menyiapkan canvas 1080x1080px...' },
-      { delay: 3000, layer: 'group', role: 'vesna', text: 'Menerapkan dynamic background gradient dan mengatur hierarchy tipografi agar "MANGO MADNESS" jadi fokus uatama... ⏳' },
-      { delay: 5500, layer: 'group', role: 'vesna', text: 'Melakukan rendering aset visual resolusi tinggi... ✅' },
-      { delay: 7000, layer: 'group', role: 'vesna', text: 'Selesai! File <b>Summer_Mango_Final.fig</b> sudah aku publish.' },
-      { delay: 1000, layer: 'group', role: 'raka', text: 'Eksekusi yang solid tim! 🔥' },
-      { delay: 1500, layer: 'main', role: 'raka', text: 'Berita baik bos, eksekusi visual dari Vesna sudah rampung 100%! Desainnya sangat pop dan nge-jreng, cocok sekali untuk *stop-scrolling* audiens Gen-Z di feed.<br><br>Silakan direview. Jika ada elemen kecil yang ingin langsung Anda geser atau ubah teksnya, Anda bisa membukanya di <b>Live Canvas</b>.', action: 'check-design' }
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: `Sangat setuju dengan pilihan Anda — pendekatan ini akan memberikan impact yang kuat untuk audiens muda.
+
+Saya sudah menyusun <strong>Project Plan</strong> yang menjabarkan semua deliverable dan resource yang akan digunakan. Berikut yang akan dikerjakan tim:
+<div class="mt-2 space-y-1.5">
+  <p class="text-[13px] text-foreground/80">• <strong>Dina (Copywriter)</strong> akan memfinalisasi headline, body copy, hashtag, dan CTA berdasarkan pilihan Anda tadi.</p>
+  <p class="text-[13px] text-foreground/80">• <strong>Bima (Designer)</strong> akan merender visual menggunakan Brand DNA yang terdaftar, termasuk color palette dan typography guideline.</p>
+  <p class="text-[13px] text-foreground/80">• Saya akan mengawasi koordinasi dan quality assurance sebelum hasil dikirimkan ke Anda.</p>
+</div>`,
+      },
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: `Jika semua sudah sesuai, klik tombol di bawah untuk memulai eksekusi proyek. Setelah konfirmasi, Anda bisa memantau progress tim secara real-time di panel <strong>Backstage</strong> sebelah kanan.`,
+        action: "plan-concept",
+      },
+    ];
+
+    const sequencePart4 = [
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: `Proyek sudah berjalan! Saya sedang mendistribusikan tugas ke setiap anggota kru. Anda bisa melihat koordinasi internal mereka di panel <strong>Backstage</strong> di sebelah kanan — semua berjalan transparan.`,
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "raka",
+        text: `Tim! Bos sudah <b>Confirm</b> projectnya. Berikut briefing lengkap:
+
+<div class="mt-1.5 space-y-1">
+<p>📌 <b>Produk:</b> Jus Mangga — promo diskon</p>
+<p>🎯 <b>Audience:</b> Gen-Z, casual tone</p>
+<p>📐 <b>Format:</b> Portrait 3:4</p>
+</div>
+
+@Dina siapkan copy final sesuai headline yang dipilih, @Bima langsung eksekusi visualnya. Let's go! 🚀`,
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "dina",
+        text: `Siap Raka! Brief sudah saya terima. Saya mulai finalisasi:
+
+✍️ Headline → sesuai pilihan bos
+✍️ Body copy → persuasif, kasual, ada urgency
+✍️ Hashtags → riset trending + brand-relevant
+✍️ CTA → "Pesan sekarang" variant
+
+Estimasi selesai dalam beberapa menit...`,
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "bima",
+        text: `Canvas ready, Raka! Saya breakdown eksekusinya:
+
+🎨 Color palette → warm tones (amber, orange) sesuai Brand DNA
+📐 Layout → portrait 3:4, hero image top, text bottom
+🔤 Typography → bold headline, supporting text lebih kecil
+📸 Image treatment → gradient overlay untuk depth
+
+Mulai rendering sekarang... ⏳`,
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "dina",
+        text: "Copy sudah selesai! Headline, body, dan hashtags sudah di-finalize. Passing ke Bima untuk integrasi ke visual. ✅",
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "bima",
+        text: "Copy sudah terintegrasi ke layout. Rendering final asset... hampir selesai! 🎨",
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "bima",
+        text: "Done! ✅ Visual sudah dipublikasikan dan siap direview oleh bos.",
+      },
+      {
+        delay: 0,
+        layer: "group",
+        role: "raka",
+        text: "QA check selesai — semua output memenuhi standar kualitas. Mengirim hasil ke bos sekarang. 📤",
+      },
+      {
+        delay: 0,
+        layer: "main",
+        role: "raka",
+        text: `Selesai! 🎉 Tim sudah menyelesaikan semua deliverable untuk proyek promo jus mangga Anda.
+
+<div class="mt-2 space-y-1.5">
+  <p class="text-[13px] text-foreground/80">✅ <strong>Visual asset</strong> — desain portrait 3:4 dengan tema warm tropical, siap export dalam high-resolution.</p>
+  <p class="text-[13px] text-foreground/80">✅ <strong>Copywriting</strong> — headline, body copy, hashtags, dan CTA sudah dioptimasi untuk engagement Gen-Z.</p>
+  <p class="text-[13px] text-foreground/80">✅ <strong>Brand compliance</strong> — semua elemen sudah dicek kesesuaiannya dengan Brand DNA yang terdaftar.</p>
+</div>
+
+<p class="mt-2 text-[13px] text-foreground/80">Silakan review hasil di bawah ini. Anda bisa klik pada visual untuk membuka <strong>Canvas Editor</strong> dan melakukan edit lebih lanjut jika diperlukan. Gunakan rating bintang untuk memberikan feedback pada output ini.</p>`,
+        action: "delivery-result",
+      },
     ];
 
     // Begin part 1
     runSeq(sequencePart1, 0);
-  }
-
+  };
 </script>

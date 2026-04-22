@@ -1,0 +1,676 @@
+---
+interface Props {
+  variant?: "panel" | "hero";
+  placeholder?: string;
+  id?: string;
+}
+
+const {
+  variant = "panel",
+  placeholder = "What can I help you create today?",
+  id = "ai-input-container",
+} = Astro.props;
+
+const isHero = variant === "hero";
+
+const categoryData = [
+  {
+    id: "copywriting",
+    label: "Copywriting",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
+    features: [
+      {
+        title: "Social Caption",
+        id: "caption",
+        desc: "Teks interaktif untuk post",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>`,
+      },
+      {
+        title: "Ad Copy",
+        id: "adcopy",
+        desc: "Copywriting persuasif iklan",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+      },
+    ],
+  },
+  {
+    id: "social",
+    label: "Social Media",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>`,
+    features: [
+      {
+        title: "Instagram Post",
+        id: "ig-post",
+        desc: "Desain konten untuk Feed, Story, dll",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>`,
+      },
+      {
+        title: "Carousel",
+        id: "carousel",
+        desc: "Konten multi-slide interaktif",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>`,
+      },
+      {
+        title: "YouTube Thumbnail",
+        id: "yt-thumb",
+        desc: "Cover video klikbel & menarik",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>`,
+      },
+      {
+        title: "Infographic",
+        id: "infographic",
+        desc: "Visual edukasi & data sosmed",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>`,
+      },
+    ],
+  },
+  {
+    id: "marketing",
+    label: "Marketing",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>`,
+    features: [
+      {
+        title: "Ad Creative",
+        id: "ads",
+        desc: "Visual kampanye konversi",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+      },
+      {
+        title: "Product Campaign",
+        id: "campaign",
+        desc: "Desain seri kampanye produk",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      },
+    ],
+  },
+  {
+    id: "ecommerce",
+    label: "E-Commerce",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+    features: [
+      {
+        title: "Product Listing",
+        id: "catalog",
+        desc: "Katalog produk minimalis",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+      },
+      {
+        title: "Promo Banner",
+        id: "promo",
+        desc: "Banner flash sale & diskon",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`,
+      },
+      {
+        title: "Product Retouch",
+        id: "retouch",
+        desc: "Poles & percantik foto produk",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>`,
+      },
+      {
+        title: "Multi-angle Shots",
+        id: "bg-remove",
+        desc: "Variasi angle produk otomatis",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="20" y1="14.48" y2="20"/><line x1="8.12" x2="12" y1="8.12" y2="12"/></svg>`,
+      },
+    ],
+  },
+  {
+    id: "branding",
+    label: "Branding",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
+    features: [
+      {
+        title: "Logo & Branding",
+        id: "logo",
+        desc: "Ide & sketsa desain logo",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 18 3 22 9 12 22 2 9"/></svg>`,
+      },
+      {
+        title: "Brand Guidelines",
+        id: "typography",
+        desc: "Pairing font & hierarki visual",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>`,
+      },
+      {
+        title: "Company Profile",
+        id: "company-profile",
+        desc: "Narasi & profil bisnis profesional",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>`,
+      },
+      {
+        title: "Product Catalog",
+        id: "product-catalog",
+        desc: "Daftar produk & layanan lengkap",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+      },
+    ],
+  },
+  {
+    id: "printing",
+    label: "Printing",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>`,
+    features: [
+      {
+        title: "Packaging",
+        id: "packaging",
+        desc: "Desain kemasan produk",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+      },
+      {
+        title: "Business Card",
+        id: "bizcard",
+        desc: "Kartu nama profesional",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>`,
+      },
+      {
+        title: "ID Card",
+        id: "idcard",
+        desc: "Kartu identitas karyawan & event",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 12h4"/><path d="M14 16h4"/></svg>`,
+      },
+      {
+        title: "Banner",
+        id: "print-banner",
+        desc: "Spanduk & banner cetak besar",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>`,
+      },
+    ],
+  },
+];
+---
+<style>
+  .category-pill.active {
+    background-color: #111;
+    color: white;
+    border-color: #111;
+  }
+
+  .ai-expandable-area {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ai-expandable-area.expanded {
+    grid-template-rows: 1fr;
+  }
+
+  .ai-expandable-inner {
+    overflow: hidden;
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fadeSlideUp {
+    animation: fadeSlideUp 0.3s ease-out forwards;
+  }
+
+  /* Chat Mode Animations */
+  .chat-mode-active .ai-gradient-wrapper {
+    padding: 0 !important;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  .chat-mode-active .ai-gradient-bg {
+    opacity: 0;
+  }
+  .chat-mode-active .ai-header-text {
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
+  }
+  .chat-mode-active .ai-inner-box {
+    padding: 20px;
+    border-radius: 24px;
+  }
+  .chat-mode-active .img-ref-badge {
+    opacity: 0;
+    max-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 0;
+    border-width: 0;
+    overflow: hidden;
+    gap: 0;
+  }
+  .chat-mode-active .ai-categories-section {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    pointer-events: none;
+  }
+</style>
+
+<div
+  id={id}
+  class={`ai-input-root transition-all flex flex-col ${isHero ? "w-full max-w-2xl" : "w-full"}`}
+>
+  <!-- Main Input Wrapper -->
+  <div
+    class="ai-gradient-wrapper relative z-20 rounded-[24px] p-[2.5px] pt-[32px] shadow-[0_4px_20px_rgb(0,0,0,0.06)] focus-within:shadow-[0_8px_32px_rgb(0,0,0,0.12)] transition-all duration-500 border border-transparent"
+  >
+    <!-- Gradient Background -->
+    <div
+      class="ai-gradient-bg absolute inset-0 rounded-[24px] bg-gradient-to-r from-[#4facfe] via-[#a855f7] to-[#ec4899] transition-opacity duration-500 z-0 pointer-events-none"
+    >
+    </div>
+
+    <!-- Gradient Header Text -->
+    <div
+      class="ai-header-text absolute top-[9px] left-[22px] text-[10.5px] font-medium text-white/95 tracking-wide transition-all duration-500 z-10"
+    >
+      Define. Align. Design. Precision planning.
+    </div>
+
+    <!-- Inner White Box -->
+    <div
+      class={`ai-inner-box bg-white rounded-[21.5px] flex flex-col relative w-full h-full transition-all duration-500 z-20 ${isHero ? "p-6" : "px-5 pb-5 pt-2"}`}
+    >
+      <!-- Image Reference Badge (hidden by default, shown when file uploaded) -->
+      <div
+        id="img-ref-badge"
+        class="img-ref-badge inline-flex items-center gap-1.5 h-[30px] pl-2 pr-2.5 rounded-lg bg-slate-50 border border-black/[0.08] text-slate-700 text-[12.5px] font-semibold hover:border-black/[0.15] transition-all duration-500 w-fit mb-2 shrink-0 group/img whitespace-nowrap overflow-hidden max-w-[200px]"
+        style="display: none;"
+      >
+        <i class="ti ti-photo text-[14px] text-muted-foreground/60 shrink-0"
+        ></i>
+        <span class="tracking-tight shrink-0">product.jpg</span>
+        <button
+          class="badge-close w-4 h-4 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 text-muted-foreground/40 transition-all ml-0.5 shrink-0"
+        >
+          <i class="ti ti-x text-[10px]"></i>
+        </button>
+      </div>
+
+      <textarea
+        class="prompt-textarea w-full font-medium text-foreground bg-transparent placeholder:text-muted-foreground/45 focus:outline-none resize-none pt-0.5 pb-6 leading-relaxed"
+        placeholder={placeholder}
+        rows="1"
+        style={`min-height: ${isHero ? "64px" : "52px"}; font-size: ${isHero ? "16px" : "14px"};`}
+      ></textarea>
+
+      <div class="flex items-center justify-between relative z-20">
+        <div class="flex items-center gap-2">
+          <!-- Add Reference Dropdown -->
+          <div class="relative dropdown-container" data-dropdown="add-ref">
+            <button
+              class="dropdown-trigger w-[30px] h-[30px] rounded-lg bg-[#f1f5f9] flex items-center justify-center text-slate-800 hover:bg-[#e2e8f0] transition-colors shrink-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M5 12h14"></path><path d="M12 5v14"></path></svg
+              >
+            </button>
+            <div
+              class="dropdown-menu hidden absolute bottom-[calc(100%+8px)] left-0 w-48 bg-white shadow-[0_8px_24px_rgb(0,0,0,0.12)] border border-black/[0.04] rounded-xl py-1.5 z-50"
+            >
+              <button
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-left hover:bg-slate-50 transition-colors"
+              >
+                <i
+                  class="ti ti-upload text-[13px] text-muted-foreground shrink-0"
+                ></i>
+                <span class="text-[12.5px] font-medium text-slate-700"
+                  >Upload Image</span
+                >
+              </button>
+              <button
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-left hover:bg-slate-50 transition-colors"
+              >
+                <i class="ti ti-box text-[13px] text-muted-foreground shrink-0"
+                ></i>
+                <span class="text-[12.5px] font-medium text-slate-700"
+                  >From Product Ref.</span
+                >
+              </button>
+            </div>
+          </div>
+
+
+          <!-- Brand DNA Picker -->
+          <div class="relative dropdown-container" data-dropdown="brand-dna">
+            <button
+              class="dropdown-trigger h-[30px] px-2.5 rounded-lg bg-[#f1f5f9] flex items-center gap-1.5 text-slate-800 text-[13px] font-semibold hover:bg-[#e2e8f0] transition-colors shrink-0 group/dna"
+            >
+              <i
+                class="ti ti-dna-2 text-[14px] text-muted-foreground/80 group-hover/dna:text-[#7185ff] transition-colors"
+              ></i>
+              <span class="dropdown-label tracking-tight">Brand DNA</span>
+              <i
+                class="ti ti-chevron-down text-[12px] text-muted-foreground/40 ml-0.5 transition-transform"
+              ></i>
+            </button>
+
+            <div
+              class="dropdown-menu hidden absolute bottom-[calc(100%+8px)] left-0 min-w-[196px] bg-white border border-black/[0.08] rounded-[12px] shadow-[0_8px_24px_rgb(0,0,0,0.08)] py-1.5 z-50"
+            >
+              <p
+                class="px-3 pt-1 pb-1.5 text-[9.5px] font-bold text-muted-foreground uppercase tracking-widest"
+              >
+                Your Brands
+              </p>
+              {
+                [
+                  { name: "Fresh Juice Co.", color: "#ffc1a6" },
+                  { name: "Urban Bloom", color: "#c6e8ff" },
+                  { name: "Apex CRM", color: "#fdc6e7" },
+                ].map((brand) => (
+                  <button
+                    class="brand-item w-full flex items-center gap-2.5 px-3 py-2 text-left hover:bg-slate-50 transition-colors"
+                    data-value={brand.name}
+                  >
+                    <div
+                      class="w-3.5 h-3.5 rounded-full shrink-0 border border-black/[0.06]"
+                      style={`background: ${brand.color};`}
+                    />
+                    <span class="text-[12px] font-medium text-foreground">
+                      {brand.name}
+                    </span>
+                  </button>
+                ))
+              }
+              <div class="border-t border-black/[0.05] mt-1 pt-1">
+                <button
+                  class="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-slate-50 transition-colors"
+                >
+                  <i class="ti ti-plus text-[12px] text-muted-foreground"></i>
+                  <span class="text-[12px] font-medium text-muted-foreground"
+                    >Create Brand DNA</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill Applied Badge -->
+          <div
+            id="skill-applied-badge"
+            class="inline-flex items-center gap-1.5 h-[30px] pl-2.5 pr-2.5 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-700 text-[12.5px] font-semibold transition-all duration-500 shrink-0 group/skill whitespace-nowrap overflow-hidden max-w-[200px]"
+            style="display: none;"
+          >
+            <span class="tracking-tight shrink-0 skill-name">Skill</span>
+            <button
+              class="badge-close-skill w-4 h-4 rounded-full flex items-center justify-center hover:bg-indigo-100 hover:text-indigo-600 text-indigo-400 transition-all ml-0.5 shrink-0"
+            >
+              <i class="ti ti-x text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            class="submit-btn w-8 h-8 rounded-[8px] bg-foreground hover:bg-black flex items-center justify-center text-white transition-all shrink-0"
+          >
+            <i class="ti ti-arrow-up text-[15px]"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Category System -->
+  <div
+    class="ai-categories-section w-full mt-3 flex flex-col z-10 transition-all duration-500 max-h-[800px] overflow-hidden"
+  >
+    <!-- Category Pills -->
+    <div
+      class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar justify-center"
+    >
+      {
+        categoryData.map((cat) => (
+          <button
+            class="category-pill flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-black/[0.08] text-[11px] font-bold text-muted-foreground hover:border-black/20 transition-all shrink-0 bg-white shadow-[0_1px_3px_rgb(0,0,0,0.02)]"
+            data-category={cat.id}
+          >
+            <div
+              class="flex items-center justify-center opacity-70 w-3.5 h-3.5"
+              set:html={cat.icon}
+            />
+            {cat.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Smooth Expandable Container for Cards -->
+    <div class="ai-expandable-area">
+      <div class="ai-expandable-inner">
+        <div class="pt-3 pb-1 w-full">
+          {
+            categoryData.map((cat) => (
+              <div
+                class={`feature-group hidden ${isHero ? "flex flex-wrap items-center justify-center gap-2" : "grid grid-cols-2 gap-2"}`}
+                id={`group-${cat.id}`}
+              >
+                {cat.features.map((f) =>
+                  isHero ? (
+                    <button class="goal-chip inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-black/[0.08] bg-white shadow-sm text-[11.5px] font-semibold text-foreground hover:border-primary/40 hover:text-primary transition-all cursor-pointer">
+                      <div
+                        class="flex items-center justify-center w-[14px] h-[14px]"
+                        set:html={f.icon}
+                      />
+                      {f.title}
+                    </button>
+                  ) : (
+                    <button class="example-prompt relative flex items-center p-3.5 rounded-[12px] bg-[#f8f9fa] hover:bg-[#f1f3f5] border border-black/[0.05] hover:border-black/10 transition-all text-left overflow-hidden group">
+                      <div class="relative z-10 w-full pr-10">
+                        <div class="flex items-center gap-1.5 mb-0.5">
+                          <span class="feature-title text-[12px] font-bold text-foreground">
+                            {f.title}
+                          </span>
+                          <i class="ti ti-chevron-right text-[11px] text-muted-foreground/50 group-hover:text-muted-foreground transition-colors" />
+                        </div>
+                        <p class="text-[10.5px] text-muted-foreground leading-relaxed font-medium line-clamp-1">
+                          {f.desc}
+                        </p>
+                      </div>
+                      <div class="absolute right-[-10px] bottom-[-14px] w-[52px] h-[52px] bg-black/[0.04] border border-black/[0.05] rounded-[10px] rotate-[-12deg] flex items-start justify-start pt-2 pl-2 group-hover:rotate-[-5deg] group-hover:translate-y-[-3px] transition-all z-0">
+                        <div
+                          class="flex items-center justify-center w-[24px] h-[24px] text-muted-foreground/30 group-hover:text-muted-foreground/50 transition-colors"
+                          set:html={f.icon}
+                        />
+                      </div>
+                    </button>
+                  ),
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupAiInput(root: HTMLElement) {
+    const triggerButtons = root.querySelectorAll(".dropdown-trigger");
+    const dropdownMenus = root.querySelectorAll(".dropdown-menu");
+    const textarea = root.querySelector(
+      ".prompt-textarea",
+    ) as HTMLTextAreaElement;
+    const submitBtn = root.querySelector(".submit-btn");
+
+    // ── Dropdown Logic ──────────────────────────────────────
+    triggerButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const menu = btn.nextElementSibling as HTMLElement;
+        const isOpen = !menu.classList.contains("hidden");
+
+        // Close other menus in THIS root
+        dropdownMenus.forEach((m) => m.classList.add("hidden"));
+
+        if (!isOpen) {
+          menu.classList.remove("hidden");
+          const chevron = btn.querySelector(".ti-chevron-down");
+          if (chevron)
+            (chevron as HTMLElement).style.transform = "rotate(180deg)";
+        }
+      });
+    });
+
+    document.addEventListener("click", () => {
+      dropdownMenus.forEach((m) => m.classList.add("hidden"));
+      root
+        .querySelectorAll(".ti-chevron-down")
+        .forEach((c) => ((c as HTMLElement).style.transform = ""));
+    });
+
+    // ── Brand DNA & Format Logic ────────────────────────────
+    root.querySelectorAll(".brand-item").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const val = (btn as HTMLElement).dataset.value;
+        const label = root.querySelector(
+          '[data-dropdown="brand-dna"] .dropdown-label',
+        );
+        if (label && val) label.textContent = val;
+      });
+    });
+
+
+
+    root.querySelector(".badge-close")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const badge = root.querySelector("#img-ref-badge") as HTMLElement;
+      if (badge) {
+        badge.style.display = "none";
+        badge.style.marginBottom = "0";
+      }
+    });
+
+    if (textarea) {
+      textarea.addEventListener("input", () => {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+      });
+    }
+
+    if (submitBtn && textarea) {
+      submitBtn.addEventListener("click", () => {
+        if (textarea.value.trim()) {
+          root.dispatchEvent(
+            new CustomEvent("ai-submit", {
+              detail: { prompt: textarea.value.trim() },
+              bubbles: true,
+            }),
+          );
+        }
+      });
+
+      textarea.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          submitBtn.dispatchEvent(new Event("click"));
+        }
+      });
+    }
+
+    // ── Category & Expand Logic ──────────────────────────────
+    const pills = root.querySelectorAll(".category-pill");
+    const groups = root.querySelectorAll(".feature-group");
+    const expandableArea = root.querySelector(".ai-expandable-area");
+
+    pills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const catId = (pill as HTMLElement).dataset.category;
+        const isAlreadyActive = pill.classList.contains("active");
+
+        // Remove active from all
+        pills.forEach((p) => p.classList.remove("active"));
+
+        if (isAlreadyActive) {
+          // Unclick: close everything
+          expandableArea?.classList.remove("expanded");
+          // Hide groups after animation finishes
+          setTimeout(() => {
+            groups.forEach((g) => {
+              g.classList.add("hidden");
+              g.classList.remove("animate-fadeSlideUp");
+            });
+          }, 300); // 300ms matches CSS transition
+        } else {
+          // Make this pill active
+          pill.classList.add("active");
+
+          // Show the correct group
+          groups.forEach((group) => {
+            group.classList.add("hidden");
+            group.classList.remove("animate-fadeSlideUp");
+            if (group.id === `group-${catId}`) {
+              group.classList.remove("hidden");
+              // trigger reflow
+              void group.offsetWidth;
+              group.classList.add("animate-fadeSlideUp");
+            }
+          });
+
+          // Expand the area
+          expandableArea?.classList.add("expanded");
+        }
+      });
+    });
+
+    // ── Skill Badge Logic ──────────────────────────────
+    const skillBadge = root.querySelector(
+      "#skill-applied-badge",
+    ) as HTMLElement;
+    const skillBadgeName = root.querySelector(".skill-name") as HTMLElement;
+    const skillBadgeClose = root.querySelector(
+      ".badge-close-skill",
+    ) as HTMLElement;
+
+    if (skillBadgeClose) {
+      skillBadgeClose.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (skillBadge) {
+          skillBadge.style.display = "none";
+        }
+      });
+    }
+
+    const featureButtons = root.querySelectorAll(".goal-chip, .example-prompt");
+    featureButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        let title = "";
+        const titleSpan = btn.querySelector(".feature-title");
+        if (titleSpan) {
+          title = titleSpan.textContent?.trim() || "";
+        } else {
+          title = btn.textContent?.trim() || "";
+        }
+
+        if (title && textarea) {
+          textarea.value = `Buatkan desain ${title}`;
+          textarea.style.height = "auto";
+          textarea.style.height = textarea.scrollHeight + "px";
+        }
+
+        if (skillBadge && skillBadgeName && title) {
+          skillBadgeName.textContent = title;
+          skillBadge.style.display = "inline-flex";
+        }
+      });
+    });
+  }
+
+  // Initialize all AI inputs
+  document.querySelectorAll(".ai-input-root").forEach((root) => {
+    setupAiInput(root as HTMLElement);
+  });
+</script>

@@ -7,6 +7,7 @@ import ChatPanel from '../components/ChatPanel.astro';
 import ProjectsList from '../components/ProjectsList.astro';
 import NewProjectModal from '../components/NewProjectModal.astro';
 import BrandDNAList from '../components/BrandDNAList.astro';
+import BrandDNAEmptyState from '../components/BrandDNAEmptyState.astro';
 import BrandDNADetail from '../components/BrandDNADetail.astro';
 import LibraryGallery from '../components/LibraryGallery.astro';
 import ProjectWorkspace from '../components/ProjectWorkspace.astro';
@@ -21,6 +22,7 @@ import ProjectWorkspace from '../components/ProjectWorkspace.astro';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <meta name="generator" content={Astro.generator} />
     <title>OiCrew Studio</title>
     <meta name="description" content="OiCrew Studio — AI Creative Team." />
@@ -48,12 +50,23 @@ import ProjectWorkspace from '../components/ProjectWorkspace.astro';
       </div>
 
       <!-- VIEW: BRAND DNA -->
-      <div id="view-brand-dna" class="hidden w-full h-full flex flex-col min-w-0 relative">
-        <div id="brand-list-wrapper" class="w-full h-full absolute inset-0">
+      <div id="view-brand-dna" class="hidden w-full h-full flex min-w-0 gap-3">
+        <!-- Left Pane (30%) -->
+        <div class="w-[340px] xl:w-[380px] shrink-0 h-full overflow-hidden block">
           <BrandDNAList />
         </div>
-        <div id="brand-detail-wrapper" class="hidden w-full h-full absolute inset-0 z-10">
-          <BrandDNADetail />
+        
+        <!-- Right Pane (70%) -->
+        <div class="flex-1 h-full overflow-hidden flex flex-col relative">
+          <!-- Empty State (Default) -->
+          <div id="brand-empty-wrapper" class="w-full h-full absolute inset-0 z-10 transition-opacity">
+            <BrandDNAEmptyState />
+          </div>
+          
+          <!-- Detail View -->
+          <div id="brand-detail-wrapper" class="hidden w-full h-full absolute inset-0 z-20 transition-opacity">
+            <BrandDNADetail />
+          </div>
         </div>
       </div>
 
@@ -98,26 +111,30 @@ import ProjectWorkspace from '../components/ProjectWorkspace.astro';
           window._startWorkspaceSequence();
         }
 
-          // Update active state in sidebar
-          sidebarBtns.forEach(btn => {
-            const target = btn.getAttribute('data-nav-target');
-            if (!target) return;
-            const isActive = target === viewId;
+        // Update active state in sidebar
+        sidebarBtns.forEach(btn => {
+          const target = btn.getAttribute('data-nav-target');
+          if (!target) return;
+          const isActive = target === viewId;
+          
+          // Reset all conditional classes first
+          btn.classList.remove('bg-white', 'border', 'border-black/[0.03]', 'shadow-[0_1px_2px_rgba(0,0,0,0.06)]', 'text-foreground', 'font-bold', 'font-semibold', 'text-muted-foreground', 'hover:bg-white', 'hover:text-foreground', 'hover:border-black/[0.03]', 'hover:shadow-[0_1px_2px_rgba(0,0,0,0.06)]');
+          
+          if (isActive) {
+            btn.classList.add('bg-white', 'text-foreground', 'font-bold', 'border', 'border-black/[0.03]', 'shadow-[0_1px_2px_rgba(0,0,0,0.06)]');
             
-            // Active Styles
-            btn.classList.toggle('bg-white', isActive);
-            btn.classList.toggle('shadow-[0_2px_10px_rgb(0,0,0,0.04)]', isActive);
-            btn.classList.toggle('border-[0.5px]', isActive);
-            btn.classList.toggle('border-black/[0.05]', isActive);
-            btn.classList.toggle('text-foreground', isActive);
-            btn.classList.toggle('font-semibold', isActive);
+            // Ensure icon is opaque
+            const icon = btn.querySelector('i');
+            if (icon) icon.classList.remove('opacity-80');
+          } else {
+            btn.classList.add('text-muted-foreground', 'font-medium', 'hover:bg-white', 'hover:text-foreground', 'hover:border-black/[0.03]', 'hover:shadow-[0_1px_2px_rgba(0,0,0,0.06)]');
             
-            // Inactive Styles
-            btn.classList.toggle('text-muted-foreground', !isActive);
-            btn.classList.toggle('hover:bg-[#fafafa]', !isActive);
-            btn.classList.toggle('font-medium', !isActive);
-          });
-        }
+            // Set icon to slightly lower opacity
+            const icon = btn.querySelector('i');
+            if (icon) icon.classList.add('opacity-80');
+          }
+        });
+      }
 
       // Sidebar navigation
       sidebarBtns.forEach(btn => {
@@ -127,47 +144,55 @@ import ProjectWorkspace from '../components/ProjectWorkspace.astro';
         });
       });
 
-      // Submit chat prompt -> Switch to Workspace view (simulating actual generation request)
-      if (btnSubmitPrompt) {
-        btnSubmitPrompt.addEventListener('click', () => {
-          if (promptInput && promptInput.value.trim()) {
-            showView('workspace');
-          }
-        });
-      }
+      // Global listeners for AI Input events
+      document.addEventListener('ai-submit', (e: any) => {
+        if (e.detail.prompt) {
+          showView('workspace');
+        }
+      });
+
+      document.addEventListener('nav-to-workspace', (e: any) => {
+        showView('workspace');
+      });
 
       // Quick feature cards -> Auto fill but wait for user to click send!
       examplePrompts.forEach(btn => {
         btn.addEventListener('click', () => {
           const titleNode = btn.querySelector('.feature-title');
           const title = titleNode ? titleNode.textContent.trim() : '';
-          if (promptInput && title) {
-             // Only populates the text field, generation starts on send button click
-             promptInput.value = `Create ${title}...`;
-             promptInput.focus();
+          
+          // Find the nearest AI input's textarea
+          const root = btn.closest('.w-full')?.querySelector('.ai-input-root') || document.querySelector('.ai-input-root');
+          const textarea = root?.querySelector('textarea');
+          
+          if (textarea && title) {
+             textarea.value = `Create ${title}...`;
+             textarea.focus();
+             // Trigger input event to resize textarea
+             textarea.dispatchEvent(new Event('input', { bubbles: true }));
           }
         });
       });
 
       // Brand DNA internal routing
-      const brandListWrapper = document.getElementById('brand-list-wrapper');
+      const brandEmptyWrapper = document.getElementById('brand-empty-wrapper');
       const brandDetailWrapper = document.getElementById('brand-detail-wrapper');
       const btnCreateBrand = document.getElementById('btn-create-brand');
       const btnBackBrandList = document.getElementById('btn-back-brand-list');
       const btnOpenBrandDetails = document.querySelectorAll('.btn-open-brand-detail');
 
       function showBrandDetail() {
-        if (brandListWrapper) brandListWrapper.classList.add('hidden');
+        if (brandEmptyWrapper) brandEmptyWrapper.classList.add('hidden');
         if (brandDetailWrapper) brandDetailWrapper.classList.remove('hidden');
       }
 
-      function showBrandList() {
+      function showBrandEmpty() {
         if (brandDetailWrapper) brandDetailWrapper.classList.add('hidden');
-        if (brandListWrapper) brandListWrapper.classList.remove('hidden');
+        if (brandEmptyWrapper) brandEmptyWrapper.classList.remove('hidden');
       }
 
       if (btnCreateBrand) btnCreateBrand.addEventListener('click', showBrandDetail);
-      if (btnBackBrandList) btnBackBrandList.addEventListener('click', showBrandList);
+      if (btnBackBrandList) btnBackBrandList.addEventListener('click', showBrandEmpty);
       btnOpenBrandDetails.forEach(btn => {
         btn.addEventListener('click', showBrandDetail);
       });

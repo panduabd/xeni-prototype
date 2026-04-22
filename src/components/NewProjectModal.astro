@@ -1,56 +1,37 @@
 ---
-const creativeGoals = [
-  { id: 'feed', title: 'Single Post (Feed)', dimension: '1080 x 1080 px', ratio: '1:1' },
-  { id: 'carousel', title: 'Carousel Post', dimension: '1080 x 1080 px', ratio: '1:1' },
-  { id: 'story', title: 'Story / Reels Cover', dimension: '1080 x 1920 px', ratio: '9:16' },
-  { id: 'ads', title: 'Facebook / IG Ads', dimension: '1200 x 628 px', ratio: '1.91:1' },
-  { id: 'banner', title: 'Marketplace Banner', dimension: '1200 x 300 px', ratio: '4:1' },
-  { id: 'deck', title: 'Slide Deck', dimension: '1920 x 1080 px', ratio: '16:9' },
-];
+import AiInput from './AiInput.astro';
 ---
 
 <div id="modal-backdrop" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center transition-opacity duration-200">
-  <div class="w-full max-w-lg mx-4 bg-white rounded-2xl shadow-2xl shadow-black/10 border border-black/5 overflow-hidden">
+  <div class="w-full max-w-[640px] mx-4 bg-white rounded-2xl shadow-2xl shadow-black/10 border border-black/5 overflow-hidden flex flex-col max-h-[90vh]">
     
-    <div class="px-6 pt-6 pb-4 flex items-start justify-between">
+    <div class="px-6 pt-5 pb-4 flex items-start justify-between shrink-0 border-b border-black/[0.04]">
       <div>
-        <h2 class="text-lg font-semibold text-foreground tracking-tight">Pilih Tujuan Kreatif</h2>
-        <p class="text-sm text-muted-foreground mt-1">Format apa yang ingin kamu buat?</p>
+        <h2 class="text-lg font-semibold text-foreground tracking-tight">Create New Project</h2>
+        <p class="text-sm text-muted-foreground mt-0.5">Jelaskan kebutuhan kreatifmu di bawah ini.</p>
       </div>
-      <button id="btn-close-modal" class="w-8 h-8 rounded-lg hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
+      <button id="btn-close-modal" class="w-8 h-8 rounded-lg hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors shrink-0">
         <i class="ti ti-x text-[16px]"></i>
       </button>
     </div>
     
-    <div class="px-6 pb-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-        {creativeGoals.map(goal => (
-          <button class="goal-card group flex items-center gap-3.5 rounded-xl border border-border/70 p-3.5 hover:border-primary/40 hover:bg-primary/[0.03] transition-all text-left" data-goal={goal.id}>
-            <div class="w-11 h-11 rounded-lg bg-muted/70 border border-border/50 flex items-center justify-center shrink-0 group-hover:border-primary/30 group-hover:bg-primary/5 transition-colors">
-              {goal.id === 'feed' ? (
-                <div class="w-5 h-5 border-[1.5px] border-muted-foreground/50 rounded-[3px] group-hover:border-primary/60"></div>
-              ) : goal.id === 'carousel' ? (
-                <div class="flex gap-0.5">
-                  <div class="w-3 h-4 border-[1.5px] border-muted-foreground/50 rounded-[2px] group-hover:border-primary/60"></div>
-                  <div class="w-3 h-4 border-[1.5px] border-muted-foreground/30 rounded-[2px] group-hover:border-primary/40 translate-y-0.5"></div>
-                </div>
-              ) : goal.id === 'story' ? (
-                <div class="w-3.5 h-6 border-[1.5px] border-muted-foreground/50 rounded-[3px] group-hover:border-primary/60"></div>
-              ) : goal.id === 'ads' ? (
-                <div class="w-6 h-3.5 border-[1.5px] border-muted-foreground/50 rounded-[3px] group-hover:border-primary/60"></div>
-              ) : goal.id === 'banner' ? (
-                <div class="w-7 h-2 border-[1.5px] border-muted-foreground/50 rounded-[2px] group-hover:border-primary/60"></div>
-              ) : (
-                <div class="w-6 h-4 border-[1.5px] border-muted-foreground/50 rounded-[2px] group-hover:border-primary/60"></div>
-              )}
-            </div>
-            <div>
-              <h4 class="text-[13px] font-semibold text-foreground leading-tight">{goal.title}</h4>
-              <p class="text-[11px] text-muted-foreground mt-0.5">{goal.dimension} • {goal.ratio}</p>
-            </div>
-          </button>
-        ))}
-      </div>
+    <div class="px-6 py-5 overflow-y-auto custom-scrollbar">
+      <!-- Utilize the new global AiInput component -->
+      <AiInput id="modal-ai-input" variant="panel" placeholder="Apa yang ingin kamu buat hari ini?" />
     </div>
+
   </div>
 </div>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+</style>
