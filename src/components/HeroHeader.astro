@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  plan?: string;
+}
+
+const {
+  title = "Think Creative. Move Marketing.",
+  description = "Lets turn a single prompt into high-quality creative assets with consistent style, structure, and purpose.",
+  plan = "Free plan"
+} = Astro.props;
+---
+
+<div class="w-full max-w-3xl mx-auto px-8 shrink-0 pt-4 pb-10 select-none flex flex-col items-start">
+  {plan && (
+    <div class="mb-[75px] flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#ebebef] border border-[#eaecf0] text-[13px] font-semibold">
+      <span class="text-[#667085]">{plan}</span>
+      <span class="w-[1px] h-3 bg-[#D1D5DB]"></span>
+      <button class="text-[#2563EB] hover:text-[#1d4ed8] transition-colors cursor-pointer">Upgrade</button>
+    </div>
+  )}
+
+  <div class="text-left space-y-4 max-w-2xl ml-[5px]">
+    <h1 class="text-[28px] font-bold text-[#111827] tracking-tight leading-tight">
+      {title}
+    </h1>
+    {description && (
+      <p class="text-[14px] text-[#667085] font-medium leading-relaxed" set:html={description} />
+    )}
+  </div>
+</div>

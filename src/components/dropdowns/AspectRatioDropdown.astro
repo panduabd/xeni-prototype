@@ -1,0 +1,85 @@
+---
+
+---
+
+<div
+  id="aspect-ratio-dropdown"
+  class="hidden absolute left-0 top-full mt-2 z-50 w-[180px] bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-1 animate-in fade-in slide-in-from-top-2 duration-200"
+>
+  <div class="flex flex-col gap-0.5">
+    <!-- Square 1:1 -->
+    <button
+      class="ratio-option w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors group"
+      data-ratio="1:1"
+    >
+      <div class="flex items-center gap-2.5">
+        <i class="ti ti-square text-[16px] text-[#98a2b3]"></i>
+        <span>Square</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] font-medium text-[#98a2b3]">1:1</span>
+        <i class="ti ti-check text-[14px] text-[#2563EB] hidden"></i>
+      </div>
+    </button>
+
+    <!-- Portrait 3:4 -->
+    <button
+      class="ratio-option w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors group"
+      data-ratio="3:4"
+    >
+      <div class="flex items-center gap-2.5">
+        <i class="ti ti-rectangle-vertical text-[16px] text-[#98a2b3]"></i>
+        <span>Social</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] font-medium text-[#98a2b3]">3:4</span>
+        <i class="ti ti-check text-[14px] text-[#2563EB] hidden"></i>
+      </div>
+    </button>
+
+    <!-- Portrait 4:5 -->
+    <button
+      class="ratio-option w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors group"
+      data-ratio="4:5"
+    >
+      <div class="flex items-center gap-2.5">
+        <i class="ti ti-rectangle-vertical text-[16px] text-[#98a2b3]"></i>
+        <span>Portrait</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] font-medium text-[#98a2b3]">4:5</span>
+        <i class="ti ti-check text-[14px] text-[#2563EB] hidden"></i>
+      </div>
+    </button>
+
+    <!-- Story 9:16 -->
+    <button
+      class="ratio-option w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors group"
+      data-ratio="9:16"
+    >
+      <div class="flex items-center gap-2.5">
+        <i class="ti ti-device-mobile text-[16px] text-[#98a2b3]"></i>
+        <span>Story</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] font-medium text-[#98a2b3]">9:16</span>
+        <i class="ti ti-check text-[14px] text-[#2563EB] hidden"></i>
+      </div>
+    </button>
+
+    <!-- Landscape 16:9 -->
+    <button
+      class="ratio-option w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors group"
+      data-ratio="16:9"
+    >
+      <div class="flex items-center gap-2.5">
+        <i class="ti ti-rectangle text-[16px] text-[#98a2b3]"></i>
+        <span>Landscape</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] font-medium text-[#98a2b3]">16:9</span>
+        <i class="ti ti-check text-[14px] text-[#2563EB] hidden"></i>
+      </div>
+    </button>
+  </div>
+</div>

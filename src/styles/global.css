@@ -50,7 +50,7 @@
     --ring: 217 91% 60%;
     --radius: 0.625rem;
     --app-bg: 60 4% 97%;
-    --sidebar-width: 240px;
+    --sidebar-width: 260px;
   }
 }
 
@@ -67,5 +67,25 @@
   /* Tabler icon base size */
   .ti {
     vertical-align: middle;
+  }
+
+  /* Custom Minimalist Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 12px !important; /* 7px actual thumb + 5px padding */
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent !important;
+    margin: 8px 0 !important;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent !important;
+    border-radius: 10px !important;
+    border-right: 5px solid transparent !important; /* This creates the 5px right gap */
+    background-clip: padding-box !important;
+    transition: background 0.3s ease-in-out !important;
+  }
+  .custom-scrollbar.is-scrolling::-webkit-scrollbar-thumb {
+    background: rgba(152, 162, 179, 0.35) !important;
+    background-clip: padding-box !important;
   }
 }

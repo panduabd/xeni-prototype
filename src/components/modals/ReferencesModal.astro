@@ -1,0 +1,121 @@
+---
+---
+<style is:global>
+  #ref-main-content::-webkit-scrollbar {
+    width: 4px;
+  }
+  #ref-main-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #ref-main-content::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+  #ref-main-content.is-scrolling::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+  }
+  /* Firefox support */
+  #ref-main-content {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.3s ease;
+  }
+  #ref-main-content.is-scrolling {
+    scrollbar-color: #D1D5DB transparent;
+  }
+</style>
+<div id="references-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+  <div class="bg-white w-full max-w-4xl h-[600px] rounded-[32px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative">
+    
+    <!-- Close Button (Top Right) -->
+    <button id="close-references" class="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer">
+      <i class="ti ti-x text-[20px]"></i>
+    </button>
+
+    <!-- Header & Action Row -->
+    <div class="px-8 pt-8 pb-6 flex flex-col gap-5 border-b border-[#eaecf0] shrink-0">
+      <!-- Title Row -->
+      <div class="flex items-center justify-between">
+        <h2 class="text-[20px] font-bold text-[#111827] tracking-tight">Product References</h2>
+      </div>
+
+      <!-- Search, Filters, Favorites toolbar below the title -->
+      <div id="ref-toolbar" class="flex items-center gap-3 bg-transparent">
+        <!-- Search Bar -->
+        <div class="relative w-[280px]">
+          <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"></i>
+          <input id="ref-search-input" type="text" placeholder="Search..." class="w-full h-8 pl-8 pr-3 rounded-full border border-[#eaecf0] text-[12px] font-medium outline-none focus:border-[#2563EB] bg-white transition-all placeholder:text-[#98a2b3]" />
+        </div>
+
+        <!-- All Business Filter Dropdown -->
+        <div id="ref-business-filter-container" class="relative">
+          <button id="ref-business-filter-btn" class="flex items-center gap-1.5 px-3 h-8 rounded-full border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all active:scale-[0.98] cursor-pointer select-none">
+            <i class="ti ti-fingerprint text-[13px] opacity-80"></i>
+            <span>All Business</span>
+            <i class="ti ti-chevron-down text-[11px] ml-1 opacity-50"></i>
+          </button>
+          
+          <!-- Dropdown -->
+          <div id="ref-business-dropdown" class="hidden absolute left-0 top-full mt-1.5 w-[160px] bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-top-1 duration-200 flex flex-col gap-0.5">
+             <button class="ref-biz-option w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-[12px] font-bold text-[#111827] bg-gray-50 cursor-pointer" data-value="All Business">
+               All Business
+               <i class="ti ti-check text-[14px] text-[#2563EB]"></i>
+             </button>
+             <button class="ref-biz-option w-full text-left px-3 py-1.5 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-gray-50 transition-colors cursor-pointer" data-value="Acme Corp">Acme Corp</button>
+             <button class="ref-biz-option w-full text-left px-3 py-1.5 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-gray-50 transition-colors cursor-pointer" data-value="Fresh Juice Co.">Fresh Juice Co.</button>
+          </div>
+        </div>
+
+        <!-- Latest Filter -->
+        <div id="ref-latest-filter-container" class="relative">
+          <button id="ref-filter-btn" class="flex items-center gap-1.5 px-3 h-8 rounded-full border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all active:scale-[0.98] cursor-pointer select-none">
+            <i class="ti ti-filter text-[14px] opacity-80"></i>
+            <span>Latest</span>
+            <i class="ti ti-chevron-down text-[11px] ml-1 opacity-50"></i>
+          </button>
+          
+          <!-- Filter Dropdown -->
+          <div id="ref-filter-dropdown" class="hidden absolute left-0 top-full mt-1.5 w-[160px] bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-top-1 duration-200 flex flex-col gap-0.5">
+             <button class="ref-filter-option w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-[12px] font-bold text-[#111827] bg-gray-50 cursor-pointer" data-value="Latest">
+               Latest
+               <i class="ti ti-check text-[14px] text-[#2563EB]"></i>
+             </button>
+             <button class="ref-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-gray-50 transition-colors cursor-pointer" data-value="Oldest">Oldest</button>
+             <button class="ref-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-gray-50 transition-colors cursor-pointer" data-value="Name A-Z">Name A-Z</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div id="ref-main-content" class="flex-1 p-8 overflow-y-auto scroll-smooth relative">
+      <!-- Product Ref Grid (Visible by default) -->
+      <div id="content-product-ref" class="grid grid-cols-4 gap-4 pb-24">
+        {[...Array(10)].map((_, i) => (
+          <button class="ref-item flex flex-col gap-2 group text-left relative cursor-pointer" data-id={`prod-${i}`} data-name={`Product Ref ${i+1}`}>
+            <div class="aspect-square rounded-2xl bg-[#F3F4F6] border border-[#eaecf0] transition-all group-hover:border-[#d0d5dd] relative overflow-hidden">
+              <div class="selected-overlay absolute inset-0 bg-[#2563EB]/10 border-2 border-[#2563EB] hidden flex items-center justify-center rounded-2xl">
+                <div class="w-6 h-6 rounded-full bg-[#2563EB] flex items-center justify-center shadow-lg">
+                   <i class="ti ti-check text-white text-[14px]"></i>
+                </div>
+              </div>
+            </div>
+            <div class="h-3 w-2/3 bg-[#F3F4F6] rounded-full"></div>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Floating Footer Buttons -->
+    <div class="absolute bottom-8 right-8 flex items-center gap-3 z-30 pointer-events-none">
+      <button id="cancel-references" class="pointer-events-auto btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer">
+        Cancel
+      </button>
+      <button class="pointer-events-auto btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,220 +1,620 @@
 ---
-import '../styles/global.css';
+import AppLayout from "../layouts/AppLayout.astro";
+import HeroHeader from "../components/HeroHeader.astro";
+import AiInputSection from "../components/AiInputSection.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 
-import Shell from '../components/Shell.astro';
-import StudioDashboard from '../components/StudioDashboard.astro';
-import ChatPanel from '../components/ChatPanel.astro';
-import ProjectsList from '../components/ProjectsList.astro';
-import NewProjectModal from '../components/NewProjectModal.astro';
-import BrandDNAList from '../components/BrandDNAList.astro';
-import BrandDNAEmptyState from '../components/BrandDNAEmptyState.astro';
-import BrandDNADetail from '../components/BrandDNADetail.astro';
-import LibraryGallery from '../components/LibraryGallery.astro';
-import ProjectWorkspace from '../components/ProjectWorkspace.astro';
+const recentProjects = [
+  {
+    id: "1",
+    title: "Summer Drink Campaign",
+    business: "Fresh Juice Co.",
+    time: "2m ago",
+  },
+  {
+    id: "2",
+    title: "New Arrival Promo",
+    business: "Urban Bloom",
+    time: "1h ago",
+  },
+  { id: "3", title: "Webinar Talk", business: "Apex CRM", time: "Yesterday" },
+  {
+    id: "4",
+    title: "Influencer Ad Set",
+    business: "Zara Brand",
+    time: "2d ago",
+  },
+  {
+    id: "5",
+    title: "Store Opening Kit",
+    business: "H&M Global",
+    time: "4d ago",
+  },
+  { id: "6", title: "Pitch Deck v2", business: "Tech Startup", time: "1w ago" },
+];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <meta name="generator" content={Astro.generator} />
-    <title>OiCrew Studio</title>
-    <meta name="description" content="OiCrew Studio — AI Creative Team." />
-  </head>
+<style>
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  .animate-cursor {
+    animation: blink 0.8s step-end infinite;
+  }
+  @keyframes pill-shine {
+    0% {
+      background-position: -200% center;
+    }
+    25%,
+    100% {
+      background-position: 200% center;
+    }
+  }
+  .pill-active {
+    background-image: linear-gradient(
+      110deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 75%
+    );
+    background-size: 200% 100%;
+    animation: pill-shine 4s ease infinite;
+  }
+</style>
 
-  <body class="overflow-hidden">
-    <Shell>
-      
-      <!-- VIEW: OVERVIEW -->
-      <div id="view-overview" class="w-full h-full flex min-w-0 gap-3 overflow-hidden">
-        <ChatPanel />
-        <div class="w-[340px] xl:w-[380px] shrink-0 h-full overflow-hidden block">
-          <StudioDashboard />
-        </div>
-      </div>
+<AppLayout title="Studio - Xeni" activePage="studio">
+  <div class="w-full min-h-full flex flex-col">
+    <!-- Top Spacer for centering (flex-grow) -->
+    <div class="flex-1"></div>
 
-      <!-- VIEW: PROJECTS -->
-      <div id="view-projects" class="hidden w-full h-full flex flex-col min-w-0">
-        <ProjectsList />
-      </div>
+    <!-- Hero Header -->
+    <HeroHeader />
 
-      <!-- VIEW: ACTIVE WORKSPACE -->
-      <div id="view-workspace" class="hidden w-full h-full flex flex-col min-w-0">
-        <ProjectWorkspace />
-      </div>
+    <!-- AI Input Component -->
+    <AiInputSection />
 
-      <!-- VIEW: BRAND DNA -->
-      <div id="view-brand-dna" class="hidden w-full h-full flex min-w-0 gap-3">
-        <!-- Left Pane (30%) -->
-        <div class="w-[340px] xl:w-[380px] shrink-0 h-full overflow-hidden block">
-          <BrandDNAList />
-        </div>
-        
-        <!-- Right Pane (70%) -->
-        <div class="flex-1 h-full overflow-hidden flex flex-col relative">
-          <!-- Empty State (Default) -->
-          <div id="brand-empty-wrapper" class="w-full h-full absolute inset-0 z-10 transition-opacity">
-            <BrandDNAEmptyState />
+    <!-- Get Started With Section -->
+    <div class="w-full shrink-0 pb-12">
+      <div class="px-8 max-w-3xl mx-auto flex flex-col gap-4">
+        <div
+          class="flex items-center gap-6 overflow-hidden relative group/categories ml-[5px]"
+        >
+          <h3 class="text-[14px] font-bold text-[#344054] shrink-0">
+            Get started with
+          </h3>
+
+          <div class="relative flex-1 min-w-0">
+            <!-- Categories -->
+            <div
+              id="categories-scroll"
+              class="flex items-center gap-2 overflow-x-auto pb-2 mb-[-8px] scroll-smooth"
+              style="scrollbar-width: none;"
+            >
+              <button
+                class="category-pill flex items-center gap-2 px-4 py-2 rounded-full border border-[#D0D5DD] text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all whitespace-nowrap cursor-pointer"
+                data-category="social-media"
+              >
+                <i class="ti ti-brand-instagram text-[16px]"></i> Social Media
+              </button>
+              <button
+                class="category-pill flex items-center gap-2 px-4 py-2 rounded-full border border-[#D0D5DD] text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all whitespace-nowrap"
+                data-category="branding"
+              >
+                <i class="ti ti-star text-[16px]"></i> Branding
+              </button>
+              <button
+                class="category-pill flex items-center gap-2 px-4 py-2 rounded-full border border-[#D0D5DD] text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all whitespace-nowrap"
+                data-category="e-commerce"
+              >
+                <i class="ti ti-shopping-cart text-[16px]"></i> E-Commerce
+              </button>
+              <button
+                class="category-pill flex items-center gap-2 px-4 py-2 rounded-full border border-[#D0D5DD] text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all whitespace-nowrap"
+                data-category="presentation"
+              >
+                <i class="ti ti-presentation text-[16px]"></i> Presentation
+              </button>
+              <button
+                class="category-pill flex items-center gap-2 px-4 py-2 rounded-full border border-[#D0D5DD] text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all whitespace-nowrap"
+                data-category="printing"
+              >
+                <i class="ti ti-printer text-[16px]"></i> Printing
+              </button>
+            </div>
+
+            <!-- Left Gradient & Arrow -->
+            <div
+              id="categories-left-gradient"
+              class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-start opacity-0 transition-opacity z-10"
+            >
+              <button
+                id="scroll-categories-left"
+                class="w-6 h-6 rounded-full bg-white shadow-sm border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-colors mt-[-8px]"
+              >
+                <i class="ti ti-chevron-left text-[14px]"></i>
+              </button>
+            </div>
+
+            <!-- Right Gradient & Arrow -->
+            <div
+              id="categories-right-gradient"
+              class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-end z-10 transition-opacity"
+            >
+              <button
+                id="scroll-categories-right"
+                class="w-6 h-6 rounded-full bg-white shadow-sm border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-colors mr-1 mt-[-8px]"
+              >
+                <i class="ti ti-chevron-right text-[14px]"></i>
+              </button>
+            </div>
           </div>
-          
-          <!-- Detail View -->
-          <div id="brand-detail-wrapper" class="hidden w-full h-full absolute inset-0 z-20 transition-opacity">
-            <BrandDNADetail />
+        </div>
+
+        <!-- Cards Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4"
+          id="get-started-cards"
+        >
+          <!-- Cards injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Projects (Horizontal Scroll) -->
+    <div class="w-full shrink-0 pb-12">
+      <div class="px-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-[14px] font-bold text-[#344054] ml-[5px]">
+            Recent Projects
+          </h3>
+          <button
+            class="text-[12px] font-semibold text-[#2563EB] hover:text-[#1d4ed8] transition-colors flex items-center gap-1 cursor-pointer"
+          >
+            View Projects
+            <i class="ti ti-arrow-right text-[12px]"></i>
+          </button>
+        </div>
+
+        <div class="relative group/projects">
+          <!-- Left Scroll Button -->
+          <div
+            id="projects-left-gradient"
+            class="absolute left-0 top-0 bottom-4 w-20 bg-gradient-to-r from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-start z-20 opacity-0 transition-opacity"
+          >
+            <button
+              id="scroll-projects-left"
+              class="w-7 h-7 rounded-full bg-white shadow-md border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-all active:scale-95 cursor-pointer"
+            >
+              <i class="ti ti-chevron-left text-[15px]"></i>
+            </button>
+          </div>
+
+          <!-- Right Scroll Button -->
+          <div
+            id="projects-right-gradient"
+            class="absolute right-0 top-0 bottom-4 w-20 bg-gradient-to-l from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-end z-20 transition-opacity"
+          >
+            <button
+              id="scroll-projects-right"
+              class="w-7 h-7 rounded-full bg-white shadow-md border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-all active:scale-95 cursor-pointer"
+            >
+              <i class="ti ti-chevron-right text-[15px]"></i>
+            </button>
+          </div>
+
+          <div
+            id="projects-scroll"
+            class="w-full overflow-x-auto pb-24 mb-[-80px] scroll-smooth"
+            style="scrollbar-width: none;"
+          >
+            <div class="flex items-center gap-5 w-max">
+              <!-- Card: Create New (Reference Style) -->
+              <a
+                href="#"
+                class="w-[250px] h-[178px] flex flex-col items-center justify-center rounded-[24px] bg-white border border-[#eaecf0] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all group shrink-0 relative"
+              >
+                <div class="flex flex-col items-center justify-center gap-4">
+                  <i
+                    class="ti ti-plus text-[48px] text-[#4b4b4f] opacity-80 group-hover:scale-110 transition-transform"
+                  ></i>
+                  <div
+                    class="px-3 py-1 rounded-full bg-[#f9fafb] border border-[#eaecf0] shadow-sm flex items-center gap-1.5 select-none"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-[#6b6b6f] opacity-80"
+                      >New Project</span
+                    >
+                  </div>
+                </div>
+              </a>
+
+              <!-- Project Card Loop -->
+              {
+                recentProjects.map((p) => (
+                  <ProjectCard
+                    id={p.id}
+                    title={p.title}
+                    business={p.business}
+                    time={p.time}
+                    className="w-[250px] shrink-0"
+                  />
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- VIEW: LIBRARY -->
-      <div id="view-library" class="hidden w-full h-full flex flex-col min-w-0">
-        <LibraryGallery />
-      </div>
+      <!-- Bottom Spacer for centering (flex-grow) -->
+      <div class="flex-1"></div>
+    </div>
+  </div>
 
-    </Shell>
-    
-    <NewProjectModal />
-
-    <script>
-      const views = {
-        overview: document.getElementById('view-overview'),
-        projects: document.getElementById('view-projects'),
-        workspace: document.getElementById('view-workspace'),
-        'brand-dna': document.getElementById('view-brand-dna'),
-        library: document.getElementById('view-library'),
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const categoriesData = {
+        "social-media": [
+          {
+            title: "Instagram Post",
+            desc: "Design eye-catching posts for your feed and engage your audience.",
+            icon: "ti-brand-instagram",
+            color: "bg-pink-50 text-pink-600",
+          },
+          {
+            title: "Ad Creative",
+            desc: "High-converting ad visuals for your marketing campaigns.",
+            icon: "ti-ad",
+            color: "bg-blue-50 text-blue-600",
+          },
+          {
+            title: "Youtube Thumbnail",
+            desc: "Click-worthy thumbnails that increase your video views.",
+            icon: "ti-brand-youtube",
+            color: "bg-red-50 text-red-600",
+          },
+          {
+            title: "Infographic",
+            desc: "Convert complex data into beautiful visual representations.",
+            icon: "ti-chart-pie",
+            color: "bg-emerald-50 text-emerald-600",
+          },
+        ],
+        branding: [
+          {
+            title: "Logo Design",
+            desc: "Create a unique and memorable identity for your brand.",
+            icon: "ti-vector",
+            color: "bg-indigo-50 text-indigo-600",
+          },
+          {
+            title: "Brand Guidelines",
+            desc: "Comprehensive manual for consistent brand usage.",
+            icon: "ti-book",
+            color: "bg-violet-50 text-violet-600",
+          },
+          {
+            title: "Product Catalog",
+            desc: "Showcase your products professionally to clients.",
+            icon: "ti-books",
+            color: "bg-amber-50 text-amber-600",
+          },
+          {
+            title: "Brand Assets",
+            desc: "Generate assorted visual assets for brand consistency.",
+            icon: "ti-briefcase",
+            color: "bg-slate-50 text-slate-600",
+          },
+        ],
+        "e-commerce": [
+          {
+            title: "Product Listing",
+            desc: "Optimized images for marketplaces and online stores.",
+            icon: "ti-shopping-bag",
+            color: "bg-orange-50 text-orange-600",
+          },
+          {
+            title: "UGC: Lifestyle Try-on",
+            desc: "User generated content style photos for authentic marketing.",
+            icon: "ti-camera",
+            color: "bg-teal-50 text-teal-600",
+          },
+          {
+            title: "Product Retouch",
+            desc: "Professional photo enhancement and background removal.",
+            icon: "ti-wand",
+            color: "bg-purple-50 text-purple-600",
+          },
+          {
+            title: "Multi-angle Shots",
+            desc: "Show your products from every angle in high quality.",
+            icon: "ti-3d-cube-sphere",
+            color: "bg-cyan-50 text-cyan-600",
+          },
+          {
+            title: "Campaign Banner",
+            desc: "Eye-catching banners for your seasonal sales.",
+            icon: "ti-layout-board-split",
+            color: "bg-rose-50 text-rose-600",
+          },
+          {
+            title: "Lookbook",
+            desc: "A curated collection of your product styles and looks.",
+            icon: "ti-book-2",
+            color: "bg-indigo-50 text-indigo-600",
+          },
+        ],
+        presentation: [
+          {
+            title: "Company Profile",
+            desc: "Professional overview of your business and services.",
+            icon: "ti-building",
+            color: "bg-blue-50 text-blue-600",
+          },
+          {
+            title: "Pitch Deck",
+            desc: "Persuasive slides designed specifically for investors.",
+            icon: "ti-presentation",
+            color: "bg-emerald-50 text-emerald-600",
+          },
+          {
+            title: "Sales & Marketing",
+            desc: "Engaging materials for your sales team presentations.",
+            icon: "ti-chart-line",
+            color: "bg-indigo-50 text-indigo-600",
+          },
+          {
+            title: "Educational & Training",
+            desc: "Clear and informative slides for learning materials.",
+            icon: "ti-school",
+            color: "bg-amber-50 text-amber-600",
+          },
+        ],
+        printing: [
+          {
+            title: "Packaging",
+            desc: "Box and label designs for physical products.",
+            icon: "ti-package",
+            color: "bg-orange-50 text-orange-600",
+          },
+          {
+            title: "Business Card",
+            desc: "Professional contact cards that leave an impression.",
+            icon: "ti-id",
+            color: "bg-slate-50 text-slate-600",
+          },
+          {
+            title: "ID Card & Stationery",
+            desc: "Cohesive office materials and employee badges.",
+            icon: "ti-id-badge-2",
+            color: "bg-blue-50 text-blue-600",
+          },
+          {
+            title: "Banner",
+            desc: "Large format promotional banners for physical spaces.",
+            icon: "ti-flag",
+            color: "bg-red-50 text-red-600",
+          },
+          {
+            title: "Brochure",
+            desc: "Informative folded pamphlets for your services.",
+            icon: "ti-book-2",
+            color: "bg-emerald-50 text-emerald-600",
+          },
+          {
+            title: "Merchandise",
+            desc: "Designs for apparel, mugs, and promotional goods.",
+            icon: "ti-shirt",
+            color: "bg-pink-50 text-pink-600",
+          },
+          {
+            title: "3D Booth",
+            desc: "Exhibition and event booth layout concepts.",
+            icon: "ti-box",
+            color: "bg-violet-50 text-violet-600",
+          },
+        ],
       };
 
-      const sidebarBtns = document.querySelectorAll('.sidebar-nav-btn');
-      const promptInput = document.getElementById('prompt-input');
-      const btnSubmitPrompt = document.getElementById('btn-submit-prompt');
-      const examplePrompts = document.querySelectorAll('.example-prompt');
-      
-      const modalBackdrop = document.getElementById('modal-backdrop');
-      const btnCloseModal = document.getElementById('btn-close-modal');
-      const btnNewProjectList = document.getElementById('btn-new-project-list');
-      const btnNewProjectGrid = document.getElementById('btn-new-project-grid');
-      const btnNewProjectDash = document.getElementById('btn-new-project');
-      const cardNewProjectDash = document.getElementById('card-new-project');
-      const goalCards = document.querySelectorAll('.goal-card');
+      const cardsContainer = document.getElementById("get-started-cards");
+      const pills = document.querySelectorAll(".category-pill");
+      const skillBadge = document.getElementById("active-skill-badge");
+      const badgeText = document.getElementById("badge-text");
+      const badgeIcon = document.getElementById("badge-icon");
 
-      function showView(viewId) {
-        Object.entries(views).forEach(([id, el]) => {
-          if (el) el.classList.toggle('hidden', id !== viewId);
-        });
+      function renderCards(category) {
+        if (!cardsContainer) return;
+        const data = categoriesData[category] || [];
 
-        // Trigger workspace sequence if opening workspace view
-        if (viewId === 'workspace' && window._startWorkspaceSequence) {
-          window._startWorkspaceSequence();
-        }
+        cardsContainer.style.opacity = "0";
 
-        // Update active state in sidebar
-        sidebarBtns.forEach(btn => {
-          const target = btn.getAttribute('data-nav-target');
-          if (!target) return;
-          const isActive = target === viewId;
-          
-          // Reset all conditional classes first
-          btn.classList.remove('bg-white', 'border', 'border-black/[0.03]', 'shadow-[0_1px_2px_rgba(0,0,0,0.06)]', 'text-foreground', 'font-bold', 'font-semibold', 'text-muted-foreground', 'hover:bg-white', 'hover:text-foreground', 'hover:border-black/[0.03]', 'hover:shadow-[0_1px_2px_rgba(0,0,0,0.06)]');
-          
+        setTimeout(() => {
+          cardsContainer.innerHTML = data
+            .map(
+              (item) => `
+          <div class="sub-card flex items-center justify-between p-4 rounded-[16px] border border-[#eaecf0] bg-white hover:border-[#eaecf0] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all cursor-pointer group" data-skill="${item.title}" data-icon="${item.icon}" data-desc="${item.desc}">
+            <div class="flex-1 min-w-0 pr-4">
+              <div class="flex items-center gap-2 mb-1.5">
+                <h4 class="text-[14px] font-bold text-[#111827] truncate">${item.title}</h4>
+                <i class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#667085] transition-colors"></i>
+              </div>
+              <p class="text-[12px] text-[#667085] line-clamp-2 leading-relaxed">${item.desc}</p>
+            </div>
+            <div class="w-[72px] h-[72px] rounded-xl shrink-0 flex items-center justify-center ${item.color} relative overflow-hidden group-hover:scale-[1.02] transition-transform">
+               <i class="ti ${item.icon} text-[28px] opacity-90"></i>
+               <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent"></div>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+
+          cardsContainer.style.opacity = "1";
+
+          // Attach badge application logic to the newly rendered sub-cards
+          const subCards = cardsContainer.querySelectorAll(".sub-card");
+          subCards.forEach((card) => {
+            card.addEventListener("click", () => {
+              if (!skillBadge || !badgeText || !badgeIcon) return;
+              const skillName = card.getAttribute("data-skill");
+              const iconClass = card.getAttribute("data-icon");
+
+              badgeText.textContent = skillName;
+              badgeIcon.className = "ti " + iconClass + " text-[14px]";
+              skillBadge.classList.remove("hidden");
+              skillBadge.classList.add("flex");
+
+              const aiInput = document.getElementById("ai-input");
+              if (aiInput) {
+                const desc = card.getAttribute("data-desc") || "";
+                aiInput.textContent = `Please generate ${desc.toLowerCase()}`;
+                const placeholderAnim =
+                  document.getElementById("placeholder-anim");
+                if (placeholderAnim) placeholderAnim.style.display = "none";
+              }
+
+              // Optional: Smooth scroll up to AI Input
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+          });
+        }, 150);
+      }
+
+      if (cardsContainer) {
+        cardsContainer.style.transition = "opacity 0.2s ease";
+      }
+
+      pills.forEach((pill) => {
+        pill.addEventListener("click", (e) => {
+          const clicked = e.currentTarget;
+          const isActive = clicked.classList.contains("pill-active");
+
+          // Reset all pills
+          pills.forEach((p) => {
+            p.className =
+              "category-pill flex items-center gap-2 px-4 py-2 rounded-full border border-[#eaecf0] text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all whitespace-nowrap";
+          });
+
           if (isActive) {
-            btn.classList.add('bg-white', 'text-foreground', 'font-bold', 'border', 'border-black/[0.03]', 'shadow-[0_1px_2px_rgba(0,0,0,0.06)]');
-            
-            // Ensure icon is opaque
-            const icon = btn.querySelector('i');
-            if (icon) icon.classList.remove('opacity-80');
+            // If it was active, we just deactivated it, so clear cards
+            cardsContainer.style.opacity = "0";
+            setTimeout(() => {
+              cardsContainer.innerHTML = "";
+            }, 150);
           } else {
-            btn.classList.add('text-muted-foreground', 'font-medium', 'hover:bg-white', 'hover:text-foreground', 'hover:border-black/[0.03]', 'hover:shadow-[0_1px_2px_rgba(0,0,0,0.06)]');
-            
-            // Set icon to slightly lower opacity
-            const icon = btn.querySelector('i');
-            if (icon) icon.classList.add('opacity-80');
-          }
-        });
-      }
+            // If it was not active, activate it and render its cards
+            clicked.className =
+              "category-pill pill-active flex items-center gap-2 px-4 py-2 rounded-full border text-[13px] font-medium transition-all whitespace-nowrap bg-[#F9FAFB] border-[#d0d5dd] text-[#111827]";
 
-      // Sidebar navigation
-      sidebarBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const target = btn.getAttribute('data-nav-target');
-          if (target && views[target]) showView(target);
-        });
-      });
-
-      // Global listeners for AI Input events
-      document.addEventListener('ai-submit', (e: any) => {
-        if (e.detail.prompt) {
-          showView('workspace');
-        }
-      });
-
-      document.addEventListener('nav-to-workspace', (e: any) => {
-        showView('workspace');
-      });
-
-      // Quick feature cards -> Auto fill but wait for user to click send!
-      examplePrompts.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const titleNode = btn.querySelector('.feature-title');
-          const title = titleNode ? titleNode.textContent.trim() : '';
-          
-          // Find the nearest AI input's textarea
-          const root = btn.closest('.w-full')?.querySelector('.ai-input-root') || document.querySelector('.ai-input-root');
-          const textarea = root?.querySelector('textarea');
-          
-          if (textarea && title) {
-             textarea.value = `Create ${title}...`;
-             textarea.focus();
-             // Trigger input event to resize textarea
-             textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            const category = clicked.getAttribute("data-category");
+            renderCards(category);
           }
         });
       });
 
-      // Brand DNA internal routing
-      const brandEmptyWrapper = document.getElementById('brand-empty-wrapper');
-      const brandDetailWrapper = document.getElementById('brand-detail-wrapper');
-      const btnCreateBrand = document.getElementById('btn-create-brand');
-      const btnBackBrandList = document.getElementById('btn-back-brand-list');
-      const btnOpenBrandDetails = document.querySelectorAll('.btn-open-brand-detail');
+      // Scroll Logic for Categories
+      const categoriesScroll = document.getElementById("categories-scroll");
+      const scrollCategoriesRightBtn = document.getElementById(
+        "scroll-categories-right",
+      );
+      const scrollCategoriesLeftBtn = document.getElementById(
+        "scroll-categories-left",
+      );
+      const categoriesRightGradient = document.getElementById(
+        "categories-right-gradient",
+      );
+      const categoriesLeftGradient = document.getElementById(
+        "categories-left-gradient",
+      );
 
-      function showBrandDetail() {
-        if (brandEmptyWrapper) brandEmptyWrapper.classList.add('hidden');
-        if (brandDetailWrapper) brandDetailWrapper.classList.remove('hidden');
-      }
+      if (
+        categoriesScroll &&
+        scrollCategoriesRightBtn &&
+        scrollCategoriesLeftBtn
+      ) {
+        const updateCategoryScrollButtons = () => {
+          const canScrollLeft = categoriesScroll.scrollLeft > 5;
+          const canScrollRight =
+            categoriesScroll.scrollWidth - categoriesScroll.scrollLeft >
+            categoriesScroll.clientWidth + 5;
 
-      function showBrandEmpty() {
-        if (brandDetailWrapper) brandDetailWrapper.classList.add('hidden');
-        if (brandEmptyWrapper) brandEmptyWrapper.classList.remove('hidden');
-      }
+          categoriesLeftGradient.style.opacity = canScrollLeft ? "1" : "0";
+          categoriesLeftGradient.style.pointerEvents = canScrollLeft
+            ? "auto"
+            : "none";
 
-      if (btnCreateBrand) btnCreateBrand.addEventListener('click', showBrandDetail);
-      if (btnBackBrandList) btnBackBrandList.addEventListener('click', showBrandEmpty);
-      btnOpenBrandDetails.forEach(btn => {
-        btn.addEventListener('click', showBrandDetail);
-      });
+          categoriesRightGradient.style.opacity = canScrollRight ? "1" : "0";
+          categoriesRightGradient.style.pointerEvents = canScrollRight
+            ? "auto"
+            : "none";
+        };
 
-      // Simple Modal Logic
-      const openModal = () => { if (modalBackdrop) modalBackdrop.classList.remove('hidden'); };
-      const closeModal = () => { if (modalBackdrop) modalBackdrop.classList.add('hidden'); };
-
-      if (btnNewProjectList) btnNewProjectList.addEventListener('click', () => showView('workspace'));
-      if (btnNewProjectGrid) btnNewProjectGrid.addEventListener('click', () => showView('workspace'));
-      if (btnNewProjectDash) btnNewProjectDash.addEventListener('click', () => showView('workspace'));
-      if (cardNewProjectDash) cardNewProjectDash.addEventListener('click', () => showView('workspace'));
-      if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
-      if (modalBackdrop) {
-        modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
-      }
-      goalCards.forEach(card => {
-        card.addEventListener('click', () => { 
-          closeModal(); 
-          showView('workspace'); 
+        scrollCategoriesRightBtn.addEventListener("click", () => {
+          categoriesScroll.scrollBy({ left: 200, behavior: "smooth" });
         });
-      });
-    </script>
-  </body>
-</html>
+
+        scrollCategoriesLeftBtn.addEventListener("click", () => {
+          categoriesScroll.scrollBy({ left: -200, behavior: "smooth" });
+        });
+
+        categoriesScroll.addEventListener(
+          "scroll",
+          updateCategoryScrollButtons,
+        );
+        window.addEventListener("resize", updateCategoryScrollButtons);
+        setTimeout(updateCategoryScrollButtons, 500); // Initial check
+      }
+
+      // Scroll Logic for Projects
+      const projectsScroll = document.getElementById("projects-scroll");
+      const scrollProjectsRightBtn = document.getElementById(
+        "scroll-projects-right",
+      );
+      const scrollProjectsLeftBtn = document.getElementById(
+        "scroll-projects-left",
+      );
+      const projectsRightGradient = document.getElementById(
+        "projects-right-gradient",
+      );
+      const projectsLeftGradient = document.getElementById(
+        "projects-left-gradient",
+      );
+
+      if (projectsScroll && scrollProjectsRightBtn && scrollProjectsLeftBtn) {
+        const updateProjectScrollButtons = () => {
+          const canScrollLeft = projectsScroll.scrollLeft > 5;
+          const canScrollRight =
+            projectsScroll.scrollWidth - projectsScroll.scrollLeft >
+            projectsScroll.clientWidth + 5;
+
+          projectsLeftGradient.style.opacity = canScrollLeft ? "1" : "0";
+          projectsLeftGradient.style.pointerEvents = canScrollLeft
+            ? "auto"
+            : "none";
+
+          projectsRightGradient.style.opacity = canScrollRight ? "1" : "0";
+          projectsRightGradient.style.pointerEvents = canScrollRight
+            ? "auto"
+            : "none";
+        };
+
+        scrollProjectsRightBtn.addEventListener("click", () => {
+          projectsScroll.scrollBy({ left: 300, behavior: "smooth" });
+        });
+
+        scrollProjectsLeftBtn.addEventListener("click", () => {
+          projectsScroll.scrollBy({ left: -300, behavior: "smooth" });
+        });
+
+        projectsScroll.addEventListener("scroll", updateProjectScrollButtons);
+        window.addEventListener("resize", updateProjectScrollButtons);
+        setTimeout(updateProjectScrollButtons, 500); // Initial check
+      }
+    });
+  </script>
+</AppLayout>

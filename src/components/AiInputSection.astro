@@ -1,0 +1,678 @@
+---
+import ReferencesModal from "./modals/ReferencesModal.astro";
+import BusinessDNAModal from "./modals/BusinessDNAModal.astro";
+import AspectRatioDropdown from "./dropdowns/AspectRatioDropdown.astro";
+
+interface Props {
+    placeholderPhrases?: string[];
+}
+
+const {
+    placeholderPhrases = [
+        "Buat product photoshoot estetik untuk botol parfum...",
+        "Generate konten promosi sosial media untuk koleksi tas...",
+        "Buat foto produk profesional dengan latar belakang minimalis...",
+        "Rancang konten carousel Instagram untuk peluncuran sepatu...",
+        "Generate visual photoshoot produk skincare di alam terbuka...",
+    ],
+} = Astro.props;
+---
+
+<ReferencesModal />
+<BusinessDNAModal />
+
+<div class="w-full shrink-0 max-w-3xl mx-auto px-8 pb-6">
+    <div
+        class="relative flex flex-col p-2.5 rounded-[24px] bg-white border border-[#eaecf0] shadow-sm focus-within:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all"
+    >
+        <!-- Input Area -->
+        <div class="flex items-start gap-2 px-1 relative">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="text-[#98a2b3] mt-2.5 ml-1 shrink-0"
+            >
+                <path
+                    d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
+                ></path>
+            </svg>
+            <div class="relative flex-1">
+                <!-- Animated Placeholder Container -->
+                <div
+                    id="placeholder-anim"
+                    class="absolute left-0 top-2 text-[14px] font-medium text-[#98a2b3] pointer-events-none whitespace-nowrap overflow-hidden"
+                >
+                    <span id="typing-text"></span><span
+                        class="animate-cursor ml-0.5">|</span
+                    >
+                </div>
+                <div
+                    id="ai-input"
+                    contenteditable="true"
+                    class="w-full bg-transparent text-[#111827] py-2 min-h-[80px] max-h-[200px] overflow-y-auto outline-none text-[14px] font-medium relative z-10 cursor-text"
+                >
+                </div>
+            </div>
+        </div>
+
+        <style is:global>
+            #ai-input:empty:before {
+                content: attr(data-placeholder);
+                color: #98a2b3;
+            }
+            .ref-badge {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 5px !important;
+                padding: 0 8px 0 3px !important;
+                background: #ffffff !important;
+                border: 1px solid #d0d5dd !important;
+                border-radius: 9999px !important;
+                margin: 0 4px !important;
+                user-select: none !important;
+                vertical-align: middle !important;
+                height: 24px !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                max-width: 220px !important;
+                white-space: nowrap !important;
+            }
+            .ref-badge .ref-circle {
+                width: 18px !important;
+                height: 18px !important;
+                border-radius: 50% !important;
+                background: #d1d5db !important;
+                flex-shrink: 0 !important;
+            }
+            .ref-badge .ref-text {
+                font-size: 11px !important;
+                font-weight: 700 !important;
+                color: #344054 !important;
+                max-width: 120px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+            }
+            .ref-badge .remove-ref-badge {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                color: #98a2b3 !important;
+                cursor: pointer !important;
+                margin-left: 2px !important;
+                border: none !important;
+                background: none !important;
+                padding: 0 !important;
+            }
+            .ref-badge .remove-ref-badge:hover {
+                color: #d92d20 !important;
+            }
+
+            @keyframes light-swipe {
+                0% {
+                    left: -40%;
+                }
+                40% {
+                    left: 130%;
+                }
+                100% {
+                    left: 130%;
+                }
+            }
+            .btn-shimmer {
+                position: relative !important;
+                overflow: hidden !important;
+                background-color: #eff6ff !important;
+                border-color: #3b82f6 !important;
+                color: #1d4ed8 !important;
+            }
+            .btn-shimmer::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -40%;
+                width: 30%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.5),
+                    transparent
+                );
+                transform: skewX(-20deg);
+                animation: light-swipe 3s linear infinite;
+                pointer-events: none;
+            }
+        </style>
+
+        <!-- Controls Area -->
+        <div class="flex items-center justify-between mt-1">
+            <!-- Left: References, Business DNA, Aspect Ratio -->
+            <div class="flex items-center gap-1.5 relative">
+                <div class="relative">
+                    <button
+                        id="btn-references"
+                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none"
+                    >
+                        <i class="ti ti-plus text-[14px]"></i>
+                        References
+                    </button>
+                    <!-- References Dropdown Menu -->
+                    <div
+                        id="references-dropdown"
+                        class="hidden absolute left-0 top-full mt-1.5 w-[200px] bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-top-1 duration-200 flex flex-col gap-0.5"
+                    >
+                        <button
+                            id="btn-add-local"
+                            class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all flex items-center gap-2.5 cursor-pointer"
+                        >
+                            <i class="ti ti-upload text-[15px] opacity-70"></i>
+                            Add from local files
+                        </button>
+                        <button
+                            id="btn-add-prod-ref"
+                            class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all flex items-center gap-2.5 cursor-pointer"
+                        >
+                            <i class="ti ti-box text-[15px] opacity-70"></i>
+                            Add product references
+                        </button>
+                    </div>
+                    <!-- Secret Native File Input -->
+                    <input type="file" id="local-file-input" class="hidden" multiple />
+                </div>
+                <button
+                    id="btn-business-dna"
+                    class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                >
+                    <i class="ti ti-fingerprint text-[14px]"></i>
+                    Business DNA
+                </button>
+                <div class="relative">
+                    <button
+                        id="btn-aspect-ratio"
+                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                    >
+                        <i class="ti ti-frame text-[14px]"></i>
+                        Aspect Ratio
+                        <i
+                            class="ti ti-chevron-down text-[10px] ml-0.5 opacity-60"
+                        ></i>
+                    </button>
+                    <AspectRatioDropdown />
+                </div>
+
+                <!-- Skill Badge (Hidden by default) -->
+                <div
+                    id="active-skill-badge"
+                    class="hidden items-center gap-1.5 px-3 h-8 rounded-full bg-[#EFF6FF] border border-[#dbeafe] text-[12px] font-bold text-[#2563EB] select-none"
+                >
+                    <i id="badge-icon" class="ti ti-wand text-[14px]"></i>
+                    <span id="badge-text">Design</span>
+                    <button
+                        id="remove-badge"
+                        class="ml-1 hover:text-[#1e40af] transition-colors flex items-center justify-center"
+                    >
+                        <i class="ti ti-x text-[14px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Send (Icon Only) -->
+            <div class="flex items-center">
+                <button
+                    class="btn-active-plate btn-active-dark btn-active-top w-9 h-9 rounded-xl flex items-center justify-center transition-all active:scale-95 cursor-pointer"
+                >
+                    <i class="ti ti-arrow-right text-[16px]"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script is:inline define:vars={{ placeholderPhrases }}>
+    document.addEventListener("DOMContentLoaded", () => {
+        const typingText = document.getElementById("typing-text");
+        const placeholderAnim = document.getElementById("placeholder-anim");
+        const aiInput = document.getElementById("ai-input");
+
+        if (!typingText || !placeholderAnim || !aiInput) return;
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let speed = 60;
+
+        function type() {
+            const phrase = placeholderPhrases[phraseIndex];
+
+            if (isDeleting) {
+                charIndex--;
+                typingText.textContent = phrase.substring(0, charIndex);
+                speed = 30;
+            } else {
+                charIndex++;
+                typingText.textContent = phrase.substring(0, charIndex);
+                speed = 60;
+            }
+
+            if (!isDeleting && charIndex === phrase.length) {
+                isDeleting = true;
+                speed = 2000;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % placeholderPhrases.length;
+                speed = 400;
+            }
+
+            setTimeout(type, speed);
+        }
+
+        // Hide instantly on click/focus
+        function hidePlaceholder() {
+            placeholderAnim.style.display = "none";
+        }
+        function showPlaceholder() {
+            if (
+                aiInput.textContent.trim() === "" &&
+                aiInput.querySelectorAll(".ref-badge").length === 0
+            ) {
+                placeholderAnim.style.display = "";
+            }
+        }
+
+        aiInput.addEventListener("focus", hidePlaceholder);
+        aiInput.addEventListener("mousedown", hidePlaceholder);
+        aiInput.addEventListener("blur", showPlaceholder);
+        aiInput.addEventListener("input", () => {
+            aiInput.textContent.trim() !== "" ||
+            aiInput.querySelectorAll(".ref-badge").length > 0
+                ? hidePlaceholder()
+                : showPlaceholder();
+        });
+
+        type();
+
+        // --- References Modal Logic ---
+        const btnReferences = document.getElementById("btn-references");
+        const referencesDropdown = document.getElementById("references-dropdown");
+        const btnAddLocal = document.getElementById("btn-add-local");
+        const btnAddProdRef = document.getElementById("btn-add-prod-ref");
+        const localFileInput = document.getElementById("local-file-input");
+        const referencesModal = document.getElementById("references-modal");
+        const closeReferences = document.getElementById("close-references");
+        const cancelReferences = document.getElementById("cancel-references");
+
+        if (btnReferences && referencesDropdown && referencesModal) {
+            // Dropdown Toggle
+            btnReferences.addEventListener("click", (e) => {
+                e.stopPropagation();
+                referencesDropdown.classList.toggle("hidden");
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!referencesDropdown.contains(e.target) && e.target !== btnReferences) {
+                    referencesDropdown.classList.add("hidden");
+                }
+            });
+
+            // Local file upload handling
+            if (btnAddLocal && localFileInput) {
+                btnAddLocal.addEventListener("click", () => {
+                    localFileInput.click();
+                    referencesDropdown.classList.add("hidden");
+                });
+
+                localFileInput.addEventListener("change", () => {
+                    if (localFileInput.files && localFileInput.files.length > 0) {
+                        Array.from(localFileInput.files).forEach((file) => {
+                            addRefBadge(file.name);
+                        });
+                        localFileInput.value = ""; // reset
+                    }
+                });
+            }
+
+            // Modal Trigger
+            if (btnAddProdRef) {
+                btnAddProdRef.addEventListener("click", () => {
+                    referencesModal.classList.remove("hidden");
+                    referencesDropdown.classList.add("hidden");
+                });
+            }
+
+            const closeModal = () => referencesModal.classList.add("hidden");
+            if (closeReferences) closeReferences.addEventListener("click", closeModal);
+            if (cancelReferences) cancelReferences.addEventListener("click", closeModal);
+
+            referencesModal.addEventListener("click", (e) => {
+                if (e.target === referencesModal) closeModal();
+            });
+
+            // Product references grid multiselect logic
+            const selectedRefs = new Set();
+            const refItems = referencesModal.querySelectorAll(".ref-item");
+
+            refItems.forEach((item) => {
+                item.addEventListener("click", () => {
+                    const id = item.getAttribute("data-id");
+                    const overlay = item.querySelector(".selected-overlay");
+                    if (selectedRefs.has(id)) {
+                        selectedRefs.delete(id);
+                        overlay.classList.add("hidden");
+                    } else {
+                        selectedRefs.add(id);
+                        overlay.classList.remove("hidden");
+                    }
+                });
+            });
+
+            const submitRefsBtn = referencesModal.querySelector(".btn-active-dark");
+            if (submitRefsBtn) {
+                submitRefsBtn.addEventListener("click", () => {
+                    selectedRefs.forEach((id) => {
+                        const item = referencesModal.querySelector(`.ref-item[data-id="${id}"]`);
+                        if (item) {
+                            const name = item.getAttribute("data-name");
+                            addRefBadge(name);
+                        }
+                    });
+                    selectedRefs.clear();
+                    refItems.forEach((i) => i.querySelector(".selected-overlay").classList.add("hidden"));
+                    closeModal();
+                });
+            }
+
+            function addRefBadge(name) {
+                const badge = document.createElement("span");
+                badge.className = "ref-badge";
+                badge.contentEditable = "false";
+                badge.innerHTML = `
+                  <span class="ref-circle"></span>
+                  <span class="ref-text">${name}</span>
+                  <span class="remove-ref-badge"><i class="ti ti-x text-[12px]"></i></span>
+                `;
+
+                badge.querySelector(".remove-ref-badge").addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    badge.remove();
+                    if (aiInput.textContent.trim() === "" && aiInput.querySelectorAll(".ref-badge").length === 0) {
+                        showPlaceholder();
+                    }
+                });
+
+                const sel = window.getSelection();
+                if (sel.rangeCount > 0) {
+                    const range = sel.getRangeAt(0);
+                    range.deleteContents();
+                    range.insertNode(badge);
+
+                    const space = document.createTextNode("\u00A0");
+                    range.collapse(false);
+                    range.insertNode(space);
+
+                    range.setStartAfter(space);
+                    range.setEndAfter(space);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } else {
+                    aiInput.appendChild(badge);
+                    aiInput.appendChild(document.createTextNode("\u00A0"));
+                }
+
+                hidePlaceholder();
+                aiInput.focus();
+            }
+
+            aiInput.addEventListener("drop", (e) => { e.preventDefault(); });
+
+            // Filter dropdown toggle logic inside modal
+            const filterBtn = referencesModal.querySelector("#ref-filter-btn");
+            const filterDropdown = referencesModal.querySelector("#ref-filter-dropdown");
+            if (filterBtn && filterDropdown) {
+                filterBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    filterDropdown.classList.toggle("hidden");
+                    const bizDropdown = referencesModal.querySelector("#ref-business-dropdown");
+                    bizDropdown?.classList.add("hidden");
+                });
+                document.addEventListener("click", (e) => {
+                    if (!filterDropdown.contains(e.target)) filterDropdown.classList.add("hidden");
+                });
+            }
+
+            const bizFilterBtn = referencesModal.querySelector("#ref-business-filter-btn");
+            const bizDropdown = referencesModal.querySelector("#ref-business-dropdown");
+            if (bizFilterBtn && bizDropdown) {
+                bizFilterBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    bizDropdown.classList.toggle("hidden");
+                    if (filterDropdown) filterDropdown.classList.add("hidden");
+                });
+                document.addEventListener("click", (e) => {
+                    if (!bizDropdown.contains(e.target)) bizDropdown.classList.add("hidden");
+                });
+            }
+
+            // My Favorites button in modal logic
+            const favFilterBtn = referencesModal.querySelector("#ref-fav-filter-btn");
+            if (favFilterBtn) {
+                let favActive = false;
+                favFilterBtn.addEventListener("click", () => {
+                    favActive = !favActive;
+                    if (favActive) {
+                        favFilterBtn.classList.remove("text-[#667085]", "bg-white");
+                        favFilterBtn.classList.add("text-[#F59E0B]", "bg-[#F3F4F6]");
+                        const starIcon = favFilterBtn.querySelector("svg");
+                        if (starIcon) starIcon.classList.add("text-[#F59E0B]");
+                    } else {
+                        favFilterBtn.classList.add("text-[#667085]", "bg-white");
+                        favFilterBtn.classList.remove("text-[#F59E0B]", "bg-[#F3F4F6]");
+                        const starIcon = favFilterBtn.querySelector("svg");
+                        if (starIcon) starIcon.classList.remove("text-[#F59E0B]");
+                    }
+                });
+            }
+
+            // Auto-hide scrollbar
+            const refMainContent = referencesModal.querySelector("#ref-main-content");
+            let scrollTimeout;
+            if (refMainContent) {
+                refMainContent.addEventListener("scroll", () => {
+                    refMainContent.classList.add("is-scrolling");
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        refMainContent.classList.remove("is-scrolling");
+                    }, 1000);
+                });
+            }
+        }
+
+        // --- Business DNA Modal Logic ---
+        const btnBusinessDNA = document.getElementById("btn-business-dna");
+        const businessDNAModal = document.getElementById("business-dna-modal");
+        const closeBusinessDNA = document.getElementById("close-business-dna");
+        const cancelBusinessDNA = document.getElementById(
+            "cancel-business-dna",
+        );
+        const confirmBusinessDNA =
+            businessDNAModal?.querySelector(".btn-active-dark");
+        const dnaItems = document.querySelectorAll(".dna-item");
+
+        let selectedDNAName = null;
+
+        if (btnBusinessDNA && businessDNAModal && closeBusinessDNA) {
+            btnBusinessDNA.addEventListener("click", () =>
+                businessDNAModal.classList.remove("hidden"),
+            );
+            closeBusinessDNA.addEventListener("click", () =>
+                businessDNAModal.classList.add("hidden"),
+            );
+            cancelBusinessDNA?.addEventListener("click", () =>
+                businessDNAModal.classList.add("hidden"),
+            );
+
+            dnaItems.forEach((item) => {
+                item.addEventListener("click", () => {
+                    const name = item.getAttribute("data-name");
+                    const isSelected = selectedDNAName === name;
+
+                    // Reset all
+                    dnaItems.forEach((i) => {
+                        i.classList.remove("border-[#2563EB]", "bg-blue-50/30");
+                        i.classList.add("border-[#eaecf0]", "bg-white");
+                        i.querySelector(".check-badge").classList.add("hidden");
+                    });
+
+                    if (isSelected) {
+                        selectedDNAName = null;
+                    } else {
+                        // Select this
+                        item.classList.remove("border-[#eaecf0]", "bg-white");
+                        item.classList.add("border-[#2563EB]", "bg-blue-50/30");
+                        item.querySelector(".check-badge").classList.remove(
+                            "hidden",
+                        );
+                        selectedDNAName = name;
+                    }
+                });
+            });
+
+            confirmBusinessDNA?.addEventListener("click", () => {
+                if (selectedDNAName) {
+                    btnBusinessDNA.innerHTML = `<i class="ti ti-fingerprint text-[14px]"></i> ${selectedDNAName}`;
+                    btnBusinessDNA.classList.add(
+                        "text-[#2563EB]",
+                        "border-[#2563EB]",
+                        "bg-blue-50/10",
+                        "btn-shimmer",
+                    );
+                    btnBusinessDNA.classList.remove("border-[#eaecf0]");
+                } else {
+                    btnBusinessDNA.innerHTML = `<i class="ti ti-fingerprint text-[14px]"></i> Business DNA`;
+                    btnBusinessDNA.classList.remove(
+                        "text-[#2563EB]",
+                        "border-[#2563EB]",
+                        "bg-blue-50/10",
+                        "btn-shimmer",
+                    );
+                    btnBusinessDNA.classList.add("border-[#eaecf0]");
+                }
+                businessDNAModal.classList.add("hidden");
+            });
+
+            businessDNAModal.addEventListener("click", (e) => {
+                if (e.target === businessDNAModal)
+                    businessDNAModal.classList.add("hidden");
+            });
+
+            // Auto-hide Scrollbar Logic for Business DNA
+            const dnaMainContent = document.getElementById("dna-main-content");
+            let dnaScrollTimeout;
+            if (dnaMainContent) {
+                dnaMainContent.addEventListener("scroll", () => {
+                    dnaMainContent.classList.add("is-scrolling");
+                    clearTimeout(dnaScrollTimeout);
+                    dnaScrollTimeout = setTimeout(() => {
+                        dnaMainContent.classList.remove("is-scrolling");
+                    }, 1000);
+                });
+            }
+        }
+
+        // --- Aspect Ratio Dropdown Logic ---
+        const btnAspectRatio = document.getElementById("btn-aspect-ratio");
+        const aspectRatioDropdown = document.getElementById(
+            "aspect-ratio-dropdown",
+        );
+        const ratioOptions = document.querySelectorAll(".ratio-option");
+        let selectedRatio = null;
+
+        if (btnAspectRatio && aspectRatioDropdown) {
+            btnAspectRatio.addEventListener("click", (e) => {
+                e.stopPropagation();
+                aspectRatioDropdown.classList.toggle("hidden");
+            });
+
+            ratioOptions.forEach((opt) => {
+                opt.addEventListener("click", () => {
+                    const ratio = opt.getAttribute("data-ratio");
+                    const label = opt.querySelector("span").textContent;
+                    const icon = opt.querySelector("i").cloneNode(true);
+
+                    if (selectedRatio === ratio) {
+                        // Unselect
+                        selectedRatio = null;
+                        btnAspectRatio.innerHTML = `<i class="ti ti-frame text-[14px]"></i> Aspect Ratio <i class="ti ti-chevron-down text-[10px] ml-0.5 opacity-60"></i>`;
+                        btnAspectRatio.classList.remove(
+                            "text-[#2563EB]",
+                            "bg-blue-50/10",
+                        );
+                        opt.classList.remove(
+                            "font-bold",
+                            "text-[#111827]",
+                            "bg-[#F3F4F6]",
+                        );
+                        opt.classList.add("font-medium", "text-[#344054]");
+                        opt.querySelector(".ti-check").classList.add("hidden");
+                    } else {
+                        // Select
+                        selectedRatio = ratio;
+                        btnAspectRatio.innerHTML = "";
+                        btnAspectRatio.appendChild(icon);
+                        btnAspectRatio.innerHTML += ` ${label} (${ratio})`;
+                        btnAspectRatio.innerHTML += ` <i class="ti ti-chevron-down text-[10px] ml-0.5 opacity-60"></i>`;
+                        btnAspectRatio.classList.add(
+                            "text-[#2563EB]",
+                            "bg-blue-50/10",
+                        );
+
+                        // Update dropdown UI
+                        ratioOptions.forEach((o) => {
+                            o.classList.remove(
+                                "font-bold",
+                                "text-[#111827]",
+                                "bg-[#F3F4F6]",
+                            );
+                            o.classList.add("font-medium", "text-[#344054]");
+                            o.querySelector(".ti-check").classList.add(
+                                "hidden",
+                            );
+                        });
+                        opt.classList.add(
+                            "font-bold",
+                            "text-[#111827]",
+                            "bg-[#F3F4F6]",
+                        );
+                        opt.classList.remove("font-medium", "text-[#344054]");
+                        opt.querySelector(".ti-check").classList.remove(
+                            "hidden",
+                        );
+                    }
+
+                    aspectRatioDropdown.classList.add("hidden");
+                });
+            });
+
+            document.addEventListener("click", (e) => {
+                if (
+                    !aspectRatioDropdown.contains(e.target) &&
+                    e.target !== btnAspectRatio
+                ) {
+                    aspectRatioDropdown.classList.add("hidden");
+                }
+            });
+        }
+
+        const removeBadgeBtn = document.getElementById("remove-badge");
+        const skillBadge = document.getElementById("active-skill-badge");
+        if (removeBadgeBtn && skillBadge) {
+            removeBadgeBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                skillBadge.classList.add("hidden");
+                skillBadge.classList.remove("flex");
+            });
+        }
+    });
+</script>

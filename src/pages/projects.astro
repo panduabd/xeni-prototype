@@ -1,0 +1,467 @@
+---
+import AppLayout from "../layouts/AppLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const projectsData = [
+  {
+    id: "1",
+    title: "Summer Drink Campaign",
+    business: "Fresh Juice Co.",
+    time: "2m ago",
+  },
+  {
+    id: "2",
+    title: "Brand Identity Redesign",
+    business: "Acme Corp",
+    time: "1h ago",
+  },
+  {
+    id: "3",
+    title: "Social Media Q3 Package",
+    business: "TechStart Inc",
+    time: "3h ago",
+  },
+  {
+    id: "4",
+    title: "Product Photoshoot",
+    business: "Luxe Beauty",
+    time: "5h ago",
+  },
+  {
+    id: "5",
+    title: "E-Commerce Launch",
+    business: "Fresh Juice Co.",
+    time: "1d ago",
+  },
+  {
+    id: "6",
+    title: "Presentation Deck",
+    business: "Acme Corp",
+    time: "2d ago",
+  },
+  {
+    id: "7",
+    title: "Print Material Set",
+    business: "TechStart Inc",
+    time: "3d ago",
+  },
+  {
+    id: "8",
+    title: "Holiday Campaign",
+    business: "Luxe Beauty",
+    time: "1w ago",
+  },
+];
+---
+
+<AppLayout title="Projects - Xeni" activePage="projects">
+  <div class="w-full min-h-full flex flex-col px-6 pb-32 mt-[-48px]">
+    <!-- Title + Controls Row -->
+    <div
+      class="max-w-6xl mx-auto w-full pt-1 pb-8 flex items-center justify-between gap-4"
+    >
+      <!-- Left: Title -->
+      <div class="flex items-center gap-2 shrink-0">
+        <i class="ti ti-folder-star text-[20px] text-[#98a2b3]"></i>
+        <h1 class="text-[20px] font-bold text-[#111827] tracking-tight">
+          Projects
+        </h1>
+      </div>
+
+      <!-- Right: Search + DNA Filter + Favorites -->
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- My Favorites Filter Button -->
+        <button
+          id="btn-filter-favorites"
+          type="button"
+          class="flex items-center gap-1.5 px-3.5 h-8 rounded-full border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none"
+        >
+          <span
+            id="fav-star-icon"
+            class="flex items-center justify-center shrink-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-[14px] h-[14px] text-[#667085]"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+              ></path>
+            </svg>
+          </span>
+          <span>My Favorites</span>
+        </button>
+
+        <!-- DNA Filter -->
+        <div class="relative" id="dna-filter-wrapper">
+          <button
+            id="btn-dna-filter"
+            class="flex items-center gap-1.5 px-3 h-8 rounded-full border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >
+            <i class="ti ti-fingerprint text-[13px]"></i>
+            <span id="dna-filter-label">All Business</span>
+            <i class="ti ti-chevron-down text-[11px] text-[#98a2b3]"></i>
+          </button>
+          <div
+            id="dna-filter-dropdown"
+            class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
+          >
+            <div
+              id="dna-filter-list"
+              class="flex flex-col p-1.5 max-h-60 overflow-y-auto"
+              style="scrollbar-width: none;"
+            >
+            </div>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="relative w-[200px]">
+          <i
+            class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"
+          ></i>
+          <input
+            id="project-search"
+            type="text"
+            placeholder="Search..."
+            class="w-full h-8 pl-8 pr-3 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="max-w-6xl mx-auto w-full flex-1 pb-16">
+      <div
+        id="projects-grid"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      >
+        <!-- New Project Card -->
+        <div
+          id="card-new-project"
+          class="group relative flex flex-col items-center justify-center rounded-[24px] bg-white border border-[#eaecf0] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent transition-all cursor-pointer w-full h-full"
+        >
+          <div class="flex flex-col items-center justify-center gap-4">
+            <i
+              class="ti ti-plus text-[48px] text-[#4b4b4f] opacity-80 group-hover:scale-110 transition-transform"
+            ></i>
+            <div
+              class="px-3 py-1 rounded-full bg-[#f9fafb] border border-[#eaecf0] shadow-sm flex items-center gap-1.5 select-none"
+            >
+              <span class="text-[10px] font-bold text-[#6b6b6f] opacity-80"
+                >New Project</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Cards -->
+        {
+          projectsData.map((p) => (
+            <ProjectCard
+              id={p.id}
+              title={p.title}
+              business={p.business}
+              time={p.time}
+              className="!w-full"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</AppLayout>
+
+<script is:inline>
+  const projectsData = [
+    {
+      id: "1",
+      title: "Summer Drink Campaign",
+      business: "Fresh Juice Co.",
+      time: "2m ago",
+    },
+    {
+      id: "2",
+      title: "Brand Identity Redesign",
+      business: "Acme Corp",
+      time: "1h ago",
+    },
+    {
+      id: "3",
+      title: "Social Media Q3 Package",
+      business: "TechStart Inc",
+      time: "3h ago",
+    },
+    {
+      id: "4",
+      title: "Product Photoshoot",
+      business: "Luxe Beauty",
+      time: "5h ago",
+    },
+    {
+      id: "5",
+      title: "E-Commerce Launch",
+      business: "Fresh Juice Co.",
+      time: "1d ago",
+    },
+    {
+      id: "6",
+      title: "Presentation Deck",
+      business: "Acme Corp",
+      time: "2d ago",
+    },
+    {
+      id: "7",
+      title: "Print Material Set",
+      business: "TechStart Inc",
+      time: "3d ago",
+    },
+    {
+      id: "8",
+      title: "Holiday Campaign",
+      business: "Luxe Beauty",
+      time: "1w ago",
+    },
+  ];
+
+  let searchQuery = "";
+  let selectedDNA = "all";
+  let showFavoritesOnly = false;
+
+  function loadFavorites() {
+    try {
+      const saved = localStorage.getItem("project-favorites");
+      if (!saved) return;
+      const favIds = JSON.parse(saved);
+      document.querySelectorAll(".project-card").forEach((card) => {
+        const id = card.getAttribute("data-id");
+        if (!id || !favIds.includes(id)) return;
+        const btn = card.querySelector(".btn-favorite");
+        const icon = btn?.querySelector("i");
+        if (!btn || !icon) return;
+        icon.classList.remove("ti-star", "text-[#9ca3af]");
+        icon.classList.add("ti-star-filled", "text-[#F59E0B]");
+        btn.classList.remove("bg-white");
+        btn.classList.add("bg-[#FEF3C7]");
+      });
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function saveFavorites() {
+    try {
+      const favIds = [];
+      document.querySelectorAll(".project-card").forEach((card) => {
+        const btn = card.querySelector(".btn-favorite");
+        const icon = btn?.querySelector("i");
+        if (icon && icon.classList.contains("ti-star-filled")) {
+          const id = card.getAttribute("data-id");
+          if (id) favIds.push(id);
+        }
+      });
+      localStorage.setItem("project-favorites", JSON.stringify(favIds));
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function getUniqueDNA() {
+    return Array.from(new Set(projectsData.map((p) => p.business))).sort();
+  }
+
+  function renderDNAFilter() {
+    const list = document.getElementById("dna-filter-list");
+    if (!list) return;
+    const dnaNames = getUniqueDNA();
+    let html = `<button class="dna-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#111827] bg-[#F3F4F6] transition-colors cursor-pointer" data-value="all">All Business</button>`;
+    dnaNames.forEach((name) => {
+      html += `<button class="dna-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-value="${name}">${name}</button>`;
+    });
+    list.innerHTML = html;
+
+    list.querySelectorAll(".dna-option").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedDNA = btn.getAttribute("data-value");
+        document.getElementById("dna-filter-label").textContent =
+          selectedDNA === "all" ? "All Business" : selectedDNA;
+        list.querySelectorAll(".dna-option").forEach((b) => {
+          b.classList.remove("bg-[#F3F4F6]", "text-[#111827]");
+          b.classList.add(
+            "text-[#667085]",
+            "hover:bg-[#F9FAFB]",
+            "hover:text-[#111827]",
+          );
+        });
+        btn.classList.remove(
+          "text-[#667085]",
+          "hover:bg-[#F9FAFB]",
+          "hover:text-[#111827]",
+        );
+        btn.classList.add("bg-[#F3F4F6]", "text-[#111827]");
+        document.getElementById("dna-filter-dropdown").classList.add("hidden");
+        filterCards();
+      });
+    });
+  }
+
+  function setupDNAFilter() {
+    const btn = document.getElementById("btn-dna-filter");
+    const dropdown = document.getElementById("dna-filter-dropdown");
+    if (!btn || !dropdown) return;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle("hidden");
+    });
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+        dropdown.classList.add("hidden");
+      }
+    });
+  }
+
+  function filterCards() {
+    let favIds = [];
+    try {
+      const saved = localStorage.getItem("project-favorites");
+      if (saved) favIds = JSON.parse(saved);
+    } catch (e) {}
+
+    document.querySelectorAll(".project-card").forEach((card) => {
+      const title = card.querySelector("h4")?.textContent || "";
+      const businessEl =
+        card.querySelector(".project-business") ||
+        card.querySelector(".text-\\[\\#667085\\]");
+      const business = businessEl ? businessEl.textContent.trim() : "";
+      const id = card.getAttribute("data-id");
+
+      const matchesSearch =
+        !searchQuery ||
+        title.toLowerCase().includes(searchQuery) ||
+        business.toLowerCase().includes(searchQuery);
+      const matchesDNA = selectedDNA === "all" || business === selectedDNA;
+      const matchesFavorite = !showFavoritesOnly || favIds.includes(id);
+
+      card.style.display =
+        matchesSearch && matchesDNA && matchesFavorite ? "" : "none";
+    });
+  }
+
+  function setupSearch() {
+    const input = document.getElementById("project-search");
+    if (!input) return;
+    input.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      filterCards();
+    });
+
+    const favBtn = document.getElementById("btn-filter-favorites");
+    if (favBtn) {
+      favBtn.addEventListener("click", () => {
+        showFavoritesOnly = !showFavoritesOnly;
+        const starWrapper = favBtn.querySelector("#fav-star-icon");
+        if (showFavoritesOnly) {
+          favBtn.classList.add("bg-[#F3F4F6]");
+          favBtn.classList.remove("bg-white");
+          if (starWrapper) {
+            starWrapper.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-[14px] h-[14px] text-[#F59E0B]" viewBox="0 0 24 24" stroke-width="0" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                            </svg>
+                        `;
+          }
+        } else {
+          favBtn.classList.remove("bg-[#F3F4F6]");
+          favBtn.classList.add("bg-white");
+          if (starWrapper) {
+            starWrapper.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-[14px] h-[14px] text-[#667085]" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                            </svg>
+                        `;
+          }
+        }
+        filterCards();
+      });
+    }
+  }
+
+  function setupFavorites() {
+    const grid = document.getElementById("projects-grid");
+    if (!grid) return;
+    grid.addEventListener("click", (e) => {
+      const btn = e.target.closest(".btn-favorite");
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const icon = btn.querySelector("i");
+      if (!icon) return;
+      const isFavorite = icon.classList.contains("ti-star-filled");
+      if (isFavorite) {
+        icon.classList.remove("ti-star-filled", "text-[#F59E0B]");
+        icon.classList.add("ti-star", "text-[#9ca3af]");
+        btn.classList.remove("bg-[#FEF3C7]");
+        btn.classList.add("bg-white");
+      } else {
+        icon.classList.remove("ti-star", "text-[#9ca3af]");
+        icon.classList.add("ti-star-filled", "text-[#F59E0B]");
+        btn.classList.remove("bg-white");
+        btn.classList.add("bg-[#FEF3C7]");
+      }
+      saveFavorites();
+      if (showFavoritesOnly) filterCards();
+    });
+  }
+
+  function createProjectCardHTML(project) {
+    const newId = project.id || String(projectsData.length + 1);
+    return `
+            <div class="project-card group relative flex flex-col rounded-[24px] bg-white border border-[#eaecf0] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent transition-all" data-id="${newId}">
+                <div class="flex gap-2 p-3 pb-0 items-center">
+                    <div class="w-[108px] h-[108px] rounded-[16px] bg-[#F3F4F6] overflow-hidden relative border border-[#eaecf0] shrink-0">
+                        <div class="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="ti ti-photo text-[32px] text-black/10"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 grid grid-cols-2 gap-2">
+                        <div class="w-full aspect-square rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"></div>
+                        <div class="w-full aspect-square rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"></div>
+                        <div class="w-full aspect-square rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"></div>
+                        <div class="w-full aspect-square rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"></div>
+                    </div>
+                </div>
+                <div class="p-3 pt-2.5 flex-1 flex flex-col">
+                    <div class="flex items-start justify-between gap-2 mb-1">
+                        <h4 class="text-[13px] font-bold text-[#111827] truncate transition-colors flex-1">${project.title}</h4>
+                        <button class="btn-favorite shrink-0 flex items-center justify-center w-7 h-7 rounded-full border border-[#eaecf0] bg-white hover:bg-[#FEF3C7] transition-all cursor-pointer" data-id="${newId}" aria-label="Toggle favorite">
+                            <i class="ti ti-star text-[16px] text-[#9ca3af]"></i>
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-[#98a2b3] font-medium flex items-center gap-1.5 mt-auto">
+                        <span class="text-[#667085]">${project.business}</span>
+                        <span class="w-1 h-1 rounded-full bg-[#D1D5DB]"></span>
+                        ${project.time}
+                    </p>
+                </div>
+            </div>
+        `;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadFavorites();
+    renderDNAFilter();
+    setupSearch();
+    setupDNAFilter();
+    setupFavorites();
+  });
+</script>
