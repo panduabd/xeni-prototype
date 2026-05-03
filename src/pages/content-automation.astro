@@ -3,13 +3,4322 @@ import AppLayout from "../layouts/AppLayout.astro";
 ---
 
 <AppLayout title="Content Automation - Xeni" activePage="content-automation">
-  <div class="w-full min-h-full flex flex-col items-center justify-center p-6">
-    <div class="text-center space-y-3">
-      <i class="ti ti-wand text-[48px] text-[#D1D5DB]"></i>
-      <h2 class="text-[20px] font-bold text-[#344054]">Content Automation</h2>
-      <p class="text-[14px] text-[#667085] font-medium">
-        This page is under construction.
+  <div class="w-full min-h-full flex flex-col px-6 pb-32 -mt-12">
+    <!-- Title + Controls Row -->
+    <div
+      class="max-w-6xl mx-auto w-full pt-1 pb-8 flex items-center justify-between gap-4"
+    >
+      <!-- Left: Title + Info -->
+      <div class="flex items-center gap-2 shrink-0">
+        <i class="ti ti-wand text-[20px] text-[#98a2b3]"></i>
+        <h1 class="text-[20px] font-bold text-[#111827] tracking-tight">
+          Content Automation
+        </h1>
+        <i
+          class="ti ti-info-circle text-[16px] text-[#98a2b3] cursor-help"
+          title="Konten dibuat setiap jam 2 pagi WIB. Kredit hanya terpotong saat konten dibuat."
+        ></i>
+      </div>
+
+      <!-- Right: Status Mini Badges -->
+      <div class="flex items-center gap-2">
+        <span
+          class="flex items-center gap-1.5 px-2 h-5 rounded-full bg-white border border-[#eaecf0] text-[10px] font-bold text-[#667085]"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E]"></span>
+          <span id="status-active">0</span> Active
+        </span>
+        <span
+          class="flex items-center gap-1.5 px-2 h-5 rounded-full bg-white border border-[#eaecf0] text-[10px] font-bold text-[#667085]"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-[#ffd900]"></span>
+          <span id="status-scheduled"></span> Scheduled
+        </span>
+      </div>
+    </div>
+
+    <!-- Tabs Row -->
+    <div class="max-w-6xl mx-auto w-full mb-6 flex items-center gap-4">
+      <div
+        class="flex items-center gap-1 p-1 bg-white rounded-xl border border-[#eaecf0] w-fit"
+      >
+        <button
+          id="tab-automations"
+          class="tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold bg-[#111827] text-white transition-all cursor-pointer"
+          data-tab="automations"
+        >
+          Automations
+        </button>
+        <button
+          id="tab-generated"
+          class="tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          data-tab="generated"
+        >
+          Outputs
+          <span
+            id="generated-badge"
+            class="ml-1.5 px-1.5 h-4 rounded-full bg-[#FEF3C7] text-[#B45309] text-[10px] font-bold hidden"
+            >0</span
+          >
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB: AUTOMATIONS -->
+    <div id="tab-content-automations" class="max-w-6xl mx-auto w-full flex-1">
+      <!-- Automation Filters -->
+      <div class="flex items-center justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2">
+          <div class="relative" id="business-filter-wrapper">
+            <button
+              id="btn-business-filter"
+              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+            >
+              <i class="ti ti-building text-[14px]"></i>
+              <span id="business-filter-label">All Business</span>
+              <i class="ti ti-chevron-down text-[12px] text-[#98a2b3]"></i>
+            </button>
+            <div
+              id="business-filter-dropdown"
+              class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
+            >
+              <div class="flex flex-col p-1.5">
+                <button
+                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="all"
+                >
+                  All Business
+                </button>
+                <button
+                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="Fresh Juice Co."
+                >
+                  Fresh Juice Co.
+                </button>
+                <button
+                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="Tech Startup"
+                >
+                  Tech Startup
+                </button>
+                <button
+                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="Luxe Beauty"
+                >
+                  Luxe Beauty
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div class="relative flex-1 max-w-xs">
+            <i
+              class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"
+            ></i>
+            <input
+              id="automation-search"
+              type="text"
+              placeholder="Search by campaign or business..."
+              class="w-80 h-9 pl-8 pr-2 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+            />
+          </div>
+        </div>
+
+        <!-- Create Button (only for Automations tab) -->
+        <button
+          id="btn-add-automation"
+          class="px-4 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center gap-2"
+        >
+          <i class="ti ti-plus text-[14px]"></i>
+          Create Automation
+        </button>
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="w-full hidden">
+        <div class="text-center space-y-4">
+          <div
+            class="w-16 h-16 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mx-auto"
+          >
+            <i class="ti ti-calendar text-[32px] text-[#D1D5DB]"></i>
+          </div>
+          <div class="space-y-1">
+            <h2 class="text-[18px] font-bold text-[#344054]">
+              No automation yet
+            </h2>
+            <p class="text-[14px] text-[#667085] font-medium">
+              Create your first automation to start scheduling content.
+            </p>
+          </div>
+          <button
+            id="btn-empty-add"
+            class="px-4 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center gap-2 mx-auto"
+          >
+            <i class="ti ti-plus text-[14px]"></i>
+            Add Automation
+          </button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div id="automations-table" class="w-full hidden">
+        <div
+          class="bg-white rounded-3xl border border-[#eaecf0] overflow-hidden"
+        >
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-[#eaecf0]">
+                  <th
+                    class="px-5 py-3.5 text-[12px] font-bold text-[#667085] uppercase tracking-wider"
+                    >BUSINESS</th
+                  >
+                  <th
+                    class="px-5 py-3.5 text-[12px] font-bold text-[#667085] uppercase tracking-wider"
+                    >Task Name</th
+                  >
+                  <th
+                    class="px-5 py-3.5 text-[12px] font-bold text-[#667085] uppercase tracking-wider"
+                    >Schedule</th
+                  >
+                  <th
+                    class="px-5 py-3.5 text-[12px] font-bold text-[#667085] uppercase tracking-wider"
+                    >Content Types</th
+                  >
+                  <th
+                    class="px-5 py-3.5 text-[12px] font-bold text-[#667085] uppercase tracking-wider"
+                    >Status</th
+                  >
+                  <th
+                    class="px-5 py-3.5 text-[12px] font-bold text-[#667085] uppercase tracking-wider text-right"
+                    >Actions</th
+                  >
+                </tr>
+              </thead>
+              <tbody id="automations-tbody">
+                <!-- Rows injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: GENERATED -->
+    <div
+      id="tab-content-generated"
+      class="max-w-6xl mx-auto w-full flex-1 hidden"
+    >
+      <!-- Filter Bar -->
+      <div class="flex items-center gap-2 mb-4 flex-wrap">
+        <!-- Status Filter -->
+        <div class="relative">
+          <button
+            id="btn-status-filter"
+            class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >
+            <span id="status-filter-label">All Status</span>
+            <i class="ti ti-chevron-down text-[12px]"></i>
+          </button>
+          <div
+            id="status-filter-dropdown"
+            class="hidden absolute top-full left-0 mt-1.5 w-40 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
+          >
+            <div class="flex flex-col p-1.5">
+              <button class="status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="all">All Status</button>
+              <button class="status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="draft">Draft</button>
+              <button class="status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="approved">Approved</button>
+              <button class="status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="scheduled">Scheduled</button>
+              <button class="status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="published">Published</button>
+              <button class="status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="failed">Failed</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Channel Filter -->
+        <div class="relative">
+          <button
+            id="btn-channel-filter"
+            class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >
+            <span id="channel-filter-label">All Channels</span>
+            <i class="ti ti-chevron-down text-[12px]"></i>
+          </button>
+          <div
+            id="channel-filter-dropdown"
+            class="hidden absolute top-full left-0 mt-1.5 w-40 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
+          >
+            <div class="flex flex-col p-1.5">
+              <button class="channel-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-channel="all">All Channels</button>
+              <button class="channel-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-channel="Instagram">Instagram</button>
+              <button class="channel-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-channel="TikTok">TikTok</button>
+              <button class="channel-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-channel="LinkedIn">LinkedIn</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type Filter -->
+        <div class="relative">
+          <button
+            id="btn-type-filter"
+            class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >
+            <span id="type-filter-label">All Types</span>
+            <i class="ti ti-chevron-down text-[12px]"></i>
+          </button>
+          <div
+            id="type-filter-dropdown"
+            class="hidden absolute top-full left-0 mt-1.5 w-40 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
+          >
+            <div class="flex flex-col p-1.5">
+              <button class="type-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-type="all">All Types</button>
+              <button class="type-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-type="Single Post">Single Post</button>
+              <button class="type-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-type="Carousel">Carousel</button>
+              <button class="type-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-type="Ad Creatives">Ad Creatives</button>
+              <button class="type-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-type="Story">Story</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="relative flex-1 min-w-50 max-w-xs">
+          <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"></i>
+          <input
+            id="output-search"
+            type="text"
+            placeholder="Search outputs..."
+            class="w-full h-9 pl-8 pr-3 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+          />
+        </div>
+
+        <!-- Sort -->
+        <div class="relative">
+          <button
+            id="btn-sort"
+            class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >
+            <span id="sort-label">Sort: Newest</span>
+            <i class="ti ti-chevron-down text-[12px]"></i>
+          </button>
+          <div
+            id="sort-dropdown"
+            class="hidden absolute top-full right-0 mt-1.5 w-40 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
+          >
+            <div class="flex flex-col p-1.5">
+              <button class="sort-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-sort="newest">Newest</button>
+              <button class="sort-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-sort="oldest">Oldest</button>
+              <button class="sort-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-sort="name">Name</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Toggle -->
+        <div class="flex items-center p-0.5 rounded-xl border border-[#D0D5DD] bg-white">
+          <button
+            id="view-grid"
+            class="view-toggle-btn w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+            data-view-mode="grid"
+          >
+            <i class="ti ti-layout-grid text-[14px]"></i>
+          </button>
+          <button
+            id="view-list"
+            class="view-toggle-btn w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+            data-view-mode="list"
+          >
+            <i class="ti ti-list text-[14px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Generated Grid -->
+      <div
+        id="generated-grid"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      >
+        <!-- Cards injected via JS -->
+      </div>
+
+      <!-- Generated Empty State -->
+      <div id="generated-empty" class="w-full hidden">
+        <div class="text-center space-y-4 py-24">
+          <div
+            class="w-16 h-16 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mx-auto"
+          >
+            <i class="ti ti-photo text-[32px] text-[#D1D5DB]"></i>
+          </div>
+          <div class="space-y-1">
+            <h2 class="text-[18px] font-bold text-[#344054]">
+              Belum ada konten
+            </h2>
+            <p class="text-[14px] text-[#667085] font-medium">
+              Konten akan muncul di sini setelah automation berjalan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MODAL: ADD AUTOMATION (3 STEP WIZARD) -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="modal-add-automation"
+    class="hidden fixed inset-0 z-100 items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+  >
+    <div
+      class="bg-white w-full max-w-3xl h-160 rounded-4xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
+    >
+      <!-- Close Button -->
+      <button
+        id="close-add-modal"
+        class="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
+      >
+        <i class="ti ti-x text-[20px]"></i>
+      </button>
+
+      <!-- Header -->
+      <div class="px-7 pt-7 pb-3 bg-white relative z-20">
+        <h2 class="text-[20px] font-bold text-[#111827] tracking-tight mb-0.5">
+          Create Automation
+        </h2>
+        <p class="text-[13px] text-[#667085]">
+          Set up your automated content schedule.
+        </p>
+        <!-- Step Indicator -->
+        <div class="flex items-center gap-2 mt-4">
+          <div class="step-dot flex items-center gap-2" data-step="1">
+            <div
+              class="w-7 h-7 rounded-full bg-[#111827] text-white text-[12px] font-bold flex items-center justify-center"
+            >
+              1
+            </div>
+            <span class="text-[12px] font-semibold text-[#111827]">General</span
+            >
+          </div>
+          <div class="w-6 h-px bg-[#eaecf0]"></div>
+          <div class="step-dot flex items-center gap-2" data-step="2">
+            <div
+              class="w-7 h-7 rounded-full bg-[#F3F4F6] text-[#667085] text-[12px] font-bold flex items-center justify-center"
+            >
+              2
+            </div>
+            <span class="text-[12px] font-semibold text-[#667085]"
+              >Schedule</span
+            >
+          </div>
+          <div class="w-6 h-px bg-[#eaecf0]"></div>
+          <div class="step-dot flex items-center gap-2" data-step="3">
+            <div
+              class="w-7 h-7 rounded-full bg-[#F3F4F6] text-[#667085] text-[12px] font-bold flex items-center justify-center"
+            >
+              3
+            </div>
+            <span class="text-[12px] font-semibold text-[#667085]">Review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scrollable Content -->
+      <div
+        id="wizard-content"
+        class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2"
+      >
+        <!-- STEP 1: General Setup -->
+        <div id="step-1" class="step-panel space-y-5">
+          <div class="space-y-1.5">
+            <label class="text-[13px] font-semibold text-[#344054]"
+              >Task Name</label
+            >
+            <input
+              id="input-name"
+              type="text"
+              placeholder="e.g. Summer Campaign 2026"
+              class="w-full h-10 px-4 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+            />
+          </div>
+
+          <div class="space-y-1.5 relative">
+            <label class="text-[13px] font-semibold text-[#344054]"
+              >Business DNA</label
+            >
+            <button
+              id="btn-select-dna"
+              class="w-full flex items-center gap-3 p-3.5 rounded-2xl border border-[#eaecf0] bg-white text-left transition-all hover:border-[#d0d5dd] hover:bg-gray-50 cursor-pointer"
+            >
+              <div
+                class="w-10 h-10 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
+              >
+                <i class="ti ti-building text-[20px] text-[#667085]"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p
+                  id="dna-selected-name"
+                  class="text-[14px] font-bold text-[#111827]"
+                >
+                  Select Business DNA
+                </p>
+                <p
+                  id="dna-selected-desc"
+                  class="text-[12px] text-[#667085] truncate"
+                >
+                  Choose a business profile for AI grounding
+                </p>
+              </div>
+              <i class="ti ti-chevron-right text-[16px] text-[#98a2b3]"></i>
+            </button>
+            <!-- DNA Dropdown -->
+            <div
+              id="dna-dropdown"
+              class="hidden absolute left-0 right-0 mt-1 bg-white rounded-2xl border border-[#eaecf0] shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 overflow-hidden"
+            >
+              <div
+                class="p-2 space-y-1 max-h-60 overflow-y-auto"
+                style="scrollbar-width: none;"
+              >
+                <button
+                  class="dna-option w-full flex items-center gap-3 p-3 rounded-xl text-left hover:bg-[#F9FAFB] transition-colors cursor-pointer"
+                  data-name="Fresh Juice Co."
+                  data-desc="Organic beverage & lifestyle brand"
+                >
+                  <div
+                    class="w-9 h-9 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
+                  >
+                    <i class="ti ti-brand-abstract text-[18px] text-[#667085]"
+                    ></i>
+                  </div>
+                  <div>
+                    <p class="text-[13px] font-bold text-[#111827]">
+                      Fresh Juice Co.
+                    </p>
+                    <p class="text-[11px] text-[#667085]">
+                      Organic beverage & lifestyle brand
+                    </p>
+                  </div>
+                </button>
+                <button
+                  class="dna-option w-full flex items-center gap-3 p-3 rounded-xl text-left hover:bg-[#F9FAFB] transition-colors cursor-pointer"
+                  data-name="Tech Startup"
+                  data-desc="B2B SaaS platform for automation"
+                >
+                  <div
+                    class="w-9 h-9 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
+                  >
+                    <i class="ti ti-rocket text-[18px] text-[#667085]"></i>
+                  </div>
+                  <div>
+                    <p class="text-[13px] font-bold text-[#111827]">
+                      Tech Startup
+                    </p>
+                    <p class="text-[11px] text-[#667085]">
+                      B2B SaaS platform for automation
+                    </p>
+                  </div>
+                </button>
+                <button
+                  class="dna-option w-full flex items-center gap-3 p-3 rounded-xl text-left hover:bg-[#F9FAFB] transition-colors cursor-pointer"
+                  data-name="Luxe Beauty"
+                  data-desc="Premium skincare & cosmetics"
+                >
+                  <div
+                    class="w-9 h-9 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
+                  >
+                    <i class="ti ti-sparkles text-[18px] text-[#667085]"></i>
+                  </div>
+                  <div>
+                    <p class="text-[13px] font-bold text-[#111827]">
+                      Luxe Beauty
+                    </p>
+                    <p class="text-[11px] text-[#667085]">
+                      Premium skincare & cosmetics
+                    </p>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-[13px] font-semibold text-[#344054]"
+              >Publishing Mode</label
+            >
+            <div class="flex gap-2">
+              <label class="flex-1 cursor-pointer">
+                <input
+                  type="radio"
+                  name="publish-mode"
+                  value="draft"
+                  class="peer hidden"
+                  checked
+                />
+                <div
+                  class="px-3 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-center text-[12px] font-medium text-[#667085] peer-checked:bg-[#111827] peer-checked:text-white peer-checked:border-[#111827] transition-all"
+                >
+                  <div class="flex items-center justify-center gap-1.5">
+                    <i class="ti ti-file-check text-[14px]"></i>
+                    Manual Review
+                  </div>
+                </div>
+              </label>
+              <label class="flex-1 cursor-pointer">
+                <input
+                  type="radio"
+                  name="publish-mode"
+                  value="auto"
+                  class="peer hidden"
+                />
+                <div
+                  class="px-3 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-center text-[12px] font-medium text-[#667085] peer-checked:bg-[#111827] peer-checked:text-white peer-checked:border-[#111827] transition-all"
+                >
+                  <div class="flex items-center justify-center gap-1.5">
+                    <i class="ti ti-rocket text-[14px]"></i>
+                    Auto-Publish
+                  </div>
+                </div>
+              </label>
+            </div>
+            <p id="publish-mode-info" class="text-[11px] text-[#667085]">
+              Content will be saved as draft for your review before publishing.
+            </p>
+          </div>
+
+          <!-- Integration Section (hidden when Manual Review) -->
+          <div id="integration-section" class="space-y-2 hidden">
+            <label class="text-[13px] font-semibold text-[#344054]"
+              >Integration</label
+            >
+            <div class="grid grid-cols-2 gap-2">
+              <!-- Connected: Instagram -->
+              <label class="cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="social-account"
+                  value="instagram"
+                  class="peer hidden"
+                  checked
+                />
+                <div
+                  class="flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-white peer-checked:border-[#2563EB] peer-checked:bg-[#EFF6FF] transition-all"
+                >
+                  <div
+                    class="w-9 h-9 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
+                  >
+                    <i class="ti ti-brand-instagram text-[18px] text-[#E1306C]"
+                    ></i>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-[13px] font-bold text-[#111827]">
+                      Instagram
+                    </p>
+                    <p class="text-[11px] text-[#667085]">@freshjuice.co</p>
+                  </div>
+                  <i
+                    class="ti ti-check text-[14px] text-[#2563EB] ml-auto opacity-0 peer-checked:opacity-100"
+                  ></i>
+                </div>
+              </label>
+              <!-- Connected: TikTok -->
+              <label class="cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="social-account"
+                  value="tiktok"
+                  class="peer hidden"
+                />
+                <div
+                  class="flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-white peer-checked:border-[#2563EB] peer-checked:bg-[#EFF6FF] transition-all"
+                >
+                  <div
+                    class="w-9 h-9 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
+                  >
+                    <i class="ti ti-brand-tiktok text-[18px] text-[#111827]"
+                    ></i>
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-[13px] font-bold text-[#111827]">TikTok</p>
+                    <p class="text-[11px] text-[#667085]">@freshjuice.co</p>
+                  </div>
+                  <i
+                    class="ti ti-check text-[14px] text-[#2563EB] ml-auto opacity-0 peer-checked:opacity-100"
+                  ></i>
+                </div>
+              </label>
+              <!-- Not Connected: Facebook -->
+              <div
+                class="flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-[#F9FAFB] opacity-60"
+              >
+                <div
+                  class="w-9 h-9 rounded-lg bg-white border border-[#eaecf0] flex items-center justify-center shrink-0"
+                >
+                  <i class="ti ti-brand-facebook text-[18px] text-[#1877F2]"
+                  ></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <p class="text-[13px] font-bold text-[#111827]">Facebook</p>
+                  <p class="text-[11px] text-[#98a2b3]">Not connected</p>
+                </div>
+                <a
+                  href="/integrations"
+                  class="px-2.5 h-6 rounded-lg bg-white border border-[#eaecf0] text-[11px] font-medium text-[#667085] hover:text-[#2563EB] hover:border-[#2563EB] transition-all flex items-center cursor-pointer"
+                >
+                  Connect
+                </a>
+              </div>
+              <!-- Not Connected: X -->
+              <div
+                class="flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-[#F9FAFB] opacity-60"
+              >
+                <div
+                  class="w-9 h-9 rounded-lg bg-white border border-[#eaecf0] flex items-center justify-center shrink-0"
+                >
+                  <i class="ti ti-brand-x text-[18px] text-[#111827]"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <p class="text-[13px] font-bold text-[#111827]">X</p>
+                  <p class="text-[11px] text-[#98a2b3]">Not connected</p>
+                </div>
+                <a
+                  href="/integrations"
+                  class="px-2.5 h-6 rounded-lg bg-white border border-[#eaecf0] text-[11px] font-medium text-[#667085] hover:text-[#2563EB] hover:border-[#2563EB] transition-all flex items-center cursor-pointer"
+                >
+                  Connect
+                </a>
+              </div>
+              <!-- Not Connected: LinkedIn -->
+              <div
+                class="flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-[#F9FAFB] opacity-60"
+              >
+                <div
+                  class="w-9 h-9 rounded-lg bg-white border border-[#eaecf0] flex items-center justify-center shrink-0"
+                >
+                  <i class="ti ti-brand-linkedin text-[18px] text-[#0A66C2]"
+                  ></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <p class="text-[13px] font-bold text-[#111827]">LinkedIn</p>
+                  <p class="text-[11px] text-[#98a2b3]">Not connected</p>
+                </div>
+                <a
+                  href="/integrations"
+                  class="px-2.5 h-6 rounded-lg bg-white border border-[#eaecf0] text-[11px] font-medium text-[#667085] hover:text-[#2563EB] hover:border-[#2563EB] transition-all flex items-center cursor-pointer"
+                >
+                  Connect
+                </a>
+              </div>
+              <!-- Not Connected: YouTube -->
+              <div
+                class="flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-[#F9FAFB] opacity-60"
+              >
+                <div
+                  class="w-9 h-9 rounded-lg bg-white border border-[#eaecf0] flex items-center justify-center shrink-0"
+                >
+                  <i class="ti ti-brand-youtube text-[18px] text-[#FF0000]"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <p class="text-[13px] font-bold text-[#111827]">YouTube</p>
+                  <p class="text-[11px] text-[#98a2b3]">Not connected</p>
+                </div>
+                <a
+                  href="/integrations"
+                  class="px-2.5 h-6 rounded-lg bg-white border border-[#eaecf0] text-[11px] font-medium text-[#667085] hover:text-[#2563EB] hover:border-[#2563EB] transition-all flex items-center cursor-pointer"
+                >
+                  Connect
+                </a>
+              </div>
+            </div>
+            <p class="text-[11px] text-[#667085]">
+              Select at least one connected account. Auto-Publish will upload to
+              selected accounts automatically.
+            </p>
+          </div>
+
+          <div
+            class="flex items-start gap-3 p-4 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0]"
+          >
+            <i
+              class="ti ti-info-circle text-[18px] text-[#2563EB] shrink-0 mt-0.5"
+            ></i>
+            <p class="text-[12px] text-[#667085] leading-relaxed">
+              Each piece of content includes image and caption. Credits are only
+              deducted when content is generated, not when setting up the
+              automation.
+            </p>
+          </div>
+        </div>
+
+        <!-- STEP 2: Schedule -->
+        <div id="step-2" class="step-panel hidden space-y-5">
+          <!-- Calendar -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label class="text-[13px] font-semibold text-[#344054]"
+                >Select Dates</label
+              >
+              <div class="flex items-center gap-2">
+                <button
+                  id="btn-ai-suggestion"
+                  class="flex items-center gap-1.5 px-2.5 h-6 rounded-lg border border-[#dbeafe] bg-[#EFF6FF] text-[11px] font-medium text-[#2563EB] hover:bg-[#DBEAFE] transition-all cursor-pointer"
+                  title="AI will suggest optimal posting dates"
+                >
+                  <i class="ti ti-sparkles text-[12px]"></i>
+                  Auto-Fill
+                </button>
+                <span
+                  id="selected-dates-count"
+                  class="text-[11px] text-[#667085]">0 dates selected</span
+                >
+              </div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-[#eaecf0]">
+              <!-- Calendar Header -->
+              <div class="flex items-center justify-between mb-4">
+                <button
+                  id="cal-prev"
+                  class="w-8 h-8 rounded-lg hover:bg-[#F9FAFB] flex items-center justify-center text-[#667085] cursor-pointer transition-colors"
+                >
+                  <i class="ti ti-chevron-left text-[16px]"></i>
+                </button>
+                <span
+                  id="cal-month-year"
+                  class="text-[14px] font-bold text-[#111827]">May 2026</span
+                >
+                <button
+                  id="cal-next"
+                  class="w-8 h-8 rounded-lg hover:bg-[#F9FAFB] flex items-center justify-center text-[#667085] cursor-pointer transition-colors"
+                >
+                  <i class="ti ti-chevron-right text-[16px]"></i>
+                </button>
+              </div>
+              <!-- Weekday Headers -->
+              <div class="grid grid-cols-7 gap-1 mb-1">
+                <div
+                  class="text-center text-[10px] font-semibold text-[#98a2b3] py-1"
+                >
+                  Sun
+                </div>
+                <div
+                  class="text-center text-[10px] font-semibold text-[#98a2b3] py-1"
+                >
+                  Mon
+                </div>
+                <div
+                  class="text-center text-[10px] font-semibold text-[#98a2b3] py-1"
+                >
+                  Tue
+                </div>
+                <div
+                  class="text-center text-[10px] font-semibold text-[#98a2b3] py-1"
+                >
+                  Wed
+                </div>
+                <div
+                  class="text-center text-[10px] font-semibold text-[#98a2b3] py-1"
+                >
+                  Thu
+                </div>
+                <div
+                  class="text-center text-[10px] font-semibold text-[#98a2b3] py-1"
+                >
+                  Fri
+                </div>
+                <div
+                  class="text-center text-[10px] font-semibold text-[#98a2b3] py-1"
+                >
+                  Sat
+                </div>
+              </div>
+              <!-- Calendar Grid -->
+              <div id="cal-grid" class="grid grid-cols-7 gap-1">
+                <!-- Days injected via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Review & Confirm -->
+        <div id="step-3" class="step-panel hidden space-y-5">
+          <div class="space-y-4">
+            <h3 class="text-[14px] font-bold text-[#344054]">Review Summary</h3>
+
+            <!-- Basic Info -->
+            <div
+              class="space-y-3 p-4 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0]"
+            >
+              <div class="flex justify-between items-center">
+                <span class="text-[12px] text-[#667085]">Task Name</span>
+                <span
+                  id="review-name"
+                  class="text-[13px] font-bold text-[#111827]">-</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-[12px] text-[#667085]">Business DNA</span>
+                <span
+                  id="review-dna"
+                  class="text-[13px] font-bold text-[#111827]">-</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-[12px] text-[#667085]">Publishing Mode</span>
+                <span
+                  id="review-publish-mode"
+                  class="text-[13px] font-bold text-[#111827]">-</span
+                >
+              </div>
+              <div
+                id="review-publish-to-row"
+                class="flex justify-between items-center"
+              >
+                <span class="text-[12px] text-[#667085]">Publish To</span>
+                <span
+                  id="review-social-accounts"
+                  class="text-[13px] font-bold text-[#111827]">-</span
+                >
+              </div>
+            </div>
+
+            <!-- Recurring -->
+            <div class="space-y-3 pt-2">
+              <h4 class="text-[12px] font-semibold text-[#344054]">Repeat</h4>
+              <div class="flex gap-2">
+                <label class="flex-1 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="recurring"
+                    value="once"
+                    class="peer hidden"
+                    checked
+                  />
+                  <div
+                    class="px-3 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-center text-[12px] font-medium text-[#667085] peer-checked:bg-[#111827] peer-checked:text-white peer-checked:border-[#111827] transition-all"
+                  >
+                    One Time Only
+                  </div>
+                </label>
+                <label class="flex-1 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="recurring"
+                    value="monthly"
+                    class="peer hidden"
+                  />
+                  <div
+                    class="px-3 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-center text-[12px] font-medium text-[#667085] peer-checked:bg-[#111827] peer-checked:text-white peer-checked:border-[#111827] transition-all"
+                  >
+                    Same Dates Every Month
+                  </div>
+                </label>
+              </div>
+
+              <!-- Repeat For (hidden when One Time Only) -->
+              <div id="repeat-for-wrapper" class="hidden space-y-1.5">
+                <label class="text-[11px] font-semibold text-[#344054]"
+                  >Repeat for</label
+                >
+                <select
+                  id="repeat-for-select"
+                  class="w-full h-9 px-3 rounded-xl border border-[#eaecf0] bg-white text-[12px] text-[#111827] outline-none focus:border-[#2563EB] transition-all"
+                >
+                  <option value="3">3 months</option>
+                  <option value="6">6 months</option>
+                  <option value="12">12 months</option>
+                </select>
+              </div>
+
+              <p id="recurring-info" class="text-[11px] text-[#667085]">
+                Content will be generated once on selected dates.
+              </p>
+
+              <!-- Live Preview Timeline (hidden when One Time Only) -->
+              <div id="recurring-preview" class="hidden space-y-2">
+                <p class="text-[11px] font-semibold text-[#344054]">
+                  Next months preview
+                </p>
+                <div id="recurring-preview-grid" class="grid grid-cols-3 gap-2">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Schedule Cards -->
+            <div class="space-y-2">
+              <h4 class="text-[12px] font-semibold text-[#344054]">Schedule</h4>
+              <div id="review-schedule-cards" class="grid grid-cols-2 gap-2">
+                <!-- Cards injected via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Footer Buttons -->
+      <div
+        class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-7 py-5 bg-white border-t border-[#eaecf0]"
+      >
+        <!-- Left: Total Credit Estimate -->
+        <div class="flex items-center gap-2 pointer-events-auto">
+          <span
+            class="text-[11px] font-medium text-[#667085] uppercase tracking-wider"
+            >Total</span
+          >
+          <div
+            class="flex items-center gap-1.5 px-3 h-8 rounded-full bg-[#F9FAFB] border border-[#eaecf0]"
+          >
+            <i class="ti ti-sparkles text-[14px] text-[#111827]"></i>
+            <span class="text-[13px] font-bold text-[#111827]">
+              <span id="footer-credit">0</span>
+            </span>
+            <span class="text-[12px] text-[#667085]">credits</span>
+          </div>
+          <!-- Tooltip -->
+          <div class="relative group">
+            <i class="ti ti-info-circle text-[14px] text-[#98a2b3] cursor-help"
+            ></i>
+            <div
+              class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-64 p-3 rounded-xl bg-[#111827] text-white text-[11px] leading-relaxed shadow-[0_8px_30px_rgba(0,0,0,0.2)] z-50"
+            >
+              Total credits that will be consumed when AI generates all
+              scheduled content. One credit = one piece of content (image +
+              caption).
+            </div>
+          </div>
+        </div>
+        <!-- Right: Buttons -->
+        <div class="flex items-center gap-3 pointer-events-auto">
+          <button
+            id="btn-wizard-back"
+            class="btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer hidden"
+            >Back</button
+          >
+          <button
+            id="btn-wizard-next"
+            class="btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+            >Next</button
+          >
+          <button
+            id="btn-start-automation"
+            class="btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer hidden"
+            >Start Automation</button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MODAL: AUTO ENGAGEMENT (Comment + DM) -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="modal-auto-engagement"
+    class="hidden fixed inset-0 z-100 items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+  >
+    <div
+      class="bg-white w-full max-w-120 rounded-4xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative max-h-[85vh]"
+    >
+      <!-- Close Button -->
+      <button
+        id="close-engagement-modal"
+        class="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
+      >
+        <i class="ti ti-x text-[20px]"></i>
+      </button>
+
+      <!-- Header -->
+      <div class="px-7 pt-7 pb-3 bg-white relative z-20 shrink-0">
+        <h2 class="text-[20px] font-bold text-[#111827] tracking-tight mb-0.5">
+          Auto Engagement
+        </h2>
+        <p class="text-[13px] text-[#667085]">
+          Set up automatic responses for comments and DMs.
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div
+        class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2 space-y-5"
+      >
+        <!-- Auto Comment Section -->
+        <div class="space-y-3">
+          <div
+            class="flex items-center justify-between p-4 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0]"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#dbeafe] flex items-center justify-center"
+              >
+                <i class="ti ti-message text-[18px] text-[#2563EB]"></i>
+              </div>
+              <div>
+                <p class="text-[13px] font-bold text-[#111827]">Auto Comment</p>
+                <p class="text-[11px] text-[#667085]">
+                  Reply to comments automatically
+                </p>
+              </div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="comment-toggle" class="sr-only peer" />
+              <div
+                class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2563EB]"
+              >
+              </div>
+            </label>
+          </div>
+
+          <!-- Comment Fields (hidden when off) -->
+          <div id="comment-fields" class="space-y-4 hidden">
+            <div class="space-y-1.5">
+              <label class="text-[13px] font-semibold text-[#344054]"
+                >Reply Text</label
+              >
+              <textarea
+                id="comment-text"
+                rows="2"
+                placeholder="Thank you for your comment!"
+                class="w-full px-4 py-3 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all resize-none"
+              ></textarea>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[13px] font-semibold text-[#344054]"
+                >Optional Link</label
+              >
+              <input
+                id="comment-link"
+                type="url"
+                placeholder="https://..."
+                class="w-full h-10 px-4 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+              />
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[13px] font-semibold text-[#344054]"
+                >Trigger Keywords (Optional)</label
+              >
+              <input
+                id="comment-keywords"
+                type="text"
+                placeholder="price, info, interested (comma separated)"
+                class="w-full h-10 px-4 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+              />
+              <p class="text-[11px] text-[#667085]">
+                Only replies if comment contains one of these keywords.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-[#eaecf0]"></div>
+
+        <!-- Auto DM Section -->
+        <div class="space-y-3">
+          <div
+            class="flex items-center justify-between p-4 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0]"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-xl bg-[#F5F3FF] border border-[#ddd6fe] flex items-center justify-center"
+              >
+                <i class="ti ti-send text-[18px] text-[#7C3AED]"></i>
+              </div>
+              <div>
+                <p class="text-[13px] font-bold text-[#111827]">Auto DM</p>
+                <p class="text-[11px] text-[#667085]">
+                  Send DM to commenters automatically
+                </p>
+              </div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="dm-toggle" class="sr-only peer" />
+              <div
+                class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#7C3AED]"
+              >
+              </div>
+            </label>
+          </div>
+
+          <!-- DM Fields (hidden when off) -->
+          <div id="dm-fields" class="space-y-4 hidden">
+            <div class="space-y-1.5">
+              <label class="text-[13px] font-semibold text-[#344054]"
+                >DM Message</label
+              >
+              <textarea
+                id="dm-text"
+                rows="2"
+                placeholder="Hi! Thanks for your interest. Here's more info..."
+                class="w-full px-4 py-3 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#7C3AED] focus:shadow-[0_0_0_3px_rgba(124,58,237,0.1)] transition-all resize-none"
+              ></textarea>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[13px] font-semibold text-[#344054]"
+                >Optional Link</label
+              >
+              <input
+                id="dm-link"
+                type="url"
+                placeholder="https://..."
+                class="w-full h-10 px-4 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#7C3AED] focus:shadow-[0_0_0_3px_rgba(124,58,237,0.1)] transition-all"
+              />
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[13px] font-semibold text-[#344054]"
+                >Trigger Keywords (Optional)</label
+              >
+              <input
+                id="dm-keywords"
+                type="text"
+                placeholder="price, info, interested (comma separated)"
+                class="w-full h-10 px-4 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#7C3AED] focus:shadow-[0_0_0_3px_rgba(124,58,237,0.1)] transition-all"
+              />
+              <p class="text-[11px] text-[#667085]">
+                Only sends DM if comment contains one of these keywords.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Footer -->
+      <div
+        class="absolute bottom-7 right-7 flex items-center gap-3 z-30 pointer-events-none"
+      >
+        <button
+          id="btn-cancel-engagement"
+          class="pointer-events-auto btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >Cancel</button
+        >
+        <button
+          id="btn-save-engagement"
+          class="pointer-events-auto btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+          >Save</button
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SLIDE-OVER: PREVIEW GENERATED CONTENT -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="modal-preview"
+    class="hidden fixed inset-0 z-100"
+  >
+    <!-- Backdrop -->
+    <div
+      id="preview-backdrop"
+      class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+    ></div>
+
+    <!-- Panel -->
+    <div
+      id="preview-panel"
+      class="absolute top-0 right-0 h-full w-full max-w-4xl bg-white shadow-2xl flex flex-col overflow-hidden transform translate-x-full transition-transform duration-300 ease-out"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[#eaecf0] shrink-0">
+        <div class="flex items-center gap-3">
+          <span
+            id="preview-status-badge"
+            class="inline-flex items-center px-2.5 h-6 rounded-full text-[11px] font-bold"
+          ></span>
+          <h3
+            id="preview-title-header"
+            class="text-[16px] font-bold text-[#111827]"
+          ></h3>
+        </div>
+        <button
+          id="close-preview-modal"
+          class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] cursor-pointer"
+        >
+          <i class="ti ti-x text-[20px]"></i>
+        </button>
+      </div>
+
+      <div class="flex flex-1 overflow-hidden">
+        <!-- Left: Image -->
+        <div class="flex-1 bg-white flex items-center justify-center p-8">
+          <div
+            id="preview-image-placeholder"
+            class="w-full max-w-md aspect-square rounded-3xl bg-white border border-[#eaecf0] flex items-center justify-center"
+          >
+          </div>
+        </div>
+
+        <!-- Right: Details -->
+        <div class="w-95 flex flex-col border-l border-[#eaecf0]">
+          <div class="flex-1 px-6 py-6 overflow-y-auto">
+            <div class="space-y-5">
+              <!-- Meta -->
+              <div class="flex items-center gap-2 text-[12px] text-[#98a2b3]">
+                <i id="preview-platform-icon-header" class="ti text-[14px]"></i>
+                <span id="preview-platform-header"></span>
+                <span>·</span>
+                <span id="preview-brand-header"></span>
+                <span>·</span>
+                <span id="preview-date-header"></span>
+              </div>
+
+              <!-- Title -->
+              <div>
+                <h3
+                  id="preview-title"
+                  class="text-[18px] font-bold text-[#111827] mb-1"
+                >
+                </h3>
+                <p id="preview-brand" class="text-[13px] text-[#667085]"></p>
+              </div>
+
+              <!-- Caption -->
+              <div class="space-y-1.5">
+                <label
+                  class="text-[12px] font-semibold text-[#344054] uppercase tracking-wider"
+                  >Caption</label
+                >
+                <div
+                  id="preview-caption"
+                  class="p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-[13px] text-[#667085] leading-relaxed"
+                >
+                </div>
+              </div>
+
+              <!-- Content Type -->
+              <div class="space-y-1.5">
+                <label
+                  class="text-[12px] font-semibold text-[#344054] uppercase tracking-wider"
+                  >Content Type</label
+                >
+                <div class="flex items-center gap-2">
+                  <i
+                    id="preview-type-icon"
+                    class="ti text-[16px] text-[#667085]"></i>
+                  <span id="preview-type" class="text-[13px] text-[#667085]"
+                  ></span>
+                </div>
+              </div>
+
+              <!-- Automation Source -->
+              <div class="space-y-1.5">
+                <label
+                  class="text-[12px] font-semibold text-[#344054] uppercase tracking-wider"
+                  >Automation</label
+                >
+                <p id="preview-automation" class="text-[13px] text-[#667085]">
+                </p>
+              </div>
+
+              <!-- Platform -->
+              <div class="space-y-1.5">
+                <label
+                  class="text-[12px] font-semibold text-[#344054] uppercase tracking-wider"
+                  >Platform</label
+                >
+                <div class="flex items-center gap-2">
+                  <i id="preview-platform-icon" class="ti text-[16px] text-[#667085]"></i>
+                  <span id="preview-platform" class="text-[13px] text-[#667085]"></span>
+                </div>
+              </div>
+
+              <!-- Stats (published only) -->
+              <div id="preview-stats-section" class="space-y-1.5 hidden">
+                <label
+                  class="text-[12px] font-semibold text-[#344054] uppercase tracking-wider"
+                  >Performance</label
+                >
+                <div class="flex items-center gap-4 p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0]">
+                  <div class="flex items-center gap-1.5">
+                    <i class="ti ti-eye text-[14px] text-[#667085]"></i>
+                    <span id="preview-views" class="text-[13px] font-bold text-[#111827]"></span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i class="ti ti-heart text-[14px] text-[#667085]"></i>
+                    <span id="preview-likes" class="text-[13px] font-bold text-[#111827]"></span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i class="ti ti-message text-[14px] text-[#667085]"></i>
+                    <span id="preview-comments" class="text-[13px] font-bold text-[#111827]"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fail Reason (failed only) -->
+              <div id="preview-fail-section" class="space-y-1.5 hidden">
+                <label
+                  class="text-[12px] font-semibold text-[#344054] uppercase tracking-wider"
+                  >Error</label
+                >
+                <div class="p-3 rounded-xl bg-[#FEF3F2] border border-[#FECDCA] text-[13px] text-[#B42318]">
+                  <i class="ti ti-alert-circle text-[14px] mr-1"></i>
+                  <span id="preview-fail-reason"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Actions -->
+          <div
+            id="preview-actions"
+            class="px-6 py-4 border-t border-[#eaecf0] flex items-center gap-2"
+          >
+            <button
+              id="btn-reject"
+              class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+            >
+              Reject
+            </button>
+            <button
+              id="btn-approve"
+              class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+            >
+              Approve
+            </button>
+          </div>
+
+          <!-- Approved Actions -->
+          <div
+            id="preview-approved-actions"
+            class="px-6 py-4 border-t border-[#eaecf0] hidden"
+          >
+            <div class="flex items-center gap-2">
+              <button
+                id="btn-edit-approved"
+                class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+              >
+                <i class="ti ti-pencil text-[14px] mr-1"></i>
+                Edit
+              </button>
+              <button
+                id="btn-auto-engagement-from-preview"
+                class="flex-1 h-10 rounded-xl border border-[#dbeafe] bg-[#EFF6FF] text-[13px] font-bold text-[#2563EB] hover:bg-[#DBEAFE] transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                <i class="ti ti-message-share text-[14px]"></i>
+                Auto Engagement
+              </button>
+              <button
+                id="btn-schedule"
+                class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+              >
+                Schedule
+              </button>
+            </div>
+          </div>
+
+          <!-- Scheduled Actions -->
+          <div
+            id="preview-scheduled-actions"
+            class="px-6 py-4 border-t border-[#eaecf0] hidden"
+          >
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-[11px] text-[#667085]">Scheduled for</span>
+                <span
+                  id="preview-scheduled-time"
+                  class="text-[11px] font-bold text-[#111827]">-</span
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <button
+                  id="btn-edit-scheduled"
+                  class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                >
+                  <i class="ti ti-pencil text-[14px] mr-1"></i>
+                  Edit
+                </button>
+                <button
+                  id="btn-cancel-schedule"
+                  class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#FEF3F2] hover:text-[#D92D20] hover:border-[#FECDCA] transition-all cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  id="btn-reschedule"
+                  class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                >
+                  Reschedule
+                </button>
+                <button
+                  id="btn-auto-engagement-scheduled"
+                  class="flex-1 h-10 rounded-xl border border-[#dbeafe] bg-[#EFF6FF] text-[13px] font-bold text-[#2563EB] hover:bg-[#DBEAFE] transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <i class="ti ti-message-share text-[14px]"></i>
+                  Engagement
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MODAL: SCHEDULE PUBLISH -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="modal-schedule"
+    class="hidden fixed inset-0 z-100 items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+  >
+    <div
+      class="bg-white w-full max-w-md rounded-4xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
+    >
+      <!-- Close Button -->
+      <button
+        id="close-schedule-modal"
+        class="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
+      >
+        <i class="ti ti-x text-[20px]"></i>
+      </button>
+
+      <!-- Header -->
+      <div class="px-7 pt-7 pb-3 bg-white relative z-20">
+        <h2 class="text-[20px] font-bold text-[#111827] tracking-tight mb-0.5">
+          Schedule Upload
+        </h2>
+        <p class="text-[13px] text-[#667085]">
+          Choose when to publish your content.
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div
+        class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2 space-y-5"
+      >
+        <!-- Quick Options -->
+        <div class="space-y-2">
+          <p class="text-[12px] font-semibold text-[#344054]">Quick Options</p>
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              id="btn-publish-now"
+              class="h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:border-[#2563EB] hover:text-[#2563EB] transition-all cursor-pointer"
+            >
+              <i class="ti ti-bolt text-[14px] mr-1"></i>Publish Now
+            </button>
+            <button
+              id="btn-publish-1h"
+              class="h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:border-[#2563EB] hover:text-[#2563EB] transition-all cursor-pointer"
+            >
+              <i class="ti ti-clock-hour-1 text-[14px] mr-1"></i>In 1 Hour
+            </button>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-3">
+          <div class="h-px flex-1 bg-[#eaecf0]"></div>
+          <span class="text-[11px] text-[#98a2b3]">or pick custom time</span>
+          <div class="h-px flex-1 bg-[#eaecf0]"></div>
+        </div>
+
+        <!-- Custom Date/Time -->
+        <div class="space-y-3">
+          <div class="space-y-1.5">
+            <label class="text-[12px] font-semibold text-[#344054]">Date</label>
+            <input
+              id="schedule-date"
+              type="date"
+              class="w-full h-10 px-4 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+            />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[12px] font-semibold text-[#344054]">Time</label>
+            <input
+              id="schedule-time"
+              type="time"
+              class="w-full h-10 px-4 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Footer -->
+      <div
+        class="absolute bottom-7 right-7 flex items-center gap-3 z-30 pointer-events-none"
+      >
+        <button
+          id="btn-cancel-schedule-modal"
+          class="pointer-events-auto btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >Cancel</button
+        >
+        <button
+          id="btn-confirm-schedule"
+          class="pointer-events-auto btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+          >Confirm Schedule</button
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- TOAST NOTIFICATION -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="toast-container"
+    class="fixed bottom-6 right-6 z-200 flex flex-col gap-2 pointer-events-none"
+  >
+    <div
+      id="toast-template"
+      class="hidden pointer-events-auto items-center gap-3 px-4 py-3 rounded-2xl bg-[#111827] text-white shadow-[0_8px_30px_rgba(0,0,0,0.12)] transform translate-y-2 opacity-0 transition-all duration-300"
+    >
+      <i class="ti ti-check text-[18px] text-[#34D399]"></i>
+      <span class="text-[13px] font-medium toast-message"></span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- DATE DETAIL POPOVER (list automations per date) -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="date-detail-popover"
+    class="hidden fixed z-110 bg-white rounded-2xl border border-[#eaecf0] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-4 w-72 space-y-3"
+  >
+    <div class="flex items-center justify-between">
+      <span id="date-detail-date" class="text-[13px] font-bold text-[#111827]"
+        >Date</span
+      >
+      <button
+        id="close-date-detail-popover"
+        class="w-6 h-6 rounded-full hover:bg-gray-100 flex items-center justify-center text-[#667085] cursor-pointer"
+      >
+        <i class="ti ti-x text-[14px]"></i>
+      </button>
+    </div>
+    <div id="date-detail-list" class="space-y-2">
+      <!-- Automation list injected via JS -->
+    </div>
+    <button
+      id="btn-add-new-automation"
+      class="w-full h-9 rounded-xl border border-dashed border-[#eaecf0] bg-[#F9FAFB] text-[12px] font-medium text-[#667085] hover:border-[#2563EB] hover:text-[#2563EB] hover:bg-[#EFF6FF] transition-all cursor-pointer flex items-center justify-center gap-1.5"
+    >
+      <i class="ti ti-plus text-[14px]"></i>
+      Add New Automation
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- AUTOMATION FORM POPOVER (add/edit automation) -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="automation-popover"
+    class="hidden fixed z-110 bg-white rounded-2xl border border-[#eaecf0] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-4 w-72 space-y-3"
+  >
+    <div class="flex items-center justify-between">
+      <span
+        id="automation-popover-date"
+        class="text-[13px] font-bold text-[#111827]">Date</span
+      >
+      <button
+        id="close-automation-popover"
+        class="w-6 h-6 rounded-full hover:bg-gray-100 flex items-center justify-center text-[#667085] cursor-pointer"
+      >
+        <i class="ti ti-x text-[14px]"></i>
+      </button>
+    </div>
+    <div class="space-y-2">
+      <label class="text-[11px] font-semibold text-[#344054]"
+        >Content Type</label
+      >
+      <select
+        id="automation-content-type"
+        class="w-full h-9 px-3 rounded-xl border border-[#eaecf0] bg-white text-[12px] text-[#111827] outline-none focus:border-[#2563EB] transition-all"
+      >
+        <option value="Single Post">Single Post</option>
+        <option value="Carousel">Carousel</option>
+        <option value="Ad Creatives">Ad Creatives</option>
+        <option value="Story">Story</option>
+      </select>
+    </div>
+    <div class="space-y-2">
+      <label class="text-[11px] font-semibold text-[#344054]"
+        >Content Pillar</label
+      >
+      <select
+        id="automation-category"
+        class="w-full h-9 px-3 rounded-xl border border-[#eaecf0] bg-white text-[12px] text-[#111827] outline-none focus:border-[#2563EB] transition-all"
+      >
+        <option value="">Select pillar...</option>
+        <option value="Promo">Promo</option>
+        <option value="Educational">Educational</option>
+        <option value="Behind the Scenes">Behind the Scenes</option>
+        <option value="Testimonial">Testimonial</option>
+        <option value="Product Highlight">Product Highlight</option>
+        <option value="Trending">Trending</option>
+      </select>
+    </div>
+    <div class="space-y-2">
+      <div class="flex items-center justify-between">
+        <label class="text-[11px] font-semibold text-[#344054]"
+          >Additional AI Instructions</label
+        >
+        <button
+          id="btn-auto-generate-prompt"
+          class="flex items-center gap-1 px-2 h-5 rounded-full bg-[#F9FAFB] border border-[#eaecf0] text-[10px] font-medium text-[#667085] hover:bg-[#EFF6FF] hover:text-[#2563EB] hover:border-[#dbeafe] transition-all cursor-pointer"
+          title="Auto-generate instructions"
+        >
+          <i class="ti ti-sparkles text-[11px]"></i>
+          Auto
+        </button>
+      </div>
+      <textarea
+        id="automation-prompt"
+        rows="2"
+        placeholder="Optional instructions for AI..."
+        class="w-full px-3 py-2 rounded-xl border border-[#eaecf0] bg-white text-[12px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] transition-all resize-none"
+      ></textarea>
+    </div>
+    <div class="space-y-2">
+      <label class="text-[11px] font-semibold text-[#344054]">Variations</label>
+      <div class="flex items-center gap-2">
+        <button
+          id="btn-var-minus"
+          class="w-7 h-7 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] cursor-pointer transition-colors"
+        >
+          <i class="ti ti-minus text-[12px]"></i>
+        </button>
+        <input
+          id="automation-variations"
+          type="number"
+          min="1"
+          max="10"
+          value="1"
+          class="w-12 h-7 text-center rounded-lg border border-[#eaecf0] bg-white text-[12px] text-[#111827] outline-none focus:border-[#2563EB] transition-all"
+        />
+        <button
+          id="btn-var-plus"
+          class="w-7 h-7 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] cursor-pointer transition-colors"
+        >
+          <i class="ti ti-plus text-[12px]"></i>
+        </button>
+      </div>
+      <p class="text-[10px] text-[#98a2b3]">
+        How many content variations to generate
       </p>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="text-[11px] text-[#98a2b3]">
+        <span id="automation-remaining">0</span>
+      </span>
+      <button
+        id="btn-add-automation-popover"
+        class="px-4 h-8 rounded-xl bg-[#111827] text-white text-[12px] font-bold hover:bg-black transition-all cursor-pointer"
+        >Add</button
+      >
     </div>
   </div>
 </AppLayout>
+
+<script is:inline>
+  // ═══════════════════════════════════════════
+  // STATE
+  // ═══════════════════════════════════════════
+  const STORAGE_KEY = "xeni_automations";
+  let automations = [];
+  let currentStep = 1;
+  let wizardData = {
+    name: "",
+    dna: null,
+    publishMode: "draft",
+    socialAccounts: ["instagram"],
+    selectedDates: {}, // { '2026-05-15': [{contentType, category, prompt}] }
+    recurring: "once",
+    repeatFor: 3,
+  };
+  let currentCalendarDate = new Date(2026, 4, 1); // May 2026
+  let activePopoverDate = null;
+  let editingAutomationId = null;
+
+  // Content type icons
+  const CONTENT_ICONS = {
+    "Single Post": "ti-photo",
+    Carousel: "ti-carousel-horizontal",
+    "Ad Creatives": "ti-speakerphone",
+    Story: "ti-device-mobile",
+  };
+
+  // Generated content mock data
+  const GENERATED_STORAGE_KEY = "xeni_generated";
+  let generatedContent = [];
+  let currentFilter = "all";
+  let currentChannel = "all";
+  let currentType = "all";
+  let currentSort = "newest";
+  let currentViewMode = "grid";
+  let searchQuery = "";
+  let previewingContentId = null;
+
+  // Mock captions
+  const MOCK_CAPTIONS = [
+    "✨ New collection is here! Swipe to see all the colors available. Which one is your favorite?\n\n#newarrival #fashion #style",
+    "🌞 Summer vibes only! Refresh your day with our signature blend.\n\n#summer #refresh #lifestyle",
+    "💡 Pro tip: Consistency is key! Here's how we stay on top of our game.\n\n#tips #business #growth",
+    "🎉 Giveaway alert! Follow + tag 2 friends for a chance to win.\n\n#giveaway #contest #win",
+  ];
+
+  // ═══════════════════════════════════════════
+  // DOM REFERENCES
+  // ═══════════════════════════════════════════
+  const els = {
+    activeCount: document.getElementById("status-active"),
+    scheduledCount: document.getElementById("status-scheduled"),
+    emptyState: document.getElementById("empty-state"),
+    table: document.getElementById("automations-table"),
+    tbody: document.getElementById("automations-tbody"),
+    btnAdd: document.getElementById("btn-add-automation"),
+    btnEmptyAdd: document.getElementById("btn-empty-add"),
+    modalAdd: document.getElementById("modal-add-automation"),
+    closeAddModal: document.getElementById("close-add-modal"),
+    wizardContent: document.getElementById("wizard-content"),
+    btnBack: document.getElementById("btn-wizard-back"),
+    btnNext: document.getElementById("btn-wizard-next"),
+    btnStart: document.getElementById("btn-start-automation"),
+    stepPanels: document.querySelectorAll(".step-panel"),
+    stepDots: document.querySelectorAll(".step-dot"),
+    inputName: document.getElementById("input-name"),
+    btnSelectDna: document.getElementById("btn-select-dna"),
+    dnaDropdown: document.getElementById("dna-dropdown"),
+    dnaSelectedName: document.getElementById("dna-selected-name"),
+    dnaSelectedDesc: document.getElementById("dna-selected-desc"),
+    calGrid: document.getElementById("cal-grid"),
+    calMonthYear: document.getElementById("cal-month-year"),
+    calPrev: document.getElementById("cal-prev"),
+    calNext: document.getElementById("cal-next"),
+    selectedDatesContainer: document.getElementById("selected-dates-container"),
+    recurringRadios: document.querySelectorAll('input[name="recurring"]'),
+    recurringInfo: document.getElementById("recurring-info"),
+    reviewName: document.getElementById("review-name"),
+    reviewDna: document.getElementById("review-dna"),
+    reviewRecurring: document.getElementById("review-recurring"),
+    reviewPublishMode: document.getElementById("review-publish-mode"),
+    publishModeRadios: document.querySelectorAll('input[name="publish-mode"]'),
+    publishModeInfo: document.getElementById("publish-mode-info"),
+    integrationSection: document.getElementById("integration-section"),
+    reviewPublishToRow: document.getElementById("review-publish-to-row"),
+    selectedDatesCount: document.getElementById("selected-dates-count"),
+    btnAiSuggestion: document.getElementById("btn-ai-suggestion"),
+    socialAccountCheckboxes: document.querySelectorAll(
+      'input[name="social-account"]',
+    ),
+    reviewSocialAccounts: document.getElementById("review-social-accounts"),
+    reviewScheduleCards: document.getElementById("review-schedule-cards"),
+    footerCredit: document.getElementById("footer-credit"),
+    slotPopover: document.getElementById("automation-popover"),
+    closeSlotPopover: document.getElementById("close-automation-popover"),
+    slotPopoverDate: document.getElementById("automation-popover-date"),
+    slotContentType: document.getElementById("automation-content-type"),
+    slotCategory: document.getElementById("automation-category"),
+    slotPrompt: document.getElementById("automation-prompt"),
+    btnAddSlot: document.getElementById("btn-add-automation-popover"),
+    automationVariations: document.getElementById("automation-variations"),
+    btnVarMinus: document.getElementById("btn-var-minus"),
+    btnVarPlus: document.getElementById("btn-var-plus"),
+    dateDetailPopover: document.getElementById("date-detail-popover"),
+    closeDateDetailPopover: document.getElementById(
+      "close-date-detail-popover",
+    ),
+    dateDetailDate: document.getElementById("date-detail-date"),
+    dateDetailList: document.getElementById("date-detail-list"),
+    btnAddNewAutomation: document.getElementById("btn-add-new-automation"),
+    // Auto Engagement modal
+    modalEngagement: document.getElementById("modal-auto-engagement"),
+    closeEngagementModal: document.getElementById("close-engagement-modal"),
+    commentToggle: document.getElementById("comment-toggle"),
+    commentFields: document.getElementById("comment-fields"),
+    commentText: document.getElementById("comment-text"),
+    commentLink: document.getElementById("comment-link"),
+    commentKeywords: document.getElementById("comment-keywords"),
+    dmToggle: document.getElementById("dm-toggle"),
+    dmFields: document.getElementById("dm-fields"),
+    dmText: document.getElementById("dm-text"),
+    dmLink: document.getElementById("dm-link"),
+    dmKeywords: document.getElementById("dm-keywords"),
+    btnCancelEngagement: document.getElementById("btn-cancel-engagement"),
+    btnSaveEngagement: document.getElementById("btn-save-engagement"),
+    // Schedule modal
+    modalSchedule: document.getElementById("modal-schedule"),
+    closeScheduleModal: document.getElementById("close-schedule-modal"),
+    scheduleDate: document.getElementById("schedule-date"),
+    scheduleTime: document.getElementById("schedule-time"),
+    btnPublishNow: document.getElementById("btn-publish-now"),
+    btnPublish1h: document.getElementById("btn-publish-1h"),
+    btnCancelScheduleModal: document.getElementById(
+      "btn-cancel-schedule-modal",
+    ),
+    btnConfirmSchedule: document.getElementById("btn-confirm-schedule"),
+    // Tabs
+    tabAutomations: document.getElementById("tab-automations"),
+    tabGenerated: document.getElementById("tab-generated"),
+    tabContentAutomations: document.getElementById("tab-content-automations"),
+    tabContentGenerated: document.getElementById("tab-content-generated"),
+    generatedBadge: document.getElementById("generated-badge"),
+    generatedGrid: document.getElementById("generated-grid"),
+    generatedEmpty: document.getElementById("generated-empty"),
+    // Preview modal
+    modalPreview: document.getElementById("modal-preview"),
+    previewBackdrop: document.getElementById("preview-backdrop"),
+    previewPanel: document.getElementById("preview-panel"),
+    closePreviewModal: document.getElementById("close-preview-modal"),
+    previewStatusBadge: document.getElementById("preview-status-badge"),
+    previewTitleHeader: document.getElementById("preview-title-header"),
+    previewPlatformIconHeader: document.getElementById("preview-platform-icon-header"),
+    previewPlatformHeader: document.getElementById("preview-platform-header"),
+    previewBrandHeader: document.getElementById("preview-brand-header"),
+    previewDateHeader: document.getElementById("preview-date-header"),
+    previewDate: document.getElementById("preview-date"),
+    previewTitle: document.getElementById("preview-title"),
+    previewBrand: document.getElementById("preview-brand"),
+    previewCaption: document.getElementById("preview-caption"),
+    previewTypeIcon: document.getElementById("preview-type-icon"),
+    previewType: document.getElementById("preview-type"),
+    previewAutomation: document.getElementById("preview-automation"),
+    previewPlatformIcon: document.getElementById("preview-platform-icon"),
+    previewPlatform: document.getElementById("preview-platform"),
+    previewStatsSection: document.getElementById("preview-stats-section"),
+    previewViews: document.getElementById("preview-views"),
+    previewLikes: document.getElementById("preview-likes"),
+    previewComments: document.getElementById("preview-comments"),
+    previewFailSection: document.getElementById("preview-fail-section"),
+    previewFailReason: document.getElementById("preview-fail-reason"),
+    previewActions: document.getElementById("preview-actions"),
+    previewApprovedActions: document.getElementById("preview-approved-actions"),
+    previewScheduledActions: document.getElementById(
+      "preview-scheduled-actions",
+    ),
+    previewScheduledTime: document.getElementById("preview-scheduled-time"),
+    btnReject: document.getElementById("btn-reject"),
+    btnApprove: document.getElementById("btn-approve"),
+    btnSchedule: document.getElementById("btn-schedule"),
+    btnAutoEngagementFromPreview: document.getElementById(
+      "btn-auto-engagement-from-preview",
+    ),
+    btnCancelSchedule: document.getElementById("btn-cancel-schedule"),
+    btnReschedule: document.getElementById("btn-reschedule"),
+    btnAutoEngagementScheduled: document.getElementById(
+      "btn-auto-engagement-scheduled",
+    ),
+    btnEditApproved: document.getElementById("btn-edit-approved"),
+    btnEditScheduled: document.getElementById("btn-edit-scheduled"),
+    // Filters
+    filterBtns: document.querySelectorAll(".filter-btn"),
+    // View mode buttons
+    viewBtns: document.querySelectorAll(".view-btn"),
+    // Filter bar
+    btnStatusFilter: document.getElementById("btn-status-filter"),
+    statusFilterDropdown: document.getElementById("status-filter-dropdown"),
+    statusFilterLabel: document.getElementById("status-filter-label"),
+    btnChannelFilter: document.getElementById("btn-channel-filter"),
+    channelFilterDropdown: document.getElementById("channel-filter-dropdown"),
+    channelFilterLabel: document.getElementById("channel-filter-label"),
+    btnTypeFilter: document.getElementById("btn-type-filter"),
+    typeFilterDropdown: document.getElementById("type-filter-dropdown"),
+    typeFilterLabel: document.getElementById("type-filter-label"),
+    outputSearch: document.getElementById("output-search"),
+    btnSort: document.getElementById("btn-sort"),
+    sortDropdown: document.getElementById("sort-dropdown"),
+    sortLabel: document.getElementById("sort-label"),
+    viewGrid: document.getElementById("view-grid"),
+    viewList: document.getElementById("view-list"),
+    // Recurring preview
+    repeatForWrapper: document.getElementById("repeat-for-wrapper"),
+    repeatForSelect: document.getElementById("repeat-for-select"),
+    recurringPreview: document.getElementById("recurring-preview"),
+    recurringPreviewGrid: document.getElementById("recurring-preview-grid"),
+  };
+
+  // ═══════════════════════════════════════════
+  // TOAST NOTIFICATION
+  // ═══════════════════════════════════════════
+  function showToast(message) {
+    const container = document.getElementById("toast-container");
+    const template = document.getElementById("toast-template");
+    const toast = template.cloneNode(true);
+    toast.id = "";
+    toast.classList.remove("hidden");
+    toast.classList.add("flex");
+    toast.querySelector(".toast-message").textContent = message;
+    container.appendChild(toast);
+
+    // Animate in
+    requestAnimationFrame(() => {
+      toast.classList.remove("translate-y-2", "opacity-0");
+    });
+
+    // Remove after 3s
+    setTimeout(() => {
+      toast.classList.add("translate-y-2", "opacity-0");
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  // ═══════════════════════════════════════════
+  // INIT
+  // ═══════════════════════════════════════════
+  function init() {
+    loadAutomations();
+    loadGenerated();
+    renderAutomations();
+    renderGenerated();
+    bindEvents();
+    renderCalendar();
+  }
+
+  // ═══════════════════════════════════════════
+  // TAB SWITCHING
+  // ═══════════════════════════════════════════
+  function switchTab(tab) {
+    if (tab === "automations") {
+      els.tabAutomations.classList.add("bg-[#111827]", "text-white");
+      els.tabAutomations.classList.remove(
+        "text-[#667085]",
+        "hover:text-[#111827]",
+        "hover:bg-[#F9FAFB]",
+      );
+      els.tabGenerated.classList.remove("bg-[#111827]", "text-white");
+      els.tabGenerated.classList.add(
+        "text-[#667085]",
+        "hover:text-[#111827]",
+        "hover:bg-[#F9FAFB]",
+      );
+      els.tabContentAutomations.classList.remove("hidden");
+      els.tabContentGenerated.classList.add("hidden");
+      els.btnAdd.classList.remove("hidden");
+      els.btnAdd.classList.add("flex");
+    } else {
+      els.tabGenerated.classList.add("bg-[#111827]", "text-white");
+      els.tabGenerated.classList.remove(
+        "text-[#667085]",
+        "hover:text-[#111827]",
+        "hover:bg-[#F9FAFB]",
+      );
+      els.tabAutomations.classList.remove("bg-[#111827]", "text-white");
+      els.tabAutomations.classList.add(
+        "text-[#667085]",
+        "hover:text-[#111827]",
+        "hover:bg-[#F9FAFB]",
+      );
+      els.tabContentAutomations.classList.add("hidden");
+      els.tabContentGenerated.classList.remove("hidden");
+      els.btnAdd.classList.add("hidden");
+      els.btnAdd.classList.remove("flex");
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // GENERATED CONTENT
+  // ═══════════════════════════════════════════
+  function loadGenerated() {
+    // Always use fresh mock data (deterministic, not from localStorage)
+    generatedContent = createMockGenerated();
+    saveGenerated();
+  }
+
+  function saveGenerated() {
+    localStorage.setItem(
+      GENERATED_STORAGE_KEY,
+      JSON.stringify(generatedContent),
+    );
+  }
+
+  function createMockGenerated() {
+    const now = new Date();
+    const dayMs = 24 * 60 * 60 * 1000;
+
+    return [
+      {
+        id: "gen_published_1",
+        title: "Summer Vibes",
+        brand: "Fresh Juice Co.",
+        contentType: "Single Post",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[0],
+        status: "published",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(),
+        scheduledAt: new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(),
+        publishedAt: new Date(now.getTime() - 2 * 60 * 60 * 1000).toISOString(),
+        views: 1200,
+        likes: 128,
+        comments: 24,
+        autoComment: { enabled: true, text: "Thanks!", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_draft_1",
+        title: "New Arrival",
+        brand: "Tech Startup",
+        contentType: "Carousel",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[1],
+        status: "draft",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 5 * 60 * 60 * 1000).toISOString(),
+        scheduledAt: null,
+        publishedAt: null,
+        views: 0,
+        likes: 0,
+        comments: 0,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_published_2",
+        title: "Product Highlight",
+        brand: "Luxe Beauty",
+        contentType: "Single Post",
+        platform: "TikTok",
+        caption: MOCK_CAPTIONS[2],
+        status: "published",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 1 * dayMs).toISOString(),
+        scheduledAt: new Date(now.getTime() - 1 * dayMs).toISOString(),
+        publishedAt: new Date(now.getTime() - 1 * dayMs).toISOString(),
+        views: 3400,
+        likes: 392,
+        comments: 68,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: true, text: "Hi! Check our site", link: "", keywords: "price,info" },
+      },
+      {
+        id: "gen_failed_1",
+        title: "Behind the Scenes",
+        brand: "Fresh Juice Co.",
+        contentType: "Story",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[3],
+        status: "failed",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 1 * dayMs).toISOString(),
+        scheduledAt: new Date(2026, 4, 1).toISOString(),
+        publishedAt: null,
+        views: 0,
+        likes: 0,
+        comments: 0,
+        failReason: "Invalid Date",
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_published_3",
+        title: "Green Boost Tips",
+        brand: "Fresh Juice Co.",
+        contentType: "Single Post",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[0],
+        status: "published",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 2 * dayMs).toISOString(),
+        scheduledAt: new Date(now.getTime() - 2 * dayMs).toISOString(),
+        publishedAt: new Date(now.getTime() - 2 * dayMs).toISOString(),
+        views: 2100,
+        likes: 201,
+        comments: 31,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_draft_2",
+        title: "Tech Tips \u0026 Tricks",
+        brand: "Tech Startup",
+        contentType: "Single Post",
+        platform: "LinkedIn",
+        caption: MOCK_CAPTIONS[1],
+        status: "draft",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 2 * dayMs).toISOString(),
+        scheduledAt: null,
+        publishedAt: null,
+        views: 0,
+        likes: 0,
+        comments: 0,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_published_4",
+        title: "Skincare Routine",
+        brand: "Luxe Beauty",
+        contentType: "Carousel",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[2],
+        status: "published",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 2 * dayMs).toISOString(),
+        scheduledAt: new Date(now.getTime() - 2 * dayMs).toISOString(),
+        publishedAt: new Date(now.getTime() - 2 * dayMs).toISOString(),
+        views: 1600,
+        likes: 142,
+        comments: 19,
+        autoComment: { enabled: true, text: "Thanks for loving it!", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_scheduled_1",
+        title: "Weekend Refresh",
+        brand: "Fresh Juice Co.",
+        contentType: "Story",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[3],
+        status: "scheduled",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 3 * dayMs).toISOString(),
+        scheduledAt: new Date(2026, 4, 12, 9, 0).toISOString(),
+        publishedAt: null,
+        views: 0,
+        likes: 0,
+        comments: 0,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_approved_1",
+        title: "Customer Love",
+        brand: "Luxe Beauty",
+        contentType: "Single Post",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[0],
+        status: "approved",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 4 * dayMs).toISOString(),
+        scheduledAt: null,
+        publishedAt: null,
+        views: 0,
+        likes: 0,
+        comments: 0,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_scheduled_2",
+        title: "Daily Tips",
+        brand: "Tech Startup",
+        contentType: "Single Post",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[1],
+        status: "scheduled",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 5 * dayMs).toISOString(),
+        scheduledAt: new Date(2026, 4, 15, 14, 30).toISOString(),
+        publishedAt: null,
+        views: 0,
+        likes: 0,
+        comments: 0,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_approved_2",
+        title: "Summer Campaign",
+        brand: "Fresh Juice Co.",
+        contentType: "Ad Creatives",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[2],
+        status: "approved",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 6 * dayMs).toISOString(),
+        scheduledAt: null,
+        publishedAt: null,
+        views: 0,
+        likes: 0,
+        comments: 0,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+      {
+        id: "gen_published_5",
+        title: "Product Launch",
+        brand: "Tech Startup",
+        contentType: "Carousel",
+        platform: "Instagram",
+        caption: MOCK_CAPTIONS[3],
+        status: "published",
+        automationName: "Campaign Mei 2026",
+        createdAt: new Date(now.getTime() - 7 * dayMs).toISOString(),
+        scheduledAt: new Date(now.getTime() - 7 * dayMs).toISOString(),
+        publishedAt: new Date(now.getTime() - 7 * dayMs).toISOString(),
+        views: 890,
+        likes: 76,
+        comments: 12,
+        autoComment: { enabled: false, text: "", link: "", keywords: "" },
+        autoDm: { enabled: false, text: "", link: "", keywords: "" },
+      },
+    ];
+  }
+
+  function renderGenerated() {
+    // Apply all filters
+    let filtered = generatedContent.filter((item) => {
+      // Status filter
+      if (currentFilter !== "all" && item.status !== currentFilter) return false;
+      // Channel filter
+      if (currentChannel !== "all" && item.platform !== currentChannel) return false;
+      // Type filter
+      if (currentType !== "all" && item.contentType !== currentType) return false;
+      // Search
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        const haystack = `${item.title} ${item.brand} ${item.caption}`.toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+      return true;
+    });
+
+    // Apply sort
+    filtered.sort((a, b) => {
+      if (currentSort === "newest") return new Date(b.createdAt) - new Date(a.createdAt);
+      if (currentSort === "oldest") return new Date(a.createdAt) - new Date(b.createdAt);
+      if (currentSort === "name") return a.title.localeCompare(b.title);
+      return 0;
+    });
+
+    // Update badge (draft + approved + failed = needs attention)
+    const needsAttentionCount = generatedContent.filter(
+      (g) => g.status === "draft" || g.status === "approved" || g.status === "failed",
+    ).length;
+    els.generatedBadge.textContent = needsAttentionCount;
+    els.generatedBadge.classList.toggle("hidden", needsAttentionCount === 0);
+
+    // Update grid/list classes
+    if (currentViewMode === "grid") {
+      els.generatedGrid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4";
+    } else {
+      els.generatedGrid.className = "flex flex-col gap-3";
+    }
+
+    if (filtered.length === 0) {
+      els.generatedGrid.classList.add("hidden");
+      els.generatedEmpty.classList.remove("hidden");
+      els.generatedEmpty.classList.add(
+        "flex",
+        "flex-col",
+        "items-center",
+        "justify-center",
+        "py-24",
+      );
+      return;
+    }
+
+    els.generatedGrid.classList.remove("hidden");
+    els.generatedEmpty.classList.add("hidden");
+    els.generatedEmpty.classList.remove(
+      "flex",
+      "flex-col",
+      "items-center",
+      "justify-center",
+      "py-24",
+    );
+
+    const statusConfig = {
+      draft: { dot: "bg-[#F59E0B]", label: "Draft" },
+      approved: { dot: "bg-[#22C55E]", label: "Approved" },
+      scheduled: { dot: "bg-[#8B5CF6]", label: "Scheduled" },
+      published: { dot: "bg-[#3B82F6]", label: "Published" },
+      failed: { dot: "bg-[#EF4444]", label: "Failed" },
+    };
+
+    const platformIconMap = {
+      Instagram: "ti-brand-instagram",
+      TikTok: "ti-brand-tiktok",
+      LinkedIn: "ti-brand-linkedin",
+      Facebook: "ti-brand-facebook",
+      X: "ti-brand-x",
+    };
+
+    if (currentViewMode === "grid") {
+      els.generatedGrid.innerHTML = filtered.map((item) => renderGridCard(item, statusConfig, platformIconMap)).join("");
+    } else {
+      els.generatedGrid.innerHTML = filtered.map((item) => renderListRow(item, statusConfig, platformIconMap)).join("");
+    }
+  }
+
+  function renderGridCard(item, statusConfig, platformIconMap) {
+    const cfg = statusConfig[item.status];
+    const dateStr = formatRelativeDate(item.createdAt);
+    const platformIcon = platformIconMap[item.platform] || "ti-file";
+
+    const statsRow = item.status === "published" && (item.views > 0 || item.likes > 0 || item.comments > 0)
+      ? `<div class="flex items-center gap-3 pt-2 border-t border-[#eaecf0]">
+          <div class="flex items-center gap-1 text-[11px] text-[#667085]">
+            <i class="ti ti-eye text-[12px]"></i>
+            ${item.views >= 1000 ? (item.views / 1000).toFixed(1) + "K" : item.views}
+          </div>
+          <div class="flex items-center gap-1 text-[11px] text-[#667085]">
+            <i class="ti ti-heart text-[12px]"></i>
+            ${item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + "K" : item.likes}
+          </div>
+          <div class="flex items-center gap-1 text-[11px] text-[#667085]">
+            <i class="ti ti-message text-[12px]"></i>
+            ${item.comments}
+          </div>
+        </div>`
+      : "";
+
+    const failBadge = item.status === "failed" && item.failReason
+      ? `<span class="text-[10px] text-[#EF4444] font-medium">${item.failReason}</span>`
+      : "";
+
+    return `
+    <div class="group relative bg-white rounded-3xl border border-[#eaecf0] overflow-hidden hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent transition-all cursor-pointer" onclick="openPreviewModal('${item.id}')">
+      <!-- Image Placeholder -->
+      <div class="aspect-square bg-white flex items-center justify-center relative">
+        <!-- Status Dot -->
+        <span class="absolute top-3 left-3 flex items-center gap-1.5 px-2 h-5 rounded-full bg-white/90 backdrop-blur-sm border border-[#eaecf0] text-[10px] font-bold text-[#667085]">
+          <span class="w-1.5 h-1.5 rounded-full ${cfg.dot}"></span>
+          ${cfg.label}
+        </span>
+        <!-- Auto Engagement Indicator -->
+        ${
+          item.autoComment?.enabled || item.autoDm?.enabled
+            ? `<span class="absolute top-3 right-3 w-6 h-6 rounded-full bg-[#EFF6FF] border border-[#dbeafe] flex items-center justify-center" title="Auto Engagement active">
+          <i class="ti ti-message-share text-[12px] text-[#2563EB]"></i>
+        </span>`
+            : ""
+        }
+      </div>
+      <!-- Info -->
+      <div class="p-4 space-y-2">
+        <h3 class="text-[14px] font-bold text-[#111827] truncate">${escapeHtml(item.title)}</h3>
+        <div class="flex items-center justify-between">
+          <span class="text-[12px] text-[#667085]">${escapeHtml(item.brand)}</span>
+          <span class="text-[11px] text-[#98a2b3]">${dateStr}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <i class="ti ${platformIcon} text-[12px] text-[#98a2b3]"></i>
+            <span class="text-[11px] text-[#98a2b3]">${item.platform || item.contentType}</span>
+          </div>
+          ${item.status === "published" || item.status === "scheduled" ? `<span class="text-[10px] text-[#2563EB] font-medium">${formatScheduledTime(item.scheduledAt)}</span>` : ""}
+          ${failBadge}
+        </div>
+        ${statsRow}
+      </div>
+    </div>
+  `;
+  }
+
+  function renderListRow(item, statusConfig, platformIconMap) {
+    const cfg = statusConfig[item.status];
+    const dateStr = formatRelativeDate(item.createdAt);
+    const platformIcon = platformIconMap[item.platform] || "ti-file";
+
+    const statsRow = item.status === "published" && (item.views > 0 || item.likes > 0 || item.comments > 0)
+      ? `<div class="flex items-center gap-3 ml-auto">
+          <div class="flex items-center gap-1 text-[11px] text-[#667085]">
+            <i class="ti ti-eye text-[12px]"></i>
+            ${item.views >= 1000 ? (item.views / 1000).toFixed(1) + "K" : item.views}
+          </div>
+          <div class="flex items-center gap-1 text-[11px] text-[#667085]">
+            <i class="ti ti-heart text-[12px]"></i>
+            ${item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + "K" : item.likes}
+          </div>
+          <div class="flex items-center gap-1 text-[11px] text-[#667085]">
+            <i class="ti ti-message text-[12px]"></i>
+            ${item.comments}
+          </div>
+        </div>`
+      : "";
+
+    const failBadge = item.status === "failed" && item.failReason
+      ? `<span class="text-[10px] text-[#EF4444] font-medium ml-auto">${item.failReason}</span>`
+      : "";
+
+    const engagementIcon = item.autoComment?.enabled || item.autoDm?.enabled
+      ? `<span class="w-6 h-6 rounded-full bg-[#EFF6FF] border border-[#dbeafe] flex items-center justify-center ml-2" title="Auto Engagement active">
+          <i class="ti ti-message-share text-[12px] text-[#2563EB]"></i>
+        </span>`
+      : "";
+
+    return `
+    <div class="group flex items-center gap-4 bg-white rounded-2xl border border-[#eaecf0] p-3 hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent transition-all cursor-pointer" onclick="openPreviewModal('${item.id}')">
+      <!-- Thumbnail -->
+      <div class="w-14 h-14 rounded-xl bg-white border border-[#eaecf0] flex-shrink-0 flex items-center justify-center relative">
+        <span class="absolute -top-1.5 -left-1.5 flex items-center gap-1 px-1.5 h-4 rounded-full bg-white border border-[#eaecf0] text-[9px] font-bold text-[#667085]">
+          <span class="w-1 h-1 rounded-full ${cfg.dot}"></span>
+          ${cfg.label}
+        </span>
+      </div>
+      <!-- Info -->
+      <div class="flex-1 min-w-0">
+        <h3 class="text-[13px] font-bold text-[#111827] truncate">${escapeHtml(item.title)}</h3>
+        <div class="flex items-center gap-2 mt-0.5">
+          <span class="text-[11px] text-[#667085]">${escapeHtml(item.brand)}</span>
+          <span class="text-[10px] text-[#98a2b3]">• ${dateStr}</span>
+        </div>
+      </div>
+      <!-- Meta -->
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <div class="flex items-center gap-1.5">
+          <i class="ti ${platformIcon} text-[12px] text-[#98a2b3]"></i>
+          <span class="text-[11px] text-[#98a2b3]">${item.platform || item.contentType}</span>
+        </div>
+        ${engagementIcon}
+        ${item.status === "published" || item.status === "scheduled" ? `<span class="text-[10px] text-[#2563EB] font-medium">${formatScheduledTime(item.scheduledAt)}</span>` : ""}
+        ${failBadge}
+        ${statsRow}
+      </div>
+    </div>
+  `;
+  }
+
+  function formatRelativeDate(dateStr) {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const date = new Date(dateStr);
+    date.setHours(0, 0, 0, 0);
+    const diffMs = now - date;
+    const diffDays = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+
+    if (diffDays === 0) return "Hari ini";
+    if (diffDays === 1) return "Kemarin";
+    if (diffDays < 7) {
+      const days = [
+        "Minggu",
+        "Senin",
+        "Selasa",
+        "Rabu",
+        "Kamis",
+        "Jumat",
+        "Sabtu",
+      ];
+      return days[date.getDay()];
+    }
+    return date.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+    });
+  }
+
+  function formatScheduledTime(dateStr) {
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffMs = date - now;
+    const diffMins = Math.floor(diffMs / (60 * 1000));
+    const diffHours = Math.floor(diffMs / (60 * 60 * 1000));
+
+    if (diffMins <= 0) return "Publishing now";
+    if (diffMins < 60) return `${diffMins}m`;
+    if (diffHours < 24) return `${diffHours}h`;
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }
+
+  // ═══════════════════════════════════════════
+  // PREVIEW MODAL
+  // ═══════════════════════════════════════════
+  function openPreviewModal(genId) {
+    previewingContentId = genId;
+    const item = generatedContent.find((g) => g.id === genId);
+    if (!item) return;
+
+    const statusConfig = {
+      draft: {
+        bg: "bg-[#FEF3C7]",
+        text: "text-[#B45309]",
+        border: "border-[#FDE68A]",
+        label: "Draft",
+      },
+      approved: {
+        bg: "bg-[#ECFDF3]",
+        text: "text-[#027A48]",
+        border: "border-[#D1FADF]",
+        label: "Approved",
+      },
+      scheduled: {
+        bg: "bg-[#F5F3FF]",
+        text: "text-[#7C3AED]",
+        border: "border-[#DDD6FE]",
+        label: "Scheduled",
+      },
+      published: {
+        bg: "bg-[#EFF6FF]",
+        text: "text-[#2563EB]",
+        border: "border-[#DBEAFE]",
+        label: "Published",
+      },
+      failed: {
+        bg: "bg-[#FEF3F2]",
+        text: "text-[#B42318]",
+        border: "border-[#FECDCA]",
+        label: "Failed",
+      },
+    };
+    const cfg = statusConfig[item.status];
+    const dateStr = new Date(item.createdAt).toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    els.previewStatusBadge.className = `inline-flex items-center px-2.5 h-6 rounded-full text-[11px] font-bold ${cfg.bg} ${cfg.text} border ${cfg.border}`;
+    els.previewStatusBadge.textContent = cfg.label;
+
+    // Platform icon map (used below)
+    const platformIconMap = {
+      Instagram: "ti-brand-instagram",
+      TikTok: "ti-brand-tiktok",
+      LinkedIn: "ti-brand-linkedin",
+      Facebook: "ti-brand-facebook",
+      X: "ti-brand-x",
+    };
+
+    // Header info
+    els.previewTitleHeader.textContent = item.title;
+    els.previewPlatformIconHeader.className = `ti ${platformIconMap[item.platform] || "ti-file"} text-[14px] text-[#E1306C]`;
+    els.previewPlatformHeader.textContent = item.platform || "-";
+    els.previewBrandHeader.textContent = item.brand;
+    els.previewDateHeader.textContent = formatRelativeDate(item.createdAt);
+
+    // Body content
+    els.previewDate.textContent = dateStr;
+    els.previewTitle.textContent = item.title;
+    els.previewBrand.textContent = item.brand;
+    els.previewCaption.textContent = item.caption;
+    els.previewTypeIcon.className = `ti ${CONTENT_ICONS[item.contentType] || "ti-file"} text-[16px] text-[#667085]`;
+    els.previewType.textContent = item.contentType;
+    els.previewAutomation.textContent = item.automationName;
+
+    // Platform
+    els.previewPlatformIcon.className = `ti ${platformIconMap[item.platform] || "ti-file"} text-[16px] text-[#667085]`;
+    els.previewPlatform.textContent = item.platform || "-";
+
+    // Stats (published only)
+    if (item.status === "published" && (item.views > 0 || item.likes > 0 || item.comments > 0)) {
+      els.previewStatsSection.classList.remove("hidden");
+      els.previewViews.textContent = item.views >= 1000 ? (item.views / 1000).toFixed(1) + "K" : item.views;
+      els.previewLikes.textContent = item.likes >= 1000 ? (item.likes / 1000).toFixed(1) + "K" : item.likes;
+      els.previewComments.textContent = item.comments;
+    } else {
+      els.previewStatsSection.classList.add("hidden");
+    }
+
+    // Fail reason (failed only)
+    if (item.status === "failed" && item.failReason) {
+      els.previewFailSection.classList.remove("hidden");
+      els.previewFailReason.textContent = item.failReason;
+    } else {
+      els.previewFailSection.classList.add("hidden");
+    }
+
+    // Show/hide actions based on status
+    if (item.status === "draft") {
+      els.previewActions.classList.remove("hidden");
+      els.previewActions.classList.add("flex");
+      els.previewApprovedActions.classList.add("hidden");
+      els.previewApprovedActions.classList.remove("flex");
+      els.previewScheduledActions.classList.add("hidden");
+      els.previewScheduledActions.classList.remove("flex");
+    } else if (item.status === "approved") {
+      els.previewActions.classList.add("hidden");
+      els.previewActions.classList.remove("flex");
+      els.previewApprovedActions.classList.remove("hidden");
+      els.previewApprovedActions.classList.add("flex");
+      els.previewScheduledActions.classList.add("hidden");
+      els.previewScheduledActions.classList.remove("flex");
+    } else if (item.status === "scheduled") {
+      els.previewActions.classList.add("hidden");
+      els.previewActions.classList.remove("flex");
+      els.previewApprovedActions.classList.add("hidden");
+      els.previewApprovedActions.classList.remove("flex");
+      els.previewScheduledActions.classList.remove("hidden");
+      els.previewScheduledActions.classList.add("flex");
+      // Show scheduled time
+      const scheduledAt = item.scheduledAt ? new Date(item.scheduledAt) : null;
+      if (scheduledAt) {
+        els.previewScheduledTime.textContent = scheduledAt.toLocaleString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          },
+        );
+      } else {
+        els.previewScheduledTime.textContent = "Now";
+      }
+    } else if (item.status === "published") {
+      els.previewActions.classList.add("hidden");
+      els.previewActions.classList.remove("flex");
+      els.previewApprovedActions.classList.add("hidden");
+      els.previewApprovedActions.classList.remove("flex");
+      els.previewScheduledActions.classList.remove("hidden");
+      els.previewScheduledActions.classList.add("flex");
+      // Show scheduled time
+      const scheduledAt = item.scheduledAt ? new Date(item.scheduledAt) : null;
+      if (scheduledAt) {
+        els.previewScheduledTime.textContent = scheduledAt.toLocaleString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          },
+        );
+      } else {
+        els.previewScheduledTime.textContent = "Now";
+      }
+    } else if (item.status === "failed") {
+      // Failed: show Edit button to duplicate as draft
+      els.previewActions.classList.add("hidden");
+      els.previewActions.classList.remove("flex");
+      els.previewApprovedActions.classList.remove("hidden");
+      els.previewApprovedActions.classList.add("flex");
+      els.previewScheduledActions.classList.add("hidden");
+      els.previewScheduledActions.classList.remove("flex");
+    } else {
+      els.previewActions.classList.add("hidden");
+      els.previewActions.classList.remove("flex");
+      els.previewApprovedActions.classList.add("hidden");
+      els.previewApprovedActions.classList.remove("flex");
+      els.previewScheduledActions.classList.add("hidden");
+      els.previewScheduledActions.classList.remove("flex");
+    }
+
+    // Open slide-over
+    els.modalPreview.classList.remove("hidden");
+    els.modalPreview.classList.add("flex");
+    requestAnimationFrame(() => {
+      els.previewBackdrop.classList.remove("opacity-0");
+      els.previewPanel.classList.remove("translate-x-full");
+    });
+  }
+
+  function closePreviewModal() {
+    els.previewBackdrop.classList.add("opacity-0");
+    els.previewPanel.classList.add("translate-x-full");
+    setTimeout(() => {
+      els.modalPreview.classList.add("hidden");
+      els.modalPreview.classList.remove("flex");
+      previewingContentId = null;
+    }, 300);
+  }
+
+  function approveContent() {
+    if (!previewingContentId) return;
+    const item = generatedContent.find((g) => g.id === previewingContentId);
+    if (!item) return;
+    item.status = "approved";
+    saveGenerated();
+    renderGenerated();
+    openPreviewModal(previewingContentId);
+  }
+
+  function rejectContent() {
+    if (!previewingContentId) return;
+    if (
+      !confirm(
+        "Are you sure you want to reject this content? It will be deleted.",
+      )
+    )
+      return;
+    generatedContent = generatedContent.filter(
+      (g) => g.id !== previewingContentId,
+    );
+    saveGenerated();
+    renderGenerated();
+    closePreviewModal();
+  }
+
+  // ═══════════════════════════════════════════
+  // EDIT & DUPLICATE CONTENT
+  // ═══════════════════════════════════════════
+  function editAndDuplicateContent() {
+    if (!previewingContentId) return;
+    const item = generatedContent.find((g) => g.id === previewingContentId);
+    if (!item) return;
+
+    // Create a duplicate as new draft
+    const newItem = {
+      ...item,
+      id: "gen_" + Date.now(),
+      status: "draft",
+      scheduledAt: null,
+      createdAt: new Date().toISOString(),
+      title: item.title + " (Copy)",
+    };
+
+    generatedContent.push(newItem);
+    saveGenerated();
+    renderGenerated();
+    closePreviewModal();
+    showToast("Content duplicated as new draft!");
+  }
+
+  // ═══════════════════════════════════════════
+  // SCHEDULE MODAL
+  // ═══════════════════════════════════════════
+  function openScheduleModal() {
+    if (!previewingContentId) return;
+    // Set default to tomorrow at 9am
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(9, 0, 0, 0);
+    els.scheduleDate.value = tomorrow.toISOString().split("T")[0];
+    els.scheduleTime.value = "09:00";
+    els.modalSchedule.classList.remove("hidden");
+    els.modalSchedule.classList.add("flex");
+  }
+
+  function closeScheduleModalFn() {
+    els.modalSchedule.classList.add("hidden");
+    els.modalSchedule.classList.remove("flex");
+  }
+
+  function confirmSchedule() {
+    if (!previewingContentId) return;
+    const item = generatedContent.find((g) => g.id === previewingContentId);
+    if (!item) return;
+    const dateVal = els.scheduleDate.value;
+    const timeVal = els.scheduleTime.value;
+    if (dateVal && timeVal) {
+      item.scheduledAt = new Date(`${dateVal}T${timeVal}`).toISOString();
+    }
+    item.status = "published";
+    saveGenerated();
+    renderGenerated();
+    closeScheduleModalFn();
+    openPreviewModal(previewingContentId);
+    showToast("Content scheduled successfully!");
+  }
+
+  function publishNow() {
+    if (!previewingContentId) return;
+    const item = generatedContent.find((g) => g.id === previewingContentId);
+    if (!item) return;
+    item.status = "published";
+    item.scheduledAt = new Date().toISOString();
+    saveGenerated();
+    renderGenerated();
+    closeScheduleModalFn();
+    openPreviewModal(previewingContentId);
+    showToast("Content will be published now!");
+  }
+
+  function publishIn1Hour() {
+    if (!previewingContentId) return;
+    const item = generatedContent.find((g) => g.id === previewingContentId);
+    if (!item) return;
+    const in1h = new Date(Date.now() + 60 * 60 * 1000);
+    item.status = "published";
+    item.scheduledAt = in1h.toISOString();
+    saveGenerated();
+    renderGenerated();
+    closeScheduleModalFn();
+    openPreviewModal(previewingContentId);
+    showToast("Content scheduled for 1 hour from now!");
+  }
+
+  function cancelSchedule() {
+    if (!previewingContentId) return;
+    const item = generatedContent.find((g) => g.id === previewingContentId);
+    if (!item) return;
+    if (!confirm("Cancel this scheduled upload?")) return;
+    item.status = "approved";
+    item.scheduledAt = null;
+    saveGenerated();
+    renderGenerated();
+    openPreviewModal(previewingContentId);
+    showToast("Schedule cancelled.");
+  }
+
+  function rescheduleContent() {
+    openScheduleModal();
+  }
+
+  // ═══════════════════════════════════════════
+  // AUTO ENGAGEMENT MODAL
+  // ═══════════════════════════════════════════
+  function openEngagementFromPreview() {
+    if (!previewingContentId) return;
+    // Open engagement modal for this generated content
+    editingAutomationId = previewingContentId;
+    const item = generatedContent.find((g) => g.id === previewingContentId);
+    if (!item) return;
+
+    const ac = item.autoComment || {
+      enabled: false,
+      text: "",
+      link: "",
+      keywords: "",
+    };
+    const dm = item.autoDm || {
+      enabled: false,
+      text: "",
+      link: "",
+      keywords: "",
+    };
+
+    els.commentToggle.checked = ac.enabled;
+    els.commentText.value = ac.text || "";
+    els.commentLink.value = ac.link || "";
+    els.commentKeywords.value = ac.keywords || "";
+    els.commentFields.classList.toggle("hidden", !ac.enabled);
+
+    els.dmToggle.checked = dm.enabled;
+    els.dmText.value = dm.text || "";
+    els.dmLink.value = dm.link || "";
+    els.dmKeywords.value = dm.keywords || "";
+    els.dmFields.classList.toggle("hidden", !dm.enabled);
+
+    els.modalEngagement.classList.remove("hidden");
+    els.modalEngagement.classList.add("flex");
+  }
+
+  function closeEngagementModalFn() {
+    els.modalEngagement.classList.add("hidden");
+    els.modalEngagement.classList.remove("flex");
+    editingAutomationId = null;
+  }
+
+  function saveEngagement() {
+    if (!editingAutomationId) return;
+    const item = generatedContent.find((g) => g.id === editingAutomationId);
+    if (!item) return;
+
+    item.autoComment = {
+      enabled: els.commentToggle.checked,
+      text: els.commentText.value.trim(),
+      link: els.commentLink.value.trim(),
+      keywords: els.commentKeywords.value.trim(),
+    };
+    item.autoDm = {
+      enabled: els.dmToggle.checked,
+      text: els.dmText.value.trim(),
+      link: els.dmLink.value.trim(),
+      keywords: els.dmKeywords.value.trim(),
+    };
+
+    saveGenerated();
+    renderGenerated();
+    closeEngagementModalFn();
+    showToast("Auto Engagement settings saved!");
+  }
+
+  function loadAutomations() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) automations = JSON.parse(stored);
+    } catch (e) {
+      automations = [];
+    }
+  }
+
+  function saveAutomations() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(automations));
+  }
+
+  // ═══════════════════════════════════════════
+  // RENDER AUTOMATIONS TABLE
+  // ═══════════════════════════════════════════
+  function renderAutomations() {
+    const activeCount = automations.filter((a) => a.status === "active").length;
+    const scheduledCount = automations.filter(
+      (a) => a.status === "paused",
+    ).length;
+    els.activeCount.textContent = activeCount;
+    els.scheduledCount.textContent = scheduledCount;
+
+    if (automations.length === 0) {
+      els.emptyState.classList.remove("hidden");
+      els.emptyState.classList.add(
+        "flex",
+        "flex-col",
+        "items-center",
+        "justify-center",
+        "py-24",
+      );
+      els.table.classList.add("hidden");
+      return;
+    }
+
+    els.emptyState.classList.add("hidden");
+    els.emptyState.classList.remove(
+      "flex",
+      "flex-col",
+      "items-center",
+      "justify-center",
+      "py-24",
+    );
+    els.table.classList.remove("hidden");
+
+    els.tbody.innerHTML = automations
+      .map((auto) => {
+        const dateCount = Object.keys(auto.selectedDates).length;
+        const contentTypes = [
+          ...new Set(
+            Object.values(auto.selectedDates)
+              .flat()
+              .map((s) => s.contentType),
+          ),
+        ];
+        const typeLabels = contentTypes
+          .map(
+            (t) =>
+              `<span class="inline-flex items-center gap-1 px-2 h-6 rounded-full bg-[#F9FAFB] border border-[#eaecf0] text-[11px] font-medium text-[#667085]">
+                <i class="ti ${CONTENT_ICONS[t] || "ti-file"} text-[12px]"></i>
+                ${t}
+              </span>`,
+          )
+          .join("");
+
+        return `
+        <tr class="border-b border-[#eaecf0] hover:bg-[#F9FAFB] transition-colors group">
+          <td class="px-5 py-4">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0">
+                <i class="ti ti-brand-abstract text-[18px] text-[#667085]"></i>
+              </div>
+              <span class="text-[13px] font-semibold text-[#111827]">${escapeHtml(auto.dna?.name || "-")}</span>
+            </div>
+          </td>
+          <td class="px-5 py-4">
+            <span class="text-[13px] font-semibold text-[#111827]">${escapeHtml(auto.name)}</span>
+          </td>
+          <td class="px-5 py-4">
+            <span class="text-[13px] text-[#667085]">${dateCount} tanggal · ${recurringLabel(auto.recurring)}</span>
+          </td>
+          <td class="px-5 py-4">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              ${typeLabels}
+            </div>
+          </td>
+          <td class="px-5 py-4">
+            <span class="inline-flex items-center gap-1.5 px-2 h-5 rounded-full bg-white border border-[#eaecf0] text-[10px] font-bold text-[#667085]">
+              <span class="w-1.5 h-1.5 rounded-full ${auto.status === "active" ? "bg-[#22C55E]" : "bg-[#F04438]"}"></span>
+              ${auto.status === "active" ? "Active" : "Paused"}
+            </span>
+          </td>
+          <td class="px-5 py-4">
+            <div class="flex items-center justify-end gap-1">
+              <button
+                class="action-btn w-8 h-8 rounded-lg hover:bg-[#EFF6FF] flex items-center justify-center text-[#667085] hover:text-[#2563EB] transition-colors cursor-pointer"
+                title="View details"
+                onclick="alert('Detail view coming soon')"
+              >
+                <i class="ti ti-eye text-[15px]"></i>
+              </button>
+              <button
+                class="action-btn w-8 h-8 rounded-lg hover:bg-[#F3F4F6] flex items-center justify-center text-[#667085] hover:text-[#111827] transition-colors cursor-pointer"
+                title="${auto.status === "active" ? "Pause automation" : "Resume automation"}"
+                onclick="toggleAutomationStatus('${auto.id}')"
+              >
+                <i class="ti ${auto.status === "active" ? "ti-player-pause" : "ti-player-play"} text-[15px]"></i>
+              </button>
+              <button
+                class="action-btn w-8 h-8 rounded-lg hover:bg-[#FEF3F2] flex items-center justify-center text-[#667085] hover:text-[#D92D20] transition-colors cursor-pointer"
+                title="Hapus automation"
+                onclick="deleteAutomation('${auto.id}')"
+              >
+                <i class="ti ti-trash text-[15px]"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+      })
+      .join("");
+  }
+
+  function recurringLabel(value) {
+    const labels = { once: "One Time Only", monthly: "Same Dates Every Month" };
+    return labels[value] || value;
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ═══════════════════════════════════════════
+  // WIZARD NAVIGATION
+  // ═══════════════════════════════════════════
+  function goToStep(step) {
+    currentStep = step;
+    els.stepPanels.forEach((p) => p.classList.add("hidden"));
+    document.getElementById(`step-${step}`).classList.remove("hidden");
+
+    els.stepDots.forEach((dot) => {
+      const num = parseInt(dot.dataset.step);
+      const circle = dot.querySelector("div");
+      const label = dot.querySelector("span");
+      if (num === step) {
+        circle.className =
+          "w-7 h-7 rounded-full bg-[#111827] text-white text-[12px] font-bold flex items-center justify-center";
+        label.className = "text-[12px] font-semibold text-[#111827]";
+      } else if (num < step) {
+        circle.className =
+          "w-7 h-7 rounded-full bg-[#111827] text-white text-[12px] font-bold flex items-center justify-center";
+        label.className = "text-[12px] font-semibold text-[#667085]";
+      } else {
+        circle.className =
+          "w-7 h-7 rounded-full bg-[#F3F4F6] text-[#667085] text-[12px] font-bold flex items-center justify-center";
+        label.className = "text-[12px] font-semibold text-[#667085]";
+      }
+    });
+
+    els.btnBack.classList.toggle("hidden", step === 1);
+    els.btnNext.classList.toggle("hidden", step === 3);
+    els.btnStart.classList.toggle("hidden", step !== 3);
+
+    if (step === 3) updateReview();
+  }
+
+  function validateStep(step) {
+    if (step === 1) {
+      if (!wizardData.name.trim()) {
+        showToast("Campaign name is required");
+        return false;
+      }
+      if (!wizardData.dna) {
+        showToast("Please select a Business DNA");
+        return false;
+      }
+    }
+    if (step === 2) {
+      if (Object.keys(wizardData.selectedDates).length === 0) {
+        showToast("Please select at least 1 date");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function updateReview() {
+    els.reviewName.textContent = wizardData.name || "-";
+    els.reviewDna.textContent = wizardData.dna?.name || "-";
+    els.reviewPublishMode.textContent =
+      wizardData.publishMode === "auto" ? "Auto-Publish" : "Manual Review";
+    const accountLabels = { instagram: "Instagram", tiktok: "TikTok" };
+    if (wizardData.publishMode === "auto") {
+      els.reviewPublishToRow.classList.remove("hidden");
+      els.reviewSocialAccounts.textContent =
+        wizardData.socialAccounts
+          .map((a) => accountLabels[a] || a)
+          .join(", ") || "-";
+    } else {
+      els.reviewPublishToRow.classList.add("hidden");
+    }
+
+    // Render recurring preview
+    renderRecurringPreview();
+
+    // Render schedule cards
+    const dates = Object.keys(wizardData.selectedDates).sort();
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    if (dates.length === 0) {
+      els.reviewScheduleCards.innerHTML = `<div class="col-span-2 text-center py-4 text-[12px] text-[#98a2b3]">No dates selected</div>`;
+    } else {
+      const grouped = {};
+      dates.forEach((dk) => {
+        const [y, m, d] = dk.split("-");
+        const dayName = new Date(dk).toLocaleDateString("en-US", {
+          weekday: "short",
+        });
+        const key = `${d} ${monthNames[parseInt(m) - 1]}`;
+        if (!grouped[key]) {
+          grouped[key] = { dayName, automations: [] };
+        }
+        wizardData.selectedDates[dk].forEach((slot) => {
+          grouped[key].automations.push(slot);
+        });
+      });
+
+      els.reviewScheduleCards.innerHTML = Object.entries(grouped)
+        .map(
+          ([dateLabel, data]) => `
+        <div class="p-3 rounded-xl bg-white border border-[#eaecf0] space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="text-[12px] font-bold text-[#111827]">${dateLabel}</span>
+            <span class="text-[10px] text-[#667085]">${data.dayName}</span>
+          </div>
+          <div class="space-y-1.5">
+            ${data.automations
+              .map(
+                (a) => `
+              <div class="flex items-center gap-2">
+                <i class="ti ${CONTENT_ICONS[a.contentType] || "ti-file"} text-[12px] text-[#667085]"></i>
+                <span class="text-[11px] text-[#667085]">${a.contentType}${a.category ? " · " + escapeHtml(a.category) : ""}${a.variations > 1 ? " · " + a.variations + "x" : ""}</span>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        </div>
+      `,
+        )
+        .join("");
+    }
+
+    // Update footer credit
+    const totalVariations = Object.values(wizardData.selectedDates).reduce(
+      (total, slots) => {
+        return total + slots.reduce((sum, s) => sum + (s.variations || 1), 0);
+      },
+      0,
+    );
+    els.footerCredit.textContent = totalVariations;
+
+    // Update selected dates count label
+    if (els.selectedDatesCount) {
+      const dateCount = Object.keys(wizardData.selectedDates).length;
+      els.selectedDatesCount.textContent = `${dateCount} date${dateCount !== 1 ? "s" : ""} selected`;
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // RECURRING PREVIEW
+  // ═══════════════════════════════════════════
+  function renderRecurringPreview() {
+    const isMonthly = wizardData.recurring === "monthly";
+
+    els.repeatForWrapper.classList.toggle("hidden", !isMonthly);
+    els.recurringPreview.classList.toggle("hidden", !isMonthly);
+
+    if (!isMonthly) {
+      els.recurringInfo.textContent =
+        "Content will be generated once on selected dates.";
+      return;
+    }
+
+    els.recurringInfo.textContent =
+      "Selected dates will repeat every month. If a date doesn't exist in a month, it will be scheduled on the last day of that month.";
+
+    const selectedDateKeys = Object.keys(wizardData.selectedDates).sort();
+    if (selectedDateKeys.length === 0) {
+      els.recurringPreviewGrid.innerHTML = "";
+      return;
+    }
+
+    const selectedDays = selectedDateKeys.map((dk) => {
+      return parseInt(dk.split("-")[2]);
+    });
+
+    // Parse first date reliably (avoid UTC string parsing issues)
+    const [fy, fm, fd] = selectedDateKeys[0].split("-").map(Number);
+    const firstDate = new Date(fy, fm - 1, fd);
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+    const repeatCount = parseInt(wizardData.repeatFor) || 3;
+    let previewHTML = "";
+
+    for (let i = 1; i <= repeatCount; i++) {
+      const previewMonth = new Date(
+        firstDate.getFullYear(),
+        firstDate.getMonth() + i,
+        1,
+      );
+      const monthLabel = monthNames[previewMonth.getMonth()];
+      const yearLabel = previewMonth.getFullYear();
+
+      const datePills = selectedDays
+        .map((day) => {
+          const daysInMonth = new Date(
+            previewMonth.getFullYear(),
+            previewMonth.getMonth() + 1,
+            0,
+          ).getDate();
+          const actualDay = Math.min(day, daysInMonth);
+          const dateObj = new Date(
+            previewMonth.getFullYear(),
+            previewMonth.getMonth(),
+            actualDay,
+          );
+          const dow = dayNames[dateObj.getDay()];
+
+          return `
+          <div class="flex flex-col items-center gap-0.5">
+            <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#EFF6FF] border border-[#dbeafe] text-[11px] font-bold text-[#2563EB]">
+              ${actualDay}
+            </span>
+            <span class="text-[9px] text-[#98a2b3]">${dow}</span>
+          </div>
+        `;
+        })
+        .join("");
+
+      previewHTML += `
+        <div class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] space-y-1.5">
+          <div class="text-[11px] font-bold text-[#111827] text-center">${monthLabel} ${yearLabel}</div>
+          <div class="flex flex-wrap items-center justify-center gap-1.5">
+            ${datePills}
+          </div>
+        </div>
+      `;
+    }
+
+    els.recurringPreviewGrid.innerHTML = previewHTML;
+  }
+
+  // ═══════════════════════════════════════════
+  // AI SUGGESTION
+  // ═══════════════════════════════════════════
+  function applyAiSuggestion() {
+    const year = currentCalendarDate.getFullYear();
+    const month = currentCalendarDate.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Strategy: pick ~8-10 dates, avoid weekends, space ~3-4 days apart
+    const suggestedDates = [];
+    let lastPicked = 0;
+    const minGap = 3;
+    const maxGap = 5;
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(year, month, day);
+      const dayOfWeek = date.getDay();
+      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+      const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+      // Skip weekends and already selected dates
+      if (isWeekend || wizardData.selectedDates[dateKey]) continue;
+
+      // Pick first available weekday
+      if (suggestedDates.length === 0) {
+        suggestedDates.push(dateKey);
+        lastPicked = day;
+        continue;
+      }
+
+      const gap = day - lastPicked;
+      if (gap >= minGap && gap <= maxGap) {
+        suggestedDates.push(dateKey);
+        lastPicked = day;
+      }
+
+      // Stop once we have enough
+      if (suggestedDates.length >= 10) break;
+    }
+
+    // Fill remaining if we didn't get enough (relax gap constraint)
+    if (suggestedDates.length < 8) {
+      for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month, day);
+        const dayOfWeek = date.getDay();
+        const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+        const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+        if (
+          isWeekend ||
+          wizardData.selectedDates[dateKey] ||
+          suggestedDates.includes(dateKey)
+        )
+          continue;
+
+        suggestedDates.push(dateKey);
+        if (suggestedDates.length >= 8) break;
+      }
+    }
+
+    // Add default automation to each suggested date
+    suggestedDates.forEach((dateKey) => {
+      if (!wizardData.selectedDates[dateKey]) {
+        wizardData.selectedDates[dateKey] = [];
+      }
+      wizardData.selectedDates[dateKey].push({
+        contentType: "Single Post",
+        category: "",
+        prompt: "",
+        variations: 1,
+      });
+    });
+
+    renderCalendar();
+    showToast(`AI added ${suggestedDates.length} optimal posting dates!`);
+  }
+
+  // ═══════════════════════════════════════════
+  // CALENDAR
+  // ═══════════════════════════════════════════
+  function renderCalendar() {
+    const year = currentCalendarDate.getFullYear();
+    const month = currentCalendarDate.getMonth();
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    els.calMonthYear.textContent = `${monthNames[month]} ${year}`;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let html = "";
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+      html += "<div></div>";
+    }
+    // Days
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      const isSelected = wizardData.selectedDates[dateKey];
+      const hasSlots = isSelected && isSelected.length > 0;
+      const slotCount = hasSlots ? isSelected.length : 0;
+      const isWeekend = [0, 6].includes(new Date(year, month, day).getDay());
+      const totalVariations = isSelected
+        ? isSelected.reduce((sum, s) => sum + (s.variations || 1), 0)
+        : 0;
+
+      html += `
+        <button
+          class="cal-day relative w-full aspect-square rounded-lg flex flex-col items-center justify-center text-[12px] font-medium transition-all cursor-pointer
+            ${isSelected ? "bg-[#111827] text-white" : isWeekend ? "text-[#D92D20] hover:bg-[#FEF3F2]" : "text-[#111827] hover:bg-[#F9FAFB]"}"
+          data-date="${dateKey}"
+        >
+          <span>${day}</span>
+          ${
+            isSelected
+              ? `
+            <span class="cal-counter absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#2563EB] text-white text-[11px] font-bold flex items-center justify-center gap-0.5 shadow-sm hover:bg-[#1d4ed8] transition-colors cursor-pointer" data-date="${dateKey}">
+              ${totalVariations}
+              <i class="ti ti-chevron-right text-[9px]"></i>
+            </span>
+          `
+              : ""
+          }
+        </button>
+      `;
+    }
+    els.calGrid.innerHTML = html;
+
+    // Calendar day clicks
+    els.calGrid.querySelectorAll(".cal-day").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const dateKey = btn.dataset.date;
+        // If clicking the counter badge, open detail dropdown
+        if (e.target.closest(".cal-counter")) {
+          e.stopPropagation();
+          openDateDetailPopover(dateKey, btn);
+        } else if (wizardData.selectedDates[dateKey]?.length > 0) {
+          // Date has automations - open detail dropdown
+          openDateDetailPopover(dateKey, btn);
+        } else {
+          // Empty date - open form popover
+          openAutomationPopover(dateKey, btn);
+        }
+      });
+    });
+  }
+
+  // ═══════════════════════════════════════════
+  // AUTOMATION POPOVER
+  // ═══════════════════════════════════════════
+  function openAutomationPopover(dateKey, targetBtn, editIndex = -1) {
+    activePopoverDate = dateKey;
+    const slots = wizardData.selectedDates[dateKey] || [];
+    const [y, m, d] = dateKey.split("-");
+    els.slotPopoverDate.textContent = `${d} ${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][parseInt(m) - 1]} ${y}`;
+
+    // If editing, populate fields
+    if (editIndex >= 0 && slots[editIndex]) {
+      const slot = slots[editIndex];
+      els.slotContentType.value = slot.contentType;
+      els.slotCategory.value = slot.category || "";
+      els.slotPrompt.value = slot.prompt || "";
+      els.automationVariations.value = slot.variations || 1;
+      els.btnAddSlot.textContent = "Update Automation";
+      els.btnAddSlot.dataset.editIndex = editIndex;
+    } else {
+      // Reset inputs
+      els.slotContentType.value = "Single Post";
+      els.slotCategory.value = "";
+      els.slotPrompt.value = "";
+      els.automationVariations.value = 1;
+      els.btnAddSlot.textContent = "Add";
+      els.btnAddSlot.dataset.editIndex = "";
+    }
+
+    // Position popover to the right of the clicked button, vertically centered
+    const rect = targetBtn.getBoundingClientRect();
+    const popoverWidth = 288; // w-72 = 18rem = 288px
+    const popoverHeight = 380;
+    const gap = 12;
+
+    // Default: place to the right
+    let left = rect.right + gap;
+
+    // If too far right, place to the left
+    const viewportWidth = window.innerWidth;
+    if (left + popoverWidth > viewportWidth - 16) {
+      left = rect.left - popoverWidth - gap;
+    }
+
+    // Vertically center with the clicked button
+    let top = rect.top + rect.height / 2 - popoverHeight / 2;
+
+    // Keep within viewport (don't stick to top/bottom)
+    if (top < 16) top = 16;
+    if (top + popoverHeight > window.innerHeight - 16) {
+      top = window.innerHeight - popoverHeight - 16;
+    }
+
+    els.slotPopover.style.left = `${left}px`;
+    els.slotPopover.style.top = `${top}px`;
+    els.slotPopover.classList.remove("hidden");
+
+    // Update count
+    const slotCount = slots.length;
+    const totalVars = slots.reduce((sum, s) => sum + (s.variations || 1), 0);
+    document.getElementById("automation-remaining").textContent =
+      `${slotCount} automation${slotCount !== 1 ? "s" : ""} · ${totalVars} total`;
+    els.btnAddSlot.disabled = false;
+    els.btnAddSlot.style.opacity = "1";
+  }
+
+  function closeAutomationPopover() {
+    els.slotPopover.classList.add("hidden");
+    activePopoverDate = null;
+  }
+
+  // ═══════════════════════════════════════════
+  // DATE DETAIL POPOVER (dropdown list)
+  // ═══════════════════════════════════════════
+  function openDateDetailPopover(dateKey, targetBtn) {
+    activePopoverDate = dateKey;
+    const slots = wizardData.selectedDates[dateKey] || [];
+    const [y, m, d] = dateKey.split("-");
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    els.dateDetailDate.textContent = `${d} ${monthNames[parseInt(m) - 1]} ${y}`;
+
+    // Build automation list
+    if (slots.length === 0) {
+      els.dateDetailList.innerHTML = `
+        <div class="text-center py-3 text-[12px] text-[#98a2b3]">No automations yet</div>
+      `;
+    } else {
+      els.dateDetailList.innerHTML = slots
+        .map(
+          (slot, idx) => `
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] group">
+          <div class="flex items-center gap-2 min-w-0">
+            <i class="ti ${CONTENT_ICONS[slot.contentType] || "ti-file"} text-[13px] text-[#667085] shrink-0"></i>
+            <div class="min-w-0">
+              <div class="text-[12px] font-medium text-[#111827] truncate">${escapeHtml(slot.contentType)}</div>
+              <div class="text-[11px] text-[#667085] truncate">${slot.category ? escapeHtml(slot.category) + " · " : ""}${slot.variations || 1}x variations</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-0.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button onclick="editAutomation('${dateKey}', ${idx})" class="w-7 h-7 rounded-lg hover:bg-white flex items-center justify-center text-[#98a2b3] hover:text-[#2563EB] cursor-pointer transition-colors" title="Edit">
+              <i class="ti ti-pencil text-[12px]"></i>
+            </button>
+            <button onclick="removeAutomation('${dateKey}', ${idx})" class="w-7 h-7 rounded-lg hover:bg-white flex items-center justify-center text-[#98a2b3] hover:text-[#D92D20] cursor-pointer transition-colors" title="Remove">
+              <i class="ti ti-trash text-[12px]"></i>
+            </button>
+          </div>
+        </div>
+      `,
+        )
+        .join("");
+    }
+
+    // Position popover below the clicked button
+    const rect = targetBtn.getBoundingClientRect();
+    const popoverWidth = 288; // w-72
+    const gap = 8;
+
+    let left = rect.left + rect.width / 2 - popoverWidth / 2;
+    let top = rect.bottom + gap;
+
+    // Keep within viewport
+    if (left < 16) left = 16;
+    if (left + popoverWidth > window.innerWidth - 16) {
+      left = window.innerWidth - popoverWidth - 16;
+    }
+    if (top + 300 > window.innerHeight - 16) {
+      top = rect.top - 300 - gap;
+    }
+
+    els.dateDetailPopover.style.left = `${left}px`;
+    els.dateDetailPopover.style.top = `${top}px`;
+    els.dateDetailPopover.classList.remove("hidden");
+  }
+
+  function closeDateDetailPopover() {
+    els.dateDetailPopover.classList.add("hidden");
+  }
+
+  function addAutomation() {
+    if (!activePopoverDate) return;
+
+    // Create date array if doesn't exist
+    if (!wizardData.selectedDates[activePopoverDate]) {
+      wizardData.selectedDates[activePopoverDate] = [];
+    }
+
+    const slots = wizardData.selectedDates[activePopoverDate];
+    const variations = parseInt(els.automationVariations.value) || 1;
+    const editIndex = parseInt(els.btnAddSlot.dataset.editIndex);
+
+    if (!isNaN(editIndex) && editIndex >= 0 && slots[editIndex]) {
+      // Update existing
+      slots[editIndex] = {
+        contentType: els.slotContentType.value,
+        category: els.slotCategory.value.trim(),
+        prompt: els.slotPrompt.value.trim(),
+        variations: Math.max(1, Math.min(10, variations)),
+      };
+    } else {
+      // Add new
+      slots.push({
+        contentType: els.slotContentType.value,
+        category: els.slotCategory.value.trim(),
+        prompt: els.slotPrompt.value.trim(),
+        variations: Math.max(1, Math.min(10, variations)),
+      });
+    }
+
+    renderCalendar();
+    closeAutomationPopover();
+  }
+
+  function removeDate(dateKey) {
+    delete wizardData.selectedDates[dateKey];
+    renderCalendar();
+  }
+
+  function editDate(dateKey) {
+    const targetBtn = document.querySelector(
+      `button.cal-day[data-date="${dateKey}"]`,
+    );
+    if (targetBtn) {
+      openAutomationPopover(dateKey, targetBtn);
+    }
+  }
+
+  function removeAutomation(dateKey, index) {
+    wizardData.selectedDates[dateKey].splice(index, 1);
+    if (wizardData.selectedDates[dateKey].length === 0) {
+      delete wizardData.selectedDates[dateKey];
+    }
+    renderCalendar();
+  }
+
+  function editAutomation(dateKey, index) {
+    const targetBtn = document.querySelector(
+      `button.cal-day[data-date="${dateKey}"]`,
+    );
+    if (targetBtn) {
+      openAutomationPopover(dateKey, targetBtn, index);
+    }
+  }
+
+  function renderSelectedDates() {
+    const dates = Object.keys(wizardData.selectedDates).sort();
+    if (dates.length === 0) {
+      els.selectedDatesContainer.innerHTML = "";
+      return;
+    }
+
+    els.selectedDatesContainer.innerHTML = dates
+      .map((dateKey) => {
+        const slots = wizardData.selectedDates[dateKey];
+        const [y, m, d] = dateKey.split("-");
+        const monthNames = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "Mei",
+          "Jun",
+          "Jul",
+          "Agu",
+          "Sep",
+          "Okt",
+          "Nov",
+          "Des",
+        ];
+        const displayDate = `${d} ${monthNames[parseInt(m) - 1]} ${y}`;
+
+        return `
+        <div class="p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[12px] font-bold text-[#111827]">${displayDate}</span>
+            <span class="text-[11px] text-[#667085]">${slots.length} automation${slots.length > 1 ? "s" : ""}</span>
+          </div>
+          <div class="space-y-1.5">
+            ${slots
+              .map(
+                (slot, idx) => `
+              <div class="flex items-center justify-between p-2 rounded-lg bg-white border border-[#eaecf0]">
+                <div class="flex items-center gap-2">
+                  <i class="ti ${CONTENT_ICONS[slot.contentType] || "ti-file"} text-[12px] text-[#667085]"></i>
+                  <span class="text-[11px] text-[#667085]">${slot.contentType}${slot.category ? " · " + escapeHtml(slot.category) : ""}${slot.variations > 1 ? " · " + slot.variations + "x" : ""}</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <button onclick="editAutomation('${dateKey}', ${idx})" class="w-5 h-5 rounded hover:bg-[#EFF6FF] flex items-center justify-center text-[#98a2b3] hover:text-[#2563EB] cursor-pointer transition-colors" title="Edit">
+                    <i class="ti ti-pencil text-[11px]"></i>
+                  </button>
+                  <button onclick="removeAutomation('${dateKey}', ${idx})" class="w-5 h-5 rounded hover:bg-[#FEF3F2] flex items-center justify-center text-[#98a2b3] hover:text-[#D92D20] cursor-pointer transition-colors" title="Remove">
+                    <i class="ti ti-x text-[11px]"></i>
+                  </button>
+                </div>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        </div>
+      `;
+      })
+      .join("");
+  }
+
+  // ═══════════════════════════════════════════
+  // AUTO COMMENT MODAL
+  // ═══════════════════════════════════════════
+  function openCommentModal(autoId) {
+    editingAutomationId = autoId;
+    const auto = automations.find((a) => a.id === autoId);
+    if (!auto) return;
+
+    const ac = auto.autoComment || {
+      enabled: false,
+      text: "",
+      link: "",
+      keywords: "",
+    };
+    els.commentToggle.checked = ac.enabled;
+    els.commentText.value = ac.text || "";
+    els.commentLink.value = ac.link || "";
+    els.commentKeywords.value = ac.keywords || "";
+    els.commentFields.classList.toggle("hidden", !ac.enabled);
+
+    els.modalComment.classList.remove("hidden");
+    els.modalComment.classList.add("flex");
+  }
+
+  function closeCommentModal() {
+    els.modalComment.classList.add("hidden");
+    els.modalComment.classList.remove("flex");
+    editingAutomationId = null;
+  }
+
+  function saveComment() {
+    if (!editingAutomationId) return;
+
+    // Try to find in automations first
+    const auto = automations.find((a) => a.id === editingAutomationId);
+    if (auto) {
+      auto.autoComment = {
+        enabled: els.commentToggle.checked,
+        text: els.commentText.value.trim(),
+        link: els.commentLink.value.trim(),
+        keywords: els.commentKeywords.value.trim(),
+      };
+      saveAutomations();
+      renderAutomations();
+    }
+
+    // Also try to find in generated content
+    const gen = generatedContent.find((g) => g.id === editingAutomationId);
+    if (gen) {
+      gen.autoComment = {
+        enabled: els.commentToggle.checked,
+        text: els.commentText.value.trim(),
+        link: els.commentLink.value.trim(),
+        keywords: els.commentKeywords.value.trim(),
+      };
+      saveGenerated();
+      renderGenerated();
+    }
+
+    closeCommentModal();
+  }
+
+  // ═══════════════════════════════════════════
+  // AUTOMATION ACTIONS
+  // ═══════════════════════════════════════════
+  function toggleAutomationStatus(id) {
+    const auto = automations.find((a) => a.id === id);
+    if (!auto) return;
+    auto.status = auto.status === "active" ? "paused" : "active";
+    saveAutomations();
+    renderAutomations();
+  }
+
+  function deleteAutomation(id) {
+    if (!confirm("Yakin ingin menghapus automation ini?")) return;
+    automations = automations.filter((a) => a.id !== id);
+    saveAutomations();
+    renderAutomations();
+  }
+
+  function startAutomation() {
+    const newAuto = {
+      id: "auto_" + Date.now(),
+      name: wizardData.name,
+      dna: wizardData.dna,
+      publishMode: wizardData.publishMode,
+      socialAccounts: [...wizardData.socialAccounts],
+      selectedDates: { ...wizardData.selectedDates },
+      recurring: wizardData.recurring,
+      repeatFor: wizardData.repeatFor,
+      status: "active",
+      autoComment: { enabled: false, text: "", link: "", keywords: "" },
+      createdAt: new Date().toISOString(),
+    };
+
+    automations.push(newAuto);
+    saveAutomations();
+    renderAutomations();
+    closeAddModal();
+  }
+
+  // ═══════════════════════════════════════════
+  // MODAL OPEN/CLOSE
+  // ═══════════════════════════════════════════
+  function openAddModal() {
+    // Reset wizard
+    wizardData = {
+      name: "",
+      dna: null,
+      publishMode: "draft",
+      socialAccounts: ["instagram"],
+      selectedDates: {},
+      recurring: "once",
+      repeatFor: 3,
+    };
+    currentStep = 1;
+    currentCalendarDate = new Date(2026, 4, 1);
+
+    // Reset inputs
+    els.inputName.value = "";
+    els.dnaSelectedName.textContent = "Select Business DNA";
+    els.dnaSelectedDesc.textContent =
+      "Choose a business profile for AI grounding";
+    els.recurringRadios.forEach((r) => {
+      r.checked = r.value === "once";
+    });
+    els.recurringInfo.textContent =
+      "Content will be generated once on selected dates.";
+    if (els.repeatForSelect) els.repeatForSelect.value = "3";
+    els.repeatForWrapper.classList.add("hidden");
+    els.recurringPreview.classList.add("hidden");
+    els.publishModeRadios.forEach((r) => {
+      r.checked = r.value === "draft";
+    });
+    els.publishModeInfo.textContent =
+      "Content will be generated as draft for your review before publishing.";
+    els.integrationSection.classList.add("hidden");
+    els.socialAccountCheckboxes.forEach((cb) => {
+      cb.checked = cb.value === "instagram";
+    });
+
+    renderCalendar();
+    goToStep(1);
+
+    els.modalAdd.classList.remove("hidden");
+    els.modalAdd.classList.add("flex");
+  }
+
+  function closeAddModal() {
+    els.modalAdd.classList.add("hidden");
+    els.modalAdd.classList.remove("flex");
+    closeSlotPopover();
+  }
+
+  // ═══════════════════════════════════════════
+  // EVENT BINDING
+  // ═══════════════════════════════════════════
+  function bindEvents() {
+    // Open modal
+    els.btnAdd.addEventListener("click", openAddModal);
+    els.btnEmptyAdd.addEventListener("click", openAddModal);
+
+    // Close modal
+    els.closeAddModal.addEventListener("click", closeAddModal);
+    els.modalAdd.addEventListener("click", (e) => {
+      if (e.target === els.modalAdd) closeAddModal();
+    });
+
+    // Wizard navigation
+    els.btnBack.addEventListener("click", () => {
+      if (currentStep > 1) goToStep(currentStep - 1);
+    });
+    els.btnNext.addEventListener("click", () => {
+      if (validateStep(currentStep) && currentStep < 3)
+        goToStep(currentStep + 1);
+    });
+    els.btnStart.addEventListener("click", () => {
+      if (validateStep(3)) startAutomation();
+    });
+
+    // Step 1 inputs
+    els.inputName.addEventListener("input", (e) => {
+      wizardData.name = e.target.value;
+    });
+
+    // DNA dropdown
+    els.btnSelectDna.addEventListener("click", (e) => {
+      e.stopPropagation();
+      els.dnaDropdown.classList.toggle("hidden");
+    });
+    document.addEventListener("click", (e) => {
+      if (
+        !els.dnaDropdown.contains(e.target) &&
+        e.target !== els.btnSelectDna
+      ) {
+        els.dnaDropdown.classList.add("hidden");
+      }
+    });
+    document.querySelectorAll(".dna-option").forEach((opt) => {
+      opt.addEventListener("click", () => {
+        wizardData.dna = { name: opt.dataset.name, desc: opt.dataset.desc };
+        els.dnaSelectedName.textContent = opt.dataset.name;
+        els.dnaSelectedDesc.textContent = opt.dataset.desc;
+        els.dnaDropdown.classList.add("hidden");
+      });
+    });
+
+    // Calendar navigation
+    els.calPrev.addEventListener("click", () => {
+      currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+      renderCalendar();
+    });
+    els.calNext.addEventListener("click", () => {
+      currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    // Recurring
+    els.recurringRadios.forEach((radio) => {
+      radio.addEventListener("change", (e) => {
+        wizardData.recurring = e.target.value;
+        if (e.target.value === "once") {
+          els.recurringInfo.textContent =
+            "Content will be generated once on selected dates.";
+          els.repeatForWrapper.classList.add("hidden");
+          els.recurringPreview.classList.add("hidden");
+        } else {
+          els.recurringInfo.textContent =
+            "Selected dates will repeat every month. If a date doesn't exist in a month, it will be scheduled on the last day of that month.";
+          els.repeatForWrapper.classList.remove("hidden");
+          els.recurringPreview.classList.remove("hidden");
+          renderRecurringPreview();
+        }
+      });
+    });
+
+    // Repeat for dropdown
+    if (els.repeatForSelect) {
+      els.repeatForSelect.addEventListener("change", (e) => {
+        wizardData.repeatFor = parseInt(e.target.value) || 3;
+        renderRecurringPreview();
+      });
+    }
+
+    // Publish mode
+    els.publishModeRadios.forEach((radio) => {
+      radio.addEventListener("change", (e) => {
+        wizardData.publishMode = e.target.value;
+        const info = {
+          draft:
+            "Content will be saved as draft for your review before publishing.",
+          auto: "Content will be generated and published automatically. Make sure your integrations are connected!",
+        };
+        els.publishModeInfo.textContent = info[e.target.value];
+        // Show/hide integration section
+        if (e.target.value === "auto") {
+          els.integrationSection.classList.remove("hidden");
+        } else {
+          els.integrationSection.classList.add("hidden");
+        }
+      });
+    });
+
+    // AI Suggestion
+    if (els.btnAiSuggestion) {
+      els.btnAiSuggestion.addEventListener("click", applyAiSuggestion);
+    }
+
+    // Social accounts
+    els.socialAccountCheckboxes.forEach((cb) => {
+      cb.addEventListener("change", () => {
+        wizardData.socialAccounts = Array.from(els.socialAccountCheckboxes)
+          .filter((c) => c.checked)
+          .map((c) => c.value);
+      });
+    });
+
+    // Automation popover
+    els.closeSlotPopover.addEventListener("click", closeAutomationPopover);
+    els.btnAddSlot.addEventListener("click", addAutomation);
+
+    // Date detail popover
+    els.closeDateDetailPopover.addEventListener(
+      "click",
+      closeDateDetailPopover,
+    );
+    els.btnAddNewAutomation.addEventListener("click", () => {
+      closeDateDetailPopover();
+      if (activePopoverDate) {
+        const btn = document.querySelector(
+          `.cal-day[data-date="${activePopoverDate}"]`,
+        );
+        if (btn) openAutomationPopover(activePopoverDate, btn);
+      }
+    });
+
+    // Variations +/-
+    els.btnVarMinus.addEventListener("click", () => {
+      const val = parseInt(els.automationVariations.value) || 1;
+      els.automationVariations.value = Math.max(1, val - 1);
+    });
+    els.btnVarPlus.addEventListener("click", () => {
+      const val = parseInt(els.automationVariations.value) || 1;
+      els.automationVariations.value = Math.min(10, val + 1);
+    });
+    els.automationVariations.addEventListener("change", () => {
+      const val = parseInt(els.automationVariations.value) || 1;
+      els.automationVariations.value = Math.max(1, Math.min(10, val));
+    });
+
+    // Auto comment modal (legacy - replaced by engagement)
+    els.closeEngagementModal.addEventListener("click", closeEngagementModalFn);
+    els.btnCancelEngagement.addEventListener("click", closeEngagementModalFn);
+    els.btnSaveEngagement.addEventListener("click", saveEngagement);
+    els.modalEngagement.addEventListener("click", (e) => {
+      if (e.target === els.modalEngagement) closeEngagementModalFn();
+    });
+    els.commentToggle.addEventListener("change", (e) => {
+      els.commentFields.classList.toggle("hidden", !e.target.checked);
+    });
+    els.dmToggle.addEventListener("change", (e) => {
+      els.dmFields.classList.toggle("hidden", !e.target.checked);
+    });
+
+    // Schedule modal
+    els.closeScheduleModal.addEventListener("click", closeScheduleModalFn);
+    els.btnCancelScheduleModal.addEventListener("click", closeScheduleModalFn);
+    els.btnConfirmSchedule.addEventListener("click", confirmSchedule);
+    els.btnPublishNow.addEventListener("click", publishNow);
+    els.btnPublish1h.addEventListener("click", publishIn1Hour);
+    els.modalSchedule.addEventListener("click", (e) => {
+      if (e.target === els.modalSchedule) closeScheduleModalFn();
+    });
+
+    // Business filter dropdown
+    const btnBusinessFilter = document.getElementById("btn-business-filter");
+    const businessFilterDropdown = document.getElementById(
+      "business-filter-dropdown",
+    );
+    if (btnBusinessFilter && businessFilterDropdown) {
+      btnBusinessFilter.addEventListener("click", (e) => {
+        e.stopPropagation();
+        businessFilterDropdown.classList.toggle("hidden");
+      });
+      document.addEventListener("click", (e) => {
+        if (
+          !businessFilterDropdown.contains(e.target) &&
+          e.target !== btnBusinessFilter
+        ) {
+          businessFilterDropdown.classList.add("hidden");
+        }
+      });
+      document.querySelectorAll(".business-filter-option").forEach((opt) => {
+        opt.addEventListener("click", () => {
+          const brand = opt.dataset.brand;
+          document.getElementById("business-filter-label").textContent =
+            brand === "all" ? "All Business" : brand;
+          businessFilterDropdown.classList.add("hidden");
+          // Filter automations
+          if (brand === "all") {
+            renderAutomations();
+          } else {
+            const filtered = automations.filter((a) => a.dna?.name === brand);
+            els.tbody.innerHTML = filtered
+              .map((auto) => {
+                // ... reuse render logic
+                const dateCount = Object.keys(auto.selectedDates).length;
+                const contentTypes = [
+                  ...new Set(
+                    Object.values(auto.selectedDates)
+                      .flat()
+                      .map((s) => s.contentType),
+                  ),
+                ];
+                const typeIcons = contentTypes
+                  .map(
+                    (t) =>
+                      `<i class="ti ${CONTENT_ICONS[t] || "ti-file"} text-[13px] text-[#667085]" title="${t}"></i>`,
+                  )
+                  .join("");
+                return `
+                <tr class="border-b border-[#eaecf0] hover:bg-[#F9FAFB] transition-colors group">
+                  <td class="px-5 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0">
+                        <i class="ti ti-brand-abstract text-[18px] text-[#667085]"></i>
+                      </div>
+                      <span class="text-[13px] font-semibold text-[#111827]">${escapeHtml(auto.dna?.name || "-")}</span>
+                    </div>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span class="text-[13px] font-semibold text-[#111827]">${escapeHtml(auto.name)}</span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span class="text-[13px] text-[#667085]">${dateCount} tanggal · ${recurringLabel(auto.recurring)}</span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <div class="flex items-center gap-1.5">${typeIcons}</div>
+                  </td>
+                  <td class="px-5 py-4">
+                    <span class="inline-flex items-center px-2.5 h-6 rounded-full text-[11px] font-bold ${auto.status === "active" ? "bg-[#ECFDF3] text-[#027A48] border border-[#D1FADF]" : "bg-[#FEF3F2] text-[#B42318] border border-[#FECDCA]"}">
+                      ${auto.status === "active" ? "Active" : "Paused"}
+                    </span>
+                  </td>
+                  <td class="px-5 py-4">
+                    <div class="flex items-center justify-end gap-1">
+                      <button class="action-btn w-8 h-8 rounded-lg hover:bg-[#F3F4F6] flex items-center justify-center text-[#667085] hover:text-[#111827] transition-colors cursor-pointer" onclick="toggleAutomationStatus('${auto.id}')">
+                        <i class="ti ${auto.status === "active" ? "ti-player-pause" : "ti-player-play"} text-[15px]"></i>
+                      </button>
+                      <button class="action-btn w-8 h-8 rounded-lg hover:bg-[#FEF3F2] flex items-center justify-center text-[#667085] hover:text-[#D92D20] transition-colors cursor-pointer" onclick="deleteAutomation('${auto.id}')">
+                        <i class="ti ti-trash text-[15px]"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `;
+              })
+              .join("");
+          }
+        });
+      });
+    }
+
+    // Automation search
+    const automationSearch = document.getElementById("automation-search");
+    if (automationSearch) {
+      automationSearch.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase();
+        const rows = els.tbody.querySelectorAll("tr");
+        rows.forEach((row) => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(query) ? "" : "none";
+        });
+      });
+    }
+
+    // Tab switching
+    els.tabAutomations.addEventListener("click", () =>
+      switchTab("automations"),
+    );
+    els.tabGenerated.addEventListener("click", () => switchTab("generated"));
+
+    // ── Filter Bar: Status ──
+    if (els.btnStatusFilter && els.statusFilterDropdown) {
+      els.btnStatusFilter.addEventListener("click", (e) => {
+        e.stopPropagation();
+        els.statusFilterDropdown.classList.toggle("hidden");
+      });
+      document.addEventListener("click", (e) => {
+        if (!els.statusFilterDropdown.contains(e.target) && e.target !== els.btnStatusFilter) {
+          els.statusFilterDropdown.classList.add("hidden");
+        }
+      });
+      document.querySelectorAll(".status-filter-option").forEach((opt) => {
+        opt.addEventListener("click", () => {
+          currentFilter = opt.dataset.status;
+          els.statusFilterLabel.textContent = opt.textContent;
+          els.statusFilterDropdown.classList.add("hidden");
+          renderGenerated();
+        });
+      });
+    }
+
+    // ── Filter Bar: Channel ──
+    if (els.btnChannelFilter && els.channelFilterDropdown) {
+      els.btnChannelFilter.addEventListener("click", (e) => {
+        e.stopPropagation();
+        els.channelFilterDropdown.classList.toggle("hidden");
+      });
+      document.addEventListener("click", (e) => {
+        if (!els.channelFilterDropdown.contains(e.target) && e.target !== els.btnChannelFilter) {
+          els.channelFilterDropdown.classList.add("hidden");
+        }
+      });
+      document.querySelectorAll(".channel-filter-option").forEach((opt) => {
+        opt.addEventListener("click", () => {
+          currentChannel = opt.dataset.channel;
+          els.channelFilterLabel.textContent = opt.textContent;
+          els.channelFilterDropdown.classList.add("hidden");
+          renderGenerated();
+        });
+      });
+    }
+
+    // ── Filter Bar: Type ──
+    if (els.btnTypeFilter && els.typeFilterDropdown) {
+      els.btnTypeFilter.addEventListener("click", (e) => {
+        e.stopPropagation();
+        els.typeFilterDropdown.classList.toggle("hidden");
+      });
+      document.addEventListener("click", (e) => {
+        if (!els.typeFilterDropdown.contains(e.target) && e.target !== els.btnTypeFilter) {
+          els.typeFilterDropdown.classList.add("hidden");
+        }
+      });
+      document.querySelectorAll(".type-filter-option").forEach((opt) => {
+        opt.addEventListener("click", () => {
+          currentType = opt.dataset.type;
+          els.typeFilterLabel.textContent = opt.textContent;
+          els.typeFilterDropdown.classList.add("hidden");
+          renderGenerated();
+        });
+      });
+    }
+
+    // ── Filter Bar: Search ──
+    if (els.outputSearch) {
+      els.outputSearch.addEventListener("input", (e) => {
+        searchQuery = e.target.value.trim();
+        renderGenerated();
+      });
+    }
+
+    // ── Filter Bar: Sort ──
+    if (els.btnSort && els.sortDropdown) {
+      els.btnSort.addEventListener("click", (e) => {
+        e.stopPropagation();
+        els.sortDropdown.classList.toggle("hidden");
+      });
+      document.addEventListener("click", (e) => {
+        if (!els.sortDropdown.contains(e.target) && e.target !== els.btnSort) {
+          els.sortDropdown.classList.add("hidden");
+        }
+      });
+      document.querySelectorAll(".sort-option").forEach((opt) => {
+        opt.addEventListener("click", () => {
+          currentSort = opt.dataset.sort;
+          els.sortLabel.textContent = "Sort: " + opt.textContent;
+          els.sortDropdown.classList.add("hidden");
+          renderGenerated();
+        });
+      });
+    }
+
+    // ── Filter Bar: View Toggle ──
+    function updateViewToggle() {
+      if (currentViewMode === "grid") {
+        els.viewGrid.classList.add("bg-[#F3F4F6]", "text-[#111827]");
+        els.viewGrid.classList.remove("text-[#667085]", "hover:bg-[#F9FAFB]");
+        els.viewList.classList.remove("bg-[#F3F4F6]", "text-[#111827]");
+        els.viewList.classList.add("text-[#667085]", "hover:bg-[#F9FAFB]");
+      } else {
+        els.viewList.classList.add("bg-[#F3F4F6]", "text-[#111827]");
+        els.viewList.classList.remove("text-[#667085]", "hover:bg-[#F9FAFB]");
+        els.viewGrid.classList.remove("bg-[#F3F4F6]", "text-[#111827]");
+        els.viewGrid.classList.add("text-[#667085]", "hover:bg-[#F9FAFB]");
+      }
+    }
+    if (els.viewGrid && els.viewList) {
+      updateViewToggle();
+      els.viewGrid.addEventListener("click", () => {
+        currentViewMode = "grid";
+        updateViewToggle();
+        renderGenerated();
+      });
+      els.viewList.addEventListener("click", () => {
+        currentViewMode = "list";
+        updateViewToggle();
+        renderGenerated();
+      });
+    }
+
+    // Preview modal
+    els.closePreviewModal.addEventListener("click", closePreviewModal);
+    els.previewBackdrop.addEventListener("click", closePreviewModal);
+    els.btnApprove.addEventListener("click", approveContent);
+    els.btnReject.addEventListener("click", rejectContent);
+    els.btnSchedule.addEventListener("click", openScheduleModal);
+    els.btnAutoEngagementFromPreview.addEventListener(
+      "click",
+      openEngagementFromPreview,
+    );
+    els.btnCancelSchedule.addEventListener("click", cancelSchedule);
+    els.btnReschedule.addEventListener("click", rescheduleContent);
+    els.btnAutoEngagementScheduled.addEventListener(
+      "click",
+      openEngagementFromPreview,
+    );
+    // Edit & Duplicate
+    if (els.btnEditApproved) {
+      els.btnEditApproved.addEventListener("click", editAndDuplicateContent);
+    }
+    if (els.btnEditScheduled) {
+      els.btnEditScheduled.addEventListener("click", editAndDuplicateContent);
+    }
+  }
+
+  // ═══════════════════════════════════════════
+  // GLOBAL FUNCTIONS (for inline onclick)
+  // ═══════════════════════════════════════════
+  window.toggleAutomationStatus = toggleAutomationStatus;
+  window.deleteAutomation = deleteAutomation;
+  window.openCommentModal = openCommentModal;
+  window.removeAutomation = removeAutomation;
+  window.editAutomation = editAutomation;
+  window.removeDate = removeDate;
+  window.editDate = editDate;
+  window.openPreviewModal = openPreviewModal;
+  window.editAndDuplicateContent = editAndDuplicateContent;
+
+  // Start
+  init();
+</script>
