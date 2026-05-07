@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ManageAccountModal from "../components/modals/ManageAccountModal.astro";
 
 interface Props {
   title?: string;
@@ -20,16 +21,16 @@ const mainNav = [
 
 const toolNav = [
   {
-    id: "content-automation",
-    label: "Content Automation",
-    icon: "ti-wand",
-    href: "/content-automation",
-  },
-  {
     id: "business-dna",
     label: "Business DNA",
     icon: "ti-fingerprint",
     href: "/business-dna",
+  },
+  {
+    id: "content-automation",
+    label: "Content Automation",
+    icon: "ti-wand",
+    href: "/content-automation",
   },
   {
     id: "integrations",
@@ -322,7 +323,7 @@ const pageIcon = currentPage.icon;
                     >Free</span
                   >
                   <button
-                    class="px-3 py-1.5 rounded-lg bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
+                    class="btn-upgrade-trigger px-3 py-1.5 rounded-lg bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
                   >
                     Upgrade
                   </button>
@@ -347,6 +348,7 @@ const pageIcon = currentPage.icon;
 
                 <!-- Usage Details -->
                 <button
+                  id="btn-nav-usage-details"
                   class="w-full flex items-center justify-between py-1.5 text-[13px] font-bold text-[#111827] hover:opacity-70 transition-opacity"
                 >
                   Usage details
@@ -426,7 +428,7 @@ const pageIcon = currentPage.icon;
                       >Free</span
                     >
                     <button
-                      class="px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
+                      class="btn-upgrade-trigger px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
                     >
                       Upgrade
                     </button>
@@ -459,20 +461,13 @@ const pageIcon = currentPage.icon;
                 </div>
 
                 <!-- Action Items -->
-                <a
-                  href="/account"
-                  class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer"
+                <button
+                  id="btn-nav-account"
+                  class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
                 >
                   <i class="ti ti-user-circle text-[15px] text-[#98a2b3]"></i>
                   Account
-                </a>
-                <a
-                  href="/settings"
-                  class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer"
-                >
-                  <i class="ti ti-settings text-[15px] text-[#98a2b3]"></i>
-                  Settings
-                </a>
+                </button>
                 <div class="relative group/lang">
                   <button
                     class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer"
@@ -584,6 +579,36 @@ const pageIcon = currentPage.icon;
           });
         }
 
+        // --- Manage Account Modal Triggers ---
+        const btnNavAccount = document.getElementById("btn-nav-account");
+        const btnNavUsageDetails = document.getElementById("btn-nav-usage-details");
+        const upgradeButtons = document.querySelectorAll(".btn-upgrade-trigger");
+
+        if (btnNavAccount) {
+          btnNavAccount.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (profileDropdown) profileDropdown.classList.add("hidden");
+            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "profile" } }));
+          });
+        }
+
+        if (btnNavUsageDetails) {
+          btnNavUsageDetails.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (creditDropdown) creditDropdown.classList.add("hidden");
+            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "subscription" } }));
+          });
+        }
+
+        upgradeButtons.forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (profileDropdown) profileDropdown.classList.add("hidden");
+            if (creditDropdown) creditDropdown.classList.add("hidden");
+            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "subscription" } }));
+          });
+        });
+
         // --- Dark Mode Toggle ---
         const darkModeToggle = document.getElementById("dark-mode-toggle");
         const darkModeThumb = document.getElementById("dark-mode-thumb");
@@ -643,5 +668,6 @@ const pageIcon = currentPage.icon;
         }
       });
     </script>
+    <ManageAccountModal />
   </body>
 </html>

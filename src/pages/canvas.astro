@@ -1,0 +1,578 @@
+---
+import "../styles/global.css";
+import ReferencesModal from "../components/modals/ReferencesModal.astro";
+import ManageAccountModal from "../components/modals/ManageAccountModal.astro";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>Canvas - Xeni</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+  </style>
+</head>
+<body class="flex flex-col h-screen w-screen overflow-hidden bg-[#F3F4F6] text-[#111827] antialiased">
+
+  <!-- Modal Injections -->
+  <ReferencesModal />
+  <ManageAccountModal />
+
+  <!-- MAIN WORKSPACE -->
+  <main class="flex-1 flex overflow-hidden">
+    
+    <!-- LEFT PANEL: CANVAS -->
+    <section class="flex-1 relative bg-[#F3F4F6] overflow-hidden flex items-center justify-center" id="canvas-container">
+      
+      <!-- Top-Left Floating Tools -->
+      <div class="absolute top-4 left-4 flex items-center gap-2 z-10">
+        
+        <!-- Project Name Badge + Back Button -->
+        <div class="flex items-center h-[40px] px-1 pr-4 bg-white rounded-full border border-[#eaecf0] shadow-sm">
+          <!-- Back Button -->
+          <a href="/studio" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#F9FAFB] text-[#667085] transition-colors" title="Back to Studio">
+            <i class="ti ti-chevron-left text-[18px]"></i>
+          </a>
+          
+          <div class="w-px h-4 bg-[#eaecf0] mx-1"></div>
+          
+          <div class="flex items-center gap-2 ml-1 cursor-pointer hover:opacity-80 transition-opacity">
+            <i class="ti ti-folder-open text-[16px] text-[#98a2b3]"></i>
+            <span class="text-[13px] font-bold text-[#111827]">Summer Drink Campaign</span>
+          </div>
+        </div>
+
+        <!-- Undo/Redo & Zoom Pill -->
+        <div class="flex items-center bg-white rounded-full border border-[#eaecf0] shadow-sm p-1.5 h-[40px]">
+          <button class="w-7 h-7 rounded-full flex items-center justify-center hover:bg-[#F9FAFB] text-[#667085] transition-colors" title="Undo">
+            <i class="ti ti-rotate-2 text-[16px]"></i>
+          </button>
+          <button class="w-7 h-7 rounded-full flex items-center justify-center hover:bg-[#F9FAFB] text-[#667085] transition-colors" title="Redo">
+            <i class="ti ti-rotate-clockwise-2 text-[16px]"></i>
+          </button>
+
+          <div class="w-px h-4 bg-[#eaecf0] mx-1.5"></div>
+
+          <!-- Zoom Controls -->
+          <button class="w-7 h-7 rounded-full flex items-center justify-center hover:bg-[#F9FAFB] text-[#667085] transition-colors">
+            <i class="ti ti-zoom-out text-[15px]"></i>
+          </button>
+          <div class="px-1 text-[12px] font-bold text-[#344054] w-[40px] text-center select-none">100%</div>
+          <button class="w-7 h-7 rounded-full flex items-center justify-center hover:bg-[#F9FAFB] text-[#667085] transition-colors">
+            <i class="ti ti-zoom-in text-[15px]"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Top-Right Canvas Tools (Credits with Dropdown) -->
+      <div class="absolute top-4 right-4 z-20 flex items-center gap-2">
+        <div class="relative" id="credit-wrapper">
+          <div id="btn-credit" class="flex items-center h-[40px] bg-white border border-[#eaecf0] rounded-full px-4 gap-2 hover:border-[#d1d5db] transition-all shadow-sm cursor-pointer group">
+            <i class="ti ti-sparkles text-[15px] text-[#111827]"></i>
+            <span class="text-[13px] font-bold text-[#111827]">30</span>
+            <i class="ti ti-chevron-down text-[12px] text-[#98a2b3] ml-1"></i>
+          </div>
+
+          <!-- Credit Dropdown (Identical to Studio) -->
+          <div id="credit-dropdown" class="hidden absolute top-full right-0 mt-2 w-60 bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-3 z-50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[14px] font-extrabold text-[#111827]">Free</span>
+              <button class="btn-upgrade-trigger px-3 py-1.5 rounded-lg bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer">
+                Upgrade
+              </button>
+            </div>
+            <div class="h-[1px] w-full bg-[#f2f4f7] mb-3"></div>
+            <div class="flex flex-col gap-3 mb-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <i class="ti ti-sparkles text-[16px] text-[#111827]"></i>
+                  <span class="text-[13px] font-bold text-[#344054]">Credits</span>
+                </div>
+                <span class="text-[13px] font-bold text-[#111827]">30</span>
+              </div>
+            </div>
+            <div class="h-[1px] w-full bg-[#f2f4f7] mb-2"></div>
+            <button id="btn-nav-usage-details" class="w-full flex items-center justify-between py-1.5 text-[13px] font-bold text-[#111827] hover:opacity-70 transition-opacity">
+              Usage details
+              <i class="ti ti-chevron-right text-[13px] text-[#98a2b3]"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Floating Tools -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center bg-white rounded-xl shadow-lg border border-[#eaecf0] p-1.5 z-10 gap-1">
+        <button class="flex items-center gap-1 h-9 px-3 rounded-lg bg-[#F3F4F6] text-[#111827] font-medium text-[13px] hover:bg-[#E5E7EB] transition-colors" title="Select">
+          <i class="ti ti-arrow-up-left text-[16px]"></i>
+          <i class="ti ti-chevron-down text-[12px] opacity-50 ml-1"></i>
+        </button>
+        <button class="flex items-center gap-1 h-9 px-3 rounded-lg text-[#667085] font-medium text-[13px] hover:bg-[#F3F4F6] transition-colors" title="Upload Image">
+          <i class="ti ti-photo-up text-[18px]"></i>
+        </button>
+      </div>
+
+      <!-- ARTBOARD (Image directly on canvas) -->
+      <div id="artboard" class="relative w-full h-full flex items-center justify-center">
+        
+        <!-- Image Element (No white background/shadow) -->
+        <div id="mock-image" class="relative w-[400px] h-auto flex items-center justify-center cursor-pointer transition-all border-2 border-transparent">
+          <!-- Real Example Image -->
+          <img src="https://images.unsplash.com/photo-1542451313056-b7c8e6266459?auto=format&fit=crop&w=800&q=80" alt="Canvas Asset" class="w-full h-full object-cover rounded-sm" />
+          
+          <!-- Image Selection Overlay -->
+          <div id="image-selection" class="absolute inset-0 border-2 border-[#2563EB] hidden pointer-events-none">
+            <!-- Corner handles -->
+            <div class="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white border border-[#2563EB] rounded-sm"></div>
+            <div class="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white border border-[#2563EB] rounded-sm"></div>
+            <div class="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white border border-[#2563EB] rounded-sm"></div>
+            <div class="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white border border-[#2563EB] rounded-sm"></div>
+          </div>
+        </div>
+
+        <!-- Image Context Menu (Floating above image) -->
+        <div id="image-context-menu" class="absolute hidden flex items-center gap-1 bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-20">
+          
+          <!-- HD Upscale -->
+          <div class="relative">
+            <button id="btn-upscale" class="flex items-center gap-1.5 px-3 h-8 rounded-lg text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-colors">
+              <span class="border border-[#D0D5DD] rounded px-1 text-[9px] font-extrabold uppercase tracking-widest text-[#667085]">HD</span> Upscale
+            </button>
+            <div id="dropdown-upscale" class="hidden absolute top-full left-0 mt-1 w-32 bg-white rounded-xl border border-[#eaecf0] shadow-lg p-1 z-30">
+              <button class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors">Upscale 2K</button>
+              <button class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors">Upscale 4K</button>
+            </div>
+          </div>
+
+          <!-- Remove BG -->
+          <button class="flex items-center gap-1.5 px-3 h-8 rounded-lg text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors">
+            <i class="ti ti-eraser text-[15px]"></i> Remove bg
+          </button>
+
+          <!-- Edit Text -->
+          <button class="flex items-center gap-1.5 px-3 h-8 rounded-lg text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors">
+            <i class="ti ti-pencil text-[15px]"></i> Edit text
+          </button>
+
+          <div class="w-px h-5 bg-[#eaecf0] mx-1"></div>
+
+          <!-- Download -->
+          <button class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] transition-colors" title="Download">
+            <i class="ti ti-download text-[15px]"></i>
+          </button>
+
+          <!-- Schedule -->
+          <button id="btn-schedule-image" class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] transition-colors" title="Schedule">
+            <i class="ti ti-calendar-plus text-[15px]"></i>
+          </button>
+
+          <!-- Three Dot -->
+          <div class="relative">
+            <button id="btn-threedot" class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] transition-colors">
+              <i class="ti ti-dots text-[15px]"></i>
+            </button>
+            <div id="dropdown-threedot" class="hidden absolute top-full right-0 mt-1 w-32 bg-white rounded-xl border border-[#eaecf0] shadow-lg p-1 z-30">
+              <button class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors flex items-center gap-2">
+                <i class="ti ti-copy text-[14px] opacity-70"></i> Copy
+              </button>
+              <button class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#EF4444] hover:bg-[#FEF2F2] transition-colors flex items-center gap-2">
+                <i class="ti ti-trash text-[14px] opacity-70"></i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: AI CHAT (Fully Rounded) -->
+    <aside class="w-[400px] bg-white rounded-[32px] border border-[#eaecf0] flex flex-col shrink-0 relative shadow-[0_0_48px_rgba(0,0,0,0.04)] my-2 mr-2 overflow-hidden transition-transform" id="right-panel">
+      
+      <!-- Top Header Actions -->
+      <div class="h-14 px-4 flex items-center justify-between border-b border-[#eaecf0] shrink-0 bg-white z-10">
+        <!-- New Project Button -->
+        <button class="flex items-center gap-1.5 px-3 h-8 rounded-lg text-[12px] font-bold text-[#111827] hover:bg-[#F9FAFB] transition-colors cursor-pointer">
+          <i class="ti ti-file-plus text-[16px]"></i> New Project
+        </button>
+        <!-- Minimize Right Panel -->
+        <button class="w-8 h-8 rounded-lg flex items-center justify-center text-[#98a2b3] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" title="Hide Chat">
+          <i class="ti ti-layout-sidebar-right-collapse text-[18px]"></i>
+        </button>
+      </div>
+
+      <!-- Chat History -->
+      <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+        
+        <!-- User Message (Bubble) -->
+        <div class="flex flex-col gap-1 items-end">
+          <div class="bg-[#111827] text-white rounded-[20px] rounded-tr-sm px-4 py-3 max-w-[85%] shadow-sm">
+            <p class="text-[13px] leading-relaxed">
+              Buat layout untuk Summer Drink Campaign, format poster vertical.
+            </p>
+          </div>
+          <span class="text-[10px] font-medium text-[#98a2b3] mr-1">Just now</span>
+        </div>
+
+        <!-- AI Message (Plain text, no bubble) -->
+        <div class="flex flex-col gap-3 items-start pr-8">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded border border-[#eaecf0] bg-white text-[#111827] flex items-center justify-center shrink-0 shadow-sm">
+              <i class="ti ti-sparkles text-[12px]"></i>
+            </div>
+            <span class="text-[12px] font-bold text-[#111827]">Xeni</span>
+          </div>
+          <p class="text-[14px] text-[#344054] leading-relaxed">
+            I've generated the initial layout based on your prompt. The canvas has been updated with a professional product poster structure. You can select the image to edit it further (upscale, remove background, edit text) or type below to make global changes to the design.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Custom Canvas AI Input -->
+      <div class="shrink-0 w-full bg-white p-5 pt-2 relative z-20">
+        <div class="relative flex flex-col p-2.5 rounded-[24px] bg-white border border-[#eaecf0] shadow-sm focus-within:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all">
+          
+          <!-- Input Area -->
+          <div class="flex items-start gap-2 relative min-h-[60px]">
+            <textarea 
+              placeholder="Ask AI to modify the design..." 
+              class="w-full bg-transparent text-[#111827] px-2 py-1.5 min-h-[60px] max-h-[160px] overflow-y-auto outline-none text-[13px] font-medium resize-none placeholder:text-[#98a2b3]"
+            ></textarea>
+          </div>
+
+          <!-- Bottom Actions (References & Send) -->
+          <div class="flex items-center justify-between mt-2 px-1 pb-1">
+            
+            <!-- Upward Dropdown References -->
+            <div class="relative" id="canvas-ref-container">
+              <button
+                id="btn-canvas-ref"
+                class="w-8 h-8 rounded-full border border-[#D0D5DD] bg-white flex items-center justify-center text-[#667085] hover:text-[#111827] hover:border-[#111827] transition-all cursor-pointer"
+                title="References"
+              >
+                <i class="ti ti-plus text-[16px]"></i>
+              </button>
+              
+              <!-- Dropdown Menu (Upwards) -->
+              <div
+                id="dropdown-canvas-ref"
+                class="hidden absolute left-0 bottom-full mb-2 w-[200px] bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-bottom-2 duration-200 flex flex-col gap-0.5"
+              >
+                <button class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all flex items-center gap-2.5 cursor-pointer">
+                  <i class="ti ti-upload text-[15px] opacity-70"></i>
+                  Add from local files
+                </button>
+                <button id="btn-add-prod-ref-canvas" class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all flex items-center gap-2.5 cursor-pointer">
+                  <i class="ti ti-box text-[15px] opacity-70"></i>
+                  Add product references
+                </button>
+              </div>
+            </div>
+
+            <!-- Send Button -->
+            <button
+              class="btn-active-plate btn-active-dark btn-active-top w-8 h-8 rounded-full flex items-center justify-center transition-all active:scale-95 cursor-pointer bg-[#111827] text-white hover:bg-black"
+            >
+              <i class="ti ti-arrow-up text-[14px]"></i>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- SCHEDULE MODAL -->
+  <div id="modal-schedule" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 animate-in fade-in duration-200">
+    <!-- Schedule modal content -->
+    <div class="bg-white rounded-[24px] shadow-2xl w-full max-w-lg overflow-hidden" onclick="event.stopPropagation()">
+      <div class="px-6 py-5 border-b border-[#eaecf0] flex items-center justify-between bg-[#F9FAFB]">
+        <div>
+          <h2 class="text-[18px] font-bold text-[#111827]">Schedule Content</h2>
+          <p class="text-[12px] text-[#667085] mt-0.5">Automate your publishing workflow.</p>
+        </div>
+        <button id="close-schedule-modal" class="w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:bg-[#eaecf0] transition-colors">
+          <i class="ti ti-x text-[18px]"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-xl bg-[#F3F4F6] flex items-center justify-center shrink-0 border border-[#eaecf0] overflow-hidden">
+             <img src="https://images.unsplash.com/photo-1542451313056-b7c8e6266459?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" />
+          </div>
+          <div class="flex-1 space-y-2">
+            <label class="text-[11px] font-bold text-[#344054] uppercase tracking-wider">Select Platforms</label>
+            <div class="flex items-center gap-2">
+              <button class="w-8 h-8 rounded-full border-2 border-[#111827] bg-[#111827] text-white flex items-center justify-center transition-colors"><i class="ti ti-brand-instagram text-[14px]"></i></button>
+              <button class="w-8 h-8 rounded-full border-2 border-[#eaecf0] bg-white text-[#667085] flex items-center justify-center transition-colors"><i class="ti ti-brand-linkedin text-[14px]"></i></button>
+              <button class="w-8 h-8 rounded-full border-2 border-[#eaecf0] bg-white text-[#667085] flex items-center justify-center transition-colors"><i class="ti ti-brand-tiktok text-[14px]"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-[12px] font-bold text-[#344054] flex items-center gap-1.5">Business DNA <i class="ti ti-info-circle text-[12px] text-[#98a2b3]"></i></label>
+          <div class="relative">
+            <select class="w-full h-10 px-3 rounded-xl border border-[#D0D5DD] bg-white text-[13px] font-medium text-[#111827] appearance-none outline-none focus:border-[#111827]">
+              <option value="none">Select Business DNA</option>
+              <option value="fresh-juice">Fresh Juice Co.</option>
+              <option value="tech-startup">Tech Startup</option>
+              <option value="luxe-beauty">Luxe Beauty</option>
+            </select>
+            <i class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#667085] pointer-events-none"></i>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 relative">
+          <div class="flex items-center justify-between">
+            <label class="text-[12px] font-bold text-[#344054] flex items-center gap-1.5">Caption <span class="px-1.5 py-0.5 rounded bg-[#111827] text-white text-[9px] font-bold uppercase tracking-wider">AI Generated</span></label>
+            <button class="text-[11px] font-bold text-[#667085] hover:text-[#111827] transition-colors flex items-center gap-1"><i class="ti ti-refresh text-[12px]"></i> Regenerate</button>
+          </div>
+          <textarea class="w-full h-24 p-3 rounded-xl border border-[#D0D5DD] bg-[#F9FAFB] text-[13px] text-[#111827] resize-none outline-none focus:border-[#111827] focus:bg-white transition-colors">🌞 Refresh your day with our signature Summer Blend! Perfect for these hot afternoons. Grab yours today and stay cool. #SummerVibes #FreshJuice</textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="text-[12px] font-bold text-[#344054]">Date</label>
+            <input type="date" class="w-full h-10 px-3 rounded-xl border border-[#D0D5DD] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#111827]" />
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-[12px] font-bold text-[#344054]">Time</label>
+            <input type="time" value="09:00" class="w-full h-10 px-3 rounded-xl border border-[#D0D5DD] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#111827]" />
+          </div>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 bg-[#F9FAFB] border-t border-[#eaecf0] flex justify-end gap-3">
+        <button id="cancel-schedule-modal" class="px-5 h-10 rounded-xl bg-white border border-[#D0D5DD] text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all">Cancel</button>
+        <button id="confirm-schedule-modal" class="px-5 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all">Confirm Schedule</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-24 opacity-0 bg-[#111827] text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 z-[100]">
+    <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+      <i class="ti ti-check text-[14px]"></i>
+    </div>
+    <span id="toast-message" class="text-[13px] font-bold">Action completed</span>
+  </div>
+
+  <!-- SCRIPT BINDINGS -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mock Image Context Menu interaction
+      const mockImage = document.getElementById('mock-image');
+      const selectionOverlay = document.getElementById('image-selection');
+      const contextMenu = document.getElementById('image-context-menu');
+      
+      let isImageSelected = false;
+
+      function updateContextMenuPosition() {
+        if (!contextMenu || !mockImage) return;
+        const rect = mockImage.getBoundingClientRect();
+        contextMenu.style.top = (rect.top - 60) + 'px';
+        contextMenu.style.left = (rect.left + rect.width / 2) - (contextMenu.offsetWidth / 2) + 'px';
+      }
+
+      if (mockImage) {
+        mockImage.addEventListener('click', (e) => {
+          e.stopPropagation();
+          isImageSelected = true;
+          selectionOverlay.classList.remove('hidden');
+          contextMenu.classList.remove('hidden');
+          updateContextMenuPosition();
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        if (contextMenu && mockImage && !contextMenu.contains(e.target) && !mockImage.contains(e.target)) {
+          isImageSelected = false;
+          selectionOverlay.classList.add('hidden');
+          contextMenu.classList.add('hidden');
+          dropdownUpscale.classList.add('hidden');
+          dropdownThreedot.classList.add('hidden');
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (isImageSelected) {
+          updateContextMenuPosition();
+        }
+      });
+
+      // Dropdowns for Image
+      const btnUpscale = document.getElementById('btn-upscale');
+      const dropdownUpscale = document.getElementById('dropdown-upscale');
+      const btnThreedot = document.getElementById('btn-threedot');
+      const dropdownThreedot = document.getElementById('dropdown-threedot');
+
+      if (btnUpscale) {
+        btnUpscale.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dropdownUpscale.classList.toggle('hidden');
+          dropdownThreedot.classList.add('hidden');
+        });
+      }
+
+      if (btnThreedot) {
+        btnThreedot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dropdownThreedot.classList.toggle('hidden');
+          dropdownUpscale.classList.add('hidden');
+        });
+      }
+
+      // Credit Dropdown
+      const btnCredit = document.getElementById('btn-credit');
+      const creditDropdown = document.getElementById('credit-dropdown');
+      
+      if (btnCredit && creditDropdown) {
+        btnCredit.addEventListener('click', (e) => {
+          e.stopPropagation();
+          creditDropdown.classList.toggle('hidden');
+        });
+        
+        document.addEventListener('click', (e) => {
+          if (!creditDropdown.contains(e.target) && !btnCredit.contains(e.target)) {
+            creditDropdown.classList.add('hidden');
+          }
+        });
+
+        // --- Manage Account Modal Triggers ---
+        const btnNavUsageDetails = document.getElementById("btn-nav-usage-details");
+        const upgradeButtons = document.querySelectorAll(".btn-upgrade-trigger");
+
+        if (btnNavUsageDetails) {
+          btnNavUsageDetails.addEventListener("click", (e) => {
+            e.stopPropagation();
+            creditDropdown.classList.add("hidden");
+            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "subscription" } }));
+          });
+        }
+
+        upgradeButtons.forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            creditDropdown.classList.add("hidden");
+            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "subscription" } }));
+          });
+        });
+      }
+
+      // Canvas References Dropdown
+      const btnCanvasRef = document.getElementById('btn-canvas-ref');
+      const dropdownCanvasRef = document.getElementById('dropdown-canvas-ref');
+
+      if (btnCanvasRef && dropdownCanvasRef) {
+        btnCanvasRef.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dropdownCanvasRef.classList.toggle('hidden');
+          dropdownCanvasRef.classList.toggle('flex');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!dropdownCanvasRef.contains(e.target) && !btnCanvasRef.contains(e.target)) {
+            dropdownCanvasRef.classList.add('hidden');
+            dropdownCanvasRef.classList.remove('flex');
+          }
+        });
+      }
+
+      // Add Product References Modal Logic
+      const btnAddProdRefCanvas = document.getElementById('btn-add-prod-ref-canvas');
+      const referencesModal = document.getElementById('references-modal');
+      const closeReferences = document.getElementById('close-references');
+      const cancelReferences = document.getElementById('cancel-references');
+
+      if (btnAddProdRefCanvas && referencesModal) {
+        btnAddProdRefCanvas.addEventListener('click', () => {
+          referencesModal.classList.remove('hidden');
+          if (dropdownCanvasRef) {
+            dropdownCanvasRef.classList.add('hidden');
+            dropdownCanvasRef.classList.remove('flex');
+          }
+        });
+      }
+      
+      if (closeReferences && referencesModal) {
+        closeReferences.addEventListener('click', () => {
+          referencesModal.classList.add('hidden');
+        });
+      }
+      
+      if (cancelReferences && referencesModal) {
+        cancelReferences.addEventListener('click', () => {
+          referencesModal.classList.add('hidden');
+        });
+      }
+
+      // Schedule Modal Logic
+      const btnScheduleImage = document.getElementById('btn-schedule-image');
+      const modalSchedule = document.getElementById('modal-schedule');
+      const closeScheduleBtn = document.getElementById('close-schedule-modal');
+      const cancelScheduleBtn = document.getElementById('cancel-schedule-modal');
+      const confirmScheduleBtn = document.getElementById('confirm-schedule-modal');
+
+      function openSchedule() {
+        modalSchedule.classList.remove('hidden');
+        modalSchedule.classList.add('flex');
+        selectionOverlay.classList.add('hidden');
+        contextMenu.classList.add('hidden');
+        isImageSelected = false;
+      }
+
+      function closeSchedule() {
+        modalSchedule.classList.add('hidden');
+        modalSchedule.classList.remove('flex');
+      }
+
+      if (btnScheduleImage) {
+        btnScheduleImage.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openSchedule();
+        });
+      }
+
+      if (closeScheduleBtn) closeScheduleBtn.addEventListener('click', closeSchedule);
+      if (cancelScheduleBtn) cancelScheduleBtn.addEventListener('click', closeSchedule);
+      if (modalSchedule) {
+        modalSchedule.addEventListener('click', (e) => {
+          if (e.target === modalSchedule) closeSchedule();
+        });
+      }
+
+      // Toast Logic
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      let toastTimeout;
+
+      function showToast(msg) {
+        if (!toast) return;
+        toastMsg.textContent = msg;
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.add('translate-y-24', 'opacity-0');
+        }, 3000);
+      }
+
+      if (confirmScheduleBtn) {
+        confirmScheduleBtn.addEventListener('click', () => {
+          closeSchedule();
+          showToast("Content scheduled successfully!");
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>
