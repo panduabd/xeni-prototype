@@ -1,0 +1,115 @@
+---
+const logos = [
+  {
+    name: "Vertex",
+    svg: `<svg class="h-8 text-[#98a2b3] hover:text-black transition-colors" viewBox="0 0 120 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 4 L19 12 L12 20 L5 12 Z M24 12 L19 12 L24 20 L29 12 Z" opacity="0.8"/><text x="38" y="16" font-family="Inter, sans-serif" font-size="11" font-weight="800" tracking="1" letter-spacing="1">VERTEX</text></svg>`,
+  },
+  {
+    name: "Nexus",
+    svg: `<svg class="h-8 text-[#98a2b3] hover:text-black transition-colors" viewBox="0 0 120 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 6 L16 3 L24 6 L24 18 L16 21 L8 18 Z M16 7 L20 9 L20 15 L16 17 L12 15 L12 9 Z" fill-rule="evenodd" opacity="0.8"/><text x="34" y="16" font-family="Inter, sans-serif" font-size="11" font-weight="800" tracking="1" letter-spacing="1">NEXUS</text></svg>`,
+  },
+  {
+    name: "Eclipse",
+    svg: `<svg class="h-8 text-[#98a2b3] hover:text-black transition-colors" viewBox="0 0 120 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="12" r="6" opacity="0.8"/><circle cx="18" cy="12" r="4" opacity="0.5"/><circle cx="24" cy="12" r="2.5" opacity="0.3"/><text x="36" y="16" font-family="Inter, sans-serif" font-size="11" font-weight="800" tracking="1" letter-spacing="1">ECLIPSE</text></svg>`,
+  },
+  {
+    name: "Altus",
+    svg: `<svg class="h-8 text-[#98a2b3] hover:text-black transition-colors" viewBox="0 0 120 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6 18 H24 M10 13 H20 M14 8 H16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><text x="34" y="16" font-family="Inter, sans-serif" font-size="11" font-weight="800" tracking="1" letter-spacing="1">ALTUS</text></svg>`,
+  },
+  {
+    name: "Apex",
+    svg: `<svg class="h-8 text-[#98a2b3] hover:text-black transition-colors" viewBox="0 0 120 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 4 L22 18 H2 Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="11" r="3" /><text x="32" y="16" font-family="Inter, sans-serif" font-size="11" font-weight="800" tracking="1" letter-spacing="1">APEX</text></svg>`,
+  },
+  {
+    name: "Kubik",
+    svg: `<svg class="h-8 text-[#98a2b3] hover:text-black transition-colors" viewBox="0 0 120 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="12" height="12" rx="1.5" opacity="0.8"/><rect x="10" y="10" width="12" height="12" rx="1.5" opacity="0.5"/><text x="32" y="16" font-family="Inter, sans-serif" font-size="11" font-weight="800" tracking="1" letter-spacing="1">KUBIK</text></svg>`,
+  },
+];
+---
+
+<section class="w-full py-2 bg-white overflow-hidden select-none relative z-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Constrained top border aligned with Hero content width -->
+      <div class="border-t border-gray-200/60 w-full">
+        <div
+          class="w-full bg-transparent py-6 md:py-5 flex flex-col md:flex-row items-center gap-6 md:gap-8 overflow-hidden"
+        >
+       <!-- Left Column: Text with Geist Font and Balanced Margins -->
+      <div
+        class="w-full md:w-[240px] shrink-0 text-center md:text-left"
+      >
+        <p
+          class="text-[11px] font-bold text-[#667085] uppercase tracking-widest leading-relaxed font-sans"
+        >
+          Trusted By Creative Teams<br />
+          in Growing Businesses
+        </p>
+      </div>
+
+      <!-- Thin Separation Boundary Line (Thin Black) -->
+      <div class="hidden md:block w-px h-10 bg-black/15 shrink-0"></div>
+      <div class="block md:hidden w-full h-px bg-black/15 shrink-0"></div>
+
+      <!-- Right Column: Horizontal Infinite Scroll Marquee -->
+      <div class="flex-1 overflow-hidden relative py-1">
+        <div class="animate-marquee-wrapper flex gap-8 items-center">
+          {/* First Group */}
+          <div class="flex gap-8 items-center shrink-0">
+            {
+              logos.map((logo) => (
+                <div
+                  class="flex items-center justify-center shrink-0"
+                  set:html={logo.svg}
+                />
+              ))
+            }
+          </div>
+          {/* Second Group (Duplicate for infinite seamless transition) */}
+          <div class="flex gap-8 items-center shrink-0" aria-hidden="true">
+            {
+              logos.map((logo) => (
+                <div
+                  class="flex items-center justify-center shrink-0"
+                  set:html={logo.svg}
+                />
+              ))
+            }
+          </div>
+          {/* Third Group (Triplicate for wider/ultrawide displays) */}
+          <div class="flex gap-8 items-center shrink-0" aria-hidden="true">
+            {
+              logos.map((logo) => (
+                <div
+                  class="flex items-center justify-center shrink-0"
+                  set:html={logo.svg}
+                />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.3333%);
+    }
+  }
+  .animate-marquee-wrapper {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .animate-marquee-wrapper:hover {
+    animation-play-state: paused;
+  }
+</style>

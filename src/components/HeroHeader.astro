@@ -2,24 +2,35 @@
 interface Props {
   title: string;
   description?: string;
-  plan?: string;
 }
 
 const {
   title = "Think Creative. Move Marketing.",
   description = "Lets turn a single prompt into high-quality creative assets with consistent style, structure, and purpose.",
-  plan = "Free plan"
 } = Astro.props;
 ---
 
 <div class="w-full max-w-3xl mx-auto px-8 shrink-0 pt-4 pb-10 select-none flex flex-col items-start">
-  {plan && (
-    <div class="mb-[75px] flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#ebebef] border border-[#eaecf0] text-[13px] font-semibold">
-      <span class="text-[#667085]">{plan}</span>
-      <span class="w-[1px] h-3 bg-[#D1D5DB]"></span>
-      <button class="text-[#2563EB] hover:text-[#1d4ed8] transition-colors cursor-pointer">Upgrade</button>
+
+  <!-- Draft Review Notification Card -->
+  <div class="mb-[50px] w-full flex items-center justify-between p-4 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.02)] animate-in fade-in slide-in-from-top-3 duration-500 draft-border-shine">
+    <div class="flex items-center gap-3.5 min-w-0">
+      <div class="relative w-10 h-10 rounded-xl bg-[#F2F4F7] text-[#344054] flex items-center justify-center shrink-0">
+        <i class="ti ti-file-text text-[20px]"></i>
+        <!-- Yellow Counter Badge (Overlapping) -->
+        <div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#F59E0B] text-white text-[9px] font-extrabold flex items-center justify-center shadow-sm select-none border border-white">
+          3
+        </div>
+      </div>
+      <div class="flex flex-col min-w-0">
+        <span class="text-[13px] font-bold text-[#111827]">Draft pending review</span>
+        <span class="text-[11.5px] text-[#475467] font-medium mt-0.5 truncate">Your automated "Summer Drink Campaign" has drafts ready for approval.</span>
+      </div>
     </div>
-  )}
+    <a href="/content-automation?tab=generated" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#111827] text-white text-[11.5px] font-bold hover:bg-black transition-all cursor-pointer whitespace-nowrap shrink-0 shadow-sm ml-4">
+      Review <i class="ti ti-arrow-right text-[12px]"></i>
+    </a>
+  </div>
 
   <div class="text-left space-y-4 max-w-2xl ml-[5px]">
     <h1 class="text-[28px] font-bold text-[#111827] tracking-tight leading-tight">
@@ -30,3 +41,23 @@ const {
     )}
   </div>
 </div>
+
+<style>
+  .draft-border-shine {
+    position: relative;
+    background: linear-gradient(to right, white, white), linear-gradient(135deg, #eaecf0 35%, #F59E0B 50%, #eaecf0 65%);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    border: 1.5px solid transparent;
+    background-size: 200% 100%;
+    animation: border-glow-flow 4s linear infinite;
+  }
+  @keyframes border-glow-flow {
+    0% {
+      background-position: 150% center;
+    }
+    100% {
+      background-position: -150% center;
+    }
+  }
+</style>

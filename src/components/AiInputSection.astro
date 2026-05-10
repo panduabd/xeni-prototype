@@ -195,7 +195,16 @@ const {
                     id="btn-business-dna"
                     class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
                 >
-                    <i class="ti ti-fingerprint text-[14px]"></i>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        fill="currentColor"
+                        viewBox="0 0 256 256"
+                        class="flex-shrink-0"
+                    >
+                        <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
+                    </svg>
                     Business DNA
                 </button>
                 <div class="relative">
@@ -559,8 +568,9 @@ const {
             });
 
             confirmBusinessDNA?.addEventListener("click", () => {
+                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 256 256" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path></svg>`;
                 if (selectedDNAName) {
-                    btnBusinessDNA.innerHTML = `<i class="ti ti-fingerprint text-[14px]"></i> ${selectedDNAName}`;
+                    btnBusinessDNA.innerHTML = `${dnaSvg} ${selectedDNAName}`;
                     btnBusinessDNA.classList.add(
                         "text-[#2563EB]",
                         "border-[#2563EB]",
@@ -569,7 +579,7 @@ const {
                     );
                     btnBusinessDNA.classList.remove("border-[#eaecf0]");
                 } else {
-                    btnBusinessDNA.innerHTML = `<i class="ti ti-fingerprint text-[14px]"></i> Business DNA`;
+                    btnBusinessDNA.innerHTML = `${dnaSvg} Business DNA`;
                     btnBusinessDNA.classList.remove(
                         "text-[#2563EB]",
                         "border-[#2563EB]",

@@ -212,14 +212,32 @@ const pageIcon = currentPage.icon;
                 {activePage === item.id && (
                   <div class="absolute left-[-14px] w-[4px] h-6 bg-[#111827] rounded-r-full" />
                 )}
-                <i
-                  class:list={[
-                    `ti ${item.icon} text-[15px] transition-colors`,
-                    activePage === item.id
-                      ? "text-black"
-                      : "text-[#98a2b3] group-hover:text-black",
-                  ]}
-                />
+                {item.id === "business-dna" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                    class:list={[
+                      "transition-colors flex-shrink-0",
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  >
+                    <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
+                  </svg>
+                ) : (
+                  <i
+                    class:list={[
+                      `ti ${item.icon} text-[15px] transition-colors`,
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  />
+                )}
                 {item.label}
               </a>
             ))
@@ -282,12 +300,32 @@ const pageIcon = currentPage.icon;
           <div
             class="flex items-center gap-2 text-[15px] font-bold text-[#111827] pointer-events-auto ml-[5px]"
           >
-            <i class={`ti ${pageIcon} text-[18px] text-[#98a2b3]`}></i>
+            {activePage === "business-dna" ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="text-[#98a2b3] flex-shrink-0"
+              >
+                <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
+              </svg>
+            ) : (
+              <i class={`ti ${pageIcon} text-[18px] text-[#98a2b3]`}></i>
+            )}
             <span>{pageTitle}</span>
           </div>
 
           <!-- Right: Controls -->
           <div class="flex items-center gap-3 pointer-events-auto">
+            <!-- Free Plan Badge -->
+            <div class="flex items-center h-[34px] bg-transparent border border-[#d1d5db] rounded-full px-3 gap-2 hover:border-[#9ca3af] transition-all select-none">
+              <span class="text-[12px] font-bold text-[#667085]">Free plan</span>
+              <div class="w-px h-3 bg-[#d1d5db]"></div>
+              <button class="text-[#2563EB] text-[12px] font-bold hover:text-[#1d4ed8] transition-colors cursor-pointer" onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))">Upgrade</button>
+            </div>
+
             <!-- Credit Status Pill -->
             <div class="relative" id="credit-wrapper">
               <div
@@ -499,6 +537,7 @@ const pageIcon = currentPage.icon;
                 </div>
                 <div class="h-[1px] w-full bg-[#eaecf0] my-0.5"></div>
                 <button
+                  id="btn-logout"
                   class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#d92d20] hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                 >
                   <i class="ti ti-logout text-[15px]"></i>
@@ -664,6 +703,14 @@ const pageIcon = currentPage.icon;
             scrollTimeout = setTimeout(() => {
               mainEl.classList.remove("is-scrolling");
             }, 1000); // Hide after 1 second
+          });
+        }
+
+        // --- Log Out ---
+        const btnLogout = document.getElementById("btn-logout");
+        if (btnLogout) {
+          btnLogout.addEventListener("click", () => {
+            window.location.href = "/";
           });
         }
       });

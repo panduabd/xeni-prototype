@@ -305,10 +305,12 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               <div class="flex flex-col p-1.5">
                 <button
                   class="output-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-status="approved">Approved</button>
+                  data-status="approved">Approved</button
+                >
                 <button
                   class="output-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-status="rejected">Rejected</button>
+                  data-status="rejected">Rejected</button
+                >
               </div>
             </div>
           </div>
@@ -321,36 +323,36 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               >0 terpilih</span
             >
 
-          <button
-            onclick="openBulkScheduleModal()"
-            class="h-9 px-3.5 rounded-xl bg-[#111827] hover:bg-[#000] text-white text-[12px] font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
-          >
-            <i class="ti ti-calendar-event text-[12px]"></i>
-            Schedule
-          </button>
+            <button
+              onclick="openBulkScheduleModal()"
+              class="h-9 px-3.5 rounded-xl bg-[#111827] hover:bg-[#000] text-white text-[12px] font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+            >
+              <i class="ti ti-calendar-event text-[12px]"></i>
+              Schedule
+            </button>
 
-          <button
-            onclick="bulkPublishSelected()"
-            class="h-9 px-3.5 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[12px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
-          >
-            <i class="ti ti-send text-[12px]"></i>
-            Publish Now
-          </button>
+            <button
+              onclick="bulkPublishSelected()"
+              class="h-9 px-3.5 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[12px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+            >
+              <i class="ti ti-send text-[12px]"></i>
+              Publish Now
+            </button>
 
-          <button
-            onclick="bulkDeleteSelected()"
-            class="h-9 w-9 rounded-xl border border-[#D0D5DD] bg-white text-[#111827] hover:bg-[#F3F4F6] transition-all cursor-pointer flex items-center justify-center shadow-sm"
-            title="Delete Selected"
-          >
-            <i class="ti ti-trash text-[14px]"></i>
-          </button>
+            <button
+              onclick="bulkDeleteSelected()"
+              class="h-9 w-9 rounded-xl border border-[#D0D5DD] bg-white text-[#111827] hover:bg-[#F3F4F6] transition-all cursor-pointer flex items-center justify-center shadow-sm"
+              title="Delete Selected"
+            >
+              <i class="ti ti-trash text-[14px]"></i>
+            </button>
 
-          <button
-            onclick="deselectAllApproved()"
-            class="h-9 px-3 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[12px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center justify-center shadow-sm"
-          >
-            Deselect All
-          </button>
+            <button
+              onclick="deselectAllApproved()"
+              class="h-9 px-3 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[12px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center justify-center shadow-sm"
+            >
+              Deselect All
+            </button>
           </div>
         </div>
       </div>
@@ -362,7 +364,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           <div class="flex items-center justify-between px-1">
             <div class="flex items-center gap-2">
               <h3 class="text-[13px] font-bold text-[#111827]">Draft</h3>
-              <span class="inline-flex items-center gap-1 px-1.5 h-[18px] rounded-full bg-[#111827] text-[9px] font-bold text-white tracking-wide">
+              <span
+                class="inline-flex items-center gap-1 px-1.5 h-[18px] rounded-full bg-[#111827] text-[9px] font-bold text-white tracking-wide"
+              >
                 <i class="ti ti-alert-circle text-[9px]"></i>
                 Need Approval
               </span>
@@ -440,10 +444,16 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             </div>
           </div>
           <!-- Rejected alert -->
-          <div class="flex items-start gap-2.5 p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0]">
-            <i class="ti ti-alert-triangle text-[16px] text-[#111827] shrink-0 mt-0.5"></i>
+          <div
+            class="flex items-start gap-2.5 p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0]"
+          >
+            <i
+              class="ti ti-alert-triangle text-[16px] text-[#111827] shrink-0 mt-0.5"
+            ></i>
             <p class="text-[12px] text-[#667085] leading-relaxed">
-              Rejected content will be <span class="font-bold text-[#111827]">permanently deleted after 30 days</span>. Review and recover items before they are removed.
+              Rejected content will be <span class="font-bold text-[#111827]"
+                >permanently deleted after 30 days</span
+              >. Review and recover items before they are removed.
             </p>
           </div>
           <div id="rejected-grid" class="columns-3 gap-3">
@@ -488,10 +498,22 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
             >
               <div class="flex flex-col p-1.5">
-                <button class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-brand="all">All Business</button>
-                <button class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-brand="Fresh Juice Co.">Fresh Juice Co.</button>
-                <button class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-brand="Tech Startup">Tech Startup</button>
-                <button class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-brand="Luxe Beauty">Luxe Beauty</button>
+                <button
+                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="all">All Business</button
+                >
+                <button
+                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="Fresh Juice Co.">Fresh Juice Co.</button
+                >
+                <button
+                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="Tech Startup">Tech Startup</button
+                >
+                <button
+                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-brand="Luxe Beauty">Luxe Beauty</button
+                >
               </div>
             </div>
           </div>
@@ -511,16 +533,27 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               class="hidden absolute top-full left-0 mt-1.5 w-40 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
             >
               <div class="flex flex-col p-1.5">
-                <button class="scheduled-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="all">All Status</button>
-                <button class="scheduled-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="scheduled">Scheduled</button>
-                <button class="scheduled-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-status="published">Published</button>
+                <button
+                  class="scheduled-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-status="all">All Status</button
+                >
+                <button
+                  class="scheduled-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-status="scheduled">Scheduled</button
+                >
+                <button
+                  class="scheduled-status-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
+                  data-status="published">Published</button
+                >
               </div>
             </div>
           </div>
 
           <!-- Search -->
           <div class="relative flex-1 min-w-50 max-w-xs">
-            <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"></i>
+            <i
+              class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"
+            ></i>
             <input
               id="scheduled-search"
               type="text"
@@ -707,7 +740,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
       <!-- Header -->
       <div class="px-7 pt-7 pb-3 bg-white relative z-20">
-        <h2 id="wizard-title" class="text-[20px] font-bold text-[#111827] tracking-tight mb-0.5">
+        <h2
+          id="wizard-title"
+          class="text-[20px] font-bold text-[#111827] tracking-tight mb-0.5"
+        >
           Create Automation
         </h2>
         <p class="text-[13px] text-[#667085]">
@@ -1191,8 +1227,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                   Every selected day will repeat every week.
                 </div>
                 <p class="text-[11px] text-[#667085]">
-                  Konten akan di-generate setiap minggu pada hari-hari yang
-                  sama dengan yang dipilih di calendar.
+                  Konten akan di-generate setiap minggu pada hari-hari yang sama
+                  dengan yang dipilih di calendar.
                 </p>
               </div>
 
@@ -1288,97 +1324,175 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     >
       <!-- Header with Back Button -->
       <div class="px-6 pt-6 pb-2 flex items-center gap-3">
-        <button id="btn-back-engagement" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] cursor-pointer">
+        <button
+          id="btn-back-engagement"
+          class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] cursor-pointer"
+        >
           <i class="ti ti-arrow-left text-[18px]"></i>
         </button>
         <div>
-          <h2 class="text-[18px] font-bold text-[#111827] tracking-tight">Engagement Settings</h2>
-          <p class="text-[12px] text-[#667085]">Configure auto actions for this content</p>
+          <h2 class="text-[18px] font-bold text-[#111827] tracking-tight">
+            Engagement Settings
+          </h2>
+          <p class="text-[12px] text-[#667085]">
+            Configure auto actions for this content
+          </p>
         </div>
       </div>
 
       <!-- Content -->
       <div class="px-6 py-4 overflow-y-auto scroll-smooth relative space-y-3">
         <!-- Delete Comment -->
-        <div class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white">
+        <div
+          class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white"
+        >
           <div class="flex items-center gap-3">
             <i class="ti ti-trash text-[18px] text-[#111827]"></i>
-            <span class="text-[14px] font-semibold text-[#111827]">Delete Comment</span>
+            <span class="text-[14px] font-semibold text-[#111827]"
+              >Delete Comment</span
+            >
           </div>
           <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="toggle-delete-comment" class="sr-only peer" />
-            <div class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"></div>
+            <input
+              type="checkbox"
+              id="toggle-delete-comment"
+              class="sr-only peer"
+            />
+            <div
+              class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"
+            >
+            </div>
           </label>
         </div>
 
         <!-- Reply Comment -->
-        <div class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white">
+        <div
+          class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white"
+        >
           <div class="flex items-center gap-3">
-            <i class="ti ti-message-circle-reply text-[18px] text-[#111827]"></i>
-            <span class="text-[14px] font-semibold text-[#111827]">Reply Comment</span>
+            <i class="ti ti-message-circle-reply text-[18px] text-[#111827]"
+            ></i>
+            <span class="text-[14px] font-semibold text-[#111827]"
+              >Reply Comment</span
+            >
           </div>
           <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="toggle-reply-comment" class="sr-only peer" />
-            <div class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"></div>
+            <input
+              type="checkbox"
+              id="toggle-reply-comment"
+              class="sr-only peer"
+            />
+            <div
+              class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"
+            >
+            </div>
           </label>
         </div>
 
         <!-- Like Comment -->
-        <div class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white">
+        <div
+          class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white"
+        >
           <div class="flex items-center gap-3">
             <i class="ti ti-thumb-up text-[18px] text-[#111827]"></i>
-            <span class="text-[14px] font-semibold text-[#111827]">Like Comment</span>
+            <span class="text-[14px] font-semibold text-[#111827]"
+              >Like Comment</span
+            >
           </div>
           <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="toggle-like-comment" class="sr-only peer" />
-            <div class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"></div>
+            <input
+              type="checkbox"
+              id="toggle-like-comment"
+              class="sr-only peer"
+            />
+            <div
+              class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"
+            >
+            </div>
           </label>
         </div>
 
         <!-- DM Comment -->
-        <div class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white">
+        <div
+          class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white"
+        >
           <div class="flex items-center gap-3">
             <i class="ti ti-message text-[18px] text-[#111827]"></i>
-            <span class="text-[14px] font-semibold text-[#111827]">DM Comment</span>
+            <span class="text-[14px] font-semibold text-[#111827]"
+              >DM Comment</span
+            >
           </div>
           <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="toggle-dm-comment" class="sr-only peer" />
-            <div class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"></div>
+            <input
+              type="checkbox"
+              id="toggle-dm-comment"
+              class="sr-only peer"
+            />
+            <div
+              class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"
+            >
+            </div>
           </label>
         </div>
 
         <!-- Reply Story -->
-        <div class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white">
+        <div
+          class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white"
+        >
           <div class="flex items-center gap-3">
             <i class="ti ti-history text-[18px] text-[#111827]"></i>
-            <span class="text-[14px] font-semibold text-[#111827]">Reply Story</span>
+            <span class="text-[14px] font-semibold text-[#111827]"
+              >Reply Story</span
+            >
           </div>
           <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="toggle-reply-story" class="sr-only peer" />
-            <div class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"></div>
+            <input
+              type="checkbox"
+              id="toggle-reply-story"
+              class="sr-only peer"
+            />
+            <div
+              class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"
+            >
+            </div>
           </label>
         </div>
 
         <!-- Reply DM -->
-        <div class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white">
+        <div
+          class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white"
+        >
           <div class="flex items-center gap-3">
             <i class="ti ti-messages text-[18px] text-[#111827]"></i>
-            <span class="text-[14px] font-semibold text-[#111827]">Reply DM</span>
+            <span class="text-[14px] font-semibold text-[#111827]"
+              >Reply DM</span
+            >
           </div>
           <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" id="toggle-reply-dm" class="sr-only peer" />
-            <div class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"></div>
+            <div
+              class="w-11 h-6 bg-[#eaecf0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#111827]"
+            >
+            </div>
           </label>
         </div>
       </div>
 
       <!-- Action Footer -->
-      <div class="flex items-center justify-end gap-3 p-6 pt-0 mt-4 border-t border-[#eaecf0]">
-        <button id="btn-back-engagement-footer" class="px-5 h-9 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-1.5">
+      <div
+        class="flex items-center justify-end gap-3 p-6 pt-0 mt-4 border-t border-[#eaecf0]"
+      >
+        <button
+          id="btn-back-engagement-footer"
+          class="px-5 h-9 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-1.5"
+        >
           <i class="ti ti-arrow-left text-[14px]"></i>
           Back
         </button>
-        <button id="btn-save-engagement" class="px-6 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
+        <button
+          id="btn-save-engagement"
+          class="px-6 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+        >
           Save Settings
         </button>
       </div>
@@ -1412,7 +1526,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       </div>
 
       <!-- Scrollable Content -->
-      <div class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2 space-y-4">
+      <div
+        class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2 space-y-4"
+      >
         <div class="space-y-2">
           <label class="text-[12px] font-semibold text-[#344054]">Date</label>
           <input
@@ -1438,28 +1554,46 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             class="w-full flex items-center justify-between p-3.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] transition-all cursor-pointer group"
           >
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-lg bg-[#F3F4F6] flex items-center justify-center">
+              <div
+                class="w-9 h-9 rounded-lg bg-[#F3F4F6] flex items-center justify-center"
+              >
                 <i class="ti ti-message-bolt text-[16px] text-[#111827]"></i>
               </div>
               <div class="text-left">
-                <p class="text-[13px] font-bold text-[#111827] flex items-center gap-1.5">
+                <p
+                  class="text-[13px] font-bold text-[#111827] flex items-center gap-1.5"
+                >
                   Engagement Settings
-                  <span id="single-schedule-engagement-indicator" class="hidden w-2 h-2 rounded-full bg-[#22C55E]"></span>
+                  <span
+                    id="single-schedule-engagement-indicator"
+                    class="hidden w-2 h-2 rounded-full bg-[#22C55E]"></span>
                 </p>
-                <p class="text-[11px] text-[#667085]">Auto reply, like, DM, and more</p>
+                <p class="text-[11px] text-[#667085]">
+                  Auto reply, like, DM, and more
+                </p>
               </div>
             </div>
-            <i class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"></i>
+            <i
+              class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"
+            ></i>
           </button>
         </div>
       </div>
 
       <!-- Floating Footer -->
-      <div class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 px-7 py-5 bg-white border-t border-[#eaecf0]">
-        <button onclick="closeSingleScheduleModal()" class="px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[13px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer">
+      <div
+        class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 px-7 py-5 bg-white border-t border-[#eaecf0]"
+      >
+        <button
+          onclick="closeSingleScheduleModal()"
+          class="px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[13px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer"
+        >
           Cancel
         </button>
-        <button onclick="confirmSingleSchedule()" class="px-5 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
+        <button
+          onclick="confirmSingleSchedule()"
+          class="px-5 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+        >
           Confirm Schedule
         </button>
       </div>
@@ -1493,7 +1627,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       </div>
 
       <!-- Scrollable Content -->
-      <div class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2 space-y-4">
+      <div
+        class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2 space-y-4"
+      >
         <div class="space-y-2">
           <label class="text-[12px] font-semibold text-[#344054]">Date</label>
           <input
@@ -1514,11 +1650,19 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       </div>
 
       <!-- Floating Footer -->
-      <div class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 px-7 py-5 bg-white border-t border-[#eaecf0]">
-        <button onclick="closePreviewScheduleModal()" class="px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[13px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer">
+      <div
+        class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 px-7 py-5 bg-white border-t border-[#eaecf0]"
+      >
+        <button
+          onclick="closePreviewScheduleModal()"
+          class="px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[13px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer"
+        >
           Cancel
         </button>
-        <button onclick="confirmPreviewSchedule()" class="px-5 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
+        <button
+          onclick="confirmPreviewSchedule()"
+          class="px-5 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+        >
           Confirm Schedule
         </button>
       </div>
@@ -1548,20 +1692,39 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       <div class="px-6 pt-5 pb-3 shrink-0 border-b border-[#eaecf0]">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <h3 id="preview-title-header" class="text-[16px] font-bold text-[#111827] tracking-tight"></h3>
-            <span id="preview-status-badge" class="inline-flex items-center px-2 h-5 rounded-full text-[10px] font-bold"></span>
+            <h3
+              id="preview-title-header"
+              class="text-[16px] font-bold text-[#111827] tracking-tight"
+            >
+            </h3>
+            <span
+              id="preview-status-badge"
+              class="inline-flex items-center px-2 h-5 rounded-full text-[10px] font-bold"
+            ></span>
           </div>
-          <span id="preview-draft-counter" class="hidden text-[13px] font-bold text-[#111827] mr-12">1 of 5</span>
+          <span
+            id="preview-draft-counter"
+            class="hidden text-[13px] font-bold text-[#111827] mr-12"
+            >1 of 5</span
+          >
         </div>
       </div>
 
       <!-- 2-Panel Body -->
       <div class="flex-1 flex overflow-hidden">
         <!-- LEFT: Image Panel -->
-        <div class="w-[60%] bg-[#F9FAFB] flex flex-col items-center justify-center py-6 px-3 relative overflow-y-auto border-r border-[#eaecf0]">
+        <div
+          class="w-[60%] bg-[#F9FAFB] flex flex-col items-center justify-center py-6 px-3 relative overflow-y-auto border-r border-[#eaecf0]"
+        >
           <!-- Image Carousel Container -->
-          <div id="preview-image-wrapper" class="relative w-full max-w-[320px] rounded-2xl overflow-hidden bg-[#111827] shadow-2xl z-10 transition-all duration-300 group">
-            <div id="preview-image-container" class="w-full aspect-[3/4] flex items-center justify-center relative">
+          <div
+            id="preview-image-wrapper"
+            class="relative w-full max-w-[320px] rounded-2xl overflow-hidden bg-[#111827] shadow-2xl z-10 transition-all duration-300 group"
+          >
+            <div
+              id="preview-image-container"
+              class="w-full aspect-[3/4] flex items-center justify-center relative"
+            >
               <div class="text-center space-y-2">
                 <i class="ti ti-photo text-[40px] text-[#4B5563]"></i>
                 <p class="text-[11px] text-[#6B7280]">1080 × 1350</p>
@@ -1569,14 +1732,24 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             </div>
 
             <!-- Carousel Nav (Inside Image, Hover) -->
-            <button id="preview-carousel-prev" class="hidden absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center text-[#111827] hover:bg-white transition-all cursor-pointer z-10 opacity-0 group-hover:opacity-100">
+            <button
+              id="preview-carousel-prev"
+              class="hidden absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center text-[#111827] hover:bg-white transition-all cursor-pointer z-10 opacity-0 group-hover:opacity-100"
+            >
               <i class="ti ti-chevron-left text-[16px]"></i>
             </button>
-            <button id="preview-carousel-next" class="hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center text-[#111827] hover:bg-white transition-all cursor-pointer z-10 opacity-0 group-hover:opacity-100">
+            <button
+              id="preview-carousel-next"
+              class="hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center text-[#111827] hover:bg-white transition-all cursor-pointer z-10 opacity-0 group-hover:opacity-100"
+            >
               <i class="ti ti-chevron-right text-[16px]"></i>
             </button>
             <!-- Carousel Counter Badge (Inside Image, Top Right) -->
-            <span id="preview-carousel-badge" class="hidden absolute top-3 right-3 px-2 h-5 rounded-full bg-black/40 backdrop-blur-sm text-[10px] font-bold text-white z-10">1/3</span>
+            <span
+              id="preview-carousel-badge"
+              class="hidden absolute top-3 right-3 px-2 h-5 rounded-full bg-black/40 backdrop-blur-sm text-[10px] font-bold text-white z-10"
+              >1/3</span
+            >
           </div>
         </div>
 
@@ -1584,9 +1757,19 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         <div class="w-[40%] flex flex-col relative">
           <!-- Approved/Scheduled Tabs (hidden for draft) -->
           <div id="preview-right-tabs" class="hidden px-5 pt-3 pb-0">
-            <div class="flex items-center gap-1 p-0.5 bg-[#F3F4F6] rounded-lg w-fit">
-              <button id="preview-tab-content" class="preview-right-tab px-3 h-7 rounded-md text-[11px] font-semibold bg-white text-[#111827] shadow-sm transition-all cursor-pointer" data-tab="content">Content Preview</button>
-              <button id="preview-tab-performance" class="preview-right-tab px-3 h-7 rounded-md text-[11px] font-semibold text-[#667085] hover:text-[#111827] transition-all cursor-pointer" data-tab="performance">Performance</button>
+            <div
+              class="flex items-center gap-1 p-0.5 bg-[#F3F4F6] rounded-lg w-fit"
+            >
+              <button
+                id="preview-tab-content"
+                class="preview-right-tab px-3 h-7 rounded-md text-[11px] font-semibold bg-white text-[#111827] shadow-sm transition-all cursor-pointer"
+                data-tab="content">Content Preview</button
+              >
+              <button
+                id="preview-tab-performance"
+                class="preview-right-tab px-3 h-7 rounded-md text-[11px] font-semibold text-[#667085] hover:text-[#111827] transition-all cursor-pointer"
+                data-tab="performance">Performance</button
+              >
             </div>
           </div>
 
@@ -1597,8 +1780,15 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               <!-- Caption -->
               <div class="space-y-1.5">
                 <div class="flex items-center justify-between">
-                  <h4 class="text-[11px] font-bold text-[#344054] uppercase tracking-wider">Caption</h4>
-                  <button id="btn-regenerate-caption" class="flex items-center gap-1 px-2 h-6 rounded-lg border border-[#eaecf0] bg-white text-[10px] font-semibold text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all cursor-pointer">
+                  <h4
+                    class="text-[11px] font-bold text-[#344054] uppercase tracking-wider"
+                  >
+                    Caption
+                  </h4>
+                  <button
+                    id="btn-regenerate-caption"
+                    class="flex items-center gap-1 px-2 h-6 rounded-lg border border-[#eaecf0] bg-white text-[10px] font-semibold text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all cursor-pointer"
+                  >
                     <i class="ti ti-sparkles text-[11px]"></i>
                     Regenerate
                   </button>
@@ -1608,84 +1798,218 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                   rows="5"
                   class="w-full p-2.5 rounded-xl border border-[#eaecf0] text-[12px] text-[#344054] leading-relaxed resize-none focus:outline-none focus:border-[#111827] focus:ring-2 focus:ring-[#111827]/5 transition-all bg-white"
                 ></textarea>
-                <button id="btn-save-caption" class="hidden h-7 px-3 rounded-lg bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-all cursor-pointer">
+                <button
+                  id="btn-save-caption"
+                  class="hidden h-7 px-3 rounded-lg bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-all cursor-pointer"
+                >
                   Save Changes
                 </button>
               </div>
 
               <!-- Metadata (Compact) -->
               <div class="grid grid-cols-2 gap-1.5">
-                <div class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]">
-                  <p class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold">Platform</p>
-                  <p id="preview-platform" class="text-[11px] font-bold text-[#111827] mt-0.5"></p>
+                <div
+                  class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"
+                >
+                  <p
+                    class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold"
+                  >
+                    Platform
+                  </p>
+                  <p
+                    id="preview-platform"
+                    class="text-[11px] font-bold text-[#111827] mt-0.5"
+                  >
+                  </p>
                 </div>
-                <div class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]">
-                  <p class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold">Type</p>
-                  <p id="preview-type" class="text-[11px] font-bold text-[#111827] mt-0.5"></p>
+                <div
+                  class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"
+                >
+                  <p
+                    class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold"
+                  >
+                    Type
+                  </p>
+                  <p
+                    id="preview-type"
+                    class="text-[11px] font-bold text-[#111827] mt-0.5"
+                  >
+                  </p>
                 </div>
-                <div class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]">
-                  <p class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold">Content Pillar</p>
-                  <p id="preview-pillar" class="text-[11px] font-bold text-[#111827] mt-0.5">-</p>
+                <div
+                  class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"
+                >
+                  <p
+                    class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold"
+                  >
+                    Content Pillar
+                  </p>
+                  <p
+                    id="preview-pillar"
+                    class="text-[11px] font-bold text-[#111827] mt-0.5"
+                  >
+                    -
+                  </p>
                 </div>
-                <div class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]">
-                  <p class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold">Business DNA</p>
-                  <p id="preview-brand" class="text-[11px] font-bold text-[#111827] mt-0.5"></p>
+                <div
+                  class="p-2 rounded-lg bg-[#F9FAFB] border border-[#eaecf0]"
+                >
+                  <p
+                    class="text-[9px] text-[#667085] uppercase tracking-wider font-semibold"
+                  >
+                    Business DNA
+                  </p>
+                  <p
+                    id="preview-brand"
+                    class="text-[11px] font-bold text-[#111827] mt-0.5"
+                  >
+                  </p>
                 </div>
               </div>
 
               <!-- Engagement Settings (approved only, clickable) -->
-              <button id="preview-engagement-action" type="button" onclick="openEngagementFromPreview(); return false;" class="hidden w-full flex items-center justify-between p-2.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] transition-all cursor-pointer group">
+              <button
+                id="preview-engagement-action"
+                type="button"
+                onclick="openEngagementFromPreview(); return false;"
+                class="hidden w-full flex items-center justify-between p-2.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] transition-all cursor-pointer group"
+              >
                 <div class="flex items-center gap-2">
-                  <div class="w-7 h-7 rounded-lg bg-[#F3F4F6] flex items-center justify-center">
-                    <i class="ti ti-message-bolt text-[14px] text-[#111827]"></i>
+                  <div
+                    class="w-7 h-7 rounded-lg bg-[#F3F4F6] flex items-center justify-center"
+                  >
+                    <i class="ti ti-message-bolt text-[14px] text-[#111827]"
+                    ></i>
                   </div>
                   <div>
-                    <p class="text-[11px] font-bold text-[#111827] flex items-center gap-1">
+                    <p
+                      class="text-[11px] font-bold text-[#111827] flex items-center gap-1"
+                    >
                       Engagement Settings
-                      <span id="preview-engagement-indicator" class="hidden w-1.5 h-1.5 rounded-full bg-[#22C55E]"></span>
+                      <span
+                        id="preview-engagement-indicator"
+                        class="hidden w-1.5 h-1.5 rounded-full bg-[#22C55E]"
+                      ></span>
                     </p>
-                    <p class="text-[9px] text-[#667085]">Auto reply, like, DM, and more</p>
+                    <p class="text-[9px] text-[#667085]">
+                      Auto reply, like, DM, and more
+                    </p>
                   </div>
                 </div>
-                <i class="ti ti-chevron-right text-[12px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"></i>
+                <i
+                  class="ti ti-chevron-right text-[12px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"
+                ></i>
               </button>
             </div>
 
             <!-- Performance Tab (hidden by default) -->
             <div id="preview-performance-tab" class="hidden space-y-3">
-              <div id="preview-performance-empty" class="flex flex-col items-center justify-center py-8 text-center">
+              <div
+                id="preview-performance-empty"
+                class="flex flex-col items-center justify-center py-8 text-center"
+              >
                 <i class="ti ti-chart-bar text-[28px] text-[#D1D5DB] mb-2"></i>
-                <p class="text-[12px] font-semibold text-[#344054]">No performance data yet</p>
-                <p class="text-[10px] text-[#98a2b3] mt-1">Performance metrics will be available after publishing.</p>
+                <p class="text-[12px] font-semibold text-[#344054]">
+                  No performance data yet
+                </p>
+                <p class="text-[10px] text-[#98a2b3] mt-1">
+                  Performance metrics will be available after publishing.
+                </p>
               </div>
               <div id="preview-performance-data" class="hidden space-y-3">
                 <!-- Engagement Metrics -->
                 <div class="grid grid-cols-3 gap-2">
-                  <div class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center">
-                    <p class="text-[9px] text-[#667085] uppercase font-semibold">Reach</p>
-                    <p id="preview-reach" class="text-[16px] font-bold text-[#111827] mt-1">0</p>
+                  <div
+                    class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center"
+                  >
+                    <p
+                      class="text-[9px] text-[#667085] uppercase font-semibold"
+                    >
+                      Reach
+                    </p>
+                    <p
+                      id="preview-reach"
+                      class="text-[16px] font-bold text-[#111827] mt-1"
+                    >
+                      0
+                    </p>
                   </div>
-                  <div class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center">
-                    <p class="text-[9px] text-[#667085] uppercase font-semibold">Engagement</p>
-                    <p id="preview-engagement-rate" class="text-[16px] font-bold text-[#111827] mt-1">0%</p>
+                  <div
+                    class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center"
+                  >
+                    <p
+                      class="text-[9px] text-[#667085] uppercase font-semibold"
+                    >
+                      Engagement
+                    </p>
+                    <p
+                      id="preview-engagement-rate"
+                      class="text-[16px] font-bold text-[#111827] mt-1"
+                    >
+                      0%
+                    </p>
                   </div>
-                  <div class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center">
-                    <p class="text-[9px] text-[#667085] uppercase font-semibold">Saves</p>
-                    <p id="preview-saves" class="text-[16px] font-bold text-[#111827] mt-1">0</p>
+                  <div
+                    class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center"
+                  >
+                    <p
+                      class="text-[9px] text-[#667085] uppercase font-semibold"
+                    >
+                      Saves
+                    </p>
+                    <p
+                      id="preview-saves"
+                      class="text-[16px] font-bold text-[#111827] mt-1"
+                    >
+                      0
+                    </p>
                   </div>
                 </div>
                 <div class="grid grid-cols-3 gap-2">
-                  <div class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center">
-                    <p class="text-[9px] text-[#667085] uppercase font-semibold">Profile Visits</p>
-                    <p id="preview-profile-visits" class="text-[16px] font-bold text-[#111827] mt-1">0</p>
+                  <div
+                    class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center"
+                  >
+                    <p
+                      class="text-[9px] text-[#667085] uppercase font-semibold"
+                    >
+                      Profile Visits
+                    </p>
+                    <p
+                      id="preview-profile-visits"
+                      class="text-[16px] font-bold text-[#111827] mt-1"
+                    >
+                      0
+                    </p>
                   </div>
-                  <div class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center">
-                    <p class="text-[9px] text-[#667085] uppercase font-semibold">Shares</p>
-                    <p id="preview-shares" class="text-[16px] font-bold text-[#111827] mt-1">0</p>
+                  <div
+                    class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center"
+                  >
+                    <p
+                      class="text-[9px] text-[#667085] uppercase font-semibold"
+                    >
+                      Shares
+                    </p>
+                    <p
+                      id="preview-shares"
+                      class="text-[16px] font-bold text-[#111827] mt-1"
+                    >
+                      0
+                    </p>
                   </div>
-                  <div class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center">
-                    <p class="text-[9px] text-[#667085] uppercase font-semibold">Follows</p>
-                    <p id="preview-follows" class="text-[16px] font-bold text-[#111827] mt-1">0</p>
+                  <div
+                    class="p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] text-center"
+                  >
+                    <p
+                      class="text-[9px] text-[#667085] uppercase font-semibold"
+                    >
+                      Follows
+                    </p>
+                    <p
+                      id="preview-follows"
+                      class="text-[16px] font-bold text-[#111827] mt-1"
+                    >
+                      0
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1693,34 +2017,67 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           </div>
 
           <!-- Floating Footer Actions -->
-          <div class="absolute bottom-0 left-0 right-0 bg-white border-t border-[#eaecf0] px-5 pt-2 pb-3 z-20">
+          <div
+            class="absolute bottom-0 left-0 right-0 bg-white border-t border-[#eaecf0] px-5 pt-2 pb-3 z-20"
+          >
             <!-- Reject Alert (Draft Only) -->
-            <div id="preview-reject-alert" class="hidden flex items-start gap-1.5 p-2 rounded-lg bg-[#FEF3F2] border border-[#FECDCA] mb-1.5">
-              <i class="ti ti-alert-circle text-[12px] text-[#B42318] shrink-0 mt-0.5"></i>
+            <div
+              id="preview-reject-alert"
+              class="hidden flex items-start gap-1.5 p-2 rounded-lg bg-[#FEF3F2] border border-[#FECDCA] mb-1.5"
+            >
+              <i
+                class="ti ti-alert-circle text-[12px] text-[#B42318] shrink-0 mt-0.5"
+              ></i>
               <p class="text-[10px] text-[#B42318] leading-relaxed">
-                <span class="font-semibold">Rejected content</span> can still be accessed via the Rejected filter, but will be <span class="font-semibold">permanently deleted after 30 days</span>.
+                <span class="font-semibold">Rejected content</span> can still be accessed
+                via the Rejected filter, but will be <span class="font-semibold"
+                  >permanently deleted after 30 days</span
+                >.
               </p>
             </div>
 
             <!-- Draft Actions -->
             <div id="preview-actions" class="flex items-center gap-2">
-              <button id="btn-reject" class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer">Reject</button>
-              <button id="btn-approve" class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">Approve</button>
+              <button
+                id="btn-reject"
+                class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                >Reject</button
+              >
+              <button
+                id="btn-approve"
+                class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+                >Approve</button
+              >
             </div>
             <!-- Approved Actions -->
-            <div id="preview-approved-actions" class="hidden items-center gap-2">
-              <button onclick="publishSingleNow()" class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center justify-center gap-1.5">
+            <div
+              id="preview-approved-actions"
+              class="hidden items-center gap-2"
+            >
+              <button
+                onclick="publishSingleNow()"
+                class="flex-1 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center justify-center gap-1.5"
+              >
                 <i class="ti ti-send text-[14px]"></i>
                 Publish Now
               </button>
-              <button onclick="openPreviewScheduleModal()" class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center justify-center gap-1.5">
+              <button
+                onclick="openPreviewScheduleModal()"
+                class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center justify-center gap-1.5"
+              >
                 <i class="ti ti-calendar-event text-[14px]"></i>
                 Schedule
               </button>
             </div>
             <!-- Rejected Actions -->
-            <div id="preview-rejected-actions" class="hidden items-center gap-2">
-              <button id="btn-recover-draft" class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center justify-center gap-1.5">
+            <div
+              id="preview-rejected-actions"
+              class="hidden items-center gap-2"
+            >
+              <button
+                id="btn-recover-draft"
+                class="flex-1 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center justify-center gap-1.5"
+              >
                 <i class="ti ti-arrow-back-up text-[14px]"></i>
                 Recover to Draft
               </button>
@@ -1732,19 +2089,37 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   </div>
 
   <!-- MINI MODAL: Regenerate Caption -->
-  <div id="modal-regenerate" class="hidden fixed inset-0 z-110 items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-    <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-5 space-y-4 animate-in zoom-in-95 duration-200">
+  <div
+    id="modal-regenerate"
+    class="hidden fixed inset-0 z-110 items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+  >
+    <div
+      class="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-5 space-y-4 animate-in zoom-in-95 duration-200"
+    >
       <div class="flex items-center justify-between">
         <h4 class="text-[14px] font-bold text-[#111827]">Regenerate Caption</h4>
-        <button id="close-regenerate-modal" class="w-7 h-7 rounded-full flex items-center justify-center hover:bg-[#F3F4F6] text-[#667085] cursor-pointer">
+        <button
+          id="close-regenerate-modal"
+          class="w-7 h-7 rounded-full flex items-center justify-center hover:bg-[#F3F4F6] text-[#667085] cursor-pointer"
+        >
           <i class="ti ti-x text-[16px]"></i>
         </button>
       </div>
       <div class="space-y-1.5">
-        <label class="text-[11px] font-semibold text-[#344054]">Additional Prompt (Optional)</label>
-        <textarea id="regenerate-prompt" rows="3" placeholder="e.g. Make it more casual, add emojis..." class="w-full p-3 rounded-xl border border-[#eaecf0] text-[12px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#111827] transition-all resize-none"></textarea>
+        <label class="text-[11px] font-semibold text-[#344054]"
+          >Additional Prompt (Optional)</label
+        >
+        <textarea
+          id="regenerate-prompt"
+          rows="3"
+          placeholder="e.g. Make it more casual, add emojis..."
+          class="w-full p-3 rounded-xl border border-[#eaecf0] text-[12px] text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#111827] transition-all resize-none"
+        ></textarea>
       </div>
-      <button id="btn-submit-regenerate" class="w-full h-9 rounded-xl bg-[#111827] text-white text-[12px] font-bold hover:bg-black transition-all cursor-pointer flex items-center justify-center gap-1.5">
+      <button
+        id="btn-submit-regenerate"
+        class="w-full h-9 rounded-xl bg-[#111827] text-white text-[12px] font-bold hover:bg-black transition-all cursor-pointer flex items-center justify-center gap-1.5"
+      >
         <i class="ti ti-sparkles text-[13px]"></i>
         Regenerate
       </button>
@@ -1754,21 +2129,40 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   <!-- ═══════════════════════════════════════ -->
   <!-- MODAL: PREVIEW AUTOMATION (Tab: Automations) -->
   <!-- ═══════════════════════════════════════ -->
-  <div id="modal-preview-automation" class="hidden fixed inset-0 z-100 items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-    <div class="bg-white w-full max-w-lg max-h-[80vh] rounded-[28px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative">
-      <button id="close-preview-automation" class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center hover:bg-[#F3F4F6] transition-colors text-[#667085] z-30 cursor-pointer">
+  <div
+    id="modal-preview-automation"
+    class="hidden fixed inset-0 z-100 items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+  >
+    <div
+      class="bg-white w-full max-w-lg max-h-[80vh] rounded-[28px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
+    >
+      <button
+        id="close-preview-automation"
+        class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center hover:bg-[#F3F4F6] transition-colors text-[#667085] z-30 cursor-pointer"
+      >
         <i class="ti ti-x text-[18px]"></i>
       </button>
       <div class="px-6 pt-6 pb-3 shrink-0 border-b border-[#eaecf0]">
-        <h3 id="preview-auto-title" class="text-[16px] font-bold text-[#111827] tracking-tight">Automation Details</h3>
+        <h3
+          id="preview-auto-title"
+          class="text-[16px] font-bold text-[#111827] tracking-tight"
+        >
+          Automation Details
+        </h3>
       </div>
       <div class="flex-1 overflow-y-auto px-6 py-5 space-y-4">
         <div id="preview-auto-body" class="space-y-3">
           <!-- Injected via JS -->
         </div>
       </div>
-      <div class="px-6 py-4 border-t border-[#eaecf0] flex items-center justify-end gap-2">
-        <button id="btn-close-preview-auto" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer">Close</button>
+      <div
+        class="px-6 py-4 border-t border-[#eaecf0] flex items-center justify-end gap-2"
+      >
+        <button
+          id="btn-close-preview-auto"
+          class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+          >Close</button
+        >
       </div>
     </div>
   </div>
@@ -1933,7 +2327,12 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             Add from catalog
           </button>
         </div>
-        <input type="file" id="automation-local-file-input" class="hidden" multiple />
+        <input
+          type="file"
+          id="automation-local-file-input"
+          class="hidden"
+          multiple
+        />
       </div>
     </div>
     <div class="space-y-2">
@@ -2004,7 +2403,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         </p>
 
         <!-- Tabs -->
-        <div class="flex items-center gap-1 mt-4 p-1 bg-[#F9FAFB] rounded-xl w-fit">
+        <div
+          class="flex items-center gap-1 mt-4 p-1 bg-[#F9FAFB] rounded-xl w-fit"
+        >
           <button
             id="tab-same-time"
             onclick="switchBulkScheduleTab('same-time')"
@@ -2033,7 +2434,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       </div>
 
       <!-- Scrollable Content -->
-      <div class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2">
+      <div
+        class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2"
+      >
         <!-- TAB: SAME TIME -->
         <div id="bulk-panel-same-time" class="space-y-4">
           <div class="space-y-2">
@@ -2058,7 +2461,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         <!-- TAB: DAILY POST -->
         <div id="bulk-panel-daily-post" class="hidden space-y-4">
           <div class="space-y-2">
-            <label class="text-[12px] font-semibold text-[#344054]">Start Date</label>
+            <label class="text-[12px] font-semibold text-[#344054]"
+              >Start Date</label
+            >
             <input
               id="bulk-daily-start"
               type="date"
@@ -2075,9 +2480,14 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             />
           </div>
           <div class="space-y-2">
-            <label class="text-[12px] font-semibold text-[#344054]">Posts per day</label>
+            <label class="text-[12px] font-semibold text-[#344054]"
+              >Posts per day</label
+            >
             <div class="flex items-center gap-2">
-              <button onclick="adjustBulkDailyPosts(-1)" class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] cursor-pointer transition-colors">
+              <button
+                onclick="adjustBulkDailyPosts(-1)"
+                class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] cursor-pointer transition-colors"
+              >
                 <i class="ti ti-minus text-[12px]"></i>
               </button>
               <input
@@ -2088,11 +2498,16 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                 value="1"
                 class="w-16 h-9 text-center rounded-lg border border-[#eaecf0] bg-white text-[13px] text-[#111827] outline-none focus:border-[#2563EB] transition-all"
               />
-              <button onclick="adjustBulkDailyPosts(1)" class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] cursor-pointer transition-colors">
+              <button
+                onclick="adjustBulkDailyPosts(1)"
+                class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#667085] hover:bg-[#F9FAFB] cursor-pointer transition-colors"
+              >
                 <i class="ti ti-plus text-[12px]"></i>
               </button>
             </div>
-            <p class="text-[11px] text-[#98a2b3]">How many posts to publish each day</p>
+            <p class="text-[11px] text-[#98a2b3]">
+              How many posts to publish each day
+            </p>
           </div>
         </div>
 
@@ -2110,24 +2525,36 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             class="w-full flex items-center justify-between p-3.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] transition-all cursor-pointer group"
           >
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-lg bg-[#F3F4F6] flex items-center justify-center">
+              <div
+                class="w-9 h-9 rounded-lg bg-[#F3F4F6] flex items-center justify-center"
+              >
                 <i class="ti ti-message-bolt text-[16px] text-[#111827]"></i>
               </div>
               <div class="text-left">
-                <p class="text-[13px] font-bold text-[#111827] flex items-center gap-1.5">
+                <p
+                  class="text-[13px] font-bold text-[#111827] flex items-center gap-1.5"
+                >
                   Engagement Settings
-                  <span id="bulk-schedule-engagement-indicator" class="hidden w-2 h-2 rounded-full bg-[#22C55E]"></span>
+                  <span
+                    id="bulk-schedule-engagement-indicator"
+                    class="hidden w-2 h-2 rounded-full bg-[#22C55E]"></span>
                 </p>
-                <p class="text-[11px] text-[#667085]">Auto reply, like, DM, and more</p>
+                <p class="text-[11px] text-[#667085]">
+                  Auto reply, like, DM, and more
+                </p>
               </div>
             </div>
-            <i class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"></i>
+            <i
+              class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"
+            ></i>
           </button>
         </div>
 
         <!-- Preview -->
         <div class="mt-6 pt-4 border-t border-[#eaecf0]">
-          <h4 class="text-[12px] font-bold text-[#344054] mb-2">Preview Timeline</h4>
+          <h4 class="text-[12px] font-bold text-[#344054] mb-2">
+            Preview Timeline
+          </h4>
           <div id="bulk-schedule-preview" class="space-y-1.5">
             <!-- Preview injected via JS -->
           </div>
@@ -2135,11 +2562,19 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       </div>
 
       <!-- Floating Footer -->
-      <div class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 px-7 py-5 bg-white border-t border-[#eaecf0]">
-        <button onclick="closeBulkScheduleModal()" class="px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[13px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer">
+      <div
+        class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 px-7 py-5 bg-white border-t border-[#eaecf0]"
+      >
+        <button
+          onclick="closeBulkScheduleModal()"
+          class="px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[#344054] text-[13px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer"
+        >
           Cancel
         </button>
-        <button onclick="confirmBulkSchedule()" class="px-5 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
+        <button
+          onclick="confirmBulkSchedule()"
+          class="px-5 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+        >
           Confirm Schedule
         </button>
       </div>
@@ -2149,12 +2584,24 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
 <style>
   @keyframes fadeOutSlide {
-    0% { opacity: 1; transform: translateY(0) scale(1); }
-    100% { opacity: 0; transform: translateY(-60px) scale(0.95); }
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-60px) scale(0.95);
+    }
   }
   @keyframes fadeInSlide {
-    0% { opacity: 0; transform: translateY(60px) scale(0.95); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+    0% {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
   .fade-out-slide {
     animation: fadeOutSlide 0.35s ease-in forwards;
@@ -2312,11 +2759,19 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     slotPrompt: document.getElementById("automation-prompt"),
     btnAddSlot: document.getElementById("btn-add-automation-popover"),
     automationVariations: document.getElementById("automation-variations"),
-    btnAutomationReferences: document.getElementById("btn-automation-references"),
-    automationReferencesDropdown: document.getElementById("automation-references-dropdown"),
+    btnAutomationReferences: document.getElementById(
+      "btn-automation-references",
+    ),
+    automationReferencesDropdown: document.getElementById(
+      "automation-references-dropdown",
+    ),
     btnAutomationAddLocal: document.getElementById("btn-automation-add-local"),
-    btnAutomationAddCatalog: document.getElementById("btn-automation-add-catalog"),
-    automationLocalFileInput: document.getElementById("automation-local-file-input"),
+    btnAutomationAddCatalog: document.getElementById(
+      "btn-automation-add-catalog",
+    ),
+    automationLocalFileInput: document.getElementById(
+      "automation-local-file-input",
+    ),
     automationRefTags: document.getElementById("automation-ref-tags"),
     btnVarMinus: document.getElementById("btn-var-minus"),
     btnVarPlus: document.getElementById("btn-var-plus"),
@@ -2496,6 +2951,17 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     bindEvents();
     renderCalendar();
     renderWeeklyCalendar();
+
+    // Check URL parameters or hash to switch to correct tab on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    if (tabParam === 'generated') {
+      switchTab('generated');
+    } else if (tabParam === 'scheduled') {
+      switchTab('scheduled');
+    } else if (window.location.hash === '#generated' || window.location.hash === '#outputs') {
+      switchTab('generated');
+    }
   }
 
   // ═══════════════════════════════════════════
@@ -2590,12 +3056,14 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     ];
 
     const items = [];
-    
+
     // Create 3 automation groups for drafts (each with 5 outputs)
     for (let g = 0; g < 3; g++) {
       const brand = brands[g];
       const autoName = `Campaign ${titles[g]}`;
-      const createdAt = new Date(now.getTime() - (g + 1) * 2 * 60 * 60 * 1000).toISOString();
+      const createdAt = new Date(
+        now.getTime() - (g + 1) * 2 * 60 * 60 * 1000,
+      ).toISOString();
       for (let i = 0; i < 5; i++) {
         items.push({
           id: `gen_draft_${g}_${i}`,
@@ -2625,11 +3093,21 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
     // Create 15 other items (approved, rejected, scheduled, published)
     for (let i = 0; i < 15; i++) {
-      const statusPool = ["approved", "approved", "rejected", "scheduled", "scheduled", "published", "published"];
+      const statusPool = [
+        "approved",
+        "approved",
+        "rejected",
+        "scheduled",
+        "scheduled",
+        "published",
+        "published",
+      ];
       const status = statusPool[i % statusPool.length];
       const type = types[i % 4];
-      const createdAt = new Date(now.getTime() - (i + 1) * 12 * 60 * 60 * 1000).toISOString();
-      
+      const createdAt = new Date(
+        now.getTime() - (i + 1) * 12 * 60 * 60 * 1000,
+      ).toISOString();
+
       // Published items get engagement data
       const isPublished = status === "published";
       const reach = isPublished ? Math.floor(Math.random() * 5000) + 500 : 0;
@@ -2637,10 +3115,14 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       const comments = isPublished ? Math.floor(Math.random() * 50) + 5 : 0;
       const shares = isPublished ? Math.floor(Math.random() * 30) + 2 : 0;
       const saves = isPublished ? Math.floor(Math.random() * 80) + 10 : 0;
-      const profileVisits = isPublished ? Math.floor(Math.random() * 200) + 20 : 0;
+      const profileVisits = isPublished
+        ? Math.floor(Math.random() * 200) + 20
+        : 0;
       const follows = isPublished ? Math.floor(Math.random() * 15) + 1 : 0;
-      const engagementRate = isPublished ? ((likes + comments + shares + saves) / reach * 100).toFixed(1) : 0;
-      
+      const engagementRate = isPublished
+        ? (((likes + comments + shares + saves) / reach) * 100).toFixed(1)
+        : 0;
+
       items.push({
         id: `gen_${status}_${i}`,
         title: titles[i % titles.length],
@@ -2653,8 +3135,15 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         status,
         automationName: "General Campaign",
         createdAt,
-        scheduledAt: status === "scheduled" ? new Date(2026, 4, 10 + (i % 10), 9, 0).toISOString() : (status === "published" ? new Date(2026, 4, 12 + (i % 5), 9, 0).toISOString() : null),
-        publishedAt: isPublished ? new Date(2026, 4, 12 + (i % 5), 9, 0).toISOString() : null,
+        scheduledAt:
+          status === "scheduled"
+            ? new Date(2026, 4, 10 + (i % 10), 9, 0).toISOString()
+            : status === "published"
+              ? new Date(2026, 4, 12 + (i % 5), 9, 0).toISOString()
+              : null,
+        publishedAt: isPublished
+          ? new Date(2026, 4, 12 + (i % 5), 9, 0).toISOString()
+          : null,
         views: reach,
         likes,
         comments,
@@ -2677,10 +3166,15 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   function renderGenerated() {
     // Apply filters
     let filtered = generatedContent.filter((item) => {
-      if (currentBusinessFilter !== "all" && item.brand !== currentBusinessFilter) return false;
+      if (
+        currentBusinessFilter !== "all" &&
+        item.brand !== currentBusinessFilter
+      )
+        return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
-        const haystack = `${item.title} ${item.brand} ${item.caption}`.toLowerCase();
+        const haystack =
+          `${item.title} ${item.brand} ${item.caption}`.toLowerCase();
         if (!haystack.includes(q)) return false;
       }
       return true;
@@ -2702,23 +3196,35 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     const draftList = document.getElementById("draft-list");
     const draftEmpty = document.getElementById("draft-empty");
     const draftCount = document.getElementById("draft-count");
-    const draftShowMoreContainer = document.getElementById("draft-show-more-container");
+    const draftShowMoreContainer = document.getElementById(
+      "draft-show-more-container",
+    );
     if (draftCount) draftCount.textContent = drafts.length;
     if (els.draftTopCount) els.draftTopCount.textContent = drafts.length;
 
     if (drafts.length === 0) {
       if (draftList) draftList.innerHTML = "";
       if (draftEmpty) draftEmpty.classList.remove("hidden");
-      if (draftShowMoreContainer) { draftShowMoreContainer.classList.add("hidden"); draftShowMoreContainer.classList.remove("flex"); }
+      if (draftShowMoreContainer) {
+        draftShowMoreContainer.classList.add("hidden");
+        draftShowMoreContainer.classList.remove("flex");
+      }
     } else {
       if (draftEmpty) draftEmpty.classList.add("hidden");
       if (draftList) {
         const slicedDrafts = drafts.slice(0, draftLimit);
-        draftList.innerHTML = slicedDrafts.map((item) => renderDraftItem(item)).join("");
+        draftList.innerHTML = slicedDrafts
+          .map((item) => renderDraftItem(item))
+          .join("");
       }
       if (draftShowMoreContainer) {
-        if (drafts.length > draftLimit) { draftShowMoreContainer.classList.remove("hidden"); draftShowMoreContainer.classList.add("flex"); }
-        else { draftShowMoreContainer.classList.add("hidden"); draftShowMoreContainer.classList.remove("flex"); }
+        if (drafts.length > draftLimit) {
+          draftShowMoreContainer.classList.remove("hidden");
+          draftShowMoreContainer.classList.add("flex");
+        } else {
+          draftShowMoreContainer.classList.add("hidden");
+          draftShowMoreContainer.classList.remove("flex");
+        }
       }
     }
 
@@ -2727,8 +3233,14 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     const rightRejected = document.getElementById("right-panel-rejected");
 
     if (outputStatusFilter === "rejected") {
-      if (rightApproved) { rightApproved.classList.add("hidden"); rightApproved.classList.remove("flex"); }
-      if (rightRejected) { rightRejected.classList.remove("hidden"); rightRejected.classList.add("flex"); }
+      if (rightApproved) {
+        rightApproved.classList.add("hidden");
+        rightApproved.classList.remove("flex");
+      }
+      if (rightRejected) {
+        rightRejected.classList.remove("hidden");
+        rightRejected.classList.add("flex");
+      }
       // Render rejected grid
       const rejectedGrid = document.getElementById("rejected-grid");
       const rejectedEmpty = document.getElementById("rejected-empty");
@@ -2739,11 +3251,18 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         if (rejectedEmpty) rejectedEmpty.classList.remove("hidden");
       } else {
         if (rejectedEmpty) rejectedEmpty.classList.add("hidden");
-        if (rejectedGrid) rejectedGrid.innerHTML = renderApprovedGrid(rejected, true);
+        if (rejectedGrid)
+          rejectedGrid.innerHTML = renderApprovedGrid(rejected, true);
       }
     } else {
-      if (rightApproved) { rightApproved.classList.remove("hidden"); rightApproved.classList.add("flex"); }
-      if (rightRejected) { rightRejected.classList.add("hidden"); rightRejected.classList.remove("flex"); }
+      if (rightApproved) {
+        rightApproved.classList.remove("hidden");
+        rightApproved.classList.add("flex");
+      }
+      if (rightRejected) {
+        rightRejected.classList.add("hidden");
+        rightRejected.classList.remove("flex");
+      }
       // Render Approved Panel
       const approvedGrid = document.getElementById("approved-grid");
       const approvedEmpty = document.getElementById("approved-empty");
@@ -2862,12 +3381,17 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               </span>
 
               <!-- Engagement Settings Indicator -->
-              ${(item.autoEngagement && Object.values(item.autoEngagement).some(v => v)) ? `
+              ${
+                item.autoEngagement &&
+                Object.values(item.autoEngagement).some((v) => v)
+                  ? `
               <span class="inline-flex items-center gap-1 px-2 h-5 rounded-full bg-[#ECFDF3] text-[10px] font-bold text-[#027A48] border border-[#D1FADF]" title="Engagement settings active">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#22C55E]"></span>
                 Engagement
               </span>
-              ` : ""}
+              `
+                  : ""
+              }
             </div>
           </div>
         </div>
@@ -2893,12 +3417,14 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     const now = new Date();
     if (scheduledFilter === "upcoming") {
       scheduled = scheduled.filter((item) => {
-        const dateField = item.status === "published" ? item.publishedAt : item.scheduledAt;
+        const dateField =
+          item.status === "published" ? item.publishedAt : item.scheduledAt;
         return new Date(dateField) >= now;
       });
     } else if (scheduledFilter === "past") {
       scheduled = scheduled.filter((item) => {
-        const dateField = item.status === "published" ? item.publishedAt : item.scheduledAt;
+        const dateField =
+          item.status === "published" ? item.publishedAt : item.scheduledAt;
         return new Date(dateField) < now;
       });
     }
@@ -2955,7 +3481,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     // Group by date (use publishedAt for published items, scheduledAt for others)
     const grouped = {};
     scheduled.forEach((item) => {
-      const dateField = item.status === "published" ? item.publishedAt : item.scheduledAt;
+      const dateField =
+        item.status === "published" ? item.publishedAt : item.scheduledAt;
       const dateKey = new Date(dateField).toLocaleDateString("en-US", {
         weekday: "long",
         year: "numeric",
@@ -3020,10 +3547,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                     minute: "2-digit",
                   },
                 );
-                
+
                 const isStory = item.contentType === "Story";
                 const aspectClass = isStory ? "aspect-[9/16]" : "aspect-[3/4]";
-                
+
                 return `
               <div class="group flex items-center gap-3 bg-white rounded-xl border border-[#eaecf0] p-2 hover:shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-[#111827] transition-all cursor-pointer relative" onclick="openPreviewModal('${item.id}')">
                 <!-- Tiny Image Placeholder -->
@@ -3041,12 +3568,17 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                      </span>
                      <span class="w-1 h-1 rounded-full bg-[#D1D5DB]"></span>
                      <span class="text-[11px] font-medium text-[#667085]">${escapeHtml(item.contentType)}</span>
-                     ${(item.autoEngagement && Object.values(item.autoEngagement).some(v => v)) ? `
+                     ${
+                       item.autoEngagement &&
+                       Object.values(item.autoEngagement).some((v) => v)
+                         ? `
                      <span class="inline-flex items-center gap-1 px-1.5 h-4 rounded-full bg-[#ECFDF3] text-[8px] font-bold text-[#027A48] border border-[#D1FADF]" title="Engagement settings active">
                        <span class="w-1 h-1 rounded-full bg-[#22C55E]"></span>
                        Engagement
                      </span>
-                     ` : ""}
+                     `
+                         : ""
+                     }
                   </div>
                   <p class="text-[11px] text-[#98a2b3] line-clamp-1">${escapeHtml(item.caption || "No caption")}</p>
                 </div>
@@ -3094,7 +3626,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     // Build a map of scheduled items by day
     const itemsByDay = {};
     scheduled.forEach((item) => {
-      const dateField = item.status === "published" ? item.publishedAt : item.scheduledAt;
+      const dateField =
+        item.status === "published" ? item.publishedAt : item.scheduledAt;
       const d = new Date(dateField);
       if (d.getFullYear() === year && d.getMonth() === month) {
         const day = d.getDate();
@@ -3122,25 +3655,35 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         <div class="aspect-square p-2 rounded-xl border ${isToday ? "border-[#8B5CF6] bg-[#F5F3FF]" : "border-[#eaecf0] bg-white"} flex flex-col gap-1 cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all" onclick="${hasItems ? `openPreviewModal('${dayItems[0].id}')` : ""}">
           <div class="flex items-center justify-between">
             <span class="text-[13px] font-bold ${isToday ? "text-[#7C3AED]" : "text-[#111827]"}">${day}</span>
-            ${hasItems ? (() => {
-              const hasPublished = dayItems.some(i => i.status === "published");
-              const allPublished = dayItems.every(i => i.status === "published");
-              const dotColor = allPublished ? "bg-[#9CA3AF]" : hasPublished ? "bg-[#8B5CF6]" : "bg-[#8B5CF6]";
-              return `<span class="w-2 h-2 rounded-full ${dotColor}"></span>`;
-            })() : ""}
+            ${
+              hasItems
+                ? (() => {
+                    const hasPublished = dayItems.some(
+                      (i) => i.status === "published",
+                    );
+                    const allPublished = dayItems.every(
+                      (i) => i.status === "published",
+                    );
+                    const dotColor = allPublished
+                      ? "bg-[#9CA3AF]"
+                      : hasPublished
+                        ? "bg-[#8B5CF6]"
+                        : "bg-[#8B5CF6]";
+                    return `<span class="w-2 h-2 rounded-full ${dotColor}"></span>`;
+                  })()
+                : ""
+            }
           </div>
           ${dayItems
             .slice(0, 2)
-            .map(
-              (item) => {
-                const isPublished = item.status === "published";
-                return `
+            .map((item) => {
+              const isPublished = item.status === "published";
+              return `
             <div class="px-1.5 py-0.5 rounded-md ${isPublished ? "bg-[#F3F4F6] text-[#667085]" : "bg-[#F5F3FF] text-[#7C3AED]"} text-[9px] font-medium truncate leading-tight">
               ${escapeHtml(item.title)}
             </div>
           `;
-              },
-            )
+            })
             .join("")}
           ${dayItems.length > 2 ? `<div class="px-1.5 py-0.5 text-[9px] text-[#98a2b3]">+${dayItems.length - 2} more</div>` : ""}
         </div>
@@ -3168,7 +3711,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     // Build a map of scheduled items by day
     const itemsByDay = {};
     scheduled.forEach((item) => {
-      const dateField = item.status === "published" ? item.publishedAt : item.scheduledAt;
+      const dateField =
+        item.status === "published" ? item.publishedAt : item.scheduledAt;
       const d = new Date(dateField);
       // Find which day of this week it belongs to
       for (let i = 0; i < 7; i++) {
@@ -3207,13 +3751,19 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                 ? dayItems
                     .map((item) => {
                       const timeStr = new Date(
-                        item.status === "published" ? item.publishedAt : item.scheduledAt,
+                        item.status === "published"
+                          ? item.publishedAt
+                          : item.scheduledAt,
                       ).toLocaleTimeString("en-US", {
                         hour: "2-digit",
                         minute: "2-digit",
                       });
                       const isItemPast =
-                        new Date(item.status === "published" ? item.publishedAt : item.scheduledAt) < new Date();
+                        new Date(
+                          item.status === "published"
+                            ? item.publishedAt
+                            : item.scheduledAt,
+                        ) < new Date();
                       const isPublished = item.status === "published";
                       return `
                 <div class="group p-2 rounded-2xl ${isPublished ? "bg-[#F3F4F6] border-[#D1D5DB]" : "bg-white border-[#eaecf0]"} border hover:border-[#111827] hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-all cursor-pointer ${isItemPast ? "opacity-60 grayscale-[0.3]" : ""}" onclick="openPreviewModal('${item.id}')">
@@ -3236,12 +3786,17 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                     <span class="px-1.5 h-4 rounded-full ${isPublished ? "bg-[#F3F4F6] text-[#667085] border-[#D1D5DB]" : "bg-[#EFF6FF] text-[#2563EB] border-[#DBEAFE]"} text-[8px] font-bold border flex items-center">
                       ${escapeHtml(item.contentType)}
                     </span>
-                    ${(item.autoEngagement && Object.values(item.autoEngagement).some(v => v)) ? `
+                    ${
+                      item.autoEngagement &&
+                      Object.values(item.autoEngagement).some((v) => v)
+                        ? `
                     <span class="inline-flex items-center gap-1 px-1.5 h-4 rounded-full bg-[#ECFDF3] text-[8px] font-bold text-[#027A48] border border-[#D1FADF]" title="Engagement settings active">
                       <span class="w-1 h-1 rounded-full bg-[#22C55E]"></span>
                       Engagement
                     </span>
-                    ` : ""}
+                    `
+                        : ""
+                    }
                   </div>
                   
                   <div class="text-[9px] text-[#667085] line-clamp-2 leading-tight">${escapeHtml(item.caption || "")}</div>
@@ -3328,11 +3883,36 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     if (!item) return;
 
     const statusConfig = {
-      draft: { bg: "bg-[#F3F4F6]", text: "text-[#344054]", border: "border-[#D0D5DD]", label: "Draft" },
-      approved: { bg: "bg-[#F3F4F6]", text: "text-[#111827]", border: "border-[#D0D5DD]", label: "Approved" },
-      rejected: { bg: "bg-[#F3F4F6]", text: "text-[#344054]", border: "border-[#D0D5DD]", label: "Rejected" },
-      scheduled: { bg: "bg-[#F3F4F6]", text: "text-[#111827]", border: "border-[#D0D5DD]", label: "Scheduled" },
-      published: { bg: "bg-[#111827]", text: "text-white", border: "border-[#111827]", label: "Published" },
+      draft: {
+        bg: "bg-[#F3F4F6]",
+        text: "text-[#344054]",
+        border: "border-[#D0D5DD]",
+        label: "Draft",
+      },
+      approved: {
+        bg: "bg-[#F3F4F6]",
+        text: "text-[#111827]",
+        border: "border-[#D0D5DD]",
+        label: "Approved",
+      },
+      rejected: {
+        bg: "bg-[#F3F4F6]",
+        text: "text-[#344054]",
+        border: "border-[#D0D5DD]",
+        label: "Rejected",
+      },
+      scheduled: {
+        bg: "bg-[#F3F4F6]",
+        text: "text-[#111827]",
+        border: "border-[#D0D5DD]",
+        label: "Scheduled",
+      },
+      published: {
+        bg: "bg-[#111827]",
+        text: "text-white",
+        border: "border-[#111827]",
+        label: "Published",
+      },
     };
     const cfg = statusConfig[item.status] || statusConfig.draft;
 
@@ -3349,7 +3929,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     if (draftCounter) {
       if (item.status === "draft" && item.automationName) {
         const groupDrafts = generatedContent.filter(
-          (g) => g.automationName === item.automationName && g.status === "draft"
+          (g) =>
+            g.automationName === item.automationName && g.status === "draft",
         );
         const currentIndex = groupDrafts.findIndex((g) => g.id === item.id);
         const position = currentIndex >= 0 ? currentIndex + 1 : 1;
@@ -3383,7 +3964,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
     // Caption
     const captionInput = document.getElementById("preview-caption-input");
-    if (captionInput) { captionInput.value = item.caption || ""; originalCaption = item.caption || ""; }
+    if (captionInput) {
+      captionInput.value = item.caption || "";
+      originalCaption = item.caption || "";
+    }
     const saveBtn = document.getElementById("btn-save-caption");
     if (saveBtn) saveBtn.classList.add("hidden");
 
@@ -3399,16 +3983,24 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
     // Right tabs (show for approved/scheduled/published, hide for draft/rejected)
     const rightTabs = document.getElementById("preview-right-tabs");
-    const engagementAction = document.getElementById("preview-engagement-action");
-    if (item.status === "approved" || item.status === "scheduled" || item.status === "published") {
+    const engagementAction = document.getElementById(
+      "preview-engagement-action",
+    );
+    if (
+      item.status === "approved" ||
+      item.status === "scheduled" ||
+      item.status === "published"
+    ) {
       if (rightTabs) rightTabs.classList.remove("hidden");
       if (engagementAction) {
         engagementAction.classList.remove("hidden");
         // Update engagement indicator
-        const indicator = document.getElementById("preview-engagement-indicator");
+        const indicator = document.getElementById(
+          "preview-engagement-indicator",
+        );
         if (indicator) {
           const eng = item.autoEngagement || {};
-          const isActive = Object.values(eng).some(v => v);
+          const isActive = Object.values(eng).some((v) => v);
           indicator.classList.toggle("hidden", !isActive);
           indicator.classList.toggle("flex", isActive);
         }
@@ -3426,15 +4018,19 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       if (perfEmpty) perfEmpty.classList.add("hidden");
       if (perfData) perfData.classList.remove("hidden");
       const reachEl = document.getElementById("preview-reach");
-      const engagementRateEl = document.getElementById("preview-engagement-rate");
+      const engagementRateEl = document.getElementById(
+        "preview-engagement-rate",
+      );
       const savesEl = document.getElementById("preview-saves");
       const profileVisitsEl = document.getElementById("preview-profile-visits");
       const sharesEl = document.getElementById("preview-shares");
       const followsEl = document.getElementById("preview-follows");
       if (reachEl) reachEl.textContent = item.views || 0;
-      if (engagementRateEl) engagementRateEl.textContent = item.engagementRate + "%";
+      if (engagementRateEl)
+        engagementRateEl.textContent = item.engagementRate + "%";
       if (savesEl) savesEl.textContent = item.saves || 0;
-      if (profileVisitsEl) profileVisitsEl.textContent = item.profileVisits || 0;
+      if (profileVisitsEl)
+        profileVisitsEl.textContent = item.profileVisits || 0;
       if (sharesEl) sharesEl.textContent = item.shares || 0;
       if (followsEl) followsEl.textContent = item.follows || 0;
     } else {
@@ -3453,17 +4049,32 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     if (rejectAlert) rejectAlert.classList.add("hidden");
 
     if (item.status === "draft") {
-      if (actions) { actions.classList.remove("hidden"); actions.classList.add("flex"); }
-      if (rejectAlert) { rejectAlert.classList.remove("hidden"); rejectAlert.classList.add("flex"); }
+      if (actions) {
+        actions.classList.remove("hidden");
+        actions.classList.add("flex");
+      }
+      if (rejectAlert) {
+        rejectAlert.classList.remove("hidden");
+        rejectAlert.classList.add("flex");
+      }
     } else if (item.status === "approved") {
-      if (approvedActions) { approvedActions.classList.remove("hidden"); approvedActions.classList.add("flex"); }
+      if (approvedActions) {
+        approvedActions.classList.remove("hidden");
+        approvedActions.classList.add("flex");
+      }
     } else if (item.status === "rejected") {
-      if (rejectedActions) { rejectedActions.classList.remove("hidden"); rejectedActions.classList.add("flex"); }
+      if (rejectedActions) {
+        rejectedActions.classList.remove("hidden");
+        rejectedActions.classList.add("flex");
+      }
     }
 
     // Open modal
     const modal = document.getElementById("modal-preview");
-    if (modal) { modal.classList.remove("hidden"); modal.classList.add("flex"); }
+    if (modal) {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
   }
 
   function updateCarouselControls() {
@@ -3476,9 +4087,16 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       if (badge) badge.classList.add("hidden");
       return;
     }
-    if (badge) { badge.classList.remove("hidden"); badge.textContent = `${previewCarouselIndex + 1}/${previewCarouselTotal}`; }
+    if (badge) {
+      badge.classList.remove("hidden");
+      badge.textContent = `${previewCarouselIndex + 1}/${previewCarouselTotal}`;
+    }
     if (prevBtn) prevBtn.classList.toggle("hidden", previewCarouselIndex === 0);
-    if (nextBtn) nextBtn.classList.toggle("hidden", previewCarouselIndex === previewCarouselTotal - 1);
+    if (nextBtn)
+      nextBtn.classList.toggle(
+        "hidden",
+        previewCarouselIndex === previewCarouselTotal - 1,
+      );
   }
 
   function switchPreviewTab(tab) {
@@ -3489,13 +4107,25 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     if (tab === "content") {
       if (contentTab) contentTab.classList.remove("hidden");
       if (perfTab) perfTab.classList.add("hidden");
-      if (tabContent) { tabContent.classList.add("bg-white", "text-[#111827]", "shadow-sm"); tabContent.classList.remove("text-[#667085]"); }
-      if (tabPerf) { tabPerf.classList.remove("bg-white", "text-[#111827]", "shadow-sm"); tabPerf.classList.add("text-[#667085]"); }
+      if (tabContent) {
+        tabContent.classList.add("bg-white", "text-[#111827]", "shadow-sm");
+        tabContent.classList.remove("text-[#667085]");
+      }
+      if (tabPerf) {
+        tabPerf.classList.remove("bg-white", "text-[#111827]", "shadow-sm");
+        tabPerf.classList.add("text-[#667085]");
+      }
     } else {
       if (contentTab) contentTab.classList.add("hidden");
       if (perfTab) perfTab.classList.remove("hidden");
-      if (tabPerf) { tabPerf.classList.add("bg-white", "text-[#111827]", "shadow-sm"); tabPerf.classList.remove("text-[#667085]"); }
-      if (tabContent) { tabContent.classList.remove("bg-white", "text-[#111827]", "shadow-sm"); tabContent.classList.add("text-[#667085]"); }
+      if (tabPerf) {
+        tabPerf.classList.add("bg-white", "text-[#111827]", "shadow-sm");
+        tabPerf.classList.remove("text-[#667085]");
+      }
+      if (tabContent) {
+        tabContent.classList.remove("bg-white", "text-[#111827]", "shadow-sm");
+        tabContent.classList.add("text-[#667085]");
+      }
     }
   }
 
@@ -3549,7 +4179,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   function findNextDraftInGroup(currentItem) {
     if (!currentItem.automationName) return null;
     const groupDrafts = generatedContent.filter(
-      (g) => g.automationName === currentItem.automationName && g.status === "draft" && g.id !== currentItem.id
+      (g) =>
+        g.automationName === currentItem.automationName &&
+        g.status === "draft" &&
+        g.id !== currentItem.id,
     );
     return groupDrafts.length > 0 ? groupDrafts[0] : null;
   }
@@ -3622,17 +4255,26 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
     closePreviewModal();
     const modal = document.getElementById("modal-preview-schedule");
-    if (modal) { modal.classList.remove("hidden"); modal.classList.add("flex"); }
+    if (modal) {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
   }
 
   function closePreviewScheduleModal() {
     const modal = document.getElementById("modal-preview-schedule");
-    if (modal) { modal.classList.add("hidden"); modal.classList.remove("flex"); }
+    if (modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
     selectedApprovedIds = [];
   }
 
   function confirmPreviewSchedule() {
-    const itemId = selectedApprovedIds.length === 1 ? selectedApprovedIds[0] : previewingContentId;
+    const itemId =
+      selectedApprovedIds.length === 1
+        ? selectedApprovedIds[0]
+        : previewingContentId;
     if (!itemId) return;
     const item = generatedContent.find((g) => g.id === itemId);
     if (!item) return;
@@ -3673,14 +4315,20 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
   function openRegenerateModal() {
     const modal = document.getElementById("modal-regenerate");
-    if (modal) { modal.classList.remove("hidden"); modal.classList.add("flex"); }
+    if (modal) {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
     const prompt = document.getElementById("regenerate-prompt");
     if (prompt) prompt.value = "";
   }
 
   function closeRegenerateModal() {
     const modal = document.getElementById("modal-regenerate");
-    if (modal) { modal.classList.add("hidden"); modal.classList.remove("flex"); }
+    if (modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
   }
 
   function submitRegenerate() {
@@ -3694,11 +4342,15 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       "Your daily dose of inspiration is here 💡 Save this for later! #ContentMarketing",
       "New content, who dis? 😎 Tag someone who needs to see this! #SocialMedia",
     ];
-    const newCaption = newCaptions[Math.floor(Math.random() * newCaptions.length)];
+    const newCaption =
+      newCaptions[Math.floor(Math.random() * newCaptions.length)];
     item.caption = newCaption;
     saveGenerated();
     const captionInput = document.getElementById("preview-caption-input");
-    if (captionInput) { captionInput.value = newCaption; originalCaption = newCaption; }
+    if (captionInput) {
+      captionInput.value = newCaption;
+      originalCaption = newCaption;
+    }
     closeRegenerateModal();
     showToast("Caption regenerated!");
   }
@@ -3757,7 +4409,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     document.getElementById("single-schedule-time").value = "08:00";
 
     // Load engagement settings for this item
-    singleScheduleEngagement = item.autoEngagement ? { ...item.autoEngagement } : {};
+    singleScheduleEngagement = item.autoEngagement
+      ? { ...item.autoEngagement }
+      : {};
     updateSingleScheduleEngagementIndicator();
 
     const modal = document.getElementById("modal-single-schedule");
@@ -3811,9 +4465,11 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   }
 
   function updateSingleScheduleEngagementIndicator() {
-    const indicator = document.getElementById("single-schedule-engagement-indicator");
+    const indicator = document.getElementById(
+      "single-schedule-engagement-indicator",
+    );
     if (!indicator) return;
-    const isActive = Object.values(singleScheduleEngagement).some(v => v);
+    const isActive = Object.values(singleScheduleEngagement).some((v) => v);
     indicator.classList.toggle("hidden", !isActive);
   }
 
@@ -3834,53 +4490,59 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   }
 
   function updateBulkScheduleEngagementIndicator() {
-    const indicator = document.getElementById("bulk-schedule-engagement-indicator");
+    const indicator = document.getElementById(
+      "bulk-schedule-engagement-indicator",
+    );
     if (!indicator) return;
-    const isActive = Object.values(bulkScheduleEngagement).some(v => v);
+    const isActive = Object.values(bulkScheduleEngagement).some((v) => v);
     indicator.classList.toggle("hidden", !isActive);
   }
 
   function openPreviewAutomation(autoId) {
     const auto = automations.find((a) => a.id === autoId);
     if (!auto) return;
-    
+
     editingAutoId = auto.id;
-    
+
     // Populate wizardData
     wizardData.name = auto.name;
     wizardData.dna = auto.dna;
     wizardData.recurring = auto.recurring;
     wizardData.selectedDates = JSON.parse(JSON.stringify(auto.selectedDates));
-    
+
     // Set UI elements
     els.inputName.value = auto.name;
-    els.dnaSelectedName.textContent = auto.dna ? auto.dna.name : "Select Business DNA";
-    els.dnaSelectedDesc.textContent = auto.dna ? auto.dna.desc : "Choose a business profile for AI grounding";
+    els.dnaSelectedName.textContent = auto.dna
+      ? auto.dna.name
+      : "Select Business DNA";
+    els.dnaSelectedDesc.textContent = auto.dna
+      ? auto.dna.desc
+      : "Choose a business profile for AI grounding";
     els.recurringRadios.forEach((r) => {
       r.checked = r.value === auto.recurring;
     });
-    if (auto.recurring === 'weekly') {
+    if (auto.recurring === "weekly") {
       els.weeklyRepeatWrapper.classList.remove("hidden");
       els.repeatForWrapper.classList.add("hidden");
-    } else if (auto.recurring === 'monthly') {
+    } else if (auto.recurring === "monthly") {
       els.weeklyRepeatWrapper.classList.add("hidden");
       els.repeatForWrapper.classList.remove("hidden");
     } else {
       els.weeklyRepeatWrapper.classList.add("hidden");
       els.repeatForWrapper.classList.add("hidden");
     }
-    
+
     // Update labels and step
     currentStep = 1;
     const titleEl = document.getElementById("wizard-title");
     if (titleEl) titleEl.textContent = "Edit Automation";
     const btnStart = document.getElementById("btn-start-automation");
     if (btnStart) btnStart.textContent = "Save Changes";
-    
+
     goToStep(1);
     renderCalendar();
     renderWeeklyCalendar();
-    
+
     // Open modal
     els.modalAdd.classList.remove("hidden");
     els.modalAdd.classList.add("flex");
@@ -3888,7 +4550,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
   function closePreviewAutomation() {
     const modal = document.getElementById("modal-preview-automation");
-    if (modal) { modal.classList.add("hidden"); modal.classList.remove("flex"); }
+    if (modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
   }
 
   // ═══════════════════════════════════════════
@@ -4160,7 +4825,11 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   }
 
   function recurringLabel(value) {
-    const labels = { once: "One Time Only", monthly: "Same Dates Every Month", weekly: "Same Days Every Week" };
+    const labels = {
+      once: "One Time Only",
+      monthly: "Same Dates Every Month",
+      weekly: "Same Days Every Week",
+    };
     return labels[value] || value;
   }
 
@@ -4174,7 +4843,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     const container = els.automationRefTags;
     if (!container) return;
     const tag = document.createElement("span");
-    tag.className = "inline-flex items-center gap-1 px-2 h-6 rounded-full bg-white border border-[#D0D5DD] text-[11px] font-bold text-[#344054] shadow-sm";
+    tag.className =
+      "inline-flex items-center gap-1 px-2 h-6 rounded-full bg-white border border-[#D0D5DD] text-[11px] font-bold text-[#344054] shadow-sm";
     tag.innerHTML = `
       <span class="w-4 h-4 rounded-full bg-[#d1d5db] shrink-0"></span>
       <span class="truncate max-w-[120px]">${escapeHtml(name)}</span>
@@ -4470,7 +5140,15 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     } else if (isWeekly) {
       // Get unique day-of-week from selected dates
       const selectedDays = new Set();
-      const fullDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const fullDayNames = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
       selectedDateKeys.forEach((dk) => {
         const d = new Date(dk);
         selectedDays.add(d.getDay());
@@ -4489,16 +5167,24 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       // Find the Sunday of the week containing the first selected date
       const firstSelectedDate = new Date(selectedDateKeys[0]);
       const firstWeekSunday = new Date(firstSelectedDate);
-      firstWeekSunday.setDate(firstWeekSunday.getDate() - firstWeekSunday.getDay());
+      firstWeekSunday.setDate(
+        firstWeekSunday.getDate() - firstWeekSunday.getDay(),
+      );
       firstWeekSunday.setHours(0, 0, 0, 0);
 
       for (let i = 1; i <= repeatCount; i++) {
         const weekStart = new Date(firstWeekSunday);
         weekStart.setDate(weekStart.getDate() + i * 7);
-        const weekLabelStart = weekStart.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const weekLabelStart = weekStart.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
         const weekEnd = new Date(weekStart);
         weekEnd.setDate(weekEnd.getDate() + 6);
-        const weekLabelEnd = weekEnd.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const weekLabelEnd = weekEnd.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
 
         // Find matching dates in this week
         const weekDatePills = [];
@@ -5106,7 +5792,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   function openCommentModal(autoId) {
     editingAutomationId = autoId;
     // We can be opening this from an automation or from generated content
-    let source = automations.find((a) => a.id === autoId) || generatedContent.find((g) => g.id === autoId);
+    let source =
+      automations.find((a) => a.id === autoId) ||
+      generatedContent.find((g) => g.id === autoId);
     if (!source) return;
 
     const eng = source.autoEngagement || {
@@ -5118,7 +5806,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       replyDm: false,
     };
 
-    document.getElementById("toggle-delete-comment").checked = eng.deleteComment;
+    document.getElementById("toggle-delete-comment").checked =
+      eng.deleteComment;
     document.getElementById("toggle-reply-comment").checked = eng.replyComment;
     document.getElementById("toggle-like-comment").checked = eng.likeComment;
     document.getElementById("toggle-dm-comment").checked = eng.dmComment;
@@ -5167,7 +5856,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       // Update preview modal indicator
       const indicator = document.getElementById("preview-engagement-indicator");
       if (indicator) {
-        const isActive = Object.values(eng).some(v => v);
+        const isActive = Object.values(eng).some((v) => v);
         indicator.classList.toggle("hidden", !isActive);
         indicator.classList.toggle("flex", isActive);
       }
@@ -5218,12 +5907,14 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     }
 
     if (editingAutoId) {
-      const idx = automations.findIndex(a => a.id === editingAutoId);
+      const idx = automations.findIndex((a) => a.id === editingAutoId);
       if (idx !== -1) {
         automations[idx].name = wizardData.name;
         automations[idx].dna = wizardData.dna;
         automations[idx].recurring = wizardData.recurring;
-        automations[idx].selectedDates = JSON.parse(JSON.stringify(wizardData.selectedDates));
+        automations[idx].selectedDates = JSON.parse(
+          JSON.stringify(wizardData.selectedDates),
+        );
       }
     } else {
       const newAuto = {
@@ -5458,7 +6149,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           els.recurringPreview.classList.remove("hidden");
           renderRecurringPreview();
         } else if (e.target.value === "weekly") {
-          els.recurringInfo.textContent = "Content will repeat every week on the selected days.";
+          els.recurringInfo.textContent =
+            "Content will repeat every week on the selected days.";
           els.repeatForWrapper.classList.remove("hidden");
           els.weeklyRepeatWrapper.classList.remove("hidden");
           els.recurringPreview.classList.remove("hidden");
@@ -5498,7 +6190,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         els.automationReferencesDropdown.classList.toggle("hidden");
       });
       document.addEventListener("click", (e) => {
-        if (!els.automationReferencesDropdown.contains(e.target) && e.target !== els.btnAutomationReferences) {
+        if (
+          !els.automationReferencesDropdown.contains(e.target) &&
+          e.target !== els.btnAutomationReferences
+        ) {
           els.automationReferencesDropdown.classList.add("hidden");
         }
       });
@@ -5509,7 +6204,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         els.automationReferencesDropdown.classList.add("hidden");
       });
       els.automationLocalFileInput.addEventListener("change", () => {
-        if (els.automationLocalFileInput.files && els.automationLocalFileInput.files.length > 0) {
+        if (
+          els.automationLocalFileInput.files &&
+          els.automationLocalFileInput.files.length > 0
+        ) {
           Array.from(els.automationLocalFileInput.files).forEach((file) => {
             addAutomationRefTag(file.name);
           });
@@ -5551,14 +6249,18 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       if (submitRefsBtn) {
         submitRefsBtn.addEventListener("click", () => {
           selectedRefs.forEach((id) => {
-            const item = referencesModal.querySelector(`.ref-item[data-id="${id}"]`);
+            const item = referencesModal.querySelector(
+              `.ref-item[data-id="${id}"]`,
+            );
             if (item) {
               const name = item.getAttribute("data-name");
               addAutomationRefTag(name);
             }
           });
           selectedRefs.clear();
-          refItems.forEach((i) => i.querySelector(".selected-overlay").classList.add("hidden"));
+          refItems.forEach((i) =>
+            i.querySelector(".selected-overlay").classList.add("hidden"),
+          );
           referencesModal.classList.add("hidden");
         });
       }
@@ -5568,7 +6270,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       const closeModal = () => {
         referencesModal.classList.add("hidden");
         selectedRefs.clear();
-        refItems.forEach((i) => i.querySelector(".selected-overlay").classList.add("hidden"));
+        refItems.forEach((i) =>
+          i.querySelector(".selected-overlay").classList.add("hidden"),
+        );
       };
       if (closeRefs) closeRefs.addEventListener("click", closeModal);
       if (cancelRefs) cancelRefs.addEventListener("click", closeModal);
@@ -5620,7 +6324,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       els.btnSaveEngagement.addEventListener("click", saveEngagement);
     // Back buttons in engagement modal
     const btnBackEngagement = document.getElementById("btn-back-engagement");
-    const btnBackEngagementFooter = document.getElementById("btn-back-engagement-footer");
+    const btnBackEngagementFooter = document.getElementById(
+      "btn-back-engagement-footer",
+    );
     if (btnBackEngagement) {
       btnBackEngagement.addEventListener("click", closeEngagementModalFn);
     }
@@ -5921,25 +6627,33 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
     // ── Status Filter Dropdown ──
     const btnStatusFilter = document.getElementById("btn-output-status-filter");
-    const statusFilterDropdown = document.getElementById("output-status-filter-dropdown");
+    const statusFilterDropdown = document.getElementById(
+      "output-status-filter-dropdown",
+    );
     if (btnStatusFilter && statusFilterDropdown) {
       btnStatusFilter.addEventListener("click", (e) => {
         e.stopPropagation();
         statusFilterDropdown.classList.toggle("hidden");
       });
       document.addEventListener("click", (e) => {
-        if (!statusFilterDropdown.contains(e.target) && e.target !== btnStatusFilter) {
+        if (
+          !statusFilterDropdown.contains(e.target) &&
+          e.target !== btnStatusFilter
+        ) {
           statusFilterDropdown.classList.add("hidden");
         }
       });
-      document.querySelectorAll(".output-status-filter-option").forEach((opt) => {
-        opt.addEventListener("click", () => {
-          outputStatusFilter = opt.dataset.status;
-          document.getElementById("output-status-filter-label").textContent = opt.textContent;
-          statusFilterDropdown.classList.add("hidden");
-          renderGenerated();
+      document
+        .querySelectorAll(".output-status-filter-option")
+        .forEach((opt) => {
+          opt.addEventListener("click", () => {
+            outputStatusFilter = opt.dataset.status;
+            document.getElementById("output-status-filter-label").textContent =
+              opt.textContent;
+            statusFilterDropdown.classList.add("hidden");
+            renderGenerated();
+          });
         });
-      });
     }
 
     // Preview modal
@@ -5975,12 +6689,18 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     const carouselNext = document.getElementById("preview-carousel-next");
     if (carouselPrev) {
       carouselPrev.addEventListener("click", () => {
-        if (previewCarouselIndex > 0) { previewCarouselIndex--; updateCarouselControls(); }
+        if (previewCarouselIndex > 0) {
+          previewCarouselIndex--;
+          updateCarouselControls();
+        }
       });
     }
     if (carouselNext) {
       carouselNext.addEventListener("click", () => {
-        if (previewCarouselIndex < previewCarouselTotal - 1) { previewCarouselIndex++; updateCarouselControls(); }
+        if (previewCarouselIndex < previewCarouselTotal - 1) {
+          previewCarouselIndex++;
+          updateCarouselControls();
+        }
       });
     }
 
@@ -6054,18 +6774,27 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     const bulkDailyTime = document.getElementById("bulk-daily-time");
     const bulkDailyPosts = document.getElementById("bulk-daily-posts");
 
-    if (bulkSameDate) bulkSameDate.addEventListener("change", renderBulkSchedulePreview);
-    if (bulkSameTime) bulkSameTime.addEventListener("change", renderBulkSchedulePreview);
-    if (bulkDailyStart) bulkDailyStart.addEventListener("change", renderBulkSchedulePreview);
-    if (bulkDailyTime) bulkDailyTime.addEventListener("change", renderBulkSchedulePreview);
-    if (bulkDailyPosts) bulkDailyPosts.addEventListener("input", () => {
-      bulkScheduleData.dailyPostsPerDay = parseInt(bulkDailyPosts.value) || 1;
-      renderBulkSchedulePreview();
-    });
+    if (bulkSameDate)
+      bulkSameDate.addEventListener("change", renderBulkSchedulePreview);
+    if (bulkSameTime)
+      bulkSameTime.addEventListener("change", renderBulkSchedulePreview);
+    if (bulkDailyStart)
+      bulkDailyStart.addEventListener("change", renderBulkSchedulePreview);
+    if (bulkDailyTime)
+      bulkDailyTime.addEventListener("change", renderBulkSchedulePreview);
+    if (bulkDailyPosts)
+      bulkDailyPosts.addEventListener("input", () => {
+        bulkScheduleData.dailyPostsPerDay = parseInt(bulkDailyPosts.value) || 1;
+        renderBulkSchedulePreview();
+      });
 
     // ── Scheduled Tab: Status Filter Dropdown ──
-    const btnScheduledStatusFilter = document.getElementById("btn-scheduled-status-filter");
-    const scheduledStatusFilterDropdown = document.getElementById("scheduled-status-filter-dropdown");
+    const btnScheduledStatusFilter = document.getElementById(
+      "btn-scheduled-status-filter",
+    );
+    const scheduledStatusFilterDropdown = document.getElementById(
+      "scheduled-status-filter-dropdown",
+    );
     if (btnScheduledStatusFilter && scheduledStatusFilterDropdown) {
       btnScheduledStatusFilter.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -6079,14 +6808,18 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           scheduledStatusFilterDropdown.classList.add("hidden");
         }
       });
-      document.querySelectorAll(".scheduled-status-filter-option").forEach((opt) => {
-        opt.addEventListener("click", () => {
-          scheduledStatusFilter = opt.dataset.status;
-          document.getElementById("scheduled-status-filter-label").textContent = opt.textContent;
-          scheduledStatusFilterDropdown.classList.add("hidden");
-          renderScheduled();
+      document
+        .querySelectorAll(".scheduled-status-filter-option")
+        .forEach((opt) => {
+          opt.addEventListener("click", () => {
+            scheduledStatusFilter = opt.dataset.status;
+            document.getElementById(
+              "scheduled-status-filter-label",
+            ).textContent = opt.textContent;
+            scheduledStatusFilterDropdown.classList.add("hidden");
+            renderScheduled();
+          });
         });
-      });
     }
   }
 
@@ -6189,15 +6922,20 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
     document.getElementById("bulk-same-date").value = dateStr;
     document.getElementById("bulk-daily-start").value = dateStr;
-    document.getElementById("bulk-schedule-count").textContent = selectedApprovedIds.length;
+    document.getElementById("bulk-schedule-count").textContent =
+      selectedApprovedIds.length;
 
     bulkScheduleData.sameDate = dateStr;
     bulkScheduleData.dailyStartDate = dateStr;
     bulkScheduleData.customAssignments = {};
 
     // Load engagement settings from first selected item
-    const firstItem = generatedContent.find((g) => g.id === selectedApprovedIds[0]);
-    bulkScheduleEngagement = firstItem?.autoEngagement ? { ...firstItem.autoEngagement } : {};
+    const firstItem = generatedContent.find(
+      (g) => g.id === selectedApprovedIds[0],
+    );
+    bulkScheduleEngagement = firstItem?.autoEngagement
+      ? { ...firstItem.autoEngagement }
+      : {};
     updateBulkScheduleEngagementIndicator();
 
     renderBulkCustomList();
@@ -6228,23 +6966,32 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       }
     });
 
-    document.getElementById("bulk-panel-same-time").classList.toggle("hidden", mode !== "same-time");
-    document.getElementById("bulk-panel-daily-post").classList.toggle("hidden", mode !== "daily-post");
-    document.getElementById("bulk-panel-custom").classList.toggle("hidden", mode !== "custom");
+    document
+      .getElementById("bulk-panel-same-time")
+      .classList.toggle("hidden", mode !== "same-time");
+    document
+      .getElementById("bulk-panel-daily-post")
+      .classList.toggle("hidden", mode !== "daily-post");
+    document
+      .getElementById("bulk-panel-custom")
+      .classList.toggle("hidden", mode !== "custom");
 
     renderBulkSchedulePreview();
   }
 
   function renderBulkCustomList() {
     const container = document.getElementById("bulk-custom-list");
-    const items = generatedContent.filter((g) => selectedApprovedIds.includes(g.id));
+    const items = generatedContent.filter((g) =>
+      selectedApprovedIds.includes(g.id),
+    );
 
-    container.innerHTML = items.map((item, idx) => {
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1 + idx);
-      const defaultDate = tomorrow.toISOString().split("T")[0];
+    container.innerHTML = items
+      .map((item, idx) => {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1 + idx);
+        const defaultDate = tomorrow.toISOString().split("T")[0];
 
-      return `
+        return `
       <div class="flex items-center gap-3 p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0]">
         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] flex items-center justify-center shrink-0">
           <i class="ti ti-photo text-[14px] text-[#B45309]"></i>
@@ -6267,17 +7014,20 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         />
       </div>
       `;
-    }).join("");
+      })
+      .join("");
   }
 
   function updateBulkCustomDate(id, val) {
-    if (!bulkScheduleData.customAssignments[id]) bulkScheduleData.customAssignments[id] = {};
+    if (!bulkScheduleData.customAssignments[id])
+      bulkScheduleData.customAssignments[id] = {};
     bulkScheduleData.customAssignments[id].date = val;
     renderBulkSchedulePreview();
   }
 
   function updateBulkCustomTime(id, val) {
-    if (!bulkScheduleData.customAssignments[id]) bulkScheduleData.customAssignments[id] = {};
+    if (!bulkScheduleData.customAssignments[id])
+      bulkScheduleData.customAssignments[id] = {};
     bulkScheduleData.customAssignments[id].time = val;
     renderBulkSchedulePreview();
   }
@@ -6293,7 +7043,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
   function renderBulkSchedulePreview() {
     const preview = document.getElementById("bulk-schedule-preview");
-    const items = generatedContent.filter((g) => selectedApprovedIds.includes(g.id));
+    const items = generatedContent.filter((g) =>
+      selectedApprovedIds.includes(g.id),
+    );
     const assignments = [];
 
     if (bulkScheduleMode === "same-time") {
@@ -6301,13 +7053,17 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       const timeVal = document.getElementById("bulk-same-time")?.value;
       if (dateVal && timeVal) {
         items.forEach((item) => {
-          assignments.push({ title: item.title, date: `${dateVal} ${timeVal}` });
+          assignments.push({
+            title: item.title,
+            date: `${dateVal} ${timeVal}`,
+          });
         });
       }
     } else if (bulkScheduleMode === "daily-post") {
       const startVal = document.getElementById("bulk-daily-start")?.value;
       const timeVal = document.getElementById("bulk-daily-time")?.value;
-      const postsPerDay = parseInt(document.getElementById("bulk-daily-posts")?.value) || 1;
+      const postsPerDay =
+        parseInt(document.getElementById("bulk-daily-posts")?.value) || 1;
 
       if (startVal && timeVal) {
         const startDate = new Date(startVal);
@@ -6318,7 +7074,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           const d = new Date(startDate);
           d.setDate(d.getDate() + dayOffset);
           const dateStr = d.toISOString().split("T")[0];
-          assignments.push({ title: item.title, date: `${dateStr} ${timeVal}` });
+          assignments.push({
+            title: item.title,
+            date: `${dateStr} ${timeVal}`,
+          });
           currentIndex++;
         });
       }
@@ -6327,21 +7086,30 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         const custom = bulkScheduleData.customAssignments[item.id] || {};
         const dateStr = custom.date || "Not set";
         const timeStr = custom.time || "";
-        assignments.push({ title: item.title, date: `${dateStr} ${timeStr}`.trim() });
+        assignments.push({
+          title: item.title,
+          date: `${dateStr} ${timeStr}`.trim(),
+        });
       });
     }
 
-    preview.innerHTML = assignments.map((a) => `
+    preview.innerHTML = assignments
+      .map(
+        (a) => `
       <div class="flex items-center gap-2 text-[12px]">
         <i class="ti ti-calendar text-[#98a2b3]"></i>
         <span class="text-[#667085] truncate flex-1">${escapeHtml(a.title)}</span>
         <span class="text-[#111827] font-medium">${a.date}</span>
       </div>
-    `).join("");
+    `,
+      )
+      .join("");
   }
 
   function confirmBulkSchedule() {
-    const items = generatedContent.filter((g) => selectedApprovedIds.includes(g.id));
+    const items = generatedContent.filter((g) =>
+      selectedApprovedIds.includes(g.id),
+    );
 
     if (bulkScheduleMode === "same-time") {
       const dateVal = document.getElementById("bulk-same-date").value;
@@ -6358,7 +7126,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     } else if (bulkScheduleMode === "daily-post") {
       const startVal = document.getElementById("bulk-daily-start").value;
       const timeVal = document.getElementById("bulk-daily-time").value;
-      const postsPerDay = parseInt(document.getElementById("bulk-daily-posts").value) || 1;
+      const postsPerDay =
+        parseInt(document.getElementById("bulk-daily-posts").value) || 1;
 
       if (!startVal || !timeVal) {
         showToast("Please fill in start date and time");
@@ -6372,7 +7141,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         const dayOffset = Math.floor(currentIndex / postsPerDay);
         const d = new Date(startDate);
         d.setDate(d.getDate() + dayOffset);
-        d.setHours(parseInt(timeVal.split(":")[0]), parseInt(timeVal.split(":")[1]));
+        d.setHours(
+          parseInt(timeVal.split(":")[0]),
+          parseInt(timeVal.split(":")[1]),
+        );
         item.status = "scheduled";
         item.scheduledAt = d.toISOString();
         currentIndex++;
@@ -6382,7 +7154,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         const custom = bulkScheduleData.customAssignments[item.id] || {};
         if (custom.date && custom.time) {
           item.status = "scheduled";
-          item.scheduledAt = new Date(`${custom.date}T${custom.time}`).toISOString();
+          item.scheduledAt = new Date(
+            `${custom.date}T${custom.time}`,
+          ).toISOString();
         }
       });
     }
@@ -6405,9 +7179,12 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
   function bulkDeleteSelected() {
     if (selectedApprovedIds.length === 0) return;
-    if (!confirm(`Delete ${selectedApprovedIds.length} selected items?`)) return;
+    if (!confirm(`Delete ${selectedApprovedIds.length} selected items?`))
+      return;
 
-    generatedContent = generatedContent.filter((g) => !selectedApprovedIds.includes(g.id));
+    generatedContent = generatedContent.filter(
+      (g) => !selectedApprovedIds.includes(g.id),
+    );
     saveGenerated();
     showToast(`Deleted ${selectedApprovedIds.length} items`);
     selectedApprovedIds = [];

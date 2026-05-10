@@ -1,3 +1,55 @@
 ---
-return Astro.redirect('/studio');
+import "../styles/global.css";
+import LandingNavbar from "../components/landing/LandingNavbar.astro";
+import LandingHero from "../components/landing/LandingHero.astro";
+import TrustedBy from "../components/landing/TrustedBy.astro";
+import XeniWork from "../components/landing/XeniWork.astro";
+import WhySection from "../components/landing/WhySection.astro";
+import FeaturesDetailed from "../components/landing/FeaturesDetailed.astro";
+import EcosystemScale from "../components/landing/EcosystemScale.astro";
+import PrivacyTrust from "../components/landing/PrivacyTrust.astro";
+import FinalCTA from "../components/landing/FinalCTA.astro";
+import LandingFooter from "../components/landing/LandingFooter.astro";
 ---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xeni — AI Content Automation</title>
+    <meta
+      name="description"
+      content="Xeni automates your entire content pipeline — from strategy to publish-ready assets — so your team creates more and manages less."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;700&family=Rubik:wght@400;500;700&family=Outfit:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+    <style is:global>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-[#111827] font-sans antialiased">
+    <LandingNavbar />
+    <main>
+      <LandingHero />
+      <TrustedBy />
+      <WhySection />
+      <XeniWork />
+      <FeaturesDetailed />
+      <EcosystemScale />
+      <PrivacyTrust />
+      <FinalCTA />
+    </main>
+    <LandingFooter />
+  </body>
+</html>

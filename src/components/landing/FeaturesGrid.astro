@@ -1,0 +1,84 @@
+---
+const features = [
+  {
+    icon: "ti-fingerprint",
+    title: "Business DNA Engine",
+    description:
+      "Upload your brand colors, fonts, logo, tone, and visual guidelines. Xeni locks them as the single source of truth.",
+  },
+  {
+    icon: "ti-wand",
+    title: "AI Design Generation",
+    description:
+      "Turn a brief into professional social posts, carousels, thumbnails, and stories. All outputs inherit your Business DNA.",
+  },
+  {
+    icon: "ti-calendar-event",
+    title: "Auto-Post Scheduling",
+    description:
+      "Queue and publish across your channels automatically. Xeni formats each asset to match platform specs.",
+  },
+  {
+    icon: "ti-message-circle",
+    title: "Auto-DM Responses",
+    description:
+      "Engage your audience instantly with smart, on-brand direct message replies. Tone pulled from your Business DNA.",
+  },
+  {
+    icon: "ti-layout-grid",
+    title: "Multi-Format Export",
+    description:
+      "One design becomes Instagram, TikTok, LinkedIn, and Twitter assets — resized and reformatted automatically.",
+  },
+  {
+    icon: "ti-shield-check",
+    title: "Brand Guardrails",
+    description:
+      "Xeni flags anything that strays from your Business DNA before it goes live. Your brand stays protected.",
+  },
+];
+---
+
+<section id="features" class="w-full py-12 md:py-16 bg-transparent">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-[28px] font-bold text-[#111827] tracking-tight mb-2">
+        Everything you need, nothing you don't.
+      </h2>
+      <p class="text-[14px] text-[#667085] font-medium max-w-xl mx-auto">
+        Here's what makes it work.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {
+        features.map((feature) => (
+          <div class="p-5 rounded-xl border border-[#eaecf0] bg-white hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all">
+            <div class="w-10 h-10 rounded-lg bg-[#F3F4F6] border border-[#eaecf0] flex items-center justify-center mb-3">
+              {feature.icon === "ti-fingerprint" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  class="text-[#667085] flex-shrink-0"
+                >
+                  <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
+                </svg>
+              ) : (
+                <i class={`ti ${feature.icon} text-[18px] text-[#667085]`} />
+              )}
+            </div>
+            <h3 class="text-[15px] font-bold text-[#111827] mb-1.5">
+              {feature.title}
+            </h3>
+            <p class="text-[13px] text-[#667085] font-medium leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

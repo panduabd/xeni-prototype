@@ -1,0 +1,814 @@
+---
+import LandingButton from "./LandingButton.astro";
+---
+
+<section
+  class="w-full pt-10 pb-8 md:pt-16 md:pb-14 bg-white relative overflow-hidden"
+>
+  <!-- Absolute Background Aurora Effect -->
+  <div
+    id="aurora-container"
+    class="absolute inset-0 z-0 pointer-events-none opacity-40"
+  >
+  </div>
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[580px]"
+      >
+        <!-- LEFT COLUMN: Left-aligned Hero Content -->
+        <div
+          class="lg:col-span-6 flex flex-col items-start text-left max-w-xl mx-auto lg:mx-0 animate-fade-blur"
+        >
+          <!-- Badge -->
+          <div class="mb-6 flex justify-start">
+            <span
+              class="inline-flex items-center px-3 py-1 rounded-full border border-gray-300 bg-transparent text-[11px] font-semibold text-[#667085] uppercase tracking-wider whitespace-nowrap font-geist"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="text-[#667085] mr-1.5 flex-shrink-0 animate-pulse"
+              >
+                <path
+                  d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
+                ></path>
+              </svg>
+              AI Creative & Marketing Agents
+            </span>
+          </div>
+
+          <!-- Heading -->
+          <h1
+            class="text-[32px] md:text-[42px] lg:text-[48px] font-normal text-[#111827] tracking-tight leading-[1.1] mb-6 font-fraunces text-left"
+          >
+            AI Agents for <span class="font-bold text-[#1b1b1b]"
+              >10x Faster</span
+            >
+            <br />
+            Content Operations,<br /> End-to-end.
+          </h1>
+
+          <!-- Subtitle -->
+          <p
+            class="text-[15px] text-[#4b5563] font-medium mb-8 leading-relaxed text-left font-geist max-w-[480px]"
+          >
+            From design to distribution - Xeni creates, schedules, and even
+            replies to comments for you. All the output of a full-stack
+            marketing team with zero overhead.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div
+            class="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 w-full sm:w-auto"
+          >
+            <LandingButton variant="primary" size="medium" center href="/login"
+              >Try for free</LandingButton
+            >
+            <LandingButton
+              variant="secondary"
+              size="medium"
+              center
+              iconType="play"
+              href="#watch-demo">Watch demo</LandingButton
+            >
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Elegant Orbit System -->
+        <div
+          class="lg:col-span-6 flex items-center justify-center relative select-none animate-fade-blur"
+          style="animation-delay: 200ms;"
+        >
+          <div
+            class="relative w-[380px] h-[380px] md:w-[460px] md:h-[460px] flex items-center justify-center scale-90 md:scale-100"
+          >
+            <!-- Modern Minimalist Tech Coordinate System Backdrop (Razor-sharp luxury blueprint!) -->
+            <div
+              class="absolute w-[310px] h-[310px] md:w-[370px] md:h-[370px] rounded-full border border-gray-200/25 flex items-center justify-center z-0 pointer-events-none"
+            >
+              <!-- Dot-dashed Inner Blueprint Ring -->
+              <div
+                class="absolute w-[95%] h-[95%] rounded-full border border-dashed border-gray-200/40"
+              >
+              </div>
+              <!-- Center Coordinate Crosshair -->
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="text-gray-300/70 animate-pulse"
+              >
+                <line
+                  x1="16"
+                  y1="4"
+                  x2="16"
+                  y2="28"
+                  stroke="currentColor"
+                  stroke-width="0.75"
+                  stroke-dasharray="2 2"></line>
+                <line
+                  x1="4"
+                  y1="16"
+                  x2="28"
+                  y2="16"
+                  stroke="currentColor"
+                  stroke-width="0.75"
+                  stroke-dasharray="2 2"></line>
+                <circle
+                  cx="16"
+                  cy="16"
+                  r="3"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="0.75"></circle>
+              </svg>
+            </div>
+
+            <!-- Multi-layered Concentric Orbit Rings (Staggered Pulsing Ripples with 2 Minimalist Rotating Sparks) -->
+            <!-- Inner Ring Layer (Inside) -->
+            <div
+              class="absolute w-[110px] h-[110px] md:w-[130px] md:h-[130px] rounded-full border border-dashed border-gray-300/40 z-0 animate-pulse-inner"
+            >
+            </div>
+
+            <!-- Middle Ring Layer (Middle) -->
+            <div
+              class="absolute w-[210px] h-[210px] md:w-[250px] md:h-[250px] rounded-full border border-dashed border-gray-300/40 z-0 animate-pulse-middle"
+            >
+            </div>
+
+            <!-- Outer Ring Layer (Outside) with exactly 2 Symmetrical Black Sparks -->
+            <div
+              class="absolute w-[310px] h-[310px] md:w-[370px] md:h-[370px] rounded-full border border-dashed border-gray-300/60 z-0 animate-pulse-outer flex items-center justify-center"
+            >
+              <!-- Sparkle 1 (Top Left) -->
+              <div
+                class="absolute top-[25px] left-[55px] text-[#111827] flex-shrink-0 animate-pulse"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  class="flex-shrink-0"
+                >
+                  <path
+                    d="M232,128a8,8,0,0,1-8,8,80.09,80.09,0,0,0-72,72,8,8,0,0,1-16,0,80.09,80.09,0,0,0-72-72,8,8,0,0,1,0-16,80.09,80.09,0,0,0,72-72,8,8,0,0,1,16,0,80.09,80.09,0,0,0,72,72A8,8,0,0,1,232,128Z"
+                  ></path>
+                </svg>
+              </div>
+              <!-- Sparkle 2 (Bottom Right) -->
+              <div
+                class="absolute bottom-[25px] right-[55px] text-[#111827] flex-shrink-0 animate-pulse"
+                style="animation-delay: 0.5s;"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  class="flex-shrink-0"
+                >
+                  <path
+                    d="M232,128a8,8,0,0,1-8,8,80.09,80.09,0,0,0-72,72,8,8,0,0,1-16,0,80.09,80.09,0,0,0-72-72,8,8,0,0,1,0-16,80.09,80.09,0,0,0,72-72,8,8,0,0,1,16,0,80.09,80.09,0,0,0,72,72A8,8,0,0,1,232,128Z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Ambient Glow in Center -->
+            <div
+              class="absolute w-24 h-24 bg-indigo-500/10 blur-3xl rounded-full z-0"
+            >
+            </div>
+
+            <!-- Card 1: Creative Agent (180deg - Swapped) -->
+            <div class="absolute z-10 animate-orbit-180">
+              <div
+                class="bg-white/85 backdrop-blur-md border border-gray-200/80 rounded-full px-3.5 py-2 flex items-center gap-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.03)] hover-lift cursor-pointer whitespace-nowrap"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  class="text-[#111827] flex-shrink-0"
+                >
+                  <path
+                    d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
+                  ></path>
+                </svg>
+                <span class="text-[11px] font-bold text-[#111827] font-geist"
+                  >Creative Agent</span
+                >
+                <span class="ml-1 flex h-1.5 w-1.5 relative">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"
+                  ></span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Card 2: Auto Scheduler (60deg) -->
+            <div class="absolute z-10 animate-orbit-60">
+              <div
+                class="bg-white/85 backdrop-blur-md border border-gray-200/80 rounded-full px-3.5 py-2 flex items-center gap-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.03)] hover-lift cursor-pointer whitespace-nowrap"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  class="text-[#667085] flex-shrink-0"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span
+                  class="text-[11px] font-semibold text-[#111827] font-geist"
+                  >Auto Scheduler</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 3: Auto Reply & DM (120deg) -->
+            <div class="absolute z-10 animate-orbit-120">
+              <div
+                class="bg-white/85 backdrop-blur-md border border-gray-200/80 rounded-full px-3.5 py-2 flex items-center gap-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.03)] hover-lift cursor-pointer whitespace-nowrap"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  class="text-[#667085] flex-shrink-0"
+                >
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  ></path>
+                </svg>
+                <span
+                  class="text-[11px] font-semibold text-[#111827] font-geist"
+                  >Auto Reply & DM</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 4: Marketing Agent (0deg - Swapped) -->
+            <div class="absolute z-10 animate-orbit-0">
+              <div
+                class="bg-white/85 backdrop-blur-md border border-gray-200/80 rounded-full px-3.5 py-2 flex items-center gap-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.03)] hover-lift cursor-pointer whitespace-nowrap"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  class="text-[#111827] flex-shrink-0"
+                >
+                  <path
+                    d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
+                  ></path>
+                </svg>
+                <span class="text-[11px] font-bold text-[#111827] font-geist"
+                  >Marketing Agent</span
+                >
+                <span class="ml-1 flex h-1.5 w-1.5 relative">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"
+                  ></span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Card 5: Copywriter & Designer (240deg) -->
+            <div class="absolute z-10 animate-orbit-240">
+              <div
+                class="bg-white/85 backdrop-blur-md border border-gray-200/80 rounded-full px-3.5 py-2 flex items-center gap-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.03)] hover-lift cursor-pointer whitespace-nowrap"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  class="text-[#667085] flex-shrink-0"
+                >
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                </svg>
+                <span
+                  class="text-[11px] font-semibold text-[#111827] font-geist"
+                  >Copywriter & Designer</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 6: Business DNA (300deg) -->
+            <div class="absolute z-10 animate-orbit-300">
+              <div
+                class="bg-white/85 backdrop-blur-md border border-gray-200/80 rounded-full px-3.5 py-2 flex items-center gap-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.03)] hover-lift cursor-pointer whitespace-nowrap"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  class="text-[#667085] flex-shrink-0"
+                >
+                  <path
+                    d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"
+                  ></path>
+                </svg>
+                <span
+                  class="text-[11px] font-semibold text-[#111827] font-geist"
+                  >Business DNA</span
+                >
+              </div>
+            </div>
+
+            <!-- Flying AI Agent Cursor (Locks and targets revolving cards smoothly with hardware-accelerated 3D translates!) -->
+            <div
+              id="agent-cursor"
+              class="absolute left-0 top-0 z-20 pointer-events-none"
+              style="will-change: transform;"
+            >
+              <!-- Icons8 Selection Arrow Image -->
+              <img
+                src="https://img.icons8.com/external-those-icons-fill-those-icons/24/external-arrow-selection-cursors-those-icons-fill-those-icons.png"
+                class="w-[20px] h-[20px] drop-shadow-sm flex-shrink-0"
+                alt="Agent Cursor"
+              />
+              <!-- Mini Agent Label floating beside cursor (Rounded Full with Custom Blinking White Dot) -->
+              <div
+                class="ml-3.5 mt-1 bg-black text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap border border-white/20 flex items-center gap-1.5"
+              >
+                <span
+                  class="h-1.5 w-1.5 rounded-full bg-white animate-custom-dot flex-shrink-0"
+                ></span>
+                <span>Xeni's Agent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @keyframes custom-dot-blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+      .animate-custom-dot {
+        animation: custom-dot-blink 1.2s ease-in-out infinite;
+      }
+
+      :root {
+        --orbit-radius: 145px;
+      }
+      @media (min-width: 768px) {
+        :root {
+          --orbit-radius: 195px;
+        }
+      }
+
+      /* REVOLVING ORBIT KEYFRAMES (Keeps cards upright and perfectly readable!) */
+      @keyframes orbit-0 {
+        from {
+          transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg) translate(var(--orbit-radius))
+            rotate(-360deg);
+        }
+      }
+      @keyframes orbit-60 {
+        from {
+          transform: rotate(60deg) translate(var(--orbit-radius)) rotate(-60deg);
+        }
+        to {
+          transform: rotate(420deg) translate(var(--orbit-radius))
+            rotate(-420deg);
+        }
+      }
+      @keyframes orbit-120 {
+        from {
+          transform: rotate(120deg) translate(var(--orbit-radius))
+            rotate(-120deg);
+        }
+        to {
+          transform: rotate(480deg) translate(var(--orbit-radius))
+            rotate(-480deg);
+        }
+      }
+      @keyframes orbit-180 {
+        from {
+          transform: rotate(180deg) translate(var(--orbit-radius))
+            rotate(-180deg);
+        }
+        to {
+          transform: rotate(540deg) translate(var(--orbit-radius))
+            rotate(-540deg);
+        }
+      }
+      @keyframes orbit-240 {
+        from {
+          transform: rotate(240deg) translate(var(--orbit-radius))
+            rotate(-240deg);
+        }
+        to {
+          transform: rotate(600deg) translate(var(--orbit-radius))
+            rotate(-600deg);
+        }
+      }
+      @keyframes orbit-300 {
+        from {
+          transform: rotate(300deg) translate(var(--orbit-radius))
+            rotate(-300deg);
+        }
+        to {
+          transform: rotate(660deg) translate(var(--orbit-radius))
+            rotate(-660deg);
+        }
+      }
+
+      .animate-orbit-0 {
+        animation: orbit-0 115s linear infinite;
+      }
+      .animate-orbit-60 {
+        animation: orbit-60 115s linear infinite;
+      }
+      .animate-orbit-120 {
+        animation: orbit-120 115s linear infinite;
+      }
+      .animate-orbit-180 {
+        animation: orbit-180 115s linear infinite;
+      }
+      .animate-orbit-240 {
+        animation: orbit-240 115s linear infinite;
+      }
+      .animate-orbit-300 {
+        animation: orbit-300 115s linear infinite;
+      }
+
+      /* STAGGERED BREATHING GLOW ANIMATIONS (Sequential thick-to-thin tactile gray shadow ripple from inside out) */
+      @keyframes orbit-glow-pulse {
+        0%,
+        100% {
+          border-width: 1px;
+          opacity: 0.4;
+          border-color: rgba(156, 163, 175, 0.25);
+          filter: drop-shadow(0 0 0px rgba(0, 0, 0, 0));
+        }
+        50% {
+          border-width: 2px;
+          opacity: 0.85;
+          border-color: rgba(156, 163, 175, 0.55);
+          filter: drop-shadow(0 0 8px rgba(156, 163, 175, 0.25));
+        }
+      }
+
+      .animate-pulse-inner {
+        animation:
+          spin 70s linear infinite,
+          orbit-glow-pulse 4s ease-in-out infinite;
+      }
+      .animate-pulse-middle {
+        animation:
+          spin 95s linear infinite,
+          orbit-glow-pulse 4s ease-in-out infinite 1.3s;
+      }
+      .animate-pulse-outer {
+        animation:
+          spin 120s linear infinite,
+          orbit-glow-pulse 4s ease-in-out infinite 2.6s;
+      }
+
+      /* GENTLE HOVER SHADOW & BUMP EFFECT */
+      .hover-lift {
+        transition:
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 0.3s ease,
+          shadow 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: scale(1.04) translateY(-3px) !important;
+        border-color: rgba(156, 163, 175, 0.8) !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+      }
+
+      /* SMOOTH STAGGERED FADE BLUR-IN ANIMATION */
+      .animate-fade-blur {
+        opacity: 0;
+        animation: fade-blur-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes fade-blur-in {
+        0% {
+          opacity: 0;
+          filter: blur(12px);
+          transform: translateY(16px);
+        }
+        100% {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+    </style>
+
+    <!-- NATIVE WEBGL AURORA BACKGROUND INITIALIZATION -->
+    <script>
+      import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
+
+      const VERT = `#version 300 es
+    in vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }
+    `;
+
+      const FRAG = `#version 300 es
+    precision highp float;
+
+    uniform float uTime;
+    uniform float uAmplitude;
+    uniform vec3 uColorStops[3];
+    uniform vec2 uResolution;
+    uniform float uBlend;
+
+    out vec4 fragColor;
+
+    vec3 permute(vec3 x) {
+      return mod(((x * 34.0) + 1.0) * x, 289.0);
+    }
+
+    float snoise(vec2 v){
+      const vec4 C = vec4(
+          0.211324865405187, 0.366025403784439,
+          -0.577350269189626, 0.024390243902439
+      );
+      vec2 i  = floor(v + dot(v, C.yy));
+      vec2 x0 = v - i + dot(i, C.xx);
+      vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz;
+      x12.xy -= i1;
+      i = mod(i, 289.0);
+
+      vec3 p = permute(
+          permute(i.y + vec3(0.0, i1.y, 1.0))
+        + i.x + vec3(0.0, i1.x, 1.0)
+      );
+
+      vec3 m = max(
+          0.5 - vec3(
+              dot(x0, x0),
+              dot(x12.xy, x12.xy),
+              dot(x12.zw, x12.zw)
+          ), 
+          0.0
+      );
+      m = m * m;
+      m = m * m;
+
+      vec3 x = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x) - 0.5;
+      vec3 ox = floor(x + 0.5);
+      vec3 a0 = x - ox;
+      m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+
+      vec3 g;
+      g.x  = a0.x  * x0.x  + h.x  * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+
+    struct ColorStop {
+      vec3 color;
+      float position;
+    };
+
+    void colorRamp(ColorStop colors[3], float factor, out vec3 finalColor) {
+      int index = 0;
+      for (int i = 0; i < 2; i++) {
+         ColorStop currentColor = colors[i];
+         bool isInBetween = currentColor.position <= factor;
+         index = int(mix(float(index), float(i), float(isInBetween)));
+      }
+      ColorStop currentColor = colors[index];
+      ColorStop nextColor = colors[index + 1];
+      float range = nextColor.position - currentColor.position;
+      float lerpFactor = (factor - currentColor.position) / range;
+      finalColor = mix(currentColor.color, nextColor.color, lerpFactor);
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / uResolution;
+      
+      ColorStop colors[3];
+      colors[0] = ColorStop(uColorStops[0], 0.0);
+      colors[1] = ColorStop(uColorStops[1], 0.5);
+      colors[2] = ColorStop(uColorStops[2], 1.0);
+      
+      vec3 rampColor;
+      colorRamp(colors, uv.x, rampColor);
+      
+      float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
+      height = exp(height);
+      height = (uv.y * 2.0 - height + 0.2);
+      float intensity = 0.6 * height;
+      
+      float midPoint = 0.20;
+      float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
+      
+      vec3 auroraColor = intensity * rampColor;
+      
+      fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha);
+    }
+    `;
+
+      const ctn = document.getElementById("aurora-container");
+      if (ctn) {
+        const renderer = new Renderer({
+          alpha: true,
+          premultipliedAlpha: true,
+          antialias: true,
+        });
+        const gl = renderer.gl;
+        gl.clearColor(0, 0, 0, 0);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        gl.canvas.style.backgroundColor = "transparent";
+
+        let program;
+
+        function resize() {
+          if (!ctn) return;
+          const width = ctn.offsetWidth;
+          const height = ctn.offsetHeight;
+          renderer.setSize(width, height);
+          if (program) {
+            program.uniforms.uResolution.value = [width, height];
+          }
+        }
+        window.addEventListener("resize", resize);
+
+        const geometry = new Triangle(gl);
+        if (geometry.attributes.uv) {
+          delete geometry.attributes.uv;
+        }
+
+        const colorStops = ["#ffffff", "#5227ff", "#e4e4e4"];
+        const colorStopsArray = colorStops.map((hex) => {
+          const c = new Color(hex);
+          return [c.r, c.g, c.b];
+        });
+
+        program = new Program(gl, {
+          vertex: VERT,
+          fragment: FRAG,
+          uniforms: {
+            uTime: { value: 0 },
+            uAmplitude: { value: 1.0 },
+            uColorStops: { value: colorStopsArray },
+            uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
+            uBlend: { value: 0.5 },
+          },
+        });
+
+        const mesh = new Mesh(gl, { geometry, program });
+        ctn.appendChild(gl.canvas);
+
+        let animateId = 0;
+        const update = (t) => {
+          animateId = requestAnimationFrame(update);
+          program.uniforms.uTime.value = t * 0.01 * 0.5 * 0.1;
+          renderer.render({ scene: mesh });
+        };
+        animateId = requestAnimationFrame(update);
+
+        resize();
+      }
+    </script>
+
+    <!-- Isolated, High-Performance Agent Cursor Flight System -->
+    <script is:inline>
+      (function () {
+        let activeIndex = 0;
+        let curX = -999;
+        let curY = -999;
+
+        // Periodically switch target card index every 3500ms
+        setInterval(() => {
+          activeIndex = (activeIndex + 1) % 6;
+
+          // Sync the hover-pulse to trigger exactly 900ms after switching (matching the arrival of the glide!)
+          setTimeout(() => {
+            const cardsList = [
+              document.querySelector(".animate-orbit-0"),
+              document.querySelector(".animate-orbit-60"),
+              document.querySelector(".animate-orbit-120"),
+              document.querySelector(".animate-orbit-180"),
+              document.querySelector(".animate-orbit-240"),
+              document.querySelector(".animate-orbit-300"),
+            ].filter(Boolean);
+
+            if (cardsList.length > 0) {
+              const targetCard = cardsList[activeIndex % cardsList.length];
+              if (targetCard) {
+                const cardInner = targetCard.firstElementChild;
+                if (cardInner) {
+                  // Click-pulse feedback
+                  cardInner.classList.add("scale-[1.05]", "border-gray-400/80");
+                  setTimeout(() => {
+                    cardInner.classList.remove(
+                      "scale-[1.05]",
+                      "border-gray-400/80",
+                    );
+                  }, 600);
+                }
+              }
+            }
+          }, 900); // Perfect landing alignment!
+        }, 3500);
+
+        // Kinematic ease tracking loop (dynamic querying prevents all race conditions & hydration blocks!)
+        const flyCursor = () => {
+          const agentCursor = document.getElementById("agent-cursor");
+          const orbitCtn = agentCursor ? agentCursor.parentElement : null;
+          const orbitCards = [
+            document.querySelector(".animate-orbit-0"),
+            document.querySelector(".animate-orbit-60"),
+            document.querySelector(".animate-orbit-120"),
+            document.querySelector(".animate-orbit-180"),
+            document.querySelector(".animate-orbit-240"),
+            document.querySelector(".animate-orbit-300"),
+          ].filter(Boolean);
+
+          if (agentCursor && orbitCtn && orbitCards.length > 0) {
+            const activeCard = orbitCards[activeIndex % orbitCards.length];
+            if (activeCard) {
+              const ctnRect = orbitCtn.getBoundingClientRect();
+              const cardRect = activeCard.getBoundingClientRect();
+
+              if (ctnRect.width > 0 && cardRect.width > 0) {
+                // Initialize positions on the first successful query frame
+                if (curX === -999) {
+                  curX = ctnRect.width / 2;
+                  curY = ctnRect.height / 2;
+                }
+
+                // Compute destination coordinates (shifted slightly to the bottom-right of the card)
+                const destX =
+                  cardRect.left - ctnRect.left + cardRect.width / 2 + 22;
+                const destY =
+                  cardRect.top - ctnRect.top + cardRect.height / 2 + 10;
+
+                // Easing calculation
+                curX += (destX - curX) * 0.08;
+                curY += (destY - curY) * 0.08;
+
+                // Update hardware-accelerated 3D transform
+                agentCursor.style.transform = `translate3d(${curX}px, ${curY}px, 0)`;
+              }
+            }
+          }
+          requestAnimationFrame(flyCursor);
+        };
+        requestAnimationFrame(flyCursor);
+      })();
+    </script>
+  </div>
+</section>

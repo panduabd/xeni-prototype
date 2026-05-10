@@ -1,0 +1,107 @@
+---
+// Total Visual Overhaul restoring correct 3D Depth Physics
+const galleryImages = [
+  "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1595950653106-6c9ebb03c23d?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80",
+];
+---
+
+<!-- Spacing Tightened: Totally Zeroed Bottom Padding & Clipped Footprint Heights -->
+<section class="w-full pt-6 md:pt-8 pb-0 bg-transparent select-none relative overflow-hidden">
+  
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    
+    <!-- Reverted to Light Density for Grey Background Matrix -->
+    <div class="text-center max-w-2xl mx-auto mb-6 md:mb-8">
+      <h2 class="text-[26px] md:text-[36px] font-normal text-[#111827] tracking-tight leading-[1.1] font-fraunces">
+        We're everywhere.
+        <br />
+        <span class="text-[#667085] text-[17px] md:text-[20px] font-geist block mt-2 tracking-tight font-medium">
+          You just can't tell it's AI.
+        </span>
+      </h2>
+    </div>
+
+    <!-- 3D STAGE: Tightened heights to eliminate dead bottom space -->
+    <div id="xeni-3d-stage" class="relative w-full h-[320px] md:h-[430px] flex items-center justify-center" style="perspective: 1800px; transform-style: preserve-3d;">
+      
+      {galleryImages.map((imgSrc, idx) => (
+        <div 
+          class="stage-card absolute w-[60%] sm:w-[32%] md:w-[230px] aspect-[9/16] rounded-2xl overflow-hidden bg-white border border-gray-100 transition-all duration-[1200ms] cubic-bezier(0.25, 1, 0.5, 1) pointer-events-none"
+          data-index={idx}
+          style="transform-style: preserve-3d; will-change: transform, opacity;"
+        >
+          <img src={imgSrc} alt="Output" class="absolute inset-0 w-full h-full object-cover" />
+          <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/10 to-transparent"></div>
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      // CRITICAL PHYSICS UPGRADE: Using translateZ() ensures absolute bulletproof depth stacking!
+      // DRASTICALLY SPACED OUT (incrementing by 110% per step)
+      const desktopSlots = [
+        "transform: translateX(-330%) translateZ(-200px) rotateY(-30deg); opacity: 0.1; z-index: 10; visibility: visible;", // Far Far Left
+        "transform: translateX(-220%) translateZ(-120px) rotateY(-20deg); opacity: 0.4; z-index: 20; visibility: visible;", // Far Left
+        "transform: translateX(-110%) translateZ(-40px) rotateY(-10deg); opacity: 0.8; z-index: 30; visibility: visible;",  // Mid Left
+        "transform: translateX(0) translateZ(80px) rotateY(0deg); opacity: 1; z-index: 99 !important; visibility: visible;", // ABSOLUTE FORWARD CENTER
+        "transform: translateX(110%) translateZ(-40px) rotateY(10deg); opacity: 0.8; z-index: 30; visibility: visible;",   // Mid Right
+        "transform: translateX(220%) translateZ(-120px) rotateY(20deg); opacity: 0.4; z-index: 20; visibility: visible;",  // Far Right
+        "transform: translateX(330%) translateZ(-200px) rotateY(30deg); opacity: 0.1; z-index: 10; visibility: visible;",  // Far Far Right
+        "transform: translateX(0) translateZ(-400px); opacity: 0; z-index: 0; visibility: hidden;" // Hidden backstage deep behind
+      ];
+
+      const mobileSlots = [
+        "transform: translateX(-180%) translateZ(-100px) rotateY(-20deg); opacity: 0.1;",
+        "transform: translateX(-120%) translateZ(-60px) rotateY(-15deg); opacity: 0.4;",
+        "transform: translateX(-60%) translateZ(-20px) rotateY(-8deg); opacity: 0.8;",
+        "transform: translateX(0) translateZ(40px) rotateY(0deg); opacity: 1;",
+        "transform: translateX(60%) translateZ(-20px) rotateY(8deg); opacity: 0.8;",
+        "transform: translateX(120%) translateZ(-60px) rotateY(15deg); opacity: 0.4;",
+        "transform: translateX(180%) translateZ(-100px) rotateY(20deg); opacity: 0.1;",
+        "transform: translateX(0) translateZ(-300px); opacity: 0;"
+      ];
+
+      const cards = document.querySelectorAll('.stage-card');
+      if (!cards || cards.length !== 8) return;
+
+      let sequenceArray = [0, 1, 2, 3, 4, 5, 6, 7];
+
+      const drawFrame = () => {
+        const isMob = window.innerWidth < 768;
+        const set = isMob ? mobileSlots : desktopSlots;
+
+        cards.forEach((card, i) => {
+          const targetSlot = sequenceArray[i];
+          const css = set[targetSlot];
+          if (css) {
+            // Force inline css inject override
+            card.style.cssText += css;
+          }
+        });
+      };
+
+      const tick = () => {
+         const last = sequenceArray.pop();
+         sequenceArray.unshift(last);
+         drawFrame();
+      };
+
+      drawFrame();
+      const timer = setInterval(tick, 2500);
+
+      window.addEventListener('resize', drawFrame);
+      document.addEventListener("astro:before-swap", () => clearInterval(timer));
+    });
+  </script>
+</section>

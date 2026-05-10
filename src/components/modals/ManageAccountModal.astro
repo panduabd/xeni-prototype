@@ -31,9 +31,8 @@
     </button>
 
     <!-- LEFT SIDEBAR: NAVIGATION -->
-    <aside class="w-[240px] bg-[#F9FAFB] border-r border-[#eaecf0] p-6 flex flex-col gap-6 shrink-0">
+    <aside class="w-[240px] bg-white border-r border-[#eaecf0] p-6 flex flex-col gap-6 shrink-0">
       <div>
-        <h2 class="text-[14px] font-extrabold text-[#98a2b3] uppercase tracking-wider mb-4">Manage Account</h2>
         <div class="flex flex-col gap-1">
           <!-- Profile Tab Button -->
           <button
@@ -108,60 +107,45 @@
           </div>
         </div>
 
-        <!-- Device Management -->
-        <div class="border-t border-[#eaecf0] pt-8 space-y-6">
-          <div>
-            <h4 class="text-[15px] font-bold text-[#111827] mb-1">Device Management</h4>
-            <p class="text-[12px] text-[#667085] leading-relaxed max-w-2xl">
-              Xeni accounts are for individual use only. To prevent abuse and ensure platform stability, tasks can run simultaneously on up to 2 desktop Web sessions and 1 mobile Web session. For team or multi-user use, please purchase the Team Plan.
-            </p>
+        <!-- Personal details -->
+        <div class="border-t border-[#eaecf0] pt-6 space-y-5">
+          <h4 class="text-[15px] font-bold text-[#111827]">Personal details</h4>
+          
+          <div class="space-y-1">
+            <span class="text-[13px] font-bold text-[#111827]">Email</span>
+            <p class="text-[13px] text-[#667085]">jane@xeni.io</p>
           </div>
-
-          <div class="flex items-center justify-between p-4 rounded-2xl bg-red-50/50 border border-red-100">
-            <div>
-              <p class="text-[13px] font-bold text-red-900">Remove all devices</p>
-              <p class="text-[11px] text-red-700 mt-0.5">Logout of all other active browser sessions globally.</p>
+          
+          <div class="flex items-center justify-between py-1 border-t border-[#f2f4f7] pt-4">
+            <div class="space-y-1">
+              <span class="text-[13px] font-bold text-[#111827]">User ID</span>
+              <p class="text-[13px] text-[#667085]">310519663553695297</p>
             </div>
-            <button class="px-4 h-9 rounded-xl bg-red-50 text-red-700 text-[12px] font-bold hover:bg-red-100 transition-all cursor-pointer">
-              Remove all devices
+            <button class="px-3.5 h-8 rounded-lg border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer shadow-sm">
+              Copy
             </button>
           </div>
+        </div>
 
-          <!-- Devices Table -->
-          <div class="border border-[#eaecf0] rounded-2xl overflow-hidden">
-            <table class="w-full text-left border-collapse">
-              <thead>
-                <tr class="bg-[#F9FAFB] border-b border-[#eaecf0]">
-                  <th class="px-4 py-2.5 text-[11px] font-extrabold text-[#667085] uppercase tracking-wider">Online Status</th>
-                  <th class="px-4 py-2.5 text-[11px] font-extrabold text-[#667085] uppercase tracking-wider">Device Information</th>
-                  <th class="px-4 py-2.5 text-[11px] font-extrabold text-[#667085] uppercase tracking-wider text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-[#eaecf0] text-[12px]">
-                <tr>
-                  <td class="px-4 py-3 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                    <span class="font-medium text-[#111827]">Active</span>
-                  </td>
-                  <td class="px-4 py-3 text-[#667085] font-medium">Desktop | macOS | Chrome Browser | 180.252.12.1</td>
-                  <td class="px-4 py-3 text-right">
-                    <span class="text-[11px] text-[#98a2b3] font-bold uppercase tracking-wider">Current device</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-gray-300"></span>
-                    <span class="font-medium text-[#667085]">Offline</span>
-                  </td>
-                  <td class="px-4 py-3 text-[#667085] font-medium">Mobile | iOS | Safari Browser | 180.252.12.4</td>
-                  <td class="px-4 py-3 text-right">
-                    <button class="px-3 py-1 rounded-lg border border-[#eaecf0] bg-white text-[11px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-colors cursor-pointer">
-                      Remove device
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Manage account -->
+        <div class="border-t border-[#eaecf0] pt-6 space-y-5">
+          <h4 class="text-[15px] font-bold text-[#111827]">Manage account</h4>
+          
+          <div class="flex items-center justify-between py-1">
+            <span class="text-[13px] font-bold text-[#111827]">Log out of this device</span>
+            <button id="btn-logout-modal" class="px-3.5 h-8 rounded-lg border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer shadow-sm">
+              Log out
+            </button>
+          </div>
+          
+          <div class="flex items-center justify-between py-1 border-t border-[#f2f4f7] pt-4">
+            <div class="space-y-1">
+              <span class="text-[13px] font-bold text-[#111827]">Delete account</span>
+              <p class="text-[12px] text-[#667085]">This will delete your account and all data.</p>
+            </div>
+            <button class="px-3.5 h-8 rounded-lg border border-red-200 bg-white text-[12px] font-bold text-red-500 hover:bg-red-50 transition-all cursor-pointer shadow-sm">
+              Delete account
+            </button>
           </div>
         </div>
       </section>
@@ -319,5 +303,13 @@
         switchTab(activeTab);
       }
     });
+
+    // Log out button in modal
+    const btnLogoutModal = document.getElementById("btn-logout-modal");
+    if (btnLogoutModal) {
+      btnLogoutModal.addEventListener("click", () => {
+        window.location.href = "/";
+      });
+    }
   });
 </script>

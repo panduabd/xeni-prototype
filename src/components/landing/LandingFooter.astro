@@ -1,0 +1,106 @@
+---
+const footerLinks = [
+  {
+    title: "Product",
+    links: [
+      { label: "Features", href: "#features" },
+      { label: "Pricing", href: "#" },
+      { label: "Integrations", href: "#" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "#" },
+      { label: "Blog", href: "#" },
+      { label: "Careers", href: "#" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Documentation", href: "#" },
+      { label: "Help Center", href: "#" },
+      { label: "Community", href: "#" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy", href: "#" },
+      { label: "Terms", href: "#" },
+      { label: "Security", href: "#" },
+    ],
+  },
+];
+---
+
+<footer class="w-full py-12 border-t border-[#eaecf0] bg-[#F3F4F6]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="text-xl font-bold text-[#111827] tracking-tight">
+          Xeni
+        </a>
+        <p class="mt-2 text-[13px] text-[#667085] font-medium leading-relaxed">
+          AI-powered content automation that respects your brand.
+        </p>
+      </div>
+
+      <!-- Links -->
+      {
+        footerLinks.map((group) => (
+          <div>
+            <h4 class="text-[13px] font-bold text-[#111827] mb-2">
+              {group.title}
+            </h4>
+            <ul class="space-y-1.5">
+              {group.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-[13px] text-[#667085] font-medium hover:text-[#111827] transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="pt-6 border-t border-[#eaecf0] flex flex-col md:flex-row items-center justify-between gap-3"
+    >
+      <p class="text-[12px] text-[#98a2b3] font-medium">
+        © 2026 Xeni. All rights reserved.
+      </p>
+      <div class="flex items-center gap-4">
+        <a
+          href="#"
+          class="text-[#98a2b3] hover:text-[#667085] transition-colors"
+        >
+          <span class="sr-only">Twitter</span>
+          <i class="ti ti-brand-x text-[18px]"></i>
+        </a>
+        <a
+          href="#"
+          class="text-[#98a2b3] hover:text-[#667085] transition-colors"
+        >
+          <span class="sr-only">LinkedIn</span>
+          <i class="ti ti-brand-linkedin text-[18px]"></i>
+        </a>
+        <a
+          href="#"
+          class="text-[#98a2b3] hover:text-[#667085] transition-colors"
+        >
+          <span class="sr-only">GitHub</span>
+          <i class="ti ti-brand-github text-[18px]"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
