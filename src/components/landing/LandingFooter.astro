@@ -1,106 +1,111 @@
 ---
-const footerLinks = [
-  {
-    title: "Product",
-    links: [
-      { label: "Features", href: "#features" },
-      { label: "Pricing", href: "#" },
-      { label: "Integrations", href: "#" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "Careers", href: "#" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Documentation", href: "#" },
-      { label: "Help Center", href: "#" },
-      { label: "Community", href: "#" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
-      { label: "Security", href: "#" },
-    ],
-  },
-];
+// LandingFooter rewritten from reference image
 ---
 
-<footer class="w-full py-12 border-t border-[#eaecf0] bg-[#F3F4F6]">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
-      <!-- Brand -->
-      <div class="col-span-2 md:col-span-1">
-        <a href="/" class="text-xl font-bold text-[#111827] tracking-tight">
-          Xeni
-        </a>
-        <p class="mt-2 text-[13px] text-[#667085] font-medium leading-relaxed">
-          AI-powered content automation that respects your brand.
-        </p>
+<footer class="w-full bg-white pt-16 pb-6 relative overflow-hidden select-none">
+  
+  <!-- MAIN CONTENT WRAPPER -->
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    
+    <!-- TOP BAR: Logo & Social Media -->
+    <div class="flex items-center justify-between border-b border-gray-100 pb-6 mb-10">
+      <!-- Logo -->
+      <div class="flex items-center gap-1">
+        <span class="text-[22px] font-extrabold text-[#111827] tracking-tighter font-fraunces">xeni</span>
+        <sup class="text-[8px] font-bold text-gray-400 mt-1.5">®</sup>
       </div>
 
-      <!-- Links -->
-      {
-        footerLinks.map((group) => (
-          <div>
-            <h4 class="text-[13px] font-bold text-[#111827] mb-2">
-              {group.title}
-            </h4>
-            <ul class="space-y-1.5">
-              {group.links.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="text-[13px] text-[#667085] font-medium hover:text-[#111827] transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
+      <!-- Social Media Squares (Reflect Updated Request: IG, TikTok, FB, X) -->
+      <div class="flex items-center gap-4">
+        <span class="text-[12px] font-medium text-[#4B5563] font-geist hidden sm:block">Social Media</span>
+        <div class="flex items-center gap-2">
+          <!-- Instagram -->
+          <a href="#" class="w-8 h-8 rounded border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors text-[#111827]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+          </a>
+          <!-- Tiktok -->
+          <a href="#" class="w-8 h-8 rounded border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors text-[#111827]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="#" class="w-8 h-8 rounded border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors text-[#111827]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          <!-- X -->
+          <a href="#" class="w-8 h-8 rounded border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors text-[#111827]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 256 256"><path d="M214.75,211.71l-62.6-98.38,61.77-67.95a8,8,0,0,0-11.84-10.76L146,96.87,103.42,30a8,8,0,0,0-13.68,0L26.64,128.87l-61.47,67.6a8,8,0,0,0,11.85,10.76l56.2-61.79,67.86,106.65a8,8,0,0,0,13.67,0Z"></path></svg>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div
-      class="pt-6 border-t border-[#eaecf0] flex flex-col md:flex-row items-center justify-between gap-3"
-    >
-      <p class="text-[12px] text-[#98a2b3] font-medium">
+    <!-- MID SECTION: Reach Out Card & Multi-columns -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20">
+      
+      <!-- Left: Community container -->
+      <div class="md:col-span-5 lg:col-span-4 flex flex-col items-start">
+        <h4 class="text-[13px] font-bold text-[#111827] mb-4 font-geist">Community</h4>
+        
+        <!-- Community Light Capsule -->
+        <a href="#" class="group bg-[#F0F7FF] border border-[#DCEBFA] rounded-2xl p-4 flex items-center gap-4 w-full max-w-sm hover:border-blue-300 transition-all">
+          <div class="w-10 h-10 bg-[#0088CC] text-white rounded-full flex items-center justify-center flex-shrink-0 shadow-sm shadow-blue-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M236.88,26.19a9,9,0,0,0-9.16-1.57L25.06,103.93a14.22,14.22,0,0,0,2.43,27.21L80,141.45V200a15.92,15.92,0,0,0,27.46,11.06L133.24,184l42.11,33a16,16,0,0,0,25.53-8.92l32-172A9,9,0,0,0,236.88,26.19ZM196,193.76,106.88,124,204,53.22ZM96,200V155.47l26.49,20.72Z"></path></svg>
+          </div>
+          <div>
+            <p class="text-[13px] font-bold text-[#111827] font-geist">Join our community</p>
+            <p class="text-[11px] text-[#667085] font-medium font-geist mt-0.5">Engage with our network on telegram</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Right: Link Matrices aligned -->
+      <div class="md:col-span-7 lg:col-span-8 grid grid-cols-3 gap-4 md:justify-items-end">
+        
+        <!-- Features Column -->
+        <div class="flex flex-col items-start md:items-start w-fit">
+          <h4 class="text-[13px] font-bold text-[#111827] mb-4 font-geist">Features</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Agent Management</a></li>
+            <li><a href="#" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Content Pipeline</a></li>
+            <li><a href="#" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Channel Syncing</a></li>
+          </ul>
+        </div>
+
+        <!-- Explore Column -->
+        <div class="flex flex-col items-start md:items-start w-fit">
+          <h4 class="text-[13px] font-bold text-[#111827] mb-4 font-geist">Explore</h4>
+          <ul class="space-y-3">
+            <li><a href="#features" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Features</a></li>
+            <li><a href="/pricing" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Pricing</a></li>
+            <li><a href="#" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">API Docs</a></li>
+          </ul>
+        </div>
+
+        <!-- Help Column -->
+        <div class="flex flex-col items-start md:items-start w-fit">
+          <h4 class="text-[13px] font-bold text-[#111827] mb-4 font-geist">Help</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">FAQs</a></li>
+            <li><a href="#" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Support Email</a></li>
+            <li><a href="#" class="text-[12px] font-medium text-[#6B7280] hover:text-[#111827] transition-colors">Help Centre</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- BOTTOM BAR -->
+    <div class="relative z-20 border-t border-gray-100 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 mt-6">
+      <p class="text-[11px] text-[#9CA3AF] font-medium font-geist">
         © 2026 Xeni. All rights reserved.
       </p>
-      <div class="flex items-center gap-4">
-        <a
-          href="#"
-          class="text-[#98a2b3] hover:text-[#667085] transition-colors"
-        >
-          <span class="sr-only">Twitter</span>
-          <i class="ti ti-brand-x text-[18px]"></i>
-        </a>
-        <a
-          href="#"
-          class="text-[#98a2b3] hover:text-[#667085] transition-colors"
-        >
-          <span class="sr-only">LinkedIn</span>
-          <i class="ti ti-brand-linkedin text-[18px]"></i>
-        </a>
-        <a
-          href="#"
-          class="text-[#98a2b3] hover:text-[#667085] transition-colors"
-        >
-          <span class="sr-only">GitHub</span>
-          <i class="ti ti-brand-github text-[18px]"></i>
-        </a>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-[11px] font-medium text-[#9CA3AF] hover:text-[#6B7280] transition-colors">Terms of Service</a>
+        <a href="#" class="text-[11px] font-medium text-[#9CA3AF] hover:text-[#6B7280] transition-colors">Privacy Policy</a>
+        <a href="#" class="text-[11px] font-medium text-[#9CA3AF] hover:text-[#6B7280] transition-colors">Cookie Policy</a>
       </div>
     </div>
+
   </div>
 </footer>

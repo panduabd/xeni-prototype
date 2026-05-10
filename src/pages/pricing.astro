@@ -1,0 +1,295 @@
+---
+import "../styles/global.css";
+import LandingNavbar from "../components/landing/LandingNavbar.astro";
+import LandingFooter from "../components/landing/LandingFooter.astro";
+import LandingButton from "../components/landing/LandingButton.astro";
+
+// Defined context-specific metadata optimized for XENI AI
+const pricingContext = {
+  starter: {
+    name: "Starter",
+    priceMonthly: "0",
+    priceYearly: "0",
+    desc: "Ideal for solo-creators exploring visual & caption agent generation.",
+    btnLabel: "Try for free",
+    features: [
+      "1 Active AI Social Agent",
+      "5 Generation Credits /mo",
+      "Single Brand DNA profile",
+      "Standard Analytics",
+      "Mobile dashboard access"
+    ]
+  },
+  pro: {
+    name: "Professional",
+    priceMonthly: "39",
+    priceYearly: "32",
+    desc: "Built for high-growth brands needing speed and daily automation.",
+    btnLabel: "Try for free",
+    features: [
+      "Up to 5 Automated Agents",
+      "Unlimited AI Generations",
+      "3 Multi-channel Brand DNAs",
+      "Automated Scheduler pipeline",
+      "Advanced Comment Reply Engine",
+      "Priority Node support",
+      "1-1 Strategy sync"
+    ]
+  },
+  enterprise: {
+    name: "Enterprise",
+    priceMonthly: "199",
+    priceYearly: "167",
+    desc: "At the power, customization, and support your entire organization needs.",
+    btnLabel: "Get started",
+    features: [
+      "Unlimited Agents & Members",
+      "Infinite Content Generation",
+      "Agency Hub (Unlimited DNA)",
+      "Custom Model Fine-tuning",
+      "Dedicated Success Agent",
+      "White-label dashboard option",
+      "Full API Integration access"
+    ]
+  }
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing | Xeni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  </head>
+  <body class="bg-[#F8F9FB] text-[#111827] font-sans antialiased select-none">
+    <LandingNavbar />
+
+    <main class="pt-24 md:pt-32 pb-20 overflow-x-hidden">
+      <!-- HERO STRATUM WITH GENUINE HERO BADGE -->
+      <div class="max-w-4xl mx-auto px-6 text-center mb-16">
+         <!-- Authentic Xeni Hero Badge Injection -->
+         <div class="flex justify-center mb-6">
+            <span class="inline-flex items-center px-3 py-1 rounded-full border border-gray-300 bg-transparent text-[11px] font-semibold text-[#667085] uppercase tracking-wider whitespace-nowrap font-geist">
+               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 256 256" class="text-[#667085] mr-1.5 flex-shrink-0"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+               Simple Pricing
+            </span>
+         </div>
+         
+         <!-- Native Font Fraunces Restoration -->
+         <h1 class="text-[38px] md:text-[52px] font-normal text-[#111827] font-fraunces tracking-tight leading-tight mb-5">
+            Curated Pricing Structure
+         </h1>
+         
+         <p class="text-[15px] md:text-[16px] text-[#667085] font-medium max-w-2xl mx-auto mb-10 leading-relaxed font-geist">
+            Tailored automation tiers designed to help you scale faster, work less, and fill your content calendar overnight.
+         </p>
+
+         <!-- NEUTRAL TINTED TOGGLE -->
+         <div class="flex justify-center">
+            <div id="pricing-switch-container" class="relative bg-gray-200 rounded-full p-1 flex items-center w-[320px] cursor-pointer">
+               <div id="active-slider" class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-white shadow-sm rounded-full transition-transform duration-300 ease-out z-0"></div>
+               
+               <button id="btn-monthly" class="relative flex-1 py-2 text-[13px] font-bold text-[#111827] z-10 transition-colors text-center font-geist">
+                  Monthly
+               </button>
+               <button id="btn-yearly" class="relative flex-1 py-2 text-[13px] font-medium text-gray-500 z-10 transition-colors text-center flex items-center justify-center gap-2 font-geist">
+                  Yearly <span class="text-[10px] font-bold text-[#111827] bg-gray-300 px-2 py-0.5 rounded-full whitespace-nowrap">Save 16%</span>
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <!-- MONOCHROMATIC PRICING GRID -->
+      <div class="max-w-7xl mx-auto px-6 mb-32">
+         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-5 items-center">
+            
+            <!-- STARTER CARD (GREY/WHITE) -->
+            <div class="bg-white border border-gray-200 rounded-[2rem] p-8 lg:p-9 shadow-[0_8px_30px_rgba(0,0,0,0.01)] h-fit">
+               <h3 class="text-[18px] font-bold text-[#111827] mb-3 font-geist">{pricingContext.starter.name}</h3>
+               <div class="flex items-baseline gap-1 mb-4">
+                  <span class="text-[52px] font-bold text-[#111827] leading-none tracking-tighter font-fraunces">$0</span>
+                  <span class="text-[16px] font-bold text-[#667085] font-geist">/mo</span>
+               </div>
+               <p class="text-[13px] text-[#667085] font-medium mb-8 leading-relaxed min-h-[40px] font-geist">
+                  {pricingContext.starter.desc}
+               </p>
+               
+               <!-- XENI LANDING BUTTON -->
+               <div class="mb-10 w-full">
+                  <LandingButton variant="secondary" size="medium" href="/register" center>{pricingContext.starter.btnLabel}</LandingButton>
+               </div>
+
+               <ul class="space-y-3.5">
+                  {pricingContext.starter.features.map(feat => (
+                     <li class="flex items-center gap-2.5 text-[13px] font-medium text-[#374151] font-geist">
+                        <svg class="text-[#667085] shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        {feat}
+                     </li>
+                  ))}
+               </ul>
+            </div>
+
+            <!-- PROFESSIONAL CARD (GREY WRAPPER) -->
+            <div class="relative pt-2 pb-2">
+               <!-- Neutral Grey Capsule Background for Neutral Xeni Aesthetics -->
+               <div class="absolute inset-0 bg-gray-100 rounded-[2.5rem] border border-gray-200/60 z-0"></div>
+               
+               <!-- Grey Neutral Banner -->
+               <div class="relative z-10 text-center pt-3.5 pb-2.5 flex items-center justify-center gap-1.5 text-[#111827] font-bold text-[12px] uppercase tracking-wider font-geist">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 256 256"><path d="M215.79,118.17a8,8,0,0,0-7.17-5.17H144l31.24-83.32A8,8,0,0,0,161,21.14l-112,120a8,8,0,0,0,5.88,13.49h64l-31.24,83.32a8,8,0,0,0,14.22,7.91l112-120A8,8,0,0,0,215.79,118.17Z"></path></svg>
+                  Most Recommended
+               </div>
+
+               <!-- Inner white core card -->
+               <div class="relative z-10 bg-white rounded-[2rem] mx-[5px] mb-[5px] p-8 lg:p-9 shadow-[0_12px_35px_rgba(0,0,0,0.04)] border border-gray-200/40">
+                  <h3 class="text-[18px] font-bold text-[#111827] mb-3 font-geist">{pricingContext.pro.name}</h3>
+                  <div class="flex items-baseline gap-1 mb-4">
+                     <span class="text-[52px] font-bold text-[#111827] leading-none tracking-tighter font-fraunces pro-val">$39</span>
+                     <span class="text-[16px] font-bold text-[#667085] font-geist">/mo</span>
+                  </div>
+                  <p class="text-[13px] text-[#667085] font-medium mb-8 leading-relaxed min-h-[40px] font-geist">
+                     {pricingContext.pro.desc}
+                  </p>
+                  
+                  <!-- XENI LANDING BUTTON (PRIMARY BLACK) -->
+                  <div class="mb-10 w-full">
+                     <LandingButton variant="primary" size="medium" href="/register" center>{pricingContext.pro.btnLabel}</LandingButton>
+                  </div>
+
+                  <ul class="space-y-3.5">
+                     {pricingContext.pro.features.map(feat => (
+                        <li class="flex items-center gap-2.5 text-[13px] font-bold text-[#111827] font-geist">
+                           <svg class="text-[#111827] shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                           {feat}
+                        </li>
+                     ))}
+                  </ul>
+               </div>
+            </div>
+
+            <!-- ENTERPRISE CARD (GREY/WHITE) -->
+            <div class="bg-white border border-gray-200 rounded-[2rem] p-8 lg:p-9 shadow-[0_8px_30px_rgba(0,0,0,0.01)] h-fit">
+               <h3 class="text-[18px] font-bold text-[#111827] mb-3 font-geist">{pricingContext.enterprise.name}</h3>
+               <div class="flex items-baseline gap-1 mb-4">
+                  <span class="text-[52px] font-bold text-[#111827] leading-none tracking-tighter font-fraunces ent-val">$199</span>
+                  <span class="text-[16px] font-bold text-[#667085] font-geist">/mo</span>
+               </div>
+               <p class="text-[13px] text-[#667085] font-medium mb-8 leading-relaxed min-h-[40px] font-geist">
+                  {pricingContext.enterprise.desc}
+               </p>
+               
+               <!-- XENI LANDING BUTTON -->
+               <div class="mb-10 w-full">
+                  <LandingButton variant="secondary" size="medium" href="/register" center>{pricingContext.enterprise.btnLabel}</LandingButton>
+               </div>
+
+               <ul class="space-y-3.5">
+                  {pricingContext.enterprise.features.map(feat => (
+                     <li class="flex items-center gap-2.5 text-[13px] font-medium text-[#374151] font-geist">
+                        <svg class="text-[#667085] shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        {feat}
+                     </li>
+                  ))}
+               </ul>
+            </div>
+
+         </div>
+      </div>
+
+      <!-- MAINTAINING NATIVE XENI COMPARE TABLE -->
+      <section class="max-w-5xl mx-auto px-6 mb-24 md:mb-32">
+         <div class="text-center mb-12">
+            <h2 class="text-[28px] md:text-[36px] font-normal text-[#111827] font-fraunces mb-3">Compare Plans</h2>
+            <p class="text-[14px] text-[#667085] font-geist font-medium">Detailed feature matrix for absolute precision.</p>
+         </div>
+         
+         <div class="w-full overflow-x-auto bg-white border border-gray-200 rounded-xl">
+            <table class="w-full min-w-[640px] text-left border-collapse">
+               <thead>
+                  <tr class="border-b border-gray-200 bg-gray-50/50">
+                     <th class="py-5 px-6 text-[12px] font-bold uppercase tracking-wider text-[#111827] font-geist w-[30%]">Platform Engine</th>
+                     <th class="py-5 px-6 text-[13px] font-bold text-[#111827] font-geist text-center w-[23%]">Starter</th>
+                     <th class="py-5 px-6 text-[13px] font-bold text-[#111827] font-geist text-center w-[23%]">Professional</th>
+                     <th class="py-5 px-6 text-[13px] font-bold text-[#111827] font-geist text-center w-[23%]">Enterprise</th>
+                  </tr>
+               </thead>
+               <tbody class="text-[13px] text-[#111827] font-medium font-geist">
+                  <tr class="border-b border-gray-100 hover:bg-gray-50/80 transition-colors">
+                     <td class="py-4 px-6 text-[#4B5563]">Active Autonomous Agents</td>
+                     <td class="py-4 px-6 text-center font-bold">1</td>
+                     <td class="py-4 px-6 text-center font-bold">Up to 5</td>
+                     <td class="py-4 px-6 text-center font-bold">Unlimited</td>
+                  </tr>
+                  <tr class="border-b border-gray-100 hover:bg-gray-50/80 transition-colors">
+                     <td class="py-4 px-6 text-[#4B5563]">Brand DNA Profiles</td>
+                     <td class="py-4 px-6 text-center font-medium">1</td>
+                     <td class="py-4 px-6 text-center font-bold">3</td>
+                     <td class="py-4 px-6 text-center font-bold">Unlimited</td>
+                  </tr>
+                  <tr class="border-b border-gray-100 hover:bg-gray-50/80 transition-colors">
+                     <td class="py-4 px-6 text-[#4B5563]">Content Scheduler Pipeline</td>
+                     <td class="py-4 px-6 text-center text-gray-300">—</td>
+                     <td class="py-4 px-6 text-center">
+                        <div class="flex justify-center"><svg class="text-[#111827]" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg></div>
+                     </td>
+                     <td class="py-4 px-6 text-center">
+                        <div class="flex justify-center"><svg class="text-[#111827]" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg></div>
+                     </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50/80 transition-colors">
+                     <td class="py-4 px-6 text-[#4B5563]">AI Custom Fine-Tuning</td>
+                     <td class="py-4 px-6 text-center text-gray-300">—</td>
+                     <td class="py-4 px-6 text-center text-gray-300">—</td>
+                     <td class="py-4 px-6 text-center">
+                        <div class="flex justify-center"><svg class="text-[#111827]" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg></div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </section>
+
+    </main>
+
+    <LandingFooter />
+
+    <script define:vars={{ pricingContext }}>
+      const btnMonthly = document.getElementById('btn-monthly');
+      const btnYearly = document.getElementById('btn-yearly');
+      const activeSlider = document.getElementById('active-slider');
+      
+      const proValEl = document.querySelector('.pro-val');
+      const entValEl = document.querySelector('.ent-val');
+
+      function setMonthly() {
+         activeSlider.style.transform = 'translateX(0)';
+         btnMonthly.classList.add('text-[#111827]', 'font-bold');
+         btnMonthly.classList.remove('text-gray-500', 'font-medium');
+         btnYearly.classList.remove('text-[#111827]', 'font-bold');
+         btnYearly.classList.add('text-gray-500', 'font-medium');
+         
+         proValEl.textContent = `$${pricingContext.pro.priceMonthly}`;
+         entValEl.textContent = `$${pricingContext.enterprise.priceMonthly}`;
+      }
+
+      function setYearly() {
+         activeSlider.style.transform = 'translateX(calc(100% + 4px))';
+         btnYearly.classList.add('text-[#111827]', 'font-bold');
+         btnYearly.classList.remove('text-gray-500', 'font-medium');
+         btnMonthly.classList.remove('text-[#111827]', 'font-bold');
+         btnMonthly.classList.add('text-gray-500', 'font-medium');
+
+         proValEl.textContent = `$${pricingContext.pro.priceYearly}`;
+         entValEl.textContent = `$${pricingContext.enterprise.priceYearly}`;
+      }
+
+      btnMonthly.addEventListener('click', setMonthly);
+      btnYearly.addEventListener('click', setYearly);
+      setMonthly();
+    </script>
+  </body>
+</html>
