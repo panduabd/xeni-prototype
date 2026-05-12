@@ -2,10 +2,27 @@
 import AppLayout from "../layouts/AppLayout.astro";
 
 const dnaList = [
-  { id: "1", name: "Fresh Juice Co.", color: "#34D399" },
-  { id: "2", name: "Acme Corp", color: "#2563EB" },
-  { id: "3", name: "Luxe Beauty", color: "#F472B6" },
-  { id: "4", name: "TechStart Inc", color: "#8B5CF6" },
+  { id: "all", name: "All Business" },
+  { id: "1", name: "Fresh Juice Co." },
+  { id: "2", name: "Acme Corp" },
+  { id: "3", name: "Luxe Beauty" },
+  { id: "4", name: "TechStart Inc" },
+  { id: "tech", name: "TechFlow Systems" },
+  { id: "brew", name: "Daily Brew Cafe" },
+  { id: "fit", name: "FitLife Gym" },
+  { id: "eco", name: "EcoGreen Solutions" },
+  { id: "urban", name: "Urban Outfitters" },
+  { id: "pixel", name: "Pixel Perfect Studio" },
+  { id: "nova", name: "Nova Logistics" },
+  { id: "summit", name: "Summit Outdoors" },
+  { id: "glow", name: "Glow Skincare" },
+  { id: "byte", name: "Byte Labs" },
+  { id: "vista", name: "Vista Real Estate" },
+  { id: "peak", name: "Peak Performance" },
+  { id: "swift", name: "Swift Delivery" },
+  { id: "bloom", name: "Bloom Florist" },
+  { id: "ocean", name: "Oceanic Seafood" },
+  { id: "apex", name: "Apex Consulting" }
 ];
 
 const platforms = [
@@ -43,7 +60,7 @@ const totalError = accounts.filter((a) => a.status === "error").length;
 <AppLayout title="Integrations - Xeni" activePage="integrations">
   <div class="w-full min-h-full flex flex-col px-6 pb-32 -mt-12">
     <!-- Title + Controls Row -->
-    <div class="max-w-6xl mx-auto w-full pt-1 pb-6 flex items-center justify-between gap-4">
+    <div class="w-full pt-1 pb-5 flex items-center justify-between gap-4 shrink-0">
       <!-- Left: Title -->
       <div class="flex items-center gap-2 shrink-0">
         <i class="ti ti-link text-[20px] text-[#98a2b3]"></i>
@@ -53,14 +70,17 @@ const totalError = accounts.filter((a) => a.status === "error").length;
       </div>
 
       <!-- Right: Add Account -->
-      <button onclick="document.getElementById('add-account-modal').hidden = false;" class="flex items-center gap-2 px-4 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-semibold hover:bg-black transition-all cursor-pointer shrink-0">
+      <button
+        onclick="document.getElementById('add-account-modal').hidden = false;"
+        class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-4 h-9 text-[13px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+      >
         <i class="ti ti-plus text-[14px]"></i>
         Add Account
       </button>
     </div>
 
     <!-- Stats + Filters -->
-    <div class="max-w-6xl mx-auto w-full pb-6 flex flex-col gap-4">
+    <div class="w-full pb-6 flex flex-col gap-4">
       <!-- Stats Cards -->
       <div class="grid grid-cols-2 gap-4">
         <div class="flex items-center gap-3 p-4 rounded-2xl bg-white border border-[#eaecf0]">
@@ -123,17 +143,18 @@ const totalError = accounts.filter((a) => a.status === "error").length;
             <span id="dna-filter-label">All Business</span>
             <i class="ti ti-chevron-down text-[12px] text-[#98a2b3]"></i>
           </button>
-          <div
-            id="dna-filter-dropdown"
-            class="hidden absolute top-full left-0 mt-1.5 w-52 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
-          >
-            <div class="flex flex-col p-1.5">
-              <button class="dna-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#111827] hover:bg-[#F9FAFB] transition-all cursor-pointer bg-[#F9FAFB]" data-value="all">
-                All Business
-              </button>
+          <div id="dna-filter-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden flex flex-col">
+            <!-- Mini Search Bar for Filter -->
+            <div class="p-2 border-b border-[#eaecf0] bg-[#F9FAFB]">
+              <div class="relative">
+                <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[11px]"></i>
+                <input type="text" class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827]" placeholder="Search..." />
+              </div>
+            </div>
+            <!-- Scrollable List -->
+            <div class="flex flex-col p-1 max-h-[220px] overflow-y-auto custom-scrollbar biz-options-container">
               {dnaList.map((dna) => (
-                <button class="dna-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-2" data-value={dna.id}>
-                  <div class="w-2 h-2 rounded-full" style={`background-color: ${dna.color}`}></div>
+                <button class="dna-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-value={dna.id}>
                   {dna.name}
                 </button>
               ))}
@@ -162,7 +183,7 @@ const totalError = accounts.filter((a) => a.status === "error").length;
     </div>
 
     <!-- Accounts Table -->
-    <div class="max-w-6xl mx-auto w-full flex-1 pb-16">
+    <div class="w-full flex-1 pb-16">
       <div class="bg-white rounded-2xl border border-[#eaecf0] overflow-hidden">
         <!-- Table Header -->
         <div class="grid grid-cols-[1fr_140px_140px_100px_80px] gap-4 px-5 py-3 bg-[#F9FAFB] border-b border-[#eaecf0] text-[12px] font-semibold text-[#667085] uppercase tracking-wide">
@@ -249,6 +270,19 @@ const totalError = accounts.filter((a) => a.status === "error").length;
         e.stopPropagation();
         dropdown.classList.toggle('hidden');
       });
+
+      // Inner search input logic for filtering list
+      const bizSearchInput = dropdown.querySelector('.biz-search-input');
+      if (bizSearchInput) {
+        bizSearchInput.addEventListener('click', (e) => e.stopPropagation());
+        bizSearchInput.addEventListener('input', (e) => {
+          const term = e.target.value.toLowerCase();
+          dropdown.querySelectorAll('.' + optionClass).forEach(opt => {
+            const text = opt.textContent.toLowerCase();
+            opt.style.display = text.includes(term) ? 'block' : 'none';
+          });
+        });
+      }
 
       dropdown.querySelectorAll('.' + optionClass).forEach((opt) => {
         opt.addEventListener('click', () => {
@@ -470,10 +504,18 @@ const totalError = accounts.filter((a) => a.status === "error").length;
 
         <!-- Footer -->
         <div class="px-6 py-4 border-t border-[#eaecf0] flex items-center justify-end gap-3">
-          <button onclick="document.getElementById('add-account-modal').hidden = true;" class="px-5 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-semibold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer">
+          <button
+            onclick="document.getElementById('add-account-modal').hidden = true;"
+            class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-4 h-9 text-[13px] bg-white text-[#344054] border border-[#D0D5DD] shadow-[0_3px_0_0_#D0D5DD] hover:bg-[#F9FAFB] active:translate-y-[1px] active:shadow-[0_1px_0_0_#D0D5DD]"
+          >
             Cancel
           </button>
-          <button id="btn-connect" onclick="document.getElementById('add-account-modal').hidden = true;" disabled class="px-6 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-semibold hover:bg-black transition-all opacity-50 cursor-not-allowed">
+          <button
+            id="btn-connect"
+            onclick="document.getElementById('add-account-modal').hidden = true;"
+            disabled
+            class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-4 h-9 text-[13px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none"
+          >
             Connect Account
           </button>
         </div>

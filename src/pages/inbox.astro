@@ -1,0 +1,730 @@
+---
+import AppLayout from "../layouts/AppLayout.astro";
+
+const dnaList = [
+  { id: "all", name: "All Business" },
+  { id: "fresh", name: "Fresh Juice Co." },
+  { id: "acme", name: "Acme Corp" },
+  { id: "luxe", name: "Luxe Beauty" },
+  { id: "tech", name: "TechFlow Systems" },
+  { id: "brew", name: "Daily Brew Cafe" },
+  { id: "fit", name: "FitLife Gym" },
+  { id: "eco", name: "EcoGreen Solutions" },
+  { id: "urban", name: "Urban Outfitters" },
+  { id: "pixel", name: "Pixel Perfect Studio" },
+  { id: "nova", name: "Nova Logistics" },
+  { id: "summit", name: "Summit Outdoors" },
+  { id: "glow", name: "Glow Skincare" },
+  { id: "byte", name: "Byte Labs" },
+  { id: "vista", name: "Vista Real Estate" },
+  { id: "peak", name: "Peak Performance" },
+  { id: "swift", name: "Swift Delivery" },
+  { id: "bloom", name: "Bloom Florist" },
+  { id: "ocean", name: "Oceanic Seafood" },
+  { id: "apex", name: "Apex Consulting" },
+  { id: "bright", name: "Bright Future Academics" }
+];
+
+const mockMessages = [
+  {
+    id: "1",
+    businessId: "fresh",
+    user: "Alex Johnson",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+    lastMessage: "Is this still available in stock?",
+    time: "10m ago",
+    platform: "instagram",
+    status: "unread",
+    chat: [
+      { type: "incoming", text: "Hello! I saw your post about the new detox juice.", time: "10:30 AM" },
+      { type: "incoming", text: "Is this still available in stock?", time: "10:31 AM" },
+    ]
+  },
+  {
+    id: "2",
+    businessId: "acme",
+    user: "Sarah Wilson",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+    lastMessage: "Thank you for your response, it was very helpful!",
+    time: "1h ago",
+    platform: "facebook",
+    status: "sent",
+    chat: [
+      { type: "incoming", text: "How do I access the analytics dashboard?", time: "Yesterday" },
+      { type: "outgoing", text: "Hello Sarah! You can access it by clicking the 'Analytics' tab on the left navigation bar.", time: "Yesterday", byAi: true },
+      { type: "incoming", text: "Thank you for your response, it was very helpful!", time: "1h ago" }
+    ]
+  },
+  {
+    id: "3",
+    businessId: "luxe",
+    user: "David Chen",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+    lastMessage: "Failed to deliver message.",
+    time: "3h ago",
+    platform: "twitter",
+    status: "failed",
+    chat: [
+      { type: "incoming", text: "When does the sale end?", time: "3h ago" },
+      { type: "outgoing", text: "The seasonal sale ends on May 25th! Don't miss out.", time: "3h ago", failed: true }
+    ]
+  },
+  {
+    id: "4",
+    businessId: "fresh",
+    user: "Emily Davis",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily",
+    lastMessage: "Perfect! I'll place an order now.",
+    time: "1d ago",
+    platform: "instagram",
+    status: "sent",
+    chat: [
+      { type: "incoming", text: "Do you offer wholesale pricing?", time: "Yesterday" },
+      { type: "outgoing", text: "Yes we do! Please contact sales@freshjuice.co for our wholesale catalog.", time: "Yesterday", byAi: true },
+      { type: "incoming", text: "Perfect! I'll place an order now.", time: "Yesterday" }
+    ]
+  }
+];
+
+const mockComments = [
+  {
+    id: "c1",
+    businessId: "fresh",
+    user: "Michael Brown",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
+    comment: "Looks delicious! Highly recommended.",
+    time: "20m ago",
+    platform: "instagram",
+    status: "unread",
+    post: "Summer Smoothie Ad",
+    postImg: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&q=80&w=100",
+    replies: []
+  },
+  {
+    id: "c2",
+    businessId: "acme",
+    user: "Jessica Taylor",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jessica",
+    comment: "When will the new update be live?",
+    time: "2h ago",
+    platform: "linkedin",
+    status: "sent",
+    post: "Q2 Product Update",
+    postImg: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=100",
+    replies: [
+      { type: "outgoing", text: "Hi Jessica! The update goes live tomorrow at 9 AM PST.", time: "1h ago", byAi: true }
+    ]
+  }
+];
+
+const activityLog = [
+  { id: 1, category: "messages", type: "ai_replied", businessId: "acme", desc: "AI auto-replied to @sarahwilson's message", time: "10m ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" x2="8" y1="16" y2="16"/><line x1="16" x2="16" y1="16" y2="16"/></svg>` },
+  { id: 2, category: "comments", type: "failed_send", businessId: "fresh", desc: "Failed to deliver comment reply to Michael Brown", time: "1h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>` },
+  { id: 3, category: "comments", type: "ai_replied", businessId: "acme", desc: "AI auto-replied to a comment by Jessica Taylor", time: "2h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" x2="8" y1="16" y2="16"/><line x1="16" x2="16" y1="16" y2="16"/></svg>` },
+  { id: 4, category: "systems", type: "connected", businessId: "fresh", desc: "Connected new Instagram account for Fresh Juice Co.", time: "5h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 5v4"/><path d="M8 5v4"/><path d="m17 17 2 2 4-4"/></svg>` },
+  { id: 5, category: "automations", type: "automation_triggered", businessId: "tech", desc: "Automation trigger: 'Weekly Promo' workflow successfully initiated.", time: "6h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>` },
+  { id: 6, category: "messages", type: "archived", businessId: "luxe", desc: "Archived conversation with David Chen", time: "Yesterday", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>` },
+];
+
+const getPlatformIcon = (platform) => {
+  switch (platform) {
+    case 'instagram': return 'ti-brand-instagram';
+    case 'facebook': return 'ti-brand-facebook';
+    case 'twitter': return 'ti-brand-twitter';
+    case 'linkedin': return 'ti-brand-linkedin';
+    default: return 'ti-message';
+  }
+};
+
+const getPlatformColor = (platform) => {
+  switch (platform) {
+    case 'instagram': return '#E1306C';
+    case 'facebook': return '#1877F2';
+    case 'twitter': return '#1DA1F2';
+    case 'linkedin': return '#0A66C2';
+    default: return '#667085';
+  }
+};
+---
+
+<AppLayout title="Inbox - Xeni" activePage="inbox">
+  <div class="w-full h-[calc(100vh-110px)] -mt-12 flex flex-col px-6">
+    <!-- Header row -->
+    <div class="flex items-center justify-between pb-5 pt-1 shrink-0">
+      <div class="flex items-center gap-2">
+        <i class="ti ti-inbox text-[20px] text-[#98a2b3]"></i>
+        <h1 class="text-[20px] font-bold text-[#111827] tracking-tight">Inbox</h1>
+      </div>
+    </div>
+
+    <!-- Controls Row: Tabs and Filters -->
+    <div class="flex items-center justify-between mb-4 shrink-0">
+      <!-- Navigation Tabs (Messages, Comments, Activity) -->
+      <div class="flex items-center gap-1 p-1 bg-white rounded-xl border border-[#eaecf0] w-fit">
+        <button class="inbox-tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold bg-[#111827] text-white transition-all cursor-pointer flex items-center gap-2" data-tab="messages">
+          <i class="ti ti-messages text-[14px]"></i>
+          Messages
+        </button>
+        <button class="inbox-tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-2" data-tab="comments">
+          <i class="ti ti-message-circle-2 text-[14px]"></i>
+          Comments
+        </button>
+        <button class="inbox-tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-2" data-tab="activity">
+          <i class="ti ti-activity-heartbeat text-[14px]"></i>
+          Activity
+        </button>
+      </div>
+
+      <!-- Filters aligned right -->
+      <div class="flex items-center gap-2" id="inbox-filter-container">
+        <!-- Status Filter Tabs -->
+        <div class="flex items-center h-9 rounded-xl border border-[#D0D5DD] bg-white overflow-hidden" id="status-filter-group">
+          <button class="status-filter-btn active px-3 h-full text-[12px] font-semibold text-[#111827] bg-[#F3F4F6] transition-all cursor-pointer border-r border-[#eaecf0]" data-status="all">All</button>
+          <button class="status-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-status="unread">Unread</button>
+          <button class="status-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-status="sent">Sent (AI)</button>
+          <button class="status-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer" data-status="failed">Failed</button>
+        </div>
+
+        <!-- Activity Filter Tabs -->
+        <div class="hidden items-center h-9 rounded-xl border border-[#D0D5DD] bg-white overflow-hidden" id="activity-filter-group">
+          <button class="activity-filter-btn active px-3 h-full text-[12px] font-semibold text-[#111827] bg-[#F3F4F6] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="all">All</button>
+          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="messages">Messages</button>
+          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="comments">Comments</button>
+          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="automations">Automations</button>
+          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer" data-category="systems">Systems</button>
+        </div>
+
+        <!-- Business Filter (Far Right) -->
+        <div class="relative" id="business-filter-wrapper">
+          <button id="btn-business-filter" class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer">
+            <i class="ti ti-building text-[14px]"></i>
+            <span id="current-business-label">All Business</span>
+            <i class="ti ti-chevron-down text-[12px] text-[#98a2b3]"></i>
+          </button>
+          <div id="business-filter-dropdown" class="hidden absolute top-full right-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 overflow-hidden flex flex-col">
+            <!-- Mini Search Bar for Filter -->
+            <div class="p-2 border-b border-[#eaecf0] bg-[#F9FAFB]">
+              <div class="relative">
+                <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[11px]"></i>
+                <input type="text" class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827]" placeholder="Search..." />
+              </div>
+            </div>
+            <!-- Scrollable List -->
+            <div class="flex flex-col p-1 max-h-[220px] overflow-y-auto custom-scrollbar biz-options-container">
+              {dnaList.map(dna => (
+                <button class="business-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-id={dna.id}>
+                  {dna.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="flex-1 bg-white rounded-3xl border border-[#eaecf0] overflow-hidden shadow-sm flex flex-col relative min-h-0">
+      
+      <!-- ====================== TAB: MESSAGES ====================== -->
+      <div id="content-messages" class="flex w-full h-full absolute inset-0 transition-opacity duration-200">
+        <!-- Left Panel: Chat List -->
+        <div class="w-[320px] h-full border-r border-[#eaecf0] flex flex-col bg-[#F9FAFB]">
+          <!-- Search bar inside list -->
+          <div class="p-3 border-b border-[#eaecf0] bg-white">
+            <div class="relative">
+              <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[13px]"></i>
+              <input type="text" placeholder="Search messages..." class="w-full h-8 pl-8 pr-3 rounded-lg bg-[#F3F4F6] border-transparent text-[12px] placeholder:text-[#98a2b3] focus:bg-white focus:border-[#eaecf0] transition-all outline-none" />
+            </div>
+          </div>
+          <!-- Chat List Scrollable -->
+          <div class="flex-1 overflow-y-auto custom-scrollbar" id="message-list-container">
+            {mockMessages.map((msg, index) => (
+              <div 
+                class={`message-item p-3.5 border-b border-[#eaecf0] flex items-start gap-3 cursor-pointer transition-colors hover:bg-white relative ${index === 0 ? 'bg-white' : ''}`}
+                data-id={msg.id}
+                data-business={msg.businessId}
+                data-status={msg.status}
+              >
+                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827]"></div>}
+                <div class="relative shrink-0">
+                  <img src={msg.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] bg-white" />
+                  <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white flex items-center justify-center shadow-sm border border-[#f3f4f6]">
+                    <i class={`ti ${getPlatformIcon(msg.platform)} text-[10px]`} style={`color: ${getPlatformColor(msg.platform)}`}></i>
+                  </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between mb-0.5">
+                    <h4 class="text-[13px] font-bold text-[#111827] truncate">{msg.user}</h4>
+                    <span class="text-[10px] text-[#98a2b3] font-medium">{msg.time}</span>
+                  </div>
+                  <p class={`text-[12px] truncate ${msg.status === 'unread' ? 'font-semibold text-[#111827]' : 'text-[#667085]'} ${msg.status === 'failed' ? 'text-red-500' : ''}`}>
+                    {msg.lastMessage}
+                  </p>
+                  <div class="flex items-center gap-1.5 mt-1">
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-md bg-[#F3F4F6] text-[#667085] font-medium">
+                      {dnaList.find(d => d.id === msg.businessId)?.name || 'Business'}
+                    </span>
+                    {msg.status === 'unread' && <div class="w-1.5 h-1.5 rounded-full bg-[#2563EB]"></div>}
+                    {msg.status === 'failed' && <i class="ti ti-alert-circle text-red-500 text-[12px]"></i>}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right Panel: Chatbox -->
+        <div class="flex-1 h-full flex flex-col bg-white">
+          <!-- Chat Header -->
+          <div class="h-16 border-b border-[#eaecf0] flex items-center justify-between px-6 shrink-0">
+            <div class="flex items-center gap-3">
+              <img id="active-chat-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-9 h-9 rounded-full border border-[#eaecf0]" />
+              <div>
+                <h3 class="text-[14px] font-bold text-[#111827]" id="active-chat-name">Alex Johnson</h3>
+                <p class="text-[11px] text-[#667085] flex items-center gap-1">
+                  <i class="ti ti-brand-instagram" style="color: #E1306C"></i>
+                  via Instagram Direct
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-8 w-8 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#F3F4F6] transition-colors"><i class="ti ti-check"></i></button>
+              <button class="h-8 w-8 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#F3F4F6] transition-colors"><i class="ti ti-dots"></i></button>
+            </div>
+          </div>
+
+          <!-- Chat Messages Area -->
+          <div class="flex-1 p-6 overflow-y-auto flex flex-col gap-4 custom-scrollbar bg-[#FDFDFD]" id="chat-messages-scroll">
+            <!-- Date break -->
+            <div class="flex justify-center my-2">
+              <span class="text-[10px] font-bold text-[#98a2b3] uppercase tracking-wider px-2 py-1 rounded-md bg-[#F3F4F6]">Today</span>
+            </div>
+
+            <div class="flex items-start gap-3 max-w-[80%] self-start">
+              <div class="w-8 h-8 rounded-full bg-[#F3F4F6] border border-[#eaecf0] shrink-0 mt-1 overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-full h-full"/>
+              </div>
+              <div class="flex flex-col gap-1 items-start">
+                <div class="px-4 py-2.5 rounded-2xl rounded-tl-none bg-white border border-[#eaecf0] text-[13px] text-[#111827] shadow-sm leading-relaxed">
+                  Hello! I saw your post about the new detox juice.
+                </div>
+                <span class="text-[10px] text-[#98a2b3] ml-1">10:30 AM</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 max-w-[80%] self-start">
+              <div class="w-8 h-8 rounded-full bg-[#F3F4F6] border border-[#eaecf0] shrink-0 mt-1 overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-full h-full"/>
+              </div>
+              <div class="flex flex-col gap-1 items-start">
+                <div class="px-4 py-2.5 rounded-2xl rounded-tl-none bg-white border border-[#eaecf0] text-[13px] text-[#111827] shadow-sm leading-relaxed">
+                  Is this still available in stock?
+                </div>
+                <span class="text-[10px] text-[#98a2b3] ml-1">10:31 AM</span>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- Chat Input -->
+          <div class="p-4 border-t border-[#eaecf0] bg-white shrink-0">
+            <div class="relative bg-[#F9FAFB] rounded-xl border border-[#eaecf0] focus-within:border-[#2563EB] focus-within:ring-2 focus-within:ring-[#2563EB1A] transition-all flex flex-col">
+              <textarea placeholder="Type your reply..." class="w-full bg-transparent border-none outline-none p-3 text-[13px] text-[#111827] resize-none h-20 placeholder:text-[#98a2b3]"></textarea>
+              <div class="flex items-center justify-between p-2 border-t border-[#eaecf0]">
+                <div class="flex items-center gap-1">
+                  <button class="w-8 h-8 flex items-center justify-center rounded-lg text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all"><i class="ti ti-photo text-[16px]"></i></button>
+                  <button class="w-8 h-8 flex items-center justify-center rounded-lg text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all"><i class="ti ti-mood-smile text-[16px]"></i></button>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center gap-1.5 text-[11px] text-[#667085] mr-2 bg-white px-2 py-1 rounded-lg border border-[#eaecf0]">
+                    <div class="w-2 h-2 bg-[#10B981] rounded-full"></div>
+                    AI Assist Active
+                  </div>
+                  <button class="h-8 px-4 bg-[#111827] text-white rounded-lg text-[12px] font-bold hover:bg-black transition-all flex items-center gap-1.5 shadow-sm">
+                    Send
+                    <i class="ti ti-send text-[12px]"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== TAB: COMMENTS ====================== -->
+      <div id="content-comments" class="hidden w-full h-full absolute inset-0 flex opacity-0 transition-opacity duration-200">
+        <!-- Left Panel: Comments Notifications List -->
+        <div class="w-[340px] h-full border-r border-[#eaecf0] flex flex-col bg-[#F9FAFB]">
+          <div class="p-3 border-b border-[#eaecf0] bg-white">
+            <div class="relative">
+              <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[13px]"></i>
+              <input type="text" placeholder="Search comments..." class="w-full h-8 pl-8 pr-3 rounded-lg bg-[#F3F4F6] border-transparent text-[12px] focus:bg-white focus:border-[#eaecf0] outline-none" />
+            </div>
+          </div>
+          
+          <div class="flex-1 overflow-y-auto custom-scrollbar" id="comment-list-container">
+            {mockComments.map((item, index) => (
+              <div class={`comment-item p-4 border-b border-[#eaecf0] hover:bg-white cursor-pointer transition-colors flex items-start gap-3 relative ${index === 0 ? 'bg-white' : ''}`} data-id={item.id} data-business={item.businessId} data-status={item.status}>
+                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827]"></div>}
+                <div class="relative shrink-0">
+                  <img src={item.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] bg-white" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-[12px] text-[#111827] mb-1 leading-relaxed">
+                    <span class="font-bold">{item.user}</span> commented on your post
+                  </p>
+                  <div class="bg-[#F3F4F6] p-2 rounded-lg border border-[#eaecf0] text-[11px] text-[#667085] mb-2 italic truncate">
+                    "{item.comment}"
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1.5">
+                      <i class={`ti ${getPlatformIcon(item.platform)} text-[12px]`} style={`color: ${getPlatformColor(item.platform)}`}></i>
+                      <span class="text-[10px] text-[#98a2b3]">{item.time}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                       {item.status === 'sent' && <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#ECFDF3] text-[#12B76A] font-bold border border-[#D1FADF]">Replied by AI</span>}
+                       {item.status === 'unread' && <div class="w-2 h-2 bg-[#2563EB] rounded-full"></div>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right Panel: Detail View -->
+        <div class="flex-1 h-full flex bg-white overflow-hidden">
+          <!-- Layout split: Post preview (left) + comment reply chain (right) -->
+          <div class="flex-1 flex flex-col h-full">
+            <!-- Post context bar -->
+            <div class="p-4 bg-[#F9FAFB] border-b border-[#eaecf0] flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&q=80&w=100" class="w-12 h-12 rounded-lg object-cover border border-[#eaecf0] shadow-sm" />
+              <div>
+                <span class="text-[10px] font-bold text-[#667085] uppercase tracking-wider">Originating Post</span>
+                <h4 class="text-[13px] font-bold text-[#111827]">Summer Smoothie Ad Campaign</h4>
+              </div>
+              <button class="ml-auto h-8 px-3 rounded-lg border border-[#eaecf0] bg-white text-[11px] font-bold text-[#667085] hover:text-[#111827] transition-colors flex items-center gap-1.5">
+                View Post <i class="ti ti-external-link"></i>
+              </button>
+            </div>
+
+            <!-- Conversation Flow for Comments -->
+            <div class="flex-1 p-6 overflow-y-auto flex flex-col gap-5 custom-scrollbar">
+              <!-- Original Comment -->
+              <div class="flex items-start gap-3">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Michael" class="w-8 h-8 rounded-full border border-[#eaecf0]" />
+                <div class="flex-1 flex flex-col gap-1">
+                  <div class="bg-[#F3F4F6] p-3 rounded-xl rounded-tl-none inline-block w-fit border border-[#E5E7EB]">
+                    <p class="text-[12px] font-bold text-[#111827] mb-0.5">Michael Brown</p>
+                    <p class="text-[13px] text-[#374151]">Looks delicious! Highly recommended.</p>
+                  </div>
+                  <div class="flex items-center gap-3 text-[11px] text-[#98a2b3] ml-1 font-medium">
+                    <span>20m ago</span>
+                    <button class="hover:text-[#111827] transition-colors">Like</button>
+                    <button class="hover:text-[#111827] transition-colors">Reply</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Divider representing depth -->
+              <div class="flex items-center gap-2 ml-11">
+                <div class="h-px flex-1 bg-[#eaecf0]"></div>
+                <span class="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest">Replies</span>
+                <div class="h-px flex-1 bg-[#eaecf0]"></div>
+              </div>
+
+
+            </div>
+
+            <!-- Reply Box for manual intervention -->
+            <div class="p-4 border-t border-[#eaecf0] bg-white">
+              <div class="relative flex items-center gap-2">
+                <input type="text" placeholder="Write a comment reply..." class="flex-1 h-10 px-4 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] outline-none focus:border-[#111827] transition-all text-[13px]" />
+                <button class="h-10 w-10 rounded-xl bg-[#111827] text-white flex items-center justify-center hover:bg-black transition-colors shadow-sm"><i class="ti ti-send"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== TAB: ACTIVITY ====================== -->
+      <div id="content-activity" class="hidden w-full h-full absolute inset-0 bg-white opacity-0 transition-opacity duration-200 overflow-y-auto custom-scrollbar">
+        <div class="w-full flex flex-col">
+          <!-- Sub-header for internal tab context -->
+          <div class="h-14 px-6 border-b border-[#eaecf0] flex items-center bg-[#FDFDFD]">
+            <h2 class="text-[14px] font-bold text-[#111827] flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Activity Log
+            </h2>
+          </div>
+
+          <!-- Full layout row items - Minimalistic Black & White with Shadcn / Lucide SVG Icons -->
+          <div class="flex flex-col divide-y divide-[#eaecf0]" id="activity-log-container">
+            {activityLog.map(log => (
+              <div class="activity-item flex items-center gap-4 px-6 py-4 hover:bg-[#F9FAFB] transition-colors" data-business={log.businessId} data-category={log.category}>
+                <div class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center shrink-0 text-[#111827] shadow-sm">
+                  <Fragment set:html={log.icon} />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2">
+                     <p class="text-[13px] font-medium text-[#111827]">{log.desc}</p>
+                     <span class="text-[10px] px-1.5 py-0.5 bg-[#F3F4F6] text-[#667085] font-medium rounded border border-[#e5e7eb]">
+                       {dnaList.find(d => d.id === log.businessId)?.name || 'System'}
+                     </span>
+                  </div>
+                  <p class="text-[12px] text-[#667085] mt-0.5">
+                    {log.type === 'ai_replied' ? 'System successfully generated and posted an automated response.' : ''}
+                    {log.type === 'failed_send' ? 'Error details: API Timeout. Please try sending again manually.' : ''}
+                    {log.type === 'connected' ? 'User action completed.' : ''}
+                    {log.type === 'archived' ? 'Conversation archived and moved from primary inbox.' : ''}
+                  </p>
+                </div>
+                <div class="shrink-0 flex items-center gap-4 text-[12px] text-[#98a2b3] font-medium">
+                  <span class="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {log.time}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <style is:global>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e5e7eb;
+      border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #d1d5db;
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- Tab switching logic ---
+      const tabBtns = document.querySelectorAll('.inbox-tab-btn');
+      const contentViews = {
+        messages: document.getElementById('content-messages'),
+        comments: document.getElementById('content-comments'),
+        activity: document.getElementById('content-activity')
+      };
+      const filterContainer = document.getElementById('inbox-filter-container');
+      const statusFilterGroup = document.getElementById('status-filter-group');
+      const activityFilterGroup = document.getElementById('activity-filter-group');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetTab = btn.getAttribute('data-tab');
+          
+          // Update active buttons styling
+          tabBtns.forEach(b => {
+            b.classList.remove('bg-[#111827]', 'text-white');
+            b.classList.add('text-[#667085]', 'hover:text-[#111827]', 'hover:bg-[#F9FAFB]');
+          });
+          btn.classList.remove('text-[#667085]', 'hover:text-[#111827]', 'hover:bg-[#F9FAFB]');
+          btn.classList.add('bg-[#111827]', 'text-white');
+
+          // Show/Hide views with smooth fade
+          Object.keys(contentViews).forEach(key => {
+            const view = contentViews[key];
+            if (key === targetTab) {
+              view.classList.remove('hidden');
+              setTimeout(() => {
+                view.classList.remove('opacity-0');
+                view.classList.add('opacity-100');
+              }, 10);
+            } else {
+              view.classList.add('opacity-0');
+              view.classList.remove('opacity-100');
+              setTimeout(() => view.classList.add('hidden'), 200);
+            }
+          });
+
+          // Logic regarding status filter visibility
+          if (targetTab === 'activity') {
+            // Hide regular status filters, show Activity-specific filters
+            statusFilterGroup.classList.remove('flex');
+            statusFilterGroup.classList.add('hidden');
+            activityFilterGroup.classList.remove('hidden');
+            activityFilterGroup.classList.add('flex');
+          } else {
+            activityFilterGroup.classList.remove('flex');
+            activityFilterGroup.classList.add('hidden');
+            statusFilterGroup.classList.remove('hidden');
+            statusFilterGroup.classList.add('flex');
+          }
+        });
+      });
+
+      // --- Business Filter Dropdown logic ---
+      const btnBusinessFilter = document.getElementById('btn-business-filter');
+      const businessFilterDropdown = document.getElementById('business-filter-dropdown');
+      const currentBusinessLabel = document.getElementById('current-business-label');
+      let activeBusiness = 'all';
+
+      if(btnBusinessFilter && businessFilterDropdown) {
+        btnBusinessFilter.addEventListener('click', (e) => {
+          e.stopPropagation();
+          businessFilterDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+          if(!businessFilterDropdown.contains(e.target) && !btnBusinessFilter.contains(e.target)) {
+            businessFilterDropdown.classList.add('hidden');
+          }
+        });
+
+        // Search logic for business dropdown
+        const bizSearchInput = businessFilterDropdown.querySelector('.biz-search-input');
+        if (bizSearchInput) {
+          bizSearchInput.addEventListener('click', (e) => e.stopPropagation());
+          bizSearchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            businessFilterDropdown.querySelectorAll('.business-option').forEach(opt => {
+              const text = opt.textContent.toLowerCase();
+              opt.style.display = text.includes(term) ? 'block' : 'none';
+            });
+          });
+        }
+
+        document.querySelectorAll('.business-option').forEach(opt => {
+          opt.addEventListener('click', () => {
+            const id = opt.getAttribute('data-id');
+            const name = opt.textContent.trim();
+            currentBusinessLabel.textContent = name;
+            activeBusiness = id;
+            businessFilterDropdown.classList.add('hidden');
+            filterItems();
+          });
+        });
+      }
+
+      // --- Status Filter logic ---
+      const statusBtns = document.querySelectorAll('.status-filter-btn');
+      let activeStatus = 'all';
+
+      statusBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          statusBtns.forEach(b => {
+            b.classList.remove('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
+            b.classList.add('text-[#667085]', 'font-medium');
+          });
+          btn.classList.add('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
+          btn.classList.remove('text-[#667085]', 'font-medium');
+          
+          activeStatus = btn.getAttribute('data-status');
+          filterItems();
+        });
+      });
+
+      // --- Activity Filter logic ---
+      const activityBtns = document.querySelectorAll('.activity-filter-btn');
+      let activeActivityCategory = 'all';
+
+      activityBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          activityBtns.forEach(b => {
+            b.classList.remove('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
+            b.classList.add('text-[#667085]', 'font-medium');
+          });
+          btn.classList.add('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
+          btn.classList.remove('text-[#667085]', 'font-medium');
+          
+          activeActivityCategory = btn.getAttribute('data-category');
+          filterItems();
+        });
+      });
+
+      // Filtering mechanism for UI
+      function filterItems() {
+        // For messages
+        const messageItems = document.querySelectorAll('.message-item');
+        messageItems.forEach(item => {
+          const biz = item.getAttribute('data-business');
+          const stat = item.getAttribute('data-status');
+          
+          const bizMatch = (activeBusiness === 'all' || biz === activeBusiness);
+          let statusMatch = false;
+          
+          if (activeStatus === 'all') statusMatch = true;
+          else if (activeStatus === 'unread' && stat === 'unread') statusMatch = true;
+          else if (activeStatus === 'sent' && stat === 'sent') statusMatch = true;
+          else if (activeStatus === 'failed' && stat === 'failed') statusMatch = true;
+
+          item.style.display = (bizMatch && statusMatch) ? 'flex' : 'none';
+        });
+
+        // For comments
+        const commentItems = document.querySelectorAll('.comment-item');
+        commentItems.forEach(item => {
+          const biz = item.getAttribute('data-business');
+          const stat = item.getAttribute('data-status');
+          const bizMatch = (activeBusiness === 'all' || biz === activeBusiness);
+          let statusMatch = false;
+          if (activeStatus === 'all') statusMatch = true;
+          else if (activeStatus === 'unread' && stat === 'unread') statusMatch = true;
+          else if (activeStatus === 'sent' && stat === 'sent') statusMatch = true;
+          else if (activeStatus === 'failed' && stat === 'failed') statusMatch = true;
+          
+          item.style.display = (bizMatch && statusMatch) ? 'flex' : 'none';
+        });
+
+        // For activity
+        const activityItems = document.querySelectorAll('.activity-item');
+        activityItems.forEach(item => {
+          const biz = item.getAttribute('data-business');
+          const cat = item.getAttribute('data-category');
+          
+          const bizMatch = (activeBusiness === 'all' || biz === activeBusiness);
+          const catMatch = (activeActivityCategory === 'all' || cat === activeActivityCategory);
+          
+          item.style.display = (bizMatch && catMatch) ? 'flex' : 'none';
+        });
+      }
+
+      // --- Individual Selection Highlight Logic for Message List ---
+      const messageItems = document.querySelectorAll('.message-item');
+      messageItems.forEach(item => {
+        item.addEventListener('click', () => {
+          // Remove highlight from all
+          messageItems.forEach(i => {
+            i.classList.remove('bg-white');
+            const border = i.querySelector('.absolute.left-0');
+            if (border) border.remove();
+          });
+          
+          // Apply highlights to clicked
+          item.classList.add('bg-white');
+          const borderDiv = document.createElement('div');
+          borderDiv.className = 'absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827]';
+          item.appendChild(borderDiv);
+
+          // Mock content switch in right panel (chatbox)
+          const name = item.querySelector('h4').textContent;
+          const avatar = item.querySelector('img').src;
+          document.getElementById('active-chat-name').textContent = name;
+          document.getElementById('active-chat-avatar').src = avatar;
+        });
+      });
+
+      // Scroll to bottom of chat initially
+      const chatScroll = document.getElementById('chat-messages-scroll');
+      if (chatScroll) {
+        chatScroll.scrollTop = chatScroll.scrollHeight;
+      }
+    });
+  </script>
+</AppLayout>

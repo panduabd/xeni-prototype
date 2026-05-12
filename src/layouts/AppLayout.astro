@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import ManageAccountModal from "../components/modals/ManageAccountModal.astro";
+import GetCreditsModal from "../components/modals/GetCreditsModal.astro";
 
 interface Props {
   title?: string;
@@ -16,6 +17,12 @@ const mainNav = [
     label: "Projects",
     icon: "ti-folder-star",
     href: "/projects",
+  },
+  {
+    id: "inbox",
+    label: "Inbox",
+    icon: "ti-inbox",
+    href: "/inbox",
   },
 ];
 
@@ -716,5 +723,6 @@ const pageIcon = currentPage.icon;
       });
     </script>
     <ManageAccountModal />
+    <GetCreditsModal />
   </body>
 </html>

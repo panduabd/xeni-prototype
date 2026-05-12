@@ -96,7 +96,7 @@ const knowledgeItems = [
 <AppLayout title="Business DNA - Xeni" activePage="business-dna">
   <div class="w-full min-h-full flex flex-col px-6 pb-8 -mt-12">
     {/* ═══════════ HEADER ROW ═══════════ */}
-    <div class="max-w-7xl mx-auto w-full pt-1 pb-6 flex items-center gap-4">
+    <div class="w-full pt-1 pb-5 flex items-center gap-4 shrink-0">
       <div class="flex items-center gap-2 shrink-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ const knowledgeItems = [
     </div>
 
     {/* ═══════════ BENTO GRID: 2 PANELS ═══════════ */}
-    <div class="max-w-7xl mx-auto w-full flex-1 flex gap-4 min-h-0">
+    <div class="w-full flex-1 flex gap-4 min-h-0">
       {/* ═══ LEFT PANEL: DNA List (30%) ═══ */}
       <div
         class="w-[30%] min-w-70 max-w-90 flex flex-col gap-3 h-full overflow-hidden"
@@ -139,7 +139,7 @@ const knowledgeItems = [
           <button
             id="btn-new-dna"
             type="button"
-            class="w-full flex items-center justify-center gap-1.5 px-4 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-medium hover:bg-[#374151] transition-all cursor-pointer"
+            class="w-full inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-4 h-10 text-[13px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black hover:shadow-[0_3px_0_0_#374151] active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
           >
             <i class="ti ti-plus text-[14px]"></i>
             <span>New Business DNA</span>
@@ -202,7 +202,7 @@ const knowledgeItems = [
             <button
               id="btn-save-dna"
               disabled
-              class="flex items-center gap-1.5 px-3 h-8 rounded-lg bg-[#111827] text-white text-[12px] font-medium opacity-50 cursor-not-allowed transition-all"
+              class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none"
             >
               <i class="ti ti-device-floppy text-[13px]"></i> Save Changes
             </button>
@@ -298,7 +298,7 @@ const knowledgeItems = [
                   <button
                     type="button"
                     id="btn-extract-file"
-                    class="flex items-center gap-1.5 px-3 h-8 rounded-lg border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                    class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-white text-[#344054] border border-[#D0D5DD] shadow-[0_3px_0_0_#D0D5DD] hover:bg-[#F9FAFB] active:translate-y-[1px] active:shadow-[0_1px_0_0_#D0D5DD]"
                   >
                     <i class="ti ti-upload text-[13px]"></i>
                     Extract from file
@@ -306,7 +306,7 @@ const knowledgeItems = [
                   <button
                     type="button"
                     id="btn-analyze-website"
-                    class="flex items-center gap-1.5 px-3 h-8 rounded-lg bg-[#111827] text-white text-[12px] font-medium hover:bg-[#374151] transition-all cursor-pointer"
+                    class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
                   >
                     <i class="ti ti-world text-[13px]"></i>
                     Analyze Website
@@ -487,7 +487,7 @@ const knowledgeItems = [
                 <button
                   type="button"
                   id="btn-add-product"
-                  class="flex items-center gap-1.5 px-3 h-8 rounded-lg bg-[#111827] text-white text-[12px] font-medium hover:bg-[#374151] transition-all cursor-pointer shrink-0"
+                  class="shrink-0 inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
                 >
                   <i class="ti ti-plus text-[13px]"></i>
                   Add Product
@@ -539,7 +539,7 @@ const knowledgeItems = [
                 <button
                   type="button"
                   id="btn-add-knowledge"
-                  class="flex items-center gap-1.5 px-3 h-8 rounded-lg bg-[#111827] text-white text-[12px] font-medium hover:bg-[#374151] transition-all cursor-pointer shrink-0"
+                  class="shrink-0 inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
                 >
                   <i class="ti ti-plus text-[13px]"></i>
                   Add Knowledge
@@ -592,7 +592,7 @@ const knowledgeItems = [
                 <button
                   type="button"
                   id="btn-add-integration"
-                  class="flex items-center gap-1.5 px-3 h-8 rounded-lg bg-[#111827] text-white text-[12px] font-medium hover:bg-[#374151] transition-all cursor-pointer shrink-0"
+                  class="shrink-0 inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
                 >
                   <i class="ti ti-plus text-[13px]"></i>
                   Add Account

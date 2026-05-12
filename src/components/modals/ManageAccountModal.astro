@@ -157,7 +157,7 @@
             <h3 class="text-[20px] font-bold text-[#111827] tracking-tight">Subscription</h3>
             <p class="text-[13px] text-[#667085] mt-1">Manage your credit plan and billing cycles.</p>
           </div>
-          <button class="px-6 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
+          <button id="btn-upgrade-plan-action" class="px-6 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
             Upgrade Plan
           </button>
         </div>
@@ -309,6 +309,14 @@
     if (btnLogoutModal) {
       btnLogoutModal.addEventListener("click", () => {
         window.location.href = "/";
+      });
+    }
+
+    // Open Upgrade Plan (Get Credits) modal from Subscription tab
+    const btnUpgradePlanAction = document.getElementById("btn-upgrade-plan-action");
+    if (btnUpgradePlanAction) {
+      btnUpgradePlanAction.addEventListener("click", () => {
+        window.dispatchEvent(new CustomEvent("open-get-credits"));
       });
     }
   });

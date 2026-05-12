@@ -1,0 +1,291 @@
+---
+// src/components/modals/GetCreditsModal.astro
+
+const pricingContext = {
+  starter: {
+    name: "Starter",
+    priceMonthly: "0",
+    priceYearly: "0",
+    desc: "Ideal for solo-creators exploring visual & caption agent generation.",
+    btnLabel: "Try for free",
+    features: [
+      "1 Active AI Social Agent",
+      "5 Generation Credits /mo",
+      "Single Brand DNA profile",
+      "Standard Analytics",
+      "Mobile dashboard access"
+    ]
+  },
+  pro: {
+    name: "Professional",
+    priceMonthly: "39",
+    priceYearly: "32",
+    desc: "Built for high-growth brands needing speed and daily automation.",
+    btnLabel: "Upgrade Now",
+    features: [
+      "Up to 5 Automated Agents",
+      "Unlimited AI Generations",
+      "3 Multi-channel Brand DNAs",
+      "Automated Scheduler pipeline",
+      "Advanced Comment Reply Engine",
+      "Priority Node support",
+      "1-1 Strategy sync"
+    ]
+  },
+  enterprise: {
+    name: "Enterprise",
+    priceMonthly: "199",
+    priceYearly: "167",
+    desc: "At the power, customization, and support your entire organization needs.",
+    btnLabel: "Get started",
+    features: [
+      "Unlimited Agents & Members",
+      "Infinite Content Generation",
+      "Agency Hub (Unlimited DNA)",
+      "Custom Model Fine-tuning",
+      "Dedicated Success Agent",
+      "White-label dashboard option",
+      "Full API Integration access"
+    ]
+  }
+};
+---
+
+<style is:global>
+  #get-credits-modal::-webkit-scrollbar {
+    width: 6px;
+  }
+  #get-credits-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  #get-credits-content::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+  }
+  .font-fraunces {
+    font-family: 'Fraunces', serif;
+  }
+  .font-geist {
+    font-family: 'Geist', sans-serif;
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<div
+  id="get-credits-modal"
+  class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+>
+  <div
+    class="bg-[#F8F9FB] w-full max-w-[1200px] h-[90vh] min-h-[600px] max-h-[850px] rounded-[32px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative border border-[#eaecf0]"
+  >
+    <!-- Close Button -->
+    <button
+      id="close-get-credits"
+      class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white border border-[#eaecf0] flex items-center justify-center hover:bg-gray-50 transition-colors text-[#667085] z-30 cursor-pointer shadow-sm"
+    >
+      <i class="ti ti-x text-[20px]"></i>
+    </button>
+
+    <!-- Scrollable Content Container -->
+    <div id="get-credits-content" class="flex-1 overflow-y-auto px-6 py-12 md:px-12 md:py-16">
+      
+      <!-- Header Section (Adapted from pricing.astro) -->
+      <div class="max-w-3xl mx-auto text-center mb-12">
+         <div class="flex justify-center mb-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full border border-gray-300 bg-white text-[11px] font-bold text-[#667085] uppercase tracking-wider whitespace-nowrap font-geist">
+               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 256 256" class="text-[#667085] mr-1.5 flex-shrink-0"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg>
+               Simple Pricing
+            </span>
+         </div>
+         
+         <h2 class="text-[36px] md:text-[44px] font-normal text-[#111827] font-fraunces tracking-tight leading-tight mb-4">
+            Curated Pricing Structure
+         </h2>
+         
+         <p class="text-[15px] text-[#667085] font-medium max-w-xl mx-auto mb-8 leading-relaxed font-geist">
+            Tailored automation tiers designed to help you scale faster, work less, and fill your content calendar overnight.
+         </p>
+
+         <!-- Pricing Toggle Switch -->
+         <div class="flex justify-center">
+            <div id="modal-pricing-switch-container" class="relative bg-gray-200 rounded-full p-1 flex items-center w-[300px] cursor-pointer">
+               <div id="modal-active-slider" class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-white shadow-sm rounded-full transition-transform duration-300 ease-out z-0"></div>
+               
+               <button id="modal-btn-monthly" class="relative flex-1 py-2 text-[13px] font-bold text-[#111827] z-10 transition-colors text-center font-geist">
+                  Monthly
+               </button>
+               <button id="modal-btn-yearly" class="relative flex-1 py-2 text-[13px] font-medium text-gray-500 z-10 transition-colors text-center flex items-center justify-center gap-2 font-geist">
+                  Yearly <span class="text-[10px] font-bold text-[#111827] bg-gray-300 px-1.5 py-0.5 rounded-full whitespace-nowrap">Save 16%</span>
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <!-- Pricing Grid (Adapted exactly from pricing.astro design) -->
+      <div class="max-w-6xl mx-auto">
+         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+            
+            <!-- STARTER CARD -->
+            <div class="bg-white border border-gray-200 rounded-[2rem] p-8 shadow-[0_8px_30px_rgba(0,0,0,0.01)] h-full flex flex-col">
+               <h3 class="text-[18px] font-bold text-[#111827] mb-3 font-geist">{pricingContext.starter.name}</h3>
+               <div class="flex items-baseline gap-1 mb-4">
+                  <span class="text-[48px] font-bold text-[#111827] leading-none tracking-tighter font-fraunces">$0</span>
+                  <span class="text-[15px] font-bold text-[#667085] font-geist">/mo</span>
+               </div>
+               <p class="text-[13px] text-[#667085] font-medium mb-8 leading-relaxed min-h-[40px] font-geist">
+                  {pricingContext.starter.desc}
+               </p>
+               
+               <!-- Button Replacement based on LandingButton logic -->
+               <div class="mb-8">
+                  <button class="w-full inline-flex items-center justify-center rounded-xl font-bold transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-white text-[#111827] border border-gray-300 shadow-[0_3px_0_0_#D1D5DB] hover:bg-gray-50 active:translate-y-[2px] active:shadow-[0_1px_0_0_#D1D5DB] font-geist">
+                     {pricingContext.starter.btnLabel}
+                  </button>
+               </div>
+
+               <ul class="space-y-3.5 flex-grow">
+                  {pricingContext.starter.features.map(feat => (
+                     <li class="flex items-center gap-2.5 text-[13px] font-medium text-[#374151] font-geist">
+                        <svg class="text-[#667085] shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        {feat}
+                     </li>
+                  ))}
+               </ul>
+            </div>
+
+            <!-- PROFESSIONAL CARD (RECOMMENDED) -->
+            <div class="relative pt-2 pb-2 h-full">
+               <!-- Neutral Grey Capsule Background -->
+               <div class="absolute inset-0 bg-gray-100 rounded-[2.5rem] border border-gray-200/60 z-0"></div>
+               
+               <!-- Grey Neutral Banner -->
+               <div class="relative z-10 text-center pt-3 pb-2 flex items-center justify-center gap-1.5 text-[#111827] font-bold text-[12px] uppercase tracking-wider font-geist">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 256 256"><path d="M215.79,118.17a8,8,0,0,0-7.17-5.17H144l31.24-83.32A8,8,0,0,0,161,21.14l-112,120a8,8,0,0,0,5.88,13.49h64l-31.24,83.32a8,8,0,0,0,14.22,7.91l112-120A8,8,0,0,0,215.79,118.17Z"></path></svg>
+                  Most Recommended
+               </div>
+
+               <!-- Inner white core card -->
+               <div class="relative z-10 bg-white rounded-[2rem] mx-[5px] mb-[5px] p-8 shadow-[0_12px_35px_rgba(0,0,0,0.04)] border border-gray-200/40 h-[calc(100%-42px)] flex flex-col">
+                  <h3 class="text-[18px] font-bold text-[#111827] mb-3 font-geist">{pricingContext.pro.name}</h3>
+                  <div class="flex items-baseline gap-1 mb-4">
+                     <span class="text-[48px] font-bold text-[#111827] leading-none tracking-tighter font-fraunces modal-pro-val">$39</span>
+                     <span class="text-[15px] font-bold text-[#667085] font-geist">/mo</span>
+                  </div>
+                  <p class="text-[13px] text-[#667085] font-medium mb-8 leading-relaxed min-h-[40px] font-geist">
+                     {pricingContext.pro.desc}
+                  </p>
+                  
+                  <div class="mb-8">
+                     <button class="w-full inline-flex items-center justify-center rounded-xl font-bold transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black hover:shadow-[0_3px_0_0_#374151] active:translate-y-[2px] active:shadow-[0_1px_0_0_#374151] font-geist">
+                        {pricingContext.pro.btnLabel}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1.5 flex-shrink-0"><path d="m9 18 6-6-6-6"/></svg>
+                     </button>
+                  </div>
+
+                  <ul class="space-y-3.5 flex-grow">
+                     {pricingContext.pro.features.map(feat => (
+                        <li class="flex items-center gap-2.5 text-[13px] font-bold text-[#111827] font-geist">
+                           <svg class="text-[#111827] shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                           {feat}
+                        </li>
+                     ))}
+                  </ul>
+               </div>
+            </div>
+
+            <!-- ENTERPRISE CARD -->
+            <div class="bg-white border border-gray-200 rounded-[2rem] p-8 shadow-[0_8px_30px_rgba(0,0,0,0.01)] h-full flex flex-col">
+               <h3 class="text-[18px] font-bold text-[#111827] mb-3 font-geist">{pricingContext.enterprise.name}</h3>
+               <div class="flex items-baseline gap-1 mb-4">
+                  <span class="text-[48px] font-bold text-[#111827] leading-none tracking-tighter font-fraunces modal-ent-val">$199</span>
+                  <span class="text-[15px] font-bold text-[#667085] font-geist">/mo</span>
+               </div>
+               <p class="text-[13px] text-[#667085] font-medium mb-8 leading-relaxed min-h-[40px] font-geist">
+                  {pricingContext.enterprise.desc}
+               </p>
+               
+               <div class="mb-8">
+                  <button class="w-full inline-flex items-center justify-center rounded-xl font-bold transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-white text-[#111827] border border-gray-300 shadow-[0_3px_0_0_#D1D5DB] hover:bg-gray-50 active:translate-y-[2px] active:shadow-[0_1px_0_0_#D1D5DB] font-geist">
+                     {pricingContext.enterprise.btnLabel}
+                  </button>
+               </div>
+
+               <ul class="space-y-3.5 flex-grow">
+                  {pricingContext.enterprise.features.map(feat => (
+                     <li class="flex items-center gap-2.5 text-[13px] font-medium text-[#374151] font-geist">
+                        <svg class="text-[#667085] shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        {feat}
+                     </li>
+                  ))}
+               </ul>
+            </div>
+
+         </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ pricingContext }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("get-credits-modal");
+    const closeBtn = document.getElementById("close-get-credits");
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.add("hidden");
+      });
+    }
+
+    window.addEventListener("open-get-credits", () => {
+      if (modal) {
+        modal.classList.remove("hidden");
+      }
+    });
+
+    // Pricing Switch logic injected specifically for the modal
+    const btnMonthly = document.getElementById('modal-btn-monthly');
+    const btnYearly = document.getElementById('modal-btn-yearly');
+    const activeSlider = document.getElementById('modal-active-slider');
+    
+    const proValEl = document.querySelector('.modal-pro-val');
+    const entValEl = document.querySelector('.modal-ent-val');
+
+    if (btnMonthly && btnYearly && activeSlider && proValEl && entValEl) {
+      function setMonthly() {
+         activeSlider.style.transform = 'translateX(0)';
+         btnMonthly.classList.add('text-[#111827]', 'font-bold');
+         btnMonthly.classList.remove('text-gray-500', 'font-medium');
+         btnYearly.classList.remove('text-[#111827]', 'font-bold');
+         btnYearly.classList.add('text-gray-500', 'font-medium');
+         
+         proValEl.textContent = `$${pricingContext.pro.priceMonthly}`;
+         entValEl.textContent = `$${pricingContext.enterprise.priceMonthly}`;
+      }
+
+      function setYearly() {
+         activeSlider.style.transform = 'translateX(calc(100% + 4px))';
+         btnYearly.classList.add('text-[#111827]', 'font-bold');
+         btnYearly.classList.remove('text-gray-500', 'font-medium');
+         btnMonthly.classList.remove('text-[#111827]', 'font-bold');
+         btnMonthly.classList.add('text-gray-500', 'font-medium');
+
+         proValEl.textContent = `$${pricingContext.pro.priceYearly}`;
+         entValEl.textContent = `$${pricingContext.enterprise.priceYearly}`;
+      }
+
+      btnMonthly.addEventListener('click', setMonthly);
+      btnYearly.addEventListener('click', setYearly);
+      
+      // Initial state
+      setMonthly();
+    }
+  });
+</script>

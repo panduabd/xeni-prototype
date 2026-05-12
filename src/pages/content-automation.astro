@@ -1,13 +1,38 @@
 ---
 import AppLayout from "../layouts/AppLayout.astro";
 import ReferencesModal from "../components/modals/ReferencesModal.astro";
+import XeniButton from "../components/XeniButton.astro";
+
+const dnaList = [
+  { id: "all", name: "All Business" },
+  { id: "Fresh Juice Co.", name: "Fresh Juice Co." },
+  { id: "Acme Corp", name: "Acme Corp" },
+  { id: "Luxe Beauty", name: "Luxe Beauty" },
+  { id: "Tech Startup", name: "Tech Startup" },
+  { id: "TechFlow Systems", name: "TechFlow Systems" },
+  { id: "Daily Brew Cafe", name: "Daily Brew Cafe" },
+  { id: "FitLife Gym", name: "FitLife Gym" },
+  { id: "EcoGreen Solutions", name: "EcoGreen Solutions" },
+  { id: "Urban Outfitters", name: "Urban Outfitters" },
+  { id: "Pixel Perfect Studio", name: "Pixel Perfect Studio" },
+  { id: "Nova Logistics", name: "Nova Logistics" },
+  { id: "Summit Outdoors", name: "Summit Outdoors" },
+  { id: "Glow Skincare", name: "Glow Skincare" },
+  { id: "Byte Labs", name: "Byte Labs" },
+  { id: "Vista Real Estate", name: "Vista Real Estate" },
+  { id: "Peak Performance", name: "Peak Performance" },
+  { id: "Swift Delivery", name: "Swift Delivery" },
+  { id: "Bloom Florist", name: "Bloom Florist" },
+  { id: "Oceanic Seafood", name: "Oceanic Seafood" },
+  { id: "Apex Consulting", name: "Apex Consulting" }
+];
 ---
 
 <AppLayout title="Content Automation - Xeni" activePage="content-automation">
   <div class="w-full min-h-full flex flex-col px-6 pb-32 -mt-12">
     <!-- Title + Controls Row -->
     <div
-      class="max-w-6xl mx-auto w-full pt-1 pb-8 flex items-center justify-between gap-4"
+      class="w-full pt-1 pb-5 flex items-center justify-between gap-4 shrink-0"
     >
       <!-- Left: Title + Info -->
       <div class="flex items-center gap-2 shrink-0">
@@ -22,7 +47,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       </div>
 
       <!-- Right: Status Mini Badges -->
-      <div class="flex items-center gap-2">
+      <div class="hidden items-center gap-2">
         <span
           class="flex items-center gap-1.5 px-2.5 h-6 rounded-full bg-[#ECFDF3] border border-[#D1FADF] text-[11px] font-bold text-[#027A48] transition-all duration-200 hover:scale-[1.03] shadow-sm cursor-help"
           title="Active automations"
@@ -48,7 +73,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     </div>
 
     <!-- Tabs Row -->
-    <div class="max-w-6xl mx-auto w-full mb-6 flex items-center gap-4">
+    <div class="w-full mb-6 flex items-center gap-4">
       <div
         class="flex items-center gap-1 p-1 bg-white rounded-xl border border-[#eaecf0] w-fit"
       >
@@ -87,7 +112,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     </div>
 
     <!-- TAB: AUTOMATIONS -->
-    <div id="tab-content-automations" class="max-w-6xl mx-auto w-full flex-1">
+    <div id="tab-content-automations" class="w-full flex-1">
       <!-- Automation Filters -->
       <div class="flex items-center justify-between gap-2 mb-4">
         <div class="flex items-center gap-2">
@@ -100,35 +125,21 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               <span id="business-filter-label">All Business</span>
               <i class="ti ti-chevron-down text-[12px] text-[#98a2b3]"></i>
             </button>
-            <div
-              id="business-filter-dropdown"
-              class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
-            >
-              <div class="flex flex-col p-1.5">
-                <button
-                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="all"
-                >
-                  All Business
-                </button>
-                <button
-                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Fresh Juice Co."
-                >
-                  Fresh Juice Co.
-                </button>
-                <button
-                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Tech Startup"
-                >
-                  Tech Startup
-                </button>
-                <button
-                  class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Luxe Beauty"
-                >
-                  Luxe Beauty
-                </button>
+            <div id="business-filter-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden flex flex-col">
+              <!-- Mini Search -->
+              <div class="p-2 border-b border-[#eaecf0] bg-[#F9FAFB]">
+                <div class="relative">
+                  <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[11px]"></i>
+                  <input type="text" class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827]" placeholder="Search..." />
+                </div>
+              </div>
+              <!-- List -->
+              <div class="flex flex-col p-1 max-h-[220px] overflow-y-auto custom-scrollbar biz-options-container">
+                {dnaList.map(item => (
+                  <button class="business-filter-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-brand={item.id}>
+                    {item.name}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -150,7 +161,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         <!-- Create Button (only for Automations tab) -->
         <button
           id="btn-add-automation"
-          class="px-4 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center gap-2"
+          class="px-4 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151] transition-all cursor-pointer flex items-center gap-2"
         >
           <i class="ti ti-plus text-[14px]"></i>
           Create Automation
@@ -175,7 +186,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           </div>
           <button
             id="btn-empty-add"
-            class="px-4 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center gap-2 mx-auto"
+            class="px-4 h-9 rounded-xl bg-[#111827] text-white text-[13px] font-bold border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151] transition-all cursor-pointer flex items-center gap-2 mx-auto"
           >
             <i class="ti ti-plus text-[14px]"></i>
             Add Automation
@@ -230,7 +241,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     <!-- TAB: GENERATED -->
     <div
       id="tab-content-generated"
-      class="max-w-6xl mx-auto w-full flex-1 hidden"
+      class="w-full flex-1 hidden"
     >
       <!-- Filter Bar -->
       <div
@@ -248,27 +259,21 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               <span id="output-business-filter-label">All Business</span>
               <i class="ti ti-chevron-down text-[12px]"></i>
             </button>
-            <div
-              id="output-business-filter-dropdown"
-              class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
-            >
-              <div class="flex flex-col p-1.5">
-                <button
-                  class="output-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="all">All Business</button
-                >
-                <button
-                  class="output-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Fresh Juice Co.">Fresh Juice Co.</button
-                >
-                <button
-                  class="output-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Tech Startup">Tech Startup</button
-                >
-                <button
-                  class="output-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Luxe Beauty">Luxe Beauty</button
-                >
+            <div id="output-business-filter-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden flex flex-col">
+              <!-- Mini Search -->
+              <div class="p-2 border-b border-[#eaecf0] bg-[#F9FAFB]">
+                <div class="relative">
+                  <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[11px]"></i>
+                  <input type="text" class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827]" placeholder="Search..." />
+                </div>
+              </div>
+              <!-- List -->
+              <div class="flex flex-col p-1 max-h-[220px] overflow-y-auto custom-scrollbar biz-options-container">
+                {dnaList.map(item => (
+                  <button class="output-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-brand={item.id}>
+                    {item.name}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -368,7 +373,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                 class="inline-flex items-center gap-1 px-1.5 h-[18px] rounded-full bg-[#111827] text-[9px] font-bold text-white tracking-wide"
               >
                 <i class="ti ti-alert-circle text-[9px]"></i>
-                Need Approval
+                Needs Approval
               </span>
             </div>
             <span
@@ -478,7 +483,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     <!-- TAB: SCHEDULED -->
     <div
       id="tab-content-scheduled"
-      class="max-w-6xl mx-auto w-full flex-1 hidden"
+      class="w-full flex-1 hidden"
     >
       <!-- Scheduled Header -->
       <div class="flex items-center justify-between gap-2 mb-4">
@@ -493,27 +498,21 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               <span id="scheduled-business-filter-label">All Business</span>
               <i class="ti ti-chevron-down text-[12px]"></i>
             </button>
-            <div
-              id="scheduled-business-filter-dropdown"
-              class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden"
-            >
-              <div class="flex flex-col p-1.5">
-                <button
-                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="all">All Business</button
-                >
-                <button
-                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Fresh Juice Co.">Fresh Juice Co.</button
-                >
-                <button
-                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Tech Startup">Tech Startup</button
-                >
-                <button
-                  class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer"
-                  data-brand="Luxe Beauty">Luxe Beauty</button
-                >
+            <div id="scheduled-business-filter-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-30 overflow-hidden flex flex-col">
+              <!-- Mini Search -->
+              <div class="p-2 border-b border-[#eaecf0] bg-[#F9FAFB]">
+                <div class="relative">
+                  <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[11px]"></i>
+                  <input type="text" class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827]" placeholder="Search..." />
+                </div>
+              </div>
+              <!-- List -->
+              <div class="flex flex-col p-1 max-h-[220px] overflow-y-auto custom-scrollbar biz-options-container">
+                {dnaList.map(item => (
+                  <button class="scheduled-business-filter-option w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-brand={item.id}>
+                    {item.name}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -592,11 +591,18 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               List
             </button>
           </div>
-          <span class="text-[12px] text-[#667085]">
-            <span id="scheduled-count-display" class="font-bold text-[#111827]"
-              >0</span
-            > items scheduled
-          </span>
+          <div class="flex items-center gap-2">
+            <!-- Retain handle hidden for component logic stability -->
+            <span id="scheduled-count-display" class="hidden">0</span>
+            <button
+              id="btn-open-manual-schedule"
+              type="button"
+              class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3.5 h-9 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-none"
+            >
+              <i class="ti ti-plus text-[13px]"></i>
+              Manual Schedule
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1294,17 +1300,17 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
         <div class="flex items-center gap-3 pointer-events-auto">
           <button
             id="btn-wizard-back"
-            class="btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer hidden"
+            class="px-6 h-10 rounded-xl border border-[#D0D5DD] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] shadow-[0_3px_0_0_#D0D5DD] active:translate-y-[1px] active:shadow-[0_1px_0_0_#D0D5DD] transition-all cursor-pointer hidden"
             >Back</button
           >
           <button
             id="btn-wizard-next"
-            class="btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+            class="px-8 h-10 rounded-xl border border-[#374151] bg-[#111827] text-white text-[13px] font-bold hover:bg-black shadow-[0_3px_0_0_#374151] active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151] transition-all cursor-pointer"
             >Next</button
           >
           <button
             id="btn-start-automation"
-            class="btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer hidden"
+            class="px-8 h-10 rounded-xl border border-[#374151] bg-[#111827] text-white text-[13px] font-bold hover:bg-black shadow-[0_3px_0_0_#374151] active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151] transition-all cursor-pointer hidden"
             >Start Automation</button
           >
         </div>
@@ -1338,6 +1344,22 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             Configure auto actions for this content
           </p>
         </div>
+        <!-- Template Overflow Trigger -->
+        <div class="flex-1 flex justify-end relative">
+           <button id="btn-eng-template-trigger" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100 text-[#667085] transition-colors cursor-pointer">
+              <i class="ti ti-dots-vertical text-[20px]"></i>
+           </button>
+           
+           <!-- Dropdown -->
+           <div id="dropdown-eng-template" class="hidden absolute right-0 top-full mt-1 w-44 bg-white border border-[#eaecf0] rounded-xl shadow-xl z-20 overflow-hidden animate-in slide-in-from-top-2 duration-150">
+              <button id="btn-eng-save-tmpl" class="w-full text-left px-4 py-2.5 text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] flex items-center gap-2 cursor-pointer transition-colors">
+                 <i class="ti ti-device-floppy text-[16px]"></i> Save as Template
+              </button>
+              <button id="btn-eng-load-tmpl" class="w-full text-left px-4 py-2.5 text-[13px] font-medium text-[#344054] border-t border-[#eaecf0] hover:bg-[#F9FAFB] flex items-center gap-2 cursor-pointer transition-colors">
+                 <i class="ti ti-folder-open text-[16px]"></i> Load Template
+              </button>
+           </div>
+        </div>
       </div>
 
       <!-- Content -->
@@ -1370,8 +1392,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           class="flex items-center justify-between p-4 rounded-xl border border-[#eaecf0] bg-white"
         >
           <div class="flex items-center gap-3">
-            <i class="ti ti-message-circle-reply text-[18px] text-[#111827]"
-            ></i>
+            <i class="ti ti-message-dots text-[18px] text-[#111827]"></i>
             <span class="text-[14px] font-semibold text-[#111827]"
               >Reply Comment</span
             >
@@ -1499,6 +1520,64 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODALS: ENGAGEMENT TEMPLATES -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODAL: SAVE TEMPLATE -->
+  <div id="modal-eng-save-tmpl" class="hidden fixed inset-0 z-[300] items-center justify-center bg-black/30 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+     <div class="bg-white w-full max-w-[360px] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300">
+        <div class="p-5 border-b border-[#eaecf0]">
+           <h3 class="text-[16px] font-bold text-[#111827]">Save Template</h3>
+           <p class="text-[12px] text-[#667085]">Store current toggles as a reusable preset.</p>
+        </div>
+        <div class="p-5 bg-white">
+           <label class="block text-[13px] font-bold text-[#344054] mb-1.5">Template Name</label>
+           <input type="text" id="inp-eng-tmpl-name" placeholder="e.g. Auto Response Bundle" class="w-full h-10 px-3 border border-[#D0D5DD] rounded-xl text-[13px] text-[#111827] outline-none focus:border-[#111827] transition-colors" />
+        </div>
+        <div class="flex items-center justify-end gap-2 p-4 bg-[#F9FAFB] border-t border-[#eaecf0]">
+           <button id="btn-close-eng-save-tmpl" class="px-4 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-white cursor-pointer shadow-sm">Cancel</button>
+           <button id="btn-confirm-eng-save-tmpl" class="px-4 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-black cursor-pointer shadow-sm transition-colors">Save</button>
+        </div>
+     </div>
+  </div>
+
+  <!-- MODAL: LOAD TEMPLATE -->
+  <div id="modal-eng-load-tmpl" class="hidden fixed inset-0 z-[300] items-center justify-center bg-black/30 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+     <div class="bg-white w-full max-w-[360px] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300">
+        <div class="p-5 border-b border-[#eaecf0]">
+           <h3 class="text-[16px] font-bold text-[#111827]">Load Template</h3>
+           <p class="text-[12px] text-[#667085]">Apply a previously saved preset configuration.</p>
+        </div>
+        <div class="p-3 bg-white max-h-[280px] overflow-y-auto space-y-1">
+           <label class="flex items-center justify-between p-3 rounded-xl border border-[#eaecf0] bg-[#F9FAFB] hover:border-[#98a2b3] cursor-pointer transition-all group">
+              <div>
+                 <p class="text-[13px] font-bold text-[#111827]">Standard Auto-Reply</p>
+                 <p class="text-[11px] text-[#667085]">Reply & DM enabled</p>
+              </div>
+              <input type="radio" name="eng-tmpl-sel" checked class="accent-[#111827] w-4 h-4" />
+           </label>
+           <label class="flex items-center justify-between p-3 rounded-xl border border-transparent hover:bg-[#F9FAFB] cursor-pointer transition-all group">
+              <div>
+                 <p class="text-[13px] font-bold text-[#111827]">Zero Interaction</p>
+                 <p class="text-[11px] text-[#667085]">All auto actions disabled</p>
+              </div>
+              <input type="radio" name="eng-tmpl-sel" class="accent-[#111827] w-4 h-4" />
+           </label>
+           <label class="flex items-center justify-between p-3 rounded-xl border border-transparent hover:bg-[#F9FAFB] cursor-pointer transition-all group">
+              <div>
+                 <p class="text-[13px] font-bold text-[#111827]">Aggressive Reply Pack</p>
+                 <p class="text-[11px] text-[#667085]">Reply, Like, DM + Delete</p>
+              </div>
+              <input type="radio" name="eng-tmpl-sel" class="accent-[#111827] w-4 h-4" />
+           </label>
+        </div>
+        <div class="flex items-center justify-end gap-2 p-4 bg-[#F9FAFB] border-t border-[#eaecf0]">
+           <button id="btn-close-eng-load-tmpl" class="px-4 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-white cursor-pointer shadow-sm">Cancel</button>
+           <button id="btn-confirm-eng-load-tmpl" class="px-4 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-black cursor-pointer shadow-sm transition-colors">Apply Template</button>
+        </div>
+     </div>
+  </div>
+
   <!-- ═══════════════════════════════════════ -->
   <!-- MODAL: SINGLE SCHEDULE (Same Time Only + Engagement) -->
   <!-- ═══════════════════════════════════════ -->
@@ -1547,11 +1626,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           />
         </div>
 
-        <!-- Engagement Settings Button -->
+        <!-- Engagement Settings Card -->
         <div class="pt-2">
-          <button
-            onclick="openEngagementFromSingleSchedule()"
-            class="w-full flex items-center justify-between p-3.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] transition-all cursor-pointer group"
+          <div
+            class="w-full flex items-center justify-between p-3.5 rounded-xl border border-[#eaecf0] bg-white transition-all"
           >
             <div class="flex items-center gap-3">
               <div
@@ -1573,10 +1651,23 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                 </p>
               </div>
             </div>
-            <i
-              class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"
-            ></i>
-          </button>
+            <div class="flex items-center gap-3">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <span class="text-[12px] font-medium text-[#475467]">Active</span>
+                <div class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" class="sr-only peer" />
+                  <div class="w-8 h-4.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#111827]"></div>
+                </div>
+              </label>
+              <div class="w-px h-4 bg-[#eaecf0]"></div>
+              <button
+                onclick="openEngagementFromSingleSchedule()"
+                class="px-3 h-7 rounded-lg border border-[#D0D5DD] bg-white text-[#344054] text-[12px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1678,7 +1769,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   >
     <div
       id="preview-panel"
-      class="bg-white w-full max-w-[800px] max-h-[90vh] rounded-[28px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
+      class="bg-white w-full max-w-[880px] max-h-[90vh] rounded-[28px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
     >
       <!-- Close Button -->
       <button
@@ -1712,9 +1803,9 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
       <!-- 2-Panel Body -->
       <div class="flex-1 flex overflow-hidden">
-        <!-- LEFT: Image Panel -->
+        <!-- LEFT: Image Panel (Relaxed to 55%) -->
         <div
-          class="w-[60%] bg-[#F9FAFB] flex flex-col items-center justify-center py-6 px-3 relative overflow-y-auto border-r border-[#eaecf0]"
+          class="w-[55%] bg-[#F9FAFB] flex flex-col items-center justify-center py-6 px-3 relative overflow-y-auto border-r border-[#eaecf0]"
         >
           <!-- Image Carousel Container -->
           <div
@@ -1753,8 +1844,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           </div>
         </div>
 
-        <!-- RIGHT: Content Panel (Compact) -->
-        <div class="w-[40%] flex flex-col relative">
+        <!-- RIGHT: Content Panel (Expanded to 45%) -->
+        <div class="w-[45%] flex flex-col relative">
           <!-- Approved/Scheduled Tabs (hidden for draft) -->
           <div id="preview-right-tabs" class="hidden px-5 pt-3 pb-0">
             <div
@@ -1867,12 +1958,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                 </div>
               </div>
 
-              <!-- Engagement Settings (approved only, clickable) -->
-              <button
+              <!-- Engagement Settings Card (Preview) -->
+              <div
                 id="preview-engagement-action"
-                type="button"
-                onclick="openEngagementFromPreview(); return false;"
-                class="hidden w-full flex items-center justify-between p-2.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] transition-all cursor-pointer group"
+                class="hidden w-full flex items-center justify-between p-2.5 rounded-xl border border-[#eaecf0] bg-white transition-all"
               >
                 <div class="flex items-center gap-2">
                   <div
@@ -1896,10 +1985,24 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                     </p>
                   </div>
                 </div>
-                <i
-                  class="ti ti-chevron-right text-[12px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"
-                ></i>
-              </button>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                  <label class="flex items-center gap-1.5 cursor-pointer">
+                    <span class="text-[11px] font-medium text-[#475467]">Active</span>
+                    <div class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" class="sr-only peer" />
+                      <div class="w-7 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1.5px] after:start-[1.5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-[#111827]"></div>
+                    </div>
+                  </label>
+                  <div class="w-px h-3 bg-[#eaecf0]"></div>
+                  <button
+                    type="button"
+                    onclick="openEngagementFromPreview(); return false;"
+                    class="px-2 h-6 rounded-lg border border-[#D0D5DD] bg-white text-[#344054] text-[10px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                  >
+                    Detail
+                  </button>
+                </div>
+              </div>
             </div>
 
             <!-- Performance Tab (hidden by default) -->
@@ -2214,6 +2317,58 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   </div>
 
   <!-- ═══════════════════════════════════════ -->
+  <!-- MODAL: BATCH APPROVAL SUMMARY -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="modal-approval-summary" class="hidden fixed inset-0 z-[400] items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-300">
+    <div class="bg-white w-full max-w-[900px] h-[80vh] max-h-[750px] rounded-[32px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative">
+       <!-- Header -->
+       <div class="px-8 pt-8 pb-6 border-b border-[#eaecf0] flex items-start justify-between bg-gradient-to-b from-[#F9FAFB] to-white">
+           <div>
+              <div class="flex items-center gap-2 text-[13px] font-bold text-[#039855] mb-1.5">
+                 <div class="w-6 h-6 rounded-full bg-[#ECFDF3] flex items-center justify-center">
+                   <i class="ti ti-circle-check text-[16px]"></i>
+                 </div>
+                 Workflow Completed
+              </div>
+              <h2 id="summary-title" class="text-[26px] font-extrabold text-[#111827] tracking-tight leading-tight">Batch Review Finalized</h2>
+              <p class="text-[14px] text-[#667085] mt-1">All items in <span id="summary-group-name" class="font-bold text-[#111827]">Campaign Name</span> have been processed.</p>
+           </div>
+           <button id="btn-close-summary" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#F3F4F6] text-[#667085] border border-[#eaecf0] transition-all cursor-pointer shadow-sm">
+              <i class="ti ti-x text-[20px]"></i>
+           </button>
+       </div>
+       
+       <!-- Grid Body -->
+       <div class="flex-1 overflow-y-auto p-8 bg-white scroll-smooth">
+           <div id="summary-grid" class="columns-4 gap-4 pb-4 space-y-0">
+              <!-- Dynamically Injected -->
+           </div>
+       </div>
+       
+       <!-- Footer -->
+       <div class="px-8 py-5 bg-[#F9FAFB] border-t border-[#eaecf0] flex items-center justify-between flex-shrink-0">
+           <div class="flex items-center gap-3">
+              <label class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white border border-[#eaecf0] shadow-sm text-[13px] font-bold text-[#344054] cursor-pointer select-none hover:bg-gray-50">
+                 <input type="checkbox" id="summary-select-all" checked class="w-4 h-4 accent-[#111827] cursor-pointer" />
+                 Select All (<span id="summary-count">0</span>)
+              </label>
+           </div>
+           
+           <div class="flex items-center gap-3">
+               <button id="summary-btn-later" class="px-6 h-11 rounded-xl bg-white border border-[#eaecf0] text-[13px] font-bold text-[#344054] hover:bg-gray-50 shadow-sm cursor-pointer transition-all">Do it Later</button>
+               <div class="h-6 w-px bg-[#eaecf0] mx-1"></div>
+               <button id="summary-btn-publish" class="px-5 h-11 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer flex items-center gap-2 shadow-md">
+                   <i class="ti ti-send text-[16px]"></i> Publish Directly
+               </button>
+               <button id="summary-btn-schedule" class="px-5 h-11 rounded-xl bg-[#2563EB] text-white text-[13px] font-bold hover:bg-[#1d4ed8] transition-all cursor-pointer flex items-center gap-2 shadow-md">
+                   <i class="ti ti-calendar-plus text-[16px]"></i> Schedule Batch
+               </button>
+           </div>
+       </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
   <!-- AUTOMATION FORM POPOVER (add/edit automation) -->
   <!-- ═══════════════════════════════════════ -->
   <div
@@ -2378,6 +2533,351 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   <ReferencesModal />
 
   <!-- ═══════════════════════════════════════ -->
+  <!-- MODAL: MANUAL SCHEDULE COMPOSER -->
+  <!-- ═══════════════════════════════════════ -->
+  <div
+    id="modal-manual-schedule"
+    class="hidden fixed inset-0 z-100 items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+  >
+    <div
+      class="bg-white w-full max-w-5xl h-[85vh] max-h-[850px] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
+    >
+      
+      <!-- AI PROMPT SUB-MODAL OVERLAY (Retained as floating system assistant) -->
+      <div id="manual-ai-prompt-modal" class="hidden absolute inset-0 bg-black/20 backdrop-blur-[2px] z-[60] items-center justify-center p-6 animate-in fade-in duration-200">
+         <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-[#eaecf0] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+            <div class="px-5 py-4 border-b border-[#eaecf0] flex items-center justify-between bg-[#F9FAFB]">
+               <span class="text-[13px] font-bold text-[#111827] flex items-center gap-1.5">
+                 <i class="ti ti-sparkles text-[#7C3AED] text-[16px]"></i>
+                 AI Caption Helper
+               </span>
+               <button id="btn-close-ai-prompt" class="w-7 h-7 rounded-lg flex items-center justify-center text-[#667085] hover:bg-[#eaecf0] hover:text-[#111827] transition-colors cursor-pointer"><i class="ti ti-x"></i></button>
+            </div>
+            <div class="p-5 space-y-4">
+               <div class="space-y-2">
+                 <label class="block text-[12px] font-bold text-[#344054]">Additional Prompt / Context</label>
+                 <textarea id="ai-additional-prompt-input" class="w-full p-3 border border-[#D0D5DD] rounded-xl text-[13px] text-[#111827] outline-none focus:border-[#111827] focus:ring-2 focus:ring-[#111827]/5 h-24 resize-none placeholder:text-gray-400" placeholder="Describe context, tone, or special requirements (e.g. make it casual and mention free shipping)"></textarea>
+               </div>
+               <button id="btn-manual-ai-generate-final" class="w-full h-10 bg-[#111827] text-white rounded-xl font-bold text-[13px] hover:bg-black transition-colors flex items-center justify-center gap-2 shadow-[0_3px_0_0_#374151] active:translate-y-[1px] active:shadow-none cursor-pointer">
+                  Generate Caption
+               </button>
+            </div>
+         </div>
+      </div>
+
+      <!-- Header -->
+      <div class="px-6 py-5 border-b border-[#eaecf0] flex items-center justify-between bg-white shrink-0 z-10 relative">
+        <div>
+          <h2 class="text-lg font-bold text-[#111827]">Create New Post</h2>
+          <p class="text-[12px] text-[#667085]">Draft and coordinate your standalone schedules with real-time simulator.</p>
+        </div>
+        <button
+          id="btn-close-manual-schedule"
+          class="w-9 h-9 rounded-xl flex items-center justify-center hover:bg-[#F3F4F6] transition-colors text-[#667085] cursor-pointer"
+        >
+          <i class="ti ti-x text-[16px]"></i>
+        </button>
+      </div>
+
+      <!-- Main Divided Workspace -->
+      <div class="flex-1 flex flex-row overflow-hidden min-h-0">
+         
+         <!-- LEFT COLUMN: COMPOSER FORM -->
+         <div class="w-[65%] flex flex-col border-r border-[#eaecf0] bg-white overflow-hidden h-full">
+            
+            <!-- Body Scrollable content -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar bg-white">
+              
+              <!-- SECTION 1: IDENTITY & ROUTING -->
+              <div class="grid grid-cols-2 gap-5">
+                <!-- Select DNA -->
+                <div class="space-y-2">
+                  <label class="block text-[13px] font-bold text-[#344054]">Business DNA</label>
+                  <div class="relative">
+                    <select id="manual-select-dna" class="w-full h-10 pl-3 pr-10 bg-white border border-[#D0D5DD] rounded-xl text-[13px] font-medium text-[#111827] appearance-none outline-none focus:border-[#111827] focus:ring-2 focus:ring-[#111827]/5 cursor-pointer">
+                      <option value="" disabled selected>Select Brand...</option>
+                      <option value="Fresh Juice Co.">Fresh Juice Co.</option>
+                      <option value="Tech Startup">Tech Startup</option>
+                      <option value="Luxe Beauty">Luxe Beauty</option>
+                    </select>
+                    <i class="ti ti-chevron-down absolute right-3 top-3 text-[#667085] pointer-events-none"></i>
+                  </div>
+                  <a href="/integrations" class="inline-flex items-center gap-1 text-[11px] font-medium text-[#667085] hover:text-[#111827] transition-colors">
+                    <i class="ti ti-link text-[12px]"></i>
+                    Need more integrations? Click here
+                  </a>
+                </div>
+
+                <!-- Publish To Dropdown -->
+                <div class="space-y-2">
+                  <label class="block text-[13px] font-bold text-[#344054]">Publish to:</label>
+                  <div class="relative">
+                    <div id="manual-publish-trigger" class="w-full h-10 px-3 bg-white border border-[#D0D5DD] rounded-xl text-[13px] font-medium text-[#111827] flex items-center justify-between cursor-pointer hover:bg-[#F9FAFB]">
+                      <span id="manual-publish-label" class="text-[#98a2b3]">Select destination accounts...</span>
+                      <i class="ti ti-chevron-down text-[#667085]"></i>
+                    </div>
+                    <!-- Multi-select simulated dropdown -->
+                    <div id="manual-publish-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-full bg-white border border-[#eaecf0] rounded-xl shadow-lg z-30 overflow-hidden p-1">
+                      <div class="px-3 py-2 bg-[#F9FAFB] text-[10px] font-bold text-[#667085] uppercase tracking-wider">Accounts</div>
+                      <div class="max-h-48 overflow-y-auto" id="manual-accounts-list">
+                        <label class="flex items-center gap-2 p-2.5 hover:bg-[#F3F4F6] rounded-lg cursor-pointer transition-colors">
+                          <input type="checkbox" value="insta-fresh" class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb" />
+                          <i class="ti ti-brand-instagram text-[#E1306C] text-[16px]"></i>
+                          <span class="text-[13px] font-medium text-[#344054]">@freshjuice.official</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 hover:bg-[#F3F4F6] rounded-lg cursor-pointer transition-colors">
+                          <input type="checkbox" value="fb-fresh" class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb" />
+                          <i class="ti ti-brand-facebook text-[#1877F2] text-[16px]"></i>
+                          <span class="text-[13px] font-medium text-[#344054]">Fresh Juice Company</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Selected Badges Row -->
+              <div id="selected-accounts-badges" class="flex flex-wrap gap-2">
+              </div>
+
+              <div class="border-b border-[#eaecf0] opacity-50"></div>
+
+              <!-- SECTION 2: CONTEXTUAL TAB SWITCHER -->
+              <div class="space-y-3">
+                <label class="block text-[13px] font-bold text-[#344054]">Configure Platform Content</label>
+                <div id="manual-platform-tabs" class="flex items-center gap-1.5 p-1 bg-[#F3F4F6] rounded-xl w-fit">
+                   <button class="px-4 h-8 rounded-lg bg-white shadow-sm flex items-center gap-2 text-[12px] font-bold text-[#111827] border border-[#eaecf0] whitespace-nowrap transition-all cursor-pointer">
+                     <i class="ti ti-brand-instagram text-[14px] text-[#E1306C]"></i>
+                     Instagram
+                   </button>
+                   <button class="px-4 h-8 rounded-lg hover:bg-gray-200/50 flex items-center gap-2 text-[12px] font-medium text-[#667085] whitespace-nowrap transition-all cursor-pointer">
+                     <i class="ti ti-brand-facebook text-[14px] text-[#1877F2]"></i>
+                     Facebook
+                   </button>
+                </div>
+              </div>
+
+              <!-- SECTION 3: COMPOSER SUITE -->
+              <div class="space-y-6">
+                 <div class="space-y-2">
+                   <span class="text-[13px] font-bold text-[#344054]">Post Type</span>
+                   <div class="flex flex-wrap gap-2" id="manual-post-type-container">
+                     <label class="relative cursor-pointer">
+                       <input type="radio" name="manualPostType" value="Feeds" checked class="peer sr-only" />
+                       <div class="px-3.5 h-8 rounded-lg border border-[#D0D5DD] bg-white flex items-center gap-2 text-[12px] font-bold text-[#475467] hover:bg-[#F9FAFB] peer-checked:border-[#111827] peer-checked:bg-[#111827] peer-checked:text-white transition-all">
+                         <i class="ti ti-photo text-[14px]"></i>
+                         Feeds
+                       </div>
+                     </label>
+                     <label class="relative cursor-pointer">
+                       <input type="radio" name="manualPostType" value="Story" class="peer sr-only" />
+                       <div class="px-3.5 h-8 rounded-lg border border-[#D0D5DD] bg-white flex items-center gap-2 text-[12px] font-bold text-[#475467] hover:bg-[#F9FAFB] peer-checked:border-[#111827] peer-checked:bg-[#111827] peer-checked:text-white transition-all">
+                         <i class="ti ti-device-mobile text-[14px]"></i>
+                         Story
+                       </div>
+                     </label>
+                     <label class="relative cursor-pointer">
+                       <input type="radio" name="manualPostType" value="Reels" class="peer sr-only" />
+                       <div class="px-3.5 h-8 rounded-lg border border-[#D0D5DD] bg-white flex items-center gap-2 text-[12px] font-bold text-[#475467] hover:bg-[#F9FAFB] peer-checked:border-[#111827] peer-checked:bg-[#111827] peer-checked:text-white transition-all">
+                         <i class="ti ti-video text-[14px]"></i>
+                         Reels
+                       </div>
+                     </label>
+                   </div>
+                 </div>
+
+                 <div class="space-y-2">
+                   <div class="flex items-center justify-between">
+                     <span class="text-[13px] font-bold text-[#344054]">Caption</span>
+                     <button id="btn-manual-ai-gen" class="inline-flex items-center gap-1.5 px-2.5 h-7 rounded-lg bg-white border border-[#D0D5DD] text-[11px] font-bold text-[#111827] hover:bg-[#F3F4F6] transition-all cursor-pointer shadow-sm">
+                       <i class="ti ti-sparkles text-[12px] text-[#7C3AED]"></i>
+                       Generate with AI
+                     </button>
+                   </div>
+                   <div class="border border-[#D0D5DD] rounded-xl bg-white overflow-hidden flex flex-col focus-within:border-[#111827] focus-within:ring-2 focus-within:ring-[#111827]/5 transition-all">
+                     <div class="px-3 h-9 border-b border-[#eaecf0] flex items-center gap-1 bg-[#F9FAFB]">
+                       <button class="w-7 h-7 rounded flex items-center justify-center text-[#667085] hover:bg-white hover:text-[#111827] transition-colors cursor-pointer"><i class="ti ti-bold text-[14px]"></i></button>
+                       <button class="w-7 h-7 rounded flex items-center justify-center text-[#667085] hover:bg-white hover:text-[#111827] transition-colors cursor-pointer"><i class="ti ti-italic text-[14px]"></i></button>
+                       <div class="w-px h-4 bg-[#D0D5DD] mx-1"></div>
+                       <button class="w-7 h-7 rounded flex items-center justify-center text-[#667085] hover:bg-white hover:text-[#111827] transition-colors cursor-pointer"><i class="ti ti-mood-smile text-[14px]"></i></button>
+                       <button class="w-7 h-7 rounded flex items-center justify-center text-[#667085] hover:bg-white hover:text-[#111827] transition-colors cursor-pointer"><i class="ti ti-hash text-[14px]"></i></button>
+                     </div>
+                     <textarea
+                       id="manual-caption-input"
+                       class="w-full p-3 text-[13px] text-[#111827] outline-none bg-transparent resize-y min-h-[100px] font-normal placeholder:text-gray-400 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
+                       placeholder="Write what you want to share... Each platform has isolated memory!"
+                     ></textarea>
+                   </div>
+                 </div>
+              </div>
+
+              <!-- SECTION 4: MEDIA DROP -->
+              <div class="space-y-3 pt-2">
+                <label class="block text-[13px] font-bold text-[#344054]">Media (Up to 10 Images)</label>
+                <div class="grid grid-cols-5 gap-3">
+                   <div id="manual-media-dropzone" class="col-span-2 h-28 border-2 border-dashed border-[#D0D5DD] rounded-xl bg-[#F9FAFB] flex flex-col items-center justify-center text-center p-4 hover:border-[#111827] hover:bg-gray-50 transition-all cursor-pointer group">
+                      <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center border border-[#D0D5DD] shadow-sm group-hover:scale-105 transition-transform mb-1.5">
+                         <i class="ti ti-photo-plus text-[16px] text-[#667085]"></i>
+                      </div>
+                      <span class="text-[11px] font-bold text-[#111827]">Click or Drag Image</span>
+                      <span class="text-[9px] text-[#667085] mt-0.5">PNG, JPG up to 10MB</span>
+                   </div>
+                   <div class="relative h-28 bg-gray-100 rounded-xl border border-[#eaecf0] overflow-hidden group opacity-40 flex items-center justify-center">
+                      <i class="ti ti-photo text-[18px] text-gray-400"></i>
+                   </div>
+                </div>
+              </div>
+
+              <!-- SECTION 5: ENGAGEMENT SETTINGS (CANONICAL CARD) -->
+              <div class="border-t border-[#eaecf0] pt-5 space-y-3">
+                 <div class="w-full flex items-center justify-between p-3 rounded-2xl border border-[#eaecf0] bg-[#F9FAFB] transition-all shadow-sm">
+                    <div class="flex items-center gap-3">
+                       <div class="w-9 h-9 rounded-xl bg-white border border-[#eaecf0] flex items-center justify-center shadow-sm text-[#111827]">
+                          <i class="ti ti-message-bolt text-[18px]"></i>
+                       </div>
+                       <div>
+                          <p class="text-[12px] font-bold text-[#111827] leading-tight">Engagement Settings</p>
+                          <p class="text-[10px] text-[#667085] mt-0.5">Auto reply, like, DM, and more</p>
+                       </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                       <label class="flex items-center gap-2 cursor-pointer group">
+                          <span class="text-[12px] font-semibold text-[#475467] group-hover:text-[#111827] transition-colors">Active</span>
+                          <div class="relative inline-flex items-center">
+                             <input type="checkbox" class="sr-only peer" checked />
+                             <div class="w-8 h-4.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#111827]"></div>
+                          </div>
+                       </label>
+                       <div class="w-px h-6 bg-[#D1D5DB]/50"></div>
+                       <button type="button" class="px-3.5 h-8 rounded-lg border border-[#D0D5DD] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F3F4F6] transition-colors cursor-pointer flex items-center justify-center shadow-sm">
+                          Detail
+                       </button>
+                    </div>
+                 </div>
+              </div>
+
+              <!-- SECTION 6: TIMING GRID -->
+              <div class="border-t border-[#eaecf0] pt-6 space-y-3">
+                <label class="block text-[13px] font-bold text-[#344054] flex items-center gap-1.5">
+                  <i class="ti ti-clock text-[15px]"></i>
+                  Schedule Configuration
+                </label>
+                <div class="grid grid-cols-12 gap-3">
+                   <div class="col-span-4 relative">
+                     <select id="manual-schedule-tz" class="w-full h-10 pl-3 pr-8 border border-[#D0D5DD] rounded-xl text-[13px] text-[#111827] outline-none focus:border-[#111827] appearance-none bg-white cursor-pointer">
+                        <option value="GMT+7">(GMT+7) Jakarta</option>
+                        <option value="GMT+0">(GMT+0) London</option>
+                        <option value="GMT-5">(GMT-5) New York</option>
+                     </select>
+                     <i class="ti ti-chevron-down absolute right-3 top-3 text-[#667085] pointer-events-none"></i>
+                   </div>
+                   <div class="col-span-4">
+                     <input type="date" id="manual-schedule-date" class="w-full h-10 px-3 border border-[#D0D5DD] rounded-xl text-[13px] text-[#111827] outline-none focus:border-[#111827] cursor-pointer" />
+                   </div>
+                   <div class="col-span-4">
+                     <input type="time" id="manual-schedule-time" class="w-full h-10 px-3 border border-[#D0D5DD] rounded-xl text-[13px] text-[#111827] outline-none focus:border-[#111827] cursor-pointer" />
+                   </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Footer Specific to Form Container -->
+            <div class="px-6 py-4 border-t border-[#eaecf0] bg-[#F9FAFB] flex items-center justify-end gap-3 shrink-0">
+              <button
+                id="btn-manual-post-now"
+                class="px-4 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] active:translate-y-[1px] transition-all cursor-pointer"
+              >
+                Post Now
+              </button>
+              <button
+                id="btn-manual-confirm-schedule"
+                class="px-5 h-9 rounded-xl border border-[#374151] bg-[#111827] text-white text-[13px] font-bold hover:bg-black shadow-[0_3px_0_0_#374151] active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151] transition-all cursor-pointer flex items-center gap-2"
+              >
+                <i class="ti ti-calendar-event text-[14px]"></i>
+                Schedule Post
+              </button>
+            </div>
+         </div>
+
+         <!-- RIGHT COLUMN: SIMULATOR -->
+         <div class="w-[35%] bg-[#F2F4F7] flex flex-col items-center justify-center p-6 h-full overflow-hidden relative">
+             
+             <!-- Simulator Main Frame (Sticky static reference) -->
+             <div class="w-full max-w-[320px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-[#eaecf0] flex flex-col overflow-hidden select-none animate-in slide-in-from-right-4 duration-300">
+                 
+                 <!-- Frame Header -->
+                 <div class="px-3 py-2.5 flex items-center gap-2 border-b border-[#F2F4F7]">
+                    <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center border border-[#eaecf0] overflow-hidden">
+                       <i class="ti ti-user text-[#98a2b3] text-[14px]"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                       <div class="text-[12px] font-bold text-[#111827] leading-tight truncate" id="sim-brand-name">Your Brand</div>
+                       <div class="text-[10px] text-[#667085] leading-tight">Sponsored</div>
+                    </div>
+                    <i class="ti ti-dots text-[#667085]"></i>
+                 </div>
+                 
+                 <!-- Post Canvas -->
+                 <div class="relative w-full aspect-square bg-[#F9FAFB] flex flex-col items-center justify-center overflow-hidden">
+                    <img id="sim-primary-image" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop" alt="Preview" class="w-full h-full object-cover" />
+                    <div id="sim-image-placeholder" class="hidden absolute inset-0 flex flex-col items-center justify-center bg-[#F2F4F7] text-[#98a2b3]">
+                       <i class="ti ti-photo text-[32px] opacity-40"></i>
+                       <span class="text-[10px] mt-2">No Image Selected</span>
+                    </div>
+                 </div>
+                 
+                 <!-- Interactions -->
+                 <div class="px-3 pt-3 pb-4 flex flex-col gap-2 bg-white">
+                    <div class="flex items-center justify-between">
+                       <div class="flex items-center gap-3"><i class="ti ti-heart text-[18px] text-[#111827]"></i><i class="ti ti-message-circle-2 text-[18px] text-[#111827]"></i><i class="ti ti-send text-[18px] text-[#111827]"></i></div>
+                       <i class="ti ti-bookmark text-[18px] text-[#111827]"></i>
+                    </div>
+                    <div class="mt-0.5 text-[12px] leading-relaxed text-[#111827]">
+                       <span class="font-bold" id="sim-brand-body">brand</span> 
+                       <span id="sim-caption-text" class="text-[#344054] whitespace-pre-wrap break-words text-[11px] leading-[1.4]">Your caption will render beautifully here as you type!</span>
+                    </div>
+                 </div>
+             </div>
+
+             <!-- Platform Badge (Bottom metadata indicator) -->
+             <div class="mt-6 flex items-center justify-center gap-2 opacity-60">
+                <i id="sim-platform-icon" class="ti ti-brand-instagram text-[15px] text-[#E1306C]"></i>
+                <span class="text-[11px] font-bold text-[#475467]" id="sim-network-name">Instagram Feeds Preview</span>
+             </div>
+         </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MODAL: CALENDAR DAY OVERVIEW (SMALL) -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="modal-calendar-day" class="hidden fixed inset-0 z-[90] items-center justify-center bg-black/30 backdrop-blur-[2px] p-4 animate-in fade-in duration-200" onclick="if(event.target === this) this.classList.add('hidden')">
+    <div class="bg-white w-full max-w-xs rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[#eaecf0] animate-in zoom-in-95 duration-200">
+       <div class="px-4 py-3.5 border-b border-[#eaecf0] flex items-center justify-between bg-[#F9FAFB]">
+         <h3 class="text-[13px] font-bold text-[#111827] flex items-center gap-2" id="cal-day-modal-title">
+           <i class="ti ti-calendar-event text-[#667085]"></i>
+           Schedule Day
+         </h3>
+         <button class="w-6 h-6 flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-gray-200/50 rounded-md transition-colors" onclick="document.getElementById('modal-calendar-day').classList.add('hidden')"><i class="ti ti-x"></i></button>
+       </div>
+       <!-- Dynamic Render List container -->
+       <div class="p-2 max-h-[280px] overflow-y-auto space-y-1 custom-scrollbar bg-white" id="cal-day-items-container">
+          <!-- Item rows go here -->
+       </div>
+       <div class="p-3 border-t border-[#eaecf0] bg-[#F9FAFB]">
+          <button onclick="document.getElementById('modal-calendar-day').classList.add('hidden'); openManualSchedule();" class="w-full h-9 rounded-xl border border-[#D0D5DD] bg-white flex items-center justify-center gap-2 text-[12px] font-bold text-[#344054] hover:bg-gray-50 hover:border-[#98a2b3] transition-all shadow-sm cursor-pointer active:scale-[0.98]">
+             <i class="ti ti-plus text-[13px]"></i>
+             Create New Post
+          </button>
+       </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
   <!-- MODAL: BULK SCHEDULE -->
   <!-- ═══════════════════════════════════════ -->
   <div
@@ -2518,11 +3018,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
           </div>
         </div>
 
-        <!-- Engagement Settings Button (Bulk) -->
+        <!-- Engagement Settings Card (Bulk) -->
         <div class="pt-2">
-          <button
-            onclick="openEngagementFromBulkSchedule()"
-            class="w-full flex items-center justify-between p-3.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] transition-all cursor-pointer group"
+          <div
+            class="w-full flex items-center justify-between p-3.5 rounded-xl border border-[#eaecf0] bg-white transition-all"
           >
             <div class="flex items-center gap-3">
               <div
@@ -2544,10 +3043,23 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
                 </p>
               </div>
             </div>
-            <i
-              class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"
-            ></i>
-          </button>
+            <div class="flex items-center gap-3">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <span class="text-[12px] font-medium text-[#475467]">Active</span>
+                <div class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" class="sr-only peer" />
+                  <div class="w-8 h-4.5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#111827]"></div>
+                </div>
+              </label>
+              <div class="w-px h-4 bg-[#eaecf0]"></div>
+              <button
+                onclick="openEngagementFromBulkSchedule()"
+                class="px-3 h-7 rounded-lg border border-[#D0D5DD] bg-white text-[#344054] text-[12px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer"
+              >
+                Detail
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Preview -->
@@ -2669,6 +3181,8 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   let outputStatusFilter = "approved";
   let searchQuery = "";
   let previewingContentId = null;
+  let engOpenedFromPreview = false;
+  let sessionApprovedIds = []; // Tracks approvals for final summary screen
   let previewCarouselIndex = 0;
   let previewCarouselTotal = 1;
   let originalCaption = "";
@@ -2688,7 +3202,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   let scheduledFilter = "upcoming";
   let scheduledStatusFilter = "all";
   let scheduledSearchQuery = "";
-  let scheduledViewMode = "list"; // list | monthly | weekly
+  let scheduledViewMode = "monthly"; // list | monthly | weekly
   let scheduledMonthDate = new Date(2026, 4, 1); // May 2026
   let scheduledWeekDate = new Date(2026, 4, 5); // Current week start
 
@@ -2954,13 +3468,16 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 
     // Check URL parameters or hash to switch to correct tab on load
     const urlParams = new URLSearchParams(window.location.search);
-    const tabParam = urlParams.get('tab');
-    if (tabParam === 'generated') {
-      switchTab('generated');
-    } else if (tabParam === 'scheduled') {
-      switchTab('scheduled');
-    } else if (window.location.hash === '#generated' || window.location.hash === '#outputs') {
-      switchTab('generated');
+    const tabParam = urlParams.get("tab");
+    if (tabParam === "generated") {
+      switchTab("generated");
+    } else if (tabParam === "scheduled") {
+      switchTab("scheduled");
+    } else if (
+      window.location.hash === "#generated" ||
+      window.location.hash === "#outputs"
+    ) {
+      switchTab("generated");
     }
   }
 
@@ -3349,8 +3866,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
             </span>
             
             <!-- Brand Mini Logo on Top Left -->
-            <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2 h-5 rounded-full bg-black/40 backdrop-blur-sm text-[9px] font-bold text-white shadow-sm">
-              <span class="w-1.5 h-1.5 rounded-full bg-gradient-to-br ${brandGrad}"></span>
+            <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 h-5 rounded-full bg-black/50 backdrop-blur-md text-[9px] font-bold text-white shadow-sm border border-white/10">
               ${escapeHtml(item.brand)}
             </div>
 
@@ -3375,7 +3891,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
               </span>
               
               <!-- Content Type -->
-              <span class="inline-flex items-center gap-1 px-2 h-5 rounded-full bg-[#EFF6FF] text-[10px] font-bold text-[#2563EB] border border-[#DBEAFE]">
+              <span class="inline-flex items-center gap-1 px-2 h-5 rounded-full bg-[#F3F4F6] text-[10px] font-bold text-[#475467] border border-[#E5E7EB]">
                 <i class="ti ${typeIcon} text-[10px]"></i>
                 ${escapeHtml(item.contentType)}
               </span>
@@ -3448,7 +3964,7 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     ).length;
     els.scheduledBadge.textContent = upcomingCount;
     els.scheduledBadge.classList.toggle("hidden", upcomingCount === 0);
-    els.scheduledCountDisplay.textContent = scheduled.length;
+    if (els.scheduledCountDisplay) els.scheduledCountDisplay.textContent = scheduled.length;
 
     // Toggle visibility of view containers
     const hasItems = scheduled.length > 0;
@@ -3650,9 +4166,10 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       const isToday = isCurrentMonth && day === today.getDate();
       const dayItems = itemsByDay[day] || [];
       const hasItems = dayItems.length > 0;
+      const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
       html += `
-        <div class="aspect-square p-2 rounded-xl border ${isToday ? "border-[#8B5CF6] bg-[#F5F3FF]" : "border-[#eaecf0] bg-white"} flex flex-col gap-1 cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all" onclick="${hasItems ? `openPreviewModal('${dayItems[0].id}')` : ""}">
+        <div class="aspect-square p-2 rounded-xl border ${isToday ? "border-[#8B5CF6] bg-[#F5F3FF]" : "border-[#eaecf0] bg-white"} flex flex-col gap-1 cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:border-[#98a2b3] transition-all" onclick="openCalendarDayModal('${dateKey}')">
           <div class="flex items-center justify-between">
             <span class="text-[13px] font-bold ${isToday ? "text-[#7C3AED]" : "text-[#111827]"}">${day}</span>
             ${
@@ -3736,11 +4253,12 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       const isPast = dayDate < today;
       const dayItems = itemsByDay[i] || [];
       const hasItems = dayItems.length > 0;
+      const dateKey = `${dayDate.getFullYear()}-${String(dayDate.getMonth() + 1).padStart(2, '0')}-${String(dayDate.getDate()).padStart(2, '0')}`;
 
       html += `
         <div class="flex flex-col gap-2">
           <!-- Date Header: Bento style white bg -->
-          <div class="text-center p-3 rounded-2xl bg-white border ${isToday ? "border-[#8B5CF6]" : "border-[#eaecf0]"} ${isPast ? "opacity-70" : ""}">
+          <div class="text-center p-3 rounded-2xl bg-white border ${isToday ? "border-[#8B5CF6]" : "border-[#eaecf0]"} ${isPast ? "opacity-70" : ""} cursor-pointer hover:bg-gray-50 hover:border-[#98a2b3] hover:shadow-sm transition-all active:scale-[0.98]" onclick="openCalendarDayModal('${dateKey}')">
             <div class="text-[11px] font-semibold ${isToday ? "text-[#7C3AED]" : "text-[#667085]"}">${dayNames[i]}</div>
             <div class="text-[18px] font-bold ${isToday ? "text-[#7C3AED]" : "text-[#111827]"}">${dayDate.getDate()}</div>
           </div>
@@ -3879,6 +4397,13 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   // ═══════════════════════════════════════════
   function openPreviewModal(genId) {
     previewingContentId = genId;
+    
+    // If the modal is currently hidden, this is a fresh entry point. Reset iteration history.
+    const pm = document.getElementById("modal-preview");
+    if (pm && pm.classList.contains("hidden")) {
+        sessionApprovedIds = [];
+    }
+
     const item = generatedContent.find((g) => g.id === genId);
     if (!item) return;
 
@@ -4147,13 +4672,18 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     saveGenerated();
     renderGenerated();
 
+    // Track for summary
+    if (!sessionApprovedIds.includes(item.id)) sessionApprovedIds.push(item.id);
+
     // Find next draft in same automation group
     const nextDraft = findNextDraftInGroup(item);
     if (nextDraft) {
       transitionToNextDraft(nextDraft);
     } else {
-      closePreviewModal();
-      showToast("Content approved! No more drafts in this group.");
+      // ALL DONE - Transmit to summary portal instead of closing!
+      const groupName = item.automationName || "Review Group";
+      showBatchApprovalSummary(groupName);
+      showToast("Session Completed!");
     }
   }
 
@@ -4239,6 +4769,148 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   function openBulkScheduleModalSingle() {
     openPreviewScheduleModal();
   }
+  // ═══════════════════════════════════════════
+  // BATCH APPROVAL SUMMARY MODULE
+  // ═══════════════════════════════════════════
+  function showBatchApprovalSummary(groupTitle) {
+    // Pull actual objects for relevant IDs from session memory
+    const approvedItems = generatedContent.filter(g => sessionApprovedIds.includes(g.id));
+    
+    closePreviewModal(); // Ensure clean exit of current view
+    
+    const gName = document.getElementById("summary-group-name");
+    const countNum = document.getElementById("summary-count");
+    if (gName) gName.textContent = groupTitle;
+    if (countNum) countNum.textContent = approvedItems.length;
+
+    const gridEl = document.getElementById("summary-grid");
+    if (gridEl) {
+       if (approvedItems.length === 0) {
+          gridEl.innerHTML = `<div class="col-span-4 text-center py-12 text-[#98A2B3] font-medium">No new items available to display.</div>`;
+       } else {
+          gridEl.innerHTML = approvedItems.map(item => {
+             const isStory = item.contentType === "Story";
+             const typeIco = (item.contentType === "Carousel") ? "ti-carousel-horizontal" : "ti-photo";
+             const aspectClass = isStory ? "aspect-[9/16]" : "aspect-[3/4]";
+             
+             return `
+               <div class="inline-block w-full break-inside-avoid mb-4">
+                 <label class="relative flex flex-col gap-2.5 bg-white border border-[#eaecf0] rounded-[24px] p-2.5 cursor-pointer group hover:border-[#2563EB] hover:shadow-md transition-all select-none ring-2 ring-[#2563EB]/20">
+                     <!-- Checkbox and image wrapper -->
+                     <div class="relative w-full ${aspectClass} rounded-[16px] bg-[#1f2937] flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+                         <input type="checkbox" value="${item.id}" checked class="summary-item-check sr-only peer" onchange="updateSummarySelectedCount(); this.closest('label').classList.toggle('ring-2', this.checked); this.closest('label').classList.toggle('ring-[#2563EB]/20', this.checked);" />
+                         
+                         <div class="absolute top-2.5 right-2.5 w-[20px] h-[20px] rounded-[6px] bg-black/20 backdrop-blur-md border border-white/40 flex items-center justify-center transition-all peer-checked:bg-[#2563EB] peer-checked:border-transparent z-20 shadow-sm peer-checked:[&_i]:opacity-100">
+                            <i class="ti ti-check text-[12px] text-white opacity-0 transition-opacity"></i>
+                         </div>
+
+                         <div class="opacity-30 group-hover:opacity-60 transition-opacity duration-300">
+                            <i class="ti ${typeIco} text-[32px] text-white"></i>
+                         </div>
+                     </div>
+                     <div class="px-1 pb-1 flex flex-col gap-1">
+                         <p class="text-[11px] font-bold text-[#111827] leading-snug line-clamp-2" title="${escapeHtml(item.title)}">${escapeHtml(item.title || "Untitled Content")}</p>
+                         <div class="flex items-center gap-1 px-1.5 h-5 w-fit rounded-full bg-[#F3F4F6] text-[9px] font-bold text-[#667085] border border-[#E5E7EB] mt-0.5">
+                            <i class="ti ${typeIco} text-[10px]"></i>
+                            <span class="uppercase tracking-wider">${item.contentType}</span>
+                         </div>
+                     </div>
+                 </label>
+               </div>
+             `;
+          }).join("");
+       }
+    }
+    
+    // Initial setup for selection counters
+    updateSummarySelectedCount();
+
+    const sumModal = document.getElementById("modal-approval-summary");
+    if (sumModal) {
+       sumModal.classList.remove("hidden");
+       sumModal.classList.add("flex");
+    }
+  }
+
+  window.updateSummarySelectedCount = function() {
+      const count = document.querySelectorAll(".summary-item-check:checked").length;
+      const countEl = document.getElementById("summary-count");
+      if (countEl) countEl.textContent = count;
+  };
+
+  function getSummaryCheckedIds() {
+     const boxes = document.querySelectorAll(".summary-item-check:checked");
+     return Array.from(boxes).map(b => b.value);
+  }
+
+  function closeSummaryPortal() {
+      const sumModal = document.getElementById("modal-approval-summary");
+      if (sumModal) {
+         sumModal.classList.add("hidden");
+         sumModal.classList.remove("flex");
+      }
+      sessionApprovedIds = []; // Safe reset upon final closure
+  }
+  
+  function initSummaryFeatureEvents() {
+     const selectAll = document.getElementById("summary-select-all");
+     if (selectAll) {
+         selectAll.checked = true;
+         selectAll.addEventListener("change", (e) => {
+             document.querySelectorAll(".summary-item-check").forEach(cb => {
+                 cb.checked = e.target.checked;
+                 const lbl = cb.closest('label');
+                 if (lbl) {
+                     lbl.classList.toggle('ring-2', cb.checked);
+                     lbl.classList.toggle('ring-[#2563EB]/20', cb.checked);
+                 }
+             });
+             updateSummarySelectedCount();
+         });
+     }
+     
+     const btnLater = document.getElementById("summary-btn-later");
+     const btnClose = document.getElementById("btn-close-summary");
+     [btnLater, btnClose].forEach(btn => {
+         if(btn) btn.addEventListener("click", closeSummaryPortal);
+     });
+
+     const btnPublish = document.getElementById("summary-btn-publish");
+     if(btnPublish) {
+         btnPublish.addEventListener("click", () => {
+             const ids = getSummaryCheckedIds();
+             if (ids.length === 0) return showToast("Please select items to publish.");
+             
+             ids.forEach(id => {
+                 const itm = generatedContent.find(g => g.id === id);
+                 if (itm) {
+                     itm.status = "published";
+                     itm.publishedAt = new Date().toISOString();
+                 }
+             });
+             
+             saveGenerated();
+             renderGenerated();
+             closeSummaryPortal();
+             showToast(`🚀 Successfully published ${ids.length} item(s) directly!`);
+         });
+     }
+
+     const btnSchedule = document.getElementById("summary-btn-schedule");
+     if(btnSchedule) {
+         btnSchedule.addEventListener("click", () => {
+             const ids = getSummaryCheckedIds();
+             if (ids.length === 0) return showToast("Please select items to schedule.");
+             
+             // Handover directly into system's existing Bulk system
+             selectedApprovedIds = ids;
+             closeSummaryPortal();
+             // Standard system invoke
+             if (typeof openBulkScheduleModal === 'function') openBulkScheduleModal();
+         });
+     }
+  }
+
 
   function openPreviewScheduleModal() {
     if (!previewingContentId) return;
@@ -4383,6 +5055,14 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
     if (dmCb) dmCb.checked = eng.dmComment;
     if (storyCb) storyCb.checked = eng.replyStory;
     if (dmReplyCb) dmReplyCb.checked = eng.replyDm;
+
+    // Mark coming from preview & hide parent modal first
+    engOpenedFromPreview = true;
+    const prevModal = document.getElementById("modal-preview");
+    if (prevModal) {
+       prevModal.classList.add("hidden");
+       prevModal.classList.remove("flex");
+    }
 
     const modal = document.getElementById("modal-auto-engagement");
     if (modal) {
@@ -5827,7 +6507,22 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       modal.classList.add("hidden");
       modal.classList.remove("flex");
     }
+    
+    // Contextual Back: If we came from preview, reopen it!
+    const wasFromPrev = engOpenedFromPreview;
+    const prevId = editingAutomationId;
+    
     editingAutomationId = null;
+    engOpenedFromPreview = false; // reset
+
+    if (wasFromPrev && prevId) {
+       // Small delay to ensure transition feels seamless replacement
+       setTimeout(() => {
+          if (typeof openPreviewModal === 'function') {
+             openPreviewModal(prevId);
+          }
+       }, 10);
+    }
   }
 
   function saveComment() {
@@ -6312,30 +7007,28 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
       els.automationVariations.value = Math.max(1, Math.min(10, val));
     });
 
-    // Auto comment modal (legacy - replaced by engagement)
+    // Engagement / Auto Comment Modal Listeners (Enhanced flow)
     if (els.closeEngagementModal)
-      els.closeEngagementModal.addEventListener(
-        "click",
-        closeEngagementModalFn,
-      );
+      els.closeEngagementModal.addEventListener("click", closeCommentModal);
     if (els.btnCancelEngagement)
-      els.btnCancelEngagement.addEventListener("click", closeEngagementModalFn);
+      els.btnCancelEngagement.addEventListener("click", closeCommentModal);
     if (els.btnSaveEngagement)
-      els.btnSaveEngagement.addEventListener("click", saveEngagement);
-    // Back buttons in engagement modal
+      els.btnSaveEngagement.addEventListener("click", saveComment);
+
+    // Back buttons in engagement modal (properly routed to support back tracking)
     const btnBackEngagement = document.getElementById("btn-back-engagement");
-    const btnBackEngagementFooter = document.getElementById(
-      "btn-back-engagement-footer",
-    );
+    const btnBackEngagementFooter = document.getElementById("btn-back-engagement-footer");
+    
     if (btnBackEngagement) {
-      btnBackEngagement.addEventListener("click", closeEngagementModalFn);
+      btnBackEngagement.addEventListener("click", closeCommentModal);
     }
     if (btnBackEngagementFooter) {
-      btnBackEngagementFooter.addEventListener("click", closeEngagementModalFn);
+      btnBackEngagementFooter.addEventListener("click", closeCommentModal);
     }
+    
     if (els.modalEngagement) {
       els.modalEngagement.addEventListener("click", (e) => {
-        if (e.target === els.modalEngagement) closeEngagementModalFn();
+        if (e.target === els.modalEngagement) closeCommentModal();
       });
     }
     if (els.commentToggle) {
@@ -7228,6 +7921,607 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
   window.confirmSingleSchedule = confirmSingleSchedule;
   window.openEngagementFromSingleSchedule = openEngagementFromSingleSchedule;
   window.openEngagementFromBulkSchedule = openEngagementFromBulkSchedule;
+
+  // ═══════════════════════════════════════════
+  // MANUAL SCHEDULE SYSTEM CONTROLLER (RESTORED)
+  // ═══════════════════════════════════════════
+  
+  const manualScheduleState = {
+    dna: "",
+    platforms: [], // selected account values
+    currentPlatform: "instagram",
+    platformConfigs: {
+      instagram: {
+        type: "Feeds",
+        caption: "",
+        images: [
+          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop",
+        ],
+      },
+      facebook: {
+        type: "Feeds",
+        caption: "",
+        images: [
+          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop",
+        ],
+      },
+    },
+  };
+
+  function openManualSchedule() {
+    const m = document.getElementById("modal-manual-schedule");
+    if (m) {
+      m.classList.remove("hidden");
+      m.classList.add("flex");
+    }
+    document.body.style.overflow = "hidden";
+    
+    // Reset date to today
+    const dateInput = document.getElementById("manual-schedule-date");
+    const timeInput = document.getElementById("manual-schedule-time");
+    if (dateInput && !dateInput.value) {
+      const now = new Date();
+      dateInput.value = now.toISOString().split("T")[0];
+    }
+    if (timeInput && !timeInput.value) {
+       timeInput.value = "12:00";
+    }
+  }
+
+  function closeManualSchedule() {
+    const m = document.getElementById("modal-manual-schedule");
+    if (m) {
+      m.classList.add("hidden");
+      m.classList.remove("flex");
+    }
+    document.body.style.overflow = "";
+  }
+
+  function rebuildManualAccountState() {
+     const checkboxes = document.querySelectorAll(".manual-account-cb:checked");
+     const badgeContainer = document.getElementById("selected-accounts-badges");
+     const label = document.getElementById("manual-publish-label");
+     
+     badgeContainer.innerHTML = "";
+     const selected = [];
+     
+     checkboxes.forEach(cb => {
+        selected.push(cb.value);
+        // create visual pill
+        const labelTxt = cb.nextElementSibling.nextElementSibling.innerText;
+        const iconClass = cb.nextElementSibling.classList.contains("ti-brand-instagram") ? "ti-brand-instagram text-[#E1306C]" : "ti-brand-facebook text-[#1877F2]";
+        
+        const pill = document.createElement("div");
+        pill.className = "inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#D0D5DD] rounded-full shadow-sm text-[12px] font-bold text-[#344054] hover:border-[#98a2b3] transition-all animate-in zoom-in-95 duration-150 group cursor-default";
+        pill.innerHTML = `
+          <i class="ti ${iconClass} text-[13px]"></i> 
+          ${labelTxt}
+          <button type="button" class="ml-0.5 w-4 h-4 rounded-full flex items-center justify-center text-[#98a2b3] hover:bg-[#F3F4F6] hover:text-[#EF4444] transition-colors cursor-pointer">
+             <i class="ti ti-x text-[10px]"></i>
+          </button>
+        `;
+        
+        // Wire the Close Action handler
+        const removeBtn = pill.querySelector("button");
+        if (removeBtn) {
+           removeBtn.addEventListener("click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              cb.checked = false; // UNCHECK SOURCE
+              rebuildManualAccountState(); // RE-TRIGGER SELF FOR TOTAL SYNC
+              
+              // Re-sync downstream logic
+              if (typeof syncManualSimulator === 'function') {
+                 syncManualSimulator();
+              }
+           });
+        }
+        
+        badgeContainer.appendChild(pill);
+     });
+     
+     manualScheduleState.platforms = selected;
+     
+     if (selected.length > 0) {
+        label.textContent = `${selected.length} account(s) selected`;
+        label.className = "text-[#111827] font-bold";
+     } else {
+        label.textContent = "Select destination accounts...";
+        label.className = "text-[#98a2b3]";
+     }
+  }
+
+  function initManualScheduleEvents() {
+    const triggerBtn = document.getElementById("btn-open-manual-schedule");
+    const modal = document.getElementById("modal-manual-schedule");
+    const closeBtn = document.getElementById("btn-close-manual-schedule");
+    const pubTrigger = document.getElementById("manual-publish-trigger");
+    const pubDropdown = document.getElementById("manual-publish-dropdown");
+    const dnaSelect = document.getElementById("manual-select-dna");
+    const captionInput = document.getElementById("manual-caption-input");
+    const confirmBtn = document.getElementById("btn-manual-confirm-schedule");
+
+    if (triggerBtn)
+      triggerBtn.addEventListener("click", () => openManualSchedule());
+    if (closeBtn)
+      closeBtn.addEventListener("click", () => closeManualSchedule());
+
+    // Dna Watch
+    if (dnaSelect) {
+      dnaSelect.addEventListener("change", (e) => {
+        manualScheduleState.dna = e.target.value;
+      });
+    }
+
+    // Publish Multi-select toggle
+    if (pubTrigger && pubDropdown) {
+      pubTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        pubDropdown.classList.toggle("hidden");
+      });
+      document.addEventListener("click", () => {
+        if (pubDropdown) pubDropdown.classList.add("hidden");
+      });
+      pubDropdown.addEventListener("click", (e) => e.stopPropagation());
+    }
+
+    // AI Prompt Modal Handlers
+    const aiTriggerBtn = document.getElementById("btn-manual-ai-gen");
+    const aiPromptModal = document.getElementById("manual-ai-prompt-modal");
+    const aiCloseBtn = document.getElementById("btn-close-ai-prompt");
+    const aiFinalGenBtn = document.getElementById("btn-manual-ai-generate-final");
+    const aiPromptInput = document.getElementById("ai-additional-prompt-input");
+
+    if (aiTriggerBtn && aiPromptModal) {
+       aiTriggerBtn.addEventListener("click", () => {
+          if (captionInput && captionInput.disabled) return; // Prevent when disabled (e.g. story)
+          aiPromptModal.classList.remove("hidden");
+          aiPromptModal.classList.add("flex");
+          if (aiPromptInput) {
+             aiPromptInput.value = "";
+             aiPromptInput.focus();
+          }
+       });
+    }
+
+    if (aiCloseBtn && aiPromptModal) {
+       aiCloseBtn.addEventListener("click", () => {
+          aiPromptModal.classList.add("hidden");
+          aiPromptModal.classList.remove("flex");
+       });
+    }
+
+    if (aiFinalGenBtn && aiPromptModal) {
+       aiFinalGenBtn.addEventListener("click", () => {
+          // Simulated AI Generation flow
+          aiFinalGenBtn.innerHTML = `<i class="ti ti-loader-2 animate-spin"></i> Generating...`;
+          aiFinalGenBtn.classList.add("opacity-75", "pointer-events-none");
+
+          setTimeout(() => {
+             aiFinalGenBtn.innerHTML = `Generate Caption`;
+             aiFinalGenBtn.classList.remove("opacity-75", "pointer-events-none");
+             aiPromptModal.classList.add("hidden");
+             aiPromptModal.classList.remove("flex");
+             
+             if (captionInput) {
+                const promptText = aiPromptInput ? aiPromptInput.value.trim() : "";
+                const dnaText = manualScheduleState.dna || "Our Brand";
+                const generatedText = `✨ Fresh inspiration arrived for ${dnaText}! ` + 
+                  (promptText ? `Incorporating: "${promptText}". ` : "") +
+                  `Explore this season's trendsetters and see why we're redefining modern living. 🌟 Link in bio #Inspiration #Innovation`;
+                
+                captionInput.value = generatedText;
+                
+                const plat = manualScheduleState.currentPlatform;
+                if (!manualScheduleState.platformConfigs[plat]) {
+                  manualScheduleState.platformConfigs[plat] = { type: "Feeds", caption: "", images: [] };
+                }
+                manualScheduleState.platformConfigs[plat].caption = generatedText;
+                
+                // AUTO SYNC PREVIEW IMMEDIATELY IF AI GENERATED
+                syncManualSimulator();
+                
+                showToast("AI caption generated successfully!");
+             }
+          }, 1200);
+       });
+    }
+
+
+    // Live input syncing with memory isolation
+    if (captionInput) {
+      captionInput.addEventListener("input", (e) => {
+        const plat = manualScheduleState.currentPlatform;
+        if (!manualScheduleState.platformConfigs[plat]) {
+          manualScheduleState.platformConfigs[plat] = {
+            type: "Feeds",
+            caption: "",
+            images: [],
+          };
+        }
+        manualScheduleState.platformConfigs[plat].caption = e.target.value;
+        syncManualSimulator(); // LIVE PREVIEW SYNC
+      });
+    }
+
+    // Post Type Radio triggers
+    document
+      .querySelectorAll('input[name="manualPostType"]')
+      .forEach((radio) => {
+        radio.addEventListener("change", (e) => {
+          const plat = manualScheduleState.currentPlatform;
+          if (!manualScheduleState.platformConfigs[plat]) {
+            manualScheduleState.platformConfigs[plat] = {
+              type: "Feeds",
+              caption: "",
+              images: [],
+            };
+          }
+          manualScheduleState.platformConfigs[plat].type = e.target.value;
+          syncManualSimulator(); // SYNC ON TYPE CHANGE
+
+          // Handle Caption Disable on Story
+          if (captionInput) {
+             if (e.target.value === "Story") {
+                captionInput.disabled = true;
+                captionInput.classList.add("bg-gray-50", "text-gray-400");
+                captionInput.placeholder = "Caption not available for Stories";
+             } else {
+                captionInput.disabled = false;
+                captionInput.classList.remove("bg-gray-50", "text-gray-400");
+                captionInput.placeholder = "Write what you want to share... Each platform has isolated memory!";
+             }
+          }
+        });
+      });
+
+     // Account Checkboxes logic
+     const manualAccCheckboxes = document.querySelectorAll(".manual-account-cb");
+     manualAccCheckboxes.forEach(cb => {
+        cb.addEventListener("change", () => {
+           rebuildManualAccountState();
+           syncManualSimulator(); // RE-SYNC BRAND ON ACCOUNT CHANGE
+        });
+     });
+
+     // Platform Context Switchers (Tabs)
+     const platformTabContainer = document.getElementById("manual-platform-tabs");
+     if (platformTabContainer) {
+        const tabs = platformTabContainer.querySelectorAll("button");
+        tabs.forEach(tab => {
+           tab.addEventListener("click", () => {
+              // Determine platform based on inner text
+              const text = tab.innerText.toLowerCase().trim();
+              manualScheduleState.currentPlatform = text.includes("facebook") ? "facebook" : "instagram";
+              
+              // Visual class toggles for tab selection
+              tabs.forEach(t => {
+                 t.className = "px-4 h-8 rounded-lg flex items-center gap-2 text-[12px] font-medium text-[#667085] hover:bg-gray-200/50 transition-all cursor-pointer whitespace-nowrap";
+              });
+              tab.className = "px-4 h-8 rounded-lg bg-white shadow-sm flex items-center gap-2 text-[12px] font-bold text-[#111827] border border-[#eaecf0] transition-all cursor-pointer whitespace-nowrap";
+              
+              // Re-load from isolated memory
+              const cfg = manualScheduleState.platformConfigs[manualScheduleState.currentPlatform] || { caption: "", type: "Feeds" };
+              if (captionInput) {
+                 captionInput.value = cfg.caption;
+                 // Enforce disable logic for Story upon switch
+                 if (cfg.type === "Story") {
+                    captionInput.disabled = true;
+                    captionInput.classList.add("bg-gray-50", "text-gray-400");
+                    captionInput.placeholder = "Caption not available for Stories";
+                 } else {
+                    captionInput.disabled = false;
+                    captionInput.classList.remove("bg-gray-50", "text-gray-400");
+                    captionInput.placeholder = "Write what you want to share... Each platform has isolated memory!";
+                 }
+              }
+              
+              // Update radio button selected type
+              document.querySelectorAll('input[name="manualPostType"]').forEach(r => {
+                 r.checked = (r.value === cfg.type);
+              });
+
+              syncManualSimulator(); // SYNC ON TAB CHANGE
+           });
+        });
+     }
+
+    // Initial sync upon first bind
+    syncManualSimulator();
+
+    // Confirm btn simulation
+    if (confirmBtn) {
+      confirmBtn.addEventListener("click", () => submitManualSchedule());
+    }
+  }
+
+  function submitManualSchedule() {
+    const confirmBtn = document.getElementById("btn-manual-confirm-schedule");
+    if (!confirmBtn) return;
+
+    // Form Check
+    if (!manualScheduleState.dna) {
+      showToast("Please select a Business DNA", "error");
+      return;
+    }
+    if (manualScheduleState.platforms.length === 0) {
+      showToast("Please select at least 1 publish destination", "error");
+      return;
+    }
+
+    confirmBtn.innerHTML = `<i class="ti ti-loader-2 animate-spin"></i> Scheduling...`;
+    confirmBtn.classList.add("opacity-75", "pointer-events-none");
+
+    setTimeout(() => {
+      confirmBtn.innerHTML = `<i class="ti ti-calendar-event"></i> Schedule`;
+      confirmBtn.classList.remove("opacity-75", "pointer-events-none");
+      closeManualSchedule();
+
+      // Simulated add to feed
+      const newItem = {
+        id: "gen-manual-" + Date.now(),
+        title: "Manual Post (" + manualScheduleState.platformConfigs[manualScheduleState.currentPlatform].type + ")",
+        brand: manualScheduleState.dna,
+        status: "scheduled",
+        type: manualScheduleState.platformConfigs[manualScheduleState.currentPlatform].type,
+        scheduledAt: document.getElementById("manual-schedule-date").value + " " + document.getElementById("manual-schedule-time").value + ":00",
+        thumbnail: manualScheduleState.platformConfigs[manualScheduleState.currentPlatform].images[0] || "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop",
+        caption: manualScheduleState.platformConfigs[manualScheduleState.currentPlatform].caption || "Manually composed schedule item."
+      };
+
+      generatedContent.unshift(newItem);
+      renderScheduled();
+      showToast("Post successfully scheduled!");
+    }, 1500);
+  }
+
+  function syncManualSimulator() {
+     const config = manualScheduleState.platformConfigs[manualScheduleState.currentPlatform];
+     if (!config) return;
+
+     const simBrandName = document.getElementById("sim-brand-name");
+     const simBrandBody = document.getElementById("sim-brand-body");
+     const simCaptionText = document.getElementById("sim-caption-text");
+     const simPrimaryImage = document.getElementById("sim-primary-image");
+     const simImagePlaceholder = document.getElementById("sim-image-placeholder");
+     const simPlatformIcon = document.getElementById("sim-platform-icon");
+     const simNetworkName = document.getElementById("sim-network-name");
+
+     // Determine Display Name based on selected DNA OR first checked checkbox
+     let brandName = "Your Brand";
+     if (manualScheduleState.dna) {
+        brandName = manualScheduleState.dna;
+     } else {
+        const firstChecked = document.querySelector(".manual-account-cb:checked");
+        if (firstChecked) {
+           brandName = firstChecked.nextElementSibling.nextElementSibling.innerText;
+        }
+     }
+
+     if (simBrandName) simBrandName.innerText = brandName;
+     if (simBrandBody) simBrandBody.innerText = brandName.toLowerCase().replace(/\s+/g, '') + " ";
+
+     // Update Caption OR type indicator for stories
+     if (simCaptionText) {
+        if (config.type === "Story") {
+           simCaptionText.innerText = "[This format includes interactive elements, interactive text overlays and zero written body caption.]";
+           simCaptionText.className = "text-[#667085] italic text-[11px]";
+        } else {
+           simCaptionText.innerText = config.caption || "Your caption will render beautifully here.";
+           simCaptionText.className = "text-[#344054] whitespace-pre-wrap break-words";
+        }
+     }
+
+     // Image Isolation check
+     if (simPrimaryImage && simImagePlaceholder) {
+        if (config.images && config.images.length > 0) {
+           simPrimaryImage.src = config.images[0];
+           simPrimaryImage.classList.remove("hidden");
+           simImagePlaceholder.classList.add("hidden");
+        } else {
+           simPrimaryImage.classList.add("hidden");
+           simImagePlaceholder.classList.remove("hidden");
+        }
+     }
+
+     // Update Network Meta
+     if (simNetworkName && simPlatformIcon) {
+        const isInsta = manualScheduleState.currentPlatform === "instagram";
+        simPlatformIcon.className = `ti ti-brand-${manualScheduleState.currentPlatform} text-[14px] ${isInsta ? "text-[#E1306C]" : "text-[#1877F2]"}`;
+        simNetworkName.innerText = `${isInsta ? "Instagram" : "Facebook"} ${config.type} Preview`;
+     }
+  }
+
+  function openCalendarDayModal(dateString) {
+    // dateString format can be "2026-05-12"
+    const targetDate = new Date(dateString);
+    const titleEl = document.getElementById("cal-day-modal-title");
+    const containerEl = document.getElementById("cal-day-items-container");
+    const modal = document.getElementById("modal-calendar-day");
+
+    if (!titleEl || !containerEl || !modal) return;
+
+    // Set header title formatted nicely
+    titleEl.innerHTML = `<i class="ti ti-calendar-event text-[#667085]"></i> ${targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+
+    // Filter scheduled content for THIS SPECIFIC DAY
+    const dayItems = generatedContent.filter(item => {
+       const itemDate = new Date(item.status === 'published' ? item.publishedAt : item.scheduledAt);
+       return itemDate.toDateString() === targetDate.toDateString();
+    });
+
+    containerEl.innerHTML = "";
+
+    if (dayItems.length === 0) {
+       containerEl.innerHTML = `
+         <div class="flex flex-col items-center justify-center py-8 px-4 text-center">
+            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center border border-[#eaecf0] mb-2">
+               <i class="ti ti-calendar-x text-[#98a2b3]"></i>
+            </div>
+            <p class="text-[11px] font-medium text-[#667085]">No items scheduled for this day.</p>
+         </div>
+       `;
+    } else {
+       dayItems.forEach(item => {
+          const isPublished = item.status === 'published';
+          const timeStr = new Date(isPublished ? item.publishedAt : item.scheduledAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+          
+          const row = document.createElement("div");
+          row.className = "p-2.5 bg-[#F9FAFB] hover:bg-white border border-[#eaecf0] rounded-xl flex items-center gap-3 transition-all group cursor-pointer";
+          row.onclick = (e) => {
+             modal.classList.add("hidden");
+             openPreviewModal(item.id);
+          };
+          
+          row.innerHTML = `
+             <div class="w-8 h-8 rounded-lg bg-[#111827] overflow-hidden flex items-center justify-center shrink-0 border border-[#374151]">
+                <i class="ti ti-photo text-white opacity-40 text-[12px]"></i>
+             </div>
+             <div class="flex-1 min-w-0">
+                <div class="text-[11px] font-bold text-[#111827] truncate">${escapeHtml(item.title || "Schedule Item")}</div>
+                <div class="text-[10px] font-medium ${isPublished ? 'text-[#667085]' : 'text-[#7C3AED]'} flex items-center gap-1">
+                   <i class="ti ti-clock text-[9px]"></i> ${timeStr}
+                </div>
+             </div>
+             <div class="w-6 h-6 rounded-md flex items-center justify-center text-[#98a2b3] group-hover:text-[#111827] group-hover:bg-white transition-colors border border-transparent group-hover:border-[#eaecf0]">
+                <i class="ti ti-chevron-right text-[13px]"></i>
+             </div>
+          `;
+          containerEl.appendChild(row);
+       });
+    }
+
+    // Open
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+
+    // Pre-fill manual schedule inputs just in case they click Create New Post
+    const mDate = document.getElementById("manual-schedule-date");
+    if (mDate) {
+       mDate.value = dateString;
+    }
+  }
+
+  // Register system initializing callback
+  setTimeout(() => {
+     initManualScheduleEvents();
+  }, 500);
+
+  window.openManualSchedule = openManualSchedule;
+  window.openCalendarDayModal = openCalendarDayModal;
+  window.syncManualSimulator = syncManualSimulator;
+
+  // ═══════════════════════════════════════════
+  // Universal logic for all business filter dynamic search inputs
+  // ═══════════════════════════════════════════
+  document.querySelectorAll(".biz-search-input").forEach(input => {
+    input.addEventListener("click", e => e.stopPropagation());
+    input.addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      const dropdown = input.closest(".absolute");
+      if (dropdown) {
+        const buttons = dropdown.querySelectorAll("button[data-brand]");
+        buttons.forEach(btn => {
+          const match = btn.textContent.toLowerCase().includes(term);
+          btn.style.display = match ? "block" : "none";
+        });
+      }
+    });
+  });
+
+  // ═══════════════════════════════════════════
+  // ENGAGEMENT TEMPLATE MODULE
+  // ═══════════════════════════════════════════
+  function initEngagementTemplateEvents() {
+     const trigger = document.getElementById("btn-eng-template-trigger");
+     const dropdown = document.getElementById("dropdown-eng-template");
+     const btnSave = document.getElementById("btn-eng-save-tmpl");
+     const btnLoad = document.getElementById("btn-eng-load-tmpl");
+     
+     const modalSave = document.getElementById("modal-eng-save-tmpl");
+     const modalLoad = document.getElementById("modal-eng-load-tmpl");
+     
+     // Dropdown Toggle
+     if (trigger && dropdown) {
+        trigger.addEventListener("click", (e) => {
+           e.stopPropagation();
+           dropdown.classList.toggle("hidden");
+        });
+        document.addEventListener("click", () => { if(dropdown) dropdown.classList.add("hidden"); });
+     }
+     
+     // Open Save
+     if (btnSave && modalSave) {
+        btnSave.addEventListener("click", () => {
+           modalSave.classList.remove("hidden");
+           modalSave.classList.add("flex");
+           if(dropdown) dropdown.classList.add("hidden");
+        });
+     }
+     
+     // Close Save handlers
+     const btnCloseSave = document.getElementById("btn-close-eng-save-tmpl");
+     const btnConfirmSave = document.getElementById("btn-confirm-eng-save-tmpl");
+     if (btnCloseSave) {
+        btnCloseSave.addEventListener("click", () => {
+           modalSave.classList.add("hidden");
+           modalSave.classList.remove("flex");
+        });
+     }
+     if (btnConfirmSave) {
+        btnConfirmSave.addEventListener("click", () => {
+           const inp = document.getElementById("inp-eng-tmpl-name");
+           const val = inp ? inp.value.trim() : "New Template";
+           if (!val) return;
+           modalSave.classList.add("hidden");
+           modalSave.classList.remove("flex");
+           showToast(`Template "${val}" saved successfully!`);
+           if(inp) inp.value = "";
+        });
+     }
+     
+     // Open Load
+     if (btnLoad && modalLoad) {
+        btnLoad.addEventListener("click", () => {
+           modalLoad.classList.remove("hidden");
+           modalLoad.classList.add("flex");
+           if(dropdown) dropdown.classList.add("hidden");
+        });
+     }
+     
+     // Close Load handlers
+     const btnCloseLoad = document.getElementById("btn-close-eng-load-tmpl");
+     const btnConfirmLoad = document.getElementById("btn-confirm-eng-load-tmpl");
+     if (btnCloseLoad) {
+        btnCloseLoad.addEventListener("click", () => {
+           modalLoad.classList.add("hidden");
+           modalLoad.classList.remove("flex");
+        });
+     }
+     if (btnConfirmLoad) {
+        btnConfirmLoad.addEventListener("click", () => {
+           modalLoad.classList.add("hidden");
+           modalLoad.classList.remove("flex");
+           
+           // Apply mock preset settings
+           const tcDelete = document.getElementById("toggle-delete-comment");
+           const tcReply = document.getElementById("toggle-reply-comment");
+           const tcLike = document.getElementById("toggle-like-comment");
+           const tcDm = document.getElementById("toggle-dm-comment");
+
+           if(tcDelete) tcDelete.checked = false;
+           if(tcReply) tcReply.checked = true;
+           if(tcLike) tcLike.checked = false;
+           if(tcDm) tcDm.checked = true;
+           
+           showToast("Engagement template applied successfully!");
+        });
+     }
+  }
+
+  // Initialize new module
+  initEngagementTemplateEvents();
+  initSummaryFeatureEvents();
 
   // Start
   init();
