@@ -233,7 +233,7 @@ const pageIcon = currentPage.icon;
                         : "text-[#98a2b3] group-hover:text-black",
                     ]}
                   >
-                    <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
+                    <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z" />
                   </svg>
                 ) : (
                   <i
@@ -253,45 +253,210 @@ const pageIcon = currentPage.icon;
 
         <!-- Bottom: Actions + Credits + Profile -->
         <div class="p-3 flex flex-col gap-0.5 shrink-0">
-          <a
-            href="/affiliate"
-            class="flex items-center gap-3 px-3 h-9 rounded-lg text-[13px] text-[#667085] hover:text-black hover:bg-[#F3F4F6] font-medium transition-all group"
+          <!-- Plan & Credits -->
+          <div
+            class="mx-1 mb-2 px-2 py-2 flex flex-col gap-2 animate-shine border border-[#eaecf0] rounded-xl bg-transparent"
           >
-            <i
-              class="ti ti-users text-[15px] text-[#98a2b3] group-hover:text-black"
-            ></i>
-            Affiliate
-          </a>
-          <a
-            href="/feedback"
-            class="flex items-center gap-3 px-3 h-9 rounded-lg text-[13px] text-[#667085] hover:text-black hover:bg-[#F3F4F6] font-medium transition-all group"
-          >
-            <i
-              class="ti ti-message-dots text-[15px] text-[#98a2b3] group-hover:text-black"
-            ></i>
-            Feedback
-            <span class="ml-0.5 flex items-center justify-center">
+            <div class="flex items-center justify-between">
+              <span class="text-[14px] font-extrabold text-[#111827]">Free</span
+              >
+              <button
+                class="btn-upgrade-trigger px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
+                onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))"
+                >Upgrade</button
+              >
+            </div>
+            <div class="h-[1px] w-full border-t border-dashed border-[#eaecf0]">
+            </div>
+
+            <button
+              id="btn-credit"
+              class="w-full flex items-center justify-between group/credit cursor-pointer hover:opacity-80 transition-opacity focus:outline-none"
+              onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))"
+            >
+              <div class="flex items-center gap-2">
+                <i class="ti ti-sparkles text-[14px] text-[#667085]"></i>
+                <span class="text-[12px] font-bold text-[#344054]">Credits</span
+                >
+                <i class="ti ti-help-circle text-[12px] text-[#98a2b3]"></i>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-[13px] font-bold text-[#344054]">300</span>
+                <i class="ti ti-chevron-right text-[11px] text-[#98a2b3]"></i>
+              </div>
+            </button>
+          </div>
+
+          <!-- Profile Widget -->
+          <div class="relative mx-1" id="profile-wrapper">
+            <button
+              id="btn-profile"
+              class="w-full flex items-center justify-between px-2 py-2 rounded-xl border border-[#eaecf0] bg-transparent hover:bg-[#F9FAFB] transition-colors focus:outline-none group"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div
+                  class="w-8 h-8 rounded-full bg-white border border-[#eaecf0] overflow-hidden shrink-0"
+                >
+                  <img
+                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
+                    class="w-full h-full object-cover"
+                    alt="avatar"
+                  />
+                </div>
+                <div class="flex flex-col text-left min-w-0">
+                  <span class="text-[13px] font-bold text-[#111827] truncate"
+                    >Jane Cooper</span
+                  >
+                  <span class="text-[11px] text-[#667085] truncate"
+                    >jane@xeni.io</span
+                  >
+                </div>
+              </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="#111827"
-                viewBox="0 0 256 256"
-                ><path
-                  d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-[#98a2b3] group-hover:text-[#667085] shrink-0 transition-colors"
+                ><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"
                 ></path></svg
               >
-            </span>
-          </a>
-          <a
-            href="/help-center"
-            class="flex items-center gap-3 px-3 h-9 rounded-lg text-[13px] text-[#667085] hover:text-black hover:bg-[#F3F4F6] font-medium transition-all group"
-          >
-            <i
-              class="ti ti-help-circle text-[15px] text-[#98a2b3] group-hover:text-black"
-            ></i>
-            Get Help
-          </a>
+            </button>
+
+            <!-- Profile Dropdown -->
+            <div
+              id="profile-dropdown"
+              class="hidden absolute bottom-full left-[46px] w-[236px] mb-2 bg-white border border-[#eaecf0] rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.08)] p-1.5 z-50"
+            >
+              <!-- User Info Header -->
+              <div class="flex items-center gap-3 px-3 py-3 mb-[3px]">
+                <div
+                  class="w-10 h-10 rounded-full bg-white border border-[#eaecf0] overflow-hidden shrink-0"
+                >
+                  <img
+                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
+                    class="w-full h-full object-cover"
+                    alt="avatar"
+                  />
+                </div>
+                <div class="min-w-0 flex-1">
+                  <p
+                    class="text-[13px] font-bold text-[#111827] truncate leading-tight"
+                  >
+                    Jane Cooper
+                  </p>
+                  <p class="text-[11px] text-[#98a2b3] truncate">
+                    jane@xeni.io
+                  </p>
+                </div>
+                <!-- Dark Mode Toggle Switch -->
+                <div class="flex items-center">
+                  <button
+                    id="dark-mode-toggle"
+                    class="w-[42px] h-[22px] rounded-full bg-[#ebebef] border border-[#d1d5db] relative flex items-center p-0.5 cursor-pointer transition-all hover:border-[#9ca3af] group"
+                    aria-label="Toggle Dark Mode"
+                  >
+                    <div
+                      id="dark-mode-thumb"
+                      class="absolute left-0.5 w-[18px] h-[18px] rounded-full bg-white border border-[#d1d5db] shadow-sm flex items-center justify-center transition-all duration-300"
+                    >
+                      <i
+                        id="dark-mode-icon"
+                        class="ti ti-sun text-[10px] text-[#4b5563]"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Action Items -->
+              <button
+                id="btn-nav-account"
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+              >
+                <i class="ti ti-user-circle text-[15px] text-[#98a2b3]"></i>
+                Account
+              </button>
+              <button
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+                onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'affiliate' } }))"
+              >
+                <i class="ti ti-users text-[15px] text-[#98a2b3]"></i>
+                Affiliate
+              </button>
+
+              <div class="relative group/lang">
+                <button
+                  class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer"
+                >
+                  <div class="flex items-center gap-2.5">
+                    <i class="ti ti-world text-[15px] text-[#98a2b3]"></i>
+                    Language
+                  </div>
+                  <i class="ti ti-chevron-right text-[12px] text-[#98a2b3]"></i>
+                </button>
+                <div
+                  class="absolute left-full top-0 ml-1 w-36 bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-1 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all z-50 flex flex-col gap-0.5"
+                >
+                  <button
+                    class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-bold text-[#111827] bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
+                  >
+                    English
+                    <i class="ti ti-check text-[14px] text-[#2563EB]"></i>
+                  </button>
+                  <button
+                    class="w-full flex items-center px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
+                  >
+                    Indonesia
+                  </button>
+                </div>
+              </div>
+
+              <div class="h-[1px] w-full bg-[#eaecf0] my-0.5"></div>
+
+              <button
+                class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+                onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'feedback' } }))"
+              >
+                <div class="flex items-center gap-2.5">
+                  <i class="ti ti-message-dots text-[15px] text-[#98a2b3]"></i>
+                  Feedback
+                </div>
+                <span class="flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    fill="#111827"
+                    viewBox="0 0 256 256"
+                    ><path
+                      d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
+                    ></path></svg
+                  >
+                </span>
+              </button>
+              <a
+                href="/help-center"
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+              >
+                <i class="ti ti-help-circle text-[15px] text-[#98a2b3]"></i>
+                Get Help
+              </a>
+
+              <div class="h-[1px] w-full bg-[#eaecf0] my-0.5"></div>
+              <button
+                id="btn-logout"
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#d92d20] hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+              >
+                <i class="ti ti-logout text-[15px]"></i>
+                Log Out
+              </button>
+            </div>
+          </div>
         </div>
       </aside>
 
@@ -307,252 +472,27 @@ const pageIcon = currentPage.icon;
           <div
             class="flex items-center gap-2 text-[15px] font-bold text-[#111827] pointer-events-auto ml-[5px]"
           >
-            {activePage === "business-dna" ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-                class="text-[#98a2b3] flex-shrink-0"
-              >
-                <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
-              </svg>
-            ) : (
-              <i class={`ti ${pageIcon} text-[18px] text-[#98a2b3]`}></i>
-            )}
+            {
+              activePage === "business-dna" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  class="text-[#98a2b3] flex-shrink-0"
+                >
+                  <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z" />
+                </svg>
+              ) : (
+                <i class={`ti ${pageIcon} text-[18px] text-[#98a2b3]`} />
+              )
+            }
             <span>{pageTitle}</span>
           </div>
 
           <!-- Right: Controls -->
-          <div class="flex items-center gap-3 pointer-events-auto">
-            <!-- Free Plan Badge -->
-            <div class="flex items-center h-[34px] bg-transparent border border-[#d1d5db] rounded-full px-3 gap-2 hover:border-[#9ca3af] transition-all select-none">
-              <span class="text-[12px] font-bold text-[#667085]">Free plan</span>
-              <div class="w-px h-3 bg-[#d1d5db]"></div>
-              <button class="text-[#2563EB] text-[12px] font-bold hover:text-[#1d4ed8] transition-colors cursor-pointer" onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))">Upgrade</button>
-            </div>
-
-            <!-- Credit Status Pill -->
-            <div class="relative" id="credit-wrapper">
-              <div
-                id="btn-credit"
-                class="flex items-center h-[34px] bg-transparent border border-[#d1d5db] rounded-full px-3 gap-2 hover:border-[#9ca3af] transition-all cursor-pointer group"
-              >
-                <div class="flex items-center gap-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="13"
-                    height="13"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
-                    class="text-[#111827]"
-                    ><path
-                      d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
-                    ></path></svg
-                  >
-                  <span
-                    class="text-[12px] font-bold text-[#111827] leading-none"
-                    >30</span
-                  >
-                </div>
-              </div>
-
-              <div
-                id="credit-dropdown"
-                class="hidden absolute top-full right-0 w-60 mt-2 bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-3 z-50"
-              >
-                <!-- Top Section -->
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-[14px] font-extrabold text-[#111827]"
-                    >Free</span
-                  >
-                  <button
-                    class="btn-upgrade-trigger px-3 py-1.5 rounded-lg bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
-                  >
-                    Upgrade
-                  </button>
-                </div>
-
-                <div class="h-[1px] w-full bg-[#f2f4f7] mb-3"></div>
-
-                <!-- Info Rows -->
-                <div class="flex flex-col gap-3 mb-3">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2.5">
-                      <i class="ti ti-sparkles text-[16px] text-[#111827]"></i>
-                      <span class="text-[13px] font-bold text-[#344054]"
-                        >Credits</span
-                      >
-                    </div>
-                    <span class="text-[13px] font-bold text-[#111827]">30</span>
-                  </div>
-                </div>
-
-                <div class="h-[1px] w-full bg-[#f2f4f7] mb-2"></div>
-
-                <!-- Usage Details -->
-                <button
-                  id="btn-nav-usage-details"
-                  class="w-full flex items-center justify-between py-1.5 text-[13px] font-bold text-[#111827] hover:opacity-70 transition-opacity"
-                >
-                  Usage details
-                  <i class="ti ti-chevron-right text-[13px] text-[#98a2b3]"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Profile Dropdown in Navbar -->
-            <div class="relative ml-1" id="profile-wrapper">
-              <button
-                id="btn-profile"
-                class="flex items-center gap-1 p-1 rounded-full hover:bg-[#f9fafb] transition-colors"
-              >
-                <div
-                  class="w-9 h-9 rounded-full bg-white border border-white overflow-hidden shrink-0"
-                >
-                  <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
-                    class="w-full h-full object-cover"
-                    alt="avatar"
-                  />
-                </div>
-              </button>
-
-              <div
-                id="profile-dropdown"
-                class="hidden absolute top-full right-0 w-64 mt-2 bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-1.5 z-50"
-              >
-                <!-- User Info Header -->
-                <div class="flex items-center gap-3 px-3 py-3 mb-[3px]">
-                  <div
-                    class="w-10 h-10 rounded-full bg-white border border-white overflow-hidden shrink-0"
-                  >
-                    <img
-                      src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
-                      class="w-full h-full object-cover"
-                      alt="avatar"
-                    />
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <p
-                      class="text-[13px] font-bold text-[#111827] truncate leading-tight"
-                    >
-                      Jane Cooper
-                    </p>
-                    <p class="text-[11px] text-[#98a2b3] truncate">
-                      jane@xeni.io
-                    </p>
-                  </div>
-
-                  <!-- Dark Mode Toggle Switch -->
-                  <div class="flex items-center">
-                    <button
-                      id="dark-mode-toggle"
-                      class="w-[42px] h-[22px] rounded-full bg-[#ebebef] border border-[#d1d5db] relative flex items-center p-0.5 cursor-pointer transition-all hover:border-[#9ca3af] group"
-                      aria-label="Toggle Dark Mode"
-                    >
-                      <div
-                        id="dark-mode-thumb"
-                        class="absolute left-0.5 w-[18px] h-[18px] rounded-full bg-white border border-[#d1d5db] shadow-sm flex items-center justify-center transition-all duration-300"
-                      >
-                        <i
-                          id="dark-mode-icon"
-                          class="ti ti-sun text-[10px] text-[#4b5563]"></i>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Plan & Credits Card -->
-                <div
-                  class="mx-1 mb-2 p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex flex-col gap-2 animate-shine"
-                >
-                  <div class="flex items-center justify-between">
-                    <span class="text-[14px] font-extrabold text-[#111827]"
-                      >Free</span
-                    >
-                    <button
-                      class="btn-upgrade-trigger px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
-                    >
-                      Upgrade
-                    </button>
-                  </div>
-
-                  <div
-                    class="h-[1px] w-full border-t border-dashed border-[#eaecf0]"
-                  >
-                  </div>
-
-                  <div
-                    class="flex items-center justify-between group/credit cursor-pointer"
-                  >
-                    <div class="flex items-center gap-2">
-                      <i class="ti ti-sparkles text-[14px] text-[#667085]"></i>
-                      <span class="text-[12px] font-bold text-[#344054]"
-                        >Credits</span
-                      >
-                      <i class="ti ti-help-circle text-[12px] text-[#98a2b3]"
-                      ></i>
-                    </div>
-                    <div class="flex items-center gap-1">
-                      <span class="text-[13px] font-bold text-[#344054]"
-                        >300</span
-                      >
-                      <i class="ti ti-chevron-right text-[11px] text-[#98a2b3]"
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Action Items -->
-                <button
-                  id="btn-nav-account"
-                  class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
-                >
-                  <i class="ti ti-user-circle text-[15px] text-[#98a2b3]"></i>
-                  Account
-                </button>
-                <div class="relative group/lang">
-                  <button
-                    class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer"
-                  >
-                    <div class="flex items-center gap-2.5">
-                      <i class="ti ti-world text-[15px] text-[#98a2b3]"></i>
-                      Language
-                    </div>
-                    <i class="ti ti-chevron-right text-[12px] text-[#98a2b3]"
-                    ></i>
-                  </button>
-
-                  <!-- Language Sub-menu (appears to the left) -->
-                  <div
-                    class="absolute right-full top-0 mr-1 w-36 bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-1 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all z-50 flex flex-col gap-0.5"
-                  >
-                    <button
-                      class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-bold text-[#111827] bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
-                    >
-                      English
-                      <i class="ti ti-check text-[14px] text-[#2563EB]"></i>
-                    </button>
-                    <button
-                      class="w-full flex items-center px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
-                    >
-                      Indonesia
-                    </button>
-                  </div>
-                </div>
-                <div class="h-[1px] w-full bg-[#eaecf0] my-0.5"></div>
-                <button
-                  id="btn-logout"
-                  class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#d92d20] hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                >
-                  <i class="ti ti-logout text-[15px]"></i>
-                  Log Out
-                </button>
-              </div>
-            </div>
-          </div>
+          <div class="flex items-center gap-3 pointer-events-auto"></div>
         </header>
 
         <!-- Content Area Wrapper -->
@@ -627,14 +567,22 @@ const pageIcon = currentPage.icon;
 
         // --- Manage Account Modal Triggers ---
         const btnNavAccount = document.getElementById("btn-nav-account");
-        const btnNavUsageDetails = document.getElementById("btn-nav-usage-details");
-        const upgradeButtons = document.querySelectorAll(".btn-upgrade-trigger");
+        const btnNavUsageDetails = document.getElementById(
+          "btn-nav-usage-details",
+        );
+        const upgradeButtons = document.querySelectorAll(
+          ".btn-upgrade-trigger",
+        );
 
         if (btnNavAccount) {
           btnNavAccount.addEventListener("click", (e) => {
             e.stopPropagation();
             if (profileDropdown) profileDropdown.classList.add("hidden");
-            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "profile" } }));
+            window.dispatchEvent(
+              new CustomEvent("open-manage-account", {
+                detail: { tab: "profile" },
+              }),
+            );
           });
         }
 
@@ -642,16 +590,24 @@ const pageIcon = currentPage.icon;
           btnNavUsageDetails.addEventListener("click", (e) => {
             e.stopPropagation();
             if (creditDropdown) creditDropdown.classList.add("hidden");
-            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "subscription" } }));
+            window.dispatchEvent(
+              new CustomEvent("open-manage-account", {
+                detail: { tab: "subscription" },
+              }),
+            );
           });
         }
 
-        upgradeButtons.forEach(btn => {
+        upgradeButtons.forEach((btn) => {
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
             if (profileDropdown) profileDropdown.classList.add("hidden");
             if (creditDropdown) creditDropdown.classList.add("hidden");
-            window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "subscription" } }));
+            window.dispatchEvent(
+              new CustomEvent("open-manage-account", {
+                detail: { tab: "subscription" },
+              }),
+            );
           });
         });
 

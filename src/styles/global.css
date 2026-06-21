@@ -92,22 +92,19 @@
 
   /* Custom Minimalist Scrollbar */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 12px !important; /* 7px actual thumb + 5px padding */
+    width: 6px !important;
+    height: 6px !important;
   }
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent !important;
-    margin: 8px 0 !important;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: transparent !important;
+    background: #e5e7eb !important;
     border-radius: 10px !important;
-    border-right: 5px solid transparent !important; /* This creates the 5px right gap */
-    background-clip: padding-box !important;
     transition: background 0.3s ease-in-out !important;
   }
-  .custom-scrollbar.is-scrolling::-webkit-scrollbar-thumb {
-    background: rgba(152, 162, 179, 0.35) !important;
-    background-clip: padding-box !important;
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #d1d5db !important;
   }
 }
 

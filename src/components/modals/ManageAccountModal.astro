@@ -61,6 +61,24 @@
             <i class="ti ti-credit-card text-[16px]"></i>
             Billing
           </button>
+          <!-- Affiliate Tab Button -->
+          <button
+            id="tab-btn-affiliate"
+            class="manage-account-tab-btn flex items-center gap-3 px-3 h-10 rounded-xl text-[13px] font-medium text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all cursor-pointer text-left w-full"
+            data-tab="affiliate"
+          >
+            <i class="ti ti-users text-[16px]"></i>
+            Affiliate
+          </button>
+          <!-- Feedback Tab Button -->
+          <button
+            id="tab-btn-feedback"
+            class="manage-account-tab-btn flex items-center gap-3 px-3 h-10 rounded-xl text-[13px] font-medium text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all cursor-pointer text-left w-full"
+            data-tab="feedback"
+          >
+            <i class="ti ti-message-dots text-[16px]"></i>
+            Feedback
+          </button>
         </div>
       </div>
     </aside>
@@ -244,6 +262,36 @@
           </div>
           <span class="text-[14px] font-bold text-[#111827]">Oops.</span>
           <p class="text-[12px] text-[#667085] mt-1">No transaction history found on your account.</p>
+        </div>
+      </section>
+
+      <!-- ══════════ AFFILIATE TAB CONTENT ══════════ -->
+      <section id="manage-account-tab-affiliate" class="manage-account-tab-section space-y-8 hidden">
+        <div>
+          <h3 class="text-[20px] font-bold text-[#111827] tracking-tight">Affiliate Program</h3>
+          <p class="text-[13px] text-[#667085] mt-1">Manage your affiliate links and earnings.</p>
+        </div>
+        <div class="h-64 border-2 border-dashed border-[#eaecf0] rounded-3xl flex flex-col items-center justify-center p-6 bg-[#F9FAFB]">
+          <div class="w-12 h-12 rounded-full bg-white border border-[#eaecf0] flex items-center justify-center text-[#98a2b3] shadow-sm mb-3">
+            <i class="ti ti-users text-[22px]"></i>
+          </div>
+          <span class="text-[14px] font-bold text-[#111827]">Affiliate Dashboard Coming Soon.</span>
+          <p class="text-[12px] text-[#667085] mt-1">We are currently building this feature.</p>
+        </div>
+      </section>
+
+      <!-- ══════════ FEEDBACK TAB CONTENT ══════════ -->
+      <section id="manage-account-tab-feedback" class="manage-account-tab-section space-y-8 hidden">
+        <div>
+          <h3 class="text-[20px] font-bold text-[#111827] tracking-tight">Feedback</h3>
+          <p class="text-[13px] text-[#667085] mt-1">Share your thoughts and suggestions with us.</p>
+        </div>
+        <div class="h-64 border-2 border-dashed border-[#eaecf0] rounded-3xl flex flex-col items-center justify-center p-6 bg-[#F9FAFB]">
+          <div class="w-12 h-12 rounded-full bg-white border border-[#eaecf0] flex items-center justify-center text-[#98a2b3] shadow-sm mb-3">
+            <i class="ti ti-message-dots text-[22px]"></i>
+          </div>
+          <span class="text-[14px] font-bold text-[#111827]">We value your feedback.</span>
+          <p class="text-[12px] text-[#667085] mt-1">Feature request form will be available here.</p>
         </div>
       </section>
 

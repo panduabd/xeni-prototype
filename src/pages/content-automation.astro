@@ -1958,51 +1958,7 @@ const dnaList = [
                 </div>
               </div>
 
-              <!-- Engagement Settings Card (Preview) -->
-              <div
-                id="preview-engagement-action"
-                class="hidden w-full flex items-center justify-between p-2.5 rounded-xl border border-[#eaecf0] bg-white transition-all"
-              >
-                <div class="flex items-center gap-2">
-                  <div
-                    class="w-7 h-7 rounded-lg bg-[#F3F4F6] flex items-center justify-center"
-                  >
-                    <i class="ti ti-message-bolt text-[14px] text-[#111827]"
-                    ></i>
-                  </div>
-                  <div>
-                    <p
-                      class="text-[11px] font-bold text-[#111827] flex items-center gap-1"
-                    >
-                      Engagement Settings
-                      <span
-                        id="preview-engagement-indicator"
-                        class="hidden w-1.5 h-1.5 rounded-full bg-[#22C55E]"
-                      ></span>
-                    </p>
-                    <p class="text-[9px] text-[#667085]">
-                      Auto reply, like, DM, and more
-                    </p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-2 flex-shrink-0">
-                  <label class="flex items-center gap-1.5 cursor-pointer">
-                    <span class="text-[11px] font-medium text-[#475467]">Active</span>
-                    <div class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" class="sr-only peer" />
-                      <div class="w-7 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1.5px] after:start-[1.5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-[#111827]"></div>
-                    </div>
-                  </label>
-                  <div class="w-px h-3 bg-[#eaecf0]"></div>
-                  <button
-                    type="button"
-                    onclick="openEngagementFromPreview(); return false;"
-                    class="px-2 h-6 rounded-lg border border-[#D0D5DD] bg-white text-[#344054] text-[10px] font-semibold hover:bg-[#F9FAFB] transition-all cursor-pointer"
-                  >
-                    Detail
-                  </button>
-                </div>
-              </div>
+              <!-- Engagement Settings Card (Preview) Removed -->
             </div>
 
             <!-- Performance Tab (hidden by default) -->
@@ -2621,14 +2577,24 @@ const dnaList = [
                       <div class="px-3 py-2 bg-[#F9FAFB] text-[10px] font-bold text-[#667085] uppercase tracking-wider">Accounts</div>
                       <div class="max-h-48 overflow-y-auto" id="manual-accounts-list">
                         <label class="flex items-center gap-2 p-2.5 hover:bg-[#F3F4F6] rounded-lg cursor-pointer transition-colors">
+                          <input type="checkbox" value="fb-fresh" class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb" />
+                          <i class="ti ti-brand-facebook text-[#1877F2] text-[16px]"></i>
+                          <span class="text-[13px] font-medium text-[#344054]">Fresh Juice Company</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 hover:bg-[#F3F4F6] rounded-lg cursor-pointer transition-colors">
+                          <input type="checkbox" value="th-fresh" class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb" />
+                          <i class="ti ti-brand-threads text-[#000000] text-[16px]"></i>
+                          <span class="text-[13px] font-medium text-[#344054]">@freshjuice.threads</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 hover:bg-[#F3F4F6] rounded-lg cursor-pointer transition-colors">
                           <input type="checkbox" value="insta-fresh" class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb" />
                           <i class="ti ti-brand-instagram text-[#E1306C] text-[16px]"></i>
                           <span class="text-[13px] font-medium text-[#344054]">@freshjuice.official</span>
                         </label>
                         <label class="flex items-center gap-2 p-2.5 hover:bg-[#F3F4F6] rounded-lg cursor-pointer transition-colors">
-                          <input type="checkbox" value="fb-fresh" class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb" />
-                          <i class="ti ti-brand-facebook text-[#1877F2] text-[16px]"></i>
-                          <span class="text-[13px] font-medium text-[#344054]">Fresh Juice Company</span>
+                          <input type="checkbox" value="tt-fresh" class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb" />
+                          <i class="ti ti-brand-tiktok text-[#000000] text-[16px]"></i>
+                          <span class="text-[13px] font-medium text-[#344054]">@freshjuice</span>
                         </label>
                       </div>
                     </div>
@@ -3138,9 +3104,14 @@ const dnaList = [
     recurring: "once",
     repeatFor: 3,
     scheduleMode: "monthly", // "monthly" | "weekly"
-    currentWeekDate: new Date(2026, 4, 5), // Current week start for weekly view
+    currentWeekDate: (() => {
+      const d = new Date();
+      d.setDate(d.getDate() - d.getDay());
+      d.setHours(0, 0, 0, 0);
+      return d;
+    })(), // Current week start for weekly view
   };
-  let currentCalendarDate = new Date(2026, 4, 1); // May 2026
+  let currentCalendarDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1); // Current month
   let activePopoverDate = null;
   let editingAutomationId = null;
 
@@ -3198,13 +3169,23 @@ const dnaList = [
     customAssignments: {},
   };
 
+  // Helper to always compute the start of a week (Sunday)
+  function getStartOfWeek(date) {
+    const d = new Date(date);
+    const day = d.getDay();
+    const diff = d.getDate() - day;
+    const result = new Date(d.setDate(diff));
+    result.setHours(0, 0, 0, 0);
+    return result;
+  }
+
   // Scheduled tab state
   let scheduledFilter = "upcoming";
   let scheduledStatusFilter = "all";
   let scheduledSearchQuery = "";
   let scheduledViewMode = "monthly"; // list | monthly | weekly
-  let scheduledMonthDate = new Date(2026, 4, 1); // May 2026
-  let scheduledWeekDate = new Date(2026, 4, 5); // Current week start
+  let scheduledMonthDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1); // Current month
+  let scheduledWeekDate = getStartOfWeek(new Date()); // Current week start
 
   // Mock captions
   const MOCK_CAPTIONS = [
@@ -3557,7 +3538,7 @@ const dnaList = [
   function createMockGenerated() {
     const now = new Date();
     const brands = ["Fresh Juice Co.", "Tech Startup", "Luxe Beauty"];
-    const platforms = ["Instagram", "LinkedIn", "TikTok"];
+    const platforms = ["Facebook", "Threads", "Instagram", "TikTok"];
     const types = ["Single Post", "Carousel", "Story", "Ad Creatives"];
     const titles = [
       "Summer Promo Collection",
@@ -3608,8 +3589,8 @@ const dnaList = [
       }
     }
 
-    // Create 15 other items (approved, rejected, scheduled, published)
-    for (let i = 0; i < 15; i++) {
+    // Create 35 other items (approved, rejected, scheduled, published) to populate the calendar beautifully
+    for (let i = 0; i < 35; i++) {
       const statusPool = [
         "approved",
         "approved",
@@ -3622,7 +3603,7 @@ const dnaList = [
       const status = statusPool[i % statusPool.length];
       const type = types[i % 4];
       const createdAt = new Date(
-        now.getTime() - (i + 1) * 12 * 60 * 60 * 1000,
+        now.getTime() - (i + 1) * 8 * 60 * 60 * 1000,
       ).toISOString();
 
       // Published items get engagement data
@@ -3640,6 +3621,26 @@ const dnaList = [
         ? (((likes + comments + shares + saves) / reach) * 100).toFixed(1)
         : 0;
 
+      // Distribute dates throughout the current month dynamically
+      const targetYear = now.getFullYear();
+      const targetMonth = now.getMonth();
+      const currentDay = now.getDate();
+
+      let itemDay;
+      if (status === "scheduled") {
+        // Scheduled items are in the FUTURE: from tomorrow up to 10 days out
+        itemDay = currentDay + 1 + (i % 10);
+      } else if (status === "published") {
+        // Published items are in the PAST: from yesterday back to 10 days ago (capped at day 1)
+        itemDay = Math.max(1, currentDay - 1 - (i % 10));
+      } else {
+        // Other items spread throughout the month
+        itemDay = 1 + (i % 28);
+      }
+
+      const scheduledHour = 9 + (i % 8); // 9:00 to 16:00
+      const scheduledMinute = (i * 15) % 60; // 0, 15, 30, 45
+
       items.push({
         id: `gen_${status}_${i}`,
         title: titles[i % titles.length],
@@ -3647,19 +3648,19 @@ const dnaList = [
         contentType: type,
         platform: platforms[i % 3],
         caption: MOCK_CAPTIONS[i % 4],
-        pillar: "Educational",
+        pillar: i % 2 === 0 ? "Educational" : "Promo",
         carouselSlides: type === "Carousel" ? 3 : 1,
         status,
         automationName: "General Campaign",
         createdAt,
         scheduledAt:
           status === "scheduled"
-            ? new Date(2026, 4, 10 + (i % 10), 9, 0).toISOString()
+            ? new Date(targetYear, targetMonth, itemDay, scheduledHour, scheduledMinute).toISOString()
             : status === "published"
-              ? new Date(2026, 4, 12 + (i % 5), 9, 0).toISOString()
+              ? new Date(targetYear, targetMonth, itemDay, scheduledHour, scheduledMinute).toISOString()
               : null,
         publishedAt: isPublished
-          ? new Date(2026, 4, 12 + (i % 5), 9, 0).toISOString()
+          ? new Date(targetYear, targetMonth, itemDay, scheduledHour, scheduledMinute).toISOString()
           : null,
         views: reach,
         likes,
@@ -4010,11 +4011,10 @@ const dnaList = [
     });
 
     const platformIconMap = {
+      Facebook: "ti-brand-facebook",
+      Threads: "ti-brand-threads",
       Instagram: "ti-brand-instagram",
       TikTok: "ti-brand-tiktok",
-      LinkedIn: "ti-brand-linkedin",
-      Facebook: "ti-brand-facebook",
-      X: "ti-brand-x",
     };
 
     const contentTypeIconMap = {
@@ -4175,17 +4175,10 @@ const dnaList = [
             ${
               hasItems
                 ? (() => {
-                    const hasPublished = dayItems.some(
-                      (i) => i.status === "published",
-                    );
                     const allPublished = dayItems.every(
                       (i) => i.status === "published",
                     );
-                    const dotColor = allPublished
-                      ? "bg-[#9CA3AF]"
-                      : hasPublished
-                        ? "bg-[#8B5CF6]"
-                        : "bg-[#8B5CF6]";
+                    const dotColor = allPublished ? "bg-[#9CA3AF]" : "bg-[#2563EB]";
                     return `<span class="w-2 h-2 rounded-full ${dotColor}"></span>`;
                   })()
                 : ""
@@ -4196,7 +4189,7 @@ const dnaList = [
             .map((item) => {
               const isPublished = item.status === "published";
               return `
-            <div class="px-1.5 py-0.5 rounded-md ${isPublished ? "bg-[#F3F4F6] text-[#667085]" : "bg-[#F5F3FF] text-[#7C3AED]"} text-[9px] font-medium truncate leading-tight">
+            <div class="px-1.5 py-0.5 rounded-md ${isPublished ? "bg-[#F3F4F6] text-[#667085] border border-transparent" : "bg-[#EFF6FF] text-[#2563EB] border border-[#DBEAFE]"} text-[9px] font-medium truncate leading-tight">
               ${escapeHtml(item.title)}
             </div>
           `;
@@ -4212,9 +4205,7 @@ const dnaList = [
 
   function renderScheduledWeekly(scheduled) {
     // Get the start of the week (Sunday)
-    const weekStart = new Date(scheduledWeekDate);
-    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
-    weekStart.setHours(0, 0, 0, 0);
+    const weekStart = getStartOfWeek(scheduledWeekDate);
 
     const weekEnd = new Date(weekStart);
     weekEnd.setDate(weekEnd.getDate() + 6);
@@ -4283,8 +4274,11 @@ const dnaList = [
                             : item.scheduledAt,
                         ) < new Date();
                       const isPublished = item.status === "published";
+                      const cardStyle = isPublished 
+                        ? "bg-[#F3F4F6] border-[#D1D5DB]" 
+                        : "bg-[#EFF6FF] border-[#DBEAFE]";
                       return `
-                <div class="group p-2 rounded-2xl ${isPublished ? "bg-[#F3F4F6] border-[#D1D5DB]" : "bg-white border-[#eaecf0]"} border hover:border-[#111827] hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-all cursor-pointer ${isItemPast ? "opacity-60 grayscale-[0.3]" : ""}" onclick="openPreviewModal('${item.id}')">
+                <div class="group p-2 rounded-2xl ${cardStyle} border hover:border-[#111827] hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-all cursor-pointer ${isItemPast ? "opacity-60 grayscale-[0.3]" : ""}" onclick="openPreviewModal('${item.id}')">
                   <!-- Unified Plain Dark Gray Image Thumbnail -->
                   <div class="w-full ${item.contentType === "Story" ? "aspect-[9/16]" : "aspect-[3/4]"} bg-[#1f2937] rounded-xl flex items-center justify-center mb-2 relative overflow-hidden shadow-inner">
                     <span class="absolute bottom-1.5 right-1.5 px-1.5 h-4 rounded-full bg-black/40 backdrop-blur-sm text-[8px] font-bold text-white tracking-wider flex items-center">
@@ -6645,10 +6639,15 @@ const dnaList = [
       recurring: "once",
       repeatFor: 3,
       scheduleMode: "monthly",
-      currentWeekDate: new Date(2026, 4, 5),
+      currentWeekDate: (() => {
+        const d = new Date();
+        d.setDate(d.getDate() - d.getDay());
+        d.setHours(0, 0, 0, 0);
+        return d;
+      })(),
     };
     currentStep = 1;
-    currentCalendarDate = new Date(2026, 4, 1);
+    currentCalendarDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 
     // Reset inputs
     els.inputName.value = "";
@@ -7273,13 +7272,17 @@ const dnaList = [
     // ── Scheduled Tab: Weekly Calendar Navigation ──
     if (els.schedCalWeekPrev) {
       els.schedCalWeekPrev.addEventListener("click", () => {
-        scheduledWeekDate.setDate(scheduledWeekDate.getDate() - 7);
+        const start = getStartOfWeek(scheduledWeekDate);
+        start.setDate(start.getDate() - 7);
+        scheduledWeekDate = start;
         renderScheduled();
       });
     }
     if (els.schedCalWeekNext) {
       els.schedCalWeekNext.addEventListener("click", () => {
-        scheduledWeekDate.setDate(scheduledWeekDate.getDate() + 7);
+        const start = getStartOfWeek(scheduledWeekDate);
+        start.setDate(start.getDate() + 7);
+        scheduledWeekDate = start;
         renderScheduled();
       });
     }
@@ -7989,12 +7992,12 @@ const dnaList = [
         selected.push(cb.value);
         // create visual pill
         const labelTxt = cb.nextElementSibling.nextElementSibling.innerText;
-        const iconClass = cb.nextElementSibling.classList.contains("ti-brand-instagram") ? "ti-brand-instagram text-[#E1306C]" : "ti-brand-facebook text-[#1877F2]";
+        const iconClass = cb.nextElementSibling.className;
         
         const pill = document.createElement("div");
         pill.className = "inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#D0D5DD] rounded-full shadow-sm text-[12px] font-bold text-[#344054] hover:border-[#98a2b3] transition-all animate-in zoom-in-95 duration-150 group cursor-default";
         pill.innerHTML = `
-          <i class="ti ${iconClass} text-[13px]"></i> 
+          <i class="${iconClass} !text-[13px]"></i> 
           ${labelTxt}
           <button type="button" class="ml-0.5 w-4 h-4 rounded-full flex items-center justify-center text-[#98a2b3] hover:bg-[#F3F4F6] hover:text-[#EF4444] transition-colors cursor-pointer">
              <i class="ti ti-x text-[10px]"></i>
