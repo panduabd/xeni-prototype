@@ -44,7 +44,7 @@
 
     <!-- Header & Action Row -->
     <div
-      class="px-8 pt-8 pb-6 flex flex-col gap-5 border-b border-[#eaecf0] shrink-0"
+      class="px-8 pt-8 pb-6 flex flex-col gap-5 shrink-0"
     >
       <!-- Title Row -->
       <div class="flex items-center justify-between">
@@ -85,7 +85,7 @@
             class="hidden absolute left-0 top-full mt-1.5 w-[160px] bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-top-1 duration-200 flex flex-col gap-0.5 max-h-[220px] overflow-y-auto custom-scrollbar"
           >
             <button
-              class="ref-biz-option w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-[12px] font-bold text-[#111827] bg-gray-50 cursor-pointer"
+              class="ref-biz-option w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-[12px] font-medium text-[#111827] bg-gray-50 cursor-pointer"
               data-value="All Business"
             >
               All Business
@@ -119,7 +119,7 @@
             class="hidden absolute left-0 top-full mt-1.5 w-[160px] bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-top-1 duration-200 flex flex-col gap-0.5"
           >
             <button
-              class="ref-filter-option w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-[12px] font-bold text-[#111827] bg-gray-50 cursor-pointer"
+              class="ref-filter-option w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-[12px] font-medium text-[#111827] bg-gray-50 cursor-pointer"
               data-value="Latest"
             >
               Latest
@@ -155,11 +155,11 @@
               <div class="aspect-square rounded-2xl bg-[#F3F4F6] border border-[#eaecf0] transition-all group-hover:border-[#d0d5dd] relative overflow-hidden">
                 <div class="selected-overlay absolute inset-0 bg-[#2563EB]/10 border-2 border-[#2563EB] hidden flex items-center justify-center rounded-2xl">
                   <div class="w-6 h-6 rounded-full bg-[#2563EB] flex items-center justify-center shadow-lg">
-                    <i class="ti ti-check text-white text-[14px]" />
+                    <i class="ti ti-check text-white text-[14px]"></i>
                   </div>
                 </div>
               </div>
-              <div class="h-3 w-2/3 bg-[#F3F4F6] rounded-full" />
+              <div class="h-3 w-2/3 bg-[#F3F4F6] rounded-full"></div>
             </button>
           ))
         }
@@ -172,12 +172,12 @@
     >
       <button
         id="cancel-references"
-        class="pointer-events-auto btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+        class="pointer-events-auto btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
       >
         Cancel
       </button>
       <button
-        class="pointer-events-auto btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer"
+        class="pointer-events-auto btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-medium hover:bg-black transition-all cursor-pointer"
       >
         Submit
       </button>

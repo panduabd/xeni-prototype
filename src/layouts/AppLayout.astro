@@ -75,12 +75,20 @@ const pageIcon = currentPage.icon;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
     />
     <style is:global>
       @keyframes shine-sweep {
@@ -261,7 +269,7 @@ const pageIcon = currentPage.icon;
               <span class="text-[14px] font-extrabold text-[#111827]">Free</span
               >
               <button
-                class="btn-upgrade-trigger px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
+                class="btn-upgrade-trigger px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer"
                 onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))"
                 >Upgrade</button
               >
@@ -275,7 +283,19 @@ const pageIcon = currentPage.icon;
               onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))"
             >
               <div class="flex items-center gap-2">
-                <i class="ti ti-sparkles text-[14px] text-[#667085]"></i>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="text-[#667085]"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z"
+                    fill="currentColor"></path>
+                </svg>
                 <span class="text-[12px] font-bold text-[#344054]">Credits</span
                 >
                 <i class="ti ti-help-circle text-[12px] text-[#98a2b3]"></i>
@@ -403,7 +423,7 @@ const pageIcon = currentPage.icon;
                   class="absolute left-full top-0 ml-1 w-36 bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-1 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all z-50 flex flex-col gap-0.5"
                 >
                   <button
-                    class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-bold text-[#111827] bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
+                    class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#111827] bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
                   >
                     English
                     <i class="ti ti-check text-[14px] text-[#2563EB]"></i>
@@ -676,8 +696,406 @@ const pageIcon = currentPage.icon;
             window.location.href = "/";
           });
         }
+
+        // --- Global Tooltip Manager ---
+        function initGlobalTooltips() {
+          let tooltip = document.getElementById("xeni-global-tooltip");
+          if (!tooltip) {
+            tooltip = document.createElement("div");
+            tooltip.id = "xeni-global-tooltip";
+            document.body.appendChild(tooltip);
+          }
+
+          let activeTarget = null;
+
+          function hideTooltip() {
+            activeTarget = null;
+            if (tooltip) tooltip.classList.remove("show");
+          }
+
+          function showTooltip(el) {
+            const text =
+              el.getAttribute("data-tooltip") || el.getAttribute("title");
+            if (!text || text.trim() === "") return;
+
+            if (el.hasAttribute("title")) {
+              el.setAttribute("data-tooltip", text);
+              el.removeAttribute("title");
+            }
+
+            activeTarget = el;
+            tooltip.textContent = text;
+
+            const rect = el.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const pos = el.getAttribute("data-tooltip-pos") || "top";
+
+            let top = 0;
+            let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
+
+            if (pos === "bottom") {
+              top = rect.bottom + 6;
+            } else if (pos === "left") {
+              left = rect.left - tooltipRect.width - 6;
+              top = rect.top + rect.height / 2 - tooltipRect.height / 2;
+            } else if (pos === "right") {
+              left = rect.right + 6;
+              top = rect.top + rect.height / 2 - tooltipRect.height / 2;
+            } else {
+              top = rect.top - tooltipRect.height - 6;
+              if (top < 8) {
+                top = rect.bottom + 6;
+              }
+            }
+
+            left = Math.max(
+              8,
+              Math.min(window.innerWidth - tooltipRect.width - 8, left),
+            );
+
+            tooltip.style.top = `${top}px`;
+            tooltip.style.left = `${left}px`;
+            tooltip.classList.add("show");
+          }
+
+          document.addEventListener(
+            "mouseover",
+            (e) => {
+              const target = e.target;
+              if (!target || !(target instanceof Element)) return;
+              const el = target.closest("[data-tooltip], [title]");
+              if (!el) {
+                if (activeTarget) hideTooltip();
+                return;
+              }
+              if (el === activeTarget) return;
+              showTooltip(el);
+            },
+            true,
+          );
+
+          document.addEventListener(
+            "mouseout",
+            (e) => {
+              if (
+                activeTarget &&
+                (!e.relatedTarget || !activeTarget.contains(e.relatedTarget))
+              ) {
+                hideTooltip();
+              }
+            },
+            true,
+          );
+
+          document.addEventListener(
+            "mousedown",
+            () => {
+              hideTooltip();
+            },
+            true,
+          );
+
+          window.addEventListener(
+            "scroll",
+            () => {
+              hideTooltip();
+            },
+            { passive: true },
+          );
+        }
+
+        initGlobalTooltips();
+      });
+
+      // ══════════════════════════════════════════════
+      // EXACT CANVAS REUI ALERT SYSTEM (Bottom-Right)
+      // ══════════════════════════════════════════════
+      let globalToastTimeout;
+
+      function showToast(titleOrMsg, optDescOrType, optType) {
+        const toast = document.getElementById("toast");
+        if (!toast) return;
+
+        const toastIconContainer = document.getElementById(
+          "toast-icon-container",
+        );
+        const toastTitle = document.getElementById("toast-title");
+        const toastCloseBtn = document.getElementById("toast-close-btn");
+
+        let message = titleOrMsg;
+        let type = "success";
+
+        if (typeof titleOrMsg === "object" && titleOrMsg !== null) {
+          message = titleOrMsg.message || titleOrMsg.title || "";
+          type = titleOrMsg.variant || titleOrMsg.type || "success";
+        } else {
+          if (typeof optDescOrType === "string") {
+            if (
+              optDescOrType === "success" ||
+              optDescOrType === "error" ||
+              optDescOrType === "failed" ||
+              optDescOrType === "destructive" ||
+              optDescOrType === "warning" ||
+              optDescOrType === "info"
+            ) {
+              type =
+                optDescOrType === "failed" || optDescOrType === "destructive"
+                  ? "error"
+                  : optDescOrType;
+            } else if (
+              optType === "error" ||
+              optType === "failed" ||
+              optType === "destructive" ||
+              optType === "warning" ||
+              optType === "info"
+            ) {
+              type =
+                optType === "failed" || optType === "destructive"
+                  ? "error"
+                  : optType;
+            }
+          }
+        }
+
+        if (type === "destructive") type = "error";
+
+        // Auto-detect error or warning from message
+        if (type !== "error" && type !== "warning" && type !== "info") {
+          const lower = `${message || ""} ${optDescOrType || ""}`.toLowerCase();
+          if (
+            lower.includes("fail") ||
+            lower.includes("error") ||
+            lower.includes("gagal") ||
+            lower.includes("delete") ||
+            lower.includes("hapus") ||
+            lower.includes("permanently")
+          ) {
+            type = "error";
+          } else if (
+            lower.includes("pause") ||
+            lower.includes("warn") ||
+            lower.includes("required") ||
+            lower.includes("perhatian") ||
+            lower.includes("peringatan") ||
+            lower.includes("minimal")
+          ) {
+            type = "warning";
+          }
+        }
+
+        // Apply Exact Canvas Alert Styling
+        if (type === "error") {
+          // ReUI c-alert-8 variant="destructive"
+          toast.className =
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(239,68,68,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-red-500/30 bg-red-50/95 text-red-950 backdrop-blur-sm select-none";
+          if (toastIconContainer) {
+            toastIconContainer.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            `;
+          }
+          if (toastTitle) {
+            toastTitle.className =
+              "text-[13px] font-medium tracking-tight text-red-950 leading-none whitespace-nowrap";
+            toastTitle.textContent = message;
+          }
+          if (toastCloseBtn) {
+            toastCloseBtn.className =
+              "text-red-700/60 hover:text-red-950 hover:bg-red-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+          }
+        } else if (type === "warning") {
+          // ReUI variant="warning"
+          toast.className =
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-amber-500/30 bg-amber-50/95 text-amber-950 backdrop-blur-sm select-none";
+          if (toastIconContainer) {
+            toastIconContainer.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            `;
+          }
+          if (toastTitle) {
+            toastTitle.className =
+              "text-[13px] font-medium tracking-tight text-amber-950 leading-none whitespace-nowrap";
+            toastTitle.textContent = message;
+          }
+          if (toastCloseBtn) {
+            toastCloseBtn.className =
+              "text-amber-700/60 hover:text-amber-950 hover:bg-amber-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+          }
+        } else if (type === "info") {
+          // ReUI variant="info"
+          toast.className =
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(59,130,246,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-blue-500/30 bg-blue-50/95 text-blue-950 backdrop-blur-sm select-none";
+          if (toastIconContainer) {
+            toastIconContainer.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            `;
+          }
+          if (toastTitle) {
+            toastTitle.className =
+              "text-[13px] font-medium tracking-tight text-blue-950 leading-none whitespace-nowrap";
+            toastTitle.textContent = message;
+          }
+          if (toastCloseBtn) {
+            toastCloseBtn.className =
+              "text-blue-700/60 hover:text-blue-950 hover:bg-blue-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+          }
+        } else {
+          // ReUI c-alert-6 variant="success"
+          toast.className =
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 text-emerald-950 backdrop-blur-sm select-none";
+          if (toastIconContainer) {
+            toastIconContainer.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            `;
+          }
+          if (toastTitle) {
+            toastTitle.className =
+              "text-[13px] font-medium tracking-tight text-emerald-950 leading-none whitespace-nowrap";
+            toastTitle.textContent = message;
+          }
+          if (toastCloseBtn) {
+            toastCloseBtn.className =
+              "text-emerald-700/60 hover:text-emerald-950 hover:bg-emerald-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+          }
+        }
+
+        toast.classList.remove(
+          "translate-y-12",
+          "opacity-0",
+          "pointer-events-none",
+        );
+        toast.classList.add(
+          "translate-y-0",
+          "opacity-100",
+          "pointer-events-auto",
+        );
+
+        clearTimeout(globalToastTimeout);
+        globalToastTimeout = setTimeout(() => {
+          toast.classList.add(
+            "translate-y-12",
+            "opacity-0",
+            "pointer-events-none",
+          );
+          toast.classList.remove(
+            "translate-y-0",
+            "opacity-100",
+            "pointer-events-auto",
+          );
+        }, 3000);
+      }
+
+      window.showToast = showToast;
+      window.showAlert = function (options) {
+        if (typeof options === "string") {
+          showToast(options);
+        } else if (typeof options === "object" && options !== null) {
+          showToast(
+            options.message || options.title || "",
+            options.variant || "success",
+          );
+        }
+      };
+
+      // Polyfill window.alert to show the same alert
+      window.alert = function (msg) {
+        window.showToast(String(msg), "warning");
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const closeBtn = document.getElementById("toast-close-btn");
+        if (closeBtn) {
+          closeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const toast = document.getElementById("toast");
+            if (toast) {
+              clearTimeout(globalToastTimeout);
+              toast.classList.add(
+                "translate-y-12",
+                "opacity-0",
+                "pointer-events-none",
+              );
+              toast.classList.remove(
+                "translate-y-0",
+                "opacity-100",
+                "pointer-events-auto",
+              );
+            }
+          });
+        }
       });
     </script>
+
+    <!-- EXACT CANVAS-STYLE REUI / SHADCN ALERT NOTIFICATION (Bottom-Right) -->
+    <div
+      id="toast"
+      role="alert"
+      data-slot="alert"
+      class="fixed bottom-6 right-6 translate-y-12 opacity-0 pointer-events-none transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 text-emerald-950 backdrop-blur-sm select-none"
+    >
+      <div
+        id="toast-icon-container"
+        data-slot="alert-icon"
+        class="flex items-center justify-center shrink-0"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="text-emerald-600"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m9 12 2 2 4-4"></path>
+        </svg>
+      </div>
+      <span
+        id="toast-title"
+        data-slot="alert-title"
+        class="text-[13px] font-medium tracking-tight text-emerald-950 leading-none whitespace-nowrap"
+        >Success! All good</span
+      >
+      <button
+        id="toast-close-btn"
+        class="text-emerald-700/60 hover:text-emerald-950 hover:bg-emerald-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5"
+        aria-label="Close"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+
     <ManageAccountModal />
     <GetCreditsModal />
   </body>

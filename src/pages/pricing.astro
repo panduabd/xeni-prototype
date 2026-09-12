@@ -60,9 +60,9 @@ const pricingContext = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pricing | Xeni</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
   </head>
   <body class="bg-[#F8F9FB] text-[#111827] font-sans antialiased select-none">
@@ -93,7 +93,7 @@ const pricingContext = {
             <div id="pricing-switch-container" class="relative bg-gray-200 rounded-full p-1 flex items-center w-[320px] cursor-pointer">
                <div id="active-slider" class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-white shadow-sm rounded-full transition-transform duration-300 ease-out z-0"></div>
                
-               <button id="btn-monthly" class="relative flex-1 py-2 text-[13px] font-bold text-[#111827] z-10 transition-colors text-center font-geist">
+               <button id="btn-monthly" class="relative flex-1 py-2 text-[13px] font-medium text-[#111827] z-10 transition-colors text-center font-geist">
                   Monthly
                </button>
                <button id="btn-yearly" class="relative flex-1 py-2 text-[13px] font-medium text-gray-500 z-10 transition-colors text-center flex items-center justify-center gap-2 font-geist">
@@ -199,6 +199,93 @@ const pricingContext = {
 
          </div>
       </div>
+
+      <!-- BUY CREDIT PACKS ADD-ON SECTION -->
+      <section class="max-w-4xl mx-auto px-6 mb-24 md:mb-28">
+         <div class="bg-white border border-gray-200 rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.01)]">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-gray-200">
+               <div>
+                  <span class="text-[11px] font-semibold text-[#667085] uppercase tracking-wider block mb-1">Need more credits?</span>
+                  <h3 class="text-[24px] md:text-[28px] font-semibold text-[#111827] tracking-tight">Buy Credit Packs</h3>
+                  <p class="text-[13px] text-[#667085] font-medium mt-1 max-w-xl">
+                     Top-up kuota generasi kapan pun Anda butuhkan. Credit Pack adalah pembelian kuota satu kali (one-time add-on), bukan paket langganan.
+                  </p>
+               </div>
+               <div class="shrink-0 self-start md:self-auto">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11.5px] font-medium bg-gray-100 text-[#374151]">
+                     <i class="ti ti-clock-check text-[14px]"></i> Masa aktif 6 bulan
+                  </span>
+               </div>
+            </div>
+
+            <!-- Packs Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
+               <!-- 50 Credits -->
+               <div class="p-5 rounded-2xl border border-gray-200 bg-[#F8F9FB] flex flex-col justify-between hover:border-[#111827] transition-all">
+                  <div>
+                     <span class="text-[11px] font-medium text-[#667085] uppercase tracking-wider block">50 Credits</span>
+                     <p class="text-[26px] font-semibold text-[#111827] mt-2 leading-none">Rp69K</p>
+                     <div class="mt-2 mb-1">
+                        <span class="inline-flex items-center gap-1 text-[11px] text-[#344054] bg-white border border-gray-200 px-2.5 py-0.5 rounded-md font-medium">
+                           <i class="ti ti-sparkles text-[12px] text-[#667085]"></i> ±50x generate design
+                        </span>
+                     </div>
+                     <span class="text-[11.5px] text-[#667085] font-medium mt-1.5 block">Sekali beli · Rp 1.380/cr</span>
+                  </div>
+                  <div class="mt-5 pt-3 border-t border-gray-200">
+                     <span class="text-[11px] text-[#4b5563]">Tanpa biaya langganan</span>
+                  </div>
+               </div>
+
+               <!-- 150 Credits (Popular) -->
+               <div class="p-5 rounded-2xl border-2 border-[#111827] bg-white flex flex-col justify-between relative shadow-xs">
+                  <span class="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-[#111827] text-white text-[9.5px] font-medium tracking-tight">Populer</span>
+                  <div>
+                     <span class="text-[11px] font-medium text-[#111827] uppercase tracking-wider block">150 Credits</span>
+                     <div class="flex items-baseline gap-2 mt-2">
+                        <p class="text-[26px] font-semibold text-[#111827] leading-none">Rp179K</p>
+                        <span class="text-[10px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded font-medium">Hemat 13%</span>
+                     </div>
+                     <div class="mt-2 mb-1">
+                        <span class="inline-flex items-center gap-1 text-[11px] text-[#111827] bg-gray-50 border border-gray-200 px-2.5 py-0.5 rounded-md font-medium">
+                           <i class="ti ti-sparkles text-[12px] text-[#111827]"></i> ±150x generate design
+                        </span>
+                     </div>
+                     <span class="text-[11.5px] text-[#667085] font-medium mt-1.5 block">Sekali beli · Rp 1.193/cr</span>
+                  </div>
+                  <div class="mt-5 pt-3 border-t border-gray-200">
+                     <span class="text-[11px] text-[#4b5563]">Paling sering dipilih</span>
+                  </div>
+               </div>
+
+               <!-- 500 Credits (Best Value) -->
+               <div class="p-5 rounded-2xl border border-gray-200 bg-[#F8F9FB] flex flex-col justify-between hover:border-[#111827] transition-all">
+                  <div>
+                     <span class="text-[11px] font-medium text-[#667085] uppercase tracking-wider block">500 Credits</span>
+                     <div class="flex items-baseline gap-2 mt-2">
+                        <p class="text-[26px] font-semibold text-[#111827] leading-none">Rp549K</p>
+                        <span class="text-[10px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded font-medium">Paling Hemat</span>
+                     </div>
+                     <div class="mt-2 mb-1">
+                        <span class="inline-flex items-center gap-1 text-[11px] text-[#344054] bg-white border border-gray-200 px-2.5 py-0.5 rounded-md font-medium">
+                           <i class="ti ti-sparkles text-[12px] text-[#667085]"></i> ±500x generate design
+                        </span>
+                     </div>
+                     <span class="text-[11.5px] text-[#667085] font-medium mt-1.5 block">Sekali beli · Rp 1.098/cr</span>
+                  </div>
+                  <div class="mt-5 pt-3 border-t border-gray-200">
+                     <span class="text-[11px] text-[#4b5563]">Harga per kredit terbaik</span>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Footer note -->
+            <div class="mt-6 p-3 rounded-xl bg-gray-50 border border-gray-200/80 flex items-start gap-2.5 text-[11.5px] text-[#667085]">
+               <i class="ti ti-info-circle text-[15px] text-[#667085] shrink-0 mt-0.5"></i>
+               <span><strong class="text-[#111827] font-medium">Estimasi Pemakaian:</strong> 1 Credit ≈ 1 kali generate visual/desain AI standar (atau fitur edit seperti upscale & hapus background). Credit Pack adalah pembelian kuota add-on (bukan paket langganan).</span>
+            </div>
+         </div>
+      </section>
 
       <!-- MAINTAINING NATIVE XENI COMPARE TABLE -->
       <section class="max-w-5xl mx-auto px-6 mb-24 md:mb-32">

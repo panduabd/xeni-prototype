@@ -1,19 +1,19 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@heroui/styles/css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-dm-sans: "DM Sans", sans-serif;
-  --font-rubik: "Rubik", sans-serif;
-  --font-outfit: "Outfit", sans-serif;
-  --font-lexend: "Lexend", sans-serif;
-  --font-fraunces: "Fraunces", serif;
-  --font-geist: "Geist", sans-serif;
+  --font-sans: "Poppins", sans-serif;
+  --font-serif: "Poppins", sans-serif;
+  --font-dm-sans: "Poppins", sans-serif;
+  --font-rubik: "Poppins", sans-serif;
+  --font-outfit: "Poppins", sans-serif;
+  --font-lexend: "Poppins", sans-serif;
+  --font-fraunces: "Poppins", sans-serif;
+  --font-geist: "Poppins", sans-serif;
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -106,18 +106,52 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #d1d5db !important;
   }
+
+  /* Button font-weight softening for Poppins */
+  button,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    font-weight: 500;
+  }
+
+  button.font-bold,
+  button.font-extrabold,
+  [role="button"].font-bold,
+  [role="button"].font-extrabold {
+    font-weight: 500;
+  }
+}
+
+@keyframes pixel-on {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer-text {
+  0% {
+    background-position: 150% center;
+  }
+  100% {
+    background-position: -150% center;
+  }
 }
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: "Geist", "Inter", sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-dm-sans: "DM Sans", sans-serif;
-  --font-rubik: "Rubik", sans-serif;
-  --font-outfit: "Outfit", sans-serif;
-  --font-lexend: "Lexend", sans-serif;
-  --font-fraunces: "Fraunces", serif;
-  --font-geist: "Geist", sans-serif;
+  --font-sans: "Poppins", sans-serif;
+  --font-serif: "Poppins", sans-serif;
+  --font-dm-sans: "Poppins", sans-serif;
+  --font-rubik: "Poppins", sans-serif;
+  --font-outfit: "Poppins", sans-serif;
+  --font-lexend: "Poppins", sans-serif;
+  --font-fraunces: "Poppins", sans-serif;
+  --font-geist: "Poppins", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -225,4 +259,47 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Custom Global Tooltip (Matching Design System) */
+#xeni-global-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background-color: #111827;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 5px 9px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  z-index: 999999;
+  opacity: 0;
+  transform: translateY(3px) scale(0.96);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+#xeni-global-tooltip.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Make native date/time picker indicators transparent overlay so only rightmost icon is visible */
+input[type="date"],
+input[type="time"] {
+  position: relative;
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }

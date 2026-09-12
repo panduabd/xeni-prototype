@@ -68,48 +68,68 @@ const {
             .ref-badge {
                 display: inline-flex !important;
                 align-items: center !important;
-                gap: 5px !important;
-                padding: 0 8px 0 3px !important;
+                gap: 4px !important;
+                padding: 0 6px 0 2.5px !important;
                 background: #ffffff !important;
-                border: 1px solid #d0d5dd !important;
+                border: 1px solid #e5e7eb !important;
                 border-radius: 9999px !important;
-                margin: 0 4px !important;
+                margin: 0 4px 0 0 !important;
                 user-select: none !important;
                 vertical-align: middle !important;
-                height: 24px !important;
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-                max-width: 220px !important;
+                height: 22px !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+                max-width: 200px !important;
                 white-space: nowrap !important;
+                transition: border-color 0.15s ease !important;
+                line-height: 1 !important;
             }
-            .ref-badge .ref-circle {
-                width: 18px !important;
-                height: 18px !important;
-                border-radius: 50% !important;
-                background: #d1d5db !important;
+            .ref-badge:hover {
+                border-color: #d0d5dd !important;
+            }
+            .ref-badge .ref-circle,
+            .ref-badge .ref-thumb {
+                width: 16px !important;
+                height: 16px !important;
+                border-radius: 9999px !important;
+                background-color: #f2f4f7 !important;
                 flex-shrink: 0 !important;
+                background-size: cover !important;
+                background-position: center !important;
+                overflow: hidden !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border: 1px solid rgba(0, 0, 0, 0.08) !important;
             }
             .ref-badge .ref-text {
-                font-size: 11px !important;
-                font-weight: 700 !important;
-                color: #344054 !important;
-                max-width: 120px !important;
+                font-size: 11.5px !important;
+                font-weight: 600 !important;
+                color: #111827 !important;
+                max-width: 115px !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
                 white-space: nowrap !important;
+                letter-spacing: -0.01em !important;
+                line-height: 1 !important;
             }
             .ref-badge .remove-ref-badge {
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
+                width: 14px !important;
+                height: 14px !important;
+                border-radius: 9999px !important;
                 color: #98a2b3 !important;
                 cursor: pointer !important;
-                margin-left: 2px !important;
+                margin-left: 1px !important;
                 border: none !important;
-                background: none !important;
+                background: transparent !important;
                 padding: 0 !important;
+                transition: all 0.15s ease !important;
             }
             .ref-badge .remove-ref-badge:hover {
-                color: #d92d20 !important;
+                color: #111827 !important;
+                background-color: #f3f4f6 !important;
             }
 
             @keyframes light-swipe {
@@ -156,7 +176,8 @@ const {
                 <div class="relative">
                     <button
                         id="btn-references"
-                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none"
+                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none"
+                        data-tooltip="Add References"
                     >
                         <i class="ti ti-plus text-[14px]"></i>
                         References
@@ -193,7 +214,8 @@ const {
                 </div>
                 <button
                     id="btn-business-dna"
-                    class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                    class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                    data-tooltip="Business DNA"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +232,8 @@ const {
                 <div class="relative">
                     <button
                         id="btn-aspect-ratio"
-                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                        data-tooltip="Aspect Ratio"
                     >
                         <i class="ti ti-frame text-[14px]"></i>
                         Aspect Ratio
@@ -230,7 +253,8 @@ const {
                     <span id="badge-text">Design</span>
                     <button
                         id="remove-badge"
-                        class="ml-1 hover:text-[#1e40af] transition-colors flex items-center justify-center"
+                        class="ml-1 hover:text-[#1e40af] transition-colors flex items-center justify-center cursor-pointer"
+                        data-tooltip="Remove Skill"
                     >
                         <i class="ti ti-x text-[14px]"></i>
                     </button>
@@ -241,7 +265,8 @@ const {
             <div class="flex items-center">
                 <button
                     id="btn-generate-ai"
-                    class="w-9 h-9 inline-flex items-center justify-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+                    class="w-9 h-9 inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-100 cursor-pointer select-none whitespace-nowrap bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+                    data-tooltip="Generate"
                 >
                     <i class="ti ti-arrow-right text-[16px]"></i>
                 </button>
@@ -346,7 +371,8 @@ const {
                 localFileInput.addEventListener("change", () => {
                     if (localFileInput.files && localFileInput.files.length > 0) {
                         Array.from(localFileInput.files).forEach((file) => {
-                            addRefBadge(file.name);
+                            const url = file.type.startsWith('image/') ? URL.createObjectURL(file) : '';
+                            addRefBadge(file.name, url);
                         });
                         localFileInput.value = ""; // reset
                     }
@@ -363,6 +389,7 @@ const {
             }
 
             // Modal Trigger
+            const btnAddProdRef = document.getElementById("btn-add-prod-ref");
             if (btnAddProdRef) {
                 btnAddProdRef.addEventListener("click", () => {
                     referencesModal.classList.remove("hidden");
@@ -412,14 +439,25 @@ const {
                 });
             }
 
-            function addRefBadge(name) {
+            function addRefBadge(name, url) {
                 const badge = document.createElement("span");
-                badge.className = "ref-badge";
+                badge.className = "ref-badge inline-flex items-center gap-1 pl-1 pr-1.5 py-0.5 bg-white border border-[#e5e7eb] rounded-full mr-1 select-none align-middle h-[22px] shadow-sm max-w-[200px] whitespace-nowrap hover:border-[#d0d5dd] transition-all";
                 badge.contentEditable = "false";
+
+                const cleanName = (name || "Reference").trim();
+                const circleStyle = url 
+                    ? `background-image: url('${url}'); background-size: cover; background-position: center;` 
+                    : `background-color: #f2f4f7;`;
+                const circleContent = url ? '' : `<i class="ti ti-photo text-[9px] text-[#98a2b3]"></i>`;
+
                 badge.innerHTML = `
-                  <span class="ref-circle"></span>
-                  <span class="ref-text">${name}</span>
-                  <span class="remove-ref-badge"><i class="ti ti-x text-[12px]"></i></span>
+                  <span class="ref-circle w-4 h-4 rounded-full shrink-0 border border-black/10 overflow-hidden flex items-center justify-center" style="${circleStyle}">
+                    ${circleContent}
+                  </span>
+                  <span class="ref-text text-[11.5px] font-semibold text-[#111827] max-w-[115px] overflow-hidden text-ellipsis whitespace-nowrap leading-none tracking-tight" title="${cleanName}">${cleanName}</span>
+                  <button type="button" class="remove-ref-badge flex items-center justify-center w-3.5 h-3.5 rounded-full text-[#98a2b3] hover:text-[#111827] hover:bg-[#f3f4f6] cursor-pointer ml-0.5 transition-colors border-0 bg-transparent p-0" title="Remove reference">
+                    <i class="ti ti-x text-[10px]"></i>
+                  </button>
                 `;
 
                 badge.querySelector(".remove-ref-badge").addEventListener("click", (e) => {

@@ -1,5 +1,6 @@
 ---
 import AppLayout from "../layouts/AppLayout.astro";
+import SocialIcon from "../components/icons/SocialIcon.astro";
 
 const dnaList = [
   { id: "all", name: "All Business" },
@@ -125,52 +126,39 @@ const activityLog = [
   { id: 5, category: "automations", type: "automation_triggered", businessId: "tech", desc: "Automation trigger: 'Weekly Promo' workflow successfully initiated.", time: "6h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>` },
   { id: 6, category: "messages", type: "archived", businessId: "luxe", desc: "Archived conversation with David Chen", time: "Yesterday", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>` },
 ];
-
-const getPlatformIcon = (platform) => {
-  switch (platform) {
-    case 'facebook': return 'ti-brand-facebook';
-    case 'threads': return 'ti-brand-threads';
-    case 'instagram': return 'ti-brand-instagram';
-    case 'tiktok': return 'ti-brand-tiktok';
-    default: return 'ti-message';
-  }
-};
-
-const getPlatformColor = (platform) => {
-  switch (platform) {
-    case 'facebook': return '#1877F2';
-    case 'threads': return '#000000';
-    case 'instagram': return '#E1306C';
-    case 'tiktok': return '#000000';
-    default: return '#667085';
-  }
-};
 ---
 
 <AppLayout title="Inbox - Xeni" activePage="inbox">
   <div class="w-full h-[calc(100vh-110px)] -mt-12 flex flex-col px-6">
-    <!-- Header row -->
-    <div class="flex items-center justify-between pb-5 pt-1 shrink-0">
-      <div class="flex items-center gap-2">
-        <i class="ti ti-inbox text-[20px] text-[#98a2b3]"></i>
-        <h1 class="text-[20px] font-bold text-[#111827] tracking-tight">Inbox</h1>
+    <!-- Title + Controls Row -->
+    <div
+      class="w-full pt-1 pb-5 flex items-center justify-between gap-4 shrink-0"
+    >
+      <!-- Left: Title -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <h1 class="text-[20px] font-semibold text-[#18181b] tracking-tight">
+          Inbox
+        </h1>
       </div>
     </div>
 
     <!-- Controls Row: Tabs and Filters -->
     <div class="flex items-center justify-between mb-4 shrink-0">
       <!-- Navigation Tabs (Messages, Comments, Activity) -->
-      <div class="flex items-center gap-1 p-1 bg-white rounded-xl border border-[#eaecf0] w-fit">
-        <button class="inbox-tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold bg-[#111827] text-white transition-all cursor-pointer flex items-center gap-2" data-tab="messages">
-          <i class="ti ti-messages text-[14px]"></i>
+      <div id="inbox-tabs-container" class="relative flex items-center gap-1 p-1 bg-white rounded-xl border border-[#eaecf0] shadow-xs w-fit">
+        <!-- Sliding active indicator pill -->
+        <div
+          id="inbox-tabs-indicator"
+          class="absolute top-1 bottom-1 rounded-lg bg-[#18181b] shadow-xs pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style="left: 4px; width: 0px;"
+        ></div>
+        <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-white transition-colors duration-200 cursor-pointer" data-tab="messages">
           Messages
         </button>
-        <button class="inbox-tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-2" data-tab="comments">
-          <i class="ti ti-message-circle-2 text-[14px]"></i>
+        <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] transition-colors duration-200 cursor-pointer" data-tab="comments">
           Comments
         </button>
-        <button class="inbox-tab-btn px-4 h-8 rounded-lg text-[13px] font-semibold text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-all cursor-pointer flex items-center gap-2" data-tab="activity">
-          <i class="ti ti-activity-heartbeat text-[14px]"></i>
+        <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] transition-colors duration-200 cursor-pointer" data-tab="activity">
           Activity
         </button>
       </div>
@@ -180,29 +168,41 @@ const getPlatformColor = (platform) => {
         <!-- Social Media Platform Filter Dropdown -->
         <div class="relative" id="platform-filter-wrapper">
           <button id="btn-platform-filter" class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none">
-            <i id="current-platform-icon" class="ti ti-world text-[14px]"></i>
+            <span id="current-platform-icon-container" class="flex items-center justify-center shrink-0 w-4 h-4">
+              <i class="ti ti-world text-[14px] text-[#98a2b3]"></i>
+            </span>
             <span id="current-platform-label">All Channels</span>
             <i class="ti ti-chevron-down text-[12px] text-[#98a2b3]"></i>
           </button>
           <div id="platform-filter-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 p-1 flex flex-col gap-0.5 animate-in fade-in slide-in-from-top-1 duration-200">
-            <button class="platform-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-semibold text-[#111827] bg-[#F3F4F6] transition-colors cursor-pointer text-left" data-value="all">
-              <i class="ti ti-world text-[14px] text-[#98a2b3]"></i>
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-semibold text-[#111827] bg-[#F3F4F6] transition-colors cursor-pointer text-left" data-value="all">
+              <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
+                <i class="ti ti-world text-[14px] text-[#98a2b3]"></i>
+              </span>
               All Channels
             </button>
-            <button class="platform-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="facebook">
-              <i class="ti ti-brand-facebook text-[14px]" style="color: #1877F2"></i>
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="facebook">
+              <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
+                <SocialIcon platform="facebook" size="sm" />
+              </span>
               Facebook
             </button>
-            <button class="platform-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="threads">
-              <i class="ti ti-brand-threads text-[14px]" style="color: #000000"></i>
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="threads">
+              <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
+                <SocialIcon platform="threads" size="sm" />
+              </span>
               Threads
             </button>
-            <button class="platform-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="instagram">
-              <i class="ti ti-brand-instagram text-[14px]" style="color: #E1306C"></i>
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="instagram">
+              <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
+                <SocialIcon platform="instagram" size="sm" />
+              </span>
               Instagram
             </button>
-            <button class="platform-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="tiktok">
-              <i class="ti ti-brand-tiktok text-[14px]" style="color: #000000"></i>
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="tiktok">
+              <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
+                <SocialIcon platform="tiktok" size="sm" />
+              </span>
               TikTok
             </button>
           </div>
@@ -257,7 +257,7 @@ const getPlatformColor = (platform) => {
     <div class="flex-1 bg-white rounded-3xl border border-[#eaecf0] overflow-hidden shadow-sm flex flex-col relative min-h-0">
       
       <!-- ====================== TAB: MESSAGES ====================== -->
-      <div id="content-messages" class="flex w-full h-full absolute inset-0 transition-opacity duration-200">
+      <div id="content-messages" class="flex w-full h-full absolute inset-0 tab-pane-animate">
         <!-- Left Panel: Chat List -->
         <div class="w-[320px] h-full border-r border-[#eaecf0] flex flex-col bg-[#F9FAFB]">
           <!-- Search bar inside list -->
@@ -281,7 +281,7 @@ const getPlatformColor = (platform) => {
                 <div class="relative shrink-0">
                   <img src={msg.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] bg-white" />
                   <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white flex items-center justify-center shadow-sm border border-[#f3f4f6]">
-                    <i class={`ti ${getPlatformIcon(msg.platform)} text-[10px]`} style={`color: ${getPlatformColor(msg.platform)}`}></i>
+                    <SocialIcon platform={msg.platform} size="sm" />
                   </div>
                 </div>
                 <div class="flex-1 min-w-0">
@@ -313,8 +313,10 @@ const getPlatformColor = (platform) => {
               <img id="active-chat-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-9 h-9 rounded-full border border-[#eaecf0]" />
               <div>
                 <h3 class="text-[14px] font-bold text-[#111827]" id="active-chat-name">Alex Johnson</h3>
-                <p class="text-[11px] text-[#667085] flex items-center gap-1" id="active-chat-platform-info">
-                  <i class="ti ti-brand-instagram" style="color: #E1306C" id="active-chat-platform-icon"></i>
+                <p class="text-[11px] text-[#667085] flex items-center gap-1.5" id="active-chat-platform-info">
+                  <span id="active-chat-platform-icon" class="inline-flex items-center justify-center">
+                    <SocialIcon platform="instagram" size="sm" />
+                  </span>
                   <span id="active-chat-platform-text">via Instagram Direct</span>
                 </p>
               </div>
@@ -365,7 +367,7 @@ const getPlatformColor = (platform) => {
                   <button class="w-8 h-8 flex items-center justify-center rounded-lg text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all"><i class="ti ti-mood-smile text-[16px]"></i></button>
                 </div>
                 <div class="flex items-center gap-2">
-                  <button class="h-8 px-4 bg-[#111827] text-white rounded-lg text-[12px] font-bold hover:bg-black transition-all flex items-center gap-1.5 shadow-sm">
+                  <button class="h-8 px-4 bg-[#111827] text-white rounded-lg text-[12px] font-medium hover:bg-black transition-all flex items-center gap-1.5 shadow-sm">
                     Send
                     <i class="ti ti-send text-[12px]"></i>
                   </button>
@@ -377,7 +379,7 @@ const getPlatformColor = (platform) => {
       </div>
 
       <!-- ====================== TAB: COMMENTS ====================== -->
-      <div id="content-comments" class="hidden w-full h-full absolute inset-0 flex opacity-0 transition-opacity duration-200">
+      <div id="content-comments" class="hidden w-full h-full absolute inset-0 flex">
         <!-- Left Panel: Comments Notifications List -->
         <div class="w-[340px] h-full border-r border-[#eaecf0] flex flex-col bg-[#F9FAFB]">
           <div class="p-3 border-b border-[#eaecf0] bg-white">
@@ -403,7 +405,7 @@ const getPlatformColor = (platform) => {
                   </div>
                   <div class="flex items-center justify-between">
                     <div class="flex items-center gap-1.5">
-                      <i class={`ti ${getPlatformIcon(item.platform)} text-[12px]`} style={`color: ${getPlatformColor(item.platform)}`}></i>
+                      <SocialIcon platform={item.platform} size="sm" />
                       <span class="text-[10px] text-[#98a2b3]">{item.time}</span>
                     </div>
                     <div class="flex items-center gap-1">
@@ -428,7 +430,7 @@ const getPlatformColor = (platform) => {
                 <span class="text-[10px] font-bold text-[#667085] uppercase tracking-wider">Originating Post</span>
                 <h4 class="text-[13px] font-bold text-[#111827]">Summer Smoothie Ad Campaign</h4>
               </div>
-              <button class="ml-auto h-8 px-3 rounded-lg border border-[#eaecf0] bg-white text-[11px] font-bold text-[#667085] hover:text-[#111827] transition-colors flex items-center gap-1.5">
+              <button class="ml-auto h-8 px-3 rounded-lg border border-[#eaecf0] bg-white text-[11px] font-medium text-[#667085] hover:text-[#111827] transition-colors flex items-center gap-1.5">
                 View Post <i class="ti ti-external-link"></i>
               </button>
             </div>
@@ -473,7 +475,7 @@ const getPlatformColor = (platform) => {
       </div>
 
       <!-- ====================== TAB: ACTIVITY ====================== -->
-      <div id="content-activity" class="hidden w-full h-full absolute inset-0 bg-white opacity-0 transition-opacity duration-200 overflow-y-auto custom-scrollbar">
+      <div id="content-activity" class="hidden w-full h-full absolute inset-0 bg-white overflow-y-auto custom-scrollbar">
         <div class="w-full flex flex-col">
           <!-- Sub-header for internal tab context -->
           <div class="h-14 px-6 border-b border-[#eaecf0] flex items-center bg-[#FDFDFD]">
@@ -536,12 +538,26 @@ const getPlatformColor = (platform) => {
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background: #d1d5db;
     }
+    @keyframes tabPaneEnter {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .tab-pane-animate {
+      animation: tabPaneEnter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   </style>
 
   <script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
       // --- Tab switching logic ---
       const tabBtns = document.querySelectorAll('.inbox-tab-btn');
+      const tabsIndicator = document.getElementById('inbox-tabs-indicator');
       const contentViews = {
         messages: document.getElementById('content-messages'),
         comments: document.getElementById('content-comments'),
@@ -551,31 +567,46 @@ const getPlatformColor = (platform) => {
       const statusFilterGroup = document.getElementById('status-filter-group');
       const activityFilterGroup = document.getElementById('activity-filter-group');
 
+      function updateInboxTabIndicator(btn) {
+        if (!tabsIndicator || !btn) return;
+        tabsIndicator.style.left = `${btn.offsetLeft}px`;
+        tabsIndicator.style.width = `${btn.offsetWidth}px`;
+      }
+
+      // Initial indicator position
+      const initialTabBtn = document.querySelector('.inbox-tab-btn[data-tab="messages"]');
+      if (initialTabBtn) {
+        updateInboxTabIndicator(initialTabBtn);
+      }
+      window.addEventListener('resize', () => {
+        const activeBtn = document.querySelector('.inbox-tab-btn.text-white');
+        if (activeBtn) updateInboxTabIndicator(activeBtn);
+      });
+
       tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const targetTab = btn.getAttribute('data-tab');
           
           // Update active buttons styling
           tabBtns.forEach(b => {
-            b.classList.remove('bg-[#111827]', 'text-white');
-            b.classList.add('text-[#667085]', 'hover:text-[#111827]', 'hover:bg-[#F9FAFB]');
+            b.classList.remove('text-white', 'bg-[#18181b]', 'shadow-xs');
+            b.classList.add('text-[#71717a]', 'hover:text-[#18181b]');
           });
-          btn.classList.remove('text-[#667085]', 'hover:text-[#111827]', 'hover:bg-[#F9FAFB]');
-          btn.classList.add('bg-[#111827]', 'text-white');
+          btn.classList.remove('text-[#71717a]', 'hover:text-[#18181b]');
+          btn.classList.add('text-white');
+          updateInboxTabIndicator(btn);
 
-          // Show/Hide views with smooth fade
+          // Show/Hide views with smooth animation
           Object.keys(contentViews).forEach(key => {
             const view = contentViews[key];
             if (key === targetTab) {
-              view.classList.remove('hidden');
-              setTimeout(() => {
-                view.classList.remove('opacity-0');
-                view.classList.add('opacity-100');
-              }, 10);
+              view.classList.remove('hidden', 'opacity-0');
+              view.classList.remove('tab-pane-animate');
+              void view.offsetWidth; // trigger reflow
+              view.classList.add('tab-pane-animate');
             } else {
-              view.classList.add('opacity-0');
-              view.classList.remove('opacity-100');
-              setTimeout(() => view.classList.add('hidden'), 200);
+              view.classList.add('hidden');
+              view.classList.remove('tab-pane-animate');
             }
           });
 
@@ -703,11 +734,10 @@ const getPlatformColor = (platform) => {
             currentPlatformLabel.textContent = name;
             activePlatform = value;
             
-            const optIcon = opt.querySelector('i');
-            const currentIcon = document.getElementById('current-platform-icon');
-            if (currentIcon && optIcon) {
-              currentIcon.className = optIcon.className;
-              currentIcon.style.color = optIcon.style.color;
+            const optIconHolder = opt.querySelector('.platform-icon-holder');
+            const currentIconContainer = document.getElementById('current-platform-icon-container');
+            if (currentIconContainer && optIconHolder) {
+              currentIconContainer.innerHTML = optIconHolder.innerHTML;
             }
             
             // Highlight selected in dropdown
@@ -811,19 +841,23 @@ const getPlatformColor = (platform) => {
           // Update active chat's subheader platform info
           const plat = item.getAttribute('data-platform');
           const platformDetails = {
-            facebook: { icon: 'ti-brand-facebook', color: '#1877F2', label: 'Facebook Messenger' },
-            threads: { icon: 'ti-brand-threads', color: '#000000', label: 'Threads Direct' },
-            instagram: { icon: 'ti-brand-instagram', color: '#E1306C', label: 'Instagram Direct' },
-            tiktok: { icon: 'ti-brand-tiktok', color: '#000000', label: 'TikTok Inbox' }
+            facebook: { label: 'Facebook Messenger' },
+            threads: { label: 'Threads Direct' },
+            instagram: { label: 'Instagram Direct' },
+            tiktok: { label: 'TikTok Inbox' }
           };
-          const details = platformDetails[plat] || { icon: 'ti-message', color: '#667085', label: 'Direct' };
+          const details = platformDetails[plat] || { label: 'Direct' };
           
           const platformTextEl = document.getElementById('active-chat-platform-text');
           const platformIconEl = document.getElementById('active-chat-platform-icon');
-          if (platformTextEl && platformIconEl) {
+          if (platformTextEl) {
             platformTextEl.textContent = 'via ' + details.label;
-            platformIconEl.className = 'ti ' + details.icon;
-            platformIconEl.style.color = details.color;
+          }
+          if (platformIconEl) {
+            const optHolder = document.querySelector(`.platform-option[data-value="${plat}"] .platform-icon-holder`);
+            if (optHolder) {
+              platformIconEl.innerHTML = optHolder.innerHTML;
+            }
           }
         });
       });

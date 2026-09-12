@@ -1,5 +1,6 @@
 ---
 // src/components/modals/ManageAccountModal.astro
+import SocialIcon from "../icons/SocialIcon.astro";
 ---
 
 <style is:global>
@@ -12,6 +13,63 @@
   #manage-account-content::-webkit-scrollbar-thumb {
     background: #d1d5db;
     border-radius: 10px;
+  }
+
+  /* Smooth, slow wipe light animation for Upgrade Plan button */
+  @keyframes wipe-light-slow {
+    0% {
+      transform: translateX(-160%) skewX(-20deg);
+    }
+    30%,
+    100% {
+      transform: translateX(360%) skewX(-20deg);
+    }
+  }
+
+  .btn-wipe-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-wipe-shine::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 100%
+    );
+    animation: wipe-light-slow 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .card-wipe-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-wipe-shine::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 100%
+    );
+    animation: wipe-light-slow 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+    z-index: 5;
   }
 </style>
 
@@ -31,13 +89,16 @@
     </button>
 
     <!-- LEFT SIDEBAR: NAVIGATION -->
-    <aside class="w-[240px] bg-white border-r border-[#eaecf0] p-6 flex flex-col gap-6 shrink-0">
+    <aside class="w-[240px] bg-[#eaecf0] border-r border-[#eaecf0] p-5 flex flex-col gap-6 shrink-0">
       <div>
+        <div class="px-3 pb-3">
+          <h2 class="text-[11px] font-semibold uppercase tracking-wider text-[#475467]">Manage Account</h2>
+        </div>
         <div class="flex flex-col gap-1">
           <!-- Profile Tab Button -->
           <button
             id="tab-btn-profile"
-            class="manage-account-tab-btn flex items-center gap-3 px-3 h-10 rounded-xl text-[13px] font-bold text-[#111827] bg-[#F3F4F6] transition-all cursor-pointer text-left w-full"
+            class="manage-account-tab-btn flex items-center gap-3 px-3 h-9 rounded-lg text-xs font-medium text-[#111827] bg-white shadow-xs transition-colors cursor-pointer text-left w-full"
             data-tab="profile"
           >
             <i class="ti ti-user-circle text-[16px]"></i>
@@ -46,25 +107,27 @@
           <!-- Subscription Tab Button -->
           <button
             id="tab-btn-subscription"
-            class="manage-account-tab-btn flex items-center gap-3 px-3 h-10 rounded-xl text-[13px] font-medium text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all cursor-pointer text-left w-full"
+            class="manage-account-tab-btn flex items-center gap-3 px-3 h-9 rounded-lg text-xs font-medium text-[#475467] hover:bg-white/60 hover:text-[#111827] transition-colors cursor-pointer text-left w-full"
             data-tab="subscription"
           >
-            <i class="ti ti-bolt text-[16px]"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="shrink-0" aria-hidden="true">
+              <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+            </svg>
             Subscription
           </button>
           <!-- Billing Tab Button -->
           <button
             id="tab-btn-billing"
-            class="manage-account-tab-btn flex items-center gap-3 px-3 h-10 rounded-xl text-[13px] font-medium text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all cursor-pointer text-left w-full"
+            class="manage-account-tab-btn flex items-center gap-3 px-3 h-9 rounded-lg text-xs font-medium text-[#475467] hover:bg-white/60 hover:text-[#111827] transition-colors cursor-pointer text-left w-full"
             data-tab="billing"
           >
-            <i class="ti ti-credit-card text-[16px]"></i>
+            <i class="ti ti-receipt text-[16px]"></i>
             Billing
           </button>
           <!-- Affiliate Tab Button -->
           <button
             id="tab-btn-affiliate"
-            class="manage-account-tab-btn flex items-center gap-3 px-3 h-10 rounded-xl text-[13px] font-medium text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all cursor-pointer text-left w-full"
+            class="manage-account-tab-btn flex items-center gap-3 px-3 h-9 rounded-lg text-xs font-medium text-[#475467] hover:bg-white/60 hover:text-[#111827] transition-colors cursor-pointer text-left w-full"
             data-tab="affiliate"
           >
             <i class="ti ti-users text-[16px]"></i>
@@ -73,7 +136,7 @@
           <!-- Feedback Tab Button -->
           <button
             id="tab-btn-feedback"
-            class="manage-account-tab-btn flex items-center gap-3 px-3 h-10 rounded-xl text-[13px] font-medium text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all cursor-pointer text-left w-full"
+            class="manage-account-tab-btn flex items-center gap-3 px-3 h-9 rounded-lg text-xs font-medium text-[#475467] hover:bg-white/60 hover:text-[#111827] transition-colors cursor-pointer text-left w-full"
             data-tab="feedback"
           >
             <i class="ti ti-message-dots text-[16px]"></i>
@@ -87,161 +150,407 @@
     <main id="manage-account-content" class="flex-1 p-10 overflow-y-auto bg-white relative">
       
       <!-- ══════════ PROFILE TAB CONTENT ══════════ -->
-      <section id="manage-account-tab-profile" class="manage-account-tab-section space-y-8">
+      <section id="manage-account-tab-profile" class="manage-account-tab-section space-y-6">
         <div>
-          <h3 class="text-[18px] font-bold text-[#111827] tracking-tight mb-6">Account Info</h3>
+          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Profile</h3>
+        </div>
           
-          <!-- Avatar Row -->
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-16 h-16 rounded-full bg-[#111827] text-white flex items-center justify-center text-[22px] font-extrabold shadow-sm border-2 border-white relative overflow-hidden">
-              <img
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
-                class="w-full h-full object-cover"
-                alt="avatar"
-              />
-            </div>
-            <div>
-              <p class="text-[15px] font-bold text-[#111827]">Jane Cooper</p>
-              <p class="text-[12px] text-[#667085]">jane@xeni.io</p>
-            </div>
-            <button class="ml-auto px-4 h-9 rounded-xl border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer shadow-sm">
-              Change avatar
-            </button>
-          </div>
-
-          <!-- Fields -->
-          <div class="space-y-4 border-t border-[#eaecf0] pt-6">
-            <div class="flex items-center justify-between py-2">
-              <span class="text-[13px] font-bold text-[#344054]">User Name</span>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[13px] font-medium text-[#111827]">Jane Cooper</span>
-                <button class="text-[#98a2b3] hover:text-[#111827] transition-colors"><i class="ti ti-pencil text-[14px]"></i></button>
+        <!-- Card 1: Avatar & Profile Info -->
+        <div class="rounded-xl border border-[#eaecf0] bg-white p-5 shadow-xs">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3.5">
+              <div class="w-14 h-14 rounded-full border border-[#eaecf0] bg-[#f4f4f5] overflow-hidden shrink-0 shadow-2xs">
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
+                  class="w-full h-full object-cover"
+                  alt="avatar"
+                />
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-[#111827]">Jane Cooper</h4>
+                <p class="text-xs text-[#71717a]">jane@xeni.io</p>
               </div>
             </div>
-            <div class="flex items-center justify-between py-2 border-t border-[#f2f4f7]">
-              <span class="text-[13px] font-bold text-[#344054]">Email Address</span>
-              <span class="text-[13px] font-medium text-[#667085]">jane@xeni.io</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Personal details -->
-        <div class="border-t border-[#eaecf0] pt-6 space-y-5">
-          <h4 class="text-[15px] font-bold text-[#111827]">Personal details</h4>
-          
-          <div class="space-y-1">
-            <span class="text-[13px] font-bold text-[#111827]">Email</span>
-            <p class="text-[13px] text-[#667085]">jane@xeni.io</p>
-          </div>
-          
-          <div class="flex items-center justify-between py-1 border-t border-[#f2f4f7] pt-4">
-            <div class="space-y-1">
-              <span class="text-[13px] font-bold text-[#111827]">User ID</span>
-              <p class="text-[13px] text-[#667085]">310519663553695297</p>
-            </div>
-            <button class="px-3.5 h-8 rounded-lg border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer shadow-sm">
-              Copy
+            <button
+              type="button"
+              class="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-lg border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-xs font-medium text-[#18181b] transition-colors shadow-xs cursor-pointer"
+            >
+              <i class="ti ti-camera text-sm"></i>
+              <span>Change photo</span>
             </button>
           </div>
         </div>
 
-        <!-- Manage account -->
-        <div class="border-t border-[#eaecf0] pt-6 space-y-5">
-          <h4 class="text-[15px] font-bold text-[#111827]">Manage account</h4>
-          
-          <div class="flex items-center justify-between py-1">
-            <span class="text-[13px] font-bold text-[#111827]">Log out of this device</span>
-            <button id="btn-logout-modal" class="px-3.5 h-8 rounded-lg border border-[#eaecf0] bg-white text-[12px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer shadow-sm">
-              Log out
-            </button>
+        <!-- Card 2: Account Details -->
+        <div class="rounded-xl border border-[#eaecf0] bg-white shadow-xs overflow-hidden">
+          <div class="p-5 pb-3">
+            <h4 class="text-sm font-semibold text-[#111827]">Personal Details</h4>
           </div>
-          
-          <div class="flex items-center justify-between py-1 border-t border-[#f2f4f7] pt-4">
-            <div class="space-y-1">
-              <span class="text-[13px] font-bold text-[#111827]">Delete account</span>
-              <p class="text-[12px] text-[#667085]">This will delete your account and all data.</p>
+          <div class="divide-y divide-[#eaecf0] border-t border-[#eaecf0] text-xs">
+            <div class="flex items-center justify-between px-5 py-3">
+              <span class="text-[#71717a] font-medium">Full Name</span>
+              <div class="flex items-center gap-2">
+                <span class="text-[#18181b] font-normal">Jane Cooper</span>
+                <button type="button" class="text-[#71717a] hover:text-[#18181b] transition-colors cursor-pointer p-0.5" title="Edit name">
+                  <i class="ti ti-pencil text-sm"></i>
+                </button>
+              </div>
             </div>
-            <button class="px-3.5 h-8 rounded-lg border border-red-200 bg-white text-[12px] font-bold text-red-500 hover:bg-red-50 transition-all cursor-pointer shadow-sm">
-              Delete account
-            </button>
+            <div class="flex items-center justify-between px-5 py-3">
+              <span class="text-[#71717a] font-medium">Email Address</span>
+              <span class="text-[#18181b] font-normal">jane@xeni.io</span>
+            </div>
+            <div class="flex items-center justify-between px-5 py-3">
+              <div>
+                <span class="text-[#71717a] font-medium block">User ID</span>
+                <span class="text-[11px] text-[#a1a1aa] font-mono">310519663553695297</span>
+              </div>
+              <button
+                type="button"
+                id="btn-copy-userid"
+                class="inline-flex items-center justify-center gap-1.5 h-7 px-2.5 rounded-md border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-[11px] font-medium text-[#18181b] transition-colors shadow-2xs cursor-pointer"
+              >
+                <i class="ti ti-copy text-xs"></i>
+                <span>Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Account & Security -->
+        <div class="rounded-xl border border-[#eaecf0] bg-white shadow-xs overflow-hidden">
+          <div class="p-5 pb-3">
+            <h4 class="text-sm font-semibold text-[#111827]">Account Management</h4>
+          </div>
+          <div class="border-t border-[#eaecf0] text-xs">
+            <div class="flex items-center justify-between px-5 py-3.5">
+              <div>
+                <span class="text-[#18181b] font-medium block">Sign out from this device</span>
+                <span class="text-[11px] text-[#71717a]">Securely end your active session on this browser.</span>
+              </div>
+              <button
+                type="button"
+                id="btn-logout-modal"
+                class="inline-flex items-center justify-center h-8 px-3 rounded-lg border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-xs font-medium text-[#18181b] transition-colors shadow-xs cursor-pointer shrink-0"
+              >
+                Sign Out
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- ══════════ SUBSCRIPTION TAB CONTENT ══════════ -->
-      <section id="manage-account-tab-subscription" class="manage-account-tab-section space-y-8 hidden">
-        <div class="flex items-center justify-between">
-          <div>
-            <h3 class="text-[20px] font-bold text-[#111827] tracking-tight">Subscription</h3>
-            <p class="text-[13px] text-[#667085] mt-1">Manage your credit plan and billing cycles.</p>
-          </div>
-          <button id="btn-upgrade-plan-action" class="px-6 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-bold hover:bg-black transition-all cursor-pointer">
-            Upgrade Plan
-          </button>
+      <section id="manage-account-tab-subscription" class="manage-account-tab-section space-y-6 hidden">
+        <div>
+          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Subscription</h3>
         </div>
 
-        <!-- Plan Info Box -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="p-6 rounded-2xl border border-[#eaecf0] bg-[#F9FAFB] space-y-2">
-            <span class="text-[11px] font-extrabold text-[#667085] uppercase tracking-wider">Current Plan</span>
-            <div class="flex items-baseline gap-2">
-              <h4 class="text-[24px] font-extrabold text-[#111827]">Free Plan</h4>
-              <span class="text-[12px] font-medium text-[#667085]">forever free</span>
+        <!-- ── STATE 1: FREE PLAN ── -->
+        <div id="subscription-view-free" class="space-y-6">
+          <!-- 2 Columns: Free Plan & Credits Available -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Current Plan Card -->
+            <div class="p-5 rounded-xl border border-[#eaecf0] bg-white shadow-xs flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-medium text-[#71717a]">Current Plan</span>
+                  <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10.5px] font-medium text-[#71717a]">Free Plan</span>
+                </div>
+                <div class="mt-3">
+                  <h4 class="text-lg font-semibold text-[#111827]">Free Plan</h4>
+                </div>
+              </div>
+              <div class="mt-5 pt-3.5 border-t border-[#eaecf0] flex items-center justify-end">
+                <button
+                  id="btn-upgrade-plan-action"
+                  type="button"
+                  class="inline-flex items-center justify-center h-8 px-3.5 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors shadow-xs cursor-pointer shrink-0"
+                >
+                  Upgrade to Pro
+                </button>
+              </div>
             </div>
-            <p class="text-[12px] text-[#667085] pt-1">Daily refresh limits are set to 300 credits.</p>
+
+            <!-- Credits Balance Card -->
+            <div class="p-5 rounded-xl border border-[#eaecf0] bg-white shadow-xs flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-medium text-[#71717a]">Available Credits</span>
+                </div>
+                <div class="flex items-center gap-2.5 mt-3">
+                  <div class="w-8 h-8 rounded-lg bg-[#f4f4f5] border border-[#eaecf0] flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-[#18181b]" aria-hidden="true">
+                      <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span class="text-2xl font-semibold text-[#111827] leading-none">30</span>
+                  <span class="text-xs text-[#71717a] ml-0.5">credits</span>
+                </div>
+              </div>
+              <div class="mt-5 pt-3.5 border-t border-[#eaecf0] text-xs text-[#71717a] flex items-center justify-between min-h-[32px]">
+                <span>Quota status</span>
+                <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-medium text-emerald-700">Welcome Bonus (Active)</span>
+              </div>
+            </div>
           </div>
-          
-          <div class="p-6 rounded-2xl border border-[#eaecf0] bg-[#F9FAFB] space-y-2">
-            <span class="text-[11px] font-extrabold text-[#667085] uppercase tracking-wider">Credit Balance</span>
-            <div class="flex items-baseline gap-1.5 text-[#111827]">
-              <i class="ti ti-sparkles text-[20px]"></i>
-              <h4 class="text-[24px] font-extrabold">300</h4>
-              <span class="text-[12px] font-medium text-[#667085] ml-1">Credits left</span>
+
+          <!-- Usage History -->
+          <div class="space-y-3 pt-1">
+            <h4 class="text-sm font-semibold text-[#111827]">Usage History</h4>
+            <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                    <th class="px-4 py-2.5">Activity</th>
+                    <th class="px-4 py-2.5">Date</th>
+                    <th class="px-4 py-2.5 text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
+                  <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                    <td class="px-4 py-3 font-medium text-[#111827]">Registration Welcome Bonus</td>
+                    <td class="px-4 py-3 text-[#71717a]">2026-09-09 10:00</td>
+                    <td class="px-4 py-3 text-right font-medium text-emerald-600">+30</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <p class="text-[12px] text-[#667085] pt-1">Refreshes to 300 credits daily at 00:00 UTC.</p>
           </div>
         </div>
 
-        <!-- Usage Table -->
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <h4 class="text-[15px] font-bold text-[#111827]">Credits Usage History</h4>
-            <div class="relative">
-              <button class="flex items-center gap-1 px-3 h-8 rounded-full border border-[#D0D5DD] bg-white text-[11px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none">
-                <span>All History</span>
-                <i class="ti ti-chevron-down text-[10px] ml-0.5 opacity-50"></i>
+        <!-- ── STATE 2: PRO PLAN ── -->
+        <div id="subscription-view-pro" class="hidden space-y-6">
+          <!-- Current Plan Card -->
+          <div class="p-5 rounded-xl border border-[#eaecf0] bg-white shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256" class="shrink-0" aria-hidden="true">
+                  <path d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"></path>
+                </svg>
+                <h4 class="text-lg font-semibold text-[#111827]" id="active-plan-title">Pro Plan</h4>
+                <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-medium text-emerald-700" id="active-plan-badge">Active</span>
+              </div>
+              <p class="text-xs text-[#71717a] mt-1" id="active-plan-subtitle">Rp 390,000 / month · Auto-renews on Oct 09, 2026</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button
+                id="btn-open-topup-pro"
+                type="button"
+                class="inline-flex items-center justify-center h-8 px-3.5 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors shadow-xs cursor-pointer"
+              >
+                Top Up Credits
+              </button>
+              <button
+                id="btn-manage-subscription-action"
+                type="button"
+                class="inline-flex items-center justify-center h-8 px-3.5 rounded-lg border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-xs font-medium text-[#18181b] transition-colors shadow-xs cursor-pointer"
+              >
+                Manage Subscription
               </button>
             </div>
           </div>
 
-          <div class="border border-[#eaecf0] rounded-2xl overflow-hidden">
+          <!-- Credits Balance: Separated 2 Balanced Columns -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Column 1: Monthly Subscription Credits -->
+            <div class="p-5 rounded-xl border border-[#eaecf0] bg-white shadow-xs flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-medium text-[#71717a]">Monthly Credits</span>
+                  <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10px] font-medium text-[#71717a]">Subscription</span>
+                </div>
+                <div class="flex items-center gap-2.5 mt-3">
+                  <div class="w-8 h-8 rounded-lg bg-[#f4f4f5] border border-[#eaecf0] flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-[#18181b]" aria-hidden="true">
+                      <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span class="text-2xl font-semibold text-[#111827] leading-none" id="pro-monthly-credits">1,000</span>
+                </div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#eaecf0] text-xs text-[#71717a] flex items-center justify-between min-h-[28px]">
+                <span>Expires</span>
+                <span class="font-medium text-[#18181b]">Oct 09, 2026</span>
+              </div>
+            </div>
+
+            <!-- Column 2: Top Up Credits Summary -->
+            <div class="p-5 rounded-xl border border-[#eaecf0] bg-white shadow-xs flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-medium text-[#71717a]">Top-Up Credits</span>
+                  <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10px] font-medium text-[#71717a]">6-mo validity</span>
+                </div>
+                <div class="flex items-center gap-2.5 mt-3">
+                  <div class="w-8 h-8 rounded-lg bg-[#f4f4f5] border border-[#eaecf0] flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-[#18181b]" aria-hidden="true">
+                      <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <span class="text-2xl font-semibold text-[#111827] leading-none" id="pro-topup-credits">2,250</span>
+                  <span class="text-xs text-[#71717a] ml-0.5">total active</span>
+                </div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#eaecf0] text-xs text-[#71717a] flex items-center justify-between min-h-[28px]">
+                <span>Active (with subscription)</span>
+                <button
+                  type="button"
+                  id="btn-open-topup-detail-modal"
+                  class="font-medium text-[#18181b] hover:underline flex items-center gap-1 cursor-pointer leading-none"
+                >
+                  <span>Details</span>
+                  <i class="ti ti-chevron-right text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Usage History -->
+          <div class="space-y-3 pt-1">
+            <h4 class="text-sm font-semibold text-[#111827]">Usage History</h4>
+            <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                    <th class="px-4 py-2.5">Activity</th>
+                    <th class="px-4 py-2.5">Date</th>
+                    <th class="px-4 py-2.5 text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="pro-usage-table-body" class="divide-y divide-[#eaecf0] text-[#18181b]">
+                  <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                    <td class="px-4 py-3 font-medium text-[#111827]">AI Social Studio Generation (8 Images)</td>
+                    <td class="px-4 py-3 text-[#71717a]">2026-09-09 14:15</td>
+                    <td class="px-4 py-3 text-right font-medium text-[#111827]">-40</td>
+                  </tr>
+                  <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                    <td class="px-4 py-3 font-medium text-[#111827]">Brand DNA Voice Generation</td>
+                    <td class="px-4 py-3 text-[#71717a]">2026-09-09 11:30</td>
+                    <td class="px-4 py-3 text-right font-medium text-[#111827]">-10</td>
+                  </tr>
+                  <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                    <td class="px-4 py-3 font-medium text-[#111827]">Credit Top-Up (150 Credits)</td>
+                    <td class="px-4 py-3 text-[#71717a]">2026-09-08 16:20</td>
+                    <td class="px-4 py-3 text-right font-medium text-emerald-600">+150</td>
+                  </tr>
+                  <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                    <td class="px-4 py-3 font-medium text-[#111827]">AI Carousel Creator (10 Slides)</td>
+                    <td class="px-4 py-3 text-[#71717a]">2026-09-07 10:05</td>
+                    <td class="px-4 py-3 text-right font-medium text-[#111827]">-50</td>
+                  </tr>
+                  <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                    <td class="px-4 py-3 font-medium text-[#111827]">Pro Plan Monthly Allocation</td>
+                    <td class="px-4 py-3 text-[#71717a]">2026-09-01 00:00</td>
+                    <td class="px-4 py-3 text-right font-medium text-emerald-600">+1,500</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════ BILLING TAB CONTENT ══════════ -->
+      <section id="manage-account-tab-billing" class="manage-account-tab-section space-y-6 hidden">
+        <div>
+          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Billing</h3>
+        </div>
+
+        <!-- 1. Billing Overview Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1.5">
+            <span class="text-xs font-medium text-[#71717a]">Next Billing Cycle</span>
+            <p class="text-base font-semibold text-[#111827]">Oct 09, 2026</p>
+          </div>
+          <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1.5">
+            <span class="text-xs font-medium text-[#71717a]">Scheduled Amount</span>
+            <p class="text-base font-semibold text-[#111827]">Rp 390,000</p>
+          </div>
+        </div>
+
+        <!-- 2. Invoice History Table -->
+        <div class="space-y-3 pt-1">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-semibold text-[#111827]">Billing History & Invoices</h4>
+            <span class="text-xs text-[#71717a]">All recorded transactions</span>
+          </div>
+
+          <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="bg-[#F9FAFB] border-b border-[#eaecf0]">
-                  <th class="px-4 py-2.5 text-[11px] font-extrabold text-[#667085] uppercase tracking-wider">Detail</th>
-                  <th class="px-4 py-2.5 text-[11px] font-extrabold text-[#667085] uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-2.5 text-[11px] font-extrabold text-[#667085] uppercase tracking-wider">Date</th>
-                  <th class="px-4 py-2.5 text-[11px] font-extrabold text-[#667085] uppercase tracking-wider text-right">Credits Change</th>
+                <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                  <th class="px-4 py-2.5">Invoice ID</th>
+                  <th class="px-4 py-2.5">Date</th>
+                  <th class="px-4 py-2.5">Description</th>
+                  <th class="px-4 py-2.5">Amount</th>
+                  <th class="px-4 py-2.5">Status</th>
+                  <th class="px-4 py-2.5 text-right">Invoice</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-[#eaecf0] text-[12px]">
-                <tr>
-                  <td class="px-4 py-3.5 font-bold text-[#111827]">Daily Login Bonus</td>
-                  <td class="px-4 py-3.5 text-[#667085]">Acquired</td>
-                  <td class="px-4 py-3.5 text-[#98a2b3]">2026-05-08 04:14</td>
-                  <td class="px-4 py-3.5 text-right font-extrabold text-green-600">+30</td>
+              <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
+                <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                  <td class="px-4 py-3 font-medium text-[#111827] font-mono">INV-2026-009</td>
+                  <td class="px-4 py-3 text-[#71717a]">Sep 09, 2026</td>
+                  <td class="px-4 py-3 font-medium text-[#111827]">Pro Plan (Monthly Renewal)</td>
+                  <td class="px-4 py-3 font-medium text-[#111827]">Rp 390,000</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
+                      Paid
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-right">
+                    <button
+                      type="button"
+                      class="btn-download-invoice inline-flex items-center justify-center gap-1 h-7 px-2.5 rounded-md border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-[11px] font-medium text-[#18181b] transition-colors shadow-2xs cursor-pointer"
+                      data-invoice="INV-2026-009"
+                    >
+                      <i class="ti ti-download text-xs"></i>
+                      <span>PDF</span>
+                    </button>
+                  </td>
                 </tr>
-                <tr>
-                  <td class="px-4 py-3.5 font-bold text-[#111827]">Daily Bonus Credits Expired</td>
-                  <td class="px-4 py-3.5 text-[#667085]">Consumed</td>
-                  <td class="px-4 py-3.5 text-[#98a2b3]">2026-05-07 06:59</td>
-                  <td class="px-4 py-3.5 text-right font-extrabold text-red-600">-30</td>
+                <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                  <td class="px-4 py-3 font-medium text-[#111827] font-mono">INV-2026-008</td>
+                  <td class="px-4 py-3 text-[#71717a]">Sep 08, 2026</td>
+                  <td class="px-4 py-3 font-medium text-[#111827]">Credit Pack (150 Credits)</td>
+                  <td class="px-4 py-3 font-medium text-[#111827]">Rp 179,000</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
+                      Paid
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-right">
+                    <button
+                      type="button"
+                      class="btn-download-invoice inline-flex items-center justify-center gap-1 h-7 px-2.5 rounded-md border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-[11px] font-medium text-[#18181b] transition-colors shadow-2xs cursor-pointer"
+                      data-invoice="INV-2026-008"
+                    >
+                      <i class="ti ti-download text-xs"></i>
+                      <span>PDF</span>
+                    </button>
+                  </td>
                 </tr>
-                <tr>
-                  <td class="px-4 py-3.5 font-bold text-[#111827]">AI Asset Generation (Studio)</td>
-                  <td class="px-4 py-3.5 text-[#667085]">Spent</td>
-                  <td class="px-4 py-3.5 text-[#98a2b3]">2026-05-07 04:06</td>
-                  <td class="px-4 py-3.5 text-right font-extrabold text-red-600">-50</td>
+                <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                  <td class="px-4 py-3 font-medium text-[#111827] font-mono">INV-2026-007</td>
+                  <td class="px-4 py-3 text-[#71717a]">Aug 09, 2026</td>
+                  <td class="px-4 py-3 font-medium text-[#111827]">Pro Plan (Monthly Renewal)</td>
+                  <td class="px-4 py-3 font-medium text-[#111827]">Rp 390,000</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
+                      Paid
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-right">
+                    <button
+                      type="button"
+                      class="btn-download-invoice inline-flex items-center justify-center gap-1 h-7 px-2.5 rounded-md border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-[11px] font-medium text-[#18181b] transition-colors shadow-2xs cursor-pointer"
+                      data-invoice="INV-2026-007"
+                    >
+                      <i class="ti ti-download text-xs"></i>
+                      <span>PDF</span>
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -249,53 +558,1363 @@
         </div>
       </section>
 
-      <!-- ══════════ BILLING TAB CONTENT ══════════ -->
-      <section id="manage-account-tab-billing" class="manage-account-tab-section space-y-8 hidden">
-        <div>
-          <h3 class="text-[20px] font-bold text-[#111827] tracking-tight">Billing</h3>
-          <p class="text-[13px] text-[#667085] mt-1">Review your invoices and invoice download history.</p>
-        </div>
-
-        <div class="h-64 border-2 border-dashed border-[#eaecf0] rounded-3xl flex flex-col items-center justify-center p-6 bg-[#F9FAFB]">
-          <div class="w-12 h-12 rounded-full bg-white border border-[#eaecf0] flex items-center justify-center text-[#98a2b3] shadow-sm mb-3">
-            <i class="ti ti-cloud text-[22px]"></i>
-          </div>
-          <span class="text-[14px] font-bold text-[#111827]">Oops.</span>
-          <p class="text-[12px] text-[#667085] mt-1">No transaction history found on your account.</p>
-        </div>
-      </section>
-
       <!-- ══════════ AFFILIATE TAB CONTENT ══════════ -->
-      <section id="manage-account-tab-affiliate" class="manage-account-tab-section space-y-8 hidden">
+      <section id="manage-account-tab-affiliate" class="manage-account-tab-section space-y-6 hidden">
         <div>
-          <h3 class="text-[20px] font-bold text-[#111827] tracking-tight">Affiliate Program</h3>
-          <p class="text-[13px] text-[#667085] mt-1">Manage your affiliate links and earnings.</p>
+          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Affiliate</h3>
         </div>
-        <div class="h-64 border-2 border-dashed border-[#eaecf0] rounded-3xl flex flex-col items-center justify-center p-6 bg-[#F9FAFB]">
-          <div class="w-12 h-12 rounded-full bg-white border border-[#eaecf0] flex items-center justify-center text-[#98a2b3] shadow-sm mb-3">
-            <i class="ti ti-users text-[22px]"></i>
+
+        <!-- Affiliate Welcome / Commission Banner with Wipe Light Animation -->
+        <div class="card-wipe-shine p-4 rounded-xl bg-blue-600 text-white shadow-xs flex items-center">
+          <p class="text-xs font-medium text-white relative z-10">You’re in! Earn 20% commission from every successful referral</p>
+        </div>
+
+        <!-- Referral Link Box with Direct Sharing -->
+        <div class="p-5 rounded-xl border border-[#eaecf0] bg-white space-y-3.5 shadow-xs">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <i class="ti ti-link text-sm text-[#71717a]"></i>
+              <span class="text-xs font-medium text-[#111827]">Your Referral Link</span>
+            </div>
+            <div class="flex items-center gap-1 text-[11px] text-[#71717a]">
+              <i class="ti ti-cookie text-xs"></i>
+              <span>60-day cookie window</span>
+            </div>
           </div>
-          <span class="text-[14px] font-bold text-[#111827]">Affiliate Dashboard Coming Soon.</span>
-          <p class="text-[12px] text-[#667085] mt-1">We are currently building this feature.</p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div class="flex-1 flex items-center bg-[#fafafa] border border-[#e4e4e7] rounded-lg px-3 h-9 transition-colors">
+              <span class="text-xs text-[#a1a1aa] select-none mr-1.5 font-mono">https://</span>
+              <span id="modal-ref-link" class="text-xs text-[#111827] font-mono select-all truncate">xeni.ai/ref/janecooper</span>
+            </div>
+            <button
+              id="btn-modal-copy-ref"
+              type="button"
+              class="inline-flex items-center justify-center gap-1.5 h-9 px-4 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors cursor-pointer shrink-0 shadow-xs active:scale-98"
+            >
+              <i class="ti ti-copy text-xs"></i>
+              <span id="modal-copy-btn-text">Copy Link</span>
+            </button>
+          </div>
+
+          <!-- Quick Share Buttons -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 text-xs text-[#71717a]">
+            <span>Share directly:</span>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <a
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxeni.ai%2Fref%2Fjanecooper"
+                target="_blank"
+                rel="noreferrer"
+                class="w-8 h-8 rounded-lg border border-[#e4e4e7] bg-white hover:border-[#18181b] hover:bg-[#fafafa] transition-all flex items-center justify-center cursor-pointer shadow-2xs group"
+                title="Share to Facebook"
+                aria-label="Share to Facebook"
+              >
+                <SocialIcon platform="facebook" size="share" class="transition-transform group-hover:scale-110" />
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                class="w-8 h-8 rounded-lg border border-[#e4e4e7] bg-white hover:border-[#18181b] hover:bg-[#fafafa] transition-all flex items-center justify-center cursor-pointer shadow-2xs group"
+                title="Share to Instagram"
+                aria-label="Share to Instagram"
+              >
+                <SocialIcon platform="instagram" size="share" class="transition-transform group-hover:scale-110" />
+              </a>
+              <a
+                href="https://threads.net/intent/post?text=Automate%20your%20entire%20content%20pipeline%20with%20Xeni%20https%3A%2F%2Fxeni.ai%2Fref%2Fjanecooper"
+                target="_blank"
+                rel="noreferrer"
+                class="w-8 h-8 rounded-lg border border-[#e4e4e7] bg-white hover:border-[#18181b] hover:bg-[#fafafa] transition-all flex items-center justify-center cursor-pointer shadow-2xs group"
+                title="Share to Threads"
+                aria-label="Share to Threads"
+              >
+                <SocialIcon platform="threads" size="share" class="transition-transform group-hover:scale-110" />
+              </a>
+              <a
+                href="https://api.whatsapp.com/send?text=Check%20out%20Xeni%20AI%20for%20content%20automation%3A%20https%3A%2F%2Fxeni.ai%2Fref%2Fjanecooper"
+                target="_blank"
+                rel="noreferrer"
+                class="w-8 h-8 rounded-lg border border-[#e4e4e7] bg-white hover:border-[#18181b] hover:bg-[#fafafa] transition-all flex items-center justify-center cursor-pointer shadow-2xs group"
+                title="Share via WhatsApp"
+                aria-label="Share via WhatsApp"
+              >
+                <SocialIcon platform="whatsapp" size="share" class="transition-transform group-hover:scale-110" />
+              </a>
+              <a
+                href="https://twitter.com/intent/tweet?text=Automate%20your%20entire%20content%20pipeline%20with%20Xeni&url=https%3A%2F%2Fxeni.ai%2Fref%2Fjanecooper"
+                target="_blank"
+                rel="noreferrer"
+                class="w-8 h-8 rounded-lg border border-[#e4e4e7] bg-white hover:border-[#18181b] hover:bg-[#fafafa] transition-all flex items-center justify-center cursor-pointer shadow-2xs group"
+                title="Share to X"
+                aria-label="Share to X"
+              >
+                <SocialIcon platform="x" size="share" class="transition-transform group-hover:scale-110" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Earnings & Performance Metrics -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+          <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-[#71717a]">Total Earned</span>
+              <i class="ti ti-wallet text-sm text-[#a1a1aa]"></i>
+            </div>
+            <p class="text-lg font-semibold text-[#111827] tracking-tight">Rp 7,680,000</p>
+          </div>
+          <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-[#71717a]">Paid Out</span>
+              <i class="ti ti-circle-check text-sm text-emerald-600"></i>
+            </div>
+            <p class="text-lg font-semibold text-[#111827] tracking-tight">Rp 5,750,000</p>
+          </div>
+          <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-[#71717a]">Pending Payout</span>
+              <i class="ti ti-clock-hour-4 text-sm text-amber-500"></i>
+            </div>
+            <p class="text-lg font-semibold text-[#111827] tracking-tight">Rp 1,930,000</p>
+          </div>
+          <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-[#71717a]">Referrals</span>
+              <i class="ti ti-users text-sm text-[#a1a1aa]"></i>
+            </div>
+            <p class="text-lg font-semibold text-[#111827] tracking-tight">12</p>
+          </div>
+        </div>
+
+        <!-- Payout Method & Settings -->
+        <div class="p-5 rounded-xl border border-[#eaecf0] bg-white space-y-4 shadow-xs">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-semibold text-[#111827]">Payout Account Details</h4>
+            <div class="flex items-center gap-2">
+              <button
+                id="btn-open-payment-history"
+                type="button"
+                class="inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-lg border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-xs font-medium text-[#18181b] transition-colors shadow-xs cursor-pointer"
+              >
+                <i class="ti ti-history text-xs text-[#71717a]"></i>
+                <span>Payout History</span>
+              </button>
+              <button
+                id="btn-edit-payout-details"
+                type="button"
+                class="hidden inline-flex items-center justify-center h-8 px-3 rounded-lg border border-[#e4e4e7] bg-white hover:bg-[#f4f4f5] text-xs font-medium text-[#18181b] transition-colors shadow-xs cursor-pointer"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+
+          <!-- Empty State (Default) -->
+          <div id="payout-empty-state" class="p-4.5 rounded-lg border border-dashed border-[#eaecf0] bg-[#fafafa] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-white border border-[#eaecf0] flex items-center justify-center text-[#71717a] shrink-0 shadow-2xs">
+                <i class="ti ti-building-bank text-base"></i>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-[#111827]">No payout account configured yet</p>
+                <p class="text-[11px] text-[#71717a]">Choose Bank Transfer (BCA, Mandiri, BRI, BNI) or E-Wallet (GoPay, OVO, DANA).</p>
+              </div>
+            </div>
+            <button
+              id="btn-add-payout-method"
+              type="button"
+              class="inline-flex items-center justify-center gap-1.5 h-8 px-3.5 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors cursor-pointer shrink-0 shadow-xs"
+            >
+              <i class="ti ti-plus text-xs"></i>
+              <span>Set Up Payout Account</span>
+            </button>
+          </div>
+
+          <!-- Configured State (Hidden until user adds method) -->
+          <div id="payout-configured-state" class="hidden p-3.5 rounded-lg border border-[#eaecf0] bg-[#fafafa] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div id="display-payout-icon-container" class="w-9 h-9 rounded-lg bg-white border border-[#eaecf0] flex items-center justify-center text-[#111827] shadow-2xs shrink-0">
+                <i id="display-payout-icon" class="ti ti-building-bank text-base"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-medium text-[#111827]" id="display-payout-method">Bank BCA</span>
+                </div>
+                <p class="text-[11px] text-[#71717a] mt-0.5 font-mono" id="display-payout-account">8271928371 (a.n. Jane Cooper)</p>
+              </div>
+            </div>
+            <div class="text-left sm:text-right border-t sm:border-t-0 border-[#eaecf0] pt-2 sm:pt-0">
+              <span class="text-[11px] text-[#71717a] block">Minimum Payout Threshold</span>
+              <span class="text-xs font-medium text-[#111827]">Rp 250,000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Referral Activity Table -->
+        <div class="space-y-3 pt-1">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-semibold text-[#111827]">Recent Referral Activity</h4>
+          </div>
+
+          <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                  <th class="px-4 py-2.5">User</th>
+                  <th class="px-4 py-2.5">Plan</th>
+                  <th class="px-4 py-2.5">Date</th>
+                  <th class="px-4 py-2.5">Payout Status</th>
+                  <th class="px-4 py-2.5 text-right">Commission (20%)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
+                <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">al***@gmail.com</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10.5px] font-medium text-[#71717a]">Pro Monthly</span>
+                    <span class="text-[#a1a1aa] ml-1 text-[11px]">(Rp 390,000)</span>
+                  </td>
+                  <td class="px-4 py-3 text-[#71717a]">Sep 06, 2026</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10.5px] font-medium text-amber-700">
+                      <span class="w-1 h-1 rounded-full bg-amber-500"></span>
+                      Pending
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-right font-medium text-emerald-600">+Rp 78,000</td>
+                </tr>
+                <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">ma***@metaflow.io</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10.5px] font-medium text-[#71717a]">Pro Yearly</span>
+                    <span class="text-[#a1a1aa] ml-1 text-[11px]">(Rp 3,900,000)</span>
+                  </td>
+                  <td class="px-4 py-3 text-[#71717a]">Aug 28, 2026</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-medium text-emerald-700">
+                      <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
+                      Paid
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-right font-medium text-emerald-600">+Rp 780,000</td>
+                </tr>
+                <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                  <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">sa***@design.co</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10.5px] font-medium text-[#71717a]">Pro Monthly</span>
+                    <span class="text-[#a1a1aa] ml-1 text-[11px]">(Rp 390,000)</span>
+                  </td>
+                  <td class="px-4 py-3 text-[#71717a]">Aug 14, 2026</td>
+                  <td class="px-4 py-3">
+                    <span class="inline-flex items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-medium text-emerald-700">
+                      <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
+                      Paid
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-right font-medium text-emerald-600">+Rp 78,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
       <!-- ══════════ FEEDBACK TAB CONTENT ══════════ -->
-      <section id="manage-account-tab-feedback" class="manage-account-tab-section space-y-8 hidden">
+      <section id="manage-account-tab-feedback" class="manage-account-tab-section space-y-6 hidden w-full">
         <div>
-          <h3 class="text-[20px] font-bold text-[#111827] tracking-tight">Feedback</h3>
-          <p class="text-[13px] text-[#667085] mt-1">Share your thoughts and suggestions with us.</p>
-        </div>
-        <div class="h-64 border-2 border-dashed border-[#eaecf0] rounded-3xl flex flex-col items-center justify-center p-6 bg-[#F9FAFB]">
-          <div class="w-12 h-12 rounded-full bg-white border border-[#eaecf0] flex items-center justify-center text-[#98a2b3] shadow-sm mb-3">
-            <i class="ti ti-message-dots text-[22px]"></i>
+          <div class="flex items-center gap-2">
+            <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Feedback</h3>
+            <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10.5px] font-medium text-[#71717a]">Direct to Founder Team</span>
           </div>
-          <span class="text-[14px] font-bold text-[#111827]">We value your feedback.</span>
-          <p class="text-[12px] text-[#667085] mt-1">Feature request form will be available here.</p>
         </div>
+
+        <form id="modal-feedback-form" class="space-y-4 w-full">
+          <!-- Hidden select to keep existing backend/script compatibility -->
+          <select id="modal-feedback-topic" class="hidden">
+            <option value="Feature Request" selected>Feature Request</option>
+            <option value="Bug Report">Bug Report</option>
+            <option value="UI & Design Improvement">UI & Design Improvement</option>
+            <option value="General Feedback">General Feedback</option>
+          </select>
+
+          <!-- Interactive Topic Selector Pills -->
+          <div class="space-y-1.5">
+            <label class="block text-xs font-medium text-[#3f3f46]">Category</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="feedback-category-pills">
+              <button
+                type="button"
+                data-value="Feature Request"
+                class="feedback-category-pill active px-3 py-2 rounded-lg border border-[#18181b] bg-[#18181b] text-white text-xs font-medium flex items-center gap-2 transition-colors cursor-pointer shadow-xs text-left"
+              >
+                <i class="ti ti-bulb text-sm"></i>
+                <span>Feature Request</span>
+              </button>
+              <button
+                type="button"
+                data-value="Bug Report"
+                class="feedback-category-pill px-3 py-2 rounded-lg border border-[#e4e4e7] bg-white text-[#3f3f46] hover:bg-[#f4f4f5] text-xs font-medium flex items-center gap-2 transition-colors cursor-pointer shadow-xs text-left"
+              >
+                <i class="ti ti-bug text-sm"></i>
+                <span>Bug Report</span>
+              </button>
+              <button
+                type="button"
+                data-value="UI & Design Improvement"
+                class="feedback-category-pill px-3 py-2 rounded-lg border border-[#e4e4e7] bg-white text-[#3f3f46] hover:bg-[#f4f4f5] text-xs font-medium flex items-center gap-2 transition-colors cursor-pointer shadow-xs text-left"
+              >
+                <i class="ti ti-palette text-sm"></i>
+                <span>Design & UI</span>
+              </button>
+              <button
+                type="button"
+                data-value="General Feedback"
+                class="feedback-category-pill px-3 py-2 rounded-lg border border-[#e4e4e7] bg-white text-[#3f3f46] hover:bg-[#f4f4f5] text-xs font-medium flex items-center gap-2 transition-colors cursor-pointer shadow-xs text-left"
+              >
+                <i class="ti ti-message-2 text-sm"></i>
+                <span>General</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Subject Title Input -->
+          <div class="space-y-1.5">
+            <label class="block text-xs font-medium text-[#3f3f46]">Subject</label>
+            <input
+              type="text"
+              id="modal-feedback-subject"
+              placeholder="Brief summary (e.g. Auto-post carousel to Instagram, custom fonts)"
+              class="flex h-9 w-full rounded-lg border border-[#e4e4e7] bg-white px-3 py-1 text-xs text-[#18181b] placeholder:text-[#a1a1aa] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors"
+            />
+          </div>
+
+          <!-- Message Textarea with character count -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-medium text-[#3f3f46]">Detailed Message</label>
+              <span id="feedback-char-count" class="text-[11px] text-[#a1a1aa]">0 / 1000</span>
+            </div>
+            <textarea
+              id="modal-feedback-message"
+              rows="4"
+              required
+              maxlength="1000"
+              placeholder="Tell us what you'd like to see, or describe the issue you encountered..."
+              class="flex min-h-[96px] w-full rounded-lg border border-[#e4e4e7] bg-white p-3 text-xs text-[#18181b] placeholder:text-[#a1a1aa] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Attachment Upload Area (Up to 5 items with View & Delete) -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-medium text-[#3f3f46]">
+                Attachments <span class="text-[#a1a1aa] font-normal">(optional, max 5)</span>
+              </label>
+              <span id="attachment-counter" class="text-[11px] text-[#a1a1aa]">0 / 5 files</span>
+            </div>
+
+            <!-- Upload Drop/Click Box (Visible when items < 5) -->
+            <label
+              id="attachment-drop-area"
+              for="feedback-attachment-input"
+              class="p-3.5 rounded-lg border border-dashed border-[#e4e4e7] bg-[#fafafa] hover:bg-white transition-colors flex items-center justify-between gap-3 cursor-pointer group"
+            >
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-white border border-[#eaecf0] flex items-center justify-center text-[#71717a] group-hover:text-[#18181b] transition-colors shadow-2xs">
+                  <i class="ti ti-photo-plus text-sm"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-medium text-[#18181b]">Attach screenshots or screen recordings</p>
+                  <p class="text-[11px] text-[#a1a1aa]">PNG, JPG, or MP4 up to 10MB per file (max 5 files)</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center justify-center h-7 px-2.5 rounded-md border border-[#e4e4e7] bg-white text-[11px] font-medium text-[#18181b] shadow-2xs group-hover:bg-[#f4f4f5] transition-colors">Choose Files</span>
+            </label>
+            <input type="file" id="feedback-attachment-input" accept="image/*,video/*" multiple class="hidden" />
+
+            <!-- Attached Files List (with View & Delete) -->
+            <div id="attachment-files-list" class="space-y-1.5 hidden">
+              <!-- Dynamically populated via JavaScript -->
+            </div>
+          </div>
+
+          <!-- Success Alert -->
+          <div id="modal-feedback-success" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-3 animate-in fade-in duration-200">
+            <i class="ti ti-circle-check text-base text-emerald-600 shrink-0 mt-0.5"></i>
+            <div>
+              <p class="font-medium text-emerald-900">Thank you for your feedback!</p>
+              <p class="text-[11px] text-emerald-700 mt-0.5">Ticket <span class="font-mono font-medium">#XN-8419</span> logged. Our product team will review it shortly.</p>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="flex items-center justify-end pt-2">
+            <button
+              type="submit"
+              id="btn-submit-modal-feedback"
+              class="inline-flex items-center justify-center h-9 px-4 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors cursor-pointer shadow-xs active:scale-98"
+            >
+              Submit Feedback
+            </button>
+          </div>
+        </form>
       </section>
 
     </main>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 1: SETUP PAYOUT METHOD ══════════ -->
+<div
+  id="modal-payout-setup"
+  class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white w-full max-w-md rounded-xl p-6 shadow-xl border border-[#eaecf0] space-y-4.5 relative animate-in zoom-in-95 duration-200">
+    <div class="flex items-center justify-between pb-3 border-b border-[#eaecf0]">
+      <div>
+        <h3 id="payout-modal-title" class="text-base font-semibold text-[#111827]">Payout Account Information</h3>
+        <p class="text-xs text-[#71717a]">Choose a bank account or e-wallet for automatic monthly commission payouts.</p>
+      </div>
+      <button id="btn-close-payout-modal" type="button" class="h-7 w-7 rounded-md flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+
+    <!-- Payout Method Selector -->
+    <div class="space-y-1.5">
+      <label class="block text-xs font-medium text-[#3f3f46]">Payout Method</label>
+      <div class="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          class="payout-method-opt px-3 py-2 rounded-lg border border-[#18181b] bg-[#18181b] text-white hover:bg-black text-xs font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+          data-method="Bank Transfer"
+          data-icon="ti-building-bank"
+        >
+          <i class="ti ti-building-bank text-sm"></i>
+          <span>Bank Transfer</span>
+        </button>
+        <button
+          type="button"
+          class="payout-method-opt px-3 py-2 rounded-lg border border-[#e4e4e7] bg-white text-[#3f3f46] hover:bg-[#f4f4f5] hover:text-[#18181b] text-xs font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+          data-method="E-Wallet"
+          data-icon="ti-wallet"
+        >
+          <i class="ti ti-wallet text-sm"></i>
+          <span>E-Wallet</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Dynamic Form Fields -->
+    <form id="form-payout-setup" class="space-y-3.5">
+      <!-- Bank Transfer Fields (Default Active) -->
+      <div id="field-bank-container" class="space-y-2.5">
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-[#3f3f46]">Bank Name</label>
+          <select
+            id="input-bank-name"
+            class="flex h-9 w-full rounded-lg border border-[#e4e4e7] bg-white px-3 py-1 text-xs text-[#18181b] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors"
+          >
+            <option value="BCA">BCA (Bank Central Asia)</option>
+            <option value="Mandiri">Bank Mandiri</option>
+            <option value="BRI">BRI (Bank Rakyat Indonesia)</option>
+            <option value="BNI">BNI (Bank Negara Indonesia)</option>
+            <option value="BSI">BSI (Bank Syariah Indonesia)</option>
+            <option value="Bank Jago">Bank Jago</option>
+            <option value="CIMB Niaga">CIMB Niaga</option>
+            <option value="Permata">Bank Permata</option>
+            <option value="Bank Lainnya">Other Bank</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-[#3f3f46]">Account Number</label>
+          <input
+            type="text"
+            id="input-bank-account"
+            placeholder="e.g. 8271928371"
+            class="flex h-9 w-full rounded-lg border border-[#e4e4e7] bg-white px-3 py-1 text-xs text-[#18181b] placeholder:text-[#a1a1aa] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors font-mono"
+          />
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-[#3f3f46]">Account Holder Name</label>
+          <input
+            type="text"
+            id="input-bank-holder"
+            placeholder="Full name as shown on bank account"
+            class="flex h-9 w-full rounded-lg border border-[#e4e4e7] bg-white px-3 py-1 text-xs text-[#18181b] placeholder:text-[#a1a1aa] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors"
+          />
+        </div>
+      </div>
+
+      <!-- E-Wallet Fields (Hidden by default) -->
+      <div id="field-ewallet-container" class="hidden space-y-2.5">
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-[#3f3f46]">E-Wallet Provider</label>
+          <select
+            id="input-ewallet-provider"
+            class="flex h-9 w-full rounded-lg border border-[#e4e4e7] bg-white px-3 py-1 text-xs text-[#18181b] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors"
+          >
+            <option value="GoPay">GoPay</option>
+            <option value="OVO">OVO</option>
+            <option value="DANA">DANA</option>
+            <option value="ShopeePay">ShopeePay</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-[#3f3f46]">Phone Number / Account ID</label>
+          <input
+            type="tel"
+            id="input-ewallet-phone"
+            placeholder="e.g. +62 812-3456-7890"
+            class="flex h-9 w-full rounded-lg border border-[#e4e4e7] bg-white px-3 py-1 text-xs text-[#18181b] placeholder:text-[#a1a1aa] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors font-mono"
+          />
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-medium text-[#3f3f46]">Registered Account Name</label>
+          <input
+            type="text"
+            id="input-ewallet-name"
+            placeholder="Full name registered on e-wallet"
+            class="flex h-9 w-full rounded-lg border border-[#e4e4e7] bg-white px-3 py-1 text-xs text-[#18181b] placeholder:text-[#a1a1aa] shadow-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#18181b] transition-colors"
+          />
+        </div>
+      </div>
+
+      <!-- Note -->
+      <p class="text-[11px] text-[#71717a] leading-relaxed">Make sure your account details match your legal identity to avoid payout delays.</p>
+
+      <div class="flex items-center justify-end gap-2 pt-3 border-t border-[#eaecf0]">
+        <button
+          type="button"
+          id="btn-cancel-payout-modal"
+          class="inline-flex items-center justify-center h-8 px-3 rounded-lg border border-[#e4e4e7] bg-white text-xs font-medium text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer shadow-xs"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center h-8 px-3.5 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors cursor-pointer shadow-xs"
+        >
+          Save Payout Account
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 2: PAYMENT HISTORY ══════════ -->
+<div
+  id="modal-payment-history"
+  class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white w-full max-w-2xl rounded-xl p-6 shadow-xl border border-[#eaecf0] space-y-4.5 relative animate-in zoom-in-95 duration-200">
+    <div class="flex items-center justify-between pb-3 border-b border-[#eaecf0]">
+      <div>
+        <h3 class="text-base font-semibold text-[#111827]">Commission Payout History</h3>
+        <p class="text-xs text-[#71717a]">Record of monthly commission transfers to your payout account.</p>
+      </div>
+      <button id="btn-close-payment-history" type="button" class="h-7 w-7 rounded-md flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+
+    <!-- Overview Badges -->
+    <div class="grid grid-cols-2 gap-3.5">
+      <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1">
+        <span class="text-xs font-medium text-[#71717a]">Total Paid Out</span>
+        <p class="text-lg font-semibold text-[#111827] tracking-tight">Rp 5,750,000</p>
+      </div>
+      <div class="p-4 rounded-xl border border-[#eaecf0] bg-white shadow-xs space-y-1">
+        <span class="text-xs font-medium text-[#71717a]">Successful Payouts</span>
+        <p class="text-lg font-semibold text-[#111827] tracking-tight">3 Payouts</p>
+      </div>
+    </div>
+
+    <!-- History Table -->
+    <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+            <th class="px-4 py-2.5">Reference</th>
+            <th class="px-4 py-2.5">Date</th>
+            <th class="px-4 py-2.5">Method</th>
+            <th class="px-4 py-2.5">Amount</th>
+            <th class="px-4 py-2.5">Status</th>
+            <th class="px-4 py-2.5 text-right">Receipt</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
+          <tr class="hover:bg-[#fafafa]/50 transition-colors">
+            <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">PAY-9481</td>
+            <td class="px-4 py-3 text-[#71717a]">Sep 01, 2026</td>
+            <td class="px-4 py-3 text-[#111827]">Bank BCA (•••• 8371)</td>
+            <td class="px-4 py-3 font-medium text-[#111827]">Rp 2,450,000</td>
+            <td class="px-4 py-3">
+              <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-medium text-emerald-700">Successful</span>
+            </td>
+            <td class="px-4 py-3 text-right">
+              <button class="text-[#71717a] hover:text-[#18181b] cursor-pointer p-1 rounded-md hover:bg-[#f4f4f5] transition-colors" title="Download Transfer Receipt">
+                <i class="ti ti-download text-sm"></i>
+              </button>
+            </td>
+          </tr>
+          <tr class="hover:bg-[#fafafa]/50 transition-colors">
+            <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">PAY-8219</td>
+            <td class="px-4 py-3 text-[#71717a]">Aug 01, 2026</td>
+            <td class="px-4 py-3 text-[#111827]">Bank BCA (•••• 8371)</td>
+            <td class="px-4 py-3 font-medium text-[#111827]">Rp 2,100,000</td>
+            <td class="px-4 py-3">
+              <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-medium text-emerald-700">Successful</span>
+            </td>
+            <td class="px-4 py-3 text-right">
+              <button class="text-[#71717a] hover:text-[#18181b] cursor-pointer p-1 rounded-md hover:bg-[#f4f4f5] transition-colors" title="Download Transfer Receipt">
+                <i class="ti ti-download text-sm"></i>
+              </button>
+            </td>
+          </tr>
+          <tr class="hover:bg-[#fafafa]/50 transition-colors">
+            <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">PAY-7104</td>
+            <td class="px-4 py-3 text-[#71717a]">Jul 01, 2026</td>
+            <td class="px-4 py-3 text-[#111827]">GoPay (0812••••891)</td>
+            <td class="px-4 py-3 font-medium text-[#111827]">Rp 1,200,000</td>
+            <td class="px-4 py-3">
+              <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10.5px] font-medium text-emerald-700">Successful</span>
+            </td>
+            <td class="px-4 py-3 text-right">
+              <button class="text-[#71717a] hover:text-[#18181b] cursor-pointer p-1 rounded-md hover:bg-[#f4f4f5] transition-colors" title="Download Transfer Receipt">
+                <i class="ti ti-download text-sm"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex items-center justify-end pt-3 border-t border-[#eaecf0]">
+      <button
+        id="btn-close-payment-history-bottom"
+        type="button"
+        class="inline-flex items-center justify-center h-8 px-4 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors cursor-pointer shadow-xs"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 5: UPGRADE PLAN MODAL ══════════ -->
+<div
+  id="modal-upgrade-plan"
+  class="hidden fixed inset-0 z-[210] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white w-full max-w-md rounded-xl p-6 shadow-xl border border-[#eaecf0] space-y-5 relative animate-in zoom-in-95 duration-200">
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-3 border-b border-[#eaecf0]">
+      <div>
+        <h3 class="text-base font-semibold text-[#111827]">Upgrade Subscription</h3>
+        <p class="text-xs text-[#71717a] mt-0.5">Available tiers: Free, Starter, Pro, Agency.</p>
+      </div>
+      <button id="btn-close-upgrade-plan" type="button" class="h-7 w-7 rounded-md flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+
+    <!-- Agency Plan Upgrade Target Card -->
+    <div class="space-y-3">
+      <div class="p-4 rounded-xl border border-[#18181b] bg-[#fafafa] space-y-3 shadow-xs">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-[#111827]">Agency Plan</span>
+              <span class="inline-flex items-center rounded-md border border-transparent bg-[#18181b] px-2 py-0.5 text-[10px] font-medium text-white">Highest Tier</span>
+            </div>
+            <p class="text-xs text-[#71717a] mt-0.5">For large teams & content agencies</p>
+          </div>
+          <div class="text-right">
+            <span class="text-base font-semibold text-[#111827]">Rp 990,000</span>
+            <span class="text-[11px] text-[#71717a] block">/ month</span>
+          </div>
+        </div>
+
+        <div class="pt-2.5 border-t border-[#eaecf0] space-y-1.5 text-xs text-[#18181b]">
+          <div class="flex items-center gap-2">
+            <i class="ti ti-check text-xs text-[#18181b]"></i>
+            <span><strong>5,000</strong> Monthly Credits</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="ti ti-check text-xs text-[#18181b]"></i>
+            <span>Multi-brand DNA & Unlimited Team Members</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="ti ti-check text-xs text-[#18181b]"></i>
+            <span>Fastest AI Render Priority</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warning note: old credits expire -->
+      <div class="p-3.5 rounded-lg bg-[#fafafa] border border-[#eaecf0] text-xs text-[#71717a] leading-relaxed">
+        <span class="font-medium text-[#111827]">Upgrade Note:</span> Remaining Pro plan monthly credits (<span id="upgrade-modal-sisa-credits" class="font-medium text-[#18181b]">1,000 credits</span>) will <strong>expire</strong> upon upgrade. Your billing cycle will immediately reset to Agency Plan with <strong>5,000 fresh credits</strong>.
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end gap-2 pt-3 border-t border-[#eaecf0]">
+      <button
+        type="button"
+        id="btn-cancel-upgrade-modal"
+        class="inline-flex items-center justify-center h-8 px-3 rounded-lg border border-[#e4e4e7] bg-white text-xs font-medium text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer shadow-xs"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        id="btn-confirm-upgrade-agency"
+        class="inline-flex items-center justify-center h-8 px-3.5 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors cursor-pointer shadow-xs"
+      >
+        <span>Upgrade to Agency (Rp 990,000)</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 8: RENEW EARLY CONFIRMATION MODAL ══════════ -->
+<div
+  id="modal-renew-early"
+  class="hidden fixed inset-0 z-[210] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white w-full max-w-md rounded-xl p-6 shadow-xl border border-[#eaecf0] space-y-5 relative animate-in zoom-in-95 duration-200">
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-3 border-b border-[#eaecf0]">
+      <div>
+        <h3 class="text-base font-semibold text-[#111827]">Renew Subscription Early</h3>
+        <p class="text-xs text-[#71717a] mt-0.5">Start a new cycle today without waiting for your renewal date.</p>
+      </div>
+      <button id="btn-close-renew-early" type="button" class="h-7 w-7 rounded-md flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+
+    <!-- Package Detail Card -->
+    <div class="space-y-3">
+      <div class="p-4 rounded-xl border border-[#18181b] bg-[#fafafa] space-y-3 shadow-xs">
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-[#111827]">Pro Plan — Monthly</span>
+              <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">Active Plan</span>
+            </div>
+            <p class="text-xs text-[#71717a] mt-0.5">Cycle resets immediately starting today</p>
+          </div>
+          <div class="text-right">
+            <span class="text-base font-semibold text-[#111827]">Rp 390,000</span>
+            <span class="text-[11px] text-[#71717a] block">/ month</span>
+          </div>
+        </div>
+
+        <div class="pt-2.5 border-t border-[#eaecf0] space-y-2 text-xs text-[#18181b]">
+          <span class="text-[11px] font-semibold text-[#71717a] uppercase tracking-wider block">What you will get:</span>
+          <div class="flex items-center gap-2">
+            <i class="ti ti-check text-xs text-emerald-600 shrink-0"></i>
+            <span><strong>1,500</strong> fresh monthly credits allocated immediately</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="ti ti-check text-xs text-emerald-600 shrink-0"></i>
+            <span>Billing cycle resets, active for next 30 days</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="ti ti-check text-xs text-emerald-600 shrink-0"></i>
+            <span>Full uninterrupted access to all Pro AI features</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warning note: old monthly credits reset -->
+      <div class="p-3.5 rounded-lg bg-[#fafafa] border border-[#eaecf0] text-xs text-[#71717a] leading-relaxed">
+        <span class="font-medium text-[#111827]">Note:</span> Remaining monthly credits (<span id="renew-modal-sisa-credits" class="font-medium text-[#18181b]">1,000 credits</span>) will <strong>expire and reset</strong>, replaced by 1,500 fresh credits. Your Top-Up credits (if any) remain safe and unaffected.
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end gap-2 pt-3 border-t border-[#eaecf0]">
+      <button
+        type="button"
+        id="btn-cancel-renew-early-modal"
+        class="inline-flex items-center justify-center h-8 px-3 rounded-lg border border-[#e4e4e7] bg-white text-xs font-medium text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer shadow-xs"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        id="btn-confirm-renew-early"
+        class="inline-flex items-center justify-center h-8 px-3.5 rounded-lg bg-[#18181b] hover:bg-black text-white text-xs font-medium transition-colors cursor-pointer shadow-xs"
+      >
+        <span>Confirm Renewal (Rp 390,000)</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 3: TOP UP CREDITS ══════════ -->
+<div
+  id="modal-topup-credits"
+  class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white w-full max-w-4xl max-h-[92vh] rounded-xl p-6 sm:p-7 shadow-xl border border-[#eaecf0] space-y-5 relative overflow-y-auto animate-in zoom-in-95 duration-200">
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-3.5 border-b border-[#eaecf0]">
+      <h3 class="text-base font-semibold text-[#111827] tracking-tight">Need more credits? Top up anytime.</h3>
+      <button id="btn-close-topup-credits" type="button" class="h-7 w-7 rounded-md flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+
+    <form id="form-topup-credits" class="space-y-5">
+      <!-- Pack Options -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <label class="block text-[12.5px] font-medium text-[#111827]">Choose Credit Pack</label>
+          <span class="text-[11.5px] text-[#667085]">One-time payment · Stackable balance</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Pack 50 -->
+          <div
+            class="topup-pack-card p-4 rounded-2xl border border-[#eaecf0] bg-white hover:border-[#111827] cursor-pointer transition-all flex flex-col justify-between space-y-4 text-left"
+            data-credits="50"
+            data-price-monthly="69000"
+            data-price-yearly="55000"
+            data-price-fmt="Rp 69,000"
+            data-label="50 Credits"
+          >
+            <div class="space-y-3.5">
+              <!-- Top Header: Icon + Amount -->
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-[#f3f4f6] flex items-center justify-center text-[#111827] shrink-0 border border-[#eaecf0]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-[#111827]" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <h4 class="text-[16px] font-semibold text-[#111827]">50 Credits</h4>
+              </div>
+
+              <!-- Price -->
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <span class="text-[21px] font-semibold text-[#111827] pack-price-display">Rp 69,000</span>
+                  <span class="text-[11px] text-[#667085] font-normal pack-cycle-display">/mo</span>
+                </div>
+              </div>
+
+              <!-- Jenis Langganan (Radio options) -->
+              <div class="space-y-2 pt-2.5 border-t border-[#f2f4f7]">
+                <span class="text-[9.5px] font-semibold text-[#667085] uppercase tracking-wider block">Billing Frequency</span>
+                <div class="space-y-1.5 text-[11.5px] text-[#344054]">
+                  <label class="flex items-center gap-2 cursor-pointer radio-plan-label">
+                    <input type="radio" name="plan-cycle-50" value="monthly" checked class="text-[#111827] focus:ring-0 cursor-pointer accent-[#111827] radio-cycle-input" />
+                    <span class="font-medium text-[#111827]">Monthly</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer radio-plan-label">
+                    <input type="radio" name="plan-cycle-50" value="yearly" class="text-[#111827] focus:ring-0 cursor-pointer accent-[#111827] radio-cycle-input" />
+                    <span class="text-[#667085]">Yearly, prepaid</span>
+                  </label>
+                </div>
+                <p class="text-[10px] text-[#98a2b3] flex items-center gap-1 pt-0.5">
+                  <span>Cancel anytime, no fee</span>
+                  <i class="ti ti-info-circle text-[11px]"></i>
+                </p>
+              </div>
+
+              <!-- Button Beli Kredit (Above Checklist) -->
+              <div class="pt-1">
+                <button
+                  type="button"
+                  class="btn-buy-card-credit w-full h-9 rounded-lg bg-[#111827] text-white hover:bg-black font-medium text-[12.5px] transition-all cursor-pointer shadow-xs active:scale-98 flex items-center justify-center gap-1.5"
+                  data-credits="50"
+                  data-label="50 Credits"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-white" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                  <span>Buy credits</span>
+                </button>
+              </div>
+
+              <!-- Checklist Hijau (Informasi Masa Aktif) -->
+              <div class="space-y-2 pt-2 border-t border-[#f2f4f7] text-[11.5px] text-[#344054]">
+                <div class="flex items-start gap-2">
+                  <i class="ti ti-check text-[15px] text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span>Credits valid for 6 months while subscribed</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i class="ti ti-check text-[15px] text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span>Instantly added without resetting your current plan</span>
+                </div>
+              </div>
+
+              <!-- Box Informasi AI Image Generation -->
+              <div class="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#eaecf0] space-y-1.5 text-[11px]">
+                <div class="flex items-center gap-1.5 font-medium text-[#111827]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-[#111827]" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                  <span>What can you do with 50 credits?</span>
+                </div>
+                <ul class="text-[10.5px] text-[#475467] space-y-1 list-disc pl-4 leading-relaxed">
+                  <li>Generate up to 50 high-res AI visuals, including HD Upscale & Background Removal</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pack 150 (Default Selected / Popular) -->
+          <div
+            class="topup-pack-card p-4 rounded-2xl border-2 border-[#111827] bg-[#F9FAFB] cursor-pointer transition-all flex flex-col justify-between space-y-4 text-left relative shadow-xs"
+            data-credits="150"
+            data-price-monthly="179000"
+            data-price-yearly="143000"
+            data-price-fmt="Rp 179,000"
+            data-label="150 Credits"
+          >
+            <!-- Centered Populer Badge (shadcn style) -->
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center rounded-md border border-transparent bg-[#111827] px-2.5 py-0.5 text-[10.5px] font-medium text-white shadow-xs whitespace-nowrap z-10">
+              Popular
+            </span>
+
+            <div class="space-y-3.5">
+              <!-- Top Header: Icon + Amount -->
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-[#111827] flex items-center justify-center text-white shrink-0 shadow-xs">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-white" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <h4 class="text-[16px] font-semibold text-[#111827]">150 Credits</h4>
+                  <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">Save 13%</span>
+                </div>
+              </div>
+
+              <!-- Price -->
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <span class="text-[21px] font-semibold text-[#111827] pack-price-display">Rp 179,000</span>
+                  <span class="text-[11px] text-[#667085] font-normal pack-cycle-display">/mo</span>
+                </div>
+              </div>
+
+              <!-- Jenis Langganan (Radio options) -->
+              <div class="space-y-2 pt-2.5 border-t border-[#eaecf0]">
+                <span class="text-[9.5px] font-semibold text-[#667085] uppercase tracking-wider block">Billing Frequency</span>
+                <div class="space-y-1.5 text-[11.5px] text-[#344054]">
+                  <label class="flex items-center gap-2 cursor-pointer radio-plan-label">
+                    <input type="radio" name="plan-cycle-150" value="monthly" checked class="text-[#111827] focus:ring-0 cursor-pointer accent-[#111827] radio-cycle-input" />
+                    <span class="font-medium text-[#111827]">Monthly</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer radio-plan-label">
+                    <input type="radio" name="plan-cycle-150" value="yearly" class="text-[#111827] focus:ring-0 cursor-pointer accent-[#111827] radio-cycle-input" />
+                    <span class="text-[#667085]">Yearly, prepaid</span>
+                  </label>
+                </div>
+                <p class="text-[10px] text-[#98a2b3] flex items-center gap-1 pt-0.5">
+                  <span>Cancel anytime, no fee</span>
+                  <i class="ti ti-info-circle text-[11px]"></i>
+                </p>
+              </div>
+
+              <!-- Button Beli Kredit (Above Checklist) -->
+              <div class="pt-1">
+                <button
+                  type="button"
+                  class="btn-buy-card-credit w-full h-9 rounded-lg bg-[#111827] text-white hover:bg-black font-medium text-[12.5px] transition-all cursor-pointer shadow-xs active:scale-98 flex items-center justify-center gap-1.5"
+                  data-credits="150"
+                  data-label="150 Credits"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-white" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                  <span>Buy credits</span>
+                </button>
+              </div>
+
+              <!-- Checklist Hijau (Informasi Masa Aktif) -->
+              <div class="space-y-2 pt-2 border-t border-[#eaecf0] text-[11.5px] text-[#344054]">
+                <div class="flex items-start gap-2">
+                  <i class="ti ti-check text-[15px] text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span>Credits valid for 6 months while subscribed</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i class="ti ti-check text-[15px] text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span>Instantly added without resetting your current plan</span>
+                </div>
+              </div>
+
+              <!-- Box Informasi AI Image Generation -->
+              <div class="p-3.5 rounded-xl bg-white border border-[#eaecf0] space-y-1.5 text-[11px] shadow-2xs">
+                <div class="flex items-center gap-1.5 font-medium text-[#111827]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-[#111827]" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                  <span>What can you do with 150 credits?</span>
+                </div>
+                <ul class="text-[10.5px] text-[#475467] space-y-1 list-disc pl-4 leading-relaxed">
+                  <li>Generate up to 150 high-res AI visuals, including Inpainting, HD Upscale & Background Removal</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pack 500 (Best Value) -->
+          <div
+            class="topup-pack-card p-4 rounded-2xl border border-[#eaecf0] bg-white hover:border-[#111827] cursor-pointer transition-all flex flex-col justify-between space-y-4 text-left"
+            data-credits="500"
+            data-price-monthly="549000"
+            data-price-yearly="439000"
+            data-price-fmt="Rp 549,000"
+            data-label="500 Credits"
+          >
+            <div class="space-y-3.5">
+              <!-- Top Header: Icon + Amount -->
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-[#f3f4f6] flex items-center justify-center text-[#111827] shrink-0 border border-[#eaecf0]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-[#111827]" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <h4 class="text-[16px] font-semibold text-[#111827]">500 Credits</h4>
+                  <span class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">Best Value</span>
+                </div>
+              </div>
+
+              <!-- Price -->
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <span class="text-[21px] font-semibold text-[#111827] pack-price-display">Rp 549,000</span>
+                  <span class="text-[11px] text-[#667085] font-normal pack-cycle-display">/mo</span>
+                </div>
+              </div>
+
+              <!-- Jenis Langganan (Radio options) -->
+              <div class="space-y-2 pt-2.5 border-t border-[#f2f4f7]">
+                <span class="text-[9.5px] font-semibold text-[#667085] uppercase tracking-wider block">Billing Frequency</span>
+                <div class="space-y-1.5 text-[11.5px] text-[#344054]">
+                  <label class="flex items-center gap-2 cursor-pointer radio-plan-label">
+                    <input type="radio" name="plan-cycle-500" value="monthly" checked class="text-[#111827] focus:ring-0 cursor-pointer accent-[#111827] radio-cycle-input" />
+                    <span class="font-medium text-[#111827]">Monthly</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer radio-plan-label">
+                    <input type="radio" name="plan-cycle-500" value="yearly" class="text-[#111827] focus:ring-0 cursor-pointer accent-[#111827] radio-cycle-input" />
+                    <span class="text-[#667085]">Yearly, prepaid</span>
+                  </label>
+                </div>
+                <p class="text-[10px] text-[#98a2b3] flex items-center gap-1 pt-0.5">
+                  <span>Cancel anytime, no fee</span>
+                  <i class="ti ti-info-circle text-[11px]"></i>
+                </p>
+              </div>
+
+              <!-- Button Beli Kredit (Above Checklist) -->
+              <div class="pt-1">
+                <button
+                  type="button"
+                  class="btn-buy-card-credit w-full h-9 rounded-lg bg-[#111827] text-white hover:bg-black font-medium text-[12.5px] transition-all cursor-pointer shadow-xs active:scale-98 flex items-center justify-center gap-1.5"
+                  data-credits="500"
+                  data-label="500 Credits"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-white" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                  <span>Buy credits</span>
+                </button>
+              </div>
+
+              <!-- Checklist Hijau (Informasi Masa Aktif) -->
+              <div class="space-y-2 pt-2 border-t border-[#f2f4f7] text-[11.5px] text-[#344054]">
+                <div class="flex items-start gap-2">
+                  <i class="ti ti-check text-[15px] text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span>Credits valid for 6 months while subscribed</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i class="ti ti-check text-[15px] text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span>Instantly added without resetting your current plan</span>
+                </div>
+              </div>
+
+              <!-- Box Informasi AI Image Generation -->
+              <div class="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#eaecf0] space-y-1.5 text-[11px]">
+                <div class="flex items-center gap-1.5 font-medium text-[#111827]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-[#111827]" aria-hidden="true">
+                    <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                  </svg>
+                  <span>What can you do with 500 credits?</span>
+                </div>
+                <ul class="text-[10.5px] text-[#475467] space-y-1 list-disc pl-4 leading-relaxed">
+                  <li>Generate up to 500 high-res AI visuals, full editor tools & fast render priority</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 4: MANAGE SUBSCRIPTION PLAN ══════════ -->
+<div
+  id="modal-manage-plan"
+  class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white w-full max-w-md rounded-xl p-6 shadow-xl border border-[#eaecf0] space-y-5 relative animate-in zoom-in-95 duration-200">
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-3 border-b border-[#eaecf0]">
+      <div>
+        <h3 class="text-base font-semibold text-[#111827]">Manage Subscription</h3>
+        <p class="text-xs text-[#71717a] mt-0.5 flex items-center gap-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="#000000" viewBox="0 0 256 256" class="shrink-0" aria-hidden="true">
+            <path d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"></path>
+          </svg>
+          <span>Pro Plan — Monthly</span>
+        </p>
+      </div>
+      <button id="btn-close-manage-plan" type="button" class="h-7 w-7 rounded-md flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer">
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+
+    <!-- Subscription Detail Rows -->
+    <div class="border border-[#eaecf0] rounded-xl overflow-hidden text-xs bg-white">
+      <div class="flex items-center justify-between px-4 py-2.5 border-b border-[#eaecf0]">
+        <span class="text-[#71717a]">Subscription price</span>
+        <span class="font-medium text-[#111827]">Rp 390,000 / month</span>
+      </div>
+      <div class="flex items-center justify-between px-4 py-2.5 border-b border-[#eaecf0]">
+        <span class="text-[#71717a]">Auto-renewal</span>
+        <span class="font-medium text-[#111827]">Oct 09, 2026</span>
+      </div>
+      <div class="flex items-center justify-between px-4 py-2.5 border-b border-[#eaecf0]">
+        <span class="text-[#71717a]">Remaining monthly credits</span>
+        <span class="font-medium text-[#111827]" id="modal-manage-sisa-credits">1,000 credits</span>
+      </div>
+      <div class="flex items-center justify-between px-4 py-2.5">
+        <span class="text-[#71717a]">Credits expire on</span>
+        <span class="font-medium text-[#111827]">Oct 09, 2026</span>
+      </div>
+    </div>
+
+    <p class="text-[11px] text-[#71717a] leading-relaxed">Monthly subscription credits expire on your renewal date or upon plan upgrade.</p>
+
+    <!-- Actions -->
+    <div class="space-y-2">
+      <!-- 1. Upgrade Plan Button (HIGHLIGHTED with smooth slow wipe-light animation) -->
+      <button
+        type="button"
+        id="btn-trigger-upgrade-plan"
+        class="btn-wipe-shine w-full px-4 py-2.5 rounded-lg bg-[#18181b] hover:bg-black text-white text-left flex items-center justify-between transition-colors cursor-pointer shadow-xs relative overflow-hidden"
+      >
+        <div class="relative z-10">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs font-semibold text-white">Upgrade Plan</span>
+            <span class="px-1.5 py-0.2 rounded text-[10px] font-medium bg-white/20 text-white">Agency</span>
+          </div>
+          <p class="text-[11px] text-white/70 mt-0.5">Upgrade to 5,000 credits/mo</p>
+        </div>
+        <i class="ti ti-arrow-up-right text-sm text-white relative z-10"></i>
+      </button>
+
+      <!-- 2. Renew Early Button -->
+      <button
+        type="button"
+        id="btn-renew-early-plan"
+        class="w-full px-4 py-2.5 rounded-lg border border-[#e4e4e7] hover:bg-[#f4f4f5] text-left flex items-center justify-between transition-colors cursor-pointer"
+      >
+        <div>
+          <p class="text-xs font-medium text-[#111827]">Renew Subscription Now (Renew Early)</p>
+          <p class="text-[11px] text-[#71717a]">Reset billing cycle to today & receive 1,500 fresh credits</p>
+        </div>
+        <i class="ti ti-refresh text-xs text-[#71717a]"></i>
+      </button>
+
+      <!-- 4. Cancel Renewal Button -->
+      <button
+        type="button"
+        id="btn-cancel-renewal-action"
+        class="w-full px-4 py-2.5 rounded-lg border border-red-200 hover:bg-red-50 text-left flex items-center justify-between transition-colors cursor-pointer"
+      >
+        <div>
+          <p class="text-xs font-medium text-red-600">Cancel Auto-Renewal</p>
+          <p class="text-[11px] text-[#71717a]">Credits remain active until Oct 09, 2026</p>
+        </div>
+        <i class="ti ti-chevron-right text-xs text-[#a1a1aa]"></i>
+      </button>
+    </div>
+
+    <div class="flex items-center justify-end pt-2 border-t border-[#eaecf0]">
+      <button
+        type="button"
+        id="btn-close-manage-plan-bottom"
+        class="inline-flex items-center justify-center h-8 px-4 rounded-lg border border-[#e4e4e7] bg-white text-xs font-medium text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer shadow-xs"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 6: DETAIL PAKET TOP-UP AKTIF ══════════ -->
+<div
+  id="modal-topup-detail"
+  class="hidden fixed inset-0 z-[220] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white w-full max-w-lg rounded-xl p-6 shadow-xl border border-[#eaecf0] space-y-5 relative animate-in zoom-in-95 duration-200">
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-3 border-b border-[#eaecf0]">
+      <h3 class="text-sm font-semibold text-[#18181b]">Active Top-Up Packs Detail</h3>
+      <button id="btn-close-topup-detail" type="button" class="inline-flex items-center justify-center rounded-lg text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] h-8 w-8 transition-colors cursor-pointer">
+        <i class="ti ti-x text-base"></i>
+      </button>
+    </div>
+
+    <!-- Summary Box -->
+    <div class="p-4 rounded-xl border border-[#eaecf0] bg-[#fafafa] flex items-center justify-between">
+      <div>
+        <span class="text-[11px] font-medium text-[#71717a] uppercase tracking-wider">Total Active Top-Up Credits</span>
+        <div class="flex items-center gap-1.5 mt-1">
+          <span class="text-2xl font-bold text-[#18181b] tracking-tight" id="modal-topup-detail-total">2,250</span>
+          <span class="text-xs text-[#71717a]">credits</span>
+        </div>
+      </div>
+      <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-white px-2 py-0.5 text-[10px] font-medium text-[#71717a]" id="topup-batches-count-badge">4 active packs</span>
+    </div>
+
+    <!-- Batches List -->
+    <div class="space-y-2">
+      <span class="text-[11px] font-medium uppercase tracking-wider text-[#71717a] block">Pack Breakdown & Validity</span>
+      <div class="border border-[#eaecf0] rounded-xl overflow-hidden text-xs">
+        <div id="active-topup-packs-list" class="divide-y divide-[#eaecf0] max-h-[220px] overflow-y-auto">
+          <!-- Batch 1 -->
+          <div class="topup-batch-row flex items-center justify-between px-4 py-3 bg-white hover:bg-[#fafafa] transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-md bg-[#f4f4f5] flex items-center justify-center text-[#18181b] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-[#18181b]" aria-hidden="true">
+                  <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <span class="font-medium text-[#18181b] text-xs block">+1,500 Credits</span>
+                <span class="text-[#71717a] text-[11px]">Purchased Today</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-medium text-[#18181b] block">Until Mar 09, 2027</span>
+              <span class="text-[10px] text-[#71717a]">180 days remaining</span>
+            </div>
+          </div>
+
+          <!-- Batch 2 -->
+          <div class="topup-batch-row flex items-center justify-between px-4 py-3 bg-white hover:bg-[#fafafa] transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-md bg-[#f4f4f5] flex items-center justify-center text-[#18181b] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-[#18181b]" aria-hidden="true">
+                  <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <span class="font-medium text-[#18181b] text-xs block">+500 Credits</span>
+                <span class="text-[#71717a] text-[11px]">Purchased Sep 08, 2026</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-medium text-[#18181b] block">Until Mar 08, 2027</span>
+              <span class="text-[10px] text-[#71717a]">179 days remaining</span>
+            </div>
+          </div>
+
+          <!-- Batch 3 -->
+          <div class="topup-batch-row flex items-center justify-between px-4 py-3 bg-white hover:bg-[#fafafa] transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-md bg-[#f4f4f5] flex items-center justify-center text-[#18181b] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-[#18181b]" aria-hidden="true">
+                  <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <span class="font-medium text-[#18181b] text-xs block">+250 Credits</span>
+                <span class="text-[#71717a] text-[11px]">Purchased Aug 15, 2026</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-medium text-[#18181b] block">Until Feb 15, 2027</span>
+              <span class="text-[10px] text-[#71717a]">158 days remaining</span>
+            </div>
+          </div>
+
+          <!-- Batch 4 -->
+          <div class="topup-batch-row flex items-center justify-between px-4 py-3 bg-white hover:bg-[#fafafa] transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-7 rounded-md bg-[#f4f4f5] flex items-center justify-center text-[#18181b] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-[#18181b]" aria-hidden="true">
+                  <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <span class="font-medium text-[#18181b] text-xs block">+500 Credits</span>
+                <span class="text-[#71717a] text-[11px]">Purchased Jul 20, 2026</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-medium text-[#18181b] block">Until Jan 20, 2027</span>
+              <span class="text-[10px] text-[#71717a]">133 days remaining</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-between pt-3 border-t border-[#eaecf0]">
+      <button
+        type="button"
+        id="btn-detail-modal-to-topup"
+        class="inline-flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 bg-[#18181b] text-white hover:bg-black h-8 px-3.5 shadow-xs cursor-pointer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" class="text-white" aria-hidden="true">
+          <path d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z" fill="currentColor"/>
+        </svg>
+        Top Up Credits
+      </button>
+
+      <button
+        type="button"
+        id="btn-close-topup-detail-bottom"
+        class="inline-flex items-center justify-center rounded-lg text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 border border-[#e4e4e7] bg-white text-[#18181b] hover:bg-[#f4f4f5] h-8 px-3.5 shadow-xs cursor-pointer"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUB-MODAL 7: ATTACHMENT PREVIEW LIGHTBOX ══════════ -->
+<div
+  id="modal-attachment-preview"
+  class="hidden fixed inset-0 z-[250] flex items-center justify-center bg-black/80 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+>
+  <div class="bg-white rounded-xl max-w-2xl w-full overflow-hidden shadow-xl border border-[#eaecf0] animate-in zoom-in-95 duration-200">
+    <div class="flex items-center justify-between px-5 py-3 border-b border-[#eaecf0] bg-white">
+      <span class="text-xs font-medium text-[#18181b] truncate max-w-md" id="preview-filename">File Preview</span>
+      <button
+        type="button"
+        id="btn-close-attachment-preview"
+        class="inline-flex items-center justify-center rounded-lg text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] h-7 w-7 transition-colors cursor-pointer"
+      >
+        <i class="ti ti-x text-sm"></i>
+      </button>
+    </div>
+    <div class="p-4 bg-[#fafafa] flex items-center justify-center min-h-[250px] max-h-[70vh] overflow-auto" id="preview-media-container">
+      <!-- Injected <img> or <video> -->
+    </div>
   </div>
 </div>
 
@@ -310,11 +1929,11 @@
     function switchTab(tabId) {
       tabButtons.forEach(btn => {
         if (btn.getAttribute("data-tab") === tabId) {
-          btn.classList.add("bg-[#F3F4F6]", "text-[#111827]", "font-bold");
-          btn.classList.remove("text-[#667085]", "font-medium");
+          btn.classList.add("bg-white", "text-[#111827]", "shadow-xs");
+          btn.classList.remove("text-[#475467]", "hover:bg-white/60", "hover:text-[#111827]");
         } else {
-          btn.classList.remove("bg-[#F3F4F6]", "text-[#111827]", "font-bold");
-          btn.classList.add("text-[#667085]", "font-medium");
+          btn.classList.remove("bg-white", "text-[#111827]", "shadow-xs");
+          btn.classList.add("text-[#475467]", "hover:bg-white/60", "hover:text-[#111827]");
         }
       });
 
@@ -367,5 +1986,816 @@
         window.dispatchEvent(new CustomEvent("open-get-credits"));
       });
     }
+
+    // Modal copy referral link
+    const btnModalCopy = document.getElementById("btn-modal-copy-ref");
+    const modalRefLink = document.getElementById("modal-ref-link");
+    const modalCopyBtnText = document.getElementById("modal-copy-btn-text");
+    if (btnModalCopy && modalRefLink && modalCopyBtnText) {
+      btnModalCopy.addEventListener("click", () => {
+        navigator.clipboard.writeText(modalRefLink.textContent.trim());
+        modalCopyBtnText.textContent = "Copied!";
+        setTimeout(() => {
+          modalCopyBtnText.textContent = "Copy Link";
+        }, 2000);
+      });
+    }
+
+    // Modal feedback category selection & interactivity
+    const feedbackCategoryPills = document.querySelectorAll(".feedback-category-pill");
+    const modalFeedbackTopic = document.getElementById("modal-feedback-topic");
+    const modalFeedbackSubject = document.getElementById("modal-feedback-subject");
+    const modalFeedbackMessage = document.getElementById("modal-feedback-message");
+    const feedbackCharCount = document.getElementById("feedback-char-count");
+
+    const categoryPlaceholders = {
+      "Feature Request": "What feature or workflow would you like Xeni to have? Describe how you'd use it...",
+      "Bug Report": "What happened? What did you expect to happen? Steps to reproduce the issue...",
+      "UI & Design Improvement": "Which screen or component feels off? What would make it look or feel cleaner?",
+      "General Feedback": "Share your thoughts, workflow stories, or general feedback with the team..."
+    };
+
+    feedbackCategoryPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const val = pill.getAttribute("data-value");
+        if (modalFeedbackTopic) modalFeedbackTopic.value = val;
+        feedbackCategoryPills.forEach((p) => {
+          p.className = "feedback-category-pill px-3 py-2 rounded-lg border border-[#e4e4e7] bg-white text-[#3f3f46] hover:bg-[#f4f4f5] text-xs font-medium flex items-center gap-2 transition-colors cursor-pointer shadow-xs text-left";
+        });
+        pill.className = "feedback-category-pill active px-3 py-2 rounded-lg border border-[#18181b] bg-[#18181b] text-white text-xs font-medium flex items-center gap-2 transition-colors cursor-pointer shadow-xs text-left";
+        if (modalFeedbackMessage && categoryPlaceholders[val]) {
+          modalFeedbackMessage.placeholder = categoryPlaceholders[val];
+        }
+      });
+    });
+
+    // Character counter
+    if (modalFeedbackMessage && feedbackCharCount) {
+      modalFeedbackMessage.addEventListener("input", () => {
+        feedbackCharCount.textContent = `${modalFeedbackMessage.value.length} / 1000`;
+      });
+    }
+
+    // ─── Attachment Multi-File Manager (Max 5, View & Delete) ───
+    const feedbackAttachmentInput = document.getElementById("feedback-attachment-input");
+    const attachmentDropArea = document.getElementById("attachment-drop-area");
+    const attachmentFilesList = document.getElementById("attachment-files-list");
+    const attachmentCounter = document.getElementById("attachment-counter");
+
+    // Preview lightbox elements
+    const modalAttachmentPreview = document.getElementById("modal-attachment-preview");
+    const previewFilename = document.getElementById("preview-filename");
+    const previewMediaContainer = document.getElementById("preview-media-container");
+    const btnCloseAttachmentPreview = document.getElementById("btn-close-attachment-preview");
+
+    let attachedFiles = [];
+
+    function renderAttachments() {
+      if (!attachmentFilesList || !attachmentCounter) return;
+
+      attachmentCounter.textContent = `${attachedFiles.length} / 5 files`;
+
+      if (attachedFiles.length === 0) {
+        attachmentFilesList.classList.add("hidden");
+        attachmentFilesList.innerHTML = "";
+        if (attachmentDropArea) attachmentDropArea.classList.remove("hidden");
+        return;
+      }
+
+      attachmentFilesList.classList.remove("hidden");
+      if (attachmentDropArea) {
+        if (attachedFiles.length >= 5) {
+          attachmentDropArea.classList.add("hidden");
+        } else {
+          attachmentDropArea.classList.remove("hidden");
+        }
+      }
+
+      attachmentFilesList.innerHTML = "";
+      attachedFiles.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "flex items-center justify-between p-2.5 rounded-xl border border-[#eaecf0] bg-white text-[12px] animate-in fade-in duration-200";
+
+        const isImg = item.type.startsWith("image/");
+        const isVid = item.type.startsWith("video/");
+
+        row.innerHTML = `
+          <div class="flex items-center gap-2.5 min-w-0 flex-1 mr-2">
+            <div class="w-8 h-8 rounded-lg bg-[#f3f4f6] border border-[#eaecf0] flex items-center justify-center text-[#667085] shrink-0 overflow-hidden">
+              ${isImg ? `<img src="${item.url}" class="w-full h-full object-cover" />` : (isVid ? `<i class="ti ti-video text-[15px]"></i>` : `<i class="ti ti-file text-[15px]"></i>`)}
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-medium text-[#111827] truncate text-[12px]">${item.name}</p>
+              <p class="text-[10.5px] text-[#98a2b3]">${item.sizeStr}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button
+              type="button"
+              class="btn-view-file px-2.5 py-1 rounded-lg border border-[#eaecf0] bg-white text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] text-[11px] font-medium flex items-center gap-1 transition-colors cursor-pointer"
+              data-idx="${index}"
+            >
+              <i class="ti ti-eye text-[12px]"></i>
+              <span>View</span>
+            </button>
+            <button
+              type="button"
+              class="btn-del-file w-7 h-7 rounded-lg border border-[#eaecf0] bg-white text-[#667085] hover:text-red-600 hover:border-red-200 hover:bg-red-50 flex items-center justify-center transition-colors cursor-pointer"
+              data-idx="${index}"
+              title="Delete attachment"
+            >
+              <i class="ti ti-trash text-[13px]"></i>
+            </button>
+          </div>
+        `;
+
+        attachmentFilesList.appendChild(row);
+      });
+
+      // Attach View & Delete click listeners
+      attachmentFilesList.querySelectorAll(".btn-view-file").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = parseInt(btn.getAttribute("data-idx") || "0", 10);
+          const item = attachedFiles[idx];
+          if (item) openPreview(item);
+        });
+      });
+
+      attachmentFilesList.querySelectorAll(".btn-del-file").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = parseInt(btn.getAttribute("data-idx") || "0", 10);
+          attachedFiles.splice(idx, 1);
+          renderAttachments();
+        });
+      });
+    }
+
+    function openPreview(item) {
+      if (!modalAttachmentPreview || !previewMediaContainer || !previewFilename) return;
+      previewFilename.textContent = item.name;
+
+      if (item.type.startsWith("image/")) {
+        previewMediaContainer.innerHTML = `<img src="${item.url}" alt="${item.name}" class="max-w-full max-h-[60vh] object-contain rounded-xl shadow-xs" />`;
+      } else if (item.type.startsWith("video/")) {
+        previewMediaContainer.innerHTML = `<video src="${item.url}" controls autoplay class="max-w-full max-h-[60vh] rounded-xl shadow-xs"></video>`;
+      } else {
+        previewMediaContainer.innerHTML = `<p class="text-[13px] text-[#667085]">Preview not available for this format.</p>`;
+      }
+
+      modalAttachmentPreview.classList.remove("hidden");
+    }
+
+    function closePreview() {
+      if (modalAttachmentPreview) {
+        modalAttachmentPreview.classList.add("hidden");
+        if (previewMediaContainer) previewMediaContainer.innerHTML = "";
+      }
+    }
+
+    if (btnCloseAttachmentPreview) btnCloseAttachmentPreview.addEventListener("click", closePreview);
+    if (modalAttachmentPreview) {
+      modalAttachmentPreview.addEventListener("click", (e) => {
+        if (e.target === modalAttachmentPreview) closePreview();
+      });
+    }
+
+    if (feedbackAttachmentInput) {
+      feedbackAttachmentInput.addEventListener("change", (e) => {
+        const files = Array.from(e.target.files || []);
+        for (const file of files) {
+          if (attachedFiles.length < 5) {
+            attachedFiles.push({
+              file: file,
+              name: file.name,
+              sizeStr: `${Math.round(file.size / 1024)} KB`,
+              url: URL.createObjectURL(file),
+              type: file.type
+            });
+          }
+        }
+        feedbackAttachmentInput.value = "";
+        renderAttachments();
+      });
+    }
+
+    // Modal feedback form submission
+    const modalFeedbackForm = document.getElementById("modal-feedback-form");
+    const modalFeedbackSuccess = document.getElementById("modal-feedback-success");
+    if (modalFeedbackForm && modalFeedbackSuccess) {
+      modalFeedbackForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        modalFeedbackSuccess.classList.remove("hidden");
+        if (modalFeedbackMessage) modalFeedbackMessage.value = "";
+        if (modalFeedbackSubject) modalFeedbackSubject.value = "";
+        if (feedbackCharCount) feedbackCharCount.textContent = "0 / 1000";
+        attachedFiles = [];
+        renderAttachments();
+        setTimeout(() => {
+          modalFeedbackSuccess.classList.add("hidden");
+        }, 5000);
+      });
+    }
+
+
+    // ─── Payout Setup Modal & Method Toggle ───
+    const modalPayoutSetup = document.getElementById("modal-payout-setup");
+    const btnAddPayout = document.getElementById("btn-add-payout-method");
+    const btnEditPayoutDetails = document.getElementById("btn-edit-payout-details");
+    const btnClosePayout = document.getElementById("btn-close-payout-modal");
+    const btnCancelPayout = document.getElementById("btn-cancel-payout-modal");
+    const formPayoutSetup = document.getElementById("form-payout-setup");
+    const payoutMethodOpts = document.querySelectorAll(".payout-method-opt");
+
+    const fieldBank = document.getElementById("field-bank-container");
+    const fieldEwallet = document.getElementById("field-ewallet-container");
+
+    const payoutEmptyState = document.getElementById("payout-empty-state");
+    const payoutConfiguredState = document.getElementById("payout-configured-state");
+    const displayPayoutMethod = document.getElementById("display-payout-method");
+    const displayPayoutAccount = document.getElementById("display-payout-account");
+    const displayPayoutIcon = document.getElementById("display-payout-icon");
+
+    let currentSelectedMethod = "Bank Transfer";
+    let currentMethodIcon = "ti-building-bank";
+
+    function openPayoutSetup() {
+      if (modalPayoutSetup) modalPayoutSetup.classList.remove("hidden");
+    }
+
+    function closePayoutSetup() {
+      if (modalPayoutSetup) modalPayoutSetup.classList.add("hidden");
+    }
+
+    if (btnAddPayout) btnAddPayout.addEventListener("click", openPayoutSetup);
+    if (btnEditPayoutDetails) btnEditPayoutDetails.addEventListener("click", openPayoutSetup);
+    if (btnClosePayout) btnClosePayout.addEventListener("click", closePayoutSetup);
+    if (btnCancelPayout) btnCancelPayout.addEventListener("click", closePayoutSetup);
+    if (modalPayoutSetup) {
+      modalPayoutSetup.addEventListener("click", (e) => {
+        if (e.target === modalPayoutSetup) closePayoutSetup();
+      });
+    }
+
+    const activeMethodClass = "payout-method-opt px-3 py-2 rounded-lg border border-[#18181b] bg-[#18181b] text-white hover:bg-black text-xs font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs";
+    const inactiveMethodClass = "payout-method-opt px-3 py-2 rounded-lg border border-[#e4e4e7] bg-white text-[#3f3f46] hover:bg-[#f4f4f5] hover:text-[#18181b] text-xs font-medium flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs";
+
+    function updateMethodButtons(selectedMethod) {
+      payoutMethodOpts.forEach((btn) => {
+        if (btn.getAttribute("data-method") === selectedMethod) {
+          btn.className = activeMethodClass;
+        } else {
+          btn.className = inactiveMethodClass;
+        }
+      });
+    }
+
+    // Toggle method buttons inside setup modal
+    payoutMethodOpts.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        currentSelectedMethod = btn.getAttribute("data-method") || "Bank Transfer";
+        currentMethodIcon = btn.getAttribute("data-icon") || "ti-building-bank";
+        updateMethodButtons(currentSelectedMethod);
+
+        if (fieldBank) fieldBank.classList.add("hidden");
+        if (fieldEwallet) fieldEwallet.classList.add("hidden");
+
+        if (currentSelectedMethod === "Bank Transfer" && fieldBank) {
+          fieldBank.classList.remove("hidden");
+        } else if (currentSelectedMethod === "E-Wallet" && fieldEwallet) {
+          fieldEwallet.classList.remove("hidden");
+        }
+      });
+    });
+
+    // Handle saving payout details
+    if (formPayoutSetup) {
+      formPayoutSetup.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let methodName = "";
+        let accountSummary = "";
+
+        if (currentSelectedMethod === "Bank Transfer") {
+          const bank = document.getElementById("input-bank-name")?.value || "BCA";
+          const acc = document.getElementById("input-bank-account")?.value?.trim() || "8271928371";
+          const holder = document.getElementById("input-bank-holder")?.value?.trim() || "Jane Cooper";
+          methodName = `Bank ${bank}`;
+          accountSummary = `${acc} (${holder})`;
+        } else {
+          const provider = document.getElementById("input-ewallet-provider")?.value || "GoPay";
+          const phone = document.getElementById("input-ewallet-phone")?.value?.trim() || "081234567890";
+          const holder = document.getElementById("input-ewallet-name")?.value?.trim() || "Jane Cooper";
+          methodName = provider;
+          accountSummary = `${phone} (${holder})`;
+        }
+
+        if (displayPayoutMethod) displayPayoutMethod.textContent = methodName;
+        if (displayPayoutAccount) displayPayoutAccount.textContent = accountSummary;
+        if (displayPayoutIcon) displayPayoutIcon.className = `ti ${currentMethodIcon} text-[18px]`;
+
+        if (payoutEmptyState) payoutEmptyState.classList.add("hidden");
+        if (payoutConfiguredState) payoutConfiguredState.classList.remove("hidden");
+        if (btnEditPayoutDetails) btnEditPayoutDetails.classList.remove("hidden");
+
+        closePayoutSetup();
+      });
+    }
+
+    // ─── Payment History Modal ───
+    const modalPaymentHistory = document.getElementById("modal-payment-history");
+    const btnOpenHistory = document.getElementById("btn-open-payment-history");
+    const btnCloseHistory = document.getElementById("btn-close-payment-history");
+    const btnCloseHistoryBottom = document.getElementById("btn-close-payment-history-bottom");
+
+    function openHistory() {
+      if (modalPaymentHistory) modalPaymentHistory.classList.remove("hidden");
+    }
+
+    function closeHistory() {
+      if (modalPaymentHistory) modalPaymentHistory.classList.add("hidden");
+    }
+
+    if (btnOpenHistory) btnOpenHistory.addEventListener("click", openHistory);
+    if (btnCloseHistory) btnCloseHistory.addEventListener("click", closeHistory);
+    if (btnCloseHistoryBottom) btnCloseHistoryBottom.addEventListener("click", closeHistory);
+    if (modalPaymentHistory) {
+      modalPaymentHistory.addEventListener("click", (e) => {
+        if (e.target === modalPaymentHistory) closeHistory();
+      });
+    }
+
+    // ─── Subscription Free vs Pro Switcher & Upgrade State ───
+    const btnSwitchPlanFree = document.getElementById("btn-switch-plan-free");
+    const btnSwitchPlanPro = document.getElementById("btn-switch-plan-pro");
+    const viewFree = document.getElementById("subscription-view-free");
+    const viewPro = document.getElementById("subscription-view-pro");
+    const subAlertToast = document.getElementById("subscription-alert-toast");
+    const subAlertText = document.getElementById("subscription-alert-text");
+    const btnDismissSubAlert = document.getElementById("btn-dismiss-sub-alert");
+
+    let subToastTimeout = null;
+    function showSubAlert(message) {
+      if (!subAlertToast || !subAlertText) return;
+      subAlertText.textContent = message;
+      subAlertToast.classList.remove("hidden");
+      if (subToastTimeout) clearTimeout(subToastTimeout);
+      subToastTimeout = setTimeout(() => {
+        subAlertToast.classList.add("hidden");
+      }, 5000);
+    }
+
+    if (btnDismissSubAlert && subAlertToast) {
+      btnDismissSubAlert.addEventListener("click", () => {
+        subAlertToast.classList.add("hidden");
+      });
+    }
+
+    function switchToFree() {
+      if (viewFree) viewFree.classList.remove("hidden");
+      if (viewPro) viewPro.classList.add("hidden");
+      if (btnSwitchPlanFree && btnSwitchPlanPro) {
+        btnSwitchPlanFree.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer bg-white text-[#111827] shadow-xs";
+        btnSwitchPlanPro.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer text-[#667085] hover:text-[#111827]";
+      }
+    }
+
+    function switchToPro(withAlert = false, alertMsg = "") {
+      if (viewFree) viewFree.classList.add("hidden");
+      if (viewPro) viewPro.classList.remove("hidden");
+      if (btnSwitchPlanFree && btnSwitchPlanPro) {
+        btnSwitchPlanPro.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer bg-white text-[#111827] shadow-xs";
+        btnSwitchPlanFree.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer text-[#667085] hover:text-[#111827]";
+      }
+      if (withAlert && alertMsg) {
+        showSubAlert(alertMsg);
+      }
+    }
+
+    if (btnSwitchPlanFree) btnSwitchPlanFree.addEventListener("click", switchToFree);
+    if (btnSwitchPlanPro) btnSwitchPlanPro.addEventListener("click", () => switchToPro(false));
+
+    window.addEventListener("upgraded-to-pro", () => {
+      switchToPro(true, "Congratulations! Your account was upgraded to Pro Plan! 1,500 credits have been added.");
+    });
+
+    // ─── Manage Plan & Upgrade Plan Mechanism ───
+    const modalManagePlan = document.getElementById("modal-manage-plan");
+    const btnManageSub = document.getElementById("btn-manage-subscription-action");
+    const btnCloseManagePlan = document.getElementById("btn-close-manage-plan");
+    const btnCloseManagePlanBottom = document.getElementById("btn-close-manage-plan-bottom");
+    const modalManageSisaCredits = document.getElementById("modal-manage-sisa-credits");
+    const btnTriggerUpgradePlan = document.getElementById("btn-trigger-upgrade-plan");
+    const btnRenewEarlyPlan = document.getElementById("btn-renew-early-plan");
+    const btnCancelRenewal = document.getElementById("btn-cancel-renewal-action");
+
+    // Upgrade Sub-modal elements
+    const modalUpgradePlan = document.getElementById("modal-upgrade-plan");
+    const btnCloseUpgradePlan = document.getElementById("btn-close-upgrade-plan");
+    const btnCancelUpgradeModal = document.getElementById("btn-cancel-upgrade-modal");
+    const btnConfirmUpgradeAgency = document.getElementById("btn-confirm-upgrade-agency");
+    const upgradeModalSisaCredits = document.getElementById("upgrade-modal-sisa-credits");
+
+    // Renew Early Sub-modal elements
+    const modalRenewEarly = document.getElementById("modal-renew-early");
+    const btnCloseRenewEarly = document.getElementById("btn-close-renew-early");
+    const btnCancelRenewEarlyModal = document.getElementById("btn-cancel-renew-early-modal");
+    const btnConfirmRenewEarly = document.getElementById("btn-confirm-renew-early");
+    const renewModalSisaCredits = document.getElementById("renew-modal-sisa-credits");
+
+    let monthlyCreditsVal = 1000;
+    let topupCreditsVal = 2250;
+
+    // ─── Top-Up Detail Modal & Batches Controller (Max 3 + Show More) ───
+    const modalTopupDetail = document.getElementById("modal-topup-detail");
+    const btnOpenTopupDetail = document.getElementById("btn-open-topup-detail-modal");
+    const btnCloseTopupDetail = document.getElementById("btn-close-topup-detail");
+    const btnCloseTopupDetailBottom = document.getElementById("btn-close-topup-detail-bottom");
+    const btnDetailModalToTopup = document.getElementById("btn-detail-modal-to-topup");
+    const modalTopupDetailTotal = document.getElementById("modal-topup-detail-total");
+
+    const btnToggleTopupBatches = document.getElementById("btn-toggle-topup-batches");
+    const btnToggleTopupText = document.getElementById("btn-toggle-topup-text");
+    const btnToggleTopupIcon = document.getElementById("btn-toggle-topup-icon");
+    const activeTopupList = document.getElementById("active-topup-packs-list");
+    const topupBatchesCountBadge = document.getElementById("topup-batches-count-badge");
+
+    let isTopupBatchesExpanded = false;
+
+    function openTopupDetailModal() {
+      if (modalTopupDetail) {
+        if (modalTopupDetailTotal) modalTopupDetailTotal.textContent = topupCreditsVal.toLocaleString("en-US");
+        refreshTopupBatchesVisibility();
+        modalTopupDetail.classList.remove("hidden");
+      }
+    }
+
+    function closeTopupDetailModal() {
+      if (modalTopupDetail) modalTopupDetail.classList.add("hidden");
+    }
+
+    if (btnOpenTopupDetail) btnOpenTopupDetail.addEventListener("click", openTopupDetailModal);
+    if (btnCloseTopupDetail) btnCloseTopupDetail.addEventListener("click", closeTopupDetailModal);
+    if (btnCloseTopupDetailBottom) btnCloseTopupDetailBottom.addEventListener("click", closeTopupDetailModal);
+    if (modalTopupDetail) {
+      modalTopupDetail.addEventListener("click", (e) => {
+        if (e.target === modalTopupDetail) closeTopupDetailModal();
+      });
+    }
+
+    // Button from inside detail modal to open Top Up credits modal
+    if (btnDetailModalToTopup) {
+      btnDetailModalToTopup.addEventListener("click", () => {
+        closeTopupDetailModal();
+        openTopupModal();
+      });
+    }
+
+    function refreshTopupBatchesVisibility() {
+      const rows = document.querySelectorAll(".topup-batch-row");
+      const totalRows = rows.length;
+
+      if (topupBatchesCountBadge) {
+        topupBatchesCountBadge.textContent = `${totalRows} active packs`;
+      }
+      rows.forEach(r => r.classList.remove("hidden"));
+    }
+
+    // Initial setup
+    refreshTopupBatchesVisibility();
+
+    function openManagePlanModal() {
+      if (modalManagePlan) {
+        if (modalManageSisaCredits) modalManageSisaCredits.textContent = `${monthlyCreditsVal.toLocaleString("en-US")} credits`;
+        modalManagePlan.classList.remove("hidden");
+      }
+    }
+
+    function closeManagePlanModal() {
+      if (modalManagePlan) modalManagePlan.classList.add("hidden");
+    }
+
+    if (btnManageSub) btnManageSub.addEventListener("click", openManagePlanModal);
+    if (btnCloseManagePlan) btnCloseManagePlan.addEventListener("click", closeManagePlanModal);
+    if (btnCloseManagePlanBottom) btnCloseManagePlanBottom.addEventListener("click", closeManagePlanModal);
+    if (modalManagePlan) {
+      modalManagePlan.addEventListener("click", (e) => {
+        if (e.target === modalManagePlan) closeManagePlanModal();
+      });
+    }
+
+    // "Upgrade Plan" button inside manage plan (highlighted) → open upgrade modal
+    function openUpgradeModal() {
+      if (modalUpgradePlan) {
+        if (upgradeModalSisaCredits) upgradeModalSisaCredits.textContent = `${monthlyCreditsVal.toLocaleString("en-US")} credits`;
+        modalUpgradePlan.classList.remove("hidden");
+      }
+    }
+
+    function closeUpgradeModal() {
+      if (modalUpgradePlan) modalUpgradePlan.classList.add("hidden");
+    }
+
+    if (btnTriggerUpgradePlan) {
+      btnTriggerUpgradePlan.addEventListener("click", () => {
+        closeManagePlanModal();
+        openUpgradeModal();
+      });
+    }
+
+    if (btnCloseUpgradePlan) btnCloseUpgradePlan.addEventListener("click", closeUpgradeModal);
+    if (btnCancelUpgradeModal) btnCancelUpgradeModal.addEventListener("click", closeUpgradeModal);
+    if (modalUpgradePlan) {
+      modalUpgradePlan.addEventListener("click", (e) => {
+        if (e.target === modalUpgradePlan) closeUpgradeModal();
+      });
+    }
+
+    // Confirm Upgrade to Agency Plan: old credits expire, +5000 new monthly credits
+    if (btnConfirmUpgradeAgency) {
+      btnConfirmUpgradeAgency.addEventListener("click", () => {
+        monthlyCreditsVal = 5000;
+        if (proMonthlyCredits) proMonthlyCredits.textContent = "5,000";
+        if (modalManageSisaCredits) modalManageSisaCredits.textContent = "5,000 credits";
+
+        const activePlanTitle = document.getElementById("active-plan-title");
+        const activePlanSubtitle = document.getElementById("active-plan-subtitle");
+        if (activePlanTitle) activePlanTitle.textContent = "Agency Plan";
+        if (activePlanSubtitle) activePlanSubtitle.textContent = "Rp 990,000 / month · Auto-renews on Oct 09, 2026";
+
+        // Prepend new usage row
+        if (proUsageTableBody) {
+          const newRow = document.createElement("tr");
+          newRow.className = "hover:bg-[#F9FAFB] transition-colors";
+          newRow.innerHTML = `
+            <td class="px-4 py-3 font-medium text-[#111827]">Plan Upgrade (Agency Plan · 5,000 Credits)</td>
+            <td class="px-4 py-3 font-medium text-[#667085]">Upgrade</td>
+            <td class="px-4 py-3 text-[#4b5563]">Today, just now</td>
+            <td class="px-4 py-3 text-right font-bold text-emerald-600">+5,000</td>
+          `;
+          proUsageTableBody.insertBefore(newRow, proUsageTableBody.firstChild);
+        }
+
+        closeUpgradeModal();
+        showSubAlert("Congratulations! Your account has been upgraded to Agency Plan! 5,000 fresh monthly credits are ready to use.");
+      });
+    }
+
+    // ─── Renew Early Modal Controller ───
+    function openRenewEarlyModal() {
+      if (modalRenewEarly) {
+        if (renewModalSisaCredits) renewModalSisaCredits.textContent = `${monthlyCreditsVal.toLocaleString("en-US")} credits`;
+        modalRenewEarly.classList.remove("hidden");
+      }
+    }
+
+    function closeRenewEarlyModal() {
+      if (modalRenewEarly) modalRenewEarly.classList.add("hidden");
+    }
+
+    if (btnRenewEarlyPlan) {
+      btnRenewEarlyPlan.addEventListener("click", () => {
+        closeManagePlanModal();
+        openRenewEarlyModal();
+      });
+    }
+
+    if (btnCloseRenewEarly) btnCloseRenewEarly.addEventListener("click", closeRenewEarlyModal);
+    if (btnCancelRenewEarlyModal) btnCancelRenewEarlyModal.addEventListener("click", closeRenewEarlyModal);
+    if (modalRenewEarly) {
+      modalRenewEarly.addEventListener("click", (e) => {
+        if (e.target === modalRenewEarly) closeRenewEarlyModal();
+      });
+    }
+
+    if (btnConfirmRenewEarly) {
+      btnConfirmRenewEarly.addEventListener("click", () => {
+        monthlyCreditsVal = 1500;
+        if (proMonthlyCredits) proMonthlyCredits.textContent = "1,500";
+        if (modalManageSisaCredits) modalManageSisaCredits.textContent = "1,500 credits";
+
+        // Prepend new usage row
+        if (proUsageTableBody) {
+          const newRow = document.createElement("tr");
+          newRow.className = "hover:bg-[#F9FAFB] transition-colors";
+          newRow.innerHTML = `
+            <td class="px-4 py-3 font-medium text-[#111827]">Renew Subscription Early (Pro Plan · +1,500 Credits)</td>
+            <td class="px-4 py-3 font-medium text-[#667085]">Subscription</td>
+            <td class="px-4 py-3 text-[#4b5563]">Today, just now</td>
+            <td class="px-4 py-3 text-right font-bold text-emerald-600">+1,500</td>
+          `;
+          proUsageTableBody.insertBefore(newRow, proUsageTableBody.firstChild);
+        }
+
+        closeRenewEarlyModal();
+        showSubAlert("Pro subscription renewed early! A new cycle has started and 1,500 monthly credits are ready to use.");
+      });
+    }
+
+
+
+    if (btnCancelRenewal) {
+      btnCancelRenewal.addEventListener("click", () => {
+        closeManagePlanModal();
+        showSubAlert("Auto-renewal disabled. Credits remain active until Oct 09, 2026.");
+      });
+    }
+
+    // ─── Top Up Credits Modal & Purchase Mechanism ───
+    const modalTopup = document.getElementById("modal-topup-credits");
+    const btnOpenTopupPro = document.getElementById("btn-open-topup-pro");
+    const btnCloseTopup = document.getElementById("btn-close-topup-credits");
+    const btnCancelTopup = document.getElementById("btn-cancel-topup-credits");
+    const formTopup = document.getElementById("form-topup-credits");
+    const topupPackCards = document.querySelectorAll(".topup-pack-card");
+    const topupSummaryPrice = document.getElementById("topup-summary-price");
+    const btnTopupLabel = document.getElementById("btn-topup-label");
+    const proMonthlyCredits = document.getElementById("pro-monthly-credits");
+    const proTopupCredits = document.getElementById("pro-topup-credits");
+    const proUsageTableBody = document.getElementById("pro-usage-table-body");
+
+    let selectedTopupCredits = 150;
+    let selectedTopupPriceFmt = "Rp 179,000";
+    let selectedTopupLabel = "150 Credits";
+
+    function openTopupModal() {
+      if (modalTopup) modalTopup.classList.remove("hidden");
+    }
+
+    function closeTopupModal() {
+      if (modalTopup) modalTopup.classList.add("hidden");
+    }
+
+    if (btnOpenTopupPro) btnOpenTopupPro.addEventListener("click", openTopupModal);
+    if (btnCloseTopup) btnCloseTopup.addEventListener("click", closeTopupModal);
+    if (btnCancelTopup) btnCancelTopup.addEventListener("click", closeTopupModal);
+    if (modalTopup) {
+      modalTopup.addEventListener("click", (e) => {
+        if (e.target === modalTopup) closeTopupModal();
+      });
+    }
+
+    // Toggle Top Up pack cards
+    topupPackCards.forEach((card) => {
+      card.addEventListener("click", (e) => {
+        // If clicking radio input directly, let change handler handle it
+        if (e.target && (e.target.tagName === "INPUT" || e.target.closest("label"))) return;
+
+        topupPackCards.forEach((c) => {
+          c.classList.remove("border-2", "border-[#111827]", "bg-[#F9FAFB]", "shadow-xs");
+          c.classList.add("border", "border-[#eaecf0]", "bg-white");
+        });
+        card.classList.add("border-2", "border-[#111827]", "bg-[#F9FAFB]", "shadow-xs");
+        card.classList.remove("border-[#eaecf0]", "bg-white");
+
+        selectedTopupCredits = parseInt(card.getAttribute("data-credits") || "150", 10);
+        selectedTopupPriceFmt = card.getAttribute("data-price-fmt") || "Rp 179,000";
+        selectedTopupLabel = card.getAttribute("data-label") || "150 Credits";
+
+        if (topupSummaryPrice) topupSummaryPrice.textContent = selectedTopupPriceFmt;
+        if (btnTopupLabel) btnTopupLabel.textContent = `Buy ${selectedTopupLabel}`;
+      });
+    });
+
+    // Radio cycle change handler for credit pack cards
+    const radioCycleInputs = document.querySelectorAll(".radio-cycle-input");
+    radioCycleInputs.forEach((radio) => {
+      radio.addEventListener("change", () => {
+        const card = radio.closest(".topup-pack-card");
+        if (!card) return;
+        const isYearly = radio.value === "yearly";
+        const priceMonthly = parseInt(card.getAttribute("data-price-monthly") || "179000", 10);
+        const priceYearly = parseInt(card.getAttribute("data-price-yearly") || "143000", 10);
+        const priceDisplay = card.querySelector(".pack-price-display");
+        const cycleDisplay = card.querySelector(".pack-cycle-display");
+
+        if (isYearly) {
+          const formattedYearlyMonthly = "Rp " + priceYearly.toLocaleString("en-US");
+          if (priceDisplay) priceDisplay.textContent = formattedYearlyMonthly;
+          if (cycleDisplay) cycleDisplay.textContent = "/mo";
+          card.setAttribute("data-price-fmt", formattedYearlyMonthly + " (Yearly)");
+        } else {
+          const formattedMonthly = "Rp " + priceMonthly.toLocaleString("en-US");
+          if (priceDisplay) priceDisplay.textContent = formattedMonthly;
+          if (cycleDisplay) cycleDisplay.textContent = "/mo";
+          card.setAttribute("data-price-fmt", formattedMonthly);
+        }
+
+        // Auto-select this card if not already selected
+        topupPackCards.forEach((c) => {
+          c.classList.remove("border-2", "border-[#111827]", "bg-[#F9FAFB]", "shadow-xs");
+          c.classList.add("border", "border-[#eaecf0]", "bg-white");
+        });
+        card.classList.add("border-2", "border-[#111827]", "bg-[#F9FAFB]", "shadow-xs");
+        card.classList.remove("border-[#eaecf0]", "bg-white");
+
+        selectedTopupCredits = parseInt(card.getAttribute("data-credits") || "150", 10);
+        selectedTopupPriceFmt = card.getAttribute("data-price-fmt") || "Rp 179,000";
+        selectedTopupLabel = card.getAttribute("data-label") || "150 Credits";
+
+        if (topupSummaryPrice) topupSummaryPrice.textContent = selectedTopupPriceFmt;
+        if (btnTopupLabel) btnTopupLabel.textContent = `Buy ${selectedTopupLabel}`;
+      });
+    });
+
+    // Buy credit button directly inside each card
+    const buyCardCreditBtns = document.querySelectorAll(".btn-buy-card-credit");
+    buyCardCreditBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const credits = parseInt(btn.getAttribute("data-credits") || "150", 10);
+        const label = btn.getAttribute("data-label") || `${credits} Credits`;
+
+        topupCreditsVal += credits;
+        if (proTopupCredits) {
+          proTopupCredits.textContent = topupCreditsVal.toLocaleString("en-US");
+        }
+
+        // Prepend new batch to active top-up packs list (individual 6-month validity)
+        if (activeTopupList) {
+          const newPackRow = document.createElement("div");
+          newPackRow.className = "topup-batch-row flex items-center justify-between px-4 py-3 bg-white hover:bg-[#F9FAFB] transition-colors animate-in fade-in duration-300";
+          newPackRow.innerHTML = `
+            <div class="flex items-center gap-3">
+              <span class="font-bold text-[#111827] text-[13px]">+${credits.toLocaleString("en-US")} cr</span>
+              <span class="text-[#98a2b3]">·</span>
+              <span class="text-[#667085] text-[12px]">Purchased Today</span>
+            </div>
+            <span class="text-[11px] font-medium text-[#344054] bg-[#f3f4f6] px-2.5 py-1 rounded-md">Until Mar 09, 2027</span>
+          `;
+          activeTopupList.insertBefore(newPackRow, activeTopupList.firstChild);
+          refreshTopupBatchesVisibility();
+        }
+
+        // Prepend new usage row
+        if (proUsageTableBody) {
+          const newRow = document.createElement("tr");
+          newRow.className = "hover:bg-[#F9FAFB] transition-colors";
+          newRow.innerHTML = `
+            <td class="px-4 py-3 font-medium text-[#111827]">Credit Top-Up (${label})</td>
+            <td class="px-4 py-3 font-medium text-[#667085]">Top Up</td>
+            <td class="px-4 py-3 text-[#4b5563]">Today, just now</td>
+            <td class="px-4 py-3 text-right font-bold text-emerald-600">+${credits.toLocaleString("en-US")}</td>
+          `;
+          proUsageTableBody.insertBefore(newRow, proUsageTableBody.firstChild);
+        }
+
+        closeTopupModal();
+        showSubAlert(`Payment successful! +${credits.toLocaleString("en-US")} Top-Up Credits added (Valid for 6 months).`);
+      });
+    });
+
+    // Handle Top Up Form Submission (Fallback)
+    if (formTopup) {
+      formTopup.addEventListener("submit", (e) => {
+        e.preventDefault();
+        topupCreditsVal += selectedTopupCredits;
+        if (proTopupCredits) {
+          proTopupCredits.textContent = topupCreditsVal.toLocaleString("en-US");
+        }
+
+        // Prepend new batch to active top-up packs list (individual 6-month validity)
+        if (activeTopupList) {
+          const newPackRow = document.createElement("div");
+          newPackRow.className = "topup-batch-row flex items-center justify-between px-4 py-3 bg-white hover:bg-[#F9FAFB] transition-colors animate-in fade-in duration-300";
+          newPackRow.innerHTML = `
+            <div class="flex items-center gap-3">
+              <span class="font-bold text-[#111827] text-[13px]">+${selectedTopupCredits.toLocaleString("en-US")} cr</span>
+              <span class="text-[#98a2b3]">·</span>
+              <span class="text-[#667085] text-[12px]">Purchased Today</span>
+            </div>
+            <span class="text-[11px] font-medium text-[#344054] bg-[#f3f4f6] px-2.5 py-1 rounded-md">Until Mar 09, 2027</span>
+          `;
+          activeTopupList.insertBefore(newPackRow, activeTopupList.firstChild);
+          refreshTopupBatchesVisibility();
+        }
+
+        // Prepend new usage row
+        if (proUsageTableBody) {
+          const newRow = document.createElement("tr");
+          newRow.className = "hover:bg-[#F9FAFB] transition-colors";
+          newRow.innerHTML = `
+            <td class="px-4 py-3 font-medium text-[#111827]">Credit Top-Up (${selectedTopupLabel})</td>
+            <td class="px-4 py-3 font-medium text-[#667085]">Top Up</td>
+            <td class="px-4 py-3 text-[#4b5563]">Today, just now</td>
+            <td class="px-4 py-3 text-right font-bold text-emerald-600">+${selectedTopupCredits.toLocaleString("en-US")}</td>
+          `;
+          proUsageTableBody.insertBefore(newRow, proUsageTableBody.firstChild);
+        }
+
+        closeTopupModal();
+        showSubAlert(`Payment successful! +${selectedTopupCredits.toLocaleString("en-US")} Top-Up Credits added (Valid for 6 months).`);
+      });
+    }
+
+    // ══════════ BILLING TAB INTERACTIONS ══════════
+    // 1. Download Invoice
+    const invoiceBtns = document.querySelectorAll(".btn-download-invoice");
+    invoiceBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const invId = btn.getAttribute("data-invoice") || "INV";
+        showSubAlert(`Invoice ${invId} downloaded successfully (PDF).`);
+      });
+    });
   });
 </script>

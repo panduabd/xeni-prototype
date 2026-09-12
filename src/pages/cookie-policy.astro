@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import LandingNavbar from "../components/landing/LandingNavbar.astro";
 import LandingFooter from "../components/landing/LandingFooter.astro";
+import Alert from "../components/ui/Alert.astro";
 ---
 
 <html lang="en">
@@ -10,9 +11,9 @@ import LandingFooter from "../components/landing/LandingFooter.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookie Policy | Xeni</title>
     <meta name="description" content="Cookie Policy for Xeni AI Content Automation platform. Understand how we use cookies and tracking mechanisms." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
   </head>
   <body class="bg-[#F8F9FB] text-[#111827] font-sans antialiased">
@@ -139,9 +140,11 @@ import LandingFooter from "../components/landing/LandingFooter.astro";
                 <li><strong class="text-[#111827]">Browser Settings:</strong> You can block or delete cookies directly inside your browser settings (Chrome, Safari, Edge, Firefox). Please refer to your browser's Help documentation.</li>
                 <li><strong class="text-[#111827]">Analytics Opt-Out:</strong> To prevent Google Analytics tracking across all websites, you can install the official Google Analytics Opt-out Browser Add-on.</li>
               </ul>
-              <p class="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-[13px] text-yellow-800">
-                <strong>Please Note:</strong> If you restrict or block essential cookies, you may experience significant degradation of platform features, and session-based authentication will not function.
-              </p>
+              <Alert
+                variant="warning"
+                title="Please Note"
+                description="If you restrict or block essential cookies, you may experience significant degradation of platform features, and session-based authentication will not function."
+              />
             </section>
 
             <!-- Section 5 -->

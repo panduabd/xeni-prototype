@@ -1,0 +1,115 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  variant?: "default" | "destructive" | "warning" | "success" | "info";
+  title?: string;
+  description?: string;
+  class?: string;
+  closable?: boolean;
+}
+
+const {
+  variant = "success",
+  title,
+  description,
+  class: className,
+  closable = false,
+} = Astro.props;
+
+const variantStyles: Record<string, { container: string; iconColor: string; titleColor: string; closeColor: string }> = {
+  success: {
+    container: "shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 text-emerald-950",
+    iconColor: "text-emerald-600",
+    titleColor: "text-emerald-950",
+    closeColor: "text-emerald-700/60 hover:text-emerald-950 hover:bg-emerald-100/60",
+  },
+  destructive: {
+    container: "shadow-[0_10px_30px_-10px_rgba(239,68,68,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-red-500/30 bg-red-50/95 text-red-950",
+    iconColor: "text-red-600",
+    titleColor: "text-red-950",
+    closeColor: "text-red-700/60 hover:text-red-950 hover:bg-red-100/60",
+  },
+  warning: {
+    container: "shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-amber-500/30 bg-amber-50/95 text-amber-950",
+    iconColor: "text-amber-600",
+    titleColor: "text-amber-950",
+    closeColor: "text-amber-700/60 hover:text-amber-950 hover:bg-amber-100/60",
+  },
+  info: {
+    container: "shadow-[0_10px_30px_-10px_rgba(59,130,246,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-blue-500/30 bg-blue-50/95 text-blue-950",
+    iconColor: "text-blue-600",
+    titleColor: "text-blue-950",
+    closeColor: "text-blue-700/60 hover:text-blue-950 hover:bg-blue-100/60",
+  },
+  default: {
+    container: "shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 text-emerald-950",
+    iconColor: "text-emerald-600",
+    titleColor: "text-emerald-950",
+    closeColor: "text-emerald-700/60 hover:text-emerald-950 hover:bg-emerald-100/60",
+  },
+};
+
+const v = variantStyles[variant] || variantStyles.default;
+---
+
+<div
+  role="alert"
+  data-slot="alert"
+  class={cn(
+    "flex items-center gap-2.5 rounded-xl px-4 py-2.5 backdrop-blur-sm select-none transition-all duration-300",
+    v.container,
+    className
+  )}
+>
+  <div data-slot="alert-icon" class="flex items-center justify-center shrink-0">
+    {variant === "destructive" ? (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class={v.iconColor}>
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+    ) : variant === "warning" ? (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class={v.iconColor}>
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+    ) : variant === "info" ? (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class={v.iconColor}>
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+    ) : (
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class={v.iconColor}>
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="m9 12 2 2 4-4"></path>
+      </svg>
+    )}
+  </div>
+  <div class="flex-1 min-w-0">
+    <span data-slot="alert-title" class={cn("text-[13px] font-medium tracking-tight leading-none", v.titleColor)}>
+      {title || description}
+    </span>
+    {title && description && (
+      <div class="text-[12px] opacity-80 mt-0.5 leading-snug">
+        {description}
+      </div>
+    )}
+    <slot />
+  </div>
+  {closable && (
+    <button
+      type="button"
+      onclick="this.closest('[role=alert]').remove()"
+      class={cn("p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5", v.closeColor)}
+      aria-label="Close"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"></path>
+        <path d="m6 6 12 12"></path>
+      </svg>
+    </button>
+  )}
+</div>

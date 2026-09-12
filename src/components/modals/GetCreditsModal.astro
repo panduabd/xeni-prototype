@@ -63,16 +63,16 @@ const pricingContext = {
     border-radius: 10px;
   }
   .font-fraunces {
-    font-family: 'Fraunces', serif;
+    font-family: "Poppins", sans-serif;
   }
   .font-geist {
-    font-family: 'Geist', sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 </style>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <div
   id="get-credits-modal"
@@ -114,7 +114,7 @@ const pricingContext = {
             <div id="modal-pricing-switch-container" class="relative bg-gray-200 rounded-full p-1 flex items-center w-[300px] cursor-pointer">
                <div id="modal-active-slider" class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-white shadow-sm rounded-full transition-transform duration-300 ease-out z-0"></div>
                
-               <button id="modal-btn-monthly" class="relative flex-1 py-2 text-[13px] font-bold text-[#111827] z-10 transition-colors text-center font-geist">
+               <button id="modal-btn-monthly" class="relative flex-1 py-2 text-[13px] font-medium text-[#111827] z-10 transition-colors text-center font-geist">
                   Monthly
                </button>
                <button id="modal-btn-yearly" class="relative flex-1 py-2 text-[13px] font-medium text-gray-500 z-10 transition-colors text-center flex items-center justify-center gap-2 font-geist">
@@ -141,7 +141,7 @@ const pricingContext = {
                
                <!-- Button Replacement based on LandingButton logic -->
                <div class="mb-8">
-                  <button class="w-full inline-flex items-center justify-center rounded-xl font-bold transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-white text-[#111827] border border-gray-300 shadow-[0_3px_0_0_#D1D5DB] hover:bg-gray-50 active:translate-y-[2px] active:shadow-[0_1px_0_0_#D1D5DB] font-geist">
+                  <button class="w-full inline-flex items-center justify-center rounded-xl font-medium transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-white text-[#111827] border border-gray-300 shadow-[0_3px_0_0_#D1D5DB] hover:bg-gray-50 active:translate-y-[2px] active:shadow-[0_1px_0_0_#D1D5DB] font-geist">
                      {pricingContext.starter.btnLabel}
                   </button>
                </div>
@@ -179,7 +179,7 @@ const pricingContext = {
                   </p>
                   
                   <div class="mb-8">
-                     <button class="w-full inline-flex items-center justify-center rounded-xl font-bold transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black hover:shadow-[0_3px_0_0_#374151] active:translate-y-[2px] active:shadow-[0_1px_0_0_#374151] font-geist">
+                     <button id="btn-upgrade-pro-plan" class="w-full inline-flex items-center justify-center rounded-xl font-medium transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black hover:shadow-[0_3px_0_0_#374151] active:translate-y-[2px] active:shadow-[0_1px_0_0_#374151] font-geist">
                         {pricingContext.pro.btnLabel}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1.5 flex-shrink-0"><path d="m9 18 6-6-6-6"/></svg>
                      </button>
@@ -208,7 +208,7 @@ const pricingContext = {
                </p>
                
                <div class="mb-8">
-                  <button class="w-full inline-flex items-center justify-center rounded-xl font-bold transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-white text-[#111827] border border-gray-300 shadow-[0_3px_0_0_#D1D5DB] hover:bg-gray-50 active:translate-y-[2px] active:shadow-[0_1px_0_0_#D1D5DB] font-geist">
+                  <button class="w-full inline-flex items-center justify-center rounded-xl font-medium transition-all duration-150 cursor-pointer px-[18px] py-2.5 text-[13px] bg-white text-[#111827] border border-gray-300 shadow-[0_3px_0_0_#D1D5DB] hover:bg-gray-50 active:translate-y-[2px] active:shadow-[0_1px_0_0_#D1D5DB] font-geist">
                      {pricingContext.enterprise.btnLabel}
                   </button>
                </div>
@@ -224,6 +224,92 @@ const pricingContext = {
             </div>
 
          </div>
+      </div>
+
+      <!-- Buy Credit Packs Section -->
+      <div class="max-w-6xl mx-auto mt-12">
+        <div class="bg-white border border-gray-200 rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.01)]">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-gray-200">
+            <div>
+              <span class="text-[11px] font-semibold text-[#667085] uppercase tracking-wider block mb-1">Need more credits?</span>
+              <h3 class="text-[22px] md:text-[26px] font-semibold text-[#111827] tracking-tight">Buy Credit Packs</h3>
+              <p class="text-[13px] text-[#667085] font-medium mt-1 max-w-xl">
+                Top up extra credits on demand without changing your current subscription plan. Credit packs are one-time add-ons.
+              </p>
+            </div>
+            <div class="shrink-0 self-start md:self-auto">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11.5px] font-medium bg-gray-100 text-[#374151]">
+                <i class="ti ti-clock-check text-[14px]"></i> Masa aktif 6 bulan
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
+            <!-- 50 Credits -->
+            <div class="p-5 rounded-2xl border border-gray-200 bg-[#F8F9FB] flex flex-col justify-between hover:border-[#111827] transition-all">
+              <div>
+                <span class="text-[11px] font-medium text-[#667085] uppercase tracking-wider block">50 Credits</span>
+                <p class="text-[26px] font-semibold text-[#111827] mt-2 leading-none">Rp69K</p>
+                <div class="mt-2 mb-1">
+                  <span class="inline-flex items-center gap-1 text-[11px] text-[#344054] bg-white border border-gray-200 px-2.5 py-0.5 rounded-md font-medium">
+                    <i class="ti ti-sparkles text-[12px] text-[#667085]"></i> ±50x generate design
+                  </span>
+                </div>
+                <span class="text-[11.5px] text-[#667085] font-medium mt-1.5 block">Sekali beli · Rp 1.380/cr</span>
+              </div>
+              <div class="mt-5 pt-3 border-t border-gray-200">
+                <span class="text-[11px] text-[#4b5563]">Tanpa langganan bulanan</span>
+              </div>
+            </div>
+
+            <!-- 150 Credits -->
+            <div class="p-5 rounded-2xl border-2 border-[#111827] bg-white flex flex-col justify-between relative shadow-xs">
+              <span class="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-[#111827] text-white text-[9.5px] font-medium tracking-tight">Populer</span>
+              <div>
+                <span class="text-[11px] font-medium text-[#111827] uppercase tracking-wider block">150 Credits</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                  <p class="text-[26px] font-semibold text-[#111827] leading-none">Rp179K</p>
+                  <span class="text-[10px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded font-medium">Hemat 13%</span>
+                </div>
+                <div class="mt-2 mb-1">
+                  <span class="inline-flex items-center gap-1 text-[11px] text-[#111827] bg-gray-50 border border-gray-200 px-2.5 py-0.5 rounded-md font-medium">
+                    <i class="ti ti-sparkles text-[12px] text-[#111827]"></i> ±150x generate design
+                  </span>
+                </div>
+                <span class="text-[11.5px] text-[#667085] font-medium mt-1.5 block">Sekali beli · Rp 1.193/cr</span>
+              </div>
+              <div class="mt-5 pt-3 border-t border-gray-200">
+                <span class="text-[11px] text-[#4b5563]">Paling sering dipilih</span>
+              </div>
+            </div>
+
+            <!-- 500 Credits -->
+            <div class="p-5 rounded-2xl border border-gray-200 bg-[#F8F9FB] flex flex-col justify-between hover:border-[#111827] transition-all">
+              <div>
+                <span class="text-[11px] font-medium text-[#667085] uppercase tracking-wider block">500 Credits</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                  <p class="text-[26px] font-semibold text-[#111827] leading-none">Rp549K</p>
+                  <span class="text-[10px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded font-medium">Paling Hemat</span>
+                </div>
+                <div class="mt-2 mb-1">
+                  <span class="inline-flex items-center gap-1 text-[11px] text-[#344054] bg-white border border-gray-200 px-2.5 py-0.5 rounded-md font-medium">
+                    <i class="ti ti-sparkles text-[12px] text-[#667085]"></i> ±500x generate design
+                  </span>
+                </div>
+                <span class="text-[11.5px] text-[#667085] font-medium mt-1.5 block">Sekali beli · Rp 1.098/cr</span>
+              </div>
+              <div class="mt-5 pt-3 border-t border-gray-200">
+                <span class="text-[11px] text-[#4b5563]">Harga per kredit terbaik</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer note -->
+          <div class="mt-6 p-3 rounded-xl bg-gray-50 border border-gray-200/80 flex items-start gap-2.5 text-[11.5px] text-[#667085]">
+            <i class="ti ti-info-circle text-[15px] text-[#667085] shrink-0 mt-0.5"></i>
+            <span><strong class="text-[#111827] font-medium">Estimasi Pemakaian:</strong> 1 Credit ≈ 1 kali generate visual/desain AI standar (atau fitur edit seperti upscale & hapus background). Credit Pack adalah pembelian kuota add-on (bukan paket langganan).</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -249,6 +335,16 @@ const pricingContext = {
         modal.classList.remove("hidden");
       }
     });
+
+    // Handle Upgrading to Pro
+    const btnUpgradeProPlan = document.getElementById("btn-upgrade-pro-plan");
+    if (btnUpgradeProPlan) {
+      btnUpgradeProPlan.addEventListener("click", () => {
+        if (modal) modal.classList.add("hidden");
+        window.dispatchEvent(new CustomEvent("upgraded-to-pro"));
+        window.dispatchEvent(new CustomEvent("open-manage-account", { detail: { tab: "subscription" } }));
+      });
+    }
 
     // Pricing Switch logic injected specifically for the modal
     const btnMonthly = document.getElementById('modal-btn-monthly');

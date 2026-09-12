@@ -1,5 +1,6 @@
 ---
 import AppLayout from "../layouts/AppLayout.astro";
+import SocialIcon from "../components/icons/SocialIcon.astro";
 
 const businessDNAList = [
   {
@@ -8,6 +9,8 @@ const businessDNAList = [
     category: "Food & Beverage",
     color: "#34D399",
     updatedAt: "2h ago",
+    overview: "Fresh Juice Co. is a healthy juice brand focused on organic ingredients and sustainable packaging.",
+    guidance: "Clean and minimal layouts. Use ample white space. Avoid clutter. Prioritize readability and accessibility.",
   },
   {
     id: "2",
@@ -15,6 +18,8 @@ const businessDNAList = [
     category: "Technology",
     color: "#2563EB",
     updatedAt: "5h ago",
+    overview: "Enterprise software solutions powering modern automated workflows.",
+    guidance: "Bold technical aesthetic with crisp borders and high-contrast typography.",
   },
   {
     id: "3",
@@ -22,6 +27,8 @@ const businessDNAList = [
     category: "Beauty & Cosmetics",
     color: "#F472B6",
     updatedAt: "1d ago",
+    overview: "High-end skincare and beauty products with natural essence.",
+    guidance: "Soft pastel gradients, serif headlines, and elegant lifestyle imagery.",
   },
   {
     id: "4",
@@ -29,6 +36,8 @@ const businessDNAList = [
     category: "Technology",
     color: "#8B5CF6",
     updatedAt: "2d ago",
+    overview: "Incubator and acceleration platform for innovative tech startups.",
+    guidance: "Futuristic, vibrant purple accents with clean UI components.",
   },
   {
     id: "5",
@@ -36,17 +45,9 @@ const businessDNAList = [
     category: "Retail",
     color: "#10B981",
     updatedAt: "3d ago",
+    overview: "Direct-to-consumer organic farm produce and pantry essentials.",
+    guidance: "Earthy tones, warm photography, and clear nutritional callouts.",
   },
-];
-
-const categories = [
-  "All",
-  "Food & Beverage",
-  "Technology",
-  "Beauty & Cosmetics",
-  "Retail",
-  "Healthcare",
-  "Finance",
 ];
 
 const colorPalette = [
@@ -58,27 +59,20 @@ const colorPalette = [
 ];
 
 const fonts = [
-  { name: "Inter", role: "Primary", weights: "400, 500, 600, 700" },
-  { name: "Playfair Display", role: "Accent", weights: "400, 700" },
-];
-
-const photographyStyle = [
-  "Bright, natural lighting",
-  "Clean, minimal backgrounds",
-  "Vibrant food styling",
-  "Lifestyle-oriented shots",
+  { name: "Inter", role: "Primary Font", weights: "400, 500, 600, 700", preview: "Aa" },
+  { name: "Playfair Display", role: "Accent Serif", weights: "400, 700", preview: "Aa" },
 ];
 
 const knowledgeItems = [
   {
     id: "k1",
     title: "Company History",
-    content: "Founded in 2018 in Bali, started as a small juice bar.",
+    content: "Founded in 2018 in Bali, started as a small artisan juice bar and expanded nationally.",
   },
   {
     id: "k2",
     title: "Product Lines",
-    content: "Cold-pressed juices, smoothies, wellness shots, and cleanses.",
+    content: "Cold-pressed juices, smoothies, wellness shots, and immune booster cleanses.",
   },
   {
     id: "k3",
@@ -88,99 +82,114 @@ const knowledgeItems = [
   {
     id: "k4",
     title: "Unique Selling Points",
-    content: "100% organic, locally sourced, zero-waste packaging.",
+    content: "100% organic raw ingredients, locally sourced from farmers, zero-waste compostable packaging.",
   },
+];
+
+const productItems = [
+  { id: "p1", name: "Cold Pressed Juice Box", category: "Physical Product" },
+  { id: "p2", name: "Ginger Wellness Shot", category: "Physical Product" },
+  { id: "p3", name: "7-Day Detox Plan", category: "Digital Asset" },
+];
+
+const connectedAccounts = [
+  { id: "a1", handle: "@freshjuice.co", platform: "Instagram Business", type: "instagram", active: true },
+  { id: "a2", handle: "@freshjuice", platform: "TikTok", type: "tiktok", active: true },
 ];
 ---
 
 <AppLayout title="Business DNA - Xeni" activePage="business-dna">
   <div class="w-full min-h-full flex flex-col px-6 pb-8 -mt-12">
-    {/* ═══════════ HEADER ROW ═══════════ */}
-    <div class="w-full pt-1 pb-5 flex items-center gap-4 shrink-0">
-      <div class="flex items-center gap-2 shrink-0">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="currentColor"
-          viewBox="0 0 256 256"
-          class="text-[#98a2b3] flex-shrink-0"
-        >
-          <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
-        </svg>
-        <h1 class="text-[20px] font-bold text-[#111827] tracking-tight">
+    <!-- Title + Controls Row -->
+    <div class="w-full pt-1 pb-5 flex items-center justify-between gap-4 shrink-0">
+      <!-- Left: Title -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <h1 class="text-[20px] font-semibold text-[#18181b] tracking-tight">
           Business DNA
         </h1>
       </div>
+
+      <!-- Save Success Toast -->
+      <div id="save-toast" class="hidden items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-medium shadow-xs animate-in fade-in duration-200">
+        <i class="ti ti-circle-check text-[16px] text-emerald-600"></i>
+        <span id="save-toast-msg">Perubahan berhasil disimpan!</span>
+      </div>
     </div>
 
-    {/* ═══════════ BENTO GRID: 2 PANELS ═══════════ */}
+    {/* ═══════════ BENTO GRID: 2 PANELS (30% / 70%) ═══════════ */}
     <div class="w-full flex-1 flex gap-4 min-h-0">
       {/* ═══ LEFT PANEL: DNA List (30%) ═══ */}
-      <div
-        class="w-[30%] min-w-70 max-w-90 flex flex-col gap-3 h-full overflow-hidden"
-      >
-        {/* Sticky Top Bar: Search + Button */}
-        <div class="shrink-0 sticky top-0 z-10 flex flex-col gap-2 pb-2">
-          {/* Search */}
+      <div class="w-[30%] min-w-[280px] max-w-[350px] flex flex-col gap-3 h-full overflow-hidden">
+        {/* Sticky Top Bar: Search + New DNA Button */}
+        <div class="shrink-0 flex flex-col gap-2">
+          {/* shadcn Input with Search Icon */}
           <div class="relative w-full">
-            <i
-              class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"
-            ></i>
+            <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"></i>
             <input
               id="dna-search"
               type="text"
               placeholder="Search business DNA..."
-              class="w-full h-10 pl-9 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+              class="w-full h-9.5 pl-9 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all"
             />
           </div>
 
-          {/* New Business DNA Button */}
+          {/* New Business DNA Button (shadcn Dark Button) */}
           <button
             id="btn-new-dna"
             type="button"
-            class="w-full inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-4 h-10 text-[13px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black hover:shadow-[0_3px_0_0_#374151] active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+            class="w-full h-9.5 inline-flex items-center justify-center gap-2 rounded-xl text-[12.5px] font-semibold bg-[#111827] hover:bg-black text-white shadow-xs transition-all active:scale-[0.98] cursor-pointer select-none"
           >
             <i class="ti ti-plus text-[14px]"></i>
             <span>New Business DNA</span>
           </button>
         </div>
 
-        {/* DNA Cards */}
+        {/* DNA Cards List */}
         <div
           id="dna-list"
-          class="flex-1 overflow-y-auto flex flex-col gap-3 pb-2"
-          style="scrollbar-width: none;"
+          class="flex-1 overflow-y-auto flex flex-col gap-2.5 pr-0.5 custom-scrollbar"
+          style="scrollbar-width: thin;"
         >
           {
             businessDNAList.map((dna, index) => (
               <button
                 type="button"
-                class={`dna-card group w-full text-left p-4 rounded-2xl border bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-all cursor-pointer ${index === 0 ? "border-[#9CA3AF] bg-[#F9FAFB]" : "border-[#eaecf0] hover:bg-[#F9FAFB]"}`}
+                class={`dna-card group w-full text-left p-3.5 rounded-2xl border transition-all cursor-pointer select-none ${
+                  index === 0
+                    ? "border-[#111827] bg-[#F9FAFB] shadow-xs ring-1 ring-[#111827]/10"
+                    : "border-[#eaecf0] bg-white hover:bg-[#F9FAFB] hover:border-[#d0d5dd]"
+                }`}
                 data-id={dna.id}
+                data-name={dna.name}
                 data-category={dna.category}
+                data-color={dna.color}
+                data-updated={dna.updatedAt}
+                data-overview={dna.overview}
+                data-guidance={dna.guidance}
               >
                 <div class="flex items-center gap-3">
-                  {/* Color Avatar */}
+                  {/* Color Avatar Badge */}
                   <div
-                    class="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center"
-                    style={`background-color: ${dna.color}15;`}
+                    class="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center font-bold text-[14px] shadow-2xs"
+                    style={`background-color: ${dna.color}15; color: ${dna.color}; border: 1px solid ${dna.color}35;`}
                   >
-                    <span
-                      class="text-[14px] font-bold"
-                      style={`color: ${dna.color};`}
-                    >
-                      {dna.name.charAt(0)}
-                    </span>
+                    {dna.name.charAt(0)}
                   </div>
                   {/* Info */}
                   <div class="flex-1 min-w-0">
-                    <h4 class="text-[13px] font-bold text-[#111827] truncate">
-                      {dna.name}
-                    </h4>
-                    <p class="text-[12px] text-[#667085] font-medium truncate mt-0.5">
-                      {dna.category}
-                    </p>
+                    <div class="flex items-center justify-between gap-1">
+                      <h4 class="text-[12.5px] font-bold text-[#111827] truncate dna-card-title">
+                        {dna.name}
+                      </h4>
+                      <span class="text-[10.5px] text-[#98a2b3] shrink-0 font-normal">
+                        {dna.updatedAt}
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-1.5 mt-1">
+                      <span class="px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#f3f4f6] text-[#4b5563] border border-[#eaecf0]">
+                        {dna.category}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </button>
@@ -189,78 +198,108 @@ const knowledgeItems = [
         </div>
       </div>
 
-      {/* ═══ RIGHT PANEL: DNA Detail (70%) ═══ */}
-      <div
-        class="flex-1 flex flex-col rounded-3xl border border-[#eaecf0] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] overflow-hidden min-h-0"
-      >
+      {/* ═══ RIGHT PANEL: DNA Detail & Studio (70%) ═══ */}
+      <div class="flex-1 flex flex-col rounded-3xl border border-[#eaecf0] bg-white shadow-xs overflow-hidden min-h-0">
         {/* Panel Header */}
-        <div class="px-6 pt-5 pb-4 flex items-center justify-between shrink-0">
-          <h2 id="detail-name" class="text-[16px] font-bold text-[#111827]">
-            Fresh Juice Co.
-          </h2>
+        <div class="px-6 pt-5 pb-4 flex items-center justify-between shrink-0 border-b border-[#eaecf0]/60 bg-white">
+          <div class="flex items-center gap-2.5">
+            <div
+              id="detail-avatar"
+              class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-[12px] bg-[#34D399]/20 text-[#34D399]"
+            >
+              F
+            </div>
+            <h2 id="detail-name" class="text-[15px] font-bold text-[#111827]">
+              Fresh Juice Co.
+            </h2>
+            <span class="px-2 py-0.5 rounded-md text-[10.5px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 ml-1">
+              Active Profile
+            </span>
+          </div>
+
           <div class="flex items-center gap-2">
+            {/* Save Changes Button */}
             <button
               id="btn-save-dna"
+              type="button"
               disabled
-              class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none"
+              class="h-8 px-3.5 inline-flex items-center gap-1.5 rounded-xl text-[12px] font-medium bg-[#111827] text-white shadow-xs hover:bg-black transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              <i class="ti ti-device-floppy text-[13px]"></i> Save Changes
+              <i class="ti ti-device-floppy text-[13px]"></i>
+              <span>Save Changes</span>
             </button>
+
+            {/* shadcn Dropdown Menu */}
             <div class="relative">
               <button
                 id="btn-more-actions"
-                class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                type="button"
+                class="w-8 h-8 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] flex items-center justify-center text-[#667085] hover:text-[#111827] transition-all shadow-xs cursor-pointer"
               >
                 <i class="ti ti-dots text-[16px]"></i>
               </button>
+
               <div
                 id="more-actions-dropdown"
-                class="hidden absolute right-0 top-full mt-1 w-40 rounded-xl border border-[#eaecf0] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] py-1 z-20"
+                class="hidden absolute right-0 top-full mt-1.5 w-40 rounded-xl border border-[#eaecf0] bg-white shadow-lg p-1 z-30 animate-in fade-in zoom-in-95 duration-150"
               >
                 <button
+                  id="btn-rename-action"
                   type="button"
-                  class="w-full text-left px-3 h-9 text-[12px] font-medium text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-all flex items-center gap-2"
+                  class="w-full text-left px-2.5 py-1.5 text-[12px] font-medium text-[#344054] hover:text-[#111827] hover:bg-[#F9FAFB] rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
                 >
-                  <i class="ti ti-pencil text-[13px]"></i> Rename
+                  <i class="ti ti-pencil text-[13px] text-[#667085]"></i>
+                  <span>Rename</span>
                 </button>
                 <button
+                  id="btn-duplicate-action"
                   type="button"
-                  class="w-full text-left px-3 h-9 text-[12px] font-medium text-[#F04438] hover:bg-[#FEF3F2] transition-all flex items-center gap-2"
+                  class="w-full text-left px-2.5 py-1.5 text-[12px] font-medium text-[#344054] hover:text-[#111827] hover:bg-[#F9FAFB] rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
                 >
-                  <i class="ti ti-trash text-[13px]"></i> Delete
+                  <i class="ti ti-copy text-[13px] text-[#667085]"></i>
+                  <span>Duplicate</span>
+                </button>
+                <div class="h-px bg-[#eaecf0] my-1"></div>
+                <button
+                  id="btn-delete-action"
+                  type="button"
+                  class="w-full text-left px-2.5 py-1.5 text-[12px] font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
+                >
+                  <i class="ti ti-trash text-[13px]"></i>
+                  <span>Delete</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div class="shrink-0 px-6 border-b border-[#eaecf0]">
-          <div class="flex items-center gap-1 -mb-px">
+        {/* shadcn Tabs Navigation */}
+        <div class="shrink-0 px-6 pt-2 pb-0 border-b border-[#eaecf0] bg-[#F9FAFB]/50">
+          <div class="flex items-center gap-2 -mb-px">
             <button
               type="button"
-              class="tab-btn px-4 h-10 text-[13px] font-semibold text-[#111827] border-b-2 border-[#111827] transition-all cursor-pointer"
+              class="tab-btn px-4 py-2.5 text-[12.5px] font-bold text-[#111827] border-b-2 border-[#111827] transition-all cursor-pointer select-none"
               data-tab="identity"
             >
               Identity
             </button>
             <button
               type="button"
-              class="tab-btn px-4 h-10 text-[13px] font-medium text-[#667085] border-b-2 border-transparent hover:text-[#111827] transition-all cursor-pointer"
+              class="tab-btn px-4 py-2.5 text-[12.5px] font-medium text-[#667085] border-b-2 border-transparent hover:text-[#111827] transition-all cursor-pointer select-none"
               data-tab="product-references"
             >
               Product References
             </button>
             <button
               type="button"
-              class="tab-btn px-4 h-10 text-[13px] font-medium text-[#667085] border-b-2 border-transparent hover:text-[#111827] transition-all cursor-pointer"
+              class="tab-btn px-4 py-2.5 text-[12.5px] font-medium text-[#667085] border-b-2 border-transparent hover:text-[#111827] transition-all cursor-pointer select-none"
               data-tab="knowledge"
             >
               Knowledge
             </button>
             <button
               type="button"
-              class="tab-btn px-4 h-10 text-[13px] font-medium text-[#667085] border-b-2 border-transparent hover:text-[#111827] transition-all cursor-pointer"
+              class="tab-btn px-4 py-2.5 text-[12.5px] font-medium text-[#667085] border-b-2 border-transparent hover:text-[#111827] transition-all cursor-pointer select-none"
               data-tab="integration"
             >
               Integration
@@ -268,121 +307,111 @@ const knowledgeItems = [
           </div>
         </div>
 
-        {/* Settings Content */}
-        <div class="flex-1 overflow-y-auto custom-scrollbar px-6 py-6">
-          <div class="max-w-3xl">
-            {/* ═══════════ TAB: IDENTITY ═══════════ */}
-            <div id="tab-identity" class="tab-content space-y-8">
-              {/* Brand Kit Upload Card */}
-              <div
-                class="rounded-2xl border border-[#eaecf0] bg-white p-5 flex items-center gap-4"
-              >
-                <div
-                  class="w-12 h-12 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
-                >
-                  <i class="ti ti-file-text text-[22px] text-[#667085]"></i>
+        {/* Scrollable Tab Content Area */}
+        <div class="flex-1 overflow-y-auto custom-scrollbar px-6 py-5">
+          <div class="max-w-3xl space-y-6">
+            {/* ═══════════ TAB 1: IDENTITY ═══════════ */}
+            <div id="tab-identity" class="tab-content space-y-6">
+              {/* Quick Upload Banner */}
+              <div class="p-4 rounded-2xl border border-[#eaecf0] bg-[#F9FAFB] flex items-center justify-between gap-4 shadow-xs">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] flex items-center justify-center shrink-0 shadow-2xs">
+                    <i class="ti ti-file-text text-[20px] text-[#667085]"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-[12.5px] font-bold text-[#111827]">
+                      Build your Business DNA with one upload
+                    </h3>
+                    <p class="text-[11.5px] text-[#667085] mt-0.5">
+                      Auto-fill logos, colors, fonts, and more. <a href="/studio" class="text-[#2563EB] font-semibold hover:underline">Or create in Studio</a>
+                    </p>
+                  </div>
                 </div>
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-[13px] font-bold text-[#111827]">
-                    Build your Business DNA with one upload
-                  </h3>
-                  <p class="text-[12px] text-[#667085] mt-0.5">
-                    Auto-fill logos, colors, fonts, and more. <a
-                      href="/studio"
-                      class="text-[#2563EB] hover:underline"
-                      >Or create from scratch in Studio.</a
-                    >
-                  </p>
-                </div>
+
                 <div class="flex items-center gap-2 shrink-0">
                   <button
                     type="button"
                     id="btn-extract-file"
-                    class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-white text-[#344054] border border-[#D0D5DD] shadow-[0_3px_0_0_#D0D5DD] hover:bg-[#F9FAFB] active:translate-y-[1px] active:shadow-[0_1px_0_0_#D0D5DD]"
+                    class="h-8 px-3 inline-flex items-center gap-1.5 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[#344054] hover:text-[#111827] text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
                   >
                     <i class="ti ti-upload text-[13px]"></i>
-                    Extract from file
+                    <span>Extract from file</span>
                   </button>
                   <button
                     type="button"
                     id="btn-analyze-website"
-                    class="inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+                    class="h-8 px-3 inline-flex items-center gap-1.5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
                   >
                     <i class="ti ti-world text-[13px]"></i>
-                    Analyze Website
+                    <span>Analyze Website</span>
                   </button>
                 </div>
               </div>
 
-              {/* Section: Logo */}
-              <div>
-                <h3 class="text-[13px] font-bold text-[#111827] mb-3">Logo</h3>
+              {/* Logo Section */}
+              <div class="space-y-2.5">
+                <label class="block text-[12px] font-bold text-[#111827]">Logo</label>
                 <div class="grid grid-cols-4 gap-3">
+                  <label class="aspect-square rounded-2xl border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] bg-[#F9FAFB] hover:bg-white transition-all flex flex-col items-center justify-center gap-1.5 cursor-pointer group">
+                    <i class="ti ti-plus text-[18px] text-[#98a2b3] group-hover:text-[#111827] transition-colors"></i>
+                    <span class="text-[11px] font-medium text-[#667085] group-hover:text-[#111827]">Upload</span>
+                    <input type="file" accept="image/*" class="hidden" />
+                  </label>
+                  <div class="aspect-square rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center p-3">
+                    <div id="logo-preview-box" class="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-[18px] bg-[#34D399]/20 text-[#34D399]">
+                      F
+                    </div>
+                  </div>
+                </div>
+                <p class="text-[11px] text-[#98a2b3]">SVG, PNG, or JPG. Max 2MB.</p>
+              </div>
+
+              {/* Business Overview */}
+              <div class="space-y-2">
+                <label class="block text-[12px] font-bold text-[#111827]">Business Overview</label>
+                <textarea
+                  id="dna-overview-input"
+                  rows="3"
+                  placeholder="Describe what your business does, key products, and target audience..."
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all resize-none"
+                >Fresh Juice Co. is a healthy juice brand focused on organic ingredients and sustainable packaging.</textarea>
+              </div>
+
+              {/* Design Guidance */}
+              <div class="space-y-2">
+                <label class="block text-[12px] font-bold text-[#111827]">Design Guidance</label>
+                <textarea
+                  id="dna-guidance-input"
+                  rows="3"
+                  placeholder="Describe your brand's visual identity, layout guidelines, and aesthetic rules..."
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all resize-none"
+                >Clean and minimal layouts. Use ample white space. Avoid clutter. Prioritize readability and accessibility.</textarea>
+              </div>
+
+              {/* Color Palette */}
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <label class="block text-[12px] font-bold text-[#111827]">Color Palette</label>
+                  <span class="text-[11px] text-[#98a2b3]">5 theme tokens</span>
+                </div>
+                <div class="flex items-start gap-3">
                   <button
                     type="button"
-                    class="aspect-square rounded-xl border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
+                    class="w-16 h-16 rounded-2xl border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] flex flex-col items-center justify-center text-[#98a2b3] hover:text-[#111827] transition-all cursor-pointer"
+                    onclick="window.showAlert ? window.showAlert({ title: 'Color Palette', message: 'Color picker integration coming soon.', variant: 'info' }) : null"
                   >
-                    <i class="ti ti-plus text-[20px]"></i>
+                    <i class="ti ti-plus text-[16px]"></i>
+                    <span class="text-[10px] mt-0.5">Add</span>
                   </button>
-                  <div
-                    class="aspect-square rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-                  >
-                    <i class="ti ti-photo text-[24px] text-[#D1D5DB]"></i>
-                  </div>
-                </div>
-                <p class="text-[11px] text-[#98a2b3] mt-2">
-                  SVG, PNG, or JPG. Max 2MB.
-                </p>
-              </div>
-
-              {/* Section: Business Overview */}
-              <div>
-                <h3 class="text-[13px] font-bold text-[#111827] mb-3">
-                  Business Overview
-                </h3>
-                <textarea
-                  rows="3"
-                  class="w-full px-3 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]/10 transition-all resize-none"
-                  >Fresh Juice Co. is a healthy juice brand focused on organic
-                  ingredients and sustainable packaging.</textarea
-                >
-              </div>
-
-              {/* Section: Design Guidance */}
-              <div>
-                <h3 class="text-[13px] font-bold text-[#111827] mb-3">
-                  Design Guidance
-                </h3>
-                <textarea
-                  rows="4"
-                  placeholder="Describe your brand's design guidelines..."
-                  class="w-full px-3 py-2.5 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]/10 transition-all resize-none"
-                  >Clean and minimal layouts. Use ample white space. Avoid
-                  clutter. Prioritize readability and accessibility.</textarea
-                >
-              </div>
-
-              {/* Section: Color */}
-              <div>
-                <h3 class="text-[13px] font-bold text-[#111827] mb-3">Color</h3>
-                <div class="flex items-start gap-3">
-                  <div class="flex flex-col items-center gap-1.5">
-                    <button
-                      type="button"
-                      class="w-16 h-16 rounded-xl border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
-                    >
-                      <i class="ti ti-plus text-[20px]"></i>
-                    </button>
-                  </div>
                   {
-                    colorPalette.map((color) => (
+                    colorPalette.map((c) => (
                       <div class="flex flex-col items-center gap-1.5">
                         <div
-                          class="w-16 h-16 rounded-xl border border-[#eaecf0]"
-                          style={`background-color: ${color.hex};`}
+                          class="w-16 h-16 rounded-2xl border border-[#eaecf0] shadow-2xs hover:scale-105 transition-transform cursor-pointer"
+                          style={`background-color: ${c.hex};`}
                         />
-                        <span class="text-[11px] font-mono text-[#667085]">
-                          {color.hex}
+                        <span class="text-[10px] font-mono text-[#667085] font-medium">
+                          {c.hex}
                         </span>
                       </div>
                     ))
@@ -390,68 +419,96 @@ const knowledgeItems = [
                 </div>
               </div>
 
-              {/* Section: Fonts */}
-              <div>
-                <h3 class="text-[13px] font-bold text-[#111827] mb-3">Fonts</h3>
+              {/* Fonts */}
+              <div class="space-y-2.5">
+                <label class="block text-[12px] font-bold text-[#111827]">Fonts</label>
                 <div class="flex items-start gap-3">
-                  <div class="flex flex-col items-center gap-1.5">
-                    <button
-                      type="button"
-                      class="w-16 h-16 rounded-xl border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
-                    >
-                      <i class="ti ti-plus text-[20px]"></i>
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    class="w-16 h-16 rounded-2xl border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] flex flex-col items-center justify-center text-[#98a2b3] hover:text-[#111827] transition-all cursor-pointer"
+                    onclick="window.showAlert ? window.showAlert({ title: 'Typography', message: 'Custom font upload integration coming soon.', variant: 'info' }) : null"
+                  >
+                    <i class="ti ti-plus text-[16px]"></i>
+                    <span class="text-[10px] mt-0.5">Add</span>
+                  </button>
                   {
-                    fonts.map((font) => (
-                      <div class="flex flex-col items-center gap-1.5">
-                        <div class="w-16 h-16 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center">
-                          <span class="text-[14px] font-bold text-[#111827]">
-                            Aa
-                          </span>
+                    fonts.map((f) => (
+                      <div class="flex flex-col items-center gap-1">
+                        <div class="w-16 h-16 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center text-[#111827] font-bold text-[16px] shadow-2xs">
+                          {f.preview}
                         </div>
-                        <span class="text-[11px] font-medium text-[#667085]">
-                          {font.name}
-                        </span>
+                        <span class="text-[11px] font-medium text-[#111827]">{f.name}</span>
+                        <span class="text-[9.5px] text-[#98a2b3]">{f.role}</span>
                       </div>
                     ))
                   }
                 </div>
               </div>
 
-              {/* Section: Photography */}
-              <div>
-                <h3 class="text-[13px] font-bold text-[#111827] mb-3">
-                  Photography
-                </h3>
-                <div class="grid grid-cols-4 gap-3">
+              {/* Photography Reference */}
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <label class="block text-[12px] font-bold text-[#111827]">Photography</label>
                   <button
                     type="button"
                     id="btn-add-photography"
-                    class="aspect-square rounded-xl border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
+                    class="h-7 px-2.5 inline-flex items-center gap-1 rounded-lg border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[#344054] text-[11px] font-medium shadow-xs transition-all cursor-pointer"
                   >
-                    <i class="ti ti-plus text-[20px]"></i>
+                    <i class="ti ti-camera text-[12px]"></i>
+                    <span>Add Photos</span>
                   </button>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                  <div
+                    id="trigger-add-photo-box"
+                    class="aspect-square rounded-2xl border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] bg-[#F9FAFB] flex flex-col items-center justify-center gap-1 text-[#98a2b3] hover:text-[#111827] transition-all cursor-pointer"
+                  >
+                    <i class="ti ti-plus text-[18px]"></i>
+                    <span class="text-[10px]">Add photo</span>
+                  </div>
+                  <div class="aspect-square rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center relative group overflow-hidden">
+                    <i class="ti ti-photo text-[24px] text-[#98a2b3]"></i>
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-[11px] text-white font-medium">Preview</span>
+                    </div>
+                  </div>
+                  <div class="aspect-square rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center relative group overflow-hidden">
+                    <i class="ti ti-photo text-[24px] text-[#98a2b3]"></i>
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span class="text-[11px] text-white font-medium">Preview</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Section: Moodboard */}
-              <div>
-                <h3 class="text-[13px] font-bold text-[#111827] mb-3">
-                  Moodboard
-                </h3>
-                <div class="grid grid-cols-4 gap-3">
+              {/* Moodboard */}
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <label class="block text-[12px] font-bold text-[#111827]">Moodboard</label>
                   <button
                     type="button"
                     id="btn-add-moodboard"
-                    class="aspect-square rounded-xl border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
+                    class="h-7 px-2.5 inline-flex items-center gap-1 rounded-lg border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[#344054] text-[11px] font-medium shadow-xs transition-all cursor-pointer"
                   >
-                    <i class="ti ti-plus text-[20px]"></i>
+                    <i class="ti ti-layout-grid text-[12px]"></i>
+                    <span>Add Moodboard</span>
                   </button>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                  <div
+                    id="trigger-add-moodboard-box"
+                    class="aspect-square rounded-2xl border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] bg-[#F9FAFB] flex flex-col items-center justify-center gap-1 text-[#98a2b3] hover:text-[#111827] transition-all cursor-pointer"
+                  >
+                    <i class="ti ti-plus text-[18px]"></i>
+                    <span class="text-[10px]">Add asset</span>
+                  </div>
                   {
-                    [1, 2, 3, 4].map((i) => (
-                      <div class="aspect-square rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center hover:border-[#D0D5DD] transition-all cursor-pointer group">
-                        <i class="ti ti-photo text-[24px] text-[#D1D5DB] group-hover:text-[#9CA3AF] transition-colors" />
+                    [1, 2, 3].map(() => (
+                      <div class="aspect-square rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center relative group overflow-hidden cursor-pointer">
+                        <i class="ti ti-photo text-[24px] text-[#98a2b3] group-hover:scale-110 transition-transform"></i>
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <span class="text-[11px] text-white font-medium">View</span>
+                        </div>
                       </div>
                     ))
                   }
@@ -459,217 +516,178 @@ const knowledgeItems = [
               </div>
             </div>
 
-            {/* ═══════════ TAB: PRODUCT REFERENCES ═══════════ */}
-            <div
-              id="tab-product-references"
-              class="tab-content hidden space-y-8"
-            >
-              <div
-                class="rounded-2xl border border-[#eaecf0] bg-white p-5 flex items-center gap-4"
-              >
-                <div
-                  class="w-12 h-12 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
-                >
-                  <i class="ti ti-packages text-[22px] text-[#667085]"></i>
+            {/* ═══════════ TAB 2: PRODUCT REFERENCES ═══════════ */}
+            <div id="tab-product-references" class="tab-content hidden space-y-6">
+              <div class="p-4 rounded-2xl border border-[#eaecf0] bg-[#F9FAFB] flex items-center justify-between gap-4 shadow-xs">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] flex items-center justify-center shrink-0 shadow-2xs">
+                    <i class="ti ti-package text-[20px] text-[#667085]"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-[12.5px] font-bold text-[#111827]">Product References</h3>
+                    <p class="text-[11.5px] text-[#667085] mt-0.5">
+                      Kelola aset referensi produk untuk generasi konten visual yang grounded.
+                    </p>
+                  </div>
                 </div>
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-[13px] font-bold text-[#111827]">
-                    Product References
-                  </h3>
-                  <p class="text-[12px] text-[#667085] mt-0.5">
-                    Manage your product references for content generation. <a
-                      href="/studio"
-                      class="text-[#2563EB] hover:underline"
-                      >Or create from scratch in Studio.</a
-                    >
-                  </p>
-                </div>
+
                 <button
                   type="button"
                   id="btn-add-product"
-                  class="shrink-0 inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+                  class="h-8 px-3 inline-flex items-center gap-1.5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
                 >
                   <i class="ti ti-plus text-[13px]"></i>
-                  Add Product
+                  <span>Add Product</span>
                 </button>
               </div>
-              <div class="grid grid-cols-4 gap-3">
+
+              <div id="product-cards-grid" class="grid grid-cols-3 gap-3">
+                {
+                  productItems.map((prod) => (
+                    <div class="p-4 rounded-2xl border border-[#eaecf0] bg-white hover:border-[#d0d5dd] transition-all flex flex-col justify-between group cursor-pointer shadow-xs">
+                      <div class="aspect-video rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 group-hover:bg-white transition-colors">
+                        <i class="ti ti-package text-[24px] text-[#98a2b3]"></i>
+                      </div>
+                      <div>
+                        <h4 class="text-[12.5px] font-bold text-[#111827] truncate">{prod.name}</h4>
+                        <span class="inline-block mt-1 px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#f3f4f6] text-[#4b5563] border border-[#eaecf0]">
+                          {prod.category}
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                }
+
                 <div
-                  class="aspect-square rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex flex-col items-center justify-center hover:border-[#D0D5DD] transition-all cursor-pointer group gap-2"
+                  id="trigger-add-product-box"
+                  class="border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] rounded-2xl p-4 flex flex-col items-center justify-center gap-2 cursor-pointer bg-[#F9FAFB] hover:bg-white transition-all min-h-[140px]"
                 >
-                  <i
-                    class="ti ti-photo text-[24px] text-[#D1D5DB] group-hover:text-[#9CA3AF] transition-colors"
-                  ></i>
-                  <span class="text-[11px] font-medium text-[#667085]"
-                    >Juice Box</span
-                  >
-                </div>
-                <div
-                  class="aspect-square rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex flex-col items-center justify-center hover:border-[#D0D5DD] transition-all cursor-pointer group gap-2"
-                >
-                  <i
-                    class="ti ti-photo text-[24px] text-[#D1D5DB] group-hover:text-[#9CA3AF] transition-colors"
-                  ></i>
-                  <span class="text-[11px] font-medium text-[#667085]"
-                    >Shot Bundle</span
-                  >
+                  <i class="ti ti-plus text-[20px] text-[#98a2b3]"></i>
+                  <span class="text-[12px] font-medium text-[#667085]">Add new product</span>
                 </div>
               </div>
             </div>
 
-            {/* ═══════════ TAB: KNOWLEDGE ═══════════ */}
-            <div id="tab-knowledge" class="tab-content hidden space-y-6">
-              <div
-                class="rounded-2xl border border-[#eaecf0] bg-white p-5 flex items-center gap-4"
-              >
-                <div
-                  class="w-12 h-12 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
-                >
-                  <i class="ti ti-brain text-[22px] text-[#667085]"></i>
+            {/* ═══════════ TAB 3: KNOWLEDGE BASE ═══════════ */}
+            <div id="tab-knowledge" class="tab-content hidden space-y-4">
+              <div class="p-4 rounded-2xl border border-[#eaecf0] bg-[#F9FAFB] flex items-center justify-between gap-4 shadow-xs">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] flex items-center justify-center shrink-0 shadow-2xs">
+                    <i class="ti ti-brain text-[20px] text-[#667085]"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-[12.5px] font-bold text-[#111827]">Knowledge Base</h3>
+                    <p class="text-[11.5px] text-[#667085] mt-0.5">
+                      Fakta kunci dan profil bisnis untuk grounding AI generator.
+                    </p>
+                  </div>
                 </div>
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-[13px] font-bold text-[#111827]">
-                    Knowledge Base
-                  </h3>
-                  <p class="text-[12px] text-[#667085] mt-0.5">
-                    Store key facts about your business for smarter content
-                    generation.
-                  </p>
-                </div>
+
                 <button
                   type="button"
                   id="btn-add-knowledge"
-                  class="shrink-0 inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+                  class="h-8 px-3 inline-flex items-center gap-1.5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
                 >
                   <i class="ti ti-plus text-[13px]"></i>
-                  Add Knowledge
+                  <span>Add Knowledge</span>
                 </button>
               </div>
-              <div class="space-y-2">
+
+              <div id="knowledge-items-list" class="space-y-2.5">
                 {
                   knowledgeItems.map((item) => (
-                    <div class="p-4 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] group hover:border-[#D0D5DD] transition-all">
-                      <div class="flex items-center justify-between gap-2">
-                        <h4 class="text-[13px] font-semibold text-[#111827]">
-                          {item.title}
-                        </h4>
-                        <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-white transition-all cursor-pointer">
-                            <i class="ti ti-pencil text-[13px]" />
+                    <div class="p-4 rounded-2xl border border-[#eaecf0] bg-white hover:border-[#d0d5dd] transition-all shadow-xs group">
+                      <div class="flex items-start justify-between gap-3">
+                        <div class="flex-1 min-w-0">
+                          <h4 class="text-[12.5px] font-bold text-[#111827]">{item.title}</h4>
+                          <p class="text-[12px] text-[#667085] mt-1 leading-relaxed">{item.content}</p>
+                        </div>
+                        <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                          <button
+                            type="button"
+                            class="btn-edit-knowledge w-7 h-7 rounded-lg flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-all cursor-pointer"
+                            data-id={item.id}
+                            data-title={item.title}
+                            data-content={item.content}
+                          >
+                            <i class="ti ti-pencil text-[13px]"></i>
                           </button>
-                          <button class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:text-[#F04438] hover:bg-[#FEF3F2] transition-all cursor-pointer">
-                            <i class="ti ti-trash text-[13px]" />
+                          <button
+                            type="button"
+                            class="btn-delete-knowledge w-7 h-7 rounded-lg flex items-center justify-center text-[#667085] hover:text-red-600 hover:bg-red-50 transition-all cursor-pointer"
+                            data-id={item.id}
+                          >
+                            <i class="ti ti-trash text-[13px]"></i>
                           </button>
                         </div>
                       </div>
-                      <p class="text-[12px] text-[#667085] mt-1">
-                        {item.content}
-                      </p>
                     </div>
                   ))
                 }
               </div>
             </div>
 
-            {/* ═══════════ TAB: INTEGRATION ═══════════ */}
-            <div id="tab-integration" class="tab-content hidden space-y-6">
-              <div
-                class="rounded-2xl border border-[#eaecf0] bg-white p-5 flex items-center gap-4"
-              >
-                <div
-                  class="w-12 h-12 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0"
-                >
-                  <i class="ti ti-share text-[22px] text-[#667085]"></i>
+            {/* ═══════════ TAB 4: INTEGRATION ═══════════ */}
+            <div id="tab-integration" class="tab-content hidden space-y-4">
+              <div class="p-4 rounded-2xl border border-[#eaecf0] bg-[#F9FAFB] flex items-center justify-between gap-4 shadow-xs">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] flex items-center justify-center shrink-0 shadow-2xs">
+                    <i class="ti ti-share text-[20px] text-[#667085]"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-[12.5px] font-bold text-[#111827]">Connected Social Accounts</h3>
+                    <p class="text-[11.5px] text-[#667085] mt-0.5">
+                      Hubungkan akun media sosial untuk otomatisasi posting konten.
+                    </p>
+                  </div>
                 </div>
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-[13px] font-bold text-[#111827]">
-                    Connected Social Accounts
-                  </h3>
-                  <p class="text-[12px] text-[#667085] mt-0.5">
-                    Link your social platforms to publish content directly.
-                  </p>
-                </div>
+
                 <button
                   type="button"
                   id="btn-add-integration"
-                  class="shrink-0 inline-flex items-center gap-2 rounded-xl font-bold transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-3 h-8 text-[12px] bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+                  class="h-8 px-3 inline-flex items-center gap-1.5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
                 >
                   <i class="ti ti-plus text-[13px]"></i>
-                  Add Account
+                  <span>Add Account</span>
                 </button>
               </div>
-              <div class="space-y-2">
-                <div
-                  class="flex items-center gap-3 p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0]"
-                >
-                  <div
-                    class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                    style="background-color: #E4405F10;"
-                  >
-                    <i
-                      class="ti ti-brand-instagram text-[18px]"
-                      style="color: #E4405F;"></i>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-[13px] font-semibold text-[#111827]">
-                      @freshjuice.co
-                    </p>
-                    <p class="text-[11px] text-[#667085]">Instagram Business</p>
-                  </div>
-                  <div
-                    class="flex items-center gap-1.5 px-2 h-6 rounded-full bg-[#ECFDF3] text-[#12B76A] text-[11px] font-semibold shrink-0"
-                  >
-                    <div class="w-1.5 h-1.5 rounded-full bg-[#12B76A]"></div>
-                    Active
-                  </div>
-                  <button
-                    class="w-7 h-7 rounded-lg flex items-center justify-center text-[#98a2b3] hover:text-[#F04438] hover:bg-[#FEF3F2] transition-all cursor-pointer"
-                    title="Disconnect"
-                  >
-                    <i class="ti ti-trash text-[13px]"></i>
-                  </button>
-                </div>
-                <div
-                  class="flex items-center gap-3 p-3 rounded-xl bg-[#F9FAFB] border border-[#eaecf0]"
-                >
-                  <div
-                    class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                    style="background-color: #00000010;"
-                  >
-                    <i
-                      class="ti ti-brand-tiktok text-[18px]"
-                      style="color: #000000;"></i>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-[13px] font-semibold text-[#111827]">
-                      @freshjuice
-                    </p>
-                    <p class="text-[11px] text-[#667085]">TikTok</p>
-                  </div>
-                  <div
-                    class="flex items-center gap-1.5 px-2 h-6 rounded-full bg-[#ECFDF3] text-[#12B76A] text-[11px] font-semibold shrink-0"
-                  >
-                    <div class="w-1.5 h-1.5 rounded-full bg-[#12B76A]"></div>
-                    Active
-                  </div>
-                  <button
-                    class="w-7 h-7 rounded-lg flex items-center justify-center text-[#98a2b3] hover:text-[#F04438] hover:bg-[#FEF3F2] transition-all cursor-pointer"
-                    title="Disconnect"
-                  >
-                    <i class="ti ti-trash text-[13px]"></i>
-                  </button>
-                </div>
-                <div
-                  class="flex items-center gap-2 p-3 rounded-xl border border-dashed border-[#eaecf0]"
-                >
-                  <i class="ti ti-info-circle text-[14px] text-[#98a2b3]"></i>
-                  <p class="text-[12px] text-[#667085]">
-                    Accounts are managed from <a
-                      href="/integrations"
-                      class="text-[#2563EB] font-semibold hover:underline"
-                      >Integrations</a
-                    >. Connect more platforms to expand your reach.
-                  </p>
+
+              <div id="connected-accounts-list" class="space-y-2.5">
+                {
+                  connectedAccounts.map((acc) => (
+                    <div class="p-3.5 rounded-2xl border border-[#eaecf0] bg-white flex items-center justify-between gap-3 shadow-xs">
+                      <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-white border border-[#eaecf0] shadow-2xs">
+                          <SocialIcon platform={acc.type} size="md" />
+                        </div>
+                        <div class="min-w-0 flex-1">
+                          <p class="text-[12.5px] font-bold text-[#111827] truncate">{acc.handle}</p>
+                          <p class="text-[11px] text-[#667085]">{acc.platform}</p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-center gap-3 shrink-0">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          Active
+                        </span>
+                        <button
+                          type="button"
+                          class="btn-disconnect-account w-7 h-7 rounded-lg flex items-center justify-center text-[#98a2b3] hover:text-red-600 hover:bg-red-50 transition-all cursor-pointer"
+                          data-id={acc.id}
+                          title="Disconnect account"
+                        >
+                          <i class="ti ti-trash text-[13px]"></i>
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }
+
+                <div class="flex items-center gap-2 p-3.5 rounded-2xl border border-dashed border-[#eaecf0] bg-[#F9FAFB] text-[12px] text-[#667085]">
+                  <i class="ti ti-info-circle text-[15px] text-[#98a2b3] shrink-0"></i>
+                  <span>
+                    Akun dikelola dari hub <a href="/integrations" class="text-[#2563EB] font-semibold hover:underline">Integrations</a>.
+                  </span>
                 </div>
               </div>
             </div>
@@ -679,1313 +697,1039 @@ const knowledgeItems = [
     </div>
   </div>
 
-  {/* ═══ MODAL: NEW BUSINESS DNA ═══ */}
-  <div
-    id="modal-new-dna"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-md rounded-[24px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 relative"
-    >
-      <button
-        id="close-new-dna"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
-      </button>
-      <div class="px-6 pt-6 pb-6">
-        <div
-          class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center mb-4"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            fill="currentColor"
-            viewBox="0 0 256 256"
-            class="text-[#111827] flex-shrink-0"
-          >
-            <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
-          </svg>
-        </div>
-        <h2 class="text-[18px] font-bold text-[#111827] mb-1">
-          New Business DNA
-        </h2>
-        <p class="text-[13px] text-[#667085] mb-6">
-          Choose how you want to create your Business DNA profile.
-        </p>
-        <div class="flex flex-col gap-3 mb-6">
-          <button
-            id="new-dna-extract"
-            class="w-full flex items-center gap-4 p-4 rounded-xl border border-[#eaecf0] bg-white hover:border-[#D0D5DD] hover:bg-[#F9FAFB] transition-all cursor-pointer text-left group"
-          >
-            <div
-              class="w-10 h-10 rounded-lg bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0 group-hover:bg-[#F9FAFB] transition-colors"
-            >
-              <i class="ti ti-upload text-[18px] text-[#111827]"></i>
-            </div>
-            <div>
-              <p class="text-[13px] font-bold text-[#111827]">
-                Extract from file
-              </p>
-              <p class="text-[12px] text-[#667085] mt-0.5">
-                Upload brand kit, PDF, or any document
-              </p>
-            </div>
-          </button>
-          <button
-            id="new-dna-website"
-            class="w-full flex items-center gap-4 p-4 rounded-xl border border-[#eaecf0] bg-white hover:border-[#D0D5DD] hover:bg-[#F9FAFB] transition-all cursor-pointer text-left group"
-          >
-            <div
-              class="w-10 h-10 rounded-lg bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0 group-hover:bg-[#F9FAFB] transition-colors"
-            >
-              <i class="ti ti-world text-[18px] text-[#111827]"></i>
-            </div>
-            <div>
-              <p class="text-[13px] font-bold text-[#111827]">
-                Analyze Website
-              </p>
-              <p class="text-[12px] text-[#667085] mt-0.5">
-                Auto-extract brand info from your website URL
-              </p>
-            </div>
-          </button>
-        </div>
-        <div
-          class="flex items-start gap-2 p-3 rounded-lg border border-dashed border-[#eaecf0] bg-[#F9FAFB]"
-        >
-          <i
-            class="ti ti-info-circle text-[14px] text-[#98a2b3] mt-0.5 shrink-0"
-          ></i>
-          <p class="text-[12px] text-[#667085]">
-            Don't have one? <a
-              href="/studio"
-              class="text-[#2563EB] font-semibold hover:underline"
-              >Generate from scratch in Studio</a
-            > using AI.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  {/* ════════════════════════════════════════════════════════════════════ */}
+  {/* ══════════════════ MODALS / DIALOGS (SHADCN UI) ══════════════════ */}
+  {/* ════════════════════════════════════════════════════════════════════ */}
 
-  {/* ═══ MODAL: EXTRACT FROM FILE ═══ */}
-  <div
-    id="modal-extract-file"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-md rounded-[24px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
-    >
-      <button
-        id="close-extract-file"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
+  {/* 1. New Business DNA Dialog */}
+  <div id="modal-new-dna" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-new-dna" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
       </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
-          >
+
+      <div class="w-10 h-10 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 shadow-2xs">
+        <i class="ti ti-sparkles text-[18px] text-[#111827]"></i>
+      </div>
+      <h2 class="text-[17px] font-bold text-[#111827] mb-5">New Business DNA</h2>
+
+      <div class="flex flex-col gap-2.5 mb-4">
+        <button
+          type="button"
+          id="new-dna-extract"
+          class="flex items-center gap-3.5 p-3.5 rounded-2xl border border-[#eaecf0] hover:border-[#d0d5dd] hover:bg-[#F9FAFB] transition-all text-left cursor-pointer group"
+        >
+          <div class="w-10 h-10 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0 group-hover:bg-white transition-colors">
             <i class="ti ti-upload text-[18px] text-[#111827]"></i>
           </div>
-          <div>
-            <h2 class="text-[16px] font-bold text-[#111827] tracking-tight">
-              Extract from file
-            </h2>
-            <p class="text-[12px] text-[#667085]">
-              AI will automatically extract brand identity from your document.
-            </p>
+          <div class="flex-1 min-w-0">
+            <p class="text-[12.5px] font-bold text-[#111827]">Extract from file</p>
+            <p class="text-[11px] text-[#667085] mt-0.5">Upload brand kit, panduan PDF, atau deck dokumen</p>
           </div>
-        </div>
-      </div>
-      <div class="flex-1 overflow-y-auto p-6" style="scrollbar-width:none;">
-        <label class="block w-full cursor-pointer">
-          <div
-            class="w-full border-2 border-dashed border-[#D0D5DD] rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:border-[#9CA3AF] hover:bg-[#F9FAFB] transition-all"
-          >
-            <div
-              class="w-12 h-12 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-            >
-              <i class="ti ti-file-upload text-[22px] text-[#111827]"></i>
-            </div>
-            <div class="text-center">
-              <p class="text-[13px] font-bold text-[#111827]">
-                Drop file here or click
-              </p>
-              <p class="text-[12px] text-[#98a2b3] mt-0.5">PDF max 10MB</p>
-            </div>
+        </button>
+
+        <button
+          type="button"
+          id="new-dna-website"
+          class="flex items-center gap-3.5 p-3.5 rounded-2xl border border-[#eaecf0] hover:border-[#d0d5dd] hover:bg-[#F9FAFB] transition-all text-left cursor-pointer group"
+        >
+          <div class="w-10 h-10 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0 group-hover:bg-white transition-colors">
+            <i class="ti ti-world text-[18px] text-[#111827]"></i>
           </div>
-          <input
-            type="file"
-            class="hidden"
-            id="extract-file-input"
-            accept=".pdf"
-          />
-        </label>
+          <div class="flex-1 min-w-0">
+            <p class="text-[12.5px] font-bold text-[#111827]">Analyze Website</p>
+            <p class="text-[11px] text-[#667085] mt-0.5">AI membaca warna, font, dan identitas dari URL website</p>
+          </div>
+        </button>
       </div>
-      <div
-        class="border-t border-[#eaecf0] bg-white px-6 py-4 flex items-center justify-end gap-3 shrink-0"
-      >
-        <button
-          id="cancel-extract-file"
-          class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
-          >Cancel</button
-        >
-        <button
-          id="btn-submit-extract-file"
-          class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer"
-          >Extract</button
-        >
+
+      <div class="p-3 rounded-xl border border-dashed border-[#eaecf0] bg-[#F9FAFB] flex items-start gap-2.5 text-[11.5px] text-[#667085]">
+        <i class="ti ti-info-circle text-[15px] text-[#98a2b3] mt-0.5 shrink-0"></i>
+        <span>
+          Belum punya file? <a href="/studio" class="text-[#2563EB] font-semibold hover:underline">Generate di Studio</a> menggunakan prompt percakapan AI.
+        </span>
       </div>
     </div>
   </div>
 
-  {/* ═══ MODAL: ANALYZE WEBSITE ═══ */}
-  <div
-    id="modal-analyze-website"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-md rounded-[24px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
-    >
-      <button
-        id="close-analyze-website"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
+  {/* 2. Extract from File Dialog */}
+  <div id="modal-extract-file" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-extract-file" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
       </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
-          >
-            <i class="ti ti-world text-[18px] text-[#111827]"></i>
+
+      <div class="w-10 h-10 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 shadow-2xs">
+        <i class="ti ti-upload text-[18px] text-[#111827]"></i>
+      </div>
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Extract from File</h2>
+
+      <label class="block w-full cursor-pointer my-3">
+        <div class="w-full border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] rounded-2xl p-8 flex flex-col items-center justify-center gap-2.5 bg-[#F9FAFB] hover:bg-white transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-white border border-[#eaecf0] flex items-center justify-center shadow-2xs">
+            <i class="ti ti-file-upload text-[22px] text-[#111827]"></i>
           </div>
-          <div>
-            <h2 class="text-[16px] font-bold text-[#111827] tracking-tight">
-              Analyze Website
-            </h2>
-            <p class="text-[12px] text-[#667085]">
-              AI automatically extracts brand identity from your website.
-            </p>
+          <div class="text-center">
+            <p class="text-[12.5px] font-bold text-[#111827]">Drop PDF here or click to browse</p>
+            <p class="text-[11px] text-[#98a2b3] mt-0.5">Format PDF atau slide hingga 15MB</p>
           </div>
         </div>
-      </div>
-      <div class="flex-1 flex flex-col p-6" style="scrollbar-width:none;">
-        <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-          >Website URL</label
-        >
-        <div class="relative mb-3">
-          <i
-            class="ti ti-link absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[16px] pointer-events-none"
-          ></i>
-          <input
-            id="website-url-input"
-            type="url"
-            placeholder="https://yourbrand.com"
-            class="w-full h-10 pl-9 pr-4 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
-          />
-        </div>
-        <p class="text-[11px] text-[#98a2b3]">
-          Ensure the URL is publicly accessible. AI will analyze the content,
-          colors, fonts, and brand information from the page.
-        </p>
-      </div>
-      <div
-        class="border-t border-[#eaecf0] bg-white px-6 py-4 flex items-center justify-end gap-3 shrink-0"
-      >
-        <button
-          id="cancel-analyze-website"
-          class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
-          >Cancel</button
-        >
-        <button
-          id="btn-submit-analyze-website"
-          class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer flex items-center gap-2"
-        >
-          <i class="ti ti-radar text-[14px]"></i> Analyze
+        <input type="file" id="extract-file-input" accept=".pdf" class="hidden" />
+      </label>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" id="cancel-extract-file" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+          Cancel
+        </button>
+        <button type="button" id="btn-submit-extract-file" class="h-9 px-5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all cursor-pointer">
+          Extract Brand DNA
         </button>
       </div>
     </div>
   </div>
 
-  {/* ═══ MODAL: ADD PHOTOGRAPHY ═══ */}
-  <div
-    id="modal-photography"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-3xl max-h-[85vh] rounded-[24px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 relative flex flex-col"
-    >
-      <button
-        id="close-photography"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
-      </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
-          >
-            <i class="ti ti-camera text-[18px] text-[#111827]"></i>
-          </div>
-          <div>
-            <h2 class="text-[16px] font-bold text-[#111827]">
-              Add Photography
-            </h2>
-            <p class="text-[12px] text-[#667085]">
-              Upload or select photos for your brand's photography style
-              reference.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="flex-1 overflow-y-auto p-6" style="scrollbar-width:none;">
-        <label class="block w-full cursor-pointer mb-5">
-          <div
-            class="w-full border-2 border-dashed border-[#D0D5DD] rounded-xl p-4 flex items-center justify-center gap-3 hover:border-[#9CA3AF] hover:bg-[#F9FAFB] transition-all"
-          >
-            <i class="ti ti-photo-up text-[18px] text-[#98a2b3]"></i>
-            <p class="text-[13px] font-semibold text-[#667085]">
-              Upload photos <span class="text-[#98a2b3] font-normal"
-                >— PNG, JPG, WEBP max 10MB</span
-              >
-            </p>
-          </div>
-          <input type="file" class="hidden" multiple accept="image/*" />
-        </label>
-        <div class="grid grid-cols-5 gap-3">
-          {
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
-              <div class="aspect-square rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center hover:border-[#D0D5DD] transition-all cursor-pointer group">
-                <i class="ti ti-photo text-[20px] text-[#D1D5DB] group-hover:text-[#9CA3AF] transition-colors" />
-              </div>
-            ))
-          }
-        </div>
-      </div>
-      <div
-        class="px-6 py-4 border-t border-[#eaecf0] bg-white shrink-0 flex justify-end gap-3"
-      >
-        <button
-          id="cancel-photography"
-          class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
-          >Cancel</button
-        >
-        <button
-          class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer"
-          >Add Photos</button
-        >
-      </div>
+  {/* 3. Extract Loading Dialog */}
+  <div id="modal-extract-loading" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-xs rounded-3xl border border-[#eaecf0] shadow-2xl p-8 text-center animate-in zoom-in-95 duration-200">
+      <div class="w-10 h-10 rounded-full border-2 border-[#111827] border-t-transparent animate-spin mx-auto mb-3"></div>
+      <h3 class="text-[14px] font-bold text-[#111827]">Extracting Brand DNA...</h3>
+      <p class="text-[11.5px] text-[#667085] mt-1">Mengurai logo vektor, token warna dominan, dan teks brand.</p>
     </div>
   </div>
 
-  {/* ═══ MODAL: ADD MOODBOARD ═══ */}
-  <div
-    id="modal-moodboard"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-3xl max-h-[85vh] rounded-[24px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 relative flex flex-col"
-    >
-      <button
-        id="close-moodboard"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
+  {/* 4. Analyze Website Dialog */}
+  <div id="modal-analyze-website" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-analyze-website" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
       </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
-          >
-            <i class="ti ti-layout-grid-add text-[18px] text-[#111827]"></i>
-          </div>
-          <div>
-            <h2 class="text-[16px] font-bold text-[#111827]">Add Moodboard</h2>
-            <p class="text-[12px] text-[#667085]">
-              Upload or select inspiration images for your brand's visual
-              moodboard.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="flex-1 overflow-y-auto p-6" style="scrollbar-width:none;">
-        <label class="block w-full cursor-pointer mb-5">
-          <div
-            class="w-full border-2 border-dashed border-[#D0D5DD] rounded-xl p-4 flex items-center justify-center gap-3 hover:border-[#9CA3AF] hover:bg-[#F9FAFB] transition-all"
-          >
-            <i class="ti ti-layout-grid-add text-[18px] text-[#98a2b3]"></i>
-            <p class="text-[13px] font-semibold text-[#667085]">
-              Upload images <span class="text-[#98a2b3] font-normal"
-                >— PNG, JPG, WEBP max 10MB</span
-              >
-            </p>
-          </div>
-          <input type="file" class="hidden" multiple accept="image/*" />
-        </label>
-        <div class="grid grid-cols-5 gap-3">
-          {
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
-              <div class="aspect-square rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center hover:border-[#D0D5DD] transition-all cursor-pointer group">
-                <i class="ti ti-photo text-[20px] text-[#D1D5DB] group-hover:text-[#9CA3AF] transition-colors" />
-              </div>
-            ))
-          }
-        </div>
-      </div>
-      <div
-        class="px-6 py-4 border-t border-[#eaecf0] bg-white shrink-0 flex justify-end gap-3"
-      >
-        <button
-          id="cancel-moodboard"
-          class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
-          >Cancel</button
-        >
-        <button
-          class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer"
-          >Add Images</button
-        >
-      </div>
-    </div>
-  </div>
 
-  {/* ═══ MODAL: ADD KNOWLEDGE ═══ */}
-  <div
-    id="modal-knowledge"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-2xl max-h-[90vh] rounded-[24px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
-    >
-      <button
-        id="close-knowledge"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
-      </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
-          >
-            <i class="ti ti-brain text-[18px] text-[#111827]"></i>
-          </div>
-          <div>
-            <h2 class="text-[16px] font-bold text-[#111827]">Add Knowledge</h2>
-            <p class="text-[12px] text-[#667085]">
-              Add key facts or import a document for your brand knowledge base.
-            </p>
-          </div>
-        </div>
+      <div class="w-10 h-10 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 shadow-2xs">
+        <i class="ti ti-world text-[18px] text-[#111827]"></i>
       </div>
-      <div
-        class="flex-1 overflow-y-auto p-6 flex flex-col gap-5"
-        style="scrollbar-width:none;"
-      >
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Analyze Website</h2>
+
+      <div class="space-y-3 my-3">
         <div>
-          <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-            >Title</label
-          >
+          <label class="block text-[12px] font-bold text-[#111827] mb-1.5">Website URL</label>
+          <div class="relative">
+            <i class="ti ti-link absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[15px] pointer-events-none"></i>
+            <input
+              id="website-url-input"
+              type="url"
+              placeholder="https://yourbrand.com"
+              class="w-full h-9.5 pl-9 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all"
+            />
+          </div>
+        </div>
+        <p class="text-[11px] text-[#98a2b3]">Pastikan URL dapat diakses publik. Crawler AI akan membaca metadata dan CSS halaman utama.</p>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" id="cancel-analyze-website" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+          Cancel
+        </button>
+        <button type="button" id="btn-submit-analyze-website" class="h-9 px-5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all cursor-pointer">
+          Analyze URL
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* 5. Scanning Website Progress Dialog */}
+  <div id="modal-analyze-scanning" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-xs rounded-3xl border border-[#eaecf0] shadow-2xl p-8 text-center animate-in zoom-in-95 duration-200">
+      <div class="w-10 h-10 rounded-full border-2 border-[#111827] border-t-transparent animate-spin mx-auto mb-3"></div>
+      <h3 class="text-[14px] font-bold text-[#111827]">Scanning Website...</h3>
+      <p id="scanning-url-text" class="text-[11.5px] text-[#667085] mt-1">Mengambil CSS tokens, font, dan gambar dari URL.</p>
+    </div>
+  </div>
+
+  {/* 6. Brand Preview Confirmation Dialog */}
+  <div id="modal-analyze-preview" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Hasil Analisis Website</h2>
+
+      <div class="space-y-3.5 my-3">
+        <div class="p-3.5 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] space-y-2">
+          <span class="text-[11px] font-semibold text-[#667085] uppercase tracking-wider">Detected Palette</span>
+          <div class="flex gap-2">
+            {["#78350F", "#D97706", "#FDE68A", "#1C1917", "#FAFAF9"].map((hex) => (
+              <div class="w-10 h-10 rounded-xl border border-[#eaecf0] shadow-2xs" style={`background-color: ${hex};`}></div>
+            ))}
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] space-y-1 text-[12px]">
+          <p class="font-bold text-[#111827]">Nama Brand Terdeteksi:</p>
+          <p class="text-[#667085]">Kopi Senja Roastery (Food & Beverage)</p>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" id="cancel-analyze-preview" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+          Batal
+        </button>
+        <button type="button" id="confirm-analyze-preview" class="h-9 px-5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all cursor-pointer">
+          Terapkan ke Business DNA
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* 7. Add Photography Dialog */}
+  <div id="modal-photography" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-photography" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
+      </button>
+
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Add Photography Reference</h2>
+
+      <label class="block w-full cursor-pointer my-3">
+        <div class="w-full border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] rounded-2xl p-6 flex flex-col items-center justify-center gap-2 bg-[#F9FAFB] hover:bg-white transition-all">
+          <i class="ti ti-camera text-[22px] text-[#98a2b3]"></i>
+          <p class="text-[12.5px] font-bold text-[#111827]">Upload photo references</p>
+          <p class="text-[11px] text-[#98a2b3]">PNG, JPG, atau WEBP up to 10MB</p>
+        </div>
+        <input type="file" multiple accept="image/*" class="hidden" />
+      </label>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" id="cancel-photography" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+          Cancel
+        </button>
+        <button type="button" id="btn-submit-photography" class="h-9 px-5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all cursor-pointer">
+          Add Photos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* 8. Add Moodboard Dialog */}
+  <div id="modal-moodboard" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-moodboard" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
+      </button>
+
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Add to Moodboard</h2>
+
+      <label class="block w-full cursor-pointer my-3">
+        <div class="w-full border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] rounded-2xl p-6 flex flex-col items-center justify-center gap-2 bg-[#F9FAFB] hover:bg-white transition-all">
+          <i class="ti ti-layout-grid text-[22px] text-[#98a2b3]"></i>
+          <p class="text-[12.5px] font-bold text-[#111827]">Upload moodboard imagery</p>
+          <p class="text-[11px] text-[#98a2b3]">PNG, JPG, atau SVG up to 10MB</p>
+        </div>
+        <input type="file" multiple accept="image/*" class="hidden" />
+      </label>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" id="cancel-moodboard" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+          Cancel
+        </button>
+        <button type="button" id="btn-submit-moodboard" class="h-9 px-5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all cursor-pointer">
+          Save to Moodboard
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* 9. Add Knowledge Dialog */}
+  <div id="modal-knowledge" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-knowledge" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
+      </button>
+
+      <div class="w-10 h-10 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 shadow-2xs">
+        <i class="ti ti-brain text-[18px] text-[#111827]"></i>
+      </div>
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Add Knowledge Item</h2>
+
+      <form id="form-knowledge" class="space-y-3 my-3">
+        <div>
+          <label class="block text-[12px] font-bold text-[#111827] mb-1.5">Judul Fakta / Topik</label>
           <input
             id="knowledge-title-input"
             type="text"
-            placeholder="e.g. Company History"
-            class="w-full h-10 px-3 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all"
+            required
+            placeholder="mis. Garansi Pengembalian, Standar Bahan Baku"
+            class="w-full h-9.5 px-3 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all"
           />
         </div>
         <div>
-          <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-            >Content</label
-          >
+          <label class="block text-[12px] font-bold text-[#111827] mb-1.5">Detail Fakta</label>
           <textarea
             id="knowledge-content-input"
-            placeholder="Write knowledge content in detail..."
-            class="w-full px-3 py-2.5 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:shadow-[0_0_0_3px_rgba(37,99,235,0.1)] transition-all resize-y min-h-[120px]"
-          ></textarea>
-        </div>
-
-        <div class="relative flex items-center py-2">
-          <div class="flex-grow border-t border-[#eaecf0]"></div>
-          <span
-            class="flex-shrink-0 mx-4 text-[12px] text-[#98a2b3] font-medium"
-            >Or import from file</span
-          >
-          <div class="flex-grow border-t border-[#eaecf0]"></div>
-        </div>
-
-        <label class="block cursor-pointer">
-          <div
-            class="w-full border border-dashed border-[#D0D5DD] rounded-xl py-3 px-4 flex items-center justify-center gap-3 hover:border-[#9CA3AF] hover:bg-[#F9FAFB] transition-all"
-          >
-            <i class="ti ti-file-import text-[18px] text-[#667085]"></i>
-            <span class="text-[13px] font-semibold text-[#344054]"
-              >Upload document</span
-            >
-            <span class="text-[12px] text-[#98a2b3] font-normal"
-              >(.md, .txt, .pdf, .docx)</span
-            >
-          </div>
-          <input
-            type="file"
-            class="hidden"
-            id="knowledge-file-input"
-            accept=".md,.txt,.pdf,.doc,.docx"
-          />
-        </label>
-      </div>
-      <div
-        class="px-6 py-4 border-t border-[#eaecf0] bg-white flex justify-end gap-3 shrink-0"
-      >
-        <button
-          id="cancel-knowledge"
-          class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
-          >Cancel</button
-        >
-        <button
-          id="save-knowledge"
-          class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer"
-          >Save Knowledge</button
-        >
-      </div>
-    </div>
-  </div>
-
-  {/* ═══ MODAL: EXTRACT LOADING ═══ */}
-  <div
-    id="modal-extract-loading"
-    class="hidden fixed inset-0 z-[250] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-sm rounded-[24px] shadow-2xl p-8 flex flex-col items-center text-center animate-in zoom-in-95 duration-300"
-    >
-      <div
-        class="w-16 h-16 rounded-full border-4 border-[#eaecf0] border-t-[#111827] animate-spin mb-6"
-      >
-      </div>
-      <h2 class="text-[16px] font-bold text-[#111827]">
-        Extracting Brand Identity...
-      </h2>
-      <p class="text-[13px] text-[#667085] mt-1">
-        This might take a few moments. We are analyzing your document.
-      </p>
-    </div>
-  </div>
-
-  {/* ═══ MODAL: ANALYZE SCANNING ═══ */}
-  <div
-    id="modal-analyze-scanning"
-    class="hidden fixed inset-0 z-[250] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-sm rounded-[24px] shadow-2xl p-8 flex flex-col items-center text-center animate-in zoom-in-95 duration-300"
-    >
-      <div
-        class="w-16 h-16 rounded-full border-4 border-[#eaecf0] border-t-[#2563EB] animate-spin mb-6"
-      >
-      </div>
-      <h2 class="text-[16px] font-bold text-[#111827]">Scanning Website...</h2>
-      <p class="text-[13px] text-[#667085] mt-1">
-        Extracting colors, fonts, and core business information.
-      </p>
-    </div>
-  </div>
-
-  {/* ═══ MODAL: ANALYZE PREVIEW ═══ */}
-  <div
-    id="modal-analyze-preview"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-2xl max-h-[90vh] rounded-[24px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
-    >
-      <button
-        id="close-analyze-preview"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
-      </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
-          >
-            <i class="ti ti-check text-[18px] text-[#111827]"></i>
-          </div>
-          <div>
-            <h2 class="text-[16px] font-bold text-[#111827]">
-              Extraction Complete
-            </h2>
-            <p class="text-[12px] text-[#667085]">
-              Review the extracted brand details below.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="flex-1 overflow-y-auto p-6 flex flex-col gap-6"
-        style="scrollbar-width:none;"
-      >
-        {/* Row 1: Logo & Brand Name */}
-        <div class="flex items-start gap-5">
-          <div class="w-[88px] shrink-0">
-            <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-              >Extracted Logo</label
-            >
-            <div
-              class="aspect-square w-full rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center p-2 relative group overflow-hidden"
-            >
-              <span class="text-[28px] font-bold text-[#34D399]">F</span>
-              <div
-                class="absolute inset-0 bg-black/50 hidden group-hover:flex items-center justify-center cursor-pointer transition-all"
-              >
-                <span class="text-[10px] text-white font-medium">Replace</span>
-              </div>
-            </div>
-          </div>
-          <div class="flex-1 flex flex-col gap-5">
-            <div>
-              <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-                >Brand Name</label
-              >
-              <input
-                type="text"
-                value="Fresh Juice Co."
-                class="w-full h-10 px-3 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#2563EB] transition-all"
-              />
-            </div>
-            <div>
-              <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-                >Business Overview</label
-              >
-              <textarea
-                rows="2"
-                class="w-full px-3 py-2.5 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#2563EB] transition-all resize-none"
-                >Fresh Juice Co. is a healthy juice brand focused on organic
-                ingredients and sustainable packaging.</textarea
-              >
-            </div>
-          </div>
-        </div>
-
-        {/* Design Guidance */}
-        <div>
-          <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-            >Design Guidance</label
-          >
-          <textarea
-            rows="2"
-            class="w-full px-3 py-2.5 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#2563EB] transition-all resize-none"
-            >Clean and minimal layouts. Use ample white space. Avoid clutter.
-            Prioritize readability and accessibility.</textarea
-          >
-        </div>
-
-        {/* Colors & Fonts */}
-        <div class="flex gap-6">
-          <div class="flex-1">
-            <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-              >Colors</label
-            >
-            <div class="flex items-center gap-2">
-              <div
-                class="w-8 h-8 rounded-lg shadow-sm"
-                style="background-color: #34D399;"
-              >
-              </div>
-              <div
-                class="w-8 h-8 rounded-lg shadow-sm"
-                style="background-color: #10B981;"
-              >
-              </div>
-              <div
-                class="w-8 h-8 rounded-lg shadow-sm"
-                style="background-color: #6B7280;"
-              >
-              </div>
-              <div
-                class="w-8 h-8 rounded-lg shadow-sm"
-                style="background-color: #111827;"
-              >
-              </div>
-              <div
-                class="w-8 h-8 rounded-lg shadow-sm"
-                style="background-color: #F9FAFB; border: 1px solid #eaecf0;"
-              >
-              </div>
-              <button
-                type="button"
-                class="w-8 h-8 rounded-lg border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
-              >
-                <i class="ti ti-plus text-[14px]"></i>
-              </button>
-            </div>
-          </div>
-          <div class="flex-1">
-            <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-              >Fonts</label
-            >
-            <div class="flex items-center gap-2">
-              <div
-                class="flex items-center justify-center px-3 h-8 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] text-[12px] font-bold text-[#111827]"
-              >
-                Inter
-              </div>
-              <div
-                class="flex items-center justify-center px-3 h-8 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] text-[12px] font-medium text-[#111827]"
-              >
-                Playfair
-              </div>
-              <button
-                type="button"
-                class="w-8 h-8 rounded-lg border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
-              >
-                <i class="ti ti-plus text-[14px]"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Photography & Moodboard */}
-        <div class="flex gap-6">
-          <div class="flex-1">
-            <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-              >Photography Style</label
-            >
-            <div class="flex items-center gap-2">
-              <div
-                class="w-12 h-12 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-              >
-                <i class="ti ti-photo text-[16px] text-[#D1D5DB]"></i>
-              </div>
-              <div
-                class="w-12 h-12 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-              >
-                <i class="ti ti-photo text-[16px] text-[#D1D5DB]"></i>
-              </div>
-              <div
-                class="w-12 h-12 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-              >
-                <i class="ti ti-photo text-[16px] text-[#D1D5DB]"></i>
-              </div>
-              <button
-                type="button"
-                class="w-12 h-12 rounded-lg border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
-              >
-                <i class="ti ti-plus text-[16px]"></i>
-              </button>
-            </div>
-          </div>
-          <div class="flex-1">
-            <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-              >Moodboard</label
-            >
-            <div class="flex items-center gap-2">
-              <div
-                class="w-12 h-12 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-              >
-                <i class="ti ti-photo text-[16px] text-[#D1D5DB]"></i>
-              </div>
-              <div
-                class="w-12 h-12 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-              >
-                <i class="ti ti-photo text-[16px] text-[#D1D5DB]"></i>
-              </div>
-              <div
-                class="w-12 h-12 rounded-lg bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center"
-              >
-                <i class="ti ti-photo text-[16px] text-[#D1D5DB]"></i>
-              </div>
-              <button
-                type="button"
-                class="w-12 h-12 rounded-lg border border-dashed border-[#D1D5DD] flex items-center justify-center text-[#98a2b3] hover:border-[#9CA3AF] hover:text-[#667085] transition-all cursor-pointer"
-              >
-                <i class="ti ti-plus text-[16px]"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="px-6 py-4 border-t border-[#eaecf0] bg-white flex justify-end gap-3 shrink-0"
-      >
-        <button
-          id="cancel-analyze-preview"
-          class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
-          >Discard</button
-        >
-        <button
-          id="confirm-analyze-preview"
-          class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer"
-          >Looks Good</button
-        >
-      </div>
-    </div>
-  </div>
-
-  {/* ═══ MODAL: ADD PRODUCT ═══ */}
-  <div
-    id="modal-add-product"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-2xl max-h-[90vh] rounded-[24px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
-    >
-      <button
-        id="close-add-product"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
-      </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
-          >
-            <i class="ti ti-box text-[18px] text-[#111827]"></i>
-          </div>
-          <div>
-            <h2 class="text-[16px] font-bold text-[#111827]">
-              Add Product Reference
-            </h2>
-            <p class="text-[12px] text-[#667085]">
-              Add a product to generate targeted content.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="flex-1 overflow-y-auto p-6 flex flex-col gap-5"
-        style="scrollbar-width:none;"
-      >
-        <div class="flex items-start gap-5">
-          <div class="w-[140px] shrink-0">
-            <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-              >Product Image</label
-            >
-            <label class="block w-full cursor-pointer">
-              <div
-                class="aspect-square w-full border border-dashed border-[#D0D5DD] rounded-xl flex flex-col items-center justify-center gap-2 hover:border-[#9CA3AF] hover:bg-[#F9FAFB] transition-all bg-[#F9FAFB]"
-              >
-                <i class="ti ti-photo-up text-[20px] text-[#98a2b3]"></i>
-                <span class="text-[11px] font-medium text-[#667085]"
-                  >Upload</span
-                >
-              </div>
-              <input type="file" class="hidden" accept="image/*" />
-            </label>
-          </div>
-          <div class="flex-1 flex flex-col gap-5">
-            <div>
-              <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-                >Product Title</label
-              >
-              <input
-                type="text"
-                placeholder="e.g. Wellness Cleanse Kit"
-                class="w-full h-10 px-3 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] transition-all"
-              />
-            </div>
-            <div>
-              <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-                >Category</label
-              >
-              <div class="relative">
-                <select
-                  id="product-category-select"
-                  class="appearance-none w-full h-10 px-3 pr-8 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#2563EB] transition-all cursor-pointer"
-                >
-                  <option value="physical">Physical Product</option>
-                  <option value="digital">SaaS / Digital Product</option>
-                </select>
-                <i
-                  class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"
-                ></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <label class="block text-[12px] font-bold text-[#344054] mb-1.5"
-            >Description</label
-          >
-          <textarea
             rows="3"
-            placeholder="Describe the product features and benefits..."
-            class="w-full px-3 py-2.5 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] transition-all resize-y min-h-[80px]"
+            required
+            placeholder="mis. Kami menggunakan 100% buah organik lokal tanpa tambahan gula atau pengawet sintetis..."
+            class="w-full p-3 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all resize-none"
           ></textarea>
         </div>
-        <div
-          id="product-dimensions-section"
-          class="flex flex-col gap-3 p-4 rounded-xl border border-[#eaecf0] bg-[#F9FAFB] transition-all"
-        >
-          <div class="flex items-center justify-between">
-            <label class="block text-[12px] font-bold text-[#344054]">Dimensions <span class="font-normal text-[#98a2b3]">(Optional)</span></label>
-            <p class="text-[11px] text-[#667085] italic">If left empty, AI will estimate dimensions from the image.</p>
-          </div>
-          <div class="flex gap-4">
-            <div class="flex-1">
-              <label class="block text-[11px] font-bold text-[#344054] mb-1.5"
-                >Length (cm)</label
-              >
-              <input
-                type="number"
-                placeholder="0"
-                class="w-full h-9 px-3 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#2563EB]"
-              />
-            </div>
-            <div class="flex-1">
-              <label class="block text-[11px] font-bold text-[#344054] mb-1.5"
-                >Width (cm)</label
-              >
-              <input
-                type="number"
-                placeholder="0"
-                class="w-full h-9 px-3 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#2563EB]"
-              />
-            </div>
-            <div class="flex-1">
-              <label class="block text-[11px] font-bold text-[#344054] mb-1.5"
-                >Height (cm)</label
-              >
-              <input
-                type="number"
-                placeholder="0"
-                class="w-full h-9 px-3 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] outline-none focus:border-[#2563EB]"
-              />
-            </div>
-          </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" id="cancel-knowledge" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+            Cancel
+          </button>
+          <button type="submit" class="h-9 px-5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all cursor-pointer">
+            Save Fact
+          </button>
         </div>
-      </div>
-      <div
-        class="px-6 py-4 border-t border-[#eaecf0] bg-white flex justify-end gap-3 shrink-0"
-      >
-        <button
-          id="cancel-add-product"
-          class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
-          >Cancel</button
-        >
-        <button
-          id="btn-submit-add-product"
-          class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer"
-          >Add Product</button
-        >
-      </div>
+      </form>
     </div>
   </div>
-  {/* ═══ MODAL: ADD INTEGRATION ═══ */}
-  <div
-    id="modal-add-integration"
-    class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-  >
-    <div
-      class="bg-white w-full max-w-md rounded-[24px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative"
-    >
-      <button
-        id="close-add-integration"
-        class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer"
-      >
-        <i class="ti ti-x text-[18px]"></i>
+
+  {/* 10. Add Product Dialog */}
+  <div id="modal-add-product" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-add-product" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
       </button>
-      <div class="px-6 pt-6 pb-4 border-b border-[#eaecf0] shrink-0">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] shadow-sm flex items-center justify-center shrink-0"
+
+      <div class="w-10 h-10 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 shadow-2xs">
+        <i class="ti ti-package text-[18px] text-[#111827]"></i>
+      </div>
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Add Product Reference</h2>
+
+      <form id="form-product" class="space-y-3 my-3">
+        <div>
+          <label class="block text-[12px] font-bold text-[#111827] mb-1.5">Nama Produk</label>
+          <input
+            id="product-name-input"
+            type="text"
+            required
+            placeholder="mis. Cold Pressed Orange Juice 500ml"
+            class="w-full h-9.5 px-3 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all"
+          />
+        </div>
+        <div>
+          <label class="block text-[12px] font-bold text-[#111827] mb-1.5">Tipe Produk</label>
+          <select
+            id="product-category-select"
+            class="w-full h-9.5 px-3 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all cursor-pointer"
           >
-            <i class="ti ti-plug-connected text-[18px] text-[#111827]"></i>
+            <option value="physical">Physical Product (Botol, Kemasan, Box)</option>
+            <option value="digital">Digital Asset / E-Book / Layanan</option>
+          </select>
+        </div>
+
+        <div id="product-dimensions-section" class="grid grid-cols-3 gap-2 pt-1">
+          <div>
+            <label class="block text-[11px] text-[#667085] mb-1">Lebar (cm)</label>
+            <input type="number" defaultValue="7" class="w-full h-8 px-2.5 rounded-lg border border-[#eaecf0] bg-white text-[12px]" />
           </div>
           <div>
-            <h2 class="text-[16px] font-bold text-[#111827]">Link Social Account</h2>
-            <p class="text-[12px] text-[#667085]">Select accounts from your Integrations hub to link.</p>
+            <label class="block text-[11px] text-[#667085] mb-1">Tinggi (cm)</label>
+            <input type="number" defaultValue="22" class="w-full h-8 px-2.5 rounded-lg border border-[#eaecf0] bg-white text-[12px]" />
+          </div>
+          <div>
+            <label class="block text-[11px] text-[#667085] mb-1">Berat (g)</label>
+            <input type="number" defaultValue="520" class="w-full h-8 px-2.5 rounded-lg border border-[#eaecf0] bg-white text-[12px]" />
           </div>
         </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" id="cancel-add-product" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+            Cancel
+          </button>
+          <button type="submit" class="h-9 px-5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all cursor-pointer">
+            Add Product
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {/* 11. Add Social Integration Dialog */}
+  <div id="modal-add-integration" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div class="bg-white w-full max-w-md rounded-3xl border border-[#eaecf0] shadow-2xl p-6 relative animate-in zoom-in-95 duration-200">
+      <button type="button" id="close-add-integration" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer">
+        <i class="ti ti-x text-[16px]"></i>
+      </button>
+
+      <div class="w-10 h-10 rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 shadow-2xs">
+        <i class="ti ti-share text-[18px] text-[#111827]"></i>
       </div>
-      <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-3" style="scrollbar-width:none;">
-        {/* Search Input */}
-        <div class="relative mb-2 shrink-0">
+      <h2 class="text-[17px] font-bold text-[#111827] mb-4">Link Social Account</h2>
+
+      <div class="space-y-3 my-3">
+        <div class="relative">
           <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[14px] pointer-events-none"></i>
           <input
             id="search-add-integration"
             type="text"
             placeholder="Search accounts..."
-            class="w-full h-10 pl-9 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#111827] placeholder:text-[#98a2b3] outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]/10 transition-all"
+            class="w-full h-9.5 pl-9 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[12.5px] font-medium text-[#111827] placeholder:text-[#98a2b3] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all"
           />
         </div>
 
-        <div id="integration-labels-list" class="flex flex-col gap-3">
-          <label class="integration-item-label flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-white hover:border-[#D0D5DD] hover:bg-[#F9FAFB] transition-all cursor-pointer" data-handle="@freshjuice.co">
-            <input type="checkbox" class="w-4 h-4 rounded border-[#eaecf0] text-[#2563EB] focus:ring-[#2563EB]" />
-            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background-color: #E4405F10;">
-              <i class="ti ti-brand-instagram text-[18px]" style="color: #E4405F;"></i>
+        <div id="integration-options-list" class="space-y-2 max-h-56 overflow-y-auto custom-scrollbar">
+          <div
+            class="integration-pick-item flex items-center justify-between p-3 rounded-2xl border border-[#eaecf0] hover:border-[#d0d5dd] hover:bg-[#F9FAFB] transition-all cursor-pointer group"
+            data-handle="@freshjuice.co"
+            data-platform="Instagram"
+            data-icon="ti-brand-instagram"
+            data-color="#E4405F"
+          >
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-xl bg-white border border-[#eaecf0] shadow-2xs flex items-center justify-center">
+                <SocialIcon platform="instagram" size="md" />
+              </div>
+              <div>
+                <p class="text-[12.5px] font-bold text-[#111827]">@freshjuice.co</p>
+                <p class="text-[11px] text-[#667085]">Instagram Business</p>
+              </div>
             </div>
-            <div class="flex-1 min-w-0">
-              <p class="text-[13px] font-semibold text-[#111827]">@freshjuice.co</p>
-              <p class="text-[11px] text-[#667085]">Instagram</p>
+            <button type="button" class="btn-pick-link h-7 px-2.5 rounded-lg border border-[#eaecf0] bg-white text-[11.5px] font-medium text-[#344054] shadow-xs group-hover:border-[#d0d5dd]">Link</button>
+          </div>
+
+          <div
+            class="integration-pick-item flex items-center justify-between p-3 rounded-2xl border border-[#eaecf0] hover:border-[#d0d5dd] hover:bg-[#F9FAFB] transition-all cursor-pointer group"
+            data-handle="Fresh Juice Co."
+            data-platform="Facebook Page"
+            data-icon="ti-brand-facebook"
+            data-color="#1877F2"
+          >
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-xl bg-white border border-[#eaecf0] shadow-2xs flex items-center justify-center">
+                <SocialIcon platform="facebook" size="md" />
+              </div>
+              <div>
+                <p class="text-[12.5px] font-bold text-[#111827]">Fresh Juice Co.</p>
+                <p class="text-[11px] text-[#667085]">Facebook Page</p>
+              </div>
             </div>
-          </label>
-          <label class="integration-item-label flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-white hover:border-[#D0D5DD] hover:bg-[#F9FAFB] transition-all cursor-pointer" data-handle="fresh juice co.">
-            <input type="checkbox" class="w-4 h-4 rounded border-[#eaecf0] text-[#2563EB] focus:ring-[#2563EB]" />
-            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background-color: #1877F210;">
-              <i class="ti ti-brand-facebook text-[18px]" style="color: #1877F2;"></i>
+            <button type="button" class="btn-pick-link h-7 px-2.5 rounded-lg border border-[#eaecf0] bg-white text-[11.5px] font-medium text-[#344054] shadow-xs group-hover:border-[#d0d5dd]">Link</button>
+          </div>
+
+          <div
+            class="integration-pick-item flex items-center justify-between p-3 rounded-2xl border border-[#eaecf0] hover:border-[#d0d5dd] hover:bg-[#F9FAFB] transition-all cursor-pointer group"
+            data-handle="@freshjuice"
+            data-platform="TikTok"
+            data-icon="ti-brand-tiktok"
+            data-color="#111827"
+          >
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-xl bg-white border border-[#eaecf0] shadow-2xs flex items-center justify-center">
+                <SocialIcon platform="tiktok" size="md" />
+              </div>
+              <div>
+                <p class="text-[12.5px] font-bold text-[#111827]">@freshjuice</p>
+                <p class="text-[11px] text-[#667085]">TikTok</p>
+              </div>
             </div>
-            <div class="flex-1 min-w-0">
-              <p class="text-[13px] font-semibold text-[#111827]">Fresh Juice Co.</p>
-              <p class="text-[11px] text-[#667085]">Facebook Page</p>
-            </div>
-          </label>
-          <label class="integration-item-label flex items-center gap-3 p-3 rounded-xl border border-[#eaecf0] bg-white hover:border-[#D0D5DD] hover:bg-[#F9FAFB] transition-all cursor-pointer" data-handle="@freshjuice">
-            <input type="checkbox" class="w-4 h-4 rounded border-[#eaecf0] text-[#2563EB] focus:ring-[#2563EB]" />
-            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background-color: #00000010;">
-              <i class="ti ti-brand-tiktok text-[18px]" style="color: #000000;"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="text-[13px] font-semibold text-[#111827]">@freshjuice</p>
-              <p class="text-[11px] text-[#667085]">TikTok</p>
-            </div>
-          </label>
+            <button type="button" class="btn-pick-link h-7 px-2.5 rounded-lg border border-[#eaecf0] bg-white text-[11.5px] font-medium text-[#344054] shadow-xs group-hover:border-[#d0d5dd]">Link</button>
+          </div>
         </div>
       </div>
-      <div class="px-6 py-4 border-t border-[#eaecf0] bg-white flex justify-end gap-3 shrink-0">
-        <button id="cancel-add-integration" class="px-5 h-9 rounded-lg border border-[#eaecf0] bg-white text-[13px] font-bold text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer">Cancel</button>
-        <button id="btn-submit-add-integration" class="px-5 h-9 rounded-lg bg-[#111827] text-white text-[13px] font-bold hover:bg-[#374151] transition-all cursor-pointer">Link Accounts</button>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" id="cancel-add-integration" class="h-9 px-4 rounded-xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] text-[12.5px] font-medium text-[#344054] shadow-xs transition-all cursor-pointer">
+          Close
+        </button>
       </div>
     </div>
   </div>
 </AppLayout>
 
 <script is:inline>
-  const dnaData = [
-    {
-      id: "1",
-      name: "Fresh Juice Co.",
-      category: "Food & Beverage",
-      color: "#34D399",
-      updatedAt: "2h ago",
-    },
-    {
-      id: "2",
-      name: "Acme Corp",
-      category: "Technology",
-      color: "#2563EB",
-      updatedAt: "5h ago",
-    },
-    {
-      id: "3",
-      name: "Luxe Beauty",
-      category: "Beauty & Cosmetics",
-      color: "#F472B6",
-      updatedAt: "1d ago",
-    },
-    {
-      id: "4",
-      name: "TechStart Inc",
-      category: "Technology",
-      color: "#8B5CF6",
-      updatedAt: "2d ago",
-    },
-    {
-      id: "5",
-      name: "GreenLeaf Organics",
-      category: "Retail",
-      color: "#10B981",
-      updatedAt: "3d ago",
-    },
-  ];
+  document.addEventListener("DOMContentLoaded", () => {
+    // ─── State & DOM Elements ───
+    let currentDnaId = "1";
+    let isDirty = false;
 
-  const dnaCards = document.querySelectorAll(".dna-card");
-  const detailName = document.getElementById("detail-name");
-  const searchInput = document.getElementById("dna-search");
-  const btnMoreActions = document.getElementById("btn-more-actions");
-  const moreActionsDropdown = document.getElementById("more-actions-dropdown");
+    const dnaCards = document.querySelectorAll(".dna-card");
+    const detailName = document.getElementById("detail-name");
+    const detailAvatar = document.getElementById("detail-avatar");
+    const logoPreviewBox = document.getElementById("logo-preview-box");
+    const searchInput = document.getElementById("dna-search");
+    const dnaListContainer = document.getElementById("dna-list");
 
-  let selectedId = "1";
+    const overviewInput = document.getElementById("dna-overview-input");
+    const guidanceInput = document.getElementById("dna-guidance-input");
+    const btnSaveDna = document.getElementById("btn-save-dna");
+    const saveToast = document.getElementById("save-toast");
+    const saveToastMsg = document.getElementById("save-toast-msg");
 
-  function selectDNA(id) {
-    selectedId = id;
-    const data = dnaData.find((d) => d.id === id);
-    if (!data) return;
-    dnaCards.forEach((card) => {
-      if (card.dataset.id === id) {
-        card.classList.remove("border-[#eaecf0]", "hover:bg-[#F9FAFB]");
-        card.classList.add("border-[#9CA3AF]", "bg-[#F9FAFB]");
-      } else {
-        card.classList.remove("border-[#9CA3AF]", "bg-[#F9FAFB]");
-        card.classList.add("border-[#eaecf0]", "hover:bg-[#F9FAFB]");
+    const btnMoreActions = document.getElementById("btn-more-actions");
+    const moreActionsDropdown = document.getElementById("more-actions-dropdown");
+
+    function setDirty() {
+      isDirty = true;
+      if (btnSaveDna) {
+        btnSaveDna.removeAttribute("disabled");
+        btnSaveDna.classList.remove("opacity-50", "cursor-not-allowed");
       }
-    });
-    detailName.textContent = data.name;
-  }
-
-  dnaCards.forEach((card) => {
-    card.addEventListener("click", () => selectDNA(card.dataset.id));
-  });
-
-  searchInput?.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase();
-    dnaCards.forEach((card) => {
-      const id = card.dataset.id;
-      const data = dnaData.find((d) => d.id === id);
-      if (data) {
-        const match =
-          data.name.toLowerCase().includes(query) ||
-          data.category.toLowerCase().includes(query);
-        card.style.display = match ? "" : "none";
-      }
-    });
-  });
-
-  // Three-dot dropdown
-  btnMoreActions?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    moreActionsDropdown.classList.toggle("hidden");
-  });
-  document.addEventListener("click", (e) => {
-    if (
-      !moreActionsDropdown.contains(e.target) &&
-      e.target !== btnMoreActions
-    ) {
-      moreActionsDropdown.classList.add("hidden");
     }
-  });
 
-  // Tab switching
-  const tabBtns = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
-  tabBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const tab = btn.dataset.tab;
-      tabBtns.forEach((b) => {
-        b.classList.remove(
-          "text-[#111827]",
-          "font-semibold",
-          "border-[#111827]",
-        );
-        b.classList.add("text-[#667085]", "font-medium", "border-transparent");
+    function showToast(msg = "Perubahan berhasil disimpan!", variant = "success", title = "") {
+      if (typeof window.showAlert === "function") {
+        let displayTitle = title;
+        if (!displayTitle) {
+          if (variant === "destructive" || msg.toLowerCase().includes("hapus") || msg.toLowerCase().includes("putus")) displayTitle = "Dihapus";
+          else if (variant === "warning") displayTitle = "Peringatan";
+          else if (variant === "info") displayTitle = "Informasi";
+          else displayTitle = "Berhasil";
+        }
+        window.showAlert({
+          variant: (msg.toLowerCase().includes("hapus") || msg.toLowerCase().includes("putus")) ? "destructive" : variant,
+          title: displayTitle,
+          message: msg,
+          duration: 3500,
+        });
+      }
+      if (!saveToast) return;
+      if (saveToastMsg) saveToastMsg.textContent = msg;
+      saveToast.classList.remove("hidden");
+      saveToast.classList.add("flex");
+      setTimeout(() => {
+        saveToast.classList.remove("flex");
+        saveToast.classList.add("hidden");
+      }, 3000);
+    }
+
+    // ─── DNA Selection ───
+    function selectDNA(card) {
+      if (!card) return;
+      currentDnaId = card.dataset.id;
+
+      dnaCards.forEach((c) => {
+        c.classList.remove("border-[#111827]", "bg-[#F9FAFB]", "ring-1", "ring-[#111827]/10");
+        c.classList.add("border-[#eaecf0]", "bg-white");
       });
-      btn.classList.remove(
-        "text-[#667085]",
-        "font-medium",
-        "border-transparent",
-      );
-      btn.classList.add("text-[#111827]", "font-semibold", "border-[#111827]");
-      tabContents.forEach((content) => content.classList.add("hidden"));
-      document.getElementById(`tab-${tab}`)?.classList.remove("hidden");
+      card.classList.add("border-[#111827]", "bg-[#F9FAFB]", "ring-1", "ring-[#111827]/10");
+      card.classList.remove("border-[#eaecf0]", "bg-white");
+
+      const name = card.dataset.name || "Brand";
+      const color = card.dataset.color || "#34D399";
+      const overview = card.dataset.overview || "";
+      const guidance = card.dataset.guidance || "";
+
+      if (detailName) detailName.textContent = name;
+      if (detailAvatar) {
+        detailAvatar.textContent = name.charAt(0);
+        detailAvatar.style.backgroundColor = `${color}20`;
+        detailAvatar.style.color = color;
+      }
+      if (logoPreviewBox) {
+        logoPreviewBox.textContent = name.charAt(0);
+        logoPreviewBox.style.backgroundColor = `${color}20`;
+        logoPreviewBox.style.color = color;
+      }
+      if (overviewInput) overviewInput.value = overview;
+      if (guidanceInput) guidanceInput.value = guidance;
+
+      if (btnSaveDna) {
+        btnSaveDna.setAttribute("disabled", "true");
+        btnSaveDna.classList.add("opacity-50", "cursor-not-allowed");
+        isDirty = false;
+      }
+    }
+
+    dnaCards.forEach((card) => {
+      card.addEventListener("click", () => selectDNA(card));
     });
-  });
 
-  // ── Helper: open/close modal ──────────────────────────────────────────────
-  function openModal(id) {
-    document.getElementById(id)?.classList.remove("hidden");
-  }
-  function closeModal(id) {
-    document.getElementById(id)?.classList.add("hidden");
-  }
-  function bindClose(modalId, ...closeIds) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    closeIds.forEach((cid) => {
-      document
-        .getElementById(cid)
-        ?.addEventListener("click", () => closeModal(modalId));
-    });
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal(modalId);
-    });
-  }
+    // ─── DNA Search Filtering ───
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        dnaCards.forEach((card) => {
+          const name = (card.dataset.name || "").toLowerCase();
+          const cat = (card.dataset.category || "").toLowerCase();
+          if (name.includes(q) || cat.includes(q)) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    }
 
-  // ── New Business DNA button ───────────────────────────────────────────────
-  document
-    .getElementById("btn-new-dna")
-    ?.addEventListener("click", () => openModal("modal-new-dna"));
-  bindClose("modal-new-dna", "close-new-dna");
+    // ─── Save Changes ───
+    if (overviewInput) overviewInput.addEventListener("input", setDirty);
+    if (guidanceInput) guidanceInput.addEventListener("input", setDirty);
 
-  // New DNA options → open sub-modals and close parent
-  document.getElementById("new-dna-extract")?.addEventListener("click", () => {
-    closeModal("modal-new-dna");
-    openModal("modal-extract-file");
-  });
-  document.getElementById("new-dna-website")?.addEventListener("click", () => {
-    closeModal("modal-new-dna");
-    openModal("modal-analyze-website");
-  });
-
-  // ── Extract from file (Identity tab button) ───────────────────────────────
-  document
-    .getElementById("btn-extract-file")
-    ?.addEventListener("click", () => openModal("modal-extract-file"));
-  bindClose("modal-extract-file", "close-extract-file", "cancel-extract-file");
-
-  // ── Analyze Website (Identity tab button) ─────────────────────────────────
-  document
-    .getElementById("btn-analyze-website")
-    ?.addEventListener("click", () => openModal("modal-analyze-website"));
-  bindClose(
-    "modal-analyze-website",
-    "close-analyze-website",
-    "cancel-analyze-website",
-  );
-
-  // ── Photography modal ─────────────────────────────────────────────────────
-  document
-    .getElementById("btn-add-photography")
-    ?.addEventListener("click", () => openModal("modal-photography"));
-  bindClose("modal-photography", "close-photography", "cancel-photography");
-
-  // ── Moodboard modal ───────────────────────────────────────────────────────
-  document
-    .getElementById("btn-add-moodboard")
-    ?.addEventListener("click", () => openModal("modal-moodboard"));
-  bindClose("modal-moodboard", "close-moodboard", "cancel-moodboard");
-
-  // ── Knowledge modal ───────────────────────────────────────────────────────
-  document
-    .getElementById("btn-add-knowledge")
-    ?.addEventListener("click", () => openModal("modal-knowledge"));
-  bindClose("modal-knowledge", "close-knowledge", "cancel-knowledge");
-
-  // ── Modals wiring & Global Save Button ────────────────────────────────────
-  const btnSaveDna = document.getElementById("btn-save-dna");
-  function enableSaveBtn() {
     if (btnSaveDna) {
-      btnSaveDna.disabled = false;
-      btnSaveDna.classList.remove("opacity-50", "cursor-not-allowed");
+      btnSaveDna.addEventListener("click", () => {
+        const activeCard = document.querySelector(`.dna-card[data-id="${currentDnaId}"]`);
+        if (activeCard) {
+          activeCard.dataset.overview = overviewInput ? overviewInput.value : "";
+          activeCard.dataset.guidance = guidanceInput ? guidanceInput.value : "";
+        }
+        btnSaveDna.setAttribute("disabled", "true");
+        btnSaveDna.classList.add("opacity-50", "cursor-not-allowed");
+        isDirty = false;
+        showToast("Perubahan Business DNA berhasil disimpan!");
+      });
     }
-  }
 
-  // Bind new sub-modals
-  bindClose(
-    "modal-analyze-preview",
-    "close-analyze-preview",
-    "cancel-analyze-preview",
-  );
-  bindClose("modal-add-product", "close-add-product", "cancel-add-product");
-  bindClose("modal-add-integration", "close-add-integration", "cancel-add-integration");
+    // ─── Dropdown Menu ───
+    if (btnMoreActions && moreActionsDropdown) {
+      btnMoreActions.addEventListener("click", (e) => {
+        e.stopPropagation();
+        moreActionsDropdown.classList.toggle("hidden");
+      });
 
-  // Add Integration Flow
-  document
-    .getElementById("btn-add-integration")
-    ?.addEventListener("click", () => {
-      openModal("modal-add-integration");
-      const searchInput = document.getElementById("search-add-integration");
-      if (searchInput) {
-        searchInput.value = "";
-        document.querySelectorAll(".integration-item-label").forEach(label => label.style.display = "");
-      }
-    });
-
-  document.getElementById("search-add-integration")?.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    document.querySelectorAll(".integration-item-label").forEach((label) => {
-      const handle = label.dataset.handle || "";
-      if (handle.includes(query)) {
-        label.style.display = "";
-      } else {
-        label.style.display = "none";
-      }
-    });
-  });
-
-  document
-    .getElementById("btn-submit-add-integration")
-    ?.addEventListener("click", () => {
-      closeModal("modal-add-integration");
-      enableSaveBtn();
-    });
-
-  // Add Product Flow
-  document
-    .getElementById("btn-add-product")
-    ?.addEventListener("click", () => openModal("modal-add-product"));
-
-  const productCatSelect = document.getElementById("product-category-select");
-  const productDimSection = document.getElementById(
-    "product-dimensions-section",
-  );
-  productCatSelect?.addEventListener("change", (e) => {
-    if (e.target.value === "digital") {
-      productDimSection.classList.add("hidden");
-    } else {
-      productDimSection.classList.remove("hidden");
+      document.addEventListener("click", (e) => {
+        if (!moreActionsDropdown.contains(e.target) && e.target !== btnMoreActions) {
+          moreActionsDropdown.classList.add("hidden");
+        }
+      });
     }
-  });
 
-  document
-    .getElementById("btn-submit-add-product")
-    ?.addEventListener("click", () => {
-      closeModal("modal-add-product");
-      enableSaveBtn();
-    });
+    const btnRename = document.getElementById("btn-rename-action");
+    if (btnRename) {
+      btnRename.addEventListener("click", () => {
+        if (moreActionsDropdown) moreActionsDropdown.classList.add("hidden");
+        const activeCard = document.querySelector(`.dna-card[data-id="${currentDnaId}"]`);
+        const currentName = activeCard ? activeCard.dataset.name : "Brand";
+        const newName = prompt("Ubah Nama Business DNA:", currentName);
+        if (newName && newName.trim()) {
+          const trimmed = newName.trim();
+          if (activeCard) {
+            activeCard.dataset.name = trimmed;
+            const titleEl = activeCard.querySelector(".dna-card-title");
+            if (titleEl) titleEl.textContent = trimmed;
+          }
+          if (detailName) detailName.textContent = trimmed;
+          showToast(`Nama brand diubah menjadi "${trimmed}"`);
+        }
+      });
+    }
 
-  // Extract from File Flow
-  const btnExtractSubmit = document.getElementById("btn-submit-extract-file");
-  btnExtractSubmit?.addEventListener("click", () => {
-    openModal("modal-extract-loading");
-    setTimeout(() => {
-      closeModal("modal-extract-loading");
-      closeModal("modal-extract-file");
-      enableSaveBtn();
-    }, 1500);
-  });
+    const btnDuplicate = document.getElementById("btn-duplicate-action");
+    if (btnDuplicate) {
+      btnDuplicate.addEventListener("click", () => {
+        if (moreActionsDropdown) moreActionsDropdown.classList.add("hidden");
+        const activeCard = document.querySelector(`.dna-card[data-id="${currentDnaId}"]`);
+        if (!activeCard) return;
 
-  // Analyze Website Flow
-  const btnAnalyzeSubmit = document.getElementById(
-    "btn-submit-analyze-website",
-  );
-  btnAnalyzeSubmit?.addEventListener("click", () => {
-    openModal("modal-analyze-scanning");
-    setTimeout(() => {
-      closeModal("modal-analyze-scanning");
-      closeModal("modal-analyze-website");
-      openModal("modal-analyze-preview");
-    }, 1500);
-  });
+        const copyName = `${activeCard.dataset.name} (Copy)`;
+        const newId = "dna_" + Date.now();
+        const color = activeCard.dataset.color || "#8B5CF6";
+        const cat = activeCard.dataset.category || "General";
 
-  document
-    .getElementById("confirm-analyze-preview")
-    ?.addEventListener("click", () => {
-      closeModal("modal-analyze-preview");
-      enableSaveBtn();
-    });
+        const newCard = document.createElement("button");
+        newCard.type = "button";
+        newCard.className = "dna-card group w-full text-left p-3.5 rounded-2xl border border-[#eaecf0] bg-white hover:bg-[#F9FAFB] hover:border-[#d0d5dd] transition-all cursor-pointer select-none animate-in fade-in duration-200";
+        newCard.dataset.id = newId;
+        newCard.dataset.name = copyName;
+        newCard.dataset.category = cat;
+        newCard.dataset.color = color;
+        newCard.dataset.updated = "Just now";
+        newCard.dataset.overview = activeCard.dataset.overview || "";
+        newCard.dataset.guidance = activeCard.dataset.guidance || "";
 
-  // Simulate edit triggering save
-  document
-    .querySelector("textarea")
-    ?.addEventListener("input", () => enableSaveBtn());
-
-  // Existing Knowledge Flow Update
-  document.getElementById("save-knowledge")?.addEventListener("click", () => {
-    const title = document
-      .getElementById("knowledge-title-input")
-      ?.value.trim();
-    const content = document
-      .getElementById("knowledge-content-input")
-      ?.value.trim();
-    if (!title || !content) return;
-    // Append new knowledge card to the list
-    const list = document.querySelector("#tab-knowledge .space-y-2");
-    if (list) {
-      const card = document.createElement("div");
-      card.className =
-        "p-4 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] group hover:border-[#D0D5DD] transition-all";
-      card.innerHTML = `
-        <div class="flex items-center justify-between gap-2">
-          <h4 class="text-[13px] font-semibold text-[#111827]">${title}</h4>
-          <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            <button class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:text-[#111827] hover:bg-white transition-all cursor-pointer"><i class="ti ti-pencil text-[13px]"></i></button>
-            <button class="w-8 h-8 rounded-lg flex items-center justify-center text-[#667085] hover:text-[#F04438] hover:bg-[#FEF3F2] transition-all cursor-pointer"><i class="ti ti-trash text-[13px]"></i></button>
+        newCard.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center font-bold text-[14px] shadow-2xs" style="background-color: ${color}15; color: ${color}; border: 1px solid ${color}35;">
+              ${copyName.charAt(0)}
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-1">
+                <h4 class="text-[12.5px] font-bold text-[#111827] truncate dna-card-title">${copyName}</h4>
+                <span class="text-[10.5px] text-[#98a2b3] shrink-0 font-normal">Just now</span>
+              </div>
+              <div class="flex items-center gap-1.5 mt-1">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#f3f4f6] text-[#4b5563] border border-[#eaecf0]">${cat}</span>
+              </div>
+            </div>
           </div>
-        </div>
-        <p class="text-[12px] text-[#667085] mt-1">${content}</p>
-      `;
-      list.appendChild(card);
+        `;
+
+        newCard.addEventListener("click", () => selectDNA(newCard));
+        if (dnaListContainer) dnaListContainer.insertBefore(newCard, dnaListContainer.firstChild);
+        selectDNA(newCard);
+        showToast(`Profil duplikat "${copyName}" berhasil dibuat!`);
+      });
     }
-    document.getElementById("knowledge-title-input").value = "";
-    document.getElementById("knowledge-content-input").value = "";
-    closeModal("modal-knowledge");
-    enableSaveBtn();
+
+    const btnDelete = document.getElementById("btn-delete-action");
+    if (btnDelete) {
+      btnDelete.addEventListener("click", () => {
+        if (moreActionsDropdown) moreActionsDropdown.classList.add("hidden");
+        const allCards = document.querySelectorAll(".dna-card");
+        if (allCards.length <= 1) {
+          window.showAlert({
+            variant: "warning",
+            title: "Peringatan",
+            message: "Anda harus memiliki minimal 1 profil Business DNA."
+          });
+          return;
+        }
+        const activeCard = document.querySelector(`.dna-card[data-id="${currentDnaId}"]`);
+        if (!activeCard) return;
+        const brandName = activeCard.dataset.name;
+        if (confirm(`Hapus Business DNA "${brandName}"?`)) {
+          activeCard.remove();
+          const nextCard = document.querySelector(".dna-card");
+          if (nextCard) selectDNA(nextCard);
+          showToast(`Profil "${brandName}" berhasil dihapus.`);
+        }
+      });
+    }
+
+    // ─── Tabs Switching ───
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetTab = btn.dataset.tab;
+        tabBtns.forEach((b) => {
+          b.classList.remove("text-[#111827]", "font-bold", "border-[#111827]");
+          b.classList.add("text-[#667085]", "font-medium", "border-transparent");
+        });
+        btn.classList.add("text-[#111827]", "font-bold", "border-[#111827]");
+        btn.classList.remove("text-[#667085]", "font-medium", "border-transparent");
+
+        tabContents.forEach((tc) => tc.classList.add("hidden"));
+        const targetContent = document.getElementById(`tab-${targetTab}`);
+        if (targetContent) targetContent.classList.remove("hidden");
+      });
+    });
+
+    // ─── Modal Helpers ───
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove("hidden");
+    }
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add("hidden");
+    }
+    function bindClose(modalId, ...closeBtnIds) {
+      const modal = document.getElementById(modalId);
+      if (!modal) return;
+      closeBtnIds.forEach((cid) => {
+        const btn = document.getElementById(cid);
+        if (btn) btn.addEventListener("click", () => closeModal(modalId));
+      });
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal(modalId);
+      });
+    }
+
+    // ─── Modal Wiring ───
+    // 1. New DNA Modal
+    const btnNewDna = document.getElementById("btn-new-dna");
+    if (btnNewDna) btnNewDna.addEventListener("click", () => openModal("modal-new-dna"));
+    bindClose("modal-new-dna", "close-new-dna");
+
+    const newDnaExtract = document.getElementById("new-dna-extract");
+    if (newDnaExtract) {
+      newDnaExtract.addEventListener("click", () => {
+        closeModal("modal-new-dna");
+        openModal("modal-extract-file");
+      });
+    }
+
+    const newDnaWebsite = document.getElementById("new-dna-website");
+    if (newDnaWebsite) {
+      newDnaWebsite.addEventListener("click", () => {
+        closeModal("modal-new-dna");
+        openModal("modal-analyze-website");
+      });
+    }
+
+    // 2. Extract File Flow
+    const btnExtractFile = document.getElementById("btn-extract-file");
+    if (btnExtractFile) btnExtractFile.addEventListener("click", () => openModal("modal-extract-file"));
+    bindClose("modal-extract-file", "close-extract-file", "cancel-extract-file");
+
+    const btnSubmitExtractFile = document.getElementById("btn-submit-extract-file");
+    if (btnSubmitExtractFile) {
+      btnSubmitExtractFile.addEventListener("click", () => {
+        closeModal("modal-extract-file");
+        openModal("modal-extract-loading");
+        setTimeout(() => {
+          closeModal("modal-extract-loading");
+          showToast("Brand DNA berhasil diekstrak dari dokumen!");
+        }, 1500);
+      });
+    }
+
+    // 3. Analyze Website Flow
+    const btnAnalyzeWebsite = document.getElementById("btn-analyze-website");
+    if (btnAnalyzeWebsite) btnAnalyzeWebsite.addEventListener("click", () => openModal("modal-analyze-website"));
+    bindClose("modal-analyze-website", "close-analyze-website", "cancel-analyze-website");
+
+    const btnSubmitAnalyzeWebsite = document.getElementById("btn-submit-analyze-website");
+    const websiteUrlInput = document.getElementById("website-url-input");
+    const scanningUrlText = document.getElementById("scanning-url-text");
+
+    if (btnSubmitAnalyzeWebsite) {
+      btnSubmitAnalyzeWebsite.addEventListener("click", () => {
+        const url = websiteUrlInput ? websiteUrlInput.value.trim() : "";
+        if (!url) {
+          window.showAlert({
+            variant: "warning",
+            title: "URL Diperlukan",
+            message: "Silakan masukkan URL website terlebih dahulu."
+          });
+          return;
+        }
+        if (scanningUrlText) scanningUrlText.textContent = `Memindai CSS, font, dan identitas dari ${url}...`;
+        closeModal("modal-analyze-website");
+        openModal("modal-analyze-scanning");
+
+        setTimeout(() => {
+          closeModal("modal-analyze-scanning");
+          openModal("modal-analyze-preview");
+        }, 1500);
+      });
+    }
+
+    bindClose("modal-analyze-preview", "cancel-analyze-preview");
+    const confirmAnalyzePreview = document.getElementById("confirm-analyze-preview");
+    if (confirmAnalyzePreview) {
+      confirmAnalyzePreview.addEventListener("click", () => {
+        closeModal("modal-analyze-preview");
+        showToast("Identitas website Kopi Senja Roastery diterapkan!");
+      });
+    }
+
+    // 4. Photography Modal
+    const btnAddPhoto = document.getElementById("btn-add-photography");
+    const triggerAddPhotoBox = document.getElementById("trigger-add-photo-box");
+    if (btnAddPhoto) btnAddPhoto.addEventListener("click", () => openModal("modal-photography"));
+    if (triggerAddPhotoBox) triggerAddPhotoBox.addEventListener("click", () => openModal("modal-photography"));
+    bindClose("modal-photography", "close-photography", "cancel-photography");
+
+    const btnSubmitPhoto = document.getElementById("btn-submit-photography");
+    if (btnSubmitPhoto) {
+      btnSubmitPhoto.addEventListener("click", () => {
+        closeModal("modal-photography");
+        showToast("Foto referensi berhasil ditambahkan!");
+      });
+    }
+
+    // 5. Moodboard Modal
+    const btnAddMoodboard = document.getElementById("btn-add-moodboard");
+    const triggerAddMoodboardBox = document.getElementById("trigger-add-moodboard-box");
+    if (btnAddMoodboard) btnAddMoodboard.addEventListener("click", () => openModal("modal-moodboard"));
+    if (triggerAddMoodboardBox) triggerAddMoodboardBox.addEventListener("click", () => openModal("modal-moodboard"));
+    bindClose("modal-moodboard", "close-moodboard", "cancel-moodboard");
+
+    const btnSubmitMoodboard = document.getElementById("btn-submit-moodboard");
+    if (btnSubmitMoodboard) {
+      btnSubmitMoodboard.addEventListener("click", () => {
+        closeModal("modal-moodboard");
+        showToast("Asset moodboard berhasil ditambahkan!");
+      });
+    }
+
+    // 6. Knowledge Modal
+    const btnAddKnowledge = document.getElementById("btn-add-knowledge");
+    if (btnAddKnowledge) btnAddKnowledge.addEventListener("click", () => openModal("modal-knowledge"));
+    bindClose("modal-knowledge", "close-knowledge", "cancel-knowledge");
+
+    const formKnowledge = document.getElementById("form-knowledge");
+    const knowledgeTitleInput = document.getElementById("knowledge-title-input");
+    const knowledgeContentInput = document.getElementById("knowledge-content-input");
+    const knowledgeItemsList = document.getElementById("knowledge-items-list");
+
+    if (formKnowledge) {
+      formKnowledge.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const title = knowledgeTitleInput ? knowledgeTitleInput.value.trim() : "";
+        const content = knowledgeContentInput ? knowledgeContentInput.value.trim() : "";
+        if (!title || !content) return;
+
+        const newCard = document.createElement("div");
+        newCard.className = "p-4 rounded-2xl border border-[#eaecf0] bg-white hover:border-[#d0d5dd] transition-all shadow-xs group animate-in fade-in duration-200";
+        newCard.innerHTML = `
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <h4 class="text-[12.5px] font-bold text-[#111827]">${title}</h4>
+              <p class="text-[12px] text-[#667085] mt-1 leading-relaxed">${content}</p>
+            </div>
+            <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+              <button type="button" class="btn-delete-knowledge w-7 h-7 rounded-lg flex items-center justify-center text-[#667085] hover:text-red-600 hover:bg-red-50 transition-all cursor-pointer">
+                <i class="ti ti-trash text-[13px]"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+        newCard.querySelector(".btn-delete-knowledge")?.addEventListener("click", () => newCard.remove());
+        if (knowledgeItemsList) knowledgeItemsList.insertBefore(newCard, knowledgeItemsList.firstChild);
+
+        if (knowledgeTitleInput) knowledgeTitleInput.value = "";
+        if (knowledgeContentInput) knowledgeContentInput.value = "";
+        closeModal("modal-knowledge");
+        showToast("Fakta pengetahuan baru ditambahkan ke Knowledge Base!");
+      });
+    }
+
+    // Bind existing knowledge item delete & edit buttons
+    document.querySelectorAll(".btn-delete-knowledge").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const card = btn.closest(".group");
+        if (card) card.remove();
+        showToast("Fakta dihapus dari Knowledge Base.");
+      });
+    });
+
+    document.querySelectorAll(".btn-edit-knowledge").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const currentCont = btn.dataset.content || "";
+        const newCont = prompt(`Edit "${btn.dataset.title}":`, currentCont);
+        if (newCont !== null) {
+          const card = btn.closest(".group");
+          const p = card ? card.querySelector("p") : null;
+          if (p) p.textContent = newCont;
+          btn.dataset.content = newCont;
+          showToast("Fakta berhasil diperbarui!");
+        }
+      });
+    });
+
+    // 7. Product Modal
+    const btnAddProduct = document.getElementById("btn-add-product");
+    const triggerAddProductBox = document.getElementById("trigger-add-product-box");
+    if (btnAddProduct) btnAddProduct.addEventListener("click", () => openModal("modal-add-product"));
+    if (triggerAddProductBox) triggerAddProductBox.addEventListener("click", () => openModal("modal-add-product"));
+    bindClose("modal-add-product", "close-add-product", "cancel-add-product");
+
+    const formProduct = document.getElementById("form-product");
+    const productNameInput = document.getElementById("product-name-input");
+    const productCatSelect = document.getElementById("product-category-select");
+    const productDimSection = document.getElementById("product-dimensions-section");
+    const productCardsGrid = document.getElementById("product-cards-grid");
+
+    if (productCatSelect && productDimSection) {
+      productCatSelect.addEventListener("change", (e) => {
+        if (e.target.value === "digital") {
+          productDimSection.classList.add("hidden");
+        } else {
+          productDimSection.classList.remove("hidden");
+        }
+      });
+    }
+
+    if (formProduct) {
+      formProduct.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = productNameInput ? productNameInput.value.trim() : "";
+        const type = productCatSelect ? (productCatSelect.value === "digital" ? "Digital Asset" : "Physical Product") : "Physical Product";
+        if (!name) return;
+
+        const newProdCard = document.createElement("div");
+        newProdCard.className = "p-4 rounded-2xl border border-[#eaecf0] bg-white hover:border-[#d0d5dd] transition-all flex flex-col justify-between group cursor-pointer shadow-xs animate-in fade-in duration-200";
+        newProdCard.innerHTML = `
+          <div class="aspect-video rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center mb-3 group-hover:bg-white transition-colors">
+            <i class="ti ti-package text-[24px] text-[#98a2b3]"></i>
+          </div>
+          <div>
+            <h4 class="text-[12.5px] font-bold text-[#111827] truncate">${name}</h4>
+            <span class="inline-block mt-1 px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#f3f4f6] text-[#4b5563] border border-[#eaecf0]">
+              ${type}
+            </span>
+          </div>
+        `;
+
+        if (productCardsGrid && triggerAddProductBox) {
+          productCardsGrid.insertBefore(newProdCard, triggerAddProductBox);
+        }
+
+        if (productNameInput) productNameInput.value = "";
+        closeModal("modal-add-product");
+        showToast(`Produk "${name}" berhasil ditambahkan!`);
+      });
+    }
+
+    // 8. Social Integration Modal
+    const btnAddIntegration = document.getElementById("btn-add-integration");
+    if (btnAddIntegration) btnAddIntegration.addEventListener("click", () => openModal("modal-add-integration"));
+    bindClose("modal-add-integration", "close-add-integration", "cancel-add-integration");
+
+    const searchIntegration = document.getElementById("search-add-integration");
+    if (searchIntegration) {
+      searchIntegration.addEventListener("input", (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        document.querySelectorAll(".integration-pick-item").forEach((item) => {
+          const handle = (item.dataset.handle || "").toLowerCase();
+          const plat = (item.dataset.platform || "").toLowerCase();
+          if (handle.includes(q) || plat.includes(q)) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    }
+
+    const connectedAccountsList = document.getElementById("connected-accounts-list");
+    document.querySelectorAll(".integration-pick-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        const handle = item.dataset.handle || "";
+        const plat = item.dataset.platform || "";
+        const icon = item.dataset.icon || "ti-brand-instagram";
+        const color = item.dataset.color || "#111827";
+
+        // Check if already linked
+        const existing = document.querySelector(`[data-linked-handle="${handle}"]`);
+        if (existing) {
+          window.showAlert({
+            variant: "warning",
+            title: "Akun Terhubung",
+            message: `Akun ${handle} sudah terhubung.`
+          });
+          return;
+        }
+
+        let svgHtml = '';
+        if (plat.toLowerCase().includes('instagram')) {
+          svgHtml = `<svg class="w-4.5 h-4.5 shrink-0" viewBox="0 0 2500 2500" xmlns="http://www.w3.org/2000/svg" fill="#000000"><defs><radialGradient id="ig-dyn-0" cx="332.14" cy="2511.81" r="3263.54" gradientUnits="userSpaceOnUse"><stop offset=".09" stop-color="#fa8f21"></stop><stop offset=".78" stop-color="#d82d7e"></stop></radialGradient><radialGradient id="ig-dyn-1" cx="1516.14" cy="2623.81" r="2572.12" gradientUnits="userSpaceOnUse"><stop offset=".64" stop-color="#8c3aaa" stop-opacity="0"></stop><stop offset="1" stop-color="#8c3aaa"></stop></radialGradient></defs><path d="M833.4,1250c0-230.11,186.49-416.7,416.6-416.7s416.7,186.59,416.7,416.7-186.59,416.7-416.7,416.7S833.4,1480.11,833.4,1250m-225.26,0c0,354.5,287.36,641.86,641.86,641.86S1891.86,1604.5,1891.86,1250,1604.5,608.14,1250,608.14,608.14,895.5,608.14,1250M1767.27,582.69a150,150,0,1,0,150.06-149.94h-0.06a150.07,150.07,0,0,0-150,149.94M745,2267.47c-121.87-5.55-188.11-25.85-232.13-43-58.36-22.72-100-49.78-143.78-93.5s-70.88-85.32-93.5-143.68c-17.16-44-37.46-110.26-43-232.13-6.06-131.76-7.27-171.34-7.27-505.15s1.31-373.28,7.27-505.15c5.55-121.87,26-188,43-232.13,22.72-58.36,49.78-100,93.5-143.78s85.32-70.88,143.78-93.5c44-17.16,110.26-37.46,232.13-43,131.76-6.06,171.34-7.27,505-7.27s373.28,1.31,505.15,7.27c121.87,5.55,188,26,232.13,43,58.36,22.62,100,49.78,143.78,93.5s70.78,85.42,93.5,143.78c17.16,44,37.46,110.26,43,232.13,6.06,131.87,7.27,171.34,7.27,505.15s-1.21,373.28-7.27,505.15c-5.55,121.87-25.95,188.11-43,232.13-22.72,58.36-49.78,100-93.5,143.68s-85.42,70.78-143.78,93.5c-44,17.16-110.26,37.46-232.13,43-131.76,6.06-171.34,7.27-505.15,7.27s-373.28-1.21-505-7.27M734.65,7.57c-133.07,6.06-224,27.16-303.41,58.06C349,97.54,279.38,140.35,209.81,209.81S97.54,349,65.63,431.24c-30.9,79.46-52,170.34-58.06,303.41C1.41,867.93,0,910.54,0,1250s1.41,382.07,7.57,515.35c6.06,133.08,27.16,223.95,58.06,303.41,31.91,82.19,74.62,152,144.18,221.43S349,2402.37,431.24,2434.37c79.56,30.9,170.34,52,303.41,58.06C868,2498.49,910.54,2500,1250,2500s382.07-1.41,515.35-7.57c133.08-6.06,223.95-27.16,303.41-58.06,82.19-32,151.86-74.72,221.43-144.18s112.18-139.24,144.18-221.43c30.9-79.46,52.1-170.34,58.06-303.41,6.06-133.38,7.47-175.89,7.47-515.35s-1.41-382.07-7.47-515.35c-6.06-133.08-27.16-224-58.06-303.41-32-82.19-74.72-151.86-144.18-221.43S2150.95,97.54,2068.86,65.63c-79.56-30.9-170.44-52.1-303.41-58.06C1632.17,1.51,1589.56,0,1250.1,0S868,1.41,734.65,7.57" fill="url(#ig-dyn-0)"></path><path d="M833.4,1250c0-230.11,186.49-416.7,416.6-416.7s416.7,186.59,416.7,416.7-186.59,416.7-416.7,416.7S833.4,1480.11,833.4,1250m-225.26,0c0,354.5,287.36,641.86,641.86,641.86S1891.86,1604.5,1891.86,1250,1604.5,608.14,1250,608.14,608.14,895.5,608.14,1250M1767.27,582.69a150,150,0,1,0,150.06-149.94h-0.06a150.07,150.07,0,0,0-150,149.94M745,2267.47c-121.87-5.55-188.11-25.85-232.13-43-58.36-22.72-100-49.78-143.78-93.5s-70.88-85.32-93.5-143.68c-17.16-44-37.46-110.26-43-232.13-6.06-131.76-7.27-171.34-7.27-505.15s1.31-373.28,7.27-505.15c5.55-121.87,26-188,43-232.13,22.72-58.36,49.78-100,93.5-143.78s85.32-70.88,143.78-93.5c44-17.16,110.26-37.46,232.13-43,131.76-6.06,171.34-7.27,505-7.27s373.28,1.31,505.15,7.27c121.87,5.55,188,26,232.13,43,58.36,22.62,100,49.78,143.78,93.5s70.78,85.42,93.5,143.78c17.16,44,37.46,110.26,43,232.13,6.06,131.87,7.27,171.34,7.27,505.15s-1.21,373.28-7.27,505.15c-5.55,121.87-25.95,188.11-43,232.13-22.72,58.36-49.78,100-93.5,143.68s-85.42,70.78-143.78,93.5c-44,17.16-110.26,37.46-232.13,43-131.76,6.06-171.34,7.27-505.15,7.27s-373.28-1.21-505-7.27M734.65,7.57c-133.07,6.06-224,27.16-303.41,58.06C349,97.54,279.38,140.35,209.81,209.81S97.54,349,65.63,431.24c-30.9,79.46-52,170.34-58.06,303.41C1.41,867.93,0,910.54,0,1250s1.41,382.07,7.57,515.35c6.06,133.08,27.16,223.95,58.06,303.41,31.91,82.19,74.62,152,144.18,221.43S349,2402.37,431.24,2434.37c79.56,30.9,170.34,52,303.41,58.06C868,2498.49,910.54,2500,1250,2500s382.07-1.41,515.35-7.57c133.08-6.06,223.95-27.16,303.41-58.06,82.19-32,151.86-74.72,221.43-144.18s112.18-139.24,144.18-221.43c30.9-79.46,52.1-170.34,58.06-303.41,6.06-133.38,7.47-175.89,7.47-515.35s-1.41-382.07-7.47-515.35c-6.06-133.08-27.16-224-58.06-303.41-32-82.19-74.72-151.86-144.18-221.43S2150.95,97.54,2068.86,65.63c-79.56-30.9-170.44-52.1-303.41-58.06C1632.17,1.51,1589.56,0,1250.1,0S868,1.41,734.65,7.57" fill="url(#ig-dyn-1)"></path></svg>`;
+        } else if (plat.toLowerCase().includes('facebook')) {
+          svgHtml = `<svg class="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
+        } else {
+          svgHtml = `<svg class="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="#000000"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .59.043.87.12V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.87-4.48V8.71a8.28 8.28 0 0 0 4.9 1.57v-3.59h-1z"/></svg>`;
+        }
+
+        const newRow = document.createElement("div");
+        newRow.className = "p-3.5 rounded-2xl border border-[#eaecf0] bg-white flex items-center justify-between gap-3 shadow-xs animate-in fade-in duration-200";
+        newRow.dataset.linkedHandle = handle;
+        newRow.innerHTML = `
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-white border border-[#eaecf0] shadow-2xs">
+              ${svgHtml}
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="text-[12.5px] font-bold text-[#111827] truncate">${handle}</p>
+              <p class="text-[11px] text-[#667085]">${plat}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+              Active
+            </span>
+            <button type="button" class="btn-disconnect-account w-7 h-7 rounded-lg flex items-center justify-center text-[#98a2b3] hover:text-red-600 hover:bg-red-50 transition-all cursor-pointer">
+              <i class="ti ti-trash text-[13px]"></i>
+            </button>
+          </div>
+        `;
+
+        newRow.querySelector(".btn-disconnect-account")?.addEventListener("click", () => newRow.remove());
+        if (connectedAccountsList) connectedAccountsList.insertBefore(newRow, connectedAccountsList.firstChild);
+
+        closeModal("modal-add-integration");
+        showToast(`Akun ${handle} berhasil ditautkan!`);
+      });
+    });
+
+    document.querySelectorAll(".btn-disconnect-account").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const row = btn.closest(".rounded-2xl");
+        if (row) row.remove();
+        showToast("Akun berhasil diputuskan.");
+      });
+    });
   });
 </script>
