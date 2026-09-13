@@ -4,20 +4,17 @@ import SocialIcon from "../components/icons/SocialIcon.astro";
 
 const dnaList = [
   { id: "all", name: "All Business" },
-  { id: "1", name: "Fresh Juice Co." },
-  { id: "2", name: "Acme Corp" },
-  { id: "3", name: "Luxe Beauty" },
-  { id: "4", name: "TechStart Inc" },
-  { id: "tech", name: "TechFlow Systems" },
   { id: "brew", name: "Daily Brew Cafe" },
+  { id: "2", name: "Acme Corp" },
+  { id: "glow", name: "Glow Skincare" },
+  { id: "byte", name: "Byte Labs" },
+  { id: "tech", name: "TechFlow Systems" },
   { id: "fit", name: "FitLife Gym" },
   { id: "eco", name: "EcoGreen Solutions" },
   { id: "urban", name: "Urban Outfitters" },
   { id: "pixel", name: "Pixel Perfect Studio" },
   { id: "nova", name: "Nova Logistics" },
   { id: "summit", name: "Summit Outdoors" },
-  { id: "glow", name: "Glow Skincare" },
-  { id: "byte", name: "Byte Labs" },
   { id: "vista", name: "Vista Real Estate" },
   { id: "peak", name: "Peak Performance" },
   { id: "swift", name: "Swift Delivery" },
@@ -37,9 +34,9 @@ const platforms = [
 const accounts = [
   {
     id: "ig-1",
-    handle: "@freshjuice.co",
+    handle: "@dailybrew.cafe",
     platformId: "instagram",
-    dnaId: "1",
+    dnaId: "brew",
     status: "connected",
     automations: {
       reply_comment: { enabled: true, mode: "text", text: "Terima kasih atas masukannya!", keywordMatching: false, delay: "instant" },
@@ -56,9 +53,9 @@ const accounts = [
   },
   {
     id: "tt-1",
-    handle: "@freshjuice",
+    handle: "@dailybrew",
     platformId: "tiktok",
-    dnaId: "1",
+    dnaId: "brew",
     status: "connected",
     automations: {
       delete_comment: { enabled: true, filterMode: "keyword", keywords: ["spam", "promo", "scam"] }
@@ -74,13 +71,13 @@ const accounts = [
   },
   {
     id: "fb-1",
-    handle: "Fresh Juice Co.",
+    handle: "Daily Brew Cafe",
     platformId: "facebook",
-    dnaId: "1",
+    dnaId: "brew",
     status: "connected",
     automations: {
       reply_comment: { enabled: true, mode: "text", text: "Kami sangat menghargai feedback Anda.", keywordMatching: false, delay: "30s" },
-      dm_comment: { enabled: true, mode: "text", text: "Hi {name}! Silakan cek detail promonya di sini: https://freshjuice.co/promo", delay: "instant", keywordMatching: true, matchingKeywords: ["promo", "diskon"] }
+      dm_comment: { enabled: true, mode: "text", text: "Hi {name}! Silakan cek detail promonya di sini: https://dailybrew.cafe/promo", delay: "instant", keywordMatching: true, matchingKeywords: ["promo", "diskon"] }
     }
   },
   {
@@ -93,9 +90,9 @@ const accounts = [
   },
   {
     id: "fb-3",
-    handle: "Luxe Beauty Official",
+    handle: "Glow Skincare Official",
     platformId: "facebook",
-    dnaId: "3",
+    dnaId: "glow",
     status: "connected",
     automations: {
       like_comment: { enabled: true },
@@ -104,9 +101,9 @@ const accounts = [
   },
   {
     id: "th-1",
-    handle: "@freshjuice",
+    handle: "@dailybrew.threads",
     platformId: "threads",
-    dnaId: "1",
+    dnaId: "brew",
     status: "connected",
     automations: {
       reply_comment: { enabled: true, mode: "text", text: "Halo! Terima kasih ya.", keywordMatching: false, delay: "10s" }

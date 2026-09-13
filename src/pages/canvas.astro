@@ -197,7 +197,7 @@ import LoadingState from "../components/ui/loading-state";
         background-origin: padding-box, border-box;
         border: 1.5px solid transparent;
         background-size: 200% 100%;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: none;
         z-index: 0;
         opacity: 0;
         will-change: background-position, opacity;
@@ -552,6 +552,7 @@ import LoadingState from "../components/ui/loading-state";
                     fill="currentColor"></path>
                 </svg>
                 <span
+                  id="canvas-credits-badge-val"
                   class="text-[12px] font-medium text-[#344054] leading-none"
                   >30</span
                 >
@@ -563,12 +564,18 @@ import LoadingState from "../components/ui/loading-state";
             <!-- Credit Dropdown (Identical to Studio) -->
             <div
               id="credit-dropdown"
-              class="hidden absolute top-full right-0 mt-2 w-60 bg-white border border-[#eaecf0] rounded-xl p-3 z-50"
+              class="hidden absolute top-full right-0 mt-2 w-60 bg-white border border-[#eaecf0] rounded-xl p-3 z-50 shadow-lg"
             >
               <div class="flex items-center justify-between mb-3">
-                <span class="text-[14px] font-medium text-[#111827]">Free</span>
+                <span class="plan-label-free text-[14px] font-medium text-[#111827]">Free</span>
+                <div class="plan-label-pro hidden items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="shrink-0 text-amber-500" aria-hidden="true">
+                    <path d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"></path>
+                  </svg>
+                  <span class="text-[13px] font-semibold text-[#111827]">Pro Plan</span>
+                </div>
                 <button
-                  class="btn-upgrade-trigger px-3 py-1.5 rounded-lg bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer"
+                  class="btn-upgrade-trigger btn-plan-action px-3 py-1.5 rounded-lg bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer"
                 >
                   Upgrade
                 </button>
@@ -594,7 +601,7 @@ import LoadingState from "../components/ui/loading-state";
                       >Credits</span
                     >
                   </div>
-                  <span class="text-[13px] font-medium text-[#111827]">30</span>
+                  <span id="canvas-credits-dropdown-val" class="text-[13px] font-medium text-[#111827]">30</span>
                 </div>
               </div>
               <div class="h-[1px] w-full bg-[#f2f4f7] mb-2"></div>
@@ -1151,7 +1158,7 @@ import LoadingState from "../components/ui/loading-state";
                   id="business-dna-badge-icon"
                   class="flex items-center justify-center shrink-0 text-[#667085]"
                 >
-                  <i class="ti ti-fingerprint text-[15px]"></i>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
                 </span>
                 <span id="business-dna-badge-label" class="truncate"
                   >Business DNA</span
@@ -1190,13 +1197,13 @@ import LoadingState from "../components/ui/loading-state";
                     <span
                       class="business-dna-option-icon flex items-center justify-center shrink-0 text-[#667085]"
                     >
-                      <i class="ti ti-fingerprint text-[15px]"></i>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
                     </span>
                     <span>None (Default)</span>
                   </button>
                   <button
-                    data-business-dna="fresh-juice"
-                    data-business-dna-label="Fresh Juice Co."
+                    data-business-dna="daily-brew"
+                    data-business-dna-label="Daily Brew Cafe"
                     class="business-dna-option flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors cursor-pointer"
                     role="option"
                   >
@@ -1223,11 +1230,11 @@ import LoadingState from "../components/ui/loading-state";
                           fill="#D97706"></path>
                       </svg>
                     </span>
-                    <span>Fresh Juice Co.</span>
+                    <span>Daily Brew Cafe</span>
                   </button>
                   <button
-                    data-business-dna="tech-startup"
-                    data-business-dna-label="Tech Startup"
+                    data-business-dna="byte-labs"
+                    data-business-dna-label="Byte Labs"
                     class="business-dna-option flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors cursor-pointer"
                     role="option"
                   >
@@ -1255,11 +1262,11 @@ import LoadingState from "../components/ui/loading-state";
                         <circle cx="12" cy="12" r="2.5" fill="#3B82F6"></circle>
                       </svg>
                     </span>
-                    <span>Tech Startup</span>
+                    <span>Byte Labs</span>
                   </button>
                   <button
-                    data-business-dna="luxe-beauty"
-                    data-business-dna-label="Luxe Beauty"
+                    data-business-dna="glow-skincare"
+                    data-business-dna-label="Glow Skincare"
                     class="business-dna-option flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors cursor-pointer"
                     role="option"
                   >
@@ -1280,7 +1287,7 @@ import LoadingState from "../components/ui/loading-state";
                         <circle cx="12" cy="12" r="3" fill="#FDF2F8"></circle>
                       </svg>
                     </span>
-                    <span>Luxe Beauty</span>
+                    <span>Glow Skincare</span>
                   </button>
                   <button
                     data-business-dna="urban-coffee"
@@ -1561,7 +1568,7 @@ import LoadingState from "../components/ui/loading-state";
                       >Case 2: Business DNA Lengkap</span
                     >
                     <span class="text-[10.5px] text-[#10B981] font-medium"
-                      >Pakai Business DNA (Luxe Beauty)</span
+                      >Pakai Business DNA (Glow Skincare)</span
                     >
                   </button>
                   <button
@@ -1613,7 +1620,7 @@ import LoadingState from "../components/ui/loading-state";
                       >Case 6: Complete Brief</span
                     >
                     <span class="text-[10.5px] text-[#10B981] font-medium"
-                      >Pakai Business DNA (Luxe Beauty)</span
+                      >Pakai Business DNA (Glow Skincare)</span
                     >
                   </button>
                 </div>
@@ -1667,7 +1674,7 @@ import LoadingState from "../components/ui/loading-state";
           <!-- Developer Note (Simulated User Chat Bubble) -->
           <div class="group flex flex-col items-end w-full animate-in fade-in slide-in-from-bottom-2 duration-300 mt-2">
             <div class="bg-[#F4F4F5] text-[#111827] rounded-[20px] px-4 py-2.5 max-w-[85%] text-[13.5px] leading-relaxed">
-              Halo dev, tolong pilih opsi <strong>Case Option</strong> di bar bagian atas untuk menjalankan simulasi scenario ini ya. Opsi di atas hanya contoh/mockup interaksi UI prototype dan tidak termasuk development backend.
+              Halo dev, tolong pilih opsi <strong>Case Option</strong> di bar bagian atas untuk menjalankan simulasi scenario ini ya. Opsi di atas hanya contoh/mockup interaksi UI prototype.
             </div>
           </div>
 
@@ -1711,7 +1718,7 @@ import LoadingState from "../components/ui/loading-state";
         <div class="shrink-0 w-full bg-white p-5 pt-2 relative z-20">
           <div
             id="canvas-ai-input-card"
-            class="relative flex flex-col p-2.5 rounded-[24px] bg-white border border-[#eaecf0] transition-all"
+            class="relative flex flex-col p-2.5 rounded-[24px] bg-white border border-black/[0.08] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06),0_2px_6px_-1px_rgba(0,0,0,0.03)] hover:border-black/15 focus-within:border-black/20 focus-within:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03)] transition-all duration-200"
           >
             <!-- Flowing Border Shine Overlay (matching Dashboard draft-border-shine) -->
             <div
@@ -2443,8 +2450,7 @@ import LoadingState from "../components/ui/loading-state";
                   id="ai-input-canvas"
                   contenteditable="true"
                   class="w-full bg-transparent text-[#111827] py-1 px-1 min-h-[48px] max-h-[160px] overflow-y-auto outline-none text-[13px] font-medium relative z-10 cursor-text leading-6"
-                >
-                </div>
+                ></div>
               </div>
             </div>
 
@@ -2515,10 +2521,24 @@ import LoadingState from "../components/ui/loading-state";
                 <!-- Send Button -->
                 <button
                   id="btn-send-canvas"
-                  class="btn-active-plate btn-active-dark btn-active-top w-8 h-8 rounded-full flex items-center justify-center transition-all active:scale-95 cursor-pointer bg-[#111827] text-white hover:bg-black"
+                  disabled
+                  class="btn-active-plate btn-active-dark btn-active-top w-8 h-8 rounded-full flex items-center justify-center transition-all active:scale-95 bg-[#111827] text-white hover:bg-black disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#111827] disabled:active:scale-100"
                   data-tooltip="Send"
                 >
-                  <i class="ti ti-arrow-up text-[14px]"></i>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    class="w-[18px] h-[18px] shrink-0"
+                    color="#ffffff"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 5.5V19"></path>
+                    <path d="M18 11C18 11 13.5811 5.00001 12 5C10.4188 4.99999 6 11 6 11"></path>
+                  </svg>
                 </button>
               </div>
             </div>
@@ -2745,9 +2765,9 @@ import LoadingState from "../components/ui/loading-state";
                   class="w-full h-9 px-3 rounded-xl border border-[#D0D5DD] bg-white text-[12.5px] font-medium text-[#111827] appearance-none outline-none focus:border-[#111827] cursor-pointer"
                 >
                   <option value="none">Business DNA</option>
-                  <option value="fresh-juice">Fresh Juice Co.</option>
-                  <option value="tech-startup">Tech Startup</option>
-                  <option value="luxe-beauty">Luxe Beauty</option>
+                  <option value="daily-brew">Daily Brew Cafe</option>
+                  <option value="byte-labs">Byte Labs</option>
+                  <option value="glow-skincare">Glow Skincare</option>
                   <option value="urban-coffee">Urban Coffee Roasters</option>
                   <option value="horizon-finance">Horizon Finance</option>
                   <option value="nova-robotics">Nova Robotics</option>
@@ -2795,7 +2815,7 @@ import LoadingState from "../components/ui/loading-state";
                       >Facebook</span
                     >
                     <span class="text-[10px] text-[#71717a] truncate leading-tight"
-                      >Fresh Juice Co.</span
+                      >Daily Brew Cafe</span
                     >
                   </div>
                 </label>
@@ -4639,17 +4659,62 @@ import LoadingState from "../components/ui/loading-state";
           }
         }
 
+        // Generation state variables
+        let isGenerating = false;
+        let generationTimeout = null;
+        let activeFrameId = null;
+
+        const SEND_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[18px] h-[18px] shrink-0" color="#ffffff" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5V19"></path><path d="M18 11C18 11 13.5811 5.00001 12 5C10.4188 4.99999 6 11 6 11"></path></svg>`;
+
+        function updateSendButtonState() {
+          const btnSend = document.getElementById("btn-send-canvas");
+          const aiInput = document.getElementById("ai-input-canvas");
+          if (!btnSend) return;
+
+          if (isGenerating) {
+            btnSend.removeAttribute("disabled");
+            btnSend.disabled = false;
+            btnSend.classList.remove("opacity-40", "cursor-not-allowed");
+            btnSend.classList.add("cursor-pointer");
+            return;
+          }
+
+          const rawText = aiInput
+            ? aiInput.innerText || aiInput.textContent || ""
+            : "";
+          const text = rawText.replace(/\u00A0/g, " ").trim();
+          const hasBadges = aiInput
+            ? aiInput.querySelectorAll(".ref-badge").length > 0
+            : false;
+          const hasContent = text !== "" || hasBadges;
+
+          if (hasContent) {
+            btnSend.removeAttribute("disabled");
+            btnSend.disabled = false;
+            btnSend.classList.remove("opacity-40", "cursor-not-allowed");
+            btnSend.classList.add("cursor-pointer");
+          } else {
+            btnSend.setAttribute("disabled", "true");
+            btnSend.disabled = true;
+            btnSend.classList.add("opacity-40", "cursor-not-allowed");
+            btnSend.classList.remove("cursor-pointer");
+          }
+        }
+
         function checkPlaceholderCanvas() {
           const placeholder = document.getElementById("placeholder-canvas");
           const aiInput = document.getElementById("ai-input-canvas");
           if (!placeholder || !aiInput) return;
-          const text = aiInput.textContent.replace(/\u00A0/g, " ").trim();
+          const text = (aiInput.innerText || aiInput.textContent || "")
+            .replace(/\u00A0/g, " ")
+            .trim();
           const hasBadges = aiInput.querySelectorAll(".ref-badge").length > 0;
           if (text !== "" || hasBadges) {
             placeholder.style.display = "none";
           } else {
             placeholder.style.display = "";
           }
+          updateSendButtonState();
         }
 
         let highlightCardTimeout;
@@ -4657,6 +4722,13 @@ import LoadingState from "../components/ui/loading-state";
         function addChatReference({ name, url }) {
           const aiInput = document.getElementById("ai-input-canvas");
           if (!aiInput) return;
+
+          // If aiInput is currently empty or has only whitespace/newlines, clean it first so badge starts at line 1 top-left
+          const currentText = (aiInput.innerText || aiInput.textContent || "").replace(/\u00A0/g, " ").trim();
+          const hasExistingBadges = aiInput.querySelectorAll(".ref-badge").length > 0;
+          if (!currentText && !hasExistingBadges) {
+            aiInput.innerHTML = "";
+          }
 
           const badge = document.createElement("span");
           badge.className =
@@ -4922,12 +4994,70 @@ import LoadingState from "../components/ui/loading-state";
             btn.addEventListener("click", (e) => {
               e.stopPropagation();
               creditDropdown.classList.add("hidden");
-              window.dispatchEvent(
-                new CustomEvent("open-manage-account", {
-                  detail: { tab: "subscription" },
-                }),
-              );
+              const currentPlan = localStorage.getItem("userPlan") || localStorage.getItem("xeni_user_plan") || "free";
+              if (currentPlan === "pro" || btn.textContent.trim() === "Manage") {
+                window.dispatchEvent(
+                  new CustomEvent("open-manage-account", {
+                    detail: { tab: "subscription" },
+                  }),
+                );
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("open-get-credits"),
+                );
+              }
             });
+          });
+
+          // --- Canvas Plan UI Sync (Free vs Pro) ---
+          function syncCanvasPlanUI(plan) {
+            const currentPlan = plan || localStorage.getItem("xeni_user_plan") || "free";
+            const isPro = currentPlan === "pro";
+
+            document.querySelectorAll(".plan-label-free").forEach((el) => {
+              if (isPro) el.classList.add("hidden");
+              else el.classList.remove("hidden");
+            });
+
+            document.querySelectorAll(".plan-label-pro").forEach((el) => {
+              if (isPro) {
+                el.classList.remove("hidden");
+                el.classList.add("flex");
+              } else {
+                el.classList.add("hidden");
+                el.classList.remove("flex");
+              }
+            });
+
+            document.querySelectorAll(".btn-plan-action").forEach((btn) => {
+              if (isPro) {
+                btn.textContent = "Manage";
+                btn.className = "btn-upgrade-trigger btn-plan-action px-3 py-1.5 rounded-lg bg-[#f4f4f5] hover:bg-[#e4e4e7] text-[#18181b] text-[11px] font-medium transition-colors cursor-pointer border border-[#e4e4e7]";
+              } else {
+                btn.textContent = "Upgrade";
+                btn.className = "btn-upgrade-trigger btn-plan-action px-3 py-1.5 rounded-lg bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer";
+              }
+            });
+
+            const canvasBadgeVal = document.getElementById("canvas-credits-badge-val");
+            if (canvasBadgeVal) {
+              canvasBadgeVal.textContent = isPro ? "1,500" : "30";
+            }
+            const canvasDropdownVal = document.getElementById("canvas-credits-dropdown-val");
+            if (canvasDropdownVal) {
+              canvasDropdownVal.textContent = isPro ? "1,500" : "30";
+            }
+          }
+
+          // Initialize on load
+          syncCanvasPlanUI();
+
+          // Listen for plan changes across components
+          window.addEventListener("plan-status-changed", (e) => {
+            syncCanvasPlanUI(e.detail?.plan);
+          });
+          window.addEventListener("upgraded-to-pro", () => {
+            syncCanvasPlanUI("pro");
           });
         }
 
@@ -4977,6 +5107,7 @@ import LoadingState from "../components/ui/loading-state";
           const selectedRefs = new Set();
           const refItems = referencesModal.querySelectorAll(".ref-item");
           const submitRefsBtn =
+            document.getElementById("submit-references") ||
             referencesModal.querySelector(".btn-active-dark");
 
           function closeModal() {
@@ -5011,20 +5142,27 @@ import LoadingState from "../components/ui/loading-state";
           });
 
           if (submitRefsBtn) {
-            submitRefsBtn.addEventListener("click", () => {
+            submitRefsBtn.addEventListener("click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
               let count = 0;
-              selectedRefs.forEach((id) => {
-                const item = referencesModal.querySelector(
-                  `.ref-item[data-id="${id}"]`,
-                );
-                if (item) {
-                  const name =
-                    item.getAttribute("data-name") || "Product Reference";
-                  addChatReference({ name });
-                  count++;
-                }
-              });
-              closeModal();
+              try {
+                selectedRefs.forEach((id) => {
+                  const item = referencesModal.querySelector(
+                    `.ref-item[data-id="${id}"]`,
+                  );
+                  if (item) {
+                    const name =
+                      item.getAttribute("data-name") || "Product Reference";
+                    addChatReference({ name });
+                    count++;
+                  }
+                });
+              } catch (err) {
+                console.error("Error adding references:", err);
+              } finally {
+                closeModal();
+              }
               if (count > 0) {
                 showToast("Reference Added", "success");
               }
@@ -5103,13 +5241,13 @@ import LoadingState from "../components/ui/loading-state";
         let currentScheduleSlide = 0;
 
         const singleCaptions = [
-          "🌞 Refresh your day with our signature Summer Blend! Perfect for these hot afternoons. Grab yours today and stay cool. #SummerVibes #FreshJuice",
-          "✨ Pure taste, zero compromises. Crafted from fresh local ingredients every morning. Taste the authentic difference! #CraftedWithLove #FreshDaily",
-          "🚀 Elevate your daily routine with a boost of pure energy. Simple, healthy, and delightfully crisp. #DailyBoost #HealthyLifestyle",
+          "🌞 Refresh your day with our signature Artisan Blend! Perfect for busy mornings. Grab yours today and savor the aroma. #CoffeeVibes #DailyBrew",
+          "✨ Pure taste, zero compromises. Crafted from fresh local beans every morning. Taste the authentic difference! #CraftedWithLove #FreshDaily",
+          "🚀 Elevate your daily routine with a boost of pure energy. Simple, rich, and delightfully smooth. #DailyBoost #CoffeeLifestyle",
         ];
 
         const carouselCaptions = [
-          "🌞 Refresh your day with our signature collection! Swipe right 👉 to explore all flavor variants crafted for sunny days. Which one is your favourite? #SummerVibes #FreshJuice #Carousel",
+          "🌞 Refresh your day with our signature collection! Swipe right 👉 to explore all roast variants crafted for coffee lovers. Which one is your favourite? #CoffeeVibes #DailyBrew #Carousel",
           "✨ From sunrise till dusk: Here is the complete breakdown of our latest drop. Swipe through ➡️ to see every angle and detail! #NewArrivals #ProductDrop #SwipeLeft",
           "📸 The full gallery is here! Swipe across to discover how each piece comes together to create the ultimate aesthetic. Save this post for later! #LookBook #Aesthetic #Trending",
         ];
@@ -5775,7 +5913,7 @@ import LoadingState from "../components/ui/loading-state";
                 businessDnaBadgeIcon.className =
                   "flex items-center justify-center shrink-0 text-[#667085]";
                 businessDnaBadgeIcon.innerHTML =
-                  '<i class="ti ti-fingerprint text-[15px]"></i>';
+                  '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>';
               }
             } else {
               if (businessDnaBadgeLabel && label)
@@ -7089,9 +7227,17 @@ import LoadingState from "../components/ui/loading-state";
         if (aiInputCanvas) {
           aiInputCanvas.addEventListener("focus", () => {
             if (placeholderCanvas) placeholderCanvas.style.display = "none";
+            checkPlaceholderCanvas();
           });
           aiInputCanvas.addEventListener("blur", checkPlaceholderCanvas);
           aiInputCanvas.addEventListener("input", checkPlaceholderCanvas);
+          aiInputCanvas.addEventListener("keyup", checkPlaceholderCanvas);
+          aiInputCanvas.addEventListener("paste", () => {
+            setTimeout(checkPlaceholderCanvas, 10);
+          });
+          aiInputCanvas.addEventListener("cut", () => {
+            setTimeout(checkPlaceholderCanvas, 10);
+          });
           aiInputCanvas.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
@@ -7100,6 +7246,7 @@ import LoadingState from "../components/ui/loading-state";
               }
             }
           });
+          checkPlaceholderCanvas();
         }
 
         const CHAT_CASES = {
@@ -7170,7 +7317,7 @@ import LoadingState from "../components/ui/loading-state";
             {
               role: "xeni",
               content:
-                "Siap! Saya mendeteksi akun Anda terhubung dengan <b>Business DNA: Luxe Beauty</b>.<br><br>Dari Product Library Anda, ada produk baru: <b>Brightening Serum 20ml</b>. Apakah visual ini dirancang khusus untuk campaign launching produk tersebut?",
+                "Siap! Saya mendeteksi akun Anda terhubung dengan <b>Business DNA: Glow Skincare</b>.<br><br>Dari Product Library Anda, ada produk baru: <b>Brightening Serum 20ml</b>. Apakah visual ini dirancang khusus untuk campaign launching produk tersebut?",
             },
             {
               role: "user",
@@ -7189,17 +7336,17 @@ import LoadingState from "../components/ui/loading-state";
             {
               role: "xeni",
               content:
-                "Sesuai guideline Luxe Beauty, tone komunikasi kita adalah <b>Premium & Approachable</b>.<br><br>Bagaimana dengan arahan visual setting-nya? Apakah ingin clean commercial studio dengan nuansa warna khas Luxe Beauty (#FFFDF9)?",
+                "Sesuai guideline Glow Skincare, tone komunikasi kita adalah <b>Premium & Approachable</b>.<br><br>Bagaimana dengan arahan visual setting-nya? Apakah ingin clean commercial studio dengan nuansa warna khas Glow Skincare (#FFFDF9)?",
             },
             {
               role: "user",
               content:
-                "Iya, background cream lembut khas Luxe Beauty, pencahayaan studio halus dengan refleksi kaca botol serum yang mewah.",
+                "Iya, background cream lembut khas Glow Skincare, pencahayaan studio halus dengan refleksi kaca botol serum yang mewah.",
             },
             {
               role: "xeni",
               content:
-                'Luar biasa. Saya sudah merangkum seluruh parameter ke dalam brief visual berikut:<br><br><div class="text-[13px] font-bold text-[#111827] mb-2">Final Brief (Business DNA: Luxe Beauty)</div><div class="overflow-x-auto w-full my-3 chat-table-scroll"><table class="w-full text-left text-[12px] border border-[#EAECF0] border-collapse min-w-[460px]"><thead><tr class="bg-[#F9FAFB] border-b border-[#EAECF0]"><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[130px]">Parameter</th><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[160px]">Spesifikasi</th><th class="py-2.5 px-3.5 font-bold text-[#344054] min-w-[170px]">Keterangan / Sumber</th></tr></thead><tbody><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Channel</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Instagram Feed</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Input User</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Objective</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Product Launch Campaign</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Business DNA</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Target Audience</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Perempuan Urban 22-35 thn</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Input User</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Product</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Brightening Serum 20ml</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Product Library</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Brand Identity</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Luxe Beauty</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Business DNA Aktif</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Headline / Message</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Glow starts here</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Tone & Voice Brand</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Visual Style</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Clean, premium, modern</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Visual Guidelines</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Background</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Soft brand cream #FFFDF9</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Brand Color Palette</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Composition</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Hero product centered</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Brand Standard</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Lighting</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Soft commercial studio</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Visual Guidelines</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Product Reference</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Serum bottle packshot</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Product Library</td></tr></tbody></table></div><b>Apakah brief ini sudah sesuai?</b>',
+                'Luar biasa. Saya sudah merangkum seluruh parameter ke dalam brief visual berikut:<br><br><div class="text-[13px] font-bold text-[#111827] mb-2">Final Brief (Business DNA: Glow Skincare)</div><div class="overflow-x-auto w-full my-3 chat-table-scroll"><table class="w-full text-left text-[12px] border border-[#EAECF0] border-collapse min-w-[460px]"><thead><tr class="bg-[#F9FAFB] border-b border-[#EAECF0]"><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[130px]">Parameter</th><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[160px]">Spesifikasi</th><th class="py-2.5 px-3.5 font-bold text-[#344054] min-w-[170px]">Keterangan / Sumber</th></tr></thead><tbody><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Channel</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Instagram Feed</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Input User</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Objective</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Product Launch Campaign</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Business DNA</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Target Audience</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Perempuan Urban 22-35 thn</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Input User</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Product</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Brightening Serum 20ml</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Product Library</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Brand Identity</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Glow Skincare</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Business DNA Aktif</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Headline / Message</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Glow starts here</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Tone & Voice Brand</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Visual Style</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Clean, premium, modern</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Visual Guidelines</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Background</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Soft brand cream #FFFDF9</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Brand Color Palette</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Composition</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Hero product centered</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Brand Standard</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Lighting</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Soft commercial studio</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Visual Guidelines</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Product Reference</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Serum bottle packshot</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Product Library</td></tr></tbody></table></div><b>Apakah brief ini sudah sesuai?</b>',
             },
             { role: "user", content: "Sudah pas banget." },
             {
@@ -7378,7 +7525,7 @@ import LoadingState from "../components/ui/loading-state";
             {
               role: "user",
               content:
-                "Buat Instagram post untuk launching Brightening Serum 20ml. Gunakan Business DNA Luxe Beauty.",
+                "Buat Instagram post untuk launching Brightening Serum 20ml. Gunakan Business DNA Glow Skincare.",
               attachments: [
                 "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=400&q=80",
               ],
@@ -7386,7 +7533,7 @@ import LoadingState from "../components/ui/loading-state";
             {
               role: "xeni",
               content:
-                "Siap! Campaign peluncuran <b>Brightening Serum 20ml</b> bersama <b>Business DNA: Luxe Beauty</b> ✨<br><br>Siapa target segmen konsumen yang ingin kita prioritaskan pada tahap launch ini?",
+                "Siap! Campaign peluncuran <b>Brightening Serum 20ml</b> bersama <b>Business DNA: Glow Skincare</b> ✨<br><br>Siapa target segmen konsumen yang ingin kita prioritaskan pada tahap launch ini?",
             },
             {
               role: "user",
@@ -7406,7 +7553,7 @@ import LoadingState from "../components/ui/loading-state";
             {
               role: "xeni",
               content:
-                "Pilihan tone yang pas dengan persona Luxe Beauty. Dan untuk Call to Action (CTA) serta headline utamanya, apakah ada pesan tertentu?",
+                "Pilihan tone yang pas dengan persona Glow Skincare. Dan untuk Call to Action (CTA) serta headline utamanya, apakah ada pesan tertentu?",
             },
             {
               role: "user",
@@ -7416,7 +7563,7 @@ import LoadingState from "../components/ui/loading-state";
             {
               role: "xeni",
               content:
-                'Brief Anda sudah sangat lengkap dan terhubung erat dengan <b>Business DNA: Luxe Beauty</b>:<br><br><div class="text-[13px] font-bold text-[#111827] mb-2">Final Brief (Business DNA: Luxe Beauty)</div><div class="overflow-x-auto w-full my-3 chat-table-scroll"><table class="w-full text-left text-[12px] border border-[#EAECF0] border-collapse min-w-[460px]"><thead><tr class="bg-[#F9FAFB] border-b border-[#EAECF0]"><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[130px]">Parameter</th><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[160px]">Spesifikasi</th><th class="py-2.5 px-3.5 font-bold text-[#344054] min-w-[170px]">Keterangan / Sumber</th></tr></thead><tbody><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Channel</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Instagram Post</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Campaign</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Brightening Serum Launch</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Target Audience</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Perempuan umur 20-30 thn</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Brand Identity</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Luxe Beauty</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Business DNA Aktif</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Tone of Voice</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Premium tapi friendly</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief + DNA</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Key Message</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Glow starts here</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Headline Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Call to Action</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Discover your glow</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">CTA Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Visual & Background</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Clean minimal, cream background</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Product Reference</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Brightening Serum 20ml packshot</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Product Library</td></tr></tbody></table></div><b>Apakah brief ini sudah sesuai?</b>',
+                'Brief Anda sudah sangat lengkap dan terhubung erat dengan <b>Business DNA: Glow Skincare</b>:<br><br><div class="text-[13px] font-bold text-[#111827] mb-2">Final Brief (Business DNA: Glow Skincare)</div><div class="overflow-x-auto w-full my-3 chat-table-scroll"><table class="w-full text-left text-[12px] border border-[#EAECF0] border-collapse min-w-[460px]"><thead><tr class="bg-[#F9FAFB] border-b border-[#EAECF0]"><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[130px]">Parameter</th><th class="py-2.5 px-3.5 font-bold text-[#344054] border-r border-[#EAECF0] min-w-[160px]">Spesifikasi</th><th class="py-2.5 px-3.5 font-bold text-[#344054] min-w-[170px]">Keterangan / Sumber</th></tr></thead><tbody><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Channel</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Instagram Post</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Campaign</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Brightening Serum Launch</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Target Audience</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Perempuan umur 20-30 thn</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Brand Identity</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Glow Skincare</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Business DNA Aktif</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Tone of Voice</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Premium tapi friendly</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief + DNA</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Key Message</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Glow starts here</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Headline Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Call to Action</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Discover your glow</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">CTA Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Visual & Background</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Clean minimal, cream background</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">User Brief</td></tr><tr><td class="py-2.5 px-3.5 font-semibold text-[#344054] border-b border-r border-[#EAECF0] whitespace-nowrap">Product Reference</td><td class="py-2.5 px-3.5 text-[#111827] border-b border-r border-[#EAECF0] whitespace-nowrap">Brightening Serum 20ml packshot</td><td class="py-2.5 px-3.5 text-[#667085] border-b border-[#EAECF0] whitespace-nowrap">Product Library</td></tr></tbody></table></div><b>Apakah brief ini sudah sesuai?</b>',
             },
             { role: "user", content: "Iya, sudah sangat lengkap." },
             {
@@ -7482,11 +7629,11 @@ import LoadingState from "../components/ui/loading-state";
 
         const CASE_DNA_SYNC = {
           "1": "none",
-          "2": "luxe-beauty",
+          "2": "glow-skincare",
           "3": "none",
           "4": "peak-performance",
           "5": "urban-coffee",
-          "6": "luxe-beauty",
+          "6": "glow-skincare",
         };
 
         function loadChatCase(caseNum) {
@@ -7628,10 +7775,7 @@ import LoadingState from "../components/ui/loading-state";
           chatHistoryContainer.insertAdjacentHTML("beforeend", html);
         }
 
-        // Handle final submission to generate image
-        let isGenerating = false;
-        let generationTimeout = null;
-        let activeFrameId = null;
+        // Stop generation logic
 
         function stopGeneration() {
           if (!isGenerating) return;
@@ -7645,8 +7789,9 @@ import LoadingState from "../components/ui/loading-state";
           const btnSend = document.getElementById("btn-send-canvas");
           if (btnSend) {
             btnSend.setAttribute("data-tooltip", "Send");
-            btnSend.innerHTML = '<i class="ti ti-arrow-up text-[14px]"></i>';
+            btnSend.innerHTML = SEND_ICON_SVG;
           }
+          updateSendButtonState();
 
           // Remove chat loading state
           const loadingState = document.getElementById("chat-loading-state");
@@ -7702,11 +7847,9 @@ import LoadingState from "../components/ui/loading-state";
           }
 
           const aiInput = document.getElementById("ai-input-canvas");
-          const text =
-            (aiInput ? aiInput.textContent.trim() : "") || "Generate";
-
-          // Extract any attached reference badges from aiInput
+          let text = "";
           const attachments = [];
+
           if (aiInput) {
             const badges = aiInput.querySelectorAll(".ref-badge");
             badges.forEach((b) => {
@@ -7718,6 +7861,27 @@ import LoadingState from "../components/ui/loading-state";
                 if (match && match[1]) attachments.push(match[1]);
               }
             });
+
+            // Extract pure text by cloning aiInput and removing badges
+            const clone = aiInput.cloneNode(true);
+            clone.querySelectorAll(".ref-badge").forEach((b) => b.remove());
+            text = (clone.innerText || clone.textContent || "")
+              .replace(/\u00A0/g, " ")
+              .trim();
+          }
+
+          const hasBadges = aiInput
+            ? aiInput.querySelectorAll(".ref-badge").length > 0
+            : false;
+
+          // If chat is empty and has no reference badges, do not submit
+          if (!text && !hasBadges) {
+            return;
+          }
+
+          // If text is empty but has badges, provide default prompt
+          if (!text && hasBadges) {
+            text = "Generate with attached references";
           }
 
           // Remove temporary stopped notice if user is continuing conversation
@@ -7748,6 +7912,10 @@ import LoadingState from "../components/ui/loading-state";
           isGenerating = true;
           const btnSend = document.getElementById("btn-send-canvas");
           if (btnSend) {
+            btnSend.removeAttribute("disabled");
+            btnSend.disabled = false;
+            btnSend.classList.remove("opacity-40", "cursor-not-allowed");
+            btnSend.classList.add("cursor-pointer");
             btnSend.setAttribute("data-tooltip", "Stop");
             btnSend.innerHTML =
               '<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-current text-white" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>';
@@ -7960,8 +8128,9 @@ import LoadingState from "../components/ui/loading-state";
             const btnSend = document.getElementById("btn-send-canvas");
             if (btnSend) {
               btnSend.setAttribute("data-tooltip", "Send");
-              btnSend.innerHTML = '<i class="ti ti-arrow-up text-[14px]"></i>';
+              btnSend.innerHTML = SEND_ICON_SVG;
             }
+            updateSendButtonState();
 
             // Chat replace
             const loadingState = document.getElementById("chat-loading-state");

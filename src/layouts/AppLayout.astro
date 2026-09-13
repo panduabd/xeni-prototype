@@ -90,6 +90,10 @@ const pageIcon = currentPage.icon;
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css"
+    />
     <style is:global>
       @keyframes shine-sweep {
         0% {
@@ -194,14 +198,81 @@ const pageIcon = currentPage.icon;
                 {activePage === item.id && (
                   <div class="absolute left-[-14px] w-[4px] h-6 bg-[#111827] rounded-r-full" />
                 )}
-                <i
-                  class:list={[
-                    `ti ${item.icon} text-[15px] transition-colors`,
-                    activePage === item.id
-                      ? "text-black"
-                      : "text-[#98a2b3] group-hover:text-black",
-                  ]}
-                />
+                {item.id === "studio" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="15"
+                    height="15"
+                    color="currentColor"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class:list={[
+                      "transition-colors flex-shrink-0",
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  >
+                    <path d="M3 11.9896V14.5C3 17.7998 3 19.4497 4.02513 20.4749C5.05025 21.5 6.70017 21.5 10 21.5H14C17.2998 21.5 18.9497 21.5 19.9749 20.4749C21 19.4497 21 17.7998 21 14.5V11.9896C21 10.3083 21 9.46773 20.6441 8.74005C20.2882 8.01237 19.6247 7.49628 18.2976 6.46411L16.2976 4.90855C14.2331 3.30285 13.2009 2.5 12 2.5C10.7991 2.5 9.76689 3.30285 7.70242 4.90855L5.70241 6.46411C4.37533 7.49628 3.71179 8.01237 3.3559 8.74005C3 9.46773 3 10.3083 3 11.9896Z"></path>
+                    <path d="M17 17.5V13.5"></path>
+                  </svg>
+                ) : item.id === "projects" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="15"
+                    height="15"
+                    color="currentColor"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                    class:list={[
+                      "transition-colors flex-shrink-0",
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  >
+                    <path d="M2 19V7.54902C2 6.10516 2 5.38322 2.24332 4.81647C2.5467 4.10985 3.10985 3.5467 3.81647 3.24332C4.38322 3 5.09805 3 6.54902 3H7.04311C7.64819 3 8.22075 3.27394 8.60041 3.74509L10.4175 6M10.4175 6H16C17.4001 6 18.1002 6 18.635 6.27248C19.1054 6.51217 19.4878 6.89462 19.7275 7.36502C20 7.8998 20 8.59987 20 10V11M10.4175 6H7" stroke-linecap="round"></path>
+                    <path d="M3.15802 15.5144L3.45643 14.7717C4.19029 12.9449 4.55723 12.0316 5.3224 11.5158C6.08757 11 7.07557 11 9.05157 11H17.1119C19.8004 11 21.1446 11 21.7422 11.8787C22.3397 12.7575 21.8405 14.0002 20.842 16.4856L20.5436 17.2283C19.8097 19.0551 19.4428 19.9684 18.6776 20.4842C17.9124 21 16.9244 21 14.9484 21H6.88812C4.19961 21 2.85535 21 2.25782 20.1213C1.66029 19.2425 2.15953 17.9998 3.15802 15.5144Z"></path>
+                  </svg>
+                ) : item.id === "inbox" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="15"
+                    height="15"
+                    color="currentColor"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                    class:list={[
+                      "transition-colors flex-shrink-0",
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  >
+                    <path d="M7 8L9.94202 9.73943C11.6572 10.7535 12.3428 10.7535 14.058 9.73943L17 8" stroke-linecap="round"></path>
+                    <path d="M21.9842 12.9756C22.0053 11.9899 22.0053 11.0101 21.9842 10.0244C21.9189 6.95886 21.8862 5.42609 20.7551 4.29066C19.6239 3.15523 18.0497 3.11568 14.9012 3.03657C12.9607 2.98781 11.0393 2.98781 9.09882 3.03656C5.95033 3.11566 4.37608 3.15521 3.24495 4.29065C2.11382 5.42608 2.08114 6.95885 2.01576 10.0244C1.99474 11.0101 1.99475 11.9899 2.01577 12.9756C2.08114 16.0412 2.11383 17.5739 3.24496 18.7094C4.37608 19.8448 5.95033 19.8843 9.09883 19.9634C10.404 19.9962 11.7005 20.007 13 19.9957" stroke-linecap="round"></path>
+                    <path d="M18.5 14L18.7579 14.697C19.0961 15.611 19.2652 16.068 19.5986 16.4014C19.932 16.7348 20.389 16.9039 21.303 17.2421L22 17.5L21.303 17.7579C20.389 18.0961 19.932 18.2652 19.5986 18.5986C19.2652 18.932 19.0961 19.389 18.7579 20.303L18.5 21L18.2421 20.303C17.9039 19.389 17.7348 18.932 17.4014 18.5986C17.068 18.2652 16.611 18.0961 15.697 17.7579L15 17.5L15.697 17.2421C16.611 16.9039 17.068 16.7348 17.4014 16.4014C17.7348 16.068 17.9039 15.611 18.2421 14.697L18.5 14Z"></path>
+                  </svg>
+                ) : (
+                  <i
+                    class:list={[
+                      `ti ${item.icon} text-[15px] transition-colors`,
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  />
+                )}
                 {item.label}
               </a>
             ))
@@ -232,8 +303,12 @@ const pageIcon = currentPage.icon;
                     xmlns="http://www.w3.org/2000/svg"
                     width="15"
                     height="15"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                     class:list={[
                       "transition-colors flex-shrink-0",
                       activePage === item.id
@@ -241,7 +316,51 @@ const pageIcon = currentPage.icon;
                         : "text-[#98a2b3] group-hover:text-black",
                     ]}
                   >
-                    <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z" />
+                    <path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
+                  </svg>
+                ) : item.id === "content-automation" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="15"
+                    height="15"
+                    color="currentColor"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class:list={[
+                      "transition-colors flex-shrink-0",
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  >
+                    <path d="M13 8.50733V11.5H14.8832C15.5 11.5 16 12 16 12.6168C16 12.8652 15.9172 13.1064 15.7647 13.3025L12.8025 17.1111C12.6116 17.3565 12.3182 17.5 12.0073 17.5C11.451 17.5 11 17.049 11 16.4927L11 13.5H9.11681C8.50001 13.5 8 13 8 12.3832C8 12.1348 8.08278 11.8936 8.23525 11.6975L11.1975 7.88889C11.3884 7.64352 11.6818 7.5 11.9927 7.5C12.549 7.5 13 7.951 13 8.50733Z"></path>
+                    <path d="M20 10V14C20 17.7712 20 19.6569 18.8284 20.8284C17.6569 22 15.7712 22 12 22C8.22876 22 6.34315 22 5.17157 20.8284C4 19.6569 4 17.7712 4 14V11C4 7.22876 4 5.34315 5.17157 4.17157C6.34315 3 8.22876 3 12 3H14"></path>
+                    <path d="M19.5 2.9375V4.5M19.5 4.5V6.0625M19.5 4.5H18.25M19.5 4.5H20.75M22 4.5L20.9156 4.13852C20.4179 3.97263 20.0274 3.58211 19.8615 3.08443L19.5 2L19.1385 3.08443C18.9726 3.58211 18.5821 3.97263 18.0844 4.13852L17 4.5L18.0844 4.86148C18.5821 5.02737 18.9726 5.41789 19.1385 5.91557L19.5 7L19.8615 5.91557C20.0274 5.41789 20.4179 5.02737 20.9156 4.86148L22 4.5Z"></path>
+                  </svg>
+                ) : item.id === "integrations" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="15"
+                    height="15"
+                    color="currentColor"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    class:list={[
+                      "transition-colors flex-shrink-0",
+                      activePage === item.id
+                        ? "text-black"
+                        : "text-[#98a2b3] group-hover:text-black",
+                    ]}
+                  >
+                    <path d="M4.51255 19.4866C7.02498 21.8794 10.016 20.9223 11.2124 19.9532C11.8314 19.4518 12.1097 19.1277 12.3489 18.8884C13.1864 18.1107 13.1326 17.3331 12.5882 16.711C12.3704 16.462 10.9731 15.1198 9.63313 13.7439C8.93922 13.0499 8.46066 12.5595 8.05149 12.1647C7.50354 11.6185 7.02499 10.9922 6.30715 11.0101C5.64913 11.0101 5.17057 11.5904 4.57237 12.1886C3.88422 12.8767 3.37598 13.7439 3.19652 14.5216C2.65814 16.7947 3.49562 18.4098 4.51255 19.4866ZM4.51255 19.4866L2.00012 21.999"></path>
+                    <path d="M19.4867 4.51472C16.9736 2.12078 13.9929 3.09593 12.7962 4.06548C12.177 4.56712 11.8987 4.89138 11.6593 5.13078C10.8216 5.90881 10.8755 6.68683 11.42 7.30926C11.4983 7.39881 11.7292 7.62975 12.055 7.95281M19.4867 4.51472C20.504 5.59199 21.3528 7.22547 20.8142 9.49971C20.6347 10.2777 20.1264 11.1453 19.438 11.8338C18.8397 12.4323 18.361 13.0128 17.7028 13.0128C16.9847 13.0308 16.6121 12.5115 16.064 11.9651M19.4867 4.51472L21.9999 2.0011M16.064 11.9651C15.6547 11.5701 15.07 10.9721 14.3759 10.2777C13.5175 9.39612 12.6355 8.52831 12.055 7.95281M16.064 11.9651L14.5024 13.4896M10.5114 9.50609L12.055 7.95281"></path>
                   </svg>
                 ) : (
                   <i
@@ -263,18 +382,23 @@ const pageIcon = currentPage.icon;
         <div class="p-3 flex flex-col gap-0.5 shrink-0">
           <!-- Plan & Credits -->
           <div
-            class="mx-1 mb-2 px-2 py-2 flex flex-col gap-2 animate-shine border border-[#eaecf0] rounded-xl bg-transparent"
+            id="sidebar-plan-card"
+            class="mx-1 mb-2 px-2 py-2 flex flex-col gap-2 animate-shine border border-[#eaecf0] rounded-xl bg-transparent transition-all duration-200"
           >
             <div class="flex items-center justify-between">
-              <span class="text-[14px] font-extrabold text-[#111827]">Free</span
-              >
+              <span class="plan-label-free text-[14px] font-extrabold text-[#111827]">Free</span>
+              <div class="plan-label-pro hidden items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="shrink-0 text-amber-500" aria-hidden="true">
+                  <path d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"></path>
+                </svg>
+                <span class="text-[13px] font-bold text-[#111827]">Pro Plan</span>
+              </div>
               <button
-                class="btn-upgrade-trigger px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer"
-                onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))"
+                class="btn-upgrade-trigger btn-plan-action px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer"
                 >Upgrade</button
               >
             </div>
-            <div class="h-[1px] w-full border-t border-dashed border-[#eaecf0]">
+            <div id="sidebar-plan-divider" class="h-[1px] w-full border-t border-dashed border-[#eaecf0] transition-colors">
             </div>
 
             <button
@@ -301,7 +425,7 @@ const pageIcon = currentPage.icon;
                 <i class="ti ti-help-circle text-[12px] text-[#98a2b3]"></i>
               </div>
               <div class="flex items-center gap-1">
-                <span class="text-[13px] font-bold text-[#344054]">300</span>
+                <span id="sidebar-credits-value" class="text-[13px] font-bold text-[#344054]">300</span>
                 <i class="ti ti-chevron-right text-[11px] text-[#98a2b3]"></i>
               </div>
             </button>
@@ -493,16 +617,104 @@ const pageIcon = currentPage.icon;
             class="flex items-center gap-2 text-[15px] font-bold text-[#111827] pointer-events-auto ml-[5px]"
           >
             {
-              activePage === "business-dna" ? (
+              activePage === "studio" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  color="currentColor"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-[#98a2b3] flex-shrink-0"
+                >
+                  <path d="M3 11.9896V14.5C3 17.7998 3 19.4497 4.02513 20.4749C5.05025 21.5 6.70017 21.5 10 21.5H14C17.2998 21.5 18.9497 21.5 19.9749 20.4749C21 19.4497 21 17.7998 21 14.5V11.9896C21 10.3083 21 9.46773 20.6441 8.74005C20.2882 8.01237 19.6247 7.49628 18.2976 6.46411L16.2976 4.90855C14.2331 3.30285 13.2009 2.5 12 2.5C10.7991 2.5 9.76689 3.30285 7.70242 4.90855L5.70241 6.46411C4.37533 7.49628 3.71179 8.01237 3.3559 8.74005C3 9.46773 3 10.3083 3 11.9896Z"></path>
+                  <path d="M17 17.5V13.5"></path>
+                </svg>
+              ) : activePage === "business-dna" ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
                   height="18"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                   class="text-[#98a2b3] flex-shrink-0"
                 >
-                  <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z" />
+                  <path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
+                </svg>
+              ) : activePage === "content-automation" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  color="currentColor"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-[#98a2b3] flex-shrink-0"
+                >
+                  <path d="M13 8.50733V11.5H14.8832C15.5 11.5 16 12 16 12.6168C16 12.8652 15.9172 13.1064 15.7647 13.3025L12.8025 17.1111C12.6116 17.3565 12.3182 17.5 12.0073 17.5C11.451 17.5 11 17.049 11 16.4927L11 13.5H9.11681C8.50001 13.5 8 13 8 12.3832C8 12.1348 8.08278 11.8936 8.23525 11.6975L11.1975 7.88889C11.3884 7.64352 11.6818 7.5 11.9927 7.5C12.549 7.5 13 7.951 13 8.50733Z"></path>
+                  <path d="M20 10V14C20 17.7712 20 19.6569 18.8284 20.8284C17.6569 22 15.7712 22 12 22C8.22876 22 6.34315 22 5.17157 20.8284C4 19.6569 4 17.7712 4 14V11C4 7.22876 4 5.34315 5.17157 4.17157C6.34315 3 8.22876 3 12 3H14"></path>
+                  <path d="M19.5 2.9375V4.5M19.5 4.5V6.0625M19.5 4.5H18.25M19.5 4.5H20.75M22 4.5L20.9156 4.13852C20.4179 3.97263 20.0274 3.58211 19.8615 3.08443L19.5 2L19.1385 3.08443C18.9726 3.58211 18.5821 3.97263 18.0844 4.13852L17 4.5L18.0844 4.86148C18.5821 5.02737 18.9726 5.41789 19.1385 5.91557L19.5 7L19.8615 5.91557C20.0274 5.41789 20.4179 5.02737 20.9156 4.86148L22 4.5Z"></path>
+                </svg>
+              ) : activePage === "integrations" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  color="currentColor"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  class="text-[#98a2b3] flex-shrink-0"
+                >
+                  <path d="M4.51255 19.4866C7.02498 21.8794 10.016 20.9223 11.2124 19.9532C11.8314 19.4518 12.1097 19.1277 12.3489 18.8884C13.1864 18.1107 13.1326 17.3331 12.5882 16.711C12.3704 16.462 10.9731 15.1198 9.63313 13.7439C8.93922 13.0499 8.46066 12.5595 8.05149 12.1647C7.50354 11.6185 7.02499 10.9922 6.30715 11.0101C5.64913 11.0101 5.17057 11.5904 4.57237 12.1886C3.88422 12.8767 3.37598 13.7439 3.19652 14.5216C2.65814 16.7947 3.49562 18.4098 4.51255 19.4866ZM4.51255 19.4866L2.00012 21.999"></path>
+                  <path d="M19.4867 4.51472C16.9736 2.12078 13.9929 3.09593 12.7962 4.06548C12.177 4.56712 11.8987 4.89138 11.6593 5.13078C10.8216 5.90881 10.8755 6.68683 11.42 7.30926C11.4983 7.39881 11.7292 7.62975 12.055 7.95281M19.4867 4.51472C20.504 5.59199 21.3528 7.22547 20.8142 9.49971C20.6347 10.2777 20.1264 11.1453 19.438 11.8338C18.8397 12.4323 18.361 13.0128 17.7028 13.0128C16.9847 13.0308 16.6121 12.5115 16.064 11.9651M19.4867 4.51472L21.9999 2.0011M16.064 11.9651C15.6547 11.5701 15.07 10.9721 14.3759 10.2777C13.5175 9.39612 12.6355 8.52831 12.055 7.95281M16.064 11.9651L14.5024 13.4896M10.5114 9.50609L12.055 7.95281"></path>
+                </svg>
+              ) : activePage === "projects" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  color="currentColor"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  class="text-[#98a2b3] flex-shrink-0"
+                >
+                  <path d="M2 19V7.54902C2 6.10516 2 5.38322 2.24332 4.81647C2.5467 4.10985 3.10985 3.5467 3.81647 3.24332C4.38322 3 5.09805 3 6.54902 3H7.04311C7.64819 3 8.22075 3.27394 8.60041 3.74509L10.4175 6M10.4175 6H16C17.4001 6 18.1002 6 18.635 6.27248C19.1054 6.51217 19.4878 6.89462 19.7275 7.36502C20 7.8998 20 8.59987 20 10V11M10.4175 6H7" stroke-linecap="round"></path>
+                  <path d="M3.15802 15.5144L3.45643 14.7717C4.19029 12.9449 4.55723 12.0316 5.3224 11.5158C6.08757 11 7.07557 11 9.05157 11H17.1119C19.8004 11 21.1446 11 21.7422 11.8787C22.3397 12.7575 21.8405 14.0002 20.842 16.4856L20.5436 17.2283C19.8097 19.0551 19.4428 19.9684 18.6776 20.4842C17.9124 21 16.9244 21 14.9484 21H6.88812C4.19961 21 2.85535 21 2.25782 20.1213C1.66029 19.2425 2.15953 17.9998 3.15802 15.5144Z"></path>
+                </svg>
+              ) : activePage === "inbox" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  color="currentColor"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  class="text-[#98a2b3] flex-shrink-0"
+                >
+                  <path d="M7 8L9.94202 9.73943C11.6572 10.7535 12.3428 10.7535 14.058 9.73943L17 8" stroke-linecap="round"></path>
+                  <path d="M21.9842 12.9756C22.0053 11.9899 22.0053 11.0101 21.9842 10.0244C21.9189 6.95886 21.8862 5.42609 20.7551 4.29066C19.6239 3.15523 18.0497 3.11568 14.9012 3.03657C12.9607 2.98781 11.0393 2.98781 9.09882 3.03656C5.95033 3.11566 4.37608 3.15521 3.24495 4.29065C2.11382 5.42608 2.08114 6.95885 2.01576 10.0244C1.99474 11.0101 1.99475 11.9899 2.01577 12.9756C2.08114 16.0412 2.11383 17.5739 3.24496 18.7094C4.37608 19.8448 5.95033 19.8843 9.09883 19.9634C10.404 19.9962 11.7005 20.007 13 19.9957" stroke-linecap="round"></path>
+                  <path d="M18.5 14L18.7579 14.697C19.0961 15.611 19.2652 16.068 19.5986 16.4014C19.932 16.7348 20.389 16.9039 21.303 17.2421L22 17.5L21.303 17.7579C20.389 18.0961 19.932 18.2652 19.5986 18.5986C19.2652 18.932 19.0961 19.389 18.7579 20.303L18.5 21L18.2421 20.303C17.9039 19.389 17.7348 18.932 17.4014 18.5986C17.068 18.2652 16.611 18.0961 15.697 17.7579L15 17.5L15.697 17.2421C16.611 16.9039 17.068 16.7348 17.4014 16.4014C17.7348 16.068 17.9039 15.611 18.2421 14.697L18.5 14Z"></path>
                 </svg>
               ) : (
                 <i class={`ti ${pageIcon} text-[18px] text-[#98a2b3]`} />
@@ -623,12 +835,78 @@ const pageIcon = currentPage.icon;
             e.stopPropagation();
             if (profileDropdown) profileDropdown.classList.add("hidden");
             if (creditDropdown) creditDropdown.classList.add("hidden");
-            window.dispatchEvent(
-              new CustomEvent("open-manage-account", {
-                detail: { tab: "subscription" },
-              }),
-            );
+            const currentPlan = localStorage.getItem("userPlan") || localStorage.getItem("xeni_user_plan") || "free";
+            if (currentPlan === "pro" || btn.textContent.trim() === "Manage") {
+              window.dispatchEvent(
+                new CustomEvent("open-manage-account", {
+                  detail: { tab: "subscription" },
+                }),
+              );
+            } else {
+              window.dispatchEvent(
+                new CustomEvent("open-get-credits"),
+              );
+            }
           });
+        });
+
+        // --- Plan Tier UI Sync (Free vs Pro) ---
+        function syncSidebarPlanUI(plan) {
+          const currentPlan = plan || localStorage.getItem("xeni_user_plan") || "free";
+          const isPro = currentPlan === "pro";
+
+          document.querySelectorAll(".plan-label-free").forEach((el) => {
+            if (isPro) el.classList.add("hidden");
+            else el.classList.remove("hidden");
+          });
+
+          document.querySelectorAll(".plan-label-pro").forEach((el) => {
+            if (isPro) {
+              el.classList.remove("hidden");
+              el.classList.add("flex");
+            } else {
+              el.classList.add("hidden");
+              el.classList.remove("flex");
+            }
+          });
+
+          const sidebarPlanCard = document.getElementById("sidebar-plan-card");
+
+          if (sidebarPlanCard) {
+            if (isPro) {
+              sidebarPlanCard.style.background = "linear-gradient(135deg, #FFFFFF 10%, #FFFDF5 45%, #FEF3C7 100%)";
+              sidebarPlanCard.classList.remove("bg-transparent");
+            } else {
+              sidebarPlanCard.style.background = "";
+              sidebarPlanCard.classList.add("bg-transparent");
+            }
+          }
+
+          document.querySelectorAll(".btn-plan-action").forEach((btn) => {
+            if (isPro) {
+              btn.textContent = "Manage";
+              btn.className = "btn-upgrade-trigger btn-plan-action px-3 py-1 rounded-full bg-white/90 hover:bg-white text-[#18181b] text-[11px] font-medium transition-all cursor-pointer border border-[#eaecf0] shadow-xs backdrop-blur-xs";
+            } else {
+              btn.textContent = "Upgrade";
+              btn.className = "btn-upgrade-trigger btn-plan-action px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer";
+            }
+          });
+
+          const sidebarCredits = document.getElementById("sidebar-credits-value");
+          if (sidebarCredits) {
+            sidebarCredits.textContent = isPro ? "1,500" : "300";
+          }
+        }
+
+        // Initialize on load
+        syncSidebarPlanUI();
+
+        // Listen for plan changes across components
+        window.addEventListener("plan-status-changed", (e) => {
+          syncSidebarPlanUI(e.detail?.plan);
+        });
+        window.addEventListener("upgraded-to-pro", () => {
+          syncSidebarPlanUI("pro");
         });
 
         // --- Dark Mode Toggle ---

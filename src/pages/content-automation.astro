@@ -4,20 +4,12 @@ import ReferencesModal from "../components/modals/ReferencesModal.astro";
 import XeniButton from "../components/XeniButton.astro";
 
 const BRAND_LOGOS: Record<string, string> = {
-  "Fresh Juice Co.":
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23f97316'/><path d='M32 14c-6 8-14 18-14 26a14 14 0 0 0 28 0c0-8-8-18-14-26z' fill='%23ffffff'/><path d='M32 26a8 8 0 0 1 8 8' stroke='%23f97316' stroke-width='2.5' stroke-linecap='round' fill='none'/></svg>",
-  "Fresh Juice Company":
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23f97316'/><path d='M32 14c-6 8-14 18-14 26a14 14 0 0 0 28 0c0-8-8-18-14-26z' fill='%23ffffff'/><path d='M32 26a8 8 0 0 1 8 8' stroke='%23f97316' stroke-width='2.5' stroke-linecap='round' fill='none'/></svg>",
-  "Acme Corp":
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%234f46e5'/><path d='M32 16l14 24H18z' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linejoin='round'/><circle cx='32' cy='31' r='4' fill='%23ffffff'/></svg>",
-  "Luxe Beauty":
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2318181b'/><path d='M32 14l5 13 13 5-13 5-5 13-5-13-13-5 13-5z' fill='%23fbbf24'/></svg>",
-  "Tech Startup":
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%237c3aed'/><path d='M34 14l-14 20h12l-2 16 16-22H34z' fill='%23ffffff'/></svg>",
-  "TechFlow Systems":
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230284c7'/><path d='M22 24c-5 0-8 3.5-8 8s3 8 8 8c6 0 12-16 20-16s8 3.5 8 8-3 8-8 8c-6 0-12-16-20-16z' fill='none' stroke='%23ffffff' stroke-width='4.5' stroke-linecap='round'/></svg>",
   "Daily Brew Cafe":
     "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2378350f'/><path d='M18 26h22v14a8 8 0 0 1-8 8h-6a8 8 0 0 1-8-8V26zm22 4h4a4 4 0 0 1 0 8h-4v-8zM24 16v4m6-4v4m6-4v4' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/><path d='M14 50h30' stroke='%23ffffff' stroke-width='3' stroke-linecap='round'/></svg>",
+  "Acme Corp":
+    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%234f46e5'/><path d='M32 16l14 24H18z' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linejoin='round'/><circle cx='32' cy='31' r='4' fill='%23ffffff'/></svg>",
+  "TechFlow Systems":
+    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230284c7'/><path d='M22 24c-5 0-8 3.5-8 8s3 8 8 8c6 0 12-16 20-16s8 3.5 8 8-3 8-8 8c-6 0-12-16-20-16z' fill='none' stroke='%23ffffff' stroke-width='4.5' stroke-linecap='round'/></svg>",
   "FitLife Gym":
     "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23dc2626'/><path d='M16 26v12m4-14v16m24-16v16m4-14v12M20 32h24' fill='none' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round'/></svg>",
   "EcoGreen Solutions":
@@ -51,26 +43,21 @@ const BRAND_LOGOS: Record<string, string> = {
 const dnaList = [
   { id: "all", name: "All Business", logo: "" },
   {
-    id: "Fresh Juice Co.",
-    name: "Fresh Juice Co.",
-    logo: BRAND_LOGOS["Fresh Juice Co."],
+    id: "Daily Brew Cafe",
+    name: "Daily Brew Cafe",
+    logo: BRAND_LOGOS["Daily Brew Cafe"],
+  },
+  { id: "Byte Labs", name: "Byte Labs", logo: BRAND_LOGOS["Byte Labs"] },
+  {
+    id: "Glow Skincare",
+    name: "Glow Skincare",
+    logo: BRAND_LOGOS["Glow Skincare"],
   },
   { id: "Acme Corp", name: "Acme Corp", logo: BRAND_LOGOS["Acme Corp"] },
-  { id: "Luxe Beauty", name: "Luxe Beauty", logo: BRAND_LOGOS["Luxe Beauty"] },
-  {
-    id: "Tech Startup",
-    name: "Tech Startup",
-    logo: BRAND_LOGOS["Tech Startup"],
-  },
   {
     id: "TechFlow Systems",
     name: "TechFlow Systems",
     logo: BRAND_LOGOS["TechFlow Systems"],
-  },
-  {
-    id: "Daily Brew Cafe",
-    name: "Daily Brew Cafe",
-    logo: BRAND_LOGOS["Daily Brew Cafe"],
   },
   { id: "FitLife Gym", name: "FitLife Gym", logo: BRAND_LOGOS["FitLife Gym"] },
   {
@@ -98,12 +85,6 @@ const dnaList = [
     name: "Summit Outdoors",
     logo: BRAND_LOGOS["Summit Outdoors"],
   },
-  {
-    id: "Glow Skincare",
-    name: "Glow Skincare",
-    logo: BRAND_LOGOS["Glow Skincare"],
-  },
-  { id: "Byte Labs", name: "Byte Labs", logo: BRAND_LOGOS["Byte Labs"] },
   {
     id: "Vista Real Estate",
     name: "Vista Real Estate",
@@ -644,7 +625,7 @@ const dnaList = [
               </h3>
               <span
                 id="rejected-count"
-                class="text-[11px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-md shadow-2xs"
+                class="text-[11px] font-bold text-white bg-rose-600 px-2 py-0.5 rounded-md shadow-xs"
                 >0</span
               >
             </div>
@@ -1080,61 +1061,61 @@ const dnaList = [
               >
                 <button
                   class="dna-option w-full flex items-center gap-3 p-2.5 rounded-lg text-left hover:bg-[#f4f4f5] transition-colors cursor-pointer"
-                  data-name="Fresh Juice Co."
-                  data-desc="Organic beverage & lifestyle brand"
-                  data-logo={BRAND_LOGOS["Fresh Juice Co."]}
+                  data-name="Daily Brew Cafe"
+                  data-desc="Artisan coffee roastery & cafe"
+                  data-logo={BRAND_LOGOS["Daily Brew Cafe"]}
                 >
                   <img
-                    src={BRAND_LOGOS["Fresh Juice Co."]}
-                    alt="Fresh Juice Co."
+                    src={BRAND_LOGOS["Daily Brew Cafe"]}
+                    alt="Daily Brew Cafe"
                     class="w-8.5 h-8.5 rounded-lg object-cover border border-[#e4e4e7] shrink-0"
                   />
                   <div>
                     <p class="text-[13px] font-medium text-[#18181b]">
-                      Fresh Juice Co.
+                      Daily Brew Cafe
                     </p>
                     <p class="text-[11px] text-[#71717a]">
-                      Organic beverage & lifestyle brand
+                      Artisan coffee roastery & cafe
                     </p>
                   </div>
                 </button>
                 <button
                   class="dna-option w-full flex items-center gap-3 p-2.5 rounded-lg text-left hover:bg-[#f4f4f5] transition-colors cursor-pointer"
-                  data-name="Tech Startup"
-                  data-desc="B2B SaaS platform for automation"
-                  data-logo={BRAND_LOGOS["Tech Startup"]}
+                  data-name="Byte Labs"
+                  data-desc="Developer tools & cloud automation"
+                  data-logo={BRAND_LOGOS["Byte Labs"]}
                 >
                   <img
-                    src={BRAND_LOGOS["Tech Startup"]}
-                    alt="Tech Startup"
+                    src={BRAND_LOGOS["Byte Labs"]}
+                    alt="Byte Labs"
                     class="w-8.5 h-8.5 rounded-lg object-cover border border-[#e4e4e7] shrink-0"
                   />
                   <div>
                     <p class="text-[13px] font-medium text-[#18181b]">
-                      Tech Startup
+                      Byte Labs
                     </p>
                     <p class="text-[11px] text-[#71717a]">
-                      B2B SaaS platform for automation
+                      Developer tools & cloud automation
                     </p>
                   </div>
                 </button>
                 <button
                   class="dna-option w-full flex items-center gap-3 p-2.5 rounded-lg text-left hover:bg-[#f4f4f5] transition-colors cursor-pointer"
-                  data-name="Luxe Beauty"
-                  data-desc="Premium skincare & cosmetics"
-                  data-logo={BRAND_LOGOS["Luxe Beauty"]}
+                  data-name="Glow Skincare"
+                  data-desc="Clean botanical skincare & beauty"
+                  data-logo={BRAND_LOGOS["Glow Skincare"]}
                 >
                   <img
-                    src={BRAND_LOGOS["Luxe Beauty"]}
-                    alt="Luxe Beauty"
+                    src={BRAND_LOGOS["Glow Skincare"]}
+                    alt="Glow Skincare"
                     class="w-8.5 h-8.5 rounded-lg object-cover border border-[#e4e4e7] shrink-0"
                   />
                   <div>
                     <p class="text-[13px] font-medium text-[#18181b]">
-                      Luxe Beauty
+                      Glow Skincare
                     </p>
                     <p class="text-[11px] text-[#71717a]">
-                      Premium skincare & cosmetics
+                      Clean botanical skincare & beauty
                     </p>
                   </div>
                 </button>
@@ -2258,7 +2239,7 @@ const dnaList = [
                 id="preview-schedule-caption"
                 placeholder="Write a caption or generate with AI..."
                 class="w-full h-20 p-2.5 rounded-xl border border-[#D0D5DD] bg-[#F9FAFB] text-[12px] text-[#111827] placeholder:text-[#98a2b3] resize-none outline-none focus:border-[#111827] focus:bg-white transition-all leading-relaxed"
-              >Nikmati kesegaran jus buah alami setiap hari bersama Fresh Juice Co.! Promo spesial potongan 20% khusus minggu ini 🍊✨</textarea>
+              >Nikmati racikan kopi terbaik setiap hari bersama Daily Brew Cafe! Promo spesial potongan 20% khusus minggu ini ☕✨</textarea>
             </div>
           </div>
 
@@ -2273,9 +2254,9 @@ const dnaList = [
                 class="w-full h-9 px-3 rounded-xl border border-[#D0D5DD] bg-white text-[12.5px] font-medium text-[#111827] appearance-none outline-none focus:border-[#111827] cursor-pointer"
               >
                 <option value="none">Business DNA</option>
-                <option value="fresh-juice" selected>Fresh Juice Co.</option>
-                <option value="tech-startup">Tech Startup</option>
-                <option value="luxe-beauty">Luxe Beauty</option>
+                <option value="daily-brew" selected>Daily Brew Cafe</option>
+                <option value="byte-labs">Byte Labs</option>
+                <option value="glow-skincare">Glow Skincare</option>
                 <option value="urban-coffee">Urban Coffee Roasters</option>
                 <option value="horizon-finance">Horizon Finance</option>
                 <option value="nova-robotics">Nova Robotics</option>
@@ -2324,7 +2305,7 @@ const dnaList = [
                     >Facebook</span
                   >
                   <span class="text-[10px] text-[#71717a] truncate leading-tight"
-                    >Fresh Juice Co.</span
+                    >Daily Brew Cafe</span
                   >
                 </div>
               </label>
@@ -2534,11 +2515,6 @@ const dnaList = [
             Confirm Schedule
           </button>
         </div>
-      </div>
-    </div>
-  </div>
-          Confirm Schedule
-        </button>
       </div>
     </div>
   </div>
@@ -3477,9 +3453,9 @@ const dnaList = [
                     class="w-full h-10 pl-3 pr-10 bg-white border border-[#D0D5DD] rounded-xl text-[13px] font-medium text-[#111827] appearance-none outline-none focus:border-[#111827] focus:ring-2 focus:ring-[#111827]/5 cursor-pointer"
                   >
                     <option value="" disabled selected>Select Brand...</option>
-                    <option value="Fresh Juice Co.">Fresh Juice Co.</option>
-                    <option value="Tech Startup">Tech Startup</option>
-                    <option value="Luxe Beauty">Luxe Beauty</option>
+                    <option value="Daily Brew Cafe">Daily Brew Cafe</option>
+                    <option value="Byte Labs">Byte Labs</option>
+                    <option value="Glow Skincare">Glow Skincare</option>
                   </select>
                   <i
                     class="ti ti-chevron-down absolute right-3 top-3 text-[#667085] pointer-events-none"
@@ -3522,7 +3498,7 @@ const dnaList = [
                       >
                         <input
                           type="checkbox"
-                          value="fb-fresh"
+                          value="fb-daily"
                           data-platform="facebook"
                           class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb"
                         />
@@ -3530,7 +3506,7 @@ const dnaList = [
                           class="ti ti-brand-facebook text-[#1877F2] text-[16px]"
                         ></i>
                         <span class="text-[13px] font-medium text-[#344054]"
-                          >Fresh Juice Company</span
+                          >Daily Brew Cafe Official</span
                         >
                       </label>
                       <label
@@ -3538,7 +3514,7 @@ const dnaList = [
                       >
                         <input
                           type="checkbox"
-                          value="th-fresh"
+                          value="th-daily"
                           data-platform="threads"
                           class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb"
                         />
@@ -3546,7 +3522,7 @@ const dnaList = [
                           class="ti ti-brand-threads text-[#000000] text-[16px]"
                         ></i>
                         <span class="text-[13px] font-medium text-[#344054]"
-                          >@freshjuice.threads</span
+                          >@dailybrew.threads</span
                         >
                       </label>
                       <label
@@ -3554,7 +3530,7 @@ const dnaList = [
                       >
                         <input
                           type="checkbox"
-                          value="insta-fresh"
+                          value="insta-daily"
                           data-platform="instagram"
                           class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb"
                         />
@@ -3562,7 +3538,7 @@ const dnaList = [
                           class="ti ti-brand-instagram text-[#E1306C] text-[16px]"
                         ></i>
                         <span class="text-[13px] font-medium text-[#344054]"
-                          >@freshjuice.official</span
+                          >@dailybrew.cafe</span
                         >
                       </label>
                       <label
@@ -3570,14 +3546,14 @@ const dnaList = [
                       >
                         <input
                           type="checkbox"
-                          value="tt-fresh"
+                          value="tt-daily"
                           data-platform="tiktok"
                           class="w-4 h-4 rounded text-[#111827] border-[#D0D5DD] manual-account-cb"
                         />
                         <i class="ti ti-brand-tiktok text-[#000000] text-[16px]"
                         ></i>
                         <span class="text-[13px] font-medium text-[#344054]"
-                          >@freshjuice</span
+                          >@dailybrew</span
                         >
                       </label>
                     </div>
@@ -3906,7 +3882,7 @@ const dnaList = [
                 <div
                   class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center border border-[#eaecf0] overflow-hidden"
                 >
-                  <img id="sim-brand-logo" src={BRAND_LOGOS["Fresh Juice Co."]} alt="Brand logo" class="w-full h-full object-cover" />
+                  <img id="sim-brand-logo" src={BRAND_LOGOS["Daily Brew Cafe"]} alt="Brand logo" class="w-full h-full object-cover" />
                 </div>
                 <div class="flex-1 min-w-0">
                   <div
@@ -3951,7 +3927,7 @@ const dnaList = [
                     </div>
                     <!-- User Bar -->
                     <div class="flex items-center gap-2">
-                      <img id="sim-story-brand-logo" src={BRAND_LOGOS["Fresh Juice Co."]} alt="" class="w-7 h-7 rounded-full object-cover border border-white/40" />
+                      <img id="sim-story-brand-logo" src={BRAND_LOGOS["Daily Brew Cafe"]} alt="" class="w-7 h-7 rounded-full object-cover border border-white/40" />
                       <span id="sim-story-brand-name" class="text-[12px] font-semibold text-white truncate drop-shadow-sm">Your Brand</span>
                       <span class="text-[10px] text-white/80">3h</span>
                     </div>
@@ -3971,7 +3947,7 @@ const dnaList = [
                     <!-- Left: Profile & Caption -->
                     <div class="flex-1 mr-2 text-white space-y-1.5 drop-shadow-sm">
                       <div class="flex items-center gap-2">
-                        <img id="sim-reels-brand-logo" src={BRAND_LOGOS["Fresh Juice Co."]} alt="" class="w-7 h-7 rounded-full object-cover border border-white/40" />
+                        <img id="sim-reels-brand-logo" src={BRAND_LOGOS["Daily Brew Cafe"]} alt="" class="w-7 h-7 rounded-full object-cover border border-white/40" />
                         <span id="sim-reels-brand-name" class="text-[12px] font-semibold truncate">Your Brand</span>
                         <span class="text-[10px] px-2 py-0.5 rounded-md bg-white/20 text-white font-medium border border-white/20">Follow</span>
                       </div>
@@ -4480,9 +4456,19 @@ const dnaList = [
                   class="w-5 h-5 rounded-md object-cover border border-[#eaecf0] hidden"
                   alt=""
                 />
-                <i
+                <svg
                   id="bulk-dna-select-icon"
-                  class="ti ti-dna text-[#71717a] text-[16px]"></i>
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="text-[#71717a] shrink-0"
+                ><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
               </div>
               <i
                 class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] pointer-events-none text-[13px]"
@@ -4820,16 +4806,8 @@ const dnaList = [
 
     // Business DNA Logos mapping
     const DNA_LOGOS = {
-      "Fresh Juice Co.":
-        "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23f97316'/><path d='M32 14c-6 8-14 18-14 26a14 14 0 0 0 28 0c0-8-8-18-14-26z' fill='%23ffffff'/><path d='M32 26a8 8 0 0 1 8 8' stroke='%23f97316' stroke-width='2.5' stroke-linecap='round' fill='none'/></svg>",
-      "Fresh Juice Company":
-        "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23f97316'/><path d='M32 14c-6 8-14 18-14 26a14 14 0 0 0 28 0c0-8-8-18-14-26z' fill='%23ffffff'/><path d='M32 26a8 8 0 0 1 8 8' stroke='%23f97316' stroke-width='2.5' stroke-linecap='round' fill='none'/></svg>",
       "Acme Corp":
         "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%234f46e5'/><path d='M32 16l14 24H18z' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linejoin='round'/><circle cx='32' cy='31' r='4' fill='%23ffffff'/></svg>",
-      "Luxe Beauty":
-        "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2318181b'/><path d='M32 14l5 13 13 5-13 5-5 13-5-13-13-5 13-5z' fill='%23fbbf24'/></svg>",
-      "Tech Startup":
-        "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%237c3aed'/><path d='M34 14l-14 20h12l-2 16 16-22H34z' fill='%23ffffff'/></svg>",
       "TechFlow Systems":
         "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230284c7'/><path d='M22 24c-5 0-8 3.5-8 8s3 8 8 8c6 0 12-16 20-16s8 3.5 8 8-3 8-8 8c-6 0-12-16-20-16z' fill='none' stroke='%23ffffff' stroke-width='4.5' stroke-linecap='round'/></svg>",
       "Daily Brew Cafe":
@@ -4865,7 +4843,7 @@ const dnaList = [
     };
 
     const DEFAULT_DNA_LOGO =
-      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2318181b'/><circle cx='32' cy='32' r='12' fill='%23ffffff'/></svg>";
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23F4F4F6'/><g transform='translate(10, 10) scale(1.833)' fill='none' stroke='%2398A2B3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M11 16.5C11 19.5376 13.4624 22 16.5 22C19.5376 22 22 19.5376 22 16.5C22 13.4624 19.5376 11 16.5 11C13.4624 11 11 13.4624 11 16.5Z'/><path d='M7 16H3.54895C2.69349 16 2 15.3065 2 14.4511C2 14.1565 2.08401 13.868 2.24216 13.6195L8.46312 3.84366C8.79751 3.3182 9.37717 3 10 3C10.6228 3 11.2025 3.3182 11.5369 3.84366L14 7.71429'/><path d='M19.5 2.9375V4.5M19.5 4.5V6.0625M19.5 4.5H18.25M19.5 4.5H20.75M22 4.5L20.9156 4.13852C20.4179 3.97263 20.0274 3.58211 19.8615 3.08443L19.5 2L19.1385 3.08443C18.9726 3.58211 18.5821 3.97263 18.0844 4.13852L17 4.5L18.0844 4.86148C18.5821 5.02737 18.9726 5.41789 19.1385 5.91557L19.5 7L19.8615 5.91557C20.0274 5.41789 20.4179 5.02737 20.9156 4.86148L22 4.5Z'/></g></svg>";
 
     function getDnaLogo(name) {
       if (!name || name === "Default") return DEFAULT_DNA_LOGO;
@@ -5446,9 +5424,9 @@ const dnaList = [
     function createMockGenerated() {
       const now = new Date();
       const brands = [
-        "Fresh Juice Co.",
-        "Tech Startup",
-        "Luxe Beauty",
+        "Daily Brew Cafe",
+        "Byte Labs",
+        "Glow Skincare",
         "Acme Corp",
         "TechFlow Systems",
       ];
@@ -5774,9 +5752,11 @@ const dnaList = [
       };
 
       const brandGradients = {
-        "Fresh Juice Co.": "from-[#34D399] to-[#059669]",
-        "Tech Startup": "from-[#60A5FA] to-[#2563EB]",
-        "Luxe Beauty": "from-[#F472B6] to-[#DB2777]",
+        "Daily Brew Cafe": "from-[#D97706] to-[#78350F]",
+        "Byte Labs": "from-[#38BDF8] to-[#0F172A]",
+        "Glow Skincare": "from-[#FB7185] to-[#E11D48]",
+        "Acme Corp": "from-[#818CF8] to-[#4F46E5]",
+        "TechFlow Systems": "from-[#38BDF8] to-[#0284C7]",
       };
 
       return sorted
@@ -6866,7 +6846,7 @@ const dnaList = [
                    <!-- Uniform Thumbnail with Click to Preview Full Screen -->
                    <div 
                      class="relative w-full aspect-[4/5] rounded-lg overflow-hidden bg-zinc-100 cursor-pointer group/img" 
-                     onclick="openPreviewModal('${item.id}')" 
+                     onclick="openPreviewModal('${item.id}', { hideActions: true })" 
                      title="Click to preview full screen"
                    >
                        <img 
@@ -6905,20 +6885,16 @@ const dnaList = [
                    <div class="pt-2 flex flex-col gap-1">
                        <p 
                          class="text-[12px] font-medium text-zinc-900 line-clamp-1 leading-snug cursor-pointer hover:text-blue-600 transition-colors" 
-                         onclick="openPreviewModal('${item.id}')"
+                         onclick="openPreviewModal('${item.id}', { hideActions: true })"
                          title="${escapeHtml(item.title)}"
                        >
                          ${escapeHtml(item.title || "Untitled Content")}
                        </p>
-                       <div class="flex items-center justify-between pt-0.5">
-                          <div class="flex items-center gap-1.5 text-[11px] text-zinc-500 capitalize font-medium">
-                             <i class="ti ${PLATFORM_ICONS[item.platform] || "ti-brand-instagram"} text-[12px] shrink-0 text-zinc-600"></i>
-                             <span>${escapeHtml(item.platform || "Instagram")}</span>
-                          </div>
-                          <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-zinc-100 text-zinc-600 border border-zinc-200/60 shrink-0">
-                             ${escapeHtml(item.contentType || "Post")}
-                          </span>
-                       </div>
+                        <div class="flex items-center pt-0.5">
+                           <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-zinc-100 text-zinc-600 border border-zinc-200/60 shrink-0">
+                              ${escapeHtml(item.contentType || "Post")}
+                           </span>
+                        </div>
                    </div>
                </div>
              `;
@@ -10210,25 +10186,25 @@ const dnaList = [
     let bulkSelectedAccounts = [];
 
     const BULK_BRAND_ACCOUNTS = {
-      "Fresh Juice Co.": [
+      "Daily Brew Cafe": [
         {
-          id: "fb-fresh",
-          name: "Fresh Juice Company",
+          id: "fb-daily",
+          name: "Daily Brew Cafe Official",
           icon: "ti ti-brand-facebook text-[#1877F2]",
         },
         {
-          id: "th-fresh",
-          name: "@freshjuice.threads",
+          id: "th-daily",
+          name: "@dailybrew.threads",
           icon: "ti ti-brand-threads text-[#000000]",
         },
         {
-          id: "insta-fresh",
-          name: "@freshjuice.official",
+          id: "insta-daily",
+          name: "@dailybrew.cafe",
           icon: "ti ti-brand-instagram text-[#E1306C]",
         },
         {
-          id: "tt-fresh",
-          name: "@freshjuice",
+          id: "tt-daily",
+          name: "@dailybrew",
           icon: "ti ti-brand-tiktok text-[#000000]",
         },
       ],
@@ -10249,37 +10225,37 @@ const dnaList = [
           icon: "ti ti-brand-instagram text-[#E1306C]",
         },
       ],
-      "Tech Startup": [
+      "Byte Labs": [
         {
-          id: "fb-tech",
-          name: "Tech Startup Inc.",
+          id: "fb-byte",
+          name: "Byte Labs Tech",
           icon: "ti ti-brand-facebook text-[#1877F2]",
         },
         {
-          id: "th-tech",
-          name: "@techstartup",
+          id: "th-byte",
+          name: "@bytelabs",
           icon: "ti ti-brand-threads text-[#000000]",
         },
         {
-          id: "insta-tech",
-          name: "@techstartup.io",
+          id: "insta-byte",
+          name: "@bytelabs.io",
           icon: "ti ti-brand-instagram text-[#E1306C]",
         },
       ],
-      "Luxe Beauty": [
+      "Glow Skincare": [
         {
-          id: "fb-luxe",
-          name: "Luxe Beauty Official",
+          id: "fb-glow",
+          name: "Glow Skincare Official",
           icon: "ti ti-brand-facebook text-[#1877F2]",
         },
         {
-          id: "insta-luxe",
-          name: "@luxebeauty.co",
+          id: "insta-glow",
+          name: "@glowskincare.co",
           icon: "ti ti-brand-instagram text-[#E1306C]",
         },
         {
-          id: "tt-luxe",
-          name: "@luxebeauty",
+          id: "tt-glow",
+          name: "@glowskincare",
           icon: "ti ti-brand-tiktok text-[#000000]",
         },
       ],
@@ -12035,7 +12011,7 @@ const dnaList = [
              </div>
              <div class="flex-1 min-w-0">
                 <div class="text-[11px] font-bold text-[#111827] truncate">${escapeHtml(item.title || "Schedule Item")}</div>
-                <div class="text-[10px] font-medium ${isPublished ? "text-[#667085]" : "text-[#7C3AED]"} flex items-center gap-1">
+                <div class="text-[10px] font-medium ${isPublished ? "text-[#667085]" : "text-[#18181b]"} flex items-center gap-1">
                    <i class="ti ti-clock text-[9px]"></i> ${timeStr}
                 </div>
              </div>

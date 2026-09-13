@@ -5,8 +5,8 @@ import ProjectCard from "../components/ProjectCard.astro";
 const projectsData = [
   {
     id: "1",
-    title: "Summer Drink Campaign",
-    business: "Fresh Juice Co.",
+    title: "Artisan Roast Campaign",
+    business: "Daily Brew Cafe",
     time: "2m ago",
   },
   {
@@ -18,19 +18,19 @@ const projectsData = [
   {
     id: "3",
     title: "Social Media Q3 Package",
-    business: "TechStart Inc",
+    business: "Byte Labs",
     time: "3h ago",
   },
   {
     id: "4",
     title: "Product Photoshoot",
-    business: "Luxe Beauty",
+    business: "Glow Skincare",
     time: "5h ago",
   },
   {
     id: "5",
     title: "E-Commerce Launch",
-    business: "Fresh Juice Co.",
+    business: "Daily Brew Cafe",
     time: "1d ago",
   },
   {
@@ -42,13 +42,13 @@ const projectsData = [
   {
     id: "7",
     title: "Print Material Set",
-    business: "TechStart Inc",
+    business: "Byte Labs",
     time: "3d ago",
   },
   {
     id: "8",
     title: "Holiday Campaign",
-    business: "Luxe Beauty",
+    business: "Glow Skincare",
     time: "1w ago",
   },
 ];
@@ -196,8 +196,8 @@ const projectsData = [
   const projectsData = [
     {
       id: "1",
-      title: "Summer Drink Campaign",
-      business: "Fresh Juice Co.",
+      title: "Artisan Roast Campaign",
+      business: "Daily Brew Cafe",
       time: "2m ago",
     },
     {
@@ -209,19 +209,19 @@ const projectsData = [
     {
       id: "3",
       title: "Social Media Q3 Package",
-      business: "TechStart Inc",
+      business: "Byte Labs",
       time: "3h ago",
     },
     {
       id: "4",
       title: "Product Photoshoot",
-      business: "Luxe Beauty",
+      business: "Glow Skincare",
       time: "5h ago",
     },
     {
       id: "5",
       title: "E-Commerce Launch",
-      business: "Fresh Juice Co.",
+      business: "Daily Brew Cafe",
       time: "1d ago",
     },
     {
@@ -233,13 +233,13 @@ const projectsData = [
     {
       id: "7",
       title: "Print Material Set",
-      business: "TechStart Inc",
+      business: "Byte Labs",
       time: "3d ago",
     },
     {
       id: "8",
       title: "Holiday Campaign",
-      business: "Luxe Beauty",
+      business: "Glow Skincare",
       time: "1w ago",
     },
   ];
@@ -254,17 +254,29 @@ const projectsData = [
     const template = document.getElementById("toast-template");
     const toast = template.cloneNode(true);
     toast.id = "";
+    toast.querySelector("#toast-message").textContent = message;
     toast.classList.remove("hidden");
-    toast.classList.add("flex");
-    toast.querySelector(".toast-message").textContent = message;
     container.appendChild(toast);
-    requestAnimationFrame(() => {
-      toast.classList.remove("translate-y-2", "opacity-0");
-    });
+
     setTimeout(() => {
-      toast.classList.add("translate-y-2", "opacity-0");
-      setTimeout(() => toast.remove(), 300);
+      toast.classList.remove("translate-y-2", "opacity-0");
+    }, 10);
+
+    setTimeout(() => {
+      toast.classList.add("opacity-0", "translate-y-2");
+      setTimeout(() => toast.remove(), 200);
     }, 3000);
+  }
+
+  function getUniqueDNA() {
+    // Return consistent list of 20 business names to match design requirement
+    return [
+      "Daily Brew Cafe", "Acme Corp", "Glow Skincare", "Byte Labs", 
+      "TechFlow Systems", "FitLife Gym", "EcoGreen Solutions", 
+      "Urban Outfitters", "Pixel Perfect Studio", "Nova Logistics", "Summit Outdoors", 
+      "Vista Real Estate", "Peak Performance", "Swift Delivery", "Bloom Florist", 
+      "Oceanic Seafood", "Apex Consulting", "Bright Future Academics", "Zenith Media", "Aurora Health"
+    ].sort();
   }
 
   function loadFavorites() {
@@ -303,17 +315,6 @@ const projectsData = [
     } catch (e) {
       /* ignore */
     }
-  }
-
-  function getUniqueDNA() {
-    // Return consistent list of 20 business names to match design requirement
-    return [
-      "Fresh Juice Co.", "Acme Corp", "Luxe Beauty", "TechStart Inc", 
-      "TechFlow Systems", "Daily Brew Cafe", "FitLife Gym", "EcoGreen Solutions", 
-      "Urban Outfitters", "Pixel Perfect Studio", "Nova Logistics", "Summit Outdoors", 
-      "Glow Skincare", "Byte Labs", "Vista Real Estate", "Peak Performance", 
-      "Swift Delivery", "Bloom Florist", "Oceanic Seafood", "Apex Consulting"
-    ].sort();
   }
 
   function renderDNAFilter() {

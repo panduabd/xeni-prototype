@@ -1,90 +1,224 @@
 ---
+// src/components/modals/BusinessDNAModal.astro
+
+const businessList = [
+  {
+    id: "daily-brew",
+    name: "Daily Brew Cafe",
+    category: "F&B",
+    tagline: "Artisanal coffee roasts & warm community bakery",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2378350f'/><path d='M18 26h22v14a8 8 0 0 1-8 8h-6a8 8 0 0 1-8-8V26zm22 4h4a4 4 0 0 1 0 8h-4v-8zM24 16v4m6-4v4m6-4v4' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/><path d='M14 50h30' stroke='%23ffffff' stroke-width='3' stroke-linecap='round'/></svg>",
+  },
+  {
+    id: "glow-skincare",
+    name: "Glow Skincare",
+    category: "Beauty",
+    tagline: "Organic botanical skin wellness & clinical formulas",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23f43f5e'/><circle cx='32' cy='32' r='10' fill='%23ffffff'/><path d='M32 12v6m0 28v6m-20-20h6m28 0h6' stroke='%23ffffff' stroke-width='3' stroke-linecap='round'/></svg>",
+  },
+  {
+    id: "byte-labs",
+    name: "Byte Labs",
+    category: "Software",
+    tagline: "AI-powered developer tooling, cloud APIs & SDKs",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230f172a'/><path d='M24 22l-8 10 8 10m16-20l8 10-8 10m-6-22l-4 24' fill='none' stroke='%2338bdf8' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+  },
+  {
+    id: "acme-corp",
+    name: "Acme Corp",
+    category: "Enterprise",
+    tagline: "Scalable enterprise workflows & financial solutions",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%234f46e5'/><path d='M32 16l14 24H18z' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linejoin='round'/><circle cx='32' cy='31' r='4' fill='%23ffffff'/></svg>",
+  },
+  {
+    id: "techflow",
+    name: "TechFlow Systems",
+    category: "Cloud",
+    tagline: "Modern DevOps workflows & container orchestration",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%230284c7'/><path d='M22 24c-5 0-8 3.5-8 8s3 8 8 8c6 0 12-16 20-16s8 3.5 8 8-3 8-8 8c-6 0-12-16-20-16z' fill='none' stroke='%23ffffff' stroke-width='4.5' stroke-linecap='round'/></svg>",
+  },
+  {
+    id: "peak-performance",
+    name: "Peak Performance",
+    category: "Sports",
+    tagline: "High-grade athletic sportswear & running gear",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23ea580c'/><path d='M18 42l14-16 14 16m-28-12l14-16 14 16' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+  },
+  {
+    id: "ecogreen",
+    name: "EcoGreen Solutions",
+    category: "Eco",
+    tagline: "Sustainable biodegradable packaging & zero waste",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23059669'/><path d='M32 48C32 28 46 16 46 16s-14 2-22 14c-5 8-4 18 8 18z' fill='%23ffffff'/><path d='M26 34c8-2 14-8 14-8' stroke='%23059669' stroke-width='2.5' stroke-linecap='round' fill='none'/></svg>",
+  },
+  {
+    id: "bloom-florist",
+    name: "Bloom Florist",
+    category: "Floral",
+    tagline: "Curated floral arrangements, gifts & wedding bouquets",
+    logo: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%23e11d48'/><circle cx='32' cy='22' r='7' fill='%23ffffff' fill-opacity='0.85'/><circle cx='42' cy='30' r='7' fill='%23ffffff' fill-opacity='0.85'/><circle cx='38' cy='42' r='7' fill='%23ffffff' fill-opacity='0.85'/><circle cx='26' cy='42' r='7' fill='%23ffffff' fill-opacity='0.85'/><circle cx='22' cy='30' r='7' fill='%23ffffff' fill-opacity='0.85'/><circle cx='32' cy='32' r='5' fill='%23fbbf24'/></svg>",
+  },
+];
 ---
+
 <style is:global>
   #dna-main-content::-webkit-scrollbar {
-    width: 4px;
+    width: 5px;
   }
   #dna-main-content::-webkit-scrollbar-track {
     background: transparent;
   }
   #dna-main-content::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 10px;
-    transition: background 0.3s ease;
+    background: #e2e8f0;
+    border-radius: 9999px;
   }
-  #dna-main-content.is-scrolling::-webkit-scrollbar-thumb {
-    background: #D1D5DB;
+  #dna-main-content::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
   }
   #dna-main-content {
     scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-    transition: scrollbar-color 0.3s ease;
-  }
-  #dna-main-content.is-scrolling {
-    scrollbar-color: #D1D5DB transparent;
+    scrollbar-color: #e2e8f0 transparent;
   }
 </style>
-<div id="business-dna-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-  <div class="bg-white w-full max-w-[540px] h-[480px] rounded-[32px] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 relative">
-    
-    <!-- Close Button (Top Right Floating) -->
-    <button id="close-business-dna" class="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors text-[#667085] z-30 cursor-pointer">
-      <i class="ti ti-x text-[20px]"></i>
-    </button>
 
-    <!-- Header (No Border) -->
-    <div class="px-7 pt-7 pb-3 bg-white relative z-20">
-      <h2 class="text-[20px] font-bold text-[#111827] tracking-tight">Business DNA</h2>
+<div
+  id="business-dna-modal"
+  class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+>
+  <div
+    class="bg-white w-full max-w-[460px] rounded-2xl shadow-2xl border border-[#eaecf0] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
+  >
+    <!-- Header -->
+    <div class="px-5 pt-4 pb-3 border-b border-[#f2f4f7] flex items-center justify-between">
+      <h2 class="text-[15px] font-bold text-[#111827]">Business DNA</h2>
+      <button
+        id="close-business-dna"
+        class="w-7 h-7 rounded-lg flex items-center justify-center text-[#98a2b3] hover:text-[#344054] hover:bg-[#f2f4f7] transition-colors cursor-pointer"
+        title="Tutup"
+      >
+        <i class="ti ti-x text-[16px]"></i>
+      </button>
     </div>
 
-    <!-- Main Content Area (Scrollable) -->
-    <div id="dna-main-content" class="flex-1 px-7 pb-24 overflow-y-auto scroll-smooth relative pt-2">
-      <div class="space-y-2.5">
-        <!-- DNA Item 1 -->
-        <button class="dna-item w-full flex items-center gap-4 p-3.5 rounded-2xl border border-[#eaecf0] bg-white text-left transition-all hover:border-[#d0d5dd] hover:bg-gray-50 group cursor-pointer" data-name="Fresh Juice Co.">
-          <div class="w-11 h-11 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0 group-hover:bg-white transition-colors">
-            <i class="ti ti-brand-abstract text-[22px] text-[#667085]"></i>
-          </div>
-          <div class="flex-1 min-w-0">
-            <h4 class="text-[14px] font-bold text-[#111827]">Fresh Juice Co.</h4>
-            <p class="text-[12px] text-[#667085] truncate">Organic beverage & lifestyle brand</p>
-          </div>
-          <div class="w-5 h-5 rounded-full bg-[#2563EB] flex items-center justify-center hidden check-badge">
-            <i class="ti ti-check text-[12px] text-white"></i>
-          </div>
-        </button>
-
-        <!-- DNA Item 2 -->
-        <button class="dna-item w-full flex items-center gap-4 p-3.5 rounded-2xl border border-[#eaecf0] bg-white text-left transition-all hover:border-[#d0d5dd] hover:bg-gray-50 group cursor-pointer" data-name="Tech Startup">
-          <div class="w-11 h-11 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center shrink-0 group-hover:bg-white transition-colors">
-            <i class="ti ti-rocket text-[22px] text-[#667085]"></i>
-          </div>
-          <div class="flex-1 min-w-0">
-            <h4 class="text-[14px] font-bold text-[#111827]">Tech Startup</h4>
-            <p class="text-[12px] text-[#667085] truncate">B2B SaaS platform for automation</p>
-          </div>
-          <div class="w-5 h-5 rounded-full bg-[#2563EB] flex items-center justify-center hidden check-badge">
-            <i class="ti ti-check text-[12px] text-white"></i>
-          </div>
-        </button>
-
-        <!-- Add New -->
-        <button class="w-full flex items-center justify-center gap-2 p-3.5 rounded-2xl border border-dashed border-[#d0d5dd] text-[13px] font-medium text-[#667085] hover:border-[#2563EB] hover:bg-blue-50/10 hover:text-[#2563EB] transition-all cursor-pointer">
-          <i class="ti ti-plus"></i>
-          Create Business DNA
-        </button>
+    <!-- Search Input Bar -->
+    <div class="px-5 pt-3 pb-1.5">
+      <div class="relative w-full">
+        <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[13px] pointer-events-none"></i>
+        <input
+          id="dna-search-input"
+          type="text"
+          placeholder="Cari Business DNA..."
+          class="w-full h-8.5 pl-8 pr-3 text-[12px] bg-[#f9fafb] border border-[#eaecf0] rounded-lg outline-none focus:bg-white focus:border-[#2563eb] transition-all placeholder:text-[#98a2b3]"
+        />
       </div>
     </div>
 
-    <!-- Floating Footer Buttons -->
-    <div class="absolute bottom-7 right-7 flex items-center gap-3 z-30 pointer-events-none">
-      <button class="pointer-events-auto btn-active-plate btn-active-bottom px-6 h-10 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer" id="cancel-business-dna">
-        Cancel
-      </button>
-      <button class="pointer-events-auto btn-active-plate btn-active-dark btn-active-bottom px-8 h-10 rounded-xl bg-[#111827] text-white text-[13px] font-medium hover:bg-black transition-all cursor-pointer">
-        Confirm
-      </button>
+    <!-- Scrollable Content Area -->
+    <div class="relative px-5 py-2">
+      <div
+        id="dna-main-content"
+        class="max-h-[260px] overflow-y-auto space-y-1.5 pr-1"
+      >
+        {businessList.map((item) => (
+          <button
+            type="button"
+            class="dna-item w-full flex items-center gap-3 p-2.5 rounded-xl border border-[#eaecf0] bg-white text-left transition-all hover:border-[#d0d5dd] hover:bg-gray-50/80 group cursor-pointer"
+            data-name={item.name}
+          >
+            <!-- Logo Image -->
+            <div class="w-9 h-9 rounded-lg overflow-hidden shrink-0 border border-black/5 bg-gray-100 flex items-center justify-center shadow-2xs">
+              <img
+                src={item.logo}
+                alt={item.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Content -->
+            <div class="flex-1 min-w-0 pr-2">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <h4 class="text-[13px] font-semibold text-[#111827] truncate leading-tight">
+                  {item.name}
+                </h4>
+                <span class="text-[10px] font-medium text-[#475467] bg-[#f2f4f7] px-1.5 py-0.2 rounded shrink-0">
+                  {item.category}
+                </span>
+              </div>
+              <p class="dna-desc text-[11.5px] text-[#667085] truncate leading-tight">
+                {item.tagline}
+              </p>
+            </div>
+
+            <!-- Check Badge -->
+            <div class="w-4.5 h-4.5 rounded-full bg-[#2563eb] flex items-center justify-center hidden check-badge shrink-0 shadow-2xs">
+              <i class="ti ti-check text-[11px] text-white"></i>
+            </div>
+          </button>
+        ))}
+
+        <!-- Empty Search State -->
+        <div id="dna-empty-state" class="hidden py-6 text-center">
+          <p class="text-[12.5px] text-[#667085]">Tidak ada Business DNA yang cocok.</p>
+        </div>
+      </div>
+
+      <!-- Bottom Separator & Create Action -->
+      <div class="pt-2">
+        <a
+          href="/business-dna"
+          class="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-dashed border-[#d0d5dd] text-[12px] font-medium text-[#475467] hover:border-[#2563eb] hover:bg-blue-50/30 hover:text-[#2563eb] transition-all cursor-pointer"
+        >
+          <i class="ti ti-plus text-[13px]"></i>
+          <span>Buat Business DNA Baru</span>
+        </a>
+      </div>
     </div>
 
+    <!-- Pinned Footer -->
+    <div class="px-5 py-3 bg-white border-t border-[#eaecf0] flex items-center justify-end gap-2">
+      <button
+        type="button"
+        id="cancel-business-dna"
+        class="px-3.5 h-8.5 rounded-lg border border-[#d0d5dd] bg-white text-[12.5px] font-medium text-[#344054] hover:bg-gray-50 shadow-2xs transition-all cursor-pointer"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn-active-dark px-4 h-8.5 rounded-lg bg-[#111827] text-white text-[12.5px] font-semibold hover:bg-black shadow-2xs transition-all cursor-pointer"
+      >
+        Terapkan
+      </button>
+    </div>
   </div>
 </div>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("dna-search-input");
+    const emptyState = document.getElementById("dna-empty-state");
+    const dnaItems = document.querySelectorAll(".dna-item");
+
+    // Search filter
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const val = e.target.value.toLowerCase().trim();
+        let visible = 0;
+        dnaItems.forEach((item) => {
+          const name = (item.getAttribute("data-name") || "").toLowerCase();
+          const desc = (item.querySelector(".dna-desc")?.textContent || "").toLowerCase();
+          if (name.includes(val) || desc.includes(val)) {
+            item.style.display = "flex";
+            visible++;
+          } else {
+            item.style.display = "none";
+          }
+        });
+        if (emptyState) {
+          emptyState.classList.toggle("hidden", visible > 0);
+        }
+      });
+    }
+  });
+</script>

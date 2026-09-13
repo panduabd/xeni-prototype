@@ -221,11 +221,15 @@ const {
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"
                         height="14"
-                        fill="currentColor"
-                        viewBox="0 0 256 256"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                         class="flex-shrink-0"
                     >
-                        <path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path>
+                        <path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
                     </svg>
                     Business DNA
                 </button>
@@ -235,7 +239,10 @@ const {
                         class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
                         data-tooltip="Aspect Ratio"
                     >
-                        <i class="ti ti-frame text-[14px]"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
+                            <path d="M6 16V8C6 5.17157 6 3.75736 6.87868 2.87868C7.75736 2 9.17157 2 12 2C14.8284 2 16.2426 2 17.1213 2.87868C18 3.75736 18 5.17157 18 8V16C18 18.8284 18 20.2426 17.1213 21.1213C16.2426 22 14.8284 22 12 22C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16Z"></path>
+                            <path d="M8 6L16 6C18.8284 6 20.2426 6 21.1213 6.87868C22 7.75736 22 9.17157 22 12C22 14.8284 22 16.2426 21.1213 17.1213C20.2426 18 18.8284 18 16 18H8C5.17157 18 3.75736 18 2.87868 17.1213C2 16.2426 2 14.8284 2 12C2 9.17157 2 7.75736 2.87868 6.87868C3.75736 6 5.17157 6 8 6Z"></path>
+                        </svg>
                         Aspect Ratio
                         <i
                             class="ti ti-chevron-down text-[10px] ml-0.5 opacity-60"
@@ -562,6 +569,7 @@ const {
         const cancelBusinessDNA = document.getElementById(
             "cancel-business-dna",
         );
+        const clearBusinessDNA = document.getElementById("clear-selected-dna");
         const confirmBusinessDNA =
             businessDNAModal?.querySelector(".btn-active-dark");
         const dnaItems = document.querySelectorAll(".dna-item");
@@ -569,15 +577,47 @@ const {
         let selectedDNAName = null;
 
         if (btnBusinessDNA && businessDNAModal && closeBusinessDNA) {
-            btnBusinessDNA.addEventListener("click", () =>
-                businessDNAModal.classList.remove("hidden"),
-            );
+            btnBusinessDNA.addEventListener("click", () => {
+                businessDNAModal.classList.remove("hidden");
+                // Pre-highlight active selected item if exists
+                dnaItems.forEach((i) => {
+                    const name = i.getAttribute("data-name");
+                    if (selectedDNAName && name === selectedDNAName) {
+                        i.classList.remove("border-[#eaecf0]", "bg-white");
+                        i.classList.add("border-[#2563EB]", "bg-blue-50/30");
+                        i.querySelector(".check-badge")?.classList.remove("hidden");
+                    } else {
+                        i.classList.remove("border-[#2563EB]", "bg-blue-50/30");
+                        i.classList.add("border-[#eaecf0]", "bg-white");
+                        i.querySelector(".check-badge")?.classList.add("hidden");
+                    }
+                });
+            });
             closeBusinessDNA.addEventListener("click", () =>
                 businessDNAModal.classList.add("hidden"),
             );
             cancelBusinessDNA?.addEventListener("click", () =>
                 businessDNAModal.classList.add("hidden"),
             );
+
+            clearBusinessDNA?.addEventListener("click", () => {
+                selectedDNAName = null;
+                dnaItems.forEach((i) => {
+                    i.classList.remove("border-[#2563EB]", "bg-blue-50/30");
+                    i.classList.add("border-[#eaecf0]", "bg-white");
+                    i.querySelector(".check-badge")?.classList.add("hidden");
+                });
+                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>`;
+                btnBusinessDNA.innerHTML = `${dnaSvg} Business DNA`;
+                btnBusinessDNA.classList.remove(
+                    "text-[#2563EB]",
+                    "border-[#2563EB]",
+                    "bg-blue-50/10",
+                    "btn-shimmer",
+                );
+                btnBusinessDNA.classList.add("border-[#eaecf0]");
+                businessDNAModal.classList.add("hidden");
+            });
 
             dnaItems.forEach((item) => {
                 item.addEventListener("click", () => {
@@ -588,7 +628,7 @@ const {
                     dnaItems.forEach((i) => {
                         i.classList.remove("border-[#2563EB]", "bg-blue-50/30");
                         i.classList.add("border-[#eaecf0]", "bg-white");
-                        i.querySelector(".check-badge").classList.add("hidden");
+                        i.querySelector(".check-badge")?.classList.add("hidden");
                     });
 
                     if (isSelected) {
@@ -597,7 +637,7 @@ const {
                         // Select this
                         item.classList.remove("border-[#eaecf0]", "bg-white");
                         item.classList.add("border-[#2563EB]", "bg-blue-50/30");
-                        item.querySelector(".check-badge").classList.remove(
+                        item.querySelector(".check-badge")?.classList.remove(
                             "hidden",
                         );
                         selectedDNAName = name;
@@ -606,7 +646,7 @@ const {
             });
 
             confirmBusinessDNA?.addEventListener("click", () => {
-                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 256 256" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="M200,204.5V232a8,8,0,0,1-16,0V204.5a63.67,63.67,0,0,0-35.38-57.25l-48.4-24.19A79.58,79.58,0,0,1,56,51.5V24a8,8,0,0,1,16,0V51.5a63.67,63.67,0,0,0,35.38,57.25l48.4,24.19A79.58,79.58,0,0,1,200,204.5ZM160,200H72.17a63.59,63.59,0,0,1,3.23-16h72.71a8,8,0,0,0,0-16H83.46a63.71,63.71,0,0,1,14.65-15.08A8,8,0,1,0,88.64,140,80.27,80.27,0,0,0,56,204.5V232a8,8,0,0,0,16,0V216h88a8,8,0,0,0,0-16ZM192,16a8,8,0,0,0-8,8V40H96a8,8,0,0,0,0,16h87.83a63.59,63.59,0,0,1-3.23,16H107.89a8,8,0,1,0,0,16h64.65a63.71,63.71,0,0,1-14.65,15.08,8,8,0,0,0,9.47,12.9A80.27,80.27,0,0,0,200,51.5V24A8,8,0,0,0,192,16Z"></path></svg>`;
+                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>`;
                 if (selectedDNAName) {
                     btnBusinessDNA.innerHTML = `${dnaSvg} ${selectedDNAName}`;
                     btnBusinessDNA.classList.add(
@@ -670,8 +710,8 @@ const {
 
                     if (selectedRatio === ratio) {
                         // Unselect
-                        selectedRatio = null;
-                        btnAspectRatio.innerHTML = `<i class="ti ti-frame text-[14px]"></i> Aspect Ratio <i class="ti ti-chevron-down text-[10px] ml-0.5 opacity-60"></i>`;
+                        const aspectSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 inline-block align-middle"><path d="M6 16V8C6 5.17157 6 3.75736 6.87868 2.87868C7.75736 2 9.17157 2 12 2C14.8284 2 16.2426 2 17.1213 2.87868C18 3.75736 18 5.17157 18 8V16C18 18.8284 18 20.2426 17.1213 21.1213C16.2426 22 14.8284 22 12 22C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16Z"></path><path d="M8 6L16 6C18.8284 6 20.2426 6 21.1213 6.87868C22 7.75736 22 9.17157 22 12C22 14.8284 22 16.2426 21.1213 17.1213C20.2426 18 18.8284 18 16 18H8C5.17157 18 3.75736 18 2.87868 17.1213C2 16.2426 2 14.8284 2 12C2 9.17157 2 7.75736 2.87868 6.87868C3.75736 6 5.17157 6 8 6Z"></path></svg>`;
+                        btnAspectRatio.innerHTML = `${aspectSvg} Aspect Ratio <i class="ti ti-chevron-down text-[10px] ml-0.5 opacity-60"></i>`;
                         btnAspectRatio.classList.remove(
                             "text-[#2563EB]",
                             "bg-blue-50/10",

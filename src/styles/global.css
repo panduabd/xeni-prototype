@@ -3,6 +3,22 @@
 @import "shadcn/tailwind.css";
 @import "@heroui/styles/css";
 
+@keyframes light-swipe {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  35% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.animate-light-swipe {
+  animation: light-swipe 3s infinite ease-in-out;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
@@ -14,6 +30,7 @@
   --font-lexend: "Poppins", sans-serif;
   --font-fraunces: "Poppins", sans-serif;
   --font-geist: "Poppins", sans-serif;
+  --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", sans-serif;
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -33,7 +50,10 @@
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --spacing-container: 1280px;
+  --line-width: 1px;
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -63,6 +83,8 @@
     --radius: 0.625rem;
     --app-bg: 60 4% 97%;
     --sidebar-width: 260px;
+    --brand: oklch(66.5% 0.1804 47.04);
+    --brand-foreground: oklch(75.77% 0.159 55.91);
   }
   * {
     @apply border-border outline-ring/50;
@@ -302,4 +324,26 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+/* Launch UI Glass and Line Utilities */
+@utility glass-1 {
+  @apply border-border from-card/80 to-card/40 dark:border-border/10 dark:border-b-border/5 dark:border-t-border/20 dark:from-card/5 dark:to-card/0 border bg-linear-to-b;
+}
+@utility glass-2 {
+  @apply border-border from-card/100 to-card/80 dark:border-border/10 dark:border-b-border/5 dark:border-t-border/20 dark:from-card/10 dark:to-card/5 border bg-linear-to-b;
+}
+@utility glass-3 {
+  @apply border-border from-card/30 to-card/20 dark:border-border/10 dark:border-t-border/20 dark:border-b-border/5 dark:from-primary/5 dark:to-primary/2 border bg-linear-to-b;
+}
+@utility glass-4 {
+  @apply border-border border-b-input/90 from-card/60 to-card/20 dark:border-border/10 dark:border-t-border/30 dark:from-primary/10 dark:to-primary/5 border bg-linear-to-b dark:border-b-0;
+}
+@utility glass-5 {
+  @apply border-border border-b-input from-card/100 to-card/20 dark:border-border/10 dark:border-t-border/30 dark:from-primary/15 dark:to-primary/5 border bg-linear-to-b dark:border-b-0;
+}
+
+@utility line-b {
+  @apply border-border dark:border-border/10;
+  border-width: 0 0 var(--line-width, 1px);
 }

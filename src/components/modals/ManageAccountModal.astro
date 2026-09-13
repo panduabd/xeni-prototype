@@ -242,8 +242,24 @@ import SocialIcon from "../icons/SocialIcon.astro";
 
       <!-- ══════════ SUBSCRIPTION TAB CONTENT ══════════ -->
       <section id="manage-account-tab-subscription" class="manage-account-tab-section space-y-6 hidden">
-        <div>
-          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Subscription</h3>
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Subscription</h3>
+            <p class="text-xs text-[#71717a] mt-0.5">Manage your billing, plan tier, and credit balances.</p>
+          </div>
+          <div class="relative group/dev inline-flex">
+            <div class="flex items-center gap-1 bg-[#f4f4f5] p-1 rounded-lg text-xs">
+              <button id="btn-switch-plan-free" type="button" class="px-3 py-1 rounded-lg font-medium transition-all cursor-pointer bg-white text-[#111827] shadow-xs">Free</button>
+              <button id="btn-switch-plan-pro" type="button" class="px-3 py-1 rounded-lg font-medium transition-all cursor-pointer text-[#667085] hover:text-[#111827]">Pro</button>
+            </div>
+            <!-- Tooltip: For Developer Purposes -->
+            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center pointer-events-none z-50 opacity-0 invisible group-hover/dev:opacity-100 group-hover/dev:visible transition-all duration-200 ease-out transform translate-y-1 group-hover/dev:translate-y-0">
+              <div class="bg-[#111827] text-white text-[11px] font-medium px-2.5 py-1 rounded-md shadow-lg whitespace-nowrap">
+                For Developer Purposes
+              </div>
+              <div class="w-1.5 h-1.5 bg-[#111827] rotate-45 -mt-0.75"></div>
+            </div>
+          </div>
         </div>
 
         <!-- ── STATE 1: FREE PLAN ── -->
@@ -2349,32 +2365,48 @@ import SocialIcon from "../icons/SocialIcon.astro";
       });
     }
 
-    function switchToFree() {
+    function switchToFree(persist = true) {
       if (viewFree) viewFree.classList.remove("hidden");
       if (viewPro) viewPro.classList.add("hidden");
       if (btnSwitchPlanFree && btnSwitchPlanPro) {
         btnSwitchPlanFree.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer bg-white text-[#111827] shadow-xs";
         btnSwitchPlanPro.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer text-[#667085] hover:text-[#111827]";
       }
+      if (persist) {
+        localStorage.setItem("xeni_user_plan", "free");
+        window.dispatchEvent(new CustomEvent("plan-status-changed", { detail: { plan: "free" } }));
+      }
     }
 
-    function switchToPro(withAlert = false, alertMsg = "") {
+    function switchToPro(withAlert = false, alertMsg = "", persist = true) {
       if (viewFree) viewFree.classList.add("hidden");
       if (viewPro) viewPro.classList.remove("hidden");
       if (btnSwitchPlanFree && btnSwitchPlanPro) {
         btnSwitchPlanPro.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer bg-white text-[#111827] shadow-xs";
         btnSwitchPlanFree.className = "px-3 py-1 rounded-lg font-medium transition-all cursor-pointer text-[#667085] hover:text-[#111827]";
       }
+      if (persist) {
+        localStorage.setItem("xeni_user_plan", "pro");
+        window.dispatchEvent(new CustomEvent("plan-status-changed", { detail: { plan: "pro" } }));
+      }
       if (withAlert && alertMsg) {
         showSubAlert(alertMsg);
       }
     }
 
-    if (btnSwitchPlanFree) btnSwitchPlanFree.addEventListener("click", switchToFree);
-    if (btnSwitchPlanPro) btnSwitchPlanPro.addEventListener("click", () => switchToPro(false));
+    if (btnSwitchPlanFree) btnSwitchPlanFree.addEventListener("click", () => switchToFree(true));
+    if (btnSwitchPlanPro) btnSwitchPlanPro.addEventListener("click", () => switchToPro(false, "", true));
+
+    // Initialize based on saved plan
+    const initialSavedPlan = localStorage.getItem("xeni_user_plan") || "free";
+    if (initialSavedPlan === "pro") {
+      switchToPro(false, "", false);
+    } else {
+      switchToFree(false);
+    }
 
     window.addEventListener("upgraded-to-pro", () => {
-      switchToPro(true, "Congratulations! Your account was upgraded to Pro Plan! 1,500 credits have been added.");
+      switchToPro(true, "Congratulations! Your account was upgraded to Pro Plan! 1,500 credits have been added.", true);
     });
 
     // ─── Manage Plan & Upgrade Plan Mechanism ───
@@ -2497,7 +2529,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
     if (btnTriggerUpgradePlan) {
       btnTriggerUpgradePlan.addEventListener("click", () => {
         closeManagePlanModal();
-        openUpgradeModal();
+        window.dispatchEvent(new CustomEvent("open-get-credits"));
       });
     }
 

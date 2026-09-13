@@ -4,11 +4,11 @@ import SocialIcon from "../components/icons/SocialIcon.astro";
 
 const dnaList = [
   { id: "all", name: "All Business" },
-  { id: "fresh", name: "Fresh Juice Co." },
-  { id: "acme", name: "Acme Corp" },
-  { id: "luxe", name: "Luxe Beauty" },
-  { id: "tech", name: "TechFlow Systems" },
   { id: "brew", name: "Daily Brew Cafe" },
+  { id: "acme", name: "Acme Corp" },
+  { id: "glow", name: "Glow Skincare" },
+  { id: "byte", name: "Byte Labs" },
+  { id: "tech", name: "TechFlow Systems" },
   { id: "fit", name: "FitLife Gym" },
   { id: "eco", name: "EcoGreen Solutions" },
   { id: "urban", name: "Urban Outfitters" },
@@ -81,7 +81,7 @@ const mockMessages = [
     status: "sent",
     chat: [
       { type: "incoming", text: "Do you offer wholesale pricing?", time: "Yesterday" },
-      { type: "outgoing", text: "Yes we do! Please contact sales@freshjuice.co for our wholesale catalog.", time: "Yesterday", byAi: true },
+      { type: "outgoing", text: "Yes we do! Please contact sales@dailybrew.cafe for our wholesale catalog.", time: "Yesterday", byAi: true },
       { type: "incoming", text: "Perfect! I'll place an order now.", time: "Yesterday" }
     ]
   }
@@ -120,11 +120,11 @@ const mockComments = [
 
 const activityLog = [
   { id: 1, category: "messages", type: "ai_replied", businessId: "acme", desc: "AI auto-replied to @sarahwilson's message", time: "10m ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" x2="8" y1="16" y2="16"/><line x1="16" x2="16" y1="16" y2="16"/></svg>` },
-  { id: 2, category: "comments", type: "failed_send", businessId: "fresh", desc: "Failed to deliver comment reply to Michael Brown", time: "1h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>` },
+  { id: 2, category: "comments", type: "failed_send", businessId: "brew", desc: "Failed to deliver comment reply to Michael Brown", time: "1h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>` },
   { id: 3, category: "comments", type: "ai_replied", businessId: "acme", desc: "AI auto-replied to a comment by Jessica Taylor", time: "2h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" x2="8" y1="16" y2="16"/><line x1="16" x2="16" y1="16" y2="16"/></svg>` },
-  { id: 4, category: "systems", type: "connected", businessId: "fresh", desc: "Connected new Instagram account for Fresh Juice Co.", time: "5h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 5v4"/><path d="M8 5v4"/><path d="m17 17 2 2 4-4"/></svg>` },
+  { id: 4, category: "systems", type: "connected", businessId: "brew", desc: "Connected new Instagram account for Daily Brew Cafe", time: "5h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 5v4"/><path d="M8 5v4"/><path d="m17 17 2 2 4-4"/></svg>` },
   { id: 5, category: "automations", type: "automation_triggered", businessId: "tech", desc: "Automation trigger: 'Weekly Promo' workflow successfully initiated.", time: "6h ago", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>` },
-  { id: 6, category: "messages", type: "archived", businessId: "luxe", desc: "Archived conversation with David Chen", time: "Yesterday", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>` },
+  { id: 6, category: "messages", type: "archived", businessId: "glow", desc: "Archived conversation with David Chen", time: "Yesterday", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>` },
 ];
 ---
 
