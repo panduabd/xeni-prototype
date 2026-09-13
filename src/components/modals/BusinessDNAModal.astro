@@ -89,7 +89,7 @@ const businessList = [
     class="bg-white w-full max-w-[460px] rounded-2xl shadow-2xl border border-[#eaecf0] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
   >
     <!-- Header -->
-    <div class="px-5 pt-4 pb-3 border-b border-[#f2f4f7] flex items-center justify-between">
+    <div class="px-5 pt-4 pb-2 flex items-center justify-between">
       <h2 class="text-[15px] font-bold text-[#111827]">Business DNA</h2>
       <button
         id="close-business-dna"
@@ -137,14 +137,9 @@ const businessList = [
 
             <!-- Content -->
             <div class="flex-1 min-w-0 pr-2">
-              <div class="flex items-center gap-1.5 mb-0.5">
-                <h4 class="text-[13px] font-semibold text-[#111827] truncate leading-tight">
-                  {item.name}
-                </h4>
-                <span class="text-[10px] font-medium text-[#475467] bg-[#f2f4f7] px-1.5 py-0.2 rounded shrink-0">
-                  {item.category}
-                </span>
-              </div>
+              <h4 class="text-[13px] font-semibold text-[#111827] truncate leading-tight mb-0.5">
+                {item.name}
+              </h4>
               <p class="dna-desc text-[11.5px] text-[#667085] truncate leading-tight">
                 {item.tagline}
               </p>
@@ -176,7 +171,7 @@ const businessList = [
     </div>
 
     <!-- Pinned Footer -->
-    <div class="px-5 py-3 bg-white border-t border-[#eaecf0] flex items-center justify-end gap-2">
+    <div class="px-5 pt-2 pb-4 bg-white flex items-center justify-end gap-2">
       <button
         type="button"
         id="cancel-business-dna"
