@@ -1019,7 +1019,7 @@ import LoadingState from "../components/ui/loading-state";
           <button
             id="btn-remove-bg"
             class="flex items-center gap-1.5 px-2 h-8 rounded-full text-[13px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors cursor-pointer"
-            data-tooltip="Consumes 1 Credit"
+            data-tooltip="Consumes 10 Credits"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -4923,7 +4923,7 @@ import LoadingState from "../components/ui/loading-state";
         if (btnRemoveBg) {
           btnRemoveBg.addEventListener("click", (e) => {
             e.stopPropagation();
-            showToast("Background Removed", "1 credit used", "success");
+            showToast("Background Removed", "10 credits used", "success");
           });
         }
 
