@@ -1673,8 +1673,25 @@ import LoadingState from "../components/ui/loading-state";
 
           <!-- Developer Note (Simulated User Chat Bubble) -->
           <div class="group flex flex-col items-end w-full animate-in fade-in slide-in-from-bottom-2 duration-300 mt-2">
-            <div class="bg-[#F4F4F5] text-[#111827] rounded-[20px] px-4 py-2.5 max-w-[85%] text-[13.5px] leading-relaxed">
-              Halo dev, tolong pilih opsi <strong>Case Option</strong> di bar bagian atas untuk menjalankan simulasi scenario ini ya. Opsi di atas hanya contoh/mockup interaksi UI prototype.
+            <div class="bg-[#F4F4F5] text-[#111827] rounded-[20px] px-4 py-3 max-w-[90%] text-[13px] leading-relaxed shadow-2xs">
+              <p class="mb-2">Halo dev, tolong pilih opsi <strong>Case Option</strong> di bar bagian atas untuk menjalankan simulasi scenario ini ya. Opsi di atas hanya contoh/mockup interaksi UI prototype.</p>
+              
+              <div class="pt-2 border-t border-zinc-200/80 space-y-1.5">
+                <p class="font-semibold text-[#18181b] text-[12.5px]">Fitur Canvas yang perlu dicek & diuji:</p>
+                <ul class="list-disc pl-4 space-y-1 text-[#3f3f46] text-[12px] leading-snug">
+                  <li><strong>Simulation Scenario:</strong> Pilihan Case Option di topbar untuk alur simulasi chat & aksi canvas.</li>
+                  <li><strong>Layer & Workspace:</strong> Selecting, drag, resize, rotate, dan reorder layer elemen di kanvas.</li>
+                  <li><strong>Floating Context Toolbar:</strong>
+                    <ul class="list-disc pl-3.5 mt-0.5 space-y-0.5 text-[#52525b]">
+                      <li>Gambar: Upscale (2K/4K), Remove BG (10 credits), Schedule.</li>
+                      <li>Teks: Font family, size, alignment, color, & edit text modal.</li>
+                    </ul>
+                  </li>
+                  <li><strong>AI Content Generation:</strong> Input prompt AI & regenerate konten gambar/teks secara interaktif.</li>
+                  <li><strong>Navigation & Controls:</strong> Zoom in/out, Pan (Hand tool), Undo/Redo, serta keyboard shortcuts.</li>
+                  <li><strong>Schedule & Direct Publishing:</strong> Penetapan jadwal posting ke media sosial langsung dari canvas.</li>
+                </ul>
+              </div>
             </div>
           </div>
 

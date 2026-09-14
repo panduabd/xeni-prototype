@@ -511,37 +511,37 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
   <!-- MODAL: RENAME BUSINESS DNA                                -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div id="modal-rename-dna" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-200">
-    <div class="w-full max-w-sm bg-white rounded-2xl border border-zinc-200 shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
-      <div class="px-5 pt-5 pb-4 border-b border-zinc-100 flex items-center justify-between">
-        <h3 class="text-[15px] font-semibold text-zinc-950">Rename Business DNA</h3>
-        <button id="btn-close-rename-modal" type="button" class="text-zinc-400 hover:text-zinc-700 p-1 rounded-lg hover:bg-zinc-100 cursor-pointer">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m18 6-12 12M6 6l12 12" /></svg>
+    <div class="w-full max-w-sm bg-white rounded-3xl border border-[#eaecf0] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+      <div class="px-5 pt-5 pb-1 flex items-center justify-between">
+        <h3 class="text-[15px] font-semibold text-[#111827]">Rename Business DNA</h3>
+        <button id="btn-close-rename-modal" type="button" class="text-[#98a2b3] hover:text-[#111827] p-1.5 rounded-xl hover:bg-[#F9FAFB] cursor-pointer transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m18 6-12 12M6 6l12 12" /></svg>
         </button>
       </div>
 
       <form id="form-rename-dna" class="p-5 space-y-4">
         <div class="space-y-1.5">
-          <label class="block text-[12px] font-medium text-zinc-700">Brand Name *</label>
+          <label class="block text-[12px] font-medium text-[#344054]">Brand Name *</label>
           <input
             id="modal-rename-input"
             type="text"
             required
             placeholder="Enter brand name"
-            class="w-full h-9 px-3 rounded-lg border border-zinc-200 bg-white text-[13px] text-zinc-900 shadow-xs outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-all"
+            class="w-full h-9.5 px-3.5 rounded-xl border border-[#eaecf0] bg-white text-[13px] text-[#111827] shadow-xs outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827] transition-all"
           />
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-3 border-t border-zinc-100">
+        <div class="flex items-center justify-end gap-2 pt-2">
           <button
             type="button"
             id="btn-cancel-rename-modal"
-            class="px-3.5 h-8.5 rounded-lg border border-zinc-200 text-[12px] font-medium text-zinc-700 hover:bg-zinc-50 cursor-pointer"
+            class="px-4 h-9 rounded-xl border border-[#eaecf0] text-[12.5px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-colors cursor-pointer"
           >
             Cancel
           </button>
           <button
             type="submit"
-            class="px-4 h-8.5 rounded-lg bg-zinc-900 hover:bg-black text-white text-[12px] font-medium shadow-xs cursor-pointer"
+            class="px-4.5 h-9 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-colors cursor-pointer active:scale-[0.98]"
           >
             Save
           </button>
@@ -821,51 +821,91 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
   </div>
 
   <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- MODAL: AI FONT SCANNER (IMAGE / PDF)                    -->
+  <!-- MODAL: ADD FONT (PREVIEW & PRIMARY / SECONDARY SELECTION) -->
   <!-- ═══════════════════════════════════════════════════════ -->
   <div id="modal-font-scanner" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
-    <div class="w-full max-w-md bg-white rounded-2xl border border-zinc-200 shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
+    <div class="w-full max-w-md bg-white rounded-3xl border border-[#eaecf0] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
       <div class="px-5 pt-5 pb-3 flex items-center justify-between">
-        <h3 class="text-[14.5px] font-semibold text-zinc-950">AI Font Matcher</h3>
-        <button id="btn-close-font-scanner" class="text-zinc-400 hover:text-zinc-700 p-1 rounded-lg hover:bg-zinc-100 cursor-pointer">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m18 6-12 12M6 6l12 12" /></svg>
+        <h3 class="text-[15px] font-semibold text-[#111827]">Add Font</h3>
+        <button id="btn-close-font-scanner" type="button" class="text-[#98a2b3] hover:text-[#111827] p-1.5 rounded-xl hover:bg-[#F9FAFB] cursor-pointer transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m18 6-12 12M6 6l12 12" /></svg>
         </button>
       </div>
 
       <div class="p-5 space-y-4">
         <!-- Upload Trigger -->
-        <div id="scanner-upload-box" class="w-full py-6 px-4 border-2 border-dashed border-zinc-200 hover:border-zinc-400 rounded-xl bg-zinc-50 text-center transition-all cursor-pointer flex flex-col items-center justify-center">
-          <svg class="w-7 h-7 text-zinc-400 mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z" /><path d="M14 2v6h6M8 13h8M8 17h5" /></svg>
-          <span class="text-[12.5px] font-medium text-zinc-800">Upload Logo Image or PDF Guidelines</span>
-          <input type="file" id="scanner-file-input" accept=".pdf,image/*" class="hidden" />
+        <div id="scanner-upload-box" class="w-full py-7 px-4 border-2 border-dashed border-[#eaecf0] hover:border-[#98a2b3] rounded-2xl bg-[#F9FAFB] text-center transition-all cursor-pointer flex flex-col items-center justify-center group">
+          <div class="w-10 h-10 rounded-xl bg-white border border-[#eaecf0] flex items-center justify-center text-[#98a2b3] group-hover:text-[#111827] mb-2 shadow-2xs group-hover:scale-105 transition-all">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 5v14M5 12h14"/></svg>
+          </div>
+          <span class="text-[13px] font-semibold text-[#111827]">Upload font file or image reference</span>
+          <span class="text-[11px] text-[#98a2b3] mt-0.5">PNG, JPG, TTF, OTF, WOFF</span>
+          <input type="file" id="scanner-file-input" accept=".ttf,.otf,.woff,.woff2,image/png,image/jpeg,image/jpg" class="hidden" />
         </div>
 
         <!-- Scanning Loading -->
-        <div id="scanner-loading-box" class="hidden py-6 flex flex-col items-center text-center space-y-3">
-          <div class="w-9 h-9 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin"></div>
-          <p id="scanner-status-text" class="text-[13px] font-medium text-zinc-800">Analyzing typographic features...</p>
+        <div id="scanner-loading-box" class="hidden py-8 flex flex-col items-center text-center space-y-3">
+          <div class="w-8 h-8 border-2 border-[#111827] border-t-transparent rounded-full animate-spin"></div>
+          <p id="scanner-status-text" class="text-[13px] font-medium text-[#111827]">Analyzing font...</p>
         </div>
 
         <!-- Results Card -->
-        <div id="scanner-result-box" class="hidden p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="inline-flex items-center gap-1 text-[11.5px] font-medium text-emerald-700">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m4 12.5 5.5 5.5L20 6" /></svg>
-              Font Match Detected
-            </span>
-            <span class="text-[11px] font-mono text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded">Geometric Sans</span>
+        <div id="scanner-result-box" class="hidden space-y-4">
+          <!-- Preview Image Box -->
+          <div class="relative w-full aspect-video rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] overflow-hidden flex items-center justify-center">
+            <img id="scanner-preview-img" src="" alt="Font preview" class="w-full h-full object-contain p-2 hidden" />
+            <div id="scanner-preview-fallback" class="flex flex-col items-center justify-center text-[#111827]">
+              <span class="text-[36px] font-bold" id="scanner-preview-sample">Aa</span>
+              <span class="text-[11px] text-[#98a2b3] font-medium mt-1" id="scanner-preview-name-display">Font Preview</span>
+            </div>
           </div>
 
-          <h4 id="detected-font-name" class="text-[18px] font-bold text-zinc-950">Plus Jakarta Sans</h4>
+          <!-- File Title -->
+          <div class="space-y-1.5">
+            <label class="block text-[11px] font-semibold text-[#667085] uppercase tracking-wider">Font File / Reference</label>
+            <div class="flex items-center gap-2 p-2.5 rounded-xl bg-[#F9FAFB] border border-[#eaecf0]">
+              <svg class="w-4 h-4 text-[#98a2b3] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+              <span id="scanner-detected-title" class="text-[12.5px] font-semibold text-[#111827] truncate">font-file.png</span>
+            </div>
+          </div>
 
-          <div class="pt-2 flex items-center justify-end gap-2">
+          <!-- Role Selection: Primary vs Secondary -->
+          <div class="space-y-1.5">
+            <label class="block text-[11px] font-semibold text-[#667085] uppercase tracking-wider">Set Font As</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <label class="cursor-pointer">
+                <input type="radio" name="font-role-choice" value="heading" class="peer hidden" checked />
+                <div class="p-3 rounded-2xl border-2 border-[#eaecf0] peer-checked:border-[#111827] peer-checked:bg-[#111827] peer-checked:text-white transition-all text-center group">
+                  <span class="block text-[12.5px] font-semibold">Primary Font</span>
+                  <span class="block text-[10.5px] text-[#98a2b3] peer-checked:text-zinc-300">Heading & Titles</span>
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="font-role-choice" value="body" class="peer hidden" />
+                <div class="p-3 rounded-2xl border-2 border-[#eaecf0] peer-checked:border-[#111827] peer-checked:bg-[#111827] peer-checked:text-white transition-all text-center group">
+                  <span class="block text-[12.5px] font-semibold">Secondary Font</span>
+                  <span class="block text-[10.5px] text-[#98a2b3] peer-checked:text-zinc-300">Body & Paragraphs</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="pt-1 flex items-center justify-end gap-2">
+            <button
+              id="btn-cancel-font-scanner"
+              type="button"
+              class="h-9.5 px-4 rounded-xl text-[12.5px] font-medium text-[#667085] hover:text-[#111827] hover:bg-[#F9FAFB] transition-colors cursor-pointer"
+            >
+              Cancel
+            </button>
             <button
               id="btn-apply-detected-font"
               type="button"
-              class="w-full inline-flex items-center justify-center gap-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-[12.5px] font-medium h-9 shadow-xs transition-all cursor-pointer"
+              class="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#111827] hover:bg-black text-white text-[12.5px] font-medium h-9.5 shadow-xs transition-all cursor-pointer active:scale-[0.98]"
             >
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m4 12.5 5.5 5.5L20 6" /></svg>
-              <span>Apply Font to Business DNA</span>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Add Font</span>
             </button>
           </div>
         </div>
@@ -1257,6 +1297,14 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
                 >
                   <button
                     type="button"
+                    class="btn-card-rename w-full px-3 py-1.5 text-left text-[12px] font-medium text-[#111827] hover:bg-[#F9FAFB] flex items-center gap-2 transition-colors cursor-pointer"
+                    data-id="${dna.id}"
+                  >
+                    <svg class="w-3.5 h-3.5 text-[#667085]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    <span>Rename</span>
+                  </button>
+                  <button
+                    type="button"
                     class="btn-card-duplicate w-full px-3 py-1.5 text-left text-[12px] font-medium text-[#111827] hover:bg-[#F9FAFB] flex items-center gap-2 transition-colors cursor-pointer"
                     data-id="${dna.id}"
                   >
@@ -1310,6 +1358,17 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
             if (m !== menu) m.classList.add("hidden");
           });
           menu?.classList.toggle("hidden");
+        });
+      });
+
+      // Card Rename
+      container.querySelectorAll(".btn-card-rename").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const id = btn.getAttribute("data-id");
+          const menu = btn.closest(".card-dropdown-menu");
+          menu?.classList.add("hidden");
+          openRenameModal(id);
         });
       });
 
@@ -1451,15 +1510,28 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
 
       if (active.logoUrl) {
         area.classList.remove("hidden");
-        area.className = "aspect-square rounded-2xl bg-white border border-[#eaecf0] flex items-center justify-center overflow-hidden shadow-2xs relative group";
-        area.onclick = null;
-        area.title = "";
+        area.className = "aspect-square rounded-2xl bg-white border border-[#eaecf0] flex items-center justify-center overflow-hidden shadow-2xs relative group cursor-pointer";
         area.innerHTML = `
-          <img src="${active.logoUrl}" alt="Logo" class="w-full h-full object-contain p-2" />
-          <button type="button" id="btn-remove-logo" class="absolute top-2 right-2 p-1.5 rounded-lg bg-black/60 hover:bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" title="Remove logo">
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-          </button>
+          <img src="${active.logoUrl}" alt="Logo" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-200" />
+          <div class="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 p-1">
+            <button type="button" id="btn-view-logo" class="p-1.5 rounded-lg bg-white/90 hover:bg-white text-zinc-900 cursor-pointer shadow-xs transition-all hover:scale-105" title="Preview Logo">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 12C4.5 7.5 8 4.5 12 4.5s7.5 3 9.5 7.5c-2 4.5-5.5 7.5-9.5 7.5S4.5 16.5 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button type="button" id="btn-remove-logo" class="p-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white cursor-pointer shadow-xs transition-all hover:scale-105" title="Remove Logo">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.5 5.5 18.8 17.1a3 3 0 0 1-3 2.9H8.2a3 3 0 0 1-3-2.9L4.5 5.5M3 5.5h18M9 5.5V3.5a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5v2M10 10v5M14 10v5" /></svg>
+            </button>
+          </div>
         `;
+
+        area.onclick = (e) => {
+          if (e.target.closest("#btn-remove-logo")) return;
+          openImageViewModal(active.logoUrl, (active.name || "Brand") + " Logo", { type: "logo" });
+        };
+
+        document.getElementById("btn-view-logo")?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openImageViewModal(active.logoUrl, (active.name || "Brand") + " Logo", { type: "logo" });
+        });
 
         document.getElementById("btn-remove-logo")?.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -1473,6 +1545,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
       } else {
         area.classList.add("hidden");
         area.innerHTML = "";
+        area.onclick = null;
       }
     }
 
@@ -1591,57 +1664,96 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
       const container = document.getElementById("fonts-cards-container");
       if (!container) return;
 
-      const heading = active.fonts?.heading || "";
-      const body = active.fonts?.body || "";
+      const heading = active.fonts?.heading;
+      const body = active.fonts?.body;
 
       let html = "";
 
-      if (heading && heading.trim()) {
-        const hClean = heading.split(",")[0].replace(/['"]/g, "").trim();
-        html += `
-          <div class="flex flex-col group cursor-pointer font-card-item" data-role="heading" data-font="${escapeHtml(heading)}" data-name="${escapeHtml(hClean)}">
-            <div class="aspect-square rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center text-[#111827] font-bold text-[36px] shadow-2xs group-hover:bg-white group-hover:border-[#d0d5dd] transition-all relative overflow-hidden">
-              <button type="button" class="btn-delete-font absolute top-2 right-2 text-[#98a2b3] hover:text-rose-600 bg-white/90 hover:bg-white rounded-lg p-1.5 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer shadow-2xs border border-[#eaecf0]" data-role="heading" title="Delete font">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 6-12 12M6 6l12 12"/></svg>
-              </button>
-              <span style="font-family: ${escapeHtml(heading)};">Aa</span>
-            </div>
-            <div class="mt-1.5 text-center">
-              <span class="block text-[12px] font-semibold text-[#111827] truncate">${escapeHtml(hClean)}</span>
-              <span class="block text-[10.5px] text-[#98a2b3]">Primary Font</span>
-            </div>
-          </div>
-        `;
-      }
+      const renderFontCard = (fontItem, roleKey, roleLabel) => {
+        if (!fontItem) return "";
 
-      if (body && body.trim()) {
-        const bClean = body.split(",")[0].replace(/['"]/g, "").trim();
-        html += `
-          <div class="flex flex-col group cursor-pointer font-card-item" data-role="body" data-font="${escapeHtml(body)}" data-name="${escapeHtml(bClean)}">
-            <div class="aspect-square rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] flex items-center justify-center text-[#111827] font-bold text-[36px] shadow-2xs group-hover:bg-white group-hover:border-[#d0d5dd] transition-all relative overflow-hidden">
-              <button type="button" class="btn-delete-font absolute top-2 right-2 text-[#98a2b3] hover:text-rose-600 bg-white/90 hover:bg-white rounded-lg p-1.5 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer shadow-2xs border border-[#eaecf0]" data-role="body" title="Delete font">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 6-12 12M6 6l12 12"/></svg>
-              </button>
-              <span style="font-family: ${escapeHtml(body)};">Aa</span>
+        let name = "";
+        let fontFamily = "";
+        let imageUrl = "";
+
+        if (typeof fontItem === "string") {
+          fontFamily = fontItem;
+          name = fontItem.split(",")[0].replace(/['"]/g, "").trim();
+        } else if (typeof fontItem === "object") {
+          name = fontItem.name || fontItem.fileName || fontItem.title || roleLabel;
+          fontFamily = fontItem.fontFamily || "sans-serif";
+          imageUrl = fontItem.imageUrl || "";
+        }
+
+        if (!name) return "";
+
+        return `
+          <div class="flex flex-col group cursor-pointer font-card-item" data-role="${roleKey}" data-font="${escapeHtml(fontFamily)}" data-name="${escapeHtml(name)}" data-image="${escapeHtml(imageUrl)}">
+            <div class="aspect-square rounded-2xl bg-[#F9FAFB] border border-[#eaecf0] shadow-2xs group-hover:bg-white group-hover:border-[#d0d5dd] transition-all relative overflow-hidden flex items-center justify-center">
+              ${
+                imageUrl
+                  ? `<img src="${imageUrl}" alt="${escapeHtml(name)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" />`
+                  : `<span style="font-family: ${escapeHtml(fontFamily)};" class="text-[#111827] font-bold text-[36px]">Aa</span>`
+              }
+              <div class="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 p-1">
+                <button type="button" class="btn-view-font p-1.5 rounded-lg bg-white/90 hover:bg-white text-zinc-900 cursor-pointer shadow-xs transition-all hover:scale-105" data-role="${roleKey}" title="Preview Font">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 12C4.5 7.5 8 4.5 12 4.5s7.5 3 9.5 7.5c-2 4.5-5.5 7.5-9.5 7.5S4.5 16.5 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+                <button type="button" class="btn-delete-font p-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white cursor-pointer shadow-xs transition-all hover:scale-105" data-role="${roleKey}" title="Delete font">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.5 5.5 18.8 17.1a3 3 0 0 1-3 2.9H8.2a3 3 0 0 1-3-2.9L4.5 5.5M3 5.5h18M9 5.5V3.5a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5v2M10 10v5M14 10v5" /></svg>
+                </button>
+              </div>
             </div>
             <div class="mt-1.5 text-center">
-              <span class="block text-[12px] font-semibold text-[#111827] truncate">${escapeHtml(bClean)}</span>
-              <span class="block text-[10.5px] text-[#98a2b3]">Secondary Font</span>
+              <span class="block text-[12px] font-semibold text-[#111827] truncate" title="${escapeHtml(name)}">${escapeHtml(name)}</span>
+              <span class="block text-[10.5px] text-[#98a2b3]">${roleLabel}</span>
             </div>
           </div>
         `;
+      };
+
+      if (heading) {
+        html += renderFontCard(heading, "heading", "Primary Font");
+      }
+      if (body) {
+        html += renderFontCard(body, "body", "Secondary Font");
       }
 
       container.innerHTML = html;
 
-      // Click card to view font details modal
+      // Click card to view font
       container.querySelectorAll(".font-card-item").forEach((card) => {
         card.addEventListener("click", (e) => {
           if (e.target.closest(".btn-delete-font")) return;
           const role = card.getAttribute("data-role") || "heading";
           const font = card.getAttribute("data-font") || "";
           const name = card.getAttribute("data-name") || "";
-          openFontViewModal(role, name, font);
+          const image = card.getAttribute("data-image") || "";
+
+          if (image) {
+            openImageViewModal(image, name, { type: "font", role });
+          } else {
+            openFontViewModal(role, name, font);
+          }
+        });
+      });
+
+      // Click view button
+      container.querySelectorAll(".btn-view-font").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const card = btn.closest(".font-card-item");
+          if (!card) return;
+          const role = card.getAttribute("data-role") || "heading";
+          const font = card.getAttribute("data-font") || "";
+          const name = card.getAttribute("data-name") || "";
+          const image = card.getAttribute("data-image") || "";
+
+          if (image) {
+            openImageViewModal(image, name, { type: "font", role });
+          } else {
+            openFontViewModal(role, name, font);
+          }
         });
       });
 
@@ -2446,11 +2558,11 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
 
       document.getElementById("form-rename-dna")?.addEventListener("submit", (e) => {
         e.preventDefault();
-        const active = getActiveDNA();
-        if (!active) return;
+        const target = dnaList.find((d) => d.id === renamingDnaId) || getActiveDNA();
+        if (!target) return;
         const newName = document.getElementById("modal-rename-input")?.value.trim();
         if (!newName) return;
-        active.name = newName;
+        target.name = newName;
         saveDataToStorage();
         closeRenameModal();
         renderUI();
@@ -2691,34 +2803,128 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
         }
       });
 
-      // 11. Font File / Image Upload
-      document.getElementById("font-file-input")?.addEventListener("change", (e) => {
-        const file = e.target.files?.[0];
+      // 11. Font File / Image Upload & Analysis Logic
+      let stagedFontData = null;
+
+      function closeFontScannerModal() {
+        const modal = document.getElementById("modal-font-scanner");
+        modal?.classList.add("hidden");
+        stagedFontData = null;
+        const f1 = document.getElementById("font-file-input");
+        if (f1) f1.value = "";
+        const f2 = document.getElementById("scanner-file-input");
+        if (f2) f2.value = "";
+      }
+
+      function startFontAnalysis(file) {
         if (!file) return;
 
-        const isImage = file.type.startsWith("image/") || /\.(png|jpe?g)$/i.test(file.name);
-        if (isImage) {
-          const modal = document.getElementById("modal-font-scanner");
-          const uploadBox = document.getElementById("scanner-upload-box");
-          const loadingBox = document.getElementById("scanner-loading-box");
-          const resultBox = document.getElementById("scanner-result-box");
+        const modal = document.getElementById("modal-font-scanner");
+        const uploadBox = document.getElementById("scanner-upload-box");
+        const loadingBox = document.getElementById("scanner-loading-box");
+        const resultBox = document.getElementById("scanner-result-box");
+        const previewImg = document.getElementById("scanner-preview-img");
+        const previewFallback = document.getElementById("scanner-preview-fallback");
+        const titleEl = document.getElementById("scanner-detected-title");
 
-          modal?.classList.remove("hidden");
-          uploadBox?.classList.add("hidden");
-          loadingBox?.classList.remove("hidden");
-          resultBox?.classList.add("hidden");
+        modal?.classList.remove("hidden");
+        uploadBox?.classList.add("hidden");
+        loadingBox?.classList.remove("hidden");
+        resultBox?.classList.add("hidden");
 
+        const isImage = file.type.startsWith("image/") || /\.(png|jpe?g|webp|svg)$/i.test(file.name);
+
+        const showResults = (data) => {
+          stagedFontData = data;
           setTimeout(() => {
+            if (previewImg) {
+              if (data.imageUrl) {
+                previewImg.src = data.imageUrl;
+                previewImg.classList.remove("hidden");
+                if (previewFallback) previewFallback.classList.add("hidden");
+              } else {
+                previewImg.classList.add("hidden");
+                if (previewFallback) previewFallback.classList.remove("hidden");
+              }
+            }
+            if (titleEl) titleEl.textContent = data.name;
+
+            const active = getActiveDNA();
+            const radioHeading = document.querySelector('input[name="font-role-choice"][value="heading"]');
+            const radioBody = document.querySelector('input[name="font-role-choice"][value="body"]');
+            if (active?.fonts?.heading && !active?.fonts?.body && radioBody) {
+              radioBody.checked = true;
+            } else if (radioHeading) {
+              radioHeading.checked = true;
+            }
+
             loadingBox?.classList.add("hidden");
             resultBox?.classList.remove("hidden");
-          }, 1500);
+          }, 1000);
+        };
+
+        if (isImage) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const dataUrl = ev.target?.result;
+            showResults({
+              name: file.name,
+              fileName: file.name,
+              imageUrl: dataUrl,
+              fontFamily: "sans-serif"
+            });
+          };
+          reader.readAsDataURL(file);
         } else {
-          handleFontFileUpload(file);
+          const fontName = file.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9]/g, "");
+          file.arrayBuffer().then((buffer) => {
+            const fontFace = new FontFace(fontName, buffer);
+            return fontFace.load().then((loadedFace) => {
+              document.fonts.add(loadedFace);
+
+              // Generate preview image using canvas
+              const canvas = document.createElement("canvas");
+              canvas.width = 480;
+              canvas.height = 240;
+              const ctx = canvas.getContext("2d");
+              if (ctx) {
+                ctx.fillStyle = "#F9FAFB";
+                ctx.fillRect(0, 0, 480, 240);
+                ctx.fillStyle = "#111827";
+                ctx.font = `bold 56px "${fontName}", sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("Aa Bb 123", 240, 100);
+                ctx.font = `500 18px "${fontName}", sans-serif`;
+                ctx.fillStyle = "#667085";
+                ctx.fillText(file.name, 240, 175);
+              }
+              const canvasDataUrl = canvas.toDataURL("image/png");
+
+              showResults({
+                name: file.name,
+                fileName: file.name,
+                imageUrl: canvasDataUrl,
+                fontFamily: `"${fontName}", sans-serif`
+              });
+            });
+          }).catch((err) => {
+            console.error("Font loading error:", err);
+            showResults({
+              name: file.name,
+              fileName: file.name,
+              imageUrl: "",
+              fontFamily: "sans-serif"
+            });
+          });
         }
-        e.target.value = "";
+      }
+
+      document.getElementById("font-file-input")?.addEventListener("change", (e) => {
+        const file = e.target.files?.[0];
+        if (file) startFontAnalysis(file);
       });
 
-      // 12. AI Font Scanner Modal
       document.getElementById("btn-open-font-scanner")?.addEventListener("click", () => {
         document.getElementById("modal-font-scanner")?.classList.remove("hidden");
         document.getElementById("scanner-upload-box")?.classList.remove("hidden");
@@ -2726,8 +2932,11 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
         document.getElementById("scanner-result-box")?.classList.add("hidden");
       });
 
-      document.getElementById("btn-close-font-scanner")?.addEventListener("click", () => {
-        document.getElementById("modal-font-scanner")?.classList.add("hidden");
+      document.getElementById("btn-close-font-scanner")?.addEventListener("click", closeFontScannerModal);
+      document.getElementById("btn-cancel-font-scanner")?.addEventListener("click", closeFontScannerModal);
+
+      document.getElementById("modal-font-scanner")?.addEventListener("click", (e) => {
+        if (e.target.id === "modal-font-scanner") closeFontScannerModal();
       });
 
       document.getElementById("scanner-upload-box")?.addEventListener("click", () => {
@@ -2736,31 +2945,28 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
 
       document.getElementById("scanner-file-input")?.addEventListener("change", (e) => {
         const file = e.target.files?.[0];
-        if (!file) return;
-
-        const uploadBox = document.getElementById("scanner-upload-box");
-        const loadingBox = document.getElementById("scanner-loading-box");
-        const resultBox = document.getElementById("scanner-result-box");
-
-        uploadBox?.classList.add("hidden");
-        loadingBox?.classList.remove("hidden");
-
-        setTimeout(() => {
-          loadingBox?.classList.add("hidden");
-          resultBox?.classList.remove("hidden");
-        }, 1800);
+        if (file) startFontAnalysis(file);
       });
 
       document.getElementById("btn-apply-detected-font")?.addEventListener("click", () => {
         const active = getActiveDNA();
-        if (active) {
-          if (!active.fonts) active.fonts = {};
-          active.fonts.heading = "'Plus Jakarta Sans', sans-serif";
-          saveDataToStorage();
-          renderTypographyTab(active);
-          document.getElementById("modal-font-scanner")?.classList.add("hidden");
-          showToast("Font applied to Business DNA!");
-        }
+        if (!active || !stagedFontData) return;
+
+        const role = (document.querySelector('input[name="font-role-choice"]:checked')?.value || "heading");
+
+        if (!active.fonts) active.fonts = {};
+        active.fonts[role] = {
+          name: stagedFontData.name,
+          fileName: stagedFontData.name,
+          imageUrl: stagedFontData.imageUrl,
+          fontFamily: stagedFontData.fontFamily || "sans-serif",
+          role
+        };
+
+        saveDataToStorage();
+        renderTypographyTab(active);
+        closeFontScannerModal();
+        showToast(`Font "${stagedFontData.name}" added as ${role === "heading" ? "Primary" : "Secondary"} Font!`);
       });
 
       // 14. Add / Edit Product Reference Modal Listeners
@@ -2978,6 +3184,8 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
           closeKnowledgeViewModal();
           closeAddProductModal();
           closeAddKnowledgeModal();
+          closeFontScannerModal();
+          closeRenameModal();
           document.getElementById("modal-import-dna")?.classList.add("hidden");
           closeNewDnaModal();
         }
@@ -2999,6 +3207,16 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
           active.products.splice(viewedImageContext.index, 1);
           renderProductsTab(active);
           showToast("Product deleted");
+        } else if (viewedImageContext.type === "logo") {
+          active.logoUrl = "";
+          renderLogoArea(active);
+          renderActiveAvatar(active);
+          renderSidebarList();
+          showToast("Logo removed");
+        } else if (viewedImageContext.type === "font" && active.fonts && viewedImageContext.role) {
+          delete active.fonts[viewedImageContext.role];
+          renderTypographyTab(active);
+          showToast("Font removed");
         }
 
         saveDataToStorage();
@@ -3101,12 +3319,16 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
       document.getElementById("modal-new-dna")?.classList.add("hidden");
     }
 
-    function openRenameModal() {
-      const active = getActiveDNA();
-      if (!active) return;
+    let renamingDnaId = null;
+
+    function openRenameModal(dnaId = null) {
+      renamingDnaId = dnaId || activeDnaId;
+      const target = dnaList.find((d) => d.id === renamingDnaId) || getActiveDNA();
+      if (!target) return;
+      renamingDnaId = target.id;
       const modal = document.getElementById("modal-rename-dna");
       const input = document.getElementById("modal-rename-input");
-      if (input) input.value = active.name || "";
+      if (input) input.value = target.name || "";
       modal?.classList.remove("hidden");
       input?.focus();
       input?.select();
@@ -3114,6 +3336,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
 
     function closeRenameModal() {
       document.getElementById("modal-rename-dna")?.classList.add("hidden");
+      renamingDnaId = null;
     }
 
     function createNewDnaFromModal() {
