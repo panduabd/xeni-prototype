@@ -3087,6 +3087,491 @@ import LoadingState from "../components/ui/loading-state";
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MODAL: SCHEDULE BATCH (MULTI-FRAME)    -->
+    <!-- ═══════════════════════════════════════ -->
+    <div
+      id="modal-bulk-schedule"
+      class="hidden fixed inset-0 z-[500] items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200"
+      onclick="if(event.target === this) closeCanvasBulkScheduleModal()"
+    >
+      <div
+        class="bg-white w-full max-w-2xl max-h-[85vh] rounded-2xl shadow-xl flex flex-col overflow-hidden border border-[#eaecf0] animate-in zoom-in-95 duration-200 relative"
+      >
+        <!-- Close Button -->
+        <button
+          id="close-bulk-schedule-btn"
+          onclick="closeCanvasBulkScheduleModal()"
+          class="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[#f4f4f5] transition-colors text-[#71717a] hover:text-[#18181b] z-30 cursor-pointer"
+        >
+          <i class="ti ti-x text-[16px]"></i>
+        </button>
+
+        <!-- Header -->
+        <div class="px-6 pt-6 pb-4 bg-white relative z-20 shrink-0">
+          <h2 class="text-lg font-semibold text-[#18181b]">Schedule Batch</h2>
+          <span id="bulk-schedule-count" class="hidden">0</span>
+
+          <!-- Tabs -->
+          <div
+            class="flex items-center gap-1 mt-3.5 p-1 bg-[#f4f4f5] rounded-xl border border-[#eaecf0] w-fit"
+          >
+            <button
+              id="tab-same-time"
+              onclick="switchCanvasBulkScheduleTab('same-time')"
+              class="bulk-schedule-tab px-4 h-8 rounded-lg text-[12px] font-medium bg-white text-[#18181b] shadow-xs transition-all cursor-pointer"
+              data-tab="same-time"
+            >
+              All at Once
+            </button>
+            <button
+              id="tab-daily-post"
+              onclick="switchCanvasBulkScheduleTab('daily-post')"
+              class="bulk-schedule-tab px-4 h-8 rounded-lg text-[12px] font-medium text-[#71717a] hover:text-[#18181b] hover:bg-white/60 transition-all cursor-pointer"
+              data-tab="daily-post"
+            >
+              Daily Post
+            </button>
+            <button
+              id="tab-custom"
+              onclick="switchCanvasBulkScheduleTab('custom')"
+              class="bulk-schedule-tab px-4 h-8 rounded-lg text-[12px] font-medium text-[#71717a] hover:text-[#18181b] hover:bg-white/60 transition-all cursor-pointer"
+              data-tab="custom"
+            >
+              Custom
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div
+          class="flex-1 px-6 pb-24 overflow-y-auto scroll-smooth relative pt-4 space-y-4"
+        >
+          <!-- TAB: SAME TIME (ALL AT ONCE) -->
+          <div id="bulk-panel-same-time" class="space-y-4">
+            <div class="space-y-2">
+              <label
+                class="text-[13px] font-medium text-[#18181b] flex items-center gap-1.5"
+              >
+                <i class="ti ti-clock text-[15px] text-[#71717a]"></i>
+                Schedule Configuration
+              </label>
+              <div class="grid grid-cols-2 gap-3">
+                <!-- Timezone -->
+                <div class="relative w-full">
+                  <select
+                    id="bulk-same-tz"
+                    class="w-full h-10 pl-3 pr-8 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] appearance-none bg-white cursor-pointer shadow-2xs"
+                  >
+                    <option value="GMT-12">(GMT-12:00) International Date Line West</option>
+                    <option value="GMT-11">(GMT-11:00) Midway Island, Samoa</option>
+                    <option value="GMT-10">(GMT-10:00) Hawaii, Honolulu</option>
+                    <option value="GMT-9">(GMT-09:00) Alaska, Anchorage</option>
+                    <option value="GMT-8">(GMT-08:00) Pacific Time (US & Canada), Los Angeles</option>
+                    <option value="GMT-7">(GMT-07:00) Mountain Time (US & Canada), Denver</option>
+                    <option value="GMT-6">(GMT-06:00) Central Time (US & Canada), Chicago, Mexico City</option>
+                    <option value="GMT-5">(GMT-05:00) Eastern Time (US & Canada), New York, Toronto</option>
+                    <option value="GMT-4">(GMT-04:00) Atlantic Time (Canada), Caracas, Santiago</option>
+                    <option value="GMT-3.5">(GMT-03:30) Newfoundland</option>
+                    <option value="GMT-3">(GMT-03:00) Brasilia, Buenos Aires, Greenland</option>
+                    <option value="GMT-2">(GMT-02:00) Mid-Atlantic, Fernando de Noronha</option>
+                    <option value="GMT-1">(GMT-01:00) Azores, Cape Verde Islands</option>
+                    <option value="GMT+0">(GMT+00:00) Greenwich Mean Time, London, Dublin, Lisbon</option>
+                    <option value="GMT+1">(GMT+01:00) Central European Time, Paris, Berlin, Rome</option>
+                    <option value="GMT+2">(GMT+02:00) Eastern European Time, Athens, Cairo, Helsinki</option>
+                    <option value="GMT+3">(GMT+03:00) Moscow, Istanbul, Riyadh, Nairobi</option>
+                    <option value="GMT+3.5">(GMT+03:30) Tehran</option>
+                    <option value="GMT+4">(GMT+04:00) Gulf Standard Time, Dubai, Abu Dhabi, Baku</option>
+                    <option value="GMT+4.5">(GMT+04:30) Kabul</option>
+                    <option value="GMT+5">(GMT+05:00) Tashkent, Islamabad, Karachi</option>
+                    <option value="GMT+5.5">(GMT+05:30) India Standard Time, New Delhi, Mumbai</option>
+                    <option value="GMT+5.75">(GMT+05:45) Kathmandu</option>
+                    <option value="GMT+6">(GMT+06:00) Astana, Dhaka, Almaty</option>
+                    <option value="GMT+6.5">(GMT+06:30) Yangon (Rangoon)</option>
+                    <option value="GMT+7" selected>(GMT+07:00) Western Indonesia Time, Jakarta, Bangkok</option>
+                    <option value="GMT+8">(GMT+08:00) Central Indonesia Time, Singapore, Beijing</option>
+                    <option value="GMT+9">(GMT+09:00) Eastern Indonesia Time, Tokyo, Seoul</option>
+                    <option value="GMT+9.5">(GMT+09:30) Australian Central Time, Adelaide, Darwin</option>
+                    <option value="GMT+10">(GMT+10:00) Australian Eastern Time, Sydney, Melbourne</option>
+                    <option value="GMT+11">(GMT+11:00) Solomon Islands, New Caledonia</option>
+                    <option value="GMT+12">(GMT+12:00) Auckland, Fiji, Kamchatka</option>
+                    <option value="GMT+13">(GMT+13:00) Nuku'alofa, Apia</option>
+                    <option value="GMT+14">(GMT+14:00) Kiritimati (Line Islands)</option>
+                  </select>
+                  <i
+                    class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] text-[13px] pointer-events-none"
+                  ></i>
+                </div>
+
+                <!-- Date -->
+                <div
+                  class="relative w-full cursor-pointer"
+                  onclick="this.querySelector('input')?.showPicker?.()"
+                >
+                  <input
+                    type="date"
+                    id="bulk-same-date"
+                    class="w-full h-10 pl-3 pr-9 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] cursor-pointer shadow-2xs"
+                    onclick="try{ this.showPicker() }catch(e){}"
+                  />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] pointer-events-none shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 2V5M6 2V5"></path>
+                    <path d="M10.5 3.5H13.5C17.2712 3.5 19.1569 3.5 20.3284 4.67157C21.5 5.84315 21.5 7.72876 21.5 11.5V14C21.5 17.7712 21.5 19.6569 20.3284 20.8284C19.1569 22 17.2712 22 13.5 22H10.5C6.72876 22 4.84315 22 3.67157 20.8284C2.5 19.6569 2.5 17.7712 2.5 14V11.5C2.5 7.72876 2.5 5.84315 3.67157 4.67157C4.84315 3.5 6.72876 3.5 10.5 3.5Z"></path>
+                    <path d="M3 8H21"></path>
+                    <path d="M8.44356 14.5282C10.0526 14.3279 11.3279 13.0526 11.5282 11.4436C11.5585 11.2 11.7545 11 12 11C12.2455 11 12.4415 11.2 12.4718 11.4436C12.6721 13.0526 13.9474 14.3279 15.5564 14.5282C15.8 14.5585 16 14.7545 16 15C16 15.2455 15.8 15.4415 15.5564 15.4718C13.9474 15.6721 12.6721 16.9474 12.4718 18.5564C12.4415 18.8 12.2455 19 12 19C11.7545 19 11.5585 18.8 11.5282 18.5564C11.3279 16.9474 10.0526 15.6721 8.44356 15.4718C8.19998 15.4415 8 15.2455 8 15C8 14.7545 8.19998 14.5585 8.44356 14.5282Z"></path>
+                  </svg>
+                </div>
+
+                <!-- Time -->
+                <div
+                  class="relative w-full cursor-pointer"
+                  onclick="this.querySelector('input')?.showPicker?.()"
+                >
+                  <input
+                    type="time"
+                    id="bulk-same-time"
+                    value="08:00"
+                    class="w-full h-10 pl-3 pr-9 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] cursor-pointer shadow-2xs"
+                    onclick="try{ this.showPicker() }catch(e){}"
+                  />
+                  <i
+                    class="ti ti-clock absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] text-[15px] pointer-events-none"
+                  ></i>
+                </div>
+
+                <!-- Period (AM/PM) -->
+                <div class="relative w-full">
+                  <select
+                    id="bulk-same-period"
+                    class="w-full h-10 pl-3 pr-8 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] appearance-none bg-white cursor-pointer shadow-2xs"
+                  >
+                    <option value="AM" selected>AM</option>
+                    <option value="PM">PM</option>
+                  </select>
+                  <i
+                    class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] text-[13px] pointer-events-none"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: DAILY POST -->
+          <div id="bulk-panel-daily-post" class="hidden space-y-4">
+            <div class="space-y-2">
+              <label
+                class="text-[13px] font-medium text-[#18181b] flex items-center gap-1.5"
+              >
+                <i class="ti ti-clock text-[15px] text-[#71717a]"></i>
+                Start Date Configuration
+              </label>
+              <div class="grid grid-cols-2 gap-3">
+                <!-- Timezone -->
+                <div class="relative w-full">
+                  <select
+                    id="bulk-daily-tz"
+                    class="w-full h-10 pl-3 pr-8 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] appearance-none bg-white cursor-pointer shadow-2xs"
+                  >
+                    <option value="GMT-12">(GMT-12:00) International Date Line West</option>
+                    <option value="GMT-11">(GMT-11:00) Midway Island, Samoa</option>
+                    <option value="GMT-10">(GMT-10:00) Hawaii, Honolulu</option>
+                    <option value="GMT-9">(GMT-09:00) Alaska, Anchorage</option>
+                    <option value="GMT-8">(GMT-08:00) Pacific Time (US & Canada), Los Angeles</option>
+                    <option value="GMT-7">(GMT-07:00) Mountain Time (US & Canada), Denver</option>
+                    <option value="GMT-6">(GMT-06:00) Central Time (US & Canada), Chicago, Mexico City</option>
+                    <option value="GMT-5">(GMT-05:00) Eastern Time (US & Canada), New York, Toronto</option>
+                    <option value="GMT-4">(GMT-04:00) Atlantic Time (Canada), Caracas, Santiago</option>
+                    <option value="GMT-3.5">(GMT-03:30) Newfoundland</option>
+                    <option value="GMT-3">(GMT-03:00) Brasilia, Buenos Aires, Greenland</option>
+                    <option value="GMT-2">(GMT-02:00) Mid-Atlantic, Fernando de Noronha</option>
+                    <option value="GMT-1">(GMT-01:00) Azores, Cape Verde Islands</option>
+                    <option value="GMT+0">(GMT+00:00) Greenwich Mean Time, London, Dublin, Lisbon</option>
+                    <option value="GMT+1">(GMT+01:00) Central European Time, Paris, Berlin, Rome</option>
+                    <option value="GMT+2">(GMT+02:00) Eastern European Time, Athens, Cairo, Helsinki</option>
+                    <option value="GMT+3">(GMT+03:00) Moscow, Istanbul, Riyadh, Nairobi</option>
+                    <option value="GMT+3.5">(GMT+03:30) Tehran</option>
+                    <option value="GMT+4">(GMT+04:00) Gulf Standard Time, Dubai, Abu Dhabi, Baku</option>
+                    <option value="GMT+4.5">(GMT+04:30) Kabul</option>
+                    <option value="GMT+5">(GMT+05:00) Tashkent, Islamabad, Karachi</option>
+                    <option value="GMT+5.5">(GMT+05:30) India Standard Time, New Delhi, Mumbai</option>
+                    <option value="GMT+5.75">(GMT+05:45) Kathmandu</option>
+                    <option value="GMT+6">(GMT+06:00) Astana, Dhaka, Almaty</option>
+                    <option value="GMT+6.5">(GMT+06:30) Yangon (Rangoon)</option>
+                    <option value="GMT+7" selected>(GMT+07:00) Western Indonesia Time, Jakarta, Bangkok</option>
+                    <option value="GMT+8">(GMT+08:00) Central Indonesia Time, Singapore, Beijing</option>
+                    <option value="GMT+9">(GMT+09:00) Eastern Indonesia Time, Tokyo, Seoul</option>
+                    <option value="GMT+9.5">(GMT+09:30) Australian Central Time, Adelaide, Darwin</option>
+                    <option value="GMT+10">(GMT+10:00) Australian Eastern Time, Sydney, Melbourne</option>
+                    <option value="GMT+11">(GMT+11:00) Solomon Islands, New Caledonia</option>
+                    <option value="GMT+12">(GMT+12:00) Auckland, Fiji, Kamchatka</option>
+                    <option value="GMT+13">(GMT+13:00) Nuku'alofa, Apia</option>
+                    <option value="GMT+14">(GMT+14:00) Kiritimati (Line Islands)</option>
+                  </select>
+                  <i
+                    class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] text-[13px] pointer-events-none"
+                  ></i>
+                </div>
+
+                <!-- Date (Start Date) -->
+                <div
+                  class="relative w-full cursor-pointer"
+                  onclick="this.querySelector('input')?.showPicker?.()"
+                >
+                  <input
+                    type="date"
+                    id="bulk-daily-start"
+                    class="w-full h-10 pl-3 pr-9 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] cursor-pointer shadow-2xs"
+                    onclick="try{ this.showPicker() }catch(e){}"
+                  />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] pointer-events-none shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 2V5M6 2V5"></path>
+                    <path d="M10.5 3.5H13.5C17.2712 3.5 19.1569 3.5 20.3284 4.67157C21.5 5.84315 21.5 7.72876 21.5 11.5V14C21.5 17.7712 21.5 19.6569 20.3284 20.8284C19.1569 22 17.2712 22 13.5 22H10.5C6.72876 22 4.84315 22 3.67157 20.8284C2.5 19.6569 2.5 17.7712 2.5 14V11.5C2.5 7.72876 2.5 5.84315 3.67157 4.67157C4.84315 3.5 6.72876 3.5 10.5 3.5Z"></path>
+                    <path d="M3 8H21"></path>
+                    <path d="M8.44356 14.5282C10.0526 14.3279 11.3279 13.0526 11.5282 11.4436C11.5585 11.2 11.7545 11 12 11C12.2455 11 12.4415 11.2 12.4718 11.4436C12.6721 13.0526 13.9474 14.3279 15.5564 14.5282C15.8 14.5585 16 14.7545 16 15C16 15.2455 15.8 15.4415 15.5564 15.4718C13.9474 15.6721 12.6721 16.9474 12.4718 18.5564C12.4415 18.8 12.2455 19 12 19C11.7545 19 11.5585 18.8 11.5282 18.5564C11.3279 16.9474 10.0526 15.6721 8.44356 15.4718C8.19998 15.4415 8 15.2455 8 15C8 14.7545 8.19998 14.5585 8.44356 14.5282Z"></path>
+                  </svg>
+                </div>
+
+                <!-- Time -->
+                <div
+                  class="relative w-full cursor-pointer"
+                  onclick="this.querySelector('input')?.showPicker?.()"
+                >
+                  <input
+                    type="time"
+                    id="bulk-daily-time"
+                    value="08:00"
+                    class="w-full h-10 pl-3 pr-9 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] cursor-pointer shadow-2xs"
+                    onclick="try{ this.showPicker() }catch(e){}"
+                  />
+                  <i
+                    class="ti ti-clock absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] text-[15px] pointer-events-none"
+                  ></i>
+                </div>
+
+                <!-- Period (AM/PM) -->
+                <div class="relative w-full">
+                  <select
+                    id="bulk-daily-period"
+                    class="w-full h-10 pl-3 pr-8 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] appearance-none bg-white cursor-pointer shadow-2xs"
+                  >
+                    <option value="AM" selected>AM</option>
+                    <option value="PM">PM</option>
+                  </select>
+                  <i
+                    class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] text-[13px] pointer-events-none"
+                  ></i>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label class="text-[12px] font-medium text-[#18181b]"
+                >Posts per day</label
+              >
+              <div class="flex items-center gap-2">
+                <button
+                  id="btn-adjust-bulk-daily-minus"
+                  onclick="adjustCanvasBulkDailyPosts(-1)"
+                  class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] cursor-pointer transition-colors shadow-2xs"
+                >
+                  <i class="ti ti-minus text-[12px]"></i>
+                </button>
+                <input
+                  id="bulk-daily-posts"
+                  type="number"
+                  min="1"
+                  max="24"
+                  value="1"
+                  class="w-16 h-9 text-center rounded-lg border border-[#eaecf0] bg-white text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] transition-all shadow-2xs"
+                />
+                <button
+                  id="btn-adjust-bulk-daily-plus"
+                  onclick="adjustCanvasBulkDailyPosts(1)"
+                  class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] cursor-pointer transition-colors shadow-2xs"
+                >
+                  <i class="ti ti-plus text-[12px]"></i>
+                </button>
+              </div>
+              <p class="text-[11px] text-[#71717a]">
+                How many posts to publish each day
+              </p>
+            </div>
+          </div>
+
+          <!-- TAB: CUSTOM -->
+          <div id="bulk-panel-custom" class="hidden space-y-4">
+            <div class="space-y-1.5">
+              <label
+                class="text-[12px] font-medium text-[#18181b] flex items-center gap-1.5"
+              >
+                <i class="ti ti-world text-[14px] text-[#71717a]"></i>
+                Timezone
+              </label>
+              <div class="relative w-full">
+                <select
+                  id="bulk-custom-tz"
+                  class="w-full h-10 pl-3 pr-8 border border-[#eaecf0] rounded-xl text-[13px] text-[#18181b] outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] appearance-none bg-white cursor-pointer shadow-2xs"
+                >
+                  <option value="GMT-12">(GMT-12:00) International Date Line West</option>
+                  <option value="GMT-11">(GMT-11:00) Midway Island, Samoa</option>
+                  <option value="GMT-10">(GMT-10:00) Hawaii, Honolulu</option>
+                  <option value="GMT-9">(GMT-09:00) Alaska, Anchorage</option>
+                  <option value="GMT-8">(GMT-08:00) Pacific Time (US & Canada), Los Angeles</option>
+                  <option value="GMT-7">(GMT-07:00) Mountain Time (US & Canada), Denver</option>
+                  <option value="GMT-6">(GMT-06:00) Central Time (US & Canada), Chicago, Mexico City</option>
+                  <option value="GMT-5">(GMT-05:00) Eastern Time (US & Canada), New York, Toronto</option>
+                  <option value="GMT-4">(GMT-04:00) Atlantic Time (Canada), Caracas, Santiago</option>
+                  <option value="GMT-3.5">(GMT-03:30) Newfoundland</option>
+                  <option value="GMT-3">(GMT-03:00) Brasilia, Buenos Aires, Greenland</option>
+                  <option value="GMT-2">(GMT-02:00) Mid-Atlantic, Fernando de Noronha</option>
+                  <option value="GMT-1">(GMT-01:00) Azores, Cape Verde Islands</option>
+                  <option value="GMT+0">(GMT+00:00) Greenwich Mean Time, London, Dublin, Lisbon</option>
+                  <option value="GMT+1">(GMT+01:00) Central European Time, Paris, Berlin, Rome</option>
+                  <option value="GMT+2">(GMT+02:00) Eastern European Time, Athens, Cairo, Helsinki</option>
+                  <option value="GMT+3">(GMT+03:00) Moscow, Istanbul, Riyadh, Nairobi</option>
+                  <option value="GMT+3.5">(GMT+03:30) Tehran</option>
+                  <option value="GMT+4">(GMT+04:00) Gulf Standard Time, Dubai, Abu Dhabi, Baku</option>
+                  <option value="GMT+4.5">(GMT+04:30) Kabul</option>
+                  <option value="GMT+5">(GMT+05:00) Tashkent, Islamabad, Karachi</option>
+                  <option value="GMT+5.5">(GMT+05:30) India Standard Time, New Delhi, Mumbai</option>
+                  <option value="GMT+5.75">(GMT+05:45) Kathmandu</option>
+                  <option value="GMT+6">(GMT+06:00) Astana, Dhaka, Almaty</option>
+                  <option value="GMT+6.5">(GMT+06:30) Yangon (Rangoon)</option>
+                  <option value="GMT+7" selected>(GMT+07:00) Western Indonesia Time, Jakarta, Bangkok</option>
+                  <option value="GMT+8">(GMT+08:00) Central Indonesia Time, Singapore, Beijing</option>
+                  <option value="GMT+9">(GMT+09:00) Eastern Indonesia Time, Tokyo, Seoul</option>
+                  <option value="GMT+9.5">(GMT+09:30) Australian Central Time, Adelaide, Darwin</option>
+                  <option value="GMT+10">(GMT+10:00) Australian Eastern Time, Sydney, Melbourne</option>
+                  <option value="GMT+11">(GMT+11:00) Solomon Islands, New Caledonia</option>
+                  <option value="GMT+12">(GMT+12:00) Auckland, Fiji, Kamchatka</option>
+                  <option value="GMT+13">(GMT+13:00) Nuku'alofa, Apia</option>
+                  <option value="GMT+14">(GMT+14:00) Kiritimati (Line Islands)</option>
+                </select>
+                <i
+                  class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] text-[13px] pointer-events-none"
+                ></i>
+              </div>
+            </div>
+
+            <div id="bulk-custom-list" class="space-y-2">
+              <!-- Custom rows injected via JS -->
+            </div>
+          </div>
+
+          <div class="border-t border-[#eaecf0] pt-1"></div>
+
+          <!-- Business DNA Selector -->
+          <div class="space-y-2">
+            <label class="block text-[12px] font-medium text-[#18181b]"
+              >Business DNA</label
+            >
+            <div class="relative flex items-center">
+              <select
+                id="bulk-select-dna"
+                class="w-full h-10 pl-10 pr-10 bg-white border border-[#eaecf0] rounded-xl text-[13px] font-medium text-[#18181b] appearance-none outline-none focus:border-[#18181b] focus:ring-1 focus:ring-[#18181b] cursor-pointer shadow-2xs transition-all"
+              >
+                <option value="" disabled selected>Select Business DNA...</option>
+                <option value="Daily Brew Cafe">Daily Brew Cafe</option>
+                <option value="Byte Labs">Byte Labs</option>
+                <option value="Glow Skincare">Glow Skincare</option>
+                <option value="Urban Coffee Roasters">Urban Coffee Roasters</option>
+                <option value="Horizon Finance">Horizon Finance</option>
+                <option value="Nova Robotics">Nova Robotics</option>
+                <option value="Bloom Studio">Bloom Studio</option>
+                <option value="Peak Performance">Peak Performance</option>
+                <option value="Aura Wellness">Aura Wellness</option>
+              </select>
+              <div
+                class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center"
+              >
+                <svg
+                  id="bulk-dna-select-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="text-[#71717a] shrink-0"
+                ><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
+              </div>
+              <i
+                class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] pointer-events-none text-[13px]"
+              ></i>
+            </div>
+          </div>
+
+          <!-- Publish To Dropdown -->
+          <div class="space-y-2">
+            <label class="block text-[12px] font-medium text-[#18181b]"
+              >Publish to:</label
+            >
+            <div class="relative">
+              <div
+                id="bulk-publish-trigger"
+                class="w-full h-10 px-3 bg-white border border-[#eaecf0] rounded-xl text-[13px] font-medium text-[#18181b] flex items-center justify-between cursor-pointer hover:bg-[#fafafa] shadow-2xs transition-colors"
+              >
+                <span id="bulk-publish-label" class="text-[#71717a]"
+                  >Select destination accounts...</span
+                >
+                <i class="ti ti-chevron-down text-[#71717a]"></i>
+              </div>
+              <!-- Multi-select dropdown -->
+              <div
+                id="bulk-publish-dropdown"
+                class="hidden absolute top-full left-0 mt-1.5 w-full bg-white border border-[#eaecf0] rounded-xl shadow-lg z-30 overflow-hidden p-1"
+              >
+                <div
+                  class="px-3 py-2 bg-[#fafafa] text-[10px] font-semibold text-[#71717a] uppercase tracking-wider"
+                >
+                  Connected Accounts
+                </div>
+                <div class="max-h-48 overflow-y-auto" id="bulk-accounts-list">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+            </div>
+            <!-- Selected Badges Row -->
+            <div
+              id="bulk-selected-accounts-badges"
+              class="flex flex-wrap gap-2 pt-0.5"
+            >
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div id="bulk-preview-timeline-container" class="mt-6 pt-4 border-t border-[#eaecf0]">
+            <h4 class="text-[12px] font-semibold text-[#18181b] mb-2">
+              Preview Timeline
+            </h4>
+            <div id="bulk-schedule-preview" class="space-y-1.5">
+              <!-- Preview injected via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Footer -->
+        <div
+          class="absolute bottom-0 left-0 right-0 flex items-center justify-between z-30 px-6 py-4 bg-white"
+        >
+          <button
+            onclick="closeCanvasBulkScheduleModal()"
+            class="px-4 h-9 rounded-xl border border-[#eaecf0] bg-white text-[#18181b] text-[13px] font-medium hover:bg-[#f4f4f5] transition-all cursor-pointer shadow-2xs"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="confirmCanvasBulkSchedule()"
+            class="px-5 h-9 rounded-xl bg-[#18181b] text-white text-[13px] font-medium hover:bg-black transition-all cursor-pointer shadow-xs active:scale-98 border-0"
+          >
+            Confirm Schedule
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- FULLSCREEN IMAGE PREVIEW LIGHTBOX -->
     <div
       id="modal-schedule-lightbox"
@@ -3760,7 +4245,7 @@ import LoadingState from "../components/ui/loading-state";
                 btnScheduleText.textContent = `Schedule (${selectedFrames.size})`;
               btnSchedule.setAttribute(
                 "data-tooltip",
-                `Schedule ${selectedFrames.size} Posts (Carousel)`,
+                `Schedule ${selectedFrames.size} Posts (Batch)`,
               );
             } else {
               if (btnScheduleText) btnScheduleText.textContent = "Schedule";
@@ -5540,9 +6025,954 @@ import LoadingState from "../components/ui/loading-state";
         if (btnScheduleImage) {
           btnScheduleImage.addEventListener("click", (e) => {
             e.stopPropagation();
-            openSchedule();
+            if (selectedFrames && selectedFrames.size > 1) {
+              openCanvasBulkScheduleModal();
+            } else {
+              openSchedule();
+            }
           });
         }
+
+        // ═════════════════════════════════════════════════════════
+        // SCHEDULE BATCH (MULTI-FRAME CANVAS CONTROLLER)
+        // ═════════════════════════════════════════════════════════
+        let canvasBulkScheduleMode = "same-time";
+        let canvasBulkSelectedAccounts = [];
+        const canvasBulkScheduleData = {
+          items: [],
+          sameDate: "",
+          dailyStartDate: "",
+          dailyPostsPerDay: 1,
+          customAssignments: {},
+          dailyAssignments: {},
+        };
+
+        const CANVAS_BULK_BRAND_ACCOUNTS = {
+          "Daily Brew Cafe": [
+            { id: "fb-daily", name: "Daily Brew Cafe Official", icon: "ti ti-brand-facebook text-[#1877F2]" },
+            { id: "th-daily", name: "@dailybrew.threads", icon: "ti ti-brand-threads text-[#000000]" },
+            { id: "insta-daily", name: "@dailybrew.cafe", icon: "ti ti-brand-instagram text-[#E1306C]" },
+            { id: "tt-daily", name: "@dailybrew", icon: "ti ti-brand-tiktok text-[#000000]" },
+          ],
+          "Byte Labs": [
+            { id: "fb-byte", name: "Byte Labs Tech", icon: "ti ti-brand-facebook text-[#1877F2]" },
+            { id: "th-byte", name: "@bytelabs", icon: "ti ti-brand-threads text-[#000000]" },
+            { id: "insta-byte", name: "@bytelabs.io", icon: "ti ti-brand-instagram text-[#E1306C]" },
+          ],
+          "Glow Skincare": [
+            { id: "fb-glow", name: "Glow Skincare Official", icon: "ti ti-brand-facebook text-[#1877F2]" },
+            { id: "insta-glow", name: "@glowskincare.co", icon: "ti ti-brand-instagram text-[#E1306C]" },
+            { id: "tt-glow", name: "@glowskincare", icon: "ti ti-brand-tiktok text-[#000000]" },
+          ],
+        };
+
+        function getCanvasBulkAccountsForBrand(brand) {
+          if (CANVAS_BULK_BRAND_ACCOUNTS[brand]) return CANVAS_BULK_BRAND_ACCOUNTS[brand];
+          const safeBrand = brand || "Brand";
+          const slug = safeBrand.toLowerCase().replace(/[^a-z0-9]/g, "");
+          return [
+            { id: `insta-${slug}`, name: `@${slug}.official`, icon: "ti ti-brand-instagram text-[#E1306C]" },
+            { id: `fb-${slug}`, name: safeBrand, icon: "ti ti-brand-facebook text-[#1877F2]" },
+            { id: `th-${slug}`, name: `@${slug}`, icon: "ti ti-brand-threads text-[#000000]" },
+          ];
+        }
+
+        function escapeCanvasHtml(str) {
+          if (!str) return "";
+          return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        }
+
+        function parseCanvasScheduleDate(dateStr) {
+          if (!dateStr) return new Date();
+          const parts = dateStr.split("-");
+          if (parts.length === 3) {
+            return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+          }
+          return new Date(dateStr);
+        }
+
+        function formatCanvasDisplayDate(d) {
+          if (!d || isNaN(d.getTime())) return "";
+          const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+          const m = months[d.getMonth()];
+          const day = d.getDate();
+          const y = d.getFullYear();
+          return `${m} ${day}, ${y}`;
+        }
+
+        function getCanvas24HourTime(hStr, mStr, period) {
+          let h = parseInt(hStr || "8", 10);
+          if (period === "PM" && h < 12) h += 12;
+          if (period === "AM" && h === 12) h = 0;
+          return `${String(h).padStart(2, "0")}:${mStr || "00"}`;
+        }
+
+        function getCanvasSocialIconSvg(platform, size = "13px") {
+          const p = (platform || "").toLowerCase();
+          if (p === "instagram") {
+            return `<svg style="width:${size};height:${size};" class="shrink-0" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ig-canvas-grad" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#f9a825"/><stop offset="20%" stop-color="#f77737"/><stop offset="45%" stop-color="#e1306c"/><stop offset="70%" stop-color="#c13584"/><stop offset="100%" stop-color="#833ab4"/></linearGradient></defs><path fill="url(#ig-canvas-grad)" d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,72a24,24,0,1,1,24-24A24,24,0,0,1,128,152ZM176,20H80A60.07,60.07,0,0,0,20,80v96a60.07,60.07,0,0,0,60,60h96a60.07,60.07,0,0,0,60-60V80A60.07,60.07,0,0,0,176,20Zm36,156a36,36,0,0,1-36,36H80a36,36,0,0,1-36-36V80A36,36,0,0,1,80,44h96a36,36,0,0,1,36,36ZM196,76a16,16,0,1,1-16-16A16,16,0,0,1,196,76Z"/></svg>`;
+          }
+          if (p === "facebook") {
+            return `<svg style="width:${size};height:${size};" class="shrink-0" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
+          }
+          if (p === "threads") {
+            return `<svg style="width:${size};height:${size};" class="shrink-0" viewBox="0 0 256 256" fill="#000000"><path d="M138.62,128a53.54,53.54,0,0,1,13.1,1.63c-.57,8.21-3.34,15-8.11,19.61A23.89,23.89,0,0,1,127,156c-11.87,0-15-7.58-15-12.07C112,133,125.8,128,138.62,128ZM224,128c0,65.12-35.89,104-96,104S32,193.12,32,128,67.89,24,128,24,224,62.88,224,128ZM72,128c0-43.07,18.32-64,56-64,26.34,0,43,10.08,50.81,30.83a8,8,0,0,0,15-5.66C180.9,55.14,150.9,48,128,48c-26.1,0-45.52,8.7-57.72,25.86C60.8,87.19,56,105.4,56,128s4.8,40.81,14.28,54.14C82.48,199.3,101.9,208,128,208c24.45,0,39.82-8.8,48.41-16.18,10.76-9.25,17.19-21.89,17.19-33.82,0-14.3-6.59-26.79-18.56-35.17a54.16,54.16,0,0,0-7.77-4.5c-2.09-14.65-10-25.75-22.34-31.07C130.43,81,112,83.93,101.21,94.19a8,8,0,0,0,11,11.62c5.43-5.14,16.79-8,26.4-3.85a20.05,20.05,0,0,1,10.77,10.92,68.89,68.89,0,0,0-10.76-.85C113.53,112,96,125.15,96,143.93c0,16.27,13,28.07,31,28.07a40,40,0,0,0,27.75-11.29c4.7-4.59,10.11-12.2,12.17-24A25.55,25.55,0,0,1,177.6,158c0,13.71-15.76,34-49.6,34C90.32,192,72,171.07,72,128Z"/></svg>`;
+          }
+          if (p === "tiktok") {
+            return `<svg style="width:${size};height:${size};" class="shrink-0" viewBox="0 0 24 24" fill="#000000"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .59.043.87.12V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.27 6.27 0 0 0 1.87-4.48V8.71a8.28 8.28 0 0 0 4.9 1.57v-3.59h-1z"/></svg>`;
+          }
+          return `<i class="ti ti-brand-instagram text-[14px]"></i>`;
+        }
+
+        function createCanvasSocialAccountBadge(labelTxt, platform, onRemove) {
+          const badge = document.createElement("div");
+          badge.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-[#e4e4e7] bg-[#f4f4f5] text-[12px] font-medium text-[#18181b] transition-colors select-none group";
+          badge.innerHTML = `
+            ${getCanvasSocialIconSvg(platform, "13px")}
+            <span class="truncate">${escapeCanvasHtml(labelTxt)}</span>
+            <button type="button" aria-label="Remove ${escapeCanvasHtml(labelTxt)}" class="ml-0.5 w-4 h-4 rounded flex items-center justify-center text-[#71717a] hover:bg-[#e4e4e7] hover:text-[#18181b] transition-colors cursor-pointer">
+              <i class="ti ti-x text-[10px]"></i>
+            </button>
+          `;
+          const btn = badge.querySelector("button");
+          if (btn && typeof onRemove === "function") {
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onRemove();
+            });
+          }
+          return badge;
+        }
+
+        function rebuildCanvasBulkAccountState() {
+          const checkboxes = document.querySelectorAll(".bulk-account-cb:checked");
+          const badgeContainer = document.getElementById("bulk-selected-accounts-badges");
+          const label = document.getElementById("bulk-publish-label");
+          if (!badgeContainer || !label) return;
+
+          badgeContainer.innerHTML = "";
+          canvasBulkSelectedAccounts = [];
+
+          checkboxes.forEach((cb) => {
+            canvasBulkSelectedAccounts.push(cb.value);
+            const labelTxt = cb.dataset.name || cb.value;
+            const platform = cb.value.startsWith("fb-")
+              ? "facebook"
+              : cb.value.startsWith("th-")
+                ? "threads"
+                : cb.value.startsWith("tt-")
+                  ? "tiktok"
+                  : "instagram";
+
+            const badge = createCanvasSocialAccountBadge(labelTxt, platform, () => {
+              cb.checked = false;
+              rebuildCanvasBulkAccountState();
+            });
+            badgeContainer.appendChild(badge);
+          });
+
+          if (canvasBulkSelectedAccounts.length > 0) {
+            label.textContent = `${canvasBulkSelectedAccounts.length} account(s) selected`;
+            label.className = "text-[#18181b] font-medium";
+          } else {
+            label.textContent = "Select destination accounts...";
+            label.className = "text-[#71717a]";
+          }
+        }
+
+        function populateCanvasBulkAccounts(brand) {
+          const listEl = document.getElementById("bulk-accounts-list");
+          if (!listEl) return;
+          const accounts = getCanvasBulkAccountsForBrand(brand);
+          listEl.innerHTML = accounts
+            .map(
+              (acc) => `
+            <label class="flex items-center gap-2 p-2.5 hover:bg-[#f4f4f5] rounded-lg cursor-pointer transition-colors">
+              <input type="checkbox" value="${acc.id}" data-name="${escapeCanvasHtml(acc.name)}" data-icon="${acc.icon}" class="w-4 h-4 rounded text-[#18181b] border-[#eaecf0] accent-[#18181b] bulk-account-cb" checked />
+              <i class="${acc.icon} text-[16px]"></i>
+              <span class="text-[13px] font-medium text-[#18181b]">${escapeCanvasHtml(acc.name)}</span>
+            </label>
+          `,
+            )
+            .join("");
+
+          listEl.querySelectorAll(".bulk-account-cb").forEach((cb) => {
+            cb.addEventListener("change", () => rebuildCanvasBulkAccountState());
+          });
+
+          rebuildCanvasBulkAccountState();
+        }
+
+        function clearCanvasBulkAccounts() {
+          const listEl = document.getElementById("bulk-accounts-list");
+          const badgeContainer = document.getElementById("bulk-selected-accounts-badges");
+          const label = document.getElementById("bulk-publish-label");
+
+          if (listEl) {
+            listEl.innerHTML = `<div class="p-3 text-center text-[12px] text-[#71717a]">Please select a Business DNA first.</div>`;
+          }
+          if (badgeContainer) badgeContainer.innerHTML = "";
+          if (label) {
+            label.textContent = "Select Business DNA first...";
+            label.className = "text-[#71717a]";
+          }
+          canvasBulkSelectedAccounts = [];
+        }
+
+        function initCanvasBulkScheduleEvents() {
+          const pubTrigger = document.getElementById("bulk-publish-trigger");
+          const pubDropdown = document.getElementById("bulk-publish-dropdown");
+          const dnaSelect = document.getElementById("bulk-select-dna");
+
+          if (pubTrigger && pubDropdown && !pubTrigger.dataset.bound) {
+            pubTrigger.dataset.bound = "true";
+            pubTrigger.addEventListener("click", (e) => {
+              e.stopPropagation();
+              pubDropdown.classList.toggle("hidden");
+            });
+            document.addEventListener("click", () => {
+              if (pubDropdown) pubDropdown.classList.add("hidden");
+            });
+            pubDropdown.addEventListener("click", (e) => e.stopPropagation());
+          }
+
+          if (dnaSelect && !dnaSelect.dataset.bound) {
+            dnaSelect.dataset.bound = "true";
+            dnaSelect.addEventListener("change", (e) => {
+              const brand = e.target.value;
+              if (brand) {
+                populateCanvasBulkAccounts(brand);
+              } else {
+                clearCanvasBulkAccounts();
+              }
+            });
+          }
+
+          [
+            "bulk-same-date",
+            "bulk-same-time",
+            "bulk-same-period",
+            "bulk-daily-start",
+            "bulk-daily-time",
+            "bulk-daily-period",
+            "bulk-daily-posts",
+          ].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el && !el.dataset.boundPreview) {
+              el.dataset.boundPreview = "true";
+              const handler = () => {
+                if (id === "bulk-daily-time" || id === "bulk-daily-period" || id === "bulk-daily-posts") {
+                  if (canvasBulkScheduleData.dailyAssignments) {
+                    Object.keys(canvasBulkScheduleData.dailyAssignments).forEach((key) => {
+                      if (!canvasBulkScheduleData.dailyAssignments[key]?.manual) {
+                        delete canvasBulkScheduleData.dailyAssignments[key];
+                      }
+                    });
+                  }
+                }
+                renderCanvasBulkSchedulePreview();
+              };
+              el.addEventListener("change", handler);
+              el.addEventListener("input", handler);
+            }
+          });
+
+          // Sync timezones across tabs
+          ["bulk-same-tz", "bulk-daily-tz", "bulk-custom-tz"].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el && !el.dataset.boundSync) {
+              el.dataset.boundSync = "true";
+              el.addEventListener("change", (e) => {
+                const val = e.target.value;
+                ["bulk-same-tz", "bulk-daily-tz", "bulk-custom-tz"].forEach((otherId) => {
+                  const o = document.getElementById(otherId);
+                  if (o && o.value !== val) o.value = val;
+                });
+              });
+            }
+          });
+        }
+
+        function switchCanvasBulkScheduleTab(mode) {
+          canvasBulkScheduleMode = mode;
+
+          document.querySelectorAll(".bulk-schedule-tab").forEach((btn) => {
+            const isActive = btn.dataset.tab === mode;
+            if (isActive) {
+              btn.classList.add("bg-white", "text-[#18181b]", "shadow-xs");
+              btn.classList.remove("text-[#71717a]", "hover:bg-white/60");
+            } else {
+              btn.classList.remove("bg-white", "text-[#18181b]", "shadow-xs");
+              btn.classList.add("text-[#71717a]", "hover:bg-white/60");
+            }
+          });
+
+          const panelSame = document.getElementById("bulk-panel-same-time");
+          const panelDaily = document.getElementById("bulk-panel-daily-post");
+          const panelCustom = document.getElementById("bulk-panel-custom");
+          if (panelSame) panelSame.classList.toggle("hidden", mode !== "same-time");
+          if (panelDaily) panelDaily.classList.toggle("hidden", mode !== "daily-post");
+          if (panelCustom) panelCustom.classList.toggle("hidden", mode !== "custom");
+
+          const previewContainer = document.getElementById("bulk-preview-timeline-container");
+          if (previewContainer) {
+            previewContainer.classList.toggle("hidden", mode === "custom");
+          }
+
+          renderCanvasBulkSchedulePreview();
+        }
+
+        function adjustCanvasBulkDailyPosts(delta) {
+          const input = document.getElementById("bulk-daily-posts");
+          if (!input) return;
+          let val = parseInt(input.value, 10) || 1;
+          val = Math.max(1, Math.min(24, val + delta));
+          input.value = val;
+          canvasBulkScheduleData.dailyPostsPerDay = val;
+          if (canvasBulkScheduleData.dailyAssignments) {
+            Object.keys(canvasBulkScheduleData.dailyAssignments).forEach((key) => {
+              if (!canvasBulkScheduleData.dailyAssignments[key]?.manual) {
+                delete canvasBulkScheduleData.dailyAssignments[key];
+              }
+            });
+          }
+          renderCanvasBulkSchedulePreview();
+        }
+
+        function updateCanvasBulkCustomDate(id, val) {
+          if (!canvasBulkScheduleData.customAssignments[id]) {
+            canvasBulkScheduleData.customAssignments[id] = {};
+          }
+          canvasBulkScheduleData.customAssignments[id].date = val;
+          renderCanvasBulkSchedulePreview();
+        }
+
+        function updateCanvasBulkCustomTimePart(id) {
+          const h = document.getElementById(`canvas-custom-h-${id}`)?.value || "08";
+          const m = document.getElementById(`canvas-custom-m-${id}`)?.value || "00";
+          const p = document.getElementById(`canvas-custom-p-${id}`)?.value || "AM";
+          const timeVal = getCanvas24HourTime(h, m, p);
+          if (!canvasBulkScheduleData.customAssignments[id]) {
+            canvasBulkScheduleData.customAssignments[id] = {};
+          }
+          canvasBulkScheduleData.customAssignments[id].time = timeVal;
+          canvasBulkScheduleData.customAssignments[id].displayTime = `${h}:${m} ${p}`;
+          renderCanvasBulkSchedulePreview();
+        }
+
+        function getCanvasDefaultDailyTime(baseTimeVal, period, postIndexInDay, totalPostsPerDay) {
+          const [hStr, mStr] = (baseTimeVal || "08:00").split(":");
+          let h = parseInt(hStr, 10) || 8;
+          const m = parseInt(mStr, 10) || 0;
+          let h24 = (h % 12) + (period === "PM" ? 12 : 0);
+
+          if (totalPostsPerDay <= 1 || postIndexInDay === 0) {
+            const time24Str = `${String(h24).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+            let h12 = h24 % 12;
+            if (h12 === 0) h12 = 12;
+            const displayStr = `${String(h12).padStart(2, "0")}:${String(m).padStart(2, "0")} ${period || (h24 >= 12 ? "PM" : "AM")}`;
+            return { time24: time24Str, display: displayStr };
+          }
+
+          let stepHours = 5;
+          if (totalPostsPerDay === 3) stepHours = 4;
+          else if (totalPostsPerDay >= 4) stepHours = Math.max(2, Math.floor(12 / totalPostsPerDay));
+
+          let targetH24 = (h24 + postIndexInDay * stepHours) % 24;
+          let targetM = m;
+
+          const targetP = targetH24 >= 12 ? "PM" : "AM";
+          let targetH12 = targetH24 % 12;
+          if (targetH12 === 0) targetH12 = 12;
+
+          const time24Str = `${String(targetH24).padStart(2, "0")}:${String(targetM).padStart(2, "0")}`;
+          const displayStr = `${String(targetH12).padStart(2, "0")}:${String(targetM).padStart(2, "0")} ${targetP}`;
+
+          return { time24: time24Str, display: displayStr };
+        }
+
+        function updateCanvasBulkPreviewItemTime(id, time24) {
+          if (!time24) return;
+          const [h24Str, mStr] = time24.split(":");
+          let h24 = parseInt(h24Str, 10) || 0;
+          const m = mStr || "00";
+          const p = h24 >= 12 ? "PM" : "AM";
+          let h12 = h24 % 12;
+          if (h12 === 0) h12 = 12;
+          const display = `${String(h12).padStart(2, "0")}:${m} ${p}`;
+
+          if (!canvasBulkScheduleData.dailyAssignments) canvasBulkScheduleData.dailyAssignments = {};
+          canvasBulkScheduleData.dailyAssignments[id] = {
+            time24,
+            display,
+            manual: true,
+          };
+          renderCanvasBulkSchedulePreview();
+        }
+
+        function renderCanvasBulkCustomList() {
+          const container = document.getElementById("bulk-custom-list");
+          if (!container) return;
+          const items = canvasBulkScheduleData.items || [];
+
+          container.innerHTML = items
+            .map((item, idx) => {
+              const tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1 + idx);
+              const defaultDate = tomorrow.toISOString().split("T")[0];
+              const existing = canvasBulkScheduleData.customAssignments[item.id] || {};
+              const curDate = existing.date || defaultDate;
+              const curTime = existing.time || "08:00";
+              if (!canvasBulkScheduleData.customAssignments[item.id]) {
+                canvasBulkScheduleData.customAssignments[item.id] = {
+                  date: curDate,
+                  time: curTime,
+                  displayTime: "08:00 AM",
+                };
+              }
+              const [h24, m] = curTime.split(":");
+              let hNum = parseInt(h24, 10);
+              const p = hNum >= 12 ? "PM" : "AM";
+              if (hNum === 0) hNum = 12;
+              else if (hNum > 12) hNum -= 12;
+              const hStr = String(hNum).padStart(2, "0");
+
+              return `
+                <div 
+                  class="bulk-custom-item flex items-center justify-between gap-2.5 p-2.5 rounded-xl bg-[#fafafa] border border-[#eaecf0] hover:border-[#d4d4d8] hover:bg-white transition-all select-none group/item"
+                  data-id="${item.id}"
+                  data-index="${idx}"
+                  draggable="true"
+                >
+                  <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                    <div 
+                      class="relative w-9 h-9 rounded-lg overflow-hidden bg-[#18181b] shrink-0 border border-[#eaecf0] shadow-2xs"
+                      draggable="false"
+                    >
+                      <img 
+                        src="${item.imageUrl}" 
+                        alt="${escapeCanvasHtml(item.title)}" 
+                        class="w-full h-full object-cover pointer-events-none"
+                        loading="lazy"
+                        draggable="false"
+                      />
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="text-[12px] font-medium text-[#18181b] truncate">${escapeCanvasHtml(item.title || `Post ${idx + 1}`)}</p>
+                      <p class="text-[10px] text-[#71717a] truncate">Post ${idx + 1}</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-2 shrink-0">
+                    <div 
+                      class="relative cursor-pointer shrink-0"
+                      onclick="this.querySelector('input')?.showPicker?.()"
+                      onmousedown="event.stopPropagation()"
+                    >
+                      <input
+                        type="date"
+                        value="${curDate}"
+                        onchange="updateCanvasBulkCustomDate('${item.id}', this.value)"
+                        class="w-[125px] h-8 pl-2.5 pr-7 rounded-lg border border-[#eaecf0] bg-white text-[11px] text-[#18181b] outline-none focus:border-[#18181b] transition-all shadow-2xs cursor-pointer"
+                        onclick="try{ this.showPicker() }catch(e){}"
+                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 text-[#71717a] pointer-events-none shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2V5M6 2V5"></path>
+                        <path d="M10.5 3.5H13.5C17.2712 3.5 19.1569 3.5 20.3284 4.67157C21.5 5.84315 21.5 7.72876 21.5 11.5V14C21.5 17.7712 21.5 19.6569 20.3284 20.8284C19.1569 22 17.2712 22 13.5 22H10.5C6.72876 22 4.84315 22 3.67157 20.8284C2.5 19.6569 2.5 17.7712 2.5 14V11.5C2.5 7.72876 2.5 5.84315 3.67157 4.67157C4.84315 3.5 6.72876 3.5 10.5 3.5Z"></path>
+                        <path d="M3 8H21"></path>
+                        <path d="M8.44356 14.5282C10.0526 14.3279 11.3279 13.0526 11.5282 11.4436C11.5585 11.2 11.7545 11 12 11C12.2455 11 12.4415 11.2 12.4718 11.4436C12.6721 13.0526 13.9474 14.3279 15.5564 14.5282C15.8 14.5585 16 14.7545 16 15C16 15.2455 15.8 15.4415 15.5564 15.4718C13.9474 15.6721 12.6721 16.9474 12.4718 18.5564C12.4415 18.8 12.2455 19 12 19C11.7545 19 11.5585 18.8 11.5282 18.5564C11.3279 16.9474 10.0526 15.6721 8.44356 15.4718C8.19998 15.4415 8 15.2455 8 15C8 14.7545 8.19998 14.5585 8.44356 14.5282Z"></path>
+                      </svg>
+                    </div>
+
+                    <div class="flex items-center gap-1 shrink-0" onmousedown="event.stopPropagation()">
+                      <select
+                        onchange="updateCanvasBulkCustomTimePart('${item.id}')"
+                        id="canvas-custom-h-${item.id}"
+                        class="h-8 px-1.5 rounded-lg border border-[#eaecf0] bg-white text-[11px] text-[#18181b] outline-none shadow-2xs cursor-pointer"
+                      >
+                        ${["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"].map((h) => `<option value="${h}" ${h === hStr ? "selected" : ""}>${h}</option>`).join("")}
+                      </select>
+                      <select
+                        onchange="updateCanvasBulkCustomTimePart('${item.id}')"
+                        id="canvas-custom-m-${item.id}"
+                        class="h-8 px-1.5 rounded-lg border border-[#eaecf0] bg-white text-[11px] text-[#18181b] outline-none shadow-2xs cursor-pointer"
+                      >
+                        ${["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"].map((mn) => `<option value="${mn}" ${mn === (m || "00") ? "selected" : ""}>${mn}</option>`).join("")}
+                      </select>
+                      <select
+                        onchange="updateCanvasBulkCustomTimePart('${item.id}')"
+                        id="canvas-custom-p-${item.id}"
+                        class="h-8 px-1.5 rounded-lg border border-[#eaecf0] bg-white text-[11px] text-[#18181b] outline-none shadow-2xs cursor-pointer"
+                      >
+                        <option value="AM" ${p === "AM" ? "selected" : ""}>AM</option>
+                        <option value="PM" ${p === "PM" ? "selected" : ""}>PM</option>
+                      </select>
+                    </div>
+
+                    <div 
+                      class="cursor-grab active:cursor-grabbing p-1 text-[#a1a1aa] hover:text-[#18181b] transition-colors shrink-0 drag-handle"
+                      title="Drag up or down to reorder"
+                    >
+                      <svg class="pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 6C16 6.55228 15.5523 7 15 7C14.4477 7 14 6.55228 14 6C14 5.44772 14.4477 5 15 5C15.5523 5 16 5.44772 16 6Z"></path>
+                        <path d="M10 6C10 6.55228 9.55228 7 9 7C8.44772 7 8 6.55228 8 6C8 5.44772 8.44772 5 9 5C9.55228 5 10 5.44772 10 6Z"></path>
+                        <path d="M16 18C16 18.5523 15.5523 19 15 19C14.4477 19 14 18.5523 14 18C14 17.4477 14.4477 17 15 17C15.5523 17 16 17.4477 16 18Z"></path>
+                        <path d="M16 12C16 12.5523 15.5523 13 15 13C14.4477 13 14 12.5523 14 12C14 11.4477 11 15 11C15.5523 11 16 11.4477 16 12Z"></path>
+                        <path d="M10 18C10 18.5523 9.55228 19 9 19C8.44772 19 8 18.5523 8 18C8 17.4477 8.44772 17 9 17C9.55228 17 10 17.4477 10 18Z"></path>
+                        <path d="M10 12C10 12.5523 9.55228 13 9 13C8.44772 13 8 12.5523 8 12C8 11.4477 8.44772 11 9 11C9.55228 11 10 11.4477 10 12Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+
+          initCanvasBulkCustomDragDrop();
+        }
+
+        let canvasDraggedCustomIndex = null;
+        function initCanvasBulkCustomDragDrop() {
+          const container = document.getElementById("bulk-custom-list");
+          if (!container) return;
+          const items = container.querySelectorAll(".bulk-custom-item");
+
+          items.forEach((item) => {
+            item.addEventListener("dragstart", (e) => {
+              canvasDraggedCustomIndex = parseInt(item.getAttribute("data-index"), 10);
+              item.classList.add("opacity-40", "ring-2", "ring-indigo-500/50");
+              if (e.dataTransfer) {
+                e.dataTransfer.effectAllowed = "move";
+                e.dataTransfer.setData("text/plain", String(canvasDraggedCustomIndex));
+              }
+            });
+
+            item.addEventListener("dragend", () => {
+              item.classList.remove("opacity-40", "ring-2", "ring-indigo-500/50");
+              items.forEach((it) => it.classList.remove("bg-indigo-50/60", "border-indigo-300"));
+              canvasDraggedCustomIndex = null;
+            });
+
+            item.addEventListener("dragover", (e) => {
+              e.preventDefault();
+              if (e.dataTransfer) e.dataTransfer.dropEffect = "move";
+              const targetIndex = parseInt(item.getAttribute("data-index"), 10);
+              if (canvasDraggedCustomIndex !== null && targetIndex !== canvasDraggedCustomIndex) {
+                item.classList.add("bg-indigo-50/60", "border-indigo-300");
+              }
+            });
+
+            item.addEventListener("dragleave", (e) => {
+              if (!item.contains(e.relatedTarget)) {
+                item.classList.remove("bg-indigo-50/60", "border-indigo-300");
+              }
+            });
+
+            item.addEventListener("drop", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              item.classList.remove("bg-indigo-50/60", "border-indigo-300");
+              const targetIndex = parseInt(item.getAttribute("data-index"), 10);
+              if (canvasDraggedCustomIndex !== null && !isNaN(targetIndex) && targetIndex !== canvasDraggedCustomIndex) {
+                if (canvasBulkScheduleData && Array.isArray(canvasBulkScheduleData.items)) {
+                  const movedItem = canvasBulkScheduleData.items.splice(canvasDraggedCustomIndex, 1)[0];
+                  canvasBulkScheduleData.items.splice(targetIndex, 0, movedItem);
+                  renderCanvasBulkCustomList();
+                }
+              }
+              canvasDraggedCustomIndex = null;
+            });
+          });
+        }
+
+        function renderCanvasBulkSchedulePreview() {
+          const preview = document.getElementById("bulk-schedule-preview");
+          if (!preview) return;
+
+          if (canvasBulkScheduleMode === "custom") {
+            preview.innerHTML = "";
+            return;
+          }
+
+          const items = canvasBulkScheduleData.items || [];
+          if (items.length === 0) {
+            preview.innerHTML = `
+              <div class="py-3 text-center text-[12px] text-[#71717a] italic">
+                No frames selected to preview.
+              </div>
+            `;
+            return;
+          }
+
+          const assignments = [];
+
+          if (canvasBulkScheduleMode === "same-time") {
+            let dateVal = document.getElementById("bulk-same-date")?.value;
+            if (!dateVal) {
+              const tmrw = new Date();
+              tmrw.setDate(tmrw.getDate() + 1);
+              dateVal = `${tmrw.getFullYear()}-${String(tmrw.getMonth() + 1).padStart(2, "0")}-${String(tmrw.getDate()).padStart(2, "0")}`;
+              const el = document.getElementById("bulk-same-date");
+              if (el) el.value = dateVal;
+            }
+
+            const timeVal = document.getElementById("bulk-same-time")?.value || "08:00";
+            const p = document.getElementById("bulk-same-period")?.value || "AM";
+            const parsedDate = parseCanvasScheduleDate(dateVal);
+            const formattedDate = formatCanvasDisplayDate(parsedDate);
+
+            items.forEach((item, idx) => {
+              assignments.push({
+                id: item.id,
+                title: item.title,
+                imageUrl: item.imageUrl,
+                formattedDate,
+                time24: getCanvas24HourTime(timeVal.split(":")[0], timeVal.split(":")[1] || "00", p),
+                displayTime: `${timeVal} ${p}`,
+                date: `${formattedDate} · ${timeVal} ${p}`,
+                dayLabel: "All at Once",
+              });
+            });
+          } else if (canvasBulkScheduleMode === "daily-post") {
+            let startVal = document.getElementById("bulk-daily-start")?.value;
+            if (!startVal) {
+              const tmrw = new Date();
+              tmrw.setDate(tmrw.getDate() + 1);
+              startVal = `${tmrw.getFullYear()}-${String(tmrw.getMonth() + 1).padStart(2, "0")}-${String(tmrw.getDate()).padStart(2, "0")}`;
+              const el = document.getElementById("bulk-daily-start");
+              if (el) el.value = startVal;
+            }
+
+            const timeVal = document.getElementById("bulk-daily-time")?.value || "08:00";
+            const p = document.getElementById("bulk-daily-period")?.value || "AM";
+            const postsPerDay = Math.max(1, parseInt(document.getElementById("bulk-daily-posts")?.value, 10) || 1);
+
+            const baseDate = parseCanvasScheduleDate(startVal);
+            const startY = baseDate.getFullYear();
+            const startM = baseDate.getMonth();
+            const startD = baseDate.getDate();
+
+            let currentIndex = 0;
+            items.forEach((item) => {
+              const dayOffset = Math.floor(currentIndex / postsPerDay);
+              const targetDate = new Date(startY, startM, startD + dayOffset);
+              const formattedDate = formatCanvasDisplayDate(targetDate);
+              const postIndexInDay = currentIndex % postsPerDay;
+              const postInDay = postIndexInDay + 1;
+              const dayLabel = postsPerDay > 1 ? `Day ${dayOffset + 1} · Post ${postInDay}` : `Day ${dayOffset + 1}`;
+
+              if (!canvasBulkScheduleData.dailyAssignments) canvasBulkScheduleData.dailyAssignments = {};
+              let timeInfo = canvasBulkScheduleData.dailyAssignments[item.id];
+              if (!timeInfo || !timeInfo.manual) {
+                timeInfo = getCanvasDefaultDailyTime(timeVal, p, postIndexInDay, postsPerDay);
+                canvasBulkScheduleData.dailyAssignments[item.id] = { ...timeInfo, manual: false };
+              }
+
+              assignments.push({
+                id: item.id,
+                title: item.title,
+                imageUrl: item.imageUrl,
+                formattedDate,
+                time24: timeInfo.time24,
+                displayTime: timeInfo.display,
+                date: `${formattedDate} · ${timeInfo.display}`,
+                dayLabel,
+              });
+              currentIndex++;
+            });
+          }
+
+          const isDailyPost = canvasBulkScheduleMode === "daily-post";
+
+          preview.innerHTML = assignments
+            .map(
+              (a, idx) => `
+            <div 
+              class="bulk-preview-item flex items-center justify-between gap-3 p-2.5 rounded-xl bg-[#fafafa] border border-[#eaecf0] text-[12px] hover:border-[#d4d4d8] hover:bg-white transition-all select-none group/item"
+              data-id="${a.id}"
+              data-index="${idx}"
+              draggable="${isDailyPost ? "true" : "false"}"
+            >
+              <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                <span class="w-5 h-5 rounded-md bg-[#f4f4f5] border border-[#eaecf0] text-[#71717a] flex items-center justify-center text-[10px] font-bold shrink-0">
+                  ${idx + 1}
+                </span>
+                <div 
+                  class="relative w-9 h-9 rounded-lg overflow-hidden bg-[#18181b] shrink-0 border border-[#eaecf0] shadow-2xs"
+                  draggable="false"
+                >
+                  <img 
+                    src="${a.imageUrl}" 
+                    alt="${escapeCanvasHtml(a.title)}" 
+                    class="w-full h-full object-cover pointer-events-none"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+                <div class="min-w-0 flex-1">
+                  <p class="text-[#18181b] font-medium truncate text-[12px]">${escapeCanvasHtml(a.title || `Post ${idx + 1}`)}</p>
+                  <p class="text-[10px] text-[#71717a] truncate">Frame Post ${idx + 1}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 shrink-0">
+                ${a.dayLabel ? `<span class="px-2 py-0.5 rounded-md bg-white border border-[#eaecf0] text-[11px] font-medium text-[#71717a] shadow-2xs">${a.dayLabel}</span>` : ""}
+                
+                ${
+                  isDailyPost
+                    ? `
+                <div class="flex items-center gap-1.5 text-[12px] font-semibold text-[#18181b]">
+                  <span class="flex items-center gap-1 text-[#71717a] font-normal">
+                    <i class="ti ti-calendar text-[13px]"></i>
+                    ${a.formattedDate}
+                  </span>
+                  <span class="text-[#d4d4d8]">·</span>
+                  
+                  <div 
+                    class="relative flex items-center gap-1 px-2.5 py-1 rounded-lg border border-[#eaecf0] bg-white hover:border-[#18181b] hover:bg-[#fafafa] transition-all cursor-pointer shadow-2xs group/time"
+                    title="Click to change time"
+                    onclick="this.querySelector('input')?.showPicker?.()"
+                    onmousedown="event.stopPropagation()"
+                  >
+                    <i class="ti ti-clock text-[#71717a] group-hover/time:text-[#18181b] text-[12px]"></i>
+                    <span class="text-[11.5px] font-semibold text-[#18181b] whitespace-nowrap">${a.displayTime}</span>
+                    <i class="ti ti-chevron-down text-[10px] text-[#a1a1aa] group-hover/time:text-[#18181b]"></i>
+                    <input
+                      type="time"
+                      value="${a.time24}"
+                      class="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                      onchange="updateCanvasBulkPreviewItemTime('${a.id}', this.value)"
+                      onclick="try{ this.showPicker() }catch(e){}"
+                    />
+                  </div>
+                </div>
+                `
+                    : `
+                <span class="text-[12px] font-semibold text-[#18181b] flex items-center gap-1.5">
+                  <i class="ti ti-calendar text-[#71717a] text-[13px]"></i>
+                  ${a.date}
+                </span>
+                `
+                }
+
+                ${
+                  isDailyPost
+                    ? `
+                <div 
+                  class="cursor-grab active:cursor-grabbing p-1 text-[#a1a1aa] hover:text-[#18181b] transition-colors shrink-0 drag-handle"
+                  title="Drag up or down to reorder"
+                >
+                  <svg class="pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 6C16 6.55228 15.5523 7 15 7C14.4477 7 14 6.55228 14 6C14 5.44772 14.4477 5 15 5C15.5523 5 16 5.44772 16 6Z"></path>
+                    <path d="M10 6C10 6.55228 9.55228 7 9 7C8.44772 7 8 6.55228 8 6C8 5.44772 8.44772 5 9 5C9.55228 5 10 5.44772 10 6Z"></path>
+                    <path d="M16 18C16 18.5523 15.5523 19 15 19C14.4477 19 14 18.5523 14 18C14 17.4477 14.4477 17 15 17C15.5523 17 16 17.4477 16 18Z"></path>
+                    <path d="M16 12C16 12.5523 15.5523 13 15 13C14.4477 13 14 12.5523 14 12C14 11.4477 11 15 11C15.5523 11 16 11.4477 16 12Z"></path>
+                    <path d="M10 18C10 18.5523 9.55228 19 9 19C8.44772 19 8 18.5523 8 18C8 17.4477 8.44772 17 9 17C9.55228 17 10 17.4477 10 18Z"></path>
+                    <path d="M10 12C10 12.5523 9.55228 13 9 13C8.44772 13 8 12.5523 8 12C8 11.4477 8.44772 11 9 11C9.55228 11 10 11.4477 10 12Z"></path>
+                  </svg>
+                </div>
+                `
+                    : ""
+                }
+              </div>
+            </div>
+          `,
+            )
+            .join("");
+
+          initCanvasBulkPreviewDragDrop();
+        }
+
+        let canvasDraggedPreviewIndex = null;
+        function initCanvasBulkPreviewDragDrop() {
+          if (canvasBulkScheduleMode !== "daily-post") return;
+          const container = document.getElementById("bulk-schedule-preview");
+          if (!container) return;
+          const items = container.querySelectorAll(".bulk-preview-item");
+
+          items.forEach((item) => {
+            item.addEventListener("dragstart", (e) => {
+              canvasDraggedPreviewIndex = parseInt(item.getAttribute("data-index"), 10);
+              item.classList.add("opacity-40", "ring-2", "ring-indigo-500/50");
+              if (e.dataTransfer) {
+                e.dataTransfer.effectAllowed = "move";
+                e.dataTransfer.setData("text/plain", String(canvasDraggedPreviewIndex));
+              }
+            });
+
+            item.addEventListener("dragend", () => {
+              item.classList.remove("opacity-40", "ring-2", "ring-indigo-500/50");
+              items.forEach((it) => it.classList.remove("bg-indigo-50/60", "border-indigo-300"));
+              canvasDraggedPreviewIndex = null;
+            });
+
+            item.addEventListener("dragover", (e) => {
+              e.preventDefault();
+              if (e.dataTransfer) e.dataTransfer.dropEffect = "move";
+              const targetIndex = parseInt(item.getAttribute("data-index"), 10);
+              if (canvasDraggedPreviewIndex !== null && targetIndex !== canvasDraggedPreviewIndex) {
+                item.classList.add("bg-indigo-50/60", "border-indigo-300");
+              }
+            });
+
+            item.addEventListener("dragleave", (e) => {
+              if (!item.contains(e.relatedTarget)) {
+                item.classList.remove("bg-indigo-50/60", "border-indigo-300");
+              }
+            });
+
+            item.addEventListener("drop", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              item.classList.remove("bg-indigo-50/60", "border-indigo-300");
+              const targetIndex = parseInt(item.getAttribute("data-index"), 10);
+              if (canvasDraggedPreviewIndex !== null && !isNaN(targetIndex) && targetIndex !== canvasDraggedPreviewIndex) {
+                if (canvasBulkScheduleData && Array.isArray(canvasBulkScheduleData.items)) {
+                  const movedItem = canvasBulkScheduleData.items.splice(canvasDraggedPreviewIndex, 1)[0];
+                  canvasBulkScheduleData.items.splice(targetIndex, 0, movedItem);
+                  renderCanvasBulkSchedulePreview();
+                }
+              }
+              canvasDraggedPreviewIndex = null;
+            });
+          });
+        }
+
+        function openCanvasBulkScheduleModal() {
+          const modal = document.getElementById("modal-bulk-schedule");
+          if (!modal) return;
+
+          let targetFrames = [];
+          if (selectedFrames && selectedFrames.size > 0) {
+            targetFrames = Array.from(selectedFrames);
+            targetFrames.sort((a, b) => {
+              const rectA = a.getBoundingClientRect();
+              const rectB = b.getBoundingClientRect();
+              return rectA.left - rectB.left;
+            });
+          }
+
+          const items = [];
+          targetFrames.forEach((frame, idx) => {
+            const img = frame.querySelector("img");
+            const title = frame.getAttribute("data-title") || frame.querySelector(".frame-title")?.textContent?.trim() || `Post ${idx + 1}`;
+            if (img && img.src) {
+              items.push({
+                id: `canvas-frame-item-${idx + 1}`,
+                title: title,
+                imageUrl: img.src,
+              });
+            }
+          });
+
+          if (items.length === 0) {
+            showToast("No images selected to schedule.", "error");
+            return;
+          }
+
+          canvasBulkScheduleData.items = items;
+
+          const tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          const dateStr = tomorrow.toISOString().split("T")[0];
+
+          const sameDateEl = document.getElementById("bulk-same-date");
+          const dailyStartEl = document.getElementById("bulk-daily-start");
+          if (sameDateEl) sameDateEl.value = dateStr;
+          if (dailyStartEl) dailyStartEl.value = dateStr;
+          const countEl = document.getElementById("bulk-schedule-count");
+          if (countEl) countEl.textContent = canvasBulkScheduleData.items.length;
+
+          canvasBulkScheduleData.sameDate = dateStr;
+          canvasBulkScheduleData.dailyStartDate = dateStr;
+          canvasBulkScheduleData.customAssignments = {};
+          canvasBulkScheduleData.dailyAssignments = {};
+
+          const dnaSelectEl = document.getElementById("bulk-select-dna");
+          const dnaMap = {
+            "daily-brew": "Daily Brew Cafe",
+            "byte-labs": "Byte Labs",
+            "glow-skincare": "Glow Skincare",
+            "urban-coffee": "Urban Coffee Roasters",
+            "horizon-finance": "Horizon Finance",
+            "nova-robotics": "Nova Robotics",
+            "bloom-studio": "Bloom Studio",
+            "peak-performance": "Peak Performance",
+            "aura-wellness": "Aura Wellness",
+          };
+
+          const selectDnaEl = document.getElementById("select-business-dna");
+          const activeKey = (selectDnaEl && selectDnaEl.value !== "none")
+            ? selectDnaEl.value
+            : (typeof currentBusinessDna !== "undefined" && currentBusinessDna !== "none" ? currentBusinessDna : "");
+
+          const activeDnaName = (activeKey && dnaMap[activeKey]) || "";
+          if (activeDnaName && dnaSelectEl) {
+            dnaSelectEl.value = activeDnaName;
+            populateCanvasBulkAccounts(activeDnaName);
+          } else if (dnaSelectEl && dnaSelectEl.value) {
+            populateCanvasBulkAccounts(dnaSelectEl.value);
+          } else {
+            if (dnaSelectEl) dnaSelectEl.value = "";
+            clearCanvasBulkAccounts();
+          }
+
+          initCanvasBulkScheduleEvents();
+          renderCanvasBulkCustomList();
+          switchCanvasBulkScheduleTab("same-time");
+
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+        }
+
+        function closeCanvasBulkScheduleModal() {
+          const modal = document.getElementById("modal-bulk-schedule");
+          if (modal) {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+          }
+          canvasBulkScheduleData.items = [];
+          canvasBulkScheduleData.dailyAssignments = {};
+        }
+
+        function confirmCanvasBulkSchedule() {
+          const items = canvasBulkScheduleData.items || [];
+          if (items.length === 0) {
+            showToast("No posts to schedule", "error");
+            return;
+          }
+
+          const dnaSelectEl = document.getElementById("bulk-select-dna");
+          const selectedDna = dnaSelectEl?.value;
+          if (!selectedDna) {
+            showToast("Please select a Business DNA", "error");
+            return;
+          }
+
+          if (canvasBulkSelectedAccounts.length === 0) {
+            showToast("Please select at least one account to publish to", "error");
+            return;
+          }
+
+          showToast(`Successfully scheduled ${items.length} posts!`, "success");
+          closeCanvasBulkScheduleModal();
+        }
+
+        // Expose functions to window for onclick handlers
+        window.openCanvasBulkScheduleModal = openCanvasBulkScheduleModal;
+        window.closeCanvasBulkScheduleModal = closeCanvasBulkScheduleModal;
+        window.switchCanvasBulkScheduleTab = switchCanvasBulkScheduleTab;
+        window.adjustCanvasBulkDailyPosts = adjustCanvasBulkDailyPosts;
+        window.confirmCanvasBulkSchedule = confirmCanvasBulkSchedule;
+        window.updateCanvasBulkCustomDate = updateCanvasBulkCustomDate;
+        window.updateCanvasBulkCustomTimePart = updateCanvasBulkCustomTimePart;
+        window.updateCanvasBulkPreviewItemTime = updateCanvasBulkPreviewItemTime;
 
         if (btnSchedulePrev) {
           btnSchedulePrev.addEventListener("click", (e) => {
@@ -5713,6 +7143,13 @@ import LoadingState from "../components/ui/loading-state";
         }
 
         document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            const bulkModal = document.getElementById("modal-bulk-schedule");
+            if (bulkModal && !bulkModal.classList.contains("hidden")) {
+              closeCanvasBulkScheduleModal();
+              return;
+            }
+          }
           if (
             modalScheduleLightbox &&
             !modalScheduleLightbox.classList.contains("hidden")
