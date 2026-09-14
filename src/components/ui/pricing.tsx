@@ -32,7 +32,7 @@ export const DEFAULT_MONTHLY_PLANS: PricingColumnProps[] = [
     annualSavingsNote: "Save Rp 240K with annual billing",
     credits: {
       amount: "1,500",
-      dailyRefill: "100 Daily credit refill",
+      dailyRefill: "+100 Daily credit refill",
       filledTicks: 3,
       totalTicks: 24,
     },
@@ -69,7 +69,7 @@ export const DEFAULT_MONTHLY_PLANS: PricingColumnProps[] = [
     annualSavingsNote: "Save Rp 480K with annual billing",
     credits: {
       amount: "4,000",
-      dailyRefill: "200 Daily credit refill",
+      dailyRefill: "+200 Daily credit refill",
       filledTicks: 6,
       totalTicks: 24,
     },
@@ -107,7 +107,7 @@ export const DEFAULT_MONTHLY_PLANS: PricingColumnProps[] = [
     annualSavingsNote: "Save Rp 1.680K with annual billing",
     credits: {
       amount: "14,500",
-      dailyRefill: "250 Daily credit refill",
+      dailyRefill: "+250 Daily credit refill",
       filledTicks: 14,
       totalTicks: 24,
     },
@@ -119,7 +119,7 @@ export const DEFAULT_MONTHLY_PLANS: PricingColumnProps[] = [
     features: [
       { type: "item", label: <>Up to <strong className="font-semibold text-foreground">2,200</strong> AI design/mo</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">30</strong> Business DNA</> },
-      { type: "item", label: <><strong className="font-semibold text-foreground">Unlimited</strong> Social Channels</> },
+      { type: "item", label: <><strong className="font-semibold text-foreground">50</strong> Social Channels</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">6</strong> Concurrent Tasks</> },
       { type: "item", label: "Commercial License" },
       { type: "divider" },
@@ -144,7 +144,7 @@ export const DEFAULT_MONTHLY_PLANS: PricingColumnProps[] = [
     annualSavingsNote: "Save Rp 3.360K with annual billing",
     credits: {
       amount: "25,000",
-      dailyRefill: "1,000 Daily credit refill",
+      dailyRefill: "+1,000 Daily credit refill",
       filledTicks: 24,
       totalTicks: 24,
     },
@@ -157,7 +157,7 @@ export const DEFAULT_MONTHLY_PLANS: PricingColumnProps[] = [
       { type: "item", label: <>Up to <strong className="font-semibold text-foreground">5,500</strong> AI design/mo</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">100</strong> Business DNA</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">Unlimited</strong> Social Channels</> },
-      { type: "item", label: <><strong className="font-semibold text-foreground">6</strong> Concurrent Tasks</> },
+      { type: "item", label: <><strong className="font-semibold text-foreground">10</strong> Concurrent Tasks</> },
       { type: "item", label: "Commercial License" },
       { type: "divider" },
       { type: "header", label: "Marketing Automation" },
@@ -183,7 +183,7 @@ export const DEFAULT_ANNUAL_PLANS: PricingColumnProps[] = [
     priceNote: "Save Rp 240K compared to monthly",
     credits: {
       amount: "1,500",
-      dailyRefill: "100 Daily credit refill",
+      dailyRefill: "+100 Daily credit refill",
       filledTicks: 3,
       totalTicks: 24,
     },
@@ -219,7 +219,7 @@ export const DEFAULT_ANNUAL_PLANS: PricingColumnProps[] = [
     priceNote: "Save Rp 480K compared to monthly",
     credits: {
       amount: "4,000",
-      dailyRefill: "200 Daily credit refill",
+      dailyRefill: "+200 Daily credit refill",
       filledTicks: 6,
       totalTicks: 24,
     },
@@ -256,7 +256,7 @@ export const DEFAULT_ANNUAL_PLANS: PricingColumnProps[] = [
     priceNote: "Save Rp 1.680K compared to monthly",
     credits: {
       amount: "14,500",
-      dailyRefill: "250 Daily credit refill",
+      dailyRefill: "+250 Daily credit refill",
       filledTicks: 14,
       totalTicks: 24,
     },
@@ -268,7 +268,7 @@ export const DEFAULT_ANNUAL_PLANS: PricingColumnProps[] = [
     features: [
       { type: "item", label: <>Up to <strong className="font-semibold text-foreground">2,200</strong> AI design/mo</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">30</strong> Business DNA</> },
-      { type: "item", label: <><strong className="font-semibold text-foreground">Unlimited</strong> Social Channels</> },
+      { type: "item", label: <><strong className="font-semibold text-foreground">50</strong> Social Channels</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">6</strong> Concurrent Tasks</> },
       { type: "item", label: "Commercial License" },
       { type: "divider" },
@@ -292,7 +292,7 @@ export const DEFAULT_ANNUAL_PLANS: PricingColumnProps[] = [
     priceNote: "Save Rp 3.360K compared to monthly",
     credits: {
       amount: "25,000",
-      dailyRefill: "1,000 Daily credit refill",
+      dailyRefill: "+1,000 Daily credit refill",
       filledTicks: 24,
       totalTicks: 24,
     },
@@ -305,7 +305,7 @@ export const DEFAULT_ANNUAL_PLANS: PricingColumnProps[] = [
       { type: "item", label: <>Up to <strong className="font-semibold text-foreground">5,500</strong> AI design/mo</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">100</strong> Business DNA</> },
       { type: "item", label: <><strong className="font-semibold text-foreground">Unlimited</strong> Social Channels</> },
-      { type: "item", label: <><strong className="font-semibold text-foreground">6</strong> Concurrent Tasks</> },
+      { type: "item", label: <><strong className="font-semibold text-foreground">10</strong> Concurrent Tasks</> },
       { type: "item", label: "Commercial License" },
       { type: "divider" },
       { type: "header", label: "Marketing Automation" },
@@ -406,7 +406,7 @@ export default function Pricing({
               >
                 <span>Annual</span>
                 <span className="text-[11px] font-medium text-white bg-red-600 px-2 py-0.5 rounded-full shadow-xs pointer-events-none">
-                  Up to 20% OFF
+                  Up to 64% OFF
                 </span>
               </button>
             </div>

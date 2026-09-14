@@ -152,7 +152,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
       <!-- ══════════ PROFILE TAB CONTENT ══════════ -->
       <section id="manage-account-tab-profile" class="manage-account-tab-section space-y-6">
         <div>
-          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Profile</h3>
+          <h3 class="text-lg font-medium text-[#111827] tracking-tight">Profile</h3>
         </div>
           
         <!-- Card 1: Avatar & Profile Info -->
@@ -244,7 +244,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
       <section id="manage-account-tab-subscription" class="manage-account-tab-section space-y-6 hidden">
         <div class="flex items-center justify-between">
           <div>
-            <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Subscription</h3>
+            <h3 class="text-lg font-medium text-[#111827] tracking-tight">Subscription</h3>
             <p class="text-xs text-[#71717a] mt-0.5">Manage your billing, plan tier, and credit balances.</p>
           </div>
           <div class="relative group/dev inline-flex">
@@ -386,8 +386,8 @@ import SocialIcon from "../icons/SocialIcon.astro";
                 </div>
               </div>
               <div class="mt-4 pt-3 border-t border-[#eaecf0] text-xs text-[#71717a] flex items-center justify-between min-h-[28px]">
-                <span>Expires</span>
-                <span class="font-medium text-[#18181b]">Oct 09, 2026</span>
+                <span>Daily credit refill</span>
+                <span class="font-medium text-[#18181b]" id="pro-daily-refill">+250</span>
               </div>
             </div>
 
@@ -470,7 +470,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
       <!-- ══════════ BILLING TAB CONTENT ══════════ -->
       <section id="manage-account-tab-billing" class="manage-account-tab-section space-y-6 hidden">
         <div>
-          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Billing</h3>
+          <h3 class="text-lg font-medium text-[#111827] tracking-tight">Billing</h3>
         </div>
 
         <!-- 1. Billing Overview Cards -->
@@ -577,7 +577,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
       <!-- ══════════ AFFILIATE TAB CONTENT ══════════ -->
       <section id="manage-account-tab-affiliate" class="manage-account-tab-section space-y-6 hidden">
         <div>
-          <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Affiliate</h3>
+          <h3 class="text-lg font-medium text-[#111827] tracking-tight">Affiliate</h3>
         </div>
 
         <!-- Affiliate Welcome / Commission Banner with Wipe Light Animation -->
@@ -840,7 +840,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
       <section id="manage-account-tab-feedback" class="manage-account-tab-section space-y-6 hidden w-full">
         <div>
           <div class="flex items-center gap-2">
-            <h3 class="text-lg font-semibold text-[#111827] tracking-tight">Feedback</h3>
+            <h3 class="text-lg font-medium text-[#111827] tracking-tight">Feedback</h3>
             <span class="inline-flex items-center rounded-md border border-[#e4e4e7] bg-[#f4f4f5] px-2 py-0.5 text-[10.5px] font-medium text-[#71717a]">Direct to Founder Team</span>
           </div>
         </div>
@@ -1379,7 +1379,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
   <div class="bg-white w-full max-w-4xl max-h-[92vh] rounded-xl p-6 sm:p-7 shadow-xl border border-[#eaecf0] space-y-5 relative overflow-y-auto animate-in zoom-in-95 duration-200">
     <!-- Header -->
     <div class="flex items-center justify-between pb-3.5 border-b border-[#eaecf0]">
-      <h3 class="text-base font-semibold text-[#111827] tracking-tight">Need more credits? Top up anytime.</h3>
+      <h3 class="text-base font-medium text-[#111827] tracking-tight">Need more credits? Top up anytime.</h3>
       <button id="btn-close-topup-credits" type="button" class="h-7 w-7 rounded-md flex items-center justify-center text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] transition-colors cursor-pointer">
         <i class="ti ti-x text-sm"></i>
       </button>
@@ -2547,6 +2547,9 @@ import SocialIcon from "../icons/SocialIcon.astro";
         monthlyCreditsVal = 5000;
         if (proMonthlyCredits) proMonthlyCredits.textContent = "5,000";
         if (modalManageSisaCredits) modalManageSisaCredits.textContent = "5,000 credits";
+
+        const proDailyRefill = document.getElementById("pro-daily-refill");
+        if (proDailyRefill) proDailyRefill.textContent = "+1,000";
 
         const activePlanTitle = document.getElementById("active-plan-title");
         const activePlanSubtitle = document.getElementById("active-plan-subtitle");

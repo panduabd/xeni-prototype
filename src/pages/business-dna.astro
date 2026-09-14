@@ -198,7 +198,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
                 </div>
                 <div class="min-w-0 flex-1">
                   <h4 class="text-[13px] font-normal text-[#98a2b3] group-hover:text-[#667085] leading-tight transition-colors">Import Your Business DNA</h4>
-                  <p class="text-[11.5px] font-normal text-[#98a2b3] mt-0.5 leading-snug">Analyze your website to build my Business DNA</p>
+                  <p class="text-[11.5px] font-normal text-[#98a2b3] mt-0.5 leading-snug">Analyze website to build your Business DNA</p>
                 </div>
               </button>
 
@@ -388,7 +388,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
   <!-- ═══════════════════════════════════════════════════════ -->
   <div id="modal-new-dna" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-200">
     <div class="w-full max-w-md bg-white rounded-2xl border border-zinc-200 shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
-      <div class="px-5 pt-5 pb-4 border-b border-zinc-100 flex items-center justify-between">
+      <div class="px-5 pt-5 pb-2 flex items-center justify-between">
         <h3 class="text-[15px] font-semibold text-zinc-950">New Business DNA</h3>
         <button id="btn-close-new-dna-modal" class="text-zinc-400 hover:text-zinc-700 p-1 rounded-lg hover:bg-zinc-100 cursor-pointer">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m18 6-12 12M6 6l12 12" /></svg>
@@ -557,7 +557,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
     <div class="w-full max-w-lg bg-white rounded-3xl shadow-xl overflow-hidden animate-in zoom-in-95 duration-200 p-6 space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
       <!-- Header: Title & Close Button (No icon above title, No subtitle) -->
       <div class="flex items-center justify-between">
-        <h3 id="modal-product-title" class="text-[17px] font-bold text-[#111827]">Add Product Reference</h3>
+        <h3 id="modal-product-title" class="text-[17px] font-semibold text-[#111827]">Add Product Reference</h3>
         <button
           type="button"
           id="btn-close-add-product-modal"
@@ -573,24 +573,24 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
         <!-- 1. Product Images (Moved to top, single clean upload component) -->
         <div class="space-y-2">
           <div class="flex items-center justify-between">
-            <label class="block text-[12.5px] font-semibold text-[#111827]">Product Images</label>
-            <span id="product-images-count-badge" class="text-[11px] text-[#98A2B3]">0 / 25 uploaded</span>
+            <label class="block text-[12.5px] font-semibold text-[#111827]">Product Image</label>
+            <span id="product-images-count-badge" class="text-[11px] text-[#98A2B3]">0 / 1 uploaded</span>
           </div>
           
-          <div id="product-staged-images-grid" class="grid grid-cols-5 gap-2 hidden">
-            <!-- Uploaded thumbnail previews -->
+          <div id="product-staged-images-grid" class="flex items-center gap-2 hidden">
+            <!-- Uploaded thumbnail preview -->
           </div>
 
           <label
+            id="label-product-images-staged"
             for="input-product-images-staged"
             class="w-full py-3.5 px-4 rounded-2xl border border-dashed border-[#D0D5DD] hover:border-[#98A2B3] bg-[#FAFAFB] hover:bg-[#F2F4F7] flex items-center justify-center gap-2 text-[#667085] hover:text-[#111827] transition-all cursor-pointer text-center"
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 5v14M5 12h14"/></svg>
-            <span class="text-[12.5px] font-medium">Upload images (max 25, 2MB each)</span>
+            <span class="text-[12.5px] font-medium">Upload Image (Max 2 MB)</span>
             <input
               type="file"
               id="input-product-images-staged"
-              multiple
               accept=".jpg,.jpeg,.png,image/jpeg,image/png"
               class="hidden"
             />
@@ -704,7 +704,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
     <div class="w-full max-w-3xl lg:max-w-4xl max-h-[90vh] bg-white rounded-3xl shadow-xl overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col p-6 sm:p-7 space-y-4">
       <!-- Header: Title & Close Button (No icon above title, No subtitle) -->
       <div class="flex items-center justify-between">
-        <h3 id="modal-knowledge-title" class="text-[18px] sm:text-[20px] font-bold text-[#111827]">Add Knowledge</h3>
+        <h3 id="modal-knowledge-title" class="text-[18px] sm:text-[20px] font-semibold text-[#111827]">Add Knowledge</h3>
         <button
           type="button"
           id="btn-close-add-knowledge-modal"
@@ -879,7 +879,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
   <div id="modal-add-color" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
     <div class="w-full max-w-sm bg-white rounded-3xl border border-[#eaecf0] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
       <div class="px-5 pt-5 pb-2 flex items-center justify-between">
-        <h3 id="modal-color-title" class="text-[15px] font-bold text-[#111827]">Add Brand Color</h3>
+        <h3 id="modal-color-title" class="text-[15px] font-semibold text-[#111827]">Add Brand Color</h3>
         <button id="btn-close-color-modal" type="button" class="text-[#98a2b3] hover:text-[#111827] p-1.5 rounded-xl hover:bg-[#F9FAFB] cursor-pointer transition-colors">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m18 6-12 12M6 6l12 12" /></svg>
         </button>
@@ -955,7 +955,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
   <div id="modal-font-view" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
     <div class="w-full max-w-md bg-white rounded-3xl border border-[#eaecf0] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
       <div class="px-5 pt-5 pb-2 flex items-center justify-between">
-        <h3 class="text-[15px] font-bold text-[#111827]">Font Specimen</h3>
+        <h3 class="text-[15px] font-semibold text-[#111827]">Font Specimen</h3>
         <button id="btn-close-font-view" type="button" class="text-[#98a2b3] hover:text-[#111827] p-1.5 rounded-xl hover:bg-[#F9FAFB] cursor-pointer transition-colors">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m18 6-12 12M6 6l12 12" /></svg>
         </button>
@@ -1008,7 +1008,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
   <div id="modal-product-view" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
     <div class="w-full max-w-sm bg-white rounded-3xl border border-[#eaecf0] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
       <div class="px-5 pt-5 pb-2 flex items-center justify-between">
-        <h3 class="text-[15px] font-bold text-[#111827]">Product Details</h3>
+        <h3 class="text-[15px] font-semibold text-[#111827]">Product Details</h3>
         <button id="btn-close-product-view" type="button" class="text-[#98a2b3] hover:text-[#111827] p-1.5 rounded-xl hover:bg-[#F9FAFB] cursor-pointer transition-colors">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m18 6-12 12M6 6l12 12" /></svg>
         </button>
@@ -1060,7 +1060,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
   <div id="modal-knowledge-view" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
     <div class="w-full max-w-3xl lg:max-w-4xl max-h-[90vh] bg-white rounded-3xl border border-[#eaecf0] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col p-6 sm:p-7 space-y-4">
       <div class="flex items-center justify-between">
-        <h3 class="text-[18px] sm:text-[20px] font-bold text-[#111827]">Knowledge Entry</h3>
+        <h3 class="text-[18px] sm:text-[20px] font-semibold text-[#111827]">Knowledge Entry</h3>
         <button id="btn-close-knowledge-view" type="button" class="text-[#98a2b3] hover:text-[#111827] p-1.5 rounded-xl hover:bg-[#F9FAFB] cursor-pointer transition-colors">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m18 6-12 12M6 6l12 12" /></svg>
         </button>
@@ -1765,35 +1765,54 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
     function renderStagedProductImages() {
       const grid = document.getElementById("product-staged-images-grid");
       const badge = document.getElementById("product-images-count-badge");
-      if (badge) badge.textContent = `${stagedProductImages.length} / 25 uploaded`;
+      const uploadLabel = document.getElementById("label-product-images-staged");
+      if (badge) badge.textContent = `${stagedProductImages.length} / 1 uploaded`;
 
       if (!grid) return;
       if (stagedProductImages.length === 0) {
         grid.classList.add("hidden");
         grid.innerHTML = "";
+        if (uploadLabel) uploadLabel.classList.remove("hidden");
         return;
       }
 
+      if (uploadLabel) uploadLabel.classList.add("hidden");
       grid.classList.remove("hidden");
       grid.innerHTML = stagedProductImages.map((img, idx) => `
-        <div class="relative group/staged aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-[#EAECF0]">
-          <img src="${img.url}" alt="${escapeHtml(img.name || 'preview')}" class="w-full h-full object-cover" />
-          <button
-            type="button"
-            data-remove-idx="${idx}"
-            class="btn-remove-staged-img absolute top-1 right-1 w-5 h-5 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center opacity-0 group-hover/staged:opacity-100 transition-all cursor-pointer"
-            title="Remove image"
-          >
-            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
-          </button>
+        <div class="relative group/staged w-24 h-24 aspect-square rounded-2xl overflow-hidden bg-zinc-100 border border-[#EAECF0] shadow-2xs">
+          <img src="${img.url}" alt="${escapeHtml(img.name || 'preview')}" class="w-full h-full object-cover group-hover/staged:scale-105 transition-transform duration-200" />
+          <div class="absolute inset-0 bg-black/45 opacity-0 group-hover/staged:opacity-100 transition-opacity flex items-center justify-center gap-1.5 p-1">
+            <button
+              type="button"
+              class="btn-preview-staged-img p-1.5 rounded-lg bg-white/90 hover:bg-white text-zinc-900 cursor-pointer shadow-xs transition-all hover:scale-105"
+              data-preview-url="${img.url}"
+              title="Preview Image"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2.5 12C4.5 7.5 8 4.5 12 4.5s7.5 3 9.5 7.5c-2 4.5-5.5 7.5-9.5 7.5S4.5 16.5 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button
+              type="button"
+              class="btn-remove-staged-img p-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white cursor-pointer shadow-xs transition-all hover:scale-105"
+              title="Delete Image"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M19.5 5.5 18.8 17.1a3 3 0 0 1-3 2.9H8.2a3 3 0 0 1-3-2.9L4.5 5.5M3 5.5h18M9 5.5V3.5a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5v2M10 10v5M14 10v5" /></svg>
+            </button>
+          </div>
         </div>
       `).join("");
+
+      grid.querySelectorAll(".btn-preview-staged-img").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const url = btn.getAttribute("data-preview-url");
+          if (url) openImageViewModal(url, "Product Reference Image");
+        });
+      });
 
       grid.querySelectorAll(".btn-remove-staged-img").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
-          const idx = parseInt(btn.getAttribute("data-remove-idx") || "0", 10);
-          stagedProductImages.splice(idx, 1);
+          stagedProductImages = [];
           renderStagedProductImages();
         });
       });
@@ -1865,7 +1884,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
       if (weightInput) weightInput.value = prod.weight || "";
 
       const images = prod.images || (prod.url ? [prod.url] : (prod.image ? [prod.image] : []));
-      stagedProductImages = images.map((u, i) => ({
+      stagedProductImages = images.slice(0, 1).map((u, i) => ({
         id: `img_${Date.now()}_${i}`,
         url: u,
         name: `Image ${i + 1}`
@@ -2793,58 +2812,32 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
         if (rawFiles.length === 0) return;
 
         const MAX_SIZE = 2 * 1024 * 1024; // 2MB
-        const MAX_ALLOWED = 25;
-        const availableSlots = MAX_ALLOWED - stagedProductImages.length;
+        const file = rawFiles[0];
 
-        if (availableSlots <= 0) {
-          showToast("Maximum 25 images limit reached", "error");
+        const isJpgOrPng = /image\/(jpeg|png|jpg)/i.test(file.type) || /\.(jpe?g|png)$/i.test(file.name);
+        if (!isJpgOrPng) {
+          showToast("Only JPG/PNG images allowed", "error");
           e.target.value = "";
           return;
         }
 
-        const filesToProcess = rawFiles.slice(0, availableSlots);
-        if (rawFiles.length > availableSlots) {
-          showToast(`Only ${availableSlots} more image(s) allowed (max 25 limit)`, "error");
-        }
-
-        const validFiles = [];
-        let rejectedCount = 0;
-
-        filesToProcess.forEach((file) => {
-          const isJpgOrPng = /image\/(jpeg|png|jpg)/i.test(file.type) || /\.(jpe?g|png)$/i.test(file.name);
-          if (isJpgOrPng && file.size <= MAX_SIZE) {
-            validFiles.push(file);
-          } else {
-            rejectedCount++;
-          }
-        });
-
-        if (rejectedCount > 0) {
-          showToast(`${rejectedCount} file(s) skipped: only JPG/PNG max 2MB allowed`, "error");
-        }
-
-        if (validFiles.length === 0) {
+        if (file.size > MAX_SIZE) {
+          showToast("Image size exceeds 2MB limit", "error");
           e.target.value = "";
           return;
         }
 
-        let loadedCount = 0;
-        validFiles.forEach((file) => {
-          const reader = new FileReader();
-          reader.onload = (evt) => {
-            stagedProductImages.push({
-              id: `img_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
-              name: file.name,
-              url: evt.target.result,
-              size: file.size
-            });
-            loadedCount++;
-            if (loadedCount === validFiles.length) {
-              renderStagedProductImages();
-            }
-          };
-          reader.readAsDataURL(file);
-        });
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          stagedProductImages = [{
+            id: `img_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+            name: file.name,
+            url: evt.target.result,
+            size: file.size
+          }];
+          renderStagedProductImages();
+        };
+        reader.readAsDataURL(file);
 
         e.target.value = "";
       });

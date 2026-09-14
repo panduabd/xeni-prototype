@@ -2182,7 +2182,7 @@ const dnaList = [
       <!-- RIGHT COLUMN: Compact Form Details -->
       <div class="flex-1 flex flex-col min-w-0 bg-white justify-between">
         <!-- Header -->
-        <div class="px-5 py-3.5 flex items-center justify-between border-b border-[#eaecf0]/60">
+        <div class="px-5 py-3.5 flex items-center justify-between">
           <div class="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4.5 h-4.5 text-[#344054] shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 2V5M6 2V5"></path>
@@ -2190,7 +2190,7 @@ const dnaList = [
               <path d="M3 8H21"></path>
               <path d="M8.44356 14.5282C10.0526 14.3279 11.3279 13.0526 11.5282 11.4436C11.5585 11.2 11.7545 11 12 11C12.2455 11 12.4415 11.2 12.4718 11.4436C12.6721 13.0526 13.9474 14.3279 15.5564 14.5282C15.8 14.5585 16 14.7545 16 15C16 15.2455 15.8 15.4415 15.5564 15.4718C13.9474 15.6721 12.6721 16.9474 12.4718 18.5564C12.4415 18.8 12.2455 19 12 19C11.7545 19 11.5585 18.8 11.5282 18.5564C11.3279 16.9474 10.0526 15.6721 8.44356 15.4718C8.19998 15.4415 8 15.2455 8 15C8 14.7545 8.19998 14.5585 8.44356 14.5282Z"></path>
             </svg>
-            <h2 class="text-[15px] font-bold text-[#111827]">
+            <h2 class="text-[15px] font-semibold text-[#111827]">
               Schedule Content
             </h2>
           </div>
@@ -3387,10 +3387,10 @@ const dnaList = [
           class="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-[#eaecf0] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200"
         >
           <div
-            class="px-5 py-4 border-b border-[#eaecf0] flex items-center justify-between bg-[#F9FAFB]"
+            class="px-5 py-4 flex items-center justify-between bg-[#F9FAFB]"
           >
             <span
-              class="text-[13px] font-bold text-[#111827] flex items-center gap-1.5"
+              class="text-[13px] font-semibold text-[#111827] flex items-center gap-1.5"
             >
               <i class="ti ti-sparkles text-[#7C3AED] text-[16px]"></i>
               AI Caption Helper
@@ -3430,9 +3430,9 @@ const dnaList = [
         >
           <!-- Left Section Header (No Subtitle, Isolated from Right Section) -->
           <div
-            class="px-6 py-5 border-b border-[#eaecf0] flex items-center justify-between bg-white shrink-0"
+            class="px-6 py-5 flex items-center justify-between bg-white shrink-0"
           >
-            <h2 class="text-lg font-bold text-[#111827] tracking-tight">
+            <h2 class="text-lg font-semibold text-[#111827] tracking-tight">
               Setup Manual Schedule
             </h2>
           </div>
@@ -3818,7 +3818,7 @@ const dnaList = [
 
           <!-- Footer Specific to Form Container -->
           <div
-            class="px-6 py-4 border-t border-[#eaecf0] bg-[#F9FAFB] flex items-center justify-end gap-3 shrink-0"
+            class="px-6 py-4 bg-[#F9FAFB] flex items-center justify-end gap-3 shrink-0"
           >
             <button
               id="btn-manual-post-now"
@@ -3846,7 +3846,7 @@ const dnaList = [
           class="w-[35%] bg-[#F2F4F7] flex flex-col h-full overflow-hidden relative"
         >
           <div
-            class="px-5 py-4 border-b border-[#DDE1E7] flex items-center justify-between shrink-0"
+            class="px-5 py-4 flex items-center justify-between shrink-0"
           >
             <div>
               <p class="text-[11px] font-medium text-[#667085]">Live preview</p>
@@ -4773,6 +4773,7 @@ const dnaList = [
       dailyTime: "08:00",
       dailyPostsPerDay: 1,
       customAssignments: {},
+      dailyAssignments: {},
     };
 
     // Helper to always compute the start of a week (Sunday)
@@ -10423,8 +10424,20 @@ const dnaList = [
         const el = document.getElementById(id);
         if (el && !el.dataset.boundPreview) {
           el.dataset.boundPreview = "true";
-          el.addEventListener("change", renderBulkSchedulePreview);
-          el.addEventListener("input", renderBulkSchedulePreview);
+          const handler = () => {
+            if (id === "bulk-daily-time" || id === "bulk-daily-period" || id === "bulk-daily-posts") {
+              if (bulkScheduleData.dailyAssignments) {
+                Object.keys(bulkScheduleData.dailyAssignments).forEach((key) => {
+                  if (!bulkScheduleData.dailyAssignments[key]?.manual) {
+                    delete bulkScheduleData.dailyAssignments[key];
+                  }
+                });
+              }
+            }
+            renderBulkSchedulePreview();
+          };
+          el.addEventListener("change", handler);
+          el.addEventListener("input", handler);
         }
       });
 
@@ -10533,6 +10546,7 @@ const dnaList = [
       bulkScheduleData.sameDate = dateStr;
       bulkScheduleData.dailyStartDate = dateStr;
       bulkScheduleData.customAssignments = {};
+      bulkScheduleData.dailyAssignments = {};
 
       // Check unique brands from selected approved items
       const selectedItems = getBulkActiveItems();
@@ -10579,6 +10593,7 @@ const dnaList = [
         modal.classList.remove("flex");
       }
       bulkScheduleData.itemIds = [];
+      bulkScheduleData.dailyAssignments = {};
     }
 
     function switchBulkScheduleTab(mode) {
@@ -10831,12 +10846,71 @@ const dnaList = [
       renderBulkSchedulePreview();
     }
 
+    function getDefaultDailyTime(baseTimeVal, period, postIndexInDay, totalPostsPerDay) {
+      const [hStr, mStr] = (baseTimeVal || "08:00").split(":");
+      let h = parseInt(hStr, 10) || 8;
+      const m = parseInt(mStr, 10) || 0;
+      let h24 = (h % 12) + (period === "PM" ? 12 : 0);
+
+      if (totalPostsPerDay <= 1 || postIndexInDay === 0) {
+        const time24Str = `${String(h24).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+        let h12 = h24 % 12;
+        if (h12 === 0) h12 = 12;
+        const displayStr = `${String(h12).padStart(2, "0")}:${String(m).padStart(2, "0")} ${period || (h24 >= 12 ? "PM" : "AM")}`;
+        return { time24: time24Str, display: displayStr };
+      }
+
+      // Intelligent spacing between posts within the same day
+      let stepHours = 5;
+      if (totalPostsPerDay === 3) stepHours = 4;
+      else if (totalPostsPerDay >= 4) stepHours = Math.max(2, Math.floor(12 / totalPostsPerDay));
+
+      let targetH24 = (h24 + (postIndexInDay * stepHours)) % 24;
+      let targetM = m;
+
+      const targetP = targetH24 >= 12 ? "PM" : "AM";
+      let targetH12 = targetH24 % 12;
+      if (targetH12 === 0) targetH12 = 12;
+
+      const time24Str = `${String(targetH24).padStart(2, "0")}:${String(targetM).padStart(2, "0")}`;
+      const displayStr = `${String(targetH12).padStart(2, "0")}:${String(targetM).padStart(2, "0")} ${targetP}`;
+
+      return { time24: time24Str, display: displayStr };
+    }
+
+    function updateBulkPreviewItemTime(id, time24) {
+      if (!time24) return;
+      const [h24Str, mStr] = time24.split(":");
+      let h24 = parseInt(h24Str, 10) || 0;
+      const m = mStr || "00";
+      const p = h24 >= 12 ? "PM" : "AM";
+      let h12 = h24 % 12;
+      if (h12 === 0) h12 = 12;
+      const display = `${String(h12).padStart(2, "0")}:${m} ${p}`;
+
+      if (!bulkScheduleData.dailyAssignments) bulkScheduleData.dailyAssignments = {};
+      bulkScheduleData.dailyAssignments[id] = {
+        time24,
+        display,
+        manual: true,
+      };
+      renderBulkSchedulePreview();
+    }
+    window.updateBulkPreviewItemTime = updateBulkPreviewItemTime;
+
     function adjustBulkDailyPosts(delta) {
       const input = document.getElementById("bulk-daily-posts");
       let val = parseInt(input.value) || 1;
       val = Math.max(1, Math.min(24, val + delta));
       input.value = val;
       bulkScheduleData.dailyPostsPerDay = val;
+      if (bulkScheduleData.dailyAssignments) {
+        Object.keys(bulkScheduleData.dailyAssignments).forEach((key) => {
+          if (!bulkScheduleData.dailyAssignments[key]?.manual) {
+            delete bulkScheduleData.dailyAssignments[key];
+          }
+        });
+      }
       renderBulkSchedulePreview();
     }
 
@@ -10891,6 +10965,9 @@ const dnaList = [
             brand: item.brand,
             contentType: item.contentType,
             imageUrl: imgUrl,
+            formattedDate,
+            time24: get24HourTime(timeVal.split(":")[0], timeVal.split(":")[1] || "00", p),
+            displayTime: `${timeVal} ${p}`,
             date: `${formattedDate} · ${timeVal} ${p}`,
             dayLabel: "All at Once",
           });
@@ -10923,7 +11000,8 @@ const dnaList = [
           const dayOffset = Math.floor(currentIndex / postsPerDay);
           const targetDate = new Date(startY, startM, startD + dayOffset);
           const formattedDate = formatDisplayScheduleDate(targetDate);
-          const postInDay = (currentIndex % postsPerDay) + 1;
+          const postIndexInDay = currentIndex % postsPerDay;
+          const postInDay = postIndexInDay + 1;
           const dayLabel =
             postsPerDay > 1
               ? `Day ${dayOffset + 1} · Post ${postInDay}`
@@ -10935,13 +11013,23 @@ const dnaList = [
             : (typeof SAMPLE_IMAGES !== "undefined" && SAMPLE_IMAGES[0]) || "/image/Sample Image 1.jpg";
           const imgUrl = item.imageUrl || item.image || fallbackImg;
 
+          if (!bulkScheduleData.dailyAssignments) bulkScheduleData.dailyAssignments = {};
+          let timeInfo = bulkScheduleData.dailyAssignments[item.id];
+          if (!timeInfo || !timeInfo.manual) {
+            timeInfo = getDefaultDailyTime(timeVal, p, postIndexInDay, postsPerDay);
+            bulkScheduleData.dailyAssignments[item.id] = { ...timeInfo, manual: false };
+          }
+
           assignments.push({
             id: item.id,
             title: item.title,
             brand: item.brand,
             contentType: item.contentType,
             imageUrl: imgUrl,
-            date: `${formattedDate} · ${timeVal} ${p}`,
+            formattedDate,
+            time24: timeInfo.time24,
+            displayTime: timeInfo.display,
+            date: `${formattedDate} · ${timeInfo.display}`,
             dayLabel,
           });
           currentIndex++;
@@ -10993,12 +11081,46 @@ const dnaList = [
           </div>
 
           <!-- Right side: Day Label, Date/Time, and Drag Handle (Daily Post only) -->
-          <div class="flex items-center gap-2.5 shrink-0">
+          <div class="flex items-center gap-2 shrink-0">
             ${a.dayLabel ? `<span class="px-2 py-0.5 rounded-md bg-white border border-[#eaecf0] text-[11px] font-medium text-[#71717a] shadow-2xs">${a.dayLabel}</span>` : ""}
+            
+            ${
+              isDailyPost
+                ? `
+            <div class="flex items-center gap-1.5 text-[12px] font-semibold text-[#18181b]">
+              <span class="flex items-center gap-1 text-[#71717a] font-normal">
+                <i class="ti ti-calendar text-[13px]"></i>
+                ${a.formattedDate}
+              </span>
+              <span class="text-[#d4d4d8]">·</span>
+              
+              <!-- Editable Time Pill -->
+              <div 
+                class="relative flex items-center gap-1 px-2.5 py-1 rounded-lg border border-[#eaecf0] bg-white hover:border-[#18181b] hover:bg-[#fafafa] transition-all cursor-pointer shadow-2xs group/time"
+                title="Click to change time"
+                onclick="this.querySelector('input')?.showPicker?.()"
+                onmousedown="event.stopPropagation()"
+              >
+                <i class="ti ti-clock text-[#71717a] group-hover/time:text-[#18181b] text-[12px]"></i>
+                <span class="text-[11.5px] font-semibold text-[#18181b] whitespace-nowrap">${a.displayTime}</span>
+                <i class="ti ti-chevron-down text-[10px] text-[#a1a1aa] group-hover/time:text-[#18181b]"></i>
+                <input
+                  type="time"
+                  value="${a.time24}"
+                  class="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                  onchange="updateBulkPreviewItemTime('${a.id}', this.value)"
+                  onclick="try{ this.showPicker() }catch(e){}"
+                />
+              </div>
+            </div>
+            `
+                : `
             <span class="text-[12px] font-semibold text-[#18181b] flex items-center gap-1.5">
               <i class="ti ti-calendar text-[#71717a] text-[13px]"></i>
               ${a.date}
             </span>
+            `
+            }
 
             ${
               isDailyPost
@@ -11192,20 +11314,39 @@ const dnaList = [
           return;
         }
 
-        const [hStr, mStr] = timeVal.split(":");
-        const finalTime = get24HourTime(hStr, mStr, p);
         const baseDate = parseScheduleDate(startVal);
         const startY = baseDate.getFullYear();
         const startM = baseDate.getMonth();
         const startD = baseDate.getDate();
-        const [h24Str, m24Str] = finalTime.split(":");
-        const hNum = parseInt(h24Str, 10) || 0;
-        const mNum = parseInt(m24Str, 10) || 0;
 
         let currentIndex = 0;
         items.forEach((item) => {
           const dayOffset = Math.floor(currentIndex / postsPerDay);
-          const d = new Date(startY, startM, startD + dayOffset, hNum, mNum, 0);
+          const postIndexInDay = currentIndex % postsPerDay;
+
+          let itemH = 8;
+          let itemM = 0;
+
+          const assigned =
+            bulkScheduleData.dailyAssignments &&
+            bulkScheduleData.dailyAssignments[item.id];
+          if (assigned && assigned.time24) {
+            const [hPart, mPart] = assigned.time24.split(":");
+            itemH = parseInt(hPart, 10) || 0;
+            itemM = parseInt(mPart, 10) || 0;
+          } else {
+            const defaultTimeObj = getDefaultDailyTime(
+              timeVal,
+              p,
+              postIndexInDay,
+              postsPerDay,
+            );
+            const [hPart, mPart] = defaultTimeObj.time24.split(":");
+            itemH = parseInt(hPart, 10) || 0;
+            itemM = parseInt(mPart, 10) || 0;
+          }
+
+          const d = new Date(startY, startM, startD + dayOffset, itemH, itemM, 0);
           item.status = "scheduled";
           item.scheduledAt = d.toISOString();
           item.publishedTo = [...bulkSelectedAccounts];
@@ -11234,6 +11375,7 @@ const dnaList = [
       saveGenerated();
       showToast(`Scheduled ${items.length} items successfully!`, "success");
       bulkScheduleData.itemIds = [];
+      bulkScheduleData.dailyAssignments = {};
       selectedApprovedIds = [];
       updateBulkHeader();
       closeBulkScheduleModal();
