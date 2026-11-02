@@ -13,6 +13,11 @@ import LoadingState from "../components/ui/loading-state";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
+      // Migrate legacy default from light to dark mode for existing sessions
+      if (localStorage.getItem("xeni_dark_mode_default_v2") !== "applied") {
+        localStorage.setItem("theme", "dark");
+        localStorage.setItem("xeni_dark_mode_default_v2", "applied");
+      }
       const urlTheme = new URLSearchParams(window.location.search).get("theme");
       const savedTheme = localStorage.getItem("theme");
       // Default to dark mode unless explicitly set to light

@@ -99,6 +99,11 @@ const pageIcon = currentPage.icon;
       if (localStorage.getItem("xeni_sidebar_collapsed") === "true") {
         document.documentElement.classList.add("sidebar-is-collapsed");
       }
+      // Migrate legacy default from light to dark mode for existing sessions
+      if (localStorage.getItem("xeni_dark_mode_default_v2") !== "applied") {
+        localStorage.setItem("theme", "dark");
+        localStorage.setItem("xeni_dark_mode_default_v2", "applied");
+      }
       const urlTheme = new URLSearchParams(window.location.search).get("theme");
       const savedTheme = localStorage.getItem("theme");
       // Default is dark mode unless explicitly set to light
@@ -372,12 +377,12 @@ const pageIcon = currentPage.icon;
             <img
               src="/image/Logo Xeni - Black.png"
               alt="Xeni"
-              class="logo-light h-[26px] w-auto object-contain"
+              class="logo-light h-[26px] w-auto object-contain hidden"
             />
             <img
               src="/image/Logo Xeni - Yellow.png"
               alt="Xeni"
-              class="logo-dark h-[26px] w-auto object-contain hidden"
+              class="logo-dark h-[26px] w-auto object-contain"
             />
           </a>
           <a
@@ -389,12 +394,12 @@ const pageIcon = currentPage.icon;
             <img
               src="/image/Icon Xeni - Black.png"
               alt="Xeni"
-              class="logo-light h-7 w-auto object-contain"
+              class="logo-light h-7 w-auto object-contain hidden"
             />
             <img
               src="/image/Icon Xeni - Yellow.png"
               alt="Xeni"
-              class="logo-dark h-7 w-auto object-contain hidden"
+              class="logo-dark h-7 w-auto object-contain"
             />
           </a>
           <button
@@ -779,16 +784,17 @@ const pageIcon = currentPage.icon;
                 <div class="flex items-center shrink-0">
                   <button
                     id="dark-mode-toggle"
-                    class="w-[42px] h-[22px] rounded-full bg-[#ebebef] border border-[#d1d5db] relative flex items-center p-0.5 cursor-pointer transition-all hover:border-[#9ca3af] group"
+                    class="w-[42px] h-[22px] rounded-full bg-[#373737] border border-[#444444] relative flex items-center p-0.5 cursor-pointer transition-all hover:border-[#9ca3af] group"
                     aria-label="Toggle Dark Mode"
                   >
                     <div
                       id="dark-mode-thumb"
-                      class="absolute left-0.5 w-[18px] h-[18px] rounded-full bg-white border border-[#d1d5db] shadow-sm flex items-center justify-center transition-all duration-300"
+                      class="absolute left-0.5 w-[18px] h-[18px] rounded-full bg-white border border-white shadow-sm flex items-center justify-center transition-all duration-300"
+                      style="transform: translateX(20px);"
                     >
                       <i
                         id="dark-mode-icon"
-                        class="ti ti-sun text-[10px] text-[#4b5563]"></i>
+                        class="ti ti-moon text-[10px] text-[#272727]"></i>
                     </div>
                   </button>
                 </div>
