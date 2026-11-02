@@ -67,10 +67,11 @@ const pageTitle = currentPage.label;
 const pageIcon = currentPage.icon;
 ---
 
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -94,7 +95,204 @@ const pageIcon = currentPage.icon;
       rel="stylesheet"
       href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css"
     />
+    <script is:inline>
+      if (localStorage.getItem("xeni_sidebar_collapsed") === "true") {
+        document.documentElement.classList.add("sidebar-is-collapsed");
+      }
+      const urlTheme = new URLSearchParams(window.location.search).get("theme");
+      const savedTheme = localStorage.getItem("theme");
+      // Default is dark mode unless explicitly set to light
+      if (urlTheme === "light" || (!urlTheme && savedTheme === "light")) {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
     <style is:global>
+      html, body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      /* Collapsible Sidebar Smooth Styles */
+      #app-sidebar {
+        width: 260px;
+        min-width: 260px;
+        transition: width 0.3s cubic-bezier(0.2, 0, 0, 1), min-width 0.3s cubic-bezier(0.2, 0, 0, 1);
+        overflow: visible;
+      }
+      html.sidebar-is-collapsed #app-sidebar,
+      #app-sidebar.collapsed {
+        width: 68px !important;
+        min-width: 68px !important;
+      }
+
+      /* Sidebar Header */
+      #app-sidebar .sidebar-header {
+        transition: padding 0.3s cubic-bezier(0.2, 0, 0, 1);
+      }
+      #app-sidebar .logo-expanded {
+        opacity: 1;
+        transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
+      }
+      #app-sidebar .logo-collapsed {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
+      }
+      #app-sidebar #btn-collapse-sidebar {
+        opacity: 1;
+        transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
+      }
+
+      /* Theme-based Logo switching */
+      html.dark #app-sidebar .logo-expanded img.logo-light,
+      html.dark #app-sidebar .logo-collapsed img.logo-light {
+        display: none !important;
+      }
+      html.dark #app-sidebar .logo-expanded img.logo-dark {
+        display: block !important;
+      }
+      html.dark.sidebar-is-collapsed #app-sidebar .logo-collapsed img.logo-dark,
+      html.dark #app-sidebar.collapsed .logo-collapsed img.logo-dark {
+        display: block !important;
+      }
+
+      html:not(.dark) #app-sidebar .logo-expanded img.logo-dark,
+      html:not(.dark) #app-sidebar .logo-collapsed img.logo-dark {
+        display: none !important;
+      }
+      html:not(.dark) #app-sidebar .logo-expanded img.logo-light {
+        display: block !important;
+      }
+      html:not(.dark).sidebar-is-collapsed #app-sidebar .logo-collapsed img.logo-light,
+      html:not(.dark) #app-sidebar.collapsed .logo-collapsed img.logo-light {
+        display: block !important;
+      }
+
+      html.sidebar-is-collapsed #app-sidebar .sidebar-header,
+      #app-sidebar.collapsed .sidebar-header {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        padding-top: 1.25rem !important;
+        justify-content: center !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .logo-expanded,
+      #app-sidebar.collapsed .logo-expanded {
+        display: none !important;
+        opacity: 0 !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .logo-collapsed,
+      #app-sidebar.collapsed .logo-collapsed {
+        display: flex !important;
+        opacity: 1 !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar #btn-collapse-sidebar,
+      #app-sidebar.collapsed #btn-collapse-sidebar {
+        display: none !important;
+        opacity: 0 !important;
+      }
+
+      /* Nav buttons & smooth label transitions */
+      #app-sidebar .sidebar-nav-btn {
+        white-space: nowrap;
+        overflow: hidden;
+        transition: padding 0.25s cubic-bezier(0.2, 0, 0, 1), width 0.25s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s ease;
+      }
+      #app-sidebar .sidebar-label {
+        white-space: nowrap;
+        opacity: 1;
+        transition: opacity 0.15s cubic-bezier(0.2, 0, 0, 1);
+      }
+      #app-sidebar .sidebar-heading {
+        white-space: nowrap;
+        opacity: 1;
+        transition: opacity 0.15s cubic-bezier(0.2, 0, 0, 1);
+      }
+      html.sidebar-is-collapsed #app-sidebar .sidebar-label,
+      #app-sidebar.collapsed .sidebar-label {
+        opacity: 0 !important;
+        display: none !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .sidebar-heading,
+      #app-sidebar.collapsed .sidebar-heading {
+        opacity: 0 !important;
+        display: none !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .sidebar-divider,
+      #app-sidebar.collapsed .sidebar-divider {
+        display: block !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .sidebar-nav-btn,
+      #app-sidebar.collapsed .sidebar-nav-btn {
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 42px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .sidebar-active-indicator,
+      #app-sidebar.collapsed .sidebar-active-indicator {
+        display: none !important;
+      }
+
+      /* Plan & Profile Bottom Cards */
+      #app-sidebar #sidebar-plan-card {
+        white-space: nowrap;
+        overflow: hidden;
+        transition: opacity 0.2s ease;
+      }
+      html.sidebar-is-collapsed #app-sidebar #sidebar-plan-card,
+      #app-sidebar.collapsed #sidebar-plan-card {
+        display: none !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .sidebar-plan-collapsed,
+      #app-sidebar.collapsed .sidebar-plan-collapsed {
+        display: flex !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar .profile-info,
+      #app-sidebar.collapsed .profile-info,
+      html.sidebar-is-collapsed #app-sidebar .profile-chevron,
+      #app-sidebar.collapsed .profile-chevron {
+        display: none !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar #btn-profile,
+      #app-sidebar.collapsed #btn-profile {
+        justify-content: center !important;
+        padding: 4px !important;
+        width: 42px !important;
+        height: 42px !important;
+        margin: 0 auto !important;
+        border-radius: 9999px !important;
+      }
+      html.sidebar-is-collapsed #app-sidebar #profile-dropdown,
+      #app-sidebar.collapsed #profile-dropdown {
+        left: 72px !important;
+        bottom: 8px !important;
+        width: 240px !important;
+      }
+
+      /* Outside Open Sidebar Button (beside Studio section title) */
+      .sidebar-open-btn {
+        display: none;
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1), transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+      }
+      html.sidebar-is-collapsed .sidebar-open-btn,
+      #app-sidebar.collapsed ~ div .sidebar-open-btn {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: scale(1) !important;
+      }
+      html.sidebar-is-collapsed header,
+      #app-sidebar.collapsed ~ div header {
+        padding-left: 10px !important;
+      }
+
       @keyframes shine-sweep {
         0% {
           transform: translateX(-200%) skewX(-15deg);
@@ -161,20 +359,54 @@ const pageIcon = currentPage.icon;
 
   <body class="overflow-hidden">
     <div
-      class="flex h-screen w-full overflow-hidden bg-white text-[#111827] font-sans"
+      class="app-layout-wrapper flex h-screen w-full overflow-hidden bg-white dark:bg-[#141414] text-[#111827] dark:text-[#f4f4f5] font-sans"
     >
       <!-- ═══════════ SIDEBAR ═══════════ -->
-      <aside class="w-[260px] shrink-0 flex flex-col h-full bg-white">
-        <!-- Logo -->
-        <div class="px-5 pt-5 pb-2 flex items-center justify-between shrink-0">
-          <span class="text-[20px] font-bold tracking-tight text-[#111827]"
-            >Xeni</span
+      <aside
+        id="app-sidebar"
+        class="w-[260px] shrink-0 flex flex-col h-full bg-white dark:bg-[#141414] transition-[width] duration-300 ease-in-out relative z-40 select-none border-none"
+      >
+        <!-- Logo & Collapse Button -->
+        <div class="sidebar-header px-5 pt-5 pb-2 flex items-center justify-between shrink-0 transition-all duration-300">
+          <a href="/studio" class="logo-expanded flex items-center cursor-pointer">
+            <img
+              src="/image/Logo Xeni - Black.png"
+              alt="Xeni"
+              class="logo-light h-[26px] w-auto object-contain"
+            />
+            <img
+              src="/image/Logo Xeni - Yellow.png"
+              alt="Xeni"
+              class="logo-dark h-[26px] w-auto object-contain hidden"
+            />
+          </a>
+          <a
+            href="/studio"
+            class="logo-collapsed hidden items-center justify-center cursor-pointer"
+            data-tooltip="Xeni Studio"
+            data-tooltip-pos="right"
           >
+            <img
+              src="/image/Icon Xeni - Black.png"
+              alt="Xeni"
+              class="logo-light h-7 w-auto object-contain"
+            />
+            <img
+              src="/image/Icon Xeni - Yellow.png"
+              alt="Xeni"
+              class="logo-dark h-7 w-auto object-contain hidden"
+            />
+          </a>
           <button
             id="btn-collapse-sidebar"
-            class="w-7 h-7 rounded-lg border border-[#eaecf0] flex items-center justify-center text-[#98a2b3] hover:text-[#344054] hover:bg-[#f9fafb] transition-colors cursor-pointer"
+            class="w-7 h-7 rounded-lg flex items-center justify-center text-[#98a2b3] hover:text-[#344054] hover:bg-[#f3f4f6] transition-colors cursor-pointer shrink-0"
+            data-tooltip="Collapse sidebar"
+            data-tooltip-pos="right"
+            aria-label="Toggle sidebar"
           >
-            <i class="ti ti-layout-sidebar-left-collapse text-[14px]"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M13.9142 12L18.7071 7.20712L17.2929 5.79291L11.0858 12L17.2929 18.2071L18.7071 16.7929L13.9142 12ZM7 18V6.00001H9V18H7Z"></path>
+            </svg>
           </button>
         </div>
 
@@ -194,9 +426,11 @@ const pageIcon = currentPage.icon;
                     : "text-[#667085] hover:bg-[#F3F4F6] hover:text-black",
                 ]}
                 data-page={item.id}
+                data-tooltip={item.label}
+                data-tooltip-pos="right"
               >
                 {activePage === item.id && (
-                  <div class="absolute left-[-14px] w-[4px] h-6 bg-[#111827] rounded-r-full" />
+                  <div class="sidebar-active-indicator absolute left-[-14px] w-[4px] h-6 bg-[#111827] rounded-r-full" />
                 )}
                 {item.id === "studio" ? (
                   <svg
@@ -273,16 +507,17 @@ const pageIcon = currentPage.icon;
                     ]}
                   />
                 )}
-                {item.label}
+                <span class="sidebar-label truncate">{item.label}</span>
               </a>
             ))
           }
 
           <p
-            class="px-3 pt-5 pb-1.5 text-[10px] font-bold text-[#98a2b3] uppercase tracking-wider"
+            class="sidebar-heading px-3 pt-5 pb-1.5 text-[10px] font-bold text-[#98a2b3] uppercase tracking-wider"
           >
             Intelligence
           </p>
+          <div class="sidebar-divider hidden my-2 mx-auto w-6 h-px bg-[#eaecf0]"></div>
           {
             toolNav.map((item) => (
               <a
@@ -294,30 +529,34 @@ const pageIcon = currentPage.icon;
                     : "text-[#667085] hover:bg-[#F3F4F6] hover:text-black",
                 ]}
                 data-page={item.id}
+                data-tooltip={item.label}
+                data-tooltip-pos="right"
               >
                 {activePage === item.id && (
                   <div class="absolute left-[-14px] w-[4px] h-6 bg-[#111827] rounded-r-full" />
                 )}
                 {item.id === "business-dna" ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class:list={[
-                      "transition-colors flex-shrink-0",
-                      activePage === item.id
-                        ? "text-black"
-                        : "text-[#98a2b3] group-hover:text-black",
-                    ]}
-                  >
-                    <path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
-                  </svg>
+                  <div class="w-[15px] h-[15px] flex items-center justify-center shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="8.5"
+                      height="13"
+                      viewBox="0 0 12 18"
+                      fill="none"
+                      class:list={[
+                        "transition-colors flex-shrink-0",
+                        activePage === item.id
+                          ? "text-black"
+                          : "text-[#98a2b3] group-hover:text-black",
+                      ]}
+                    >
+                      <path d="M8.57112 5.7264L10.2856 5.72845V7.36354L12 7.36456V10.6368H10.2856V7.36456L8.5722 7.36354L8.57112 5.72743H3.42888V4.09131H1.71444V2.4552L0 2.45417V0H1.71444V2.45417L3.42888 2.4552V4.09131H8.57112L8.5722 2.4552L10.2856 2.45417V0H12V2.45417L10.2856 2.4552V4.09131H8.57112V5.7264Z" fill="currentColor"/>
+                      <path d="M8.57112 13.9098L3.42888 13.9088V15.5459H1.71444V18.0001H0V15.5459H1.71444V13.9098H3.42888V12.2726H1.71444V10.6365H0V7.36328H1.71444V10.6365H3.42888V12.2737L8.57112 12.2726L8.5722 13.9098H10.2856V15.5459H12V18.0001H10.2856V15.5459H8.5722L8.57112 13.9098Z" fill="currentColor"/>
+                      <path d="M7.71501 0H4.28613V1.63611H7.71501V0Z" fill="currentColor"/>
+                      <path d="M7.71501 8.18262H4.28613V9.81873H7.71501V8.18262Z" fill="currentColor"/>
+                      <path d="M7.71501 16.3633H4.28613V17.9994H7.71501V16.3633Z" fill="currentColor"/>
+                    </svg>
+                  </div>
                 ) : item.id === "content-automation" ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +611,7 @@ const pageIcon = currentPage.icon;
                     ]}
                   />
                 )}
-                {item.label}
+                <span class="sidebar-label truncate">{item.label}</span>
               </a>
             ))
           }
@@ -380,6 +619,41 @@ const pageIcon = currentPage.icon;
 
         <!-- Bottom: Actions + Credits + Profile -->
         <div class="p-3 flex flex-col gap-0.5 shrink-0">
+          <!-- Collapsed View for Plan & Credits -->
+          <div class="sidebar-plan-collapsed hidden flex-col items-center gap-1.5 mb-2">
+            <button
+              class="w-9 h-9 rounded-xl flex items-center justify-center text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-colors cursor-pointer border border-[#eaecf0]"
+              data-tooltip="300 Credits"
+              data-tooltip-pos="right"
+              onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'subscription' } }))"
+              aria-label="View Credits"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="text-[#667085]"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.949 9.61616C20.6497 10.6155 22 11.1151 22 12C22 12.8848 20.6497 13.3845 17.949 14.3838L16.4429 14.9411C15.9036 15.1407 15.6339 15.2405 15.4372 15.4372C15.2405 15.6339 15.1407 15.9036 14.9411 16.4429L14.3838 17.949C13.3845 20.6497 12.8848 22 12 22C11.1151 22 10.6155 20.6497 9.61616 17.949L9.05883 16.4429C8.85926 15.9036 8.75948 15.6339 8.56277 15.4372C8.36606 15.2405 8.09641 15.1407 7.5571 14.9411L6.05093 14.3838C3.3503 13.3845 1.99998 12.8848 1.99998 12C1.99998 11.1151 3.3503 10.6155 6.05093 9.61616L7.5571 9.05883C8.09641 8.85926 8.36606 8.75948 8.56277 8.56277C8.75948 8.36606 8.85926 8.09641 9.05883 7.5571L9.61616 6.05093C10.6155 3.3503 11.1151 1.99998 12 1.99998C12.8848 1.99998 13.3845 3.3503 14.3838 6.05093L14.9411 7.5571C15.1407 8.09641 15.2405 8.36606 15.4372 8.56277C15.6339 8.75948 15.9036 8.85926 16.4429 9.05883L17.949 9.61616Z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+            <button
+              class="btn-upgrade-trigger btn-upgrade-collapsed w-9 h-9 rounded-xl flex items-center justify-center text-amber-500 hover:bg-amber-50 transition-colors cursor-pointer border border-[#eaecf0]"
+              data-tooltip="Upgrade to Pro"
+              data-tooltip-pos="right"
+              aria-label="Upgrade to Pro"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M239.75,90.81c0,.11,0,.21-.07.32L217,195a16,16,0,0,1-15.72,13H54.71A16,16,0,0,1,39,195L16.32,91.13c0-.11-.05-.21-.07-.32A16,16,0,0,1,44,77.39l33.67,36.29,35.8-80.29a1,1,0,0,0,0-.1,16,16,0,0,1,29.06,0,1,1,0,0,0,0,.1l35.8,80.29L212,77.39a16,16,0,0,1,27.71,13.42Z"></path>
+              </svg>
+            </button>
+          </div>
+
           <!-- Plan & Credits -->
           <div
             id="sidebar-plan-card"
@@ -432,10 +706,12 @@ const pageIcon = currentPage.icon;
           </div>
 
           <!-- Profile Widget -->
-          <div class="relative mx-1" id="profile-wrapper">
+          <div class="relative w-full" id="profile-wrapper">
             <button
               id="btn-profile"
-              class="w-full flex items-center justify-between px-2 py-2 rounded-xl border border-[#eaecf0] bg-transparent hover:bg-[#F9FAFB] transition-colors focus:outline-none group"
+              class="w-full flex items-center justify-between px-2 py-2 rounded-xl border border-[#eaecf0] bg-transparent hover:bg-[#F9FAFB] transition-colors focus:outline-none group cursor-pointer"
+              data-tooltip="Jane Cooper (jane@xeni.io)"
+              data-tooltip-pos="right"
             >
               <div class="flex items-center gap-2.5 min-w-0">
                 <div
@@ -447,7 +723,7 @@ const pageIcon = currentPage.icon;
                     alt="avatar"
                   />
                 </div>
-                <div class="flex flex-col text-left min-w-0">
+                <div class="profile-info flex flex-col text-left min-w-0">
                   <span class="text-[13px] font-bold text-[#111827] truncate"
                     >Jane Cooper</span
                   >
@@ -457,6 +733,7 @@ const pageIcon = currentPage.icon;
                 </div>
               </div>
               <svg
+                id="profile-chevron"
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
                 height="14"
@@ -466,7 +743,7 @@ const pageIcon = currentPage.icon;
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="text-[#98a2b3] group-hover:text-[#667085] shrink-0 transition-colors"
+                class="profile-chevron text-[#98a2b3] group-hover:text-[#667085] shrink-0 transition-colors"
                 ><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"
                 ></path></svg
               >
@@ -475,12 +752,12 @@ const pageIcon = currentPage.icon;
             <!-- Profile Dropdown -->
             <div
               id="profile-dropdown"
-              class="hidden absolute bottom-full left-[46px] w-[236px] mb-2 bg-white border border-[#eaecf0] rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.08)] p-1.5 z-50"
+              class="hidden absolute bottom-full left-[46px] w-[240px] mb-2 bg-white dark:bg-[#272727] border border-[#eaecf0] dark:border-[#28282c] rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.45)] p-1.5 z-50"
             >
               <!-- User Info Header -->
-              <div class="flex items-center gap-3 px-3 py-3 mb-[3px]">
+              <div class="flex items-center gap-2.5 px-2.5 py-2.5 mb-[3px]">
                 <div
-                  class="w-10 h-10 rounded-full bg-white border border-[#eaecf0] overflow-hidden shrink-0"
+                  class="w-9 h-9 rounded-full bg-white border border-[#eaecf0] overflow-hidden shrink-0"
                 >
                   <img
                     src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
@@ -499,7 +776,7 @@ const pageIcon = currentPage.icon;
                   </p>
                 </div>
                 <!-- Dark Mode Toggle Switch -->
-                <div class="flex items-center">
+                <div class="flex items-center shrink-0">
                   <button
                     id="dark-mode-toggle"
                     class="w-[42px] h-[22px] rounded-full bg-[#ebebef] border border-[#d1d5db] relative flex items-center p-0.5 cursor-pointer transition-all hover:border-[#9ca3af] group"
@@ -606,18 +883,32 @@ const pageIcon = currentPage.icon;
 
       <!-- ═══════════ MAIN AREA ═══════════ -->
       <div
-        class="flex-1 flex flex-col min-w-0 bg-[#F3F4F6] rounded-[16px] my-3 mr-3 overflow-hidden relative border border-[#eaecf0]"
+        class="main-app-container flex-1 flex flex-col min-w-0 bg-[#F3F4F6] dark:bg-[#141414] rounded-[16px] my-3 mr-3 overflow-hidden relative border border-[#eaecf0] dark:border-[#222226]"
       >
         <!-- Top Bar with Compact Breadcrumb -->
         <header
-          class={`h-[64px] absolute top-0 left-0 right-0 flex items-center px-6 justify-between bg-transparent z-30 pointer-events-none ${activePage !== "studio" ? "hidden" : ""}`}
+          class="h-[64px] absolute top-0 left-0 right-0 flex items-center px-6 justify-between bg-transparent z-30 pointer-events-none"
         >
-          <!-- Left: Breadcrumb -->
+          <!-- Left: Breadcrumb & Sidebar Expand Button -->
           <div
-            class="flex items-center gap-2 text-[15px] font-bold text-[#111827] pointer-events-auto ml-[5px]"
+            class="flex items-center gap-2 text-[15px] font-bold text-[#111827] dark:text-white pointer-events-auto"
           >
-            {
-              activePage === "studio" ? (
+            <!-- Button open sidebar (outside sidebar, beside title section) -->
+            <button
+              id="btn-open-sidebar"
+              class="sidebar-open-btn w-7 h-7 rounded-lg items-center justify-center text-[#98a2b3] dark:text-[#a1a1aa] hover:text-[#344054] dark:hover:text-white hover:bg-[#e4e7ec] dark:hover:bg-[#222226] transition-all cursor-pointer shrink-0"
+              data-tooltip="Expand sidebar"
+              data-tooltip-pos="right"
+              aria-label="Expand sidebar"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                <path d="M10.0858 12L5.29289 16.7929L6.70711 18.2071L12.9142 12L6.70711 5.79291L5.29289 7.20712L10.0858 12ZM17 6.00002L17 18H15L15 6.00002L17 6.00002Z"></path>
+              </svg>
+            </button>
+
+            <div class={`flex items-center gap-2 ${activePage !== "studio" ? "hidden" : ""}`}>
+              {
+                activePage === "studio" ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -635,20 +926,22 @@ const pageIcon = currentPage.icon;
                   <path d="M17 17.5V13.5"></path>
                 </svg>
               ) : activePage === "business-dna" ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="text-[#98a2b3] flex-shrink-0"
-                >
-                  <path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
-                </svg>
+                <div class="w-[18px] h-[18px] flex items-center justify-center shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="15"
+                    viewBox="0 0 12 18"
+                    fill="none"
+                    class="text-[#98a2b3] flex-shrink-0"
+                  >
+                    <path d="M8.57112 5.7264L10.2856 5.72845V7.36354L12 7.36456V10.6368H10.2856V7.36456L8.5722 7.36354L8.57112 5.72743H3.42888V4.09131H1.71444V2.4552L0 2.45417V0H1.71444V2.45417L3.42888 2.4552V4.09131H8.57112L8.5722 2.4552L10.2856 2.45417V0H12V2.45417L10.2856 2.4552V4.09131H8.57112V5.7264Z" fill="currentColor"/>
+                    <path d="M8.57112 13.9098L3.42888 13.9088V15.5459H1.71444V18.0001H0V15.5459H1.71444V13.9098H3.42888V12.2726H1.71444V10.6365H0V7.36328H1.71444V10.6365H3.42888V12.2737L8.57112 12.2726L8.5722 13.9098H10.2856V15.5459H12V18.0001H10.2856V15.5459H8.5722L8.57112 13.9098Z" fill="currentColor"/>
+                    <path d="M7.71501 0H4.28613V1.63611H7.71501V0Z" fill="currentColor"/>
+                    <path d="M7.71501 8.18262H4.28613V9.81873H7.71501V8.18262Z" fill="currentColor"/>
+                    <path d="M7.71501 16.3633H4.28613V17.9994H7.71501V16.3633Z" fill="currentColor"/>
+                  </svg>
+                </div>
               ) : activePage === "content-automation" ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -721,6 +1014,7 @@ const pageIcon = currentPage.icon;
               )
             }
             <span>{pageTitle}</span>
+            </div>
           </div>
 
           <!-- Right: Controls -->
@@ -871,13 +1165,23 @@ const pageIcon = currentPage.icon;
           });
 
           const sidebarPlanCard = document.getElementById("sidebar-plan-card");
+          const isDark = document.documentElement.classList.contains("dark");
 
           if (sidebarPlanCard) {
             if (isPro) {
-              sidebarPlanCard.style.background = "linear-gradient(135deg, #FFFFFF 10%, #FFFDF5 45%, #FEF3C7 100%)";
+              sidebarPlanCard.classList.add("plan-pro-active");
               sidebarPlanCard.classList.remove("bg-transparent");
+              if (isDark) {
+                sidebarPlanCard.style.background = "linear-gradient(135deg, #1c1913 0%, #151518 100%)";
+                sidebarPlanCard.style.borderColor = "#3d3319";
+              } else {
+                sidebarPlanCard.style.background = "linear-gradient(135deg, #FFFFFF 10%, #FFFDF5 45%, #FEF3C7 100%)";
+                sidebarPlanCard.style.borderColor = "#fef08a";
+              }
             } else {
+              sidebarPlanCard.classList.remove("plan-pro-active");
               sidebarPlanCard.style.background = "";
+              sidebarPlanCard.style.borderColor = "";
               sidebarPlanCard.classList.add("bg-transparent");
             }
           }
@@ -885,10 +1189,14 @@ const pageIcon = currentPage.icon;
           document.querySelectorAll(".btn-plan-action").forEach((btn) => {
             if (isPro) {
               btn.textContent = "Manage";
-              btn.className = "btn-upgrade-trigger btn-plan-action px-3 py-1 rounded-full bg-white/90 hover:bg-white text-[#18181b] text-[11px] font-medium transition-all cursor-pointer border border-[#eaecf0] shadow-xs backdrop-blur-xs";
+              btn.className = isDark
+                ? "btn-upgrade-trigger btn-plan-action px-3 py-1 rounded-full bg-[#242428] hover:bg-[#2e2e34] text-white text-[11px] font-medium transition-all cursor-pointer border border-[#3e3e46] shadow-xs"
+                : "btn-upgrade-trigger btn-plan-action px-3 py-1 rounded-full bg-white/90 hover:bg-white text-[#18181b] text-[11px] font-medium transition-all cursor-pointer border border-[#eaecf0] shadow-xs backdrop-blur-xs";
             } else {
               btn.textContent = "Upgrade";
-              btn.className = "btn-upgrade-trigger btn-plan-action px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer";
+              btn.className = isDark
+                ? "btn-upgrade-trigger btn-plan-action px-3.5 py-1 rounded-full bg-white text-[#18181b] text-[11px] font-medium hover:bg-zinc-200 transition-colors cursor-pointer"
+                : "btn-upgrade-trigger btn-plan-action px-3.5 py-1 rounded-full bg-[#111827] text-white text-[11px] font-medium hover:bg-black transition-colors cursor-pointer";
             }
           });
 
@@ -896,6 +1204,14 @@ const pageIcon = currentPage.icon;
           if (sidebarCredits) {
             sidebarCredits.textContent = isPro ? "1,500" : "300";
           }
+
+          document.querySelectorAll(".btn-upgrade-collapsed").forEach((el) => {
+            if (isPro) {
+              el.setAttribute("data-tooltip", "Pro Plan");
+            } else {
+              el.setAttribute("data-tooltip", "Upgrade to Pro");
+            }
+          });
         }
 
         // Initialize on load
@@ -909,45 +1225,119 @@ const pageIcon = currentPage.icon;
           syncSidebarPlanUI("pro");
         });
 
+        // --- Sidebar Collapse/Expand Toggle ---
+        const sidebar = document.getElementById("app-sidebar");
+        const btnCollapseSidebar = document.getElementById("btn-collapse-sidebar");
+        const btnOpenSidebar = document.getElementById("btn-open-sidebar");
+
+        function setSidebarCollapsed(collapsed) {
+          if (!sidebar) return;
+          if (collapsed) {
+            document.documentElement.classList.add("sidebar-is-collapsed");
+            sidebar.classList.add("collapsed");
+            localStorage.setItem("xeni_sidebar_collapsed", "true");
+          } else {
+            document.documentElement.classList.remove("sidebar-is-collapsed");
+            sidebar.classList.remove("collapsed");
+            localStorage.setItem("xeni_sidebar_collapsed", "false");
+          }
+        }
+
+        const isCollapsedInitial =
+          localStorage.getItem("xeni_sidebar_collapsed") === "true";
+        setSidebarCollapsed(isCollapsedInitial);
+
+        if (btnCollapseSidebar) {
+          btnCollapseSidebar.addEventListener("click", () => {
+            setSidebarCollapsed(true);
+          });
+        }
+
+        if (btnOpenSidebar) {
+          btnOpenSidebar.addEventListener("click", () => {
+            setSidebarCollapsed(false);
+          });
+        }
+
+        // Shortcut: Cmd/Ctrl + B to toggle sidebar
+        window.addEventListener("keydown", (e) => {
+          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
+            const activeTag = document.activeElement?.tagName;
+            if (activeTag === "INPUT" || activeTag === "TEXTAREA") return;
+            e.preventDefault();
+            const isCurrentlyCollapsed =
+              sidebar?.classList.contains("collapsed") ||
+              document.documentElement.classList.contains("sidebar-is-collapsed");
+            setSidebarCollapsed(!isCurrentlyCollapsed);
+          }
+        });
+
         // --- Dark Mode Toggle ---
         const darkModeToggle = document.getElementById("dark-mode-toggle");
         const darkModeThumb = document.getElementById("dark-mode-thumb");
         const darkModeIcon = document.getElementById("dark-mode-icon");
 
-        let isDarkMode = localStorage.getItem("theme") === "dark";
+        const queryTheme = new URLSearchParams(window.location.search).get("theme");
+        const savedTheme = localStorage.getItem("theme");
+        let isDarkMode = queryTheme ? queryTheme === "dark" : savedTheme !== "light";
 
         function updateTheme(dark) {
           if (dark) {
             document.documentElement.classList.add("dark");
-            if (darkModeThumb)
+            if (darkModeThumb) {
               darkModeThumb.style.transform = "translateX(20px)";
-            if (darkModeThumb) darkModeThumb.style.backgroundColor = "#111827";
-            if (darkModeThumb) darkModeThumb.style.borderColor = "#1f2937";
-            if (darkModeToggle)
-              darkModeToggle.style.backgroundColor = "#111827";
-            if (darkModeToggle) darkModeToggle.style.borderColor = "#1f2937";
-            if (darkModeIcon)
-              darkModeIcon.className = "ti ti-moon text-[10px] text-white";
+              darkModeThumb.style.backgroundColor = "#ffffff";
+              darkModeThumb.style.borderColor = "#ffffff";
+            }
+            if (darkModeToggle) {
+              darkModeToggle.style.backgroundColor = "#373737";
+              darkModeToggle.style.borderColor = "#444444";
+            }
+            if (darkModeIcon) {
+              darkModeIcon.className = "ti ti-moon text-[10px] text-[#272727]";
+            }
             localStorage.setItem("theme", "dark");
           } else {
             document.documentElement.classList.remove("dark");
-            if (darkModeThumb)
+            if (darkModeThumb) {
               darkModeThumb.style.transform = "translateX(0px)";
-            if (darkModeThumb) darkModeThumb.style.backgroundColor = "#ffffff";
-            if (darkModeThumb) darkModeThumb.style.borderColor = "#d1d5db";
-            if (darkModeToggle)
+              darkModeThumb.style.backgroundColor = "#ffffff";
+              darkModeThumb.style.borderColor = "#d1d5db";
+            }
+            if (darkModeToggle) {
               darkModeToggle.style.backgroundColor = "#ebebef";
-            if (darkModeToggle) darkModeToggle.style.borderColor = "#d1d5db";
-            if (darkModeIcon)
+              darkModeToggle.style.borderColor = "#d1d5db";
+            }
+            if (darkModeIcon) {
               darkModeIcon.className = "ti ti-sun text-[10px] text-[#4b5563]";
+            }
             localStorage.setItem("theme", "light");
           }
+
+          // Sync logo visibility for expanded and collapsed sidebars
+          document.querySelectorAll(".logo-light").forEach((el) => {
+            if (dark) el.classList.add("hidden");
+            else el.classList.remove("hidden");
+          });
+          document.querySelectorAll(".logo-dark").forEach((el) => {
+            if (dark) el.classList.remove("hidden");
+            else el.classList.add("hidden");
+          });
+
+          // Sync sidebar plan card for current theme
+          syncSidebarPlanUI();
+
+          // Dispatch theme change event
+          window.dispatchEvent(
+            new CustomEvent("theme-change", { detail: { isDark: dark } })
+          );
         }
 
         // Initialize theme
         updateTheme(isDarkMode);
 
-        darkModeToggle?.addEventListener("click", () => {
+        darkModeToggle?.addEventListener("click", (e) => {
+          e.stopPropagation();
           isDarkMode = !isDarkMode;
           updateTheme(isDarkMode);
         });
@@ -1043,6 +1433,15 @@ const pageIcon = currentPage.icon;
               if (!target || !(target instanceof Element)) return;
               const el = target.closest("[data-tooltip], [title]");
               if (!el) {
+                if (activeTarget) hideTooltip();
+                return;
+              }
+              const sb = el.closest("#app-sidebar");
+              if (
+                sb &&
+                !sb.classList.contains("collapsed") &&
+                el.classList.contains("sidebar-nav-btn")
+              ) {
                 if (activeTarget) hideTooltip();
                 return;
               }
@@ -1165,10 +1564,10 @@ const pageIcon = currentPage.icon;
         if (type === "error") {
           // ReUI c-alert-8 variant="destructive"
           toast.className =
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(239,68,68,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-red-500/30 bg-red-50/95 text-red-950 backdrop-blur-sm select-none";
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(239,68,68,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-red-500/30 bg-red-50/95 dark:bg-[#1e1113] dark:border-red-500/30 text-red-950 dark:text-white backdrop-blur-sm select-none";
           if (toastIconContainer) {
             toastIconContainer.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 dark:text-red-400">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="8" x2="12" y2="12"></line>
                 <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -1177,20 +1576,20 @@ const pageIcon = currentPage.icon;
           }
           if (toastTitle) {
             toastTitle.className =
-              "text-[13px] font-medium tracking-tight text-red-950 leading-none whitespace-nowrap";
+              "text-[13px] font-medium tracking-tight text-red-950 dark:text-white leading-none whitespace-nowrap";
             toastTitle.textContent = message;
           }
           if (toastCloseBtn) {
             toastCloseBtn.className =
-              "text-red-700/60 hover:text-red-950 hover:bg-red-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+              "text-red-700/60 dark:text-red-400/60 hover:text-red-950 dark:hover:text-white hover:bg-red-100/60 dark:hover:bg-red-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
           }
         } else if (type === "warning") {
           // ReUI variant="warning"
           toast.className =
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-amber-500/30 bg-amber-50/95 text-amber-950 backdrop-blur-sm select-none";
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-amber-500/30 bg-amber-50/95 dark:bg-[#1f170a] dark:border-amber-500/30 text-amber-950 dark:text-white backdrop-blur-sm select-none";
           if (toastIconContainer) {
             toastIconContainer.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400">
                 <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
                 <line x1="12" y1="9" x2="12" y2="13"></line>
                 <line x1="12" y1="17" x2="12.01" y2="17"></line>
@@ -1199,20 +1598,20 @@ const pageIcon = currentPage.icon;
           }
           if (toastTitle) {
             toastTitle.className =
-              "text-[13px] font-medium tracking-tight text-amber-950 leading-none whitespace-nowrap";
+              "text-[13px] font-medium tracking-tight text-amber-950 dark:text-white leading-none whitespace-nowrap";
             toastTitle.textContent = message;
           }
           if (toastCloseBtn) {
             toastCloseBtn.className =
-              "text-amber-700/60 hover:text-amber-950 hover:bg-amber-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+              "text-amber-700/60 dark:text-amber-400/60 hover:text-amber-950 dark:hover:text-white hover:bg-amber-100/60 dark:hover:bg-amber-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
           }
         } else if (type === "info") {
           // ReUI variant="info"
           toast.className =
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(59,130,246,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-blue-500/30 bg-blue-50/95 text-blue-950 backdrop-blur-sm select-none";
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(59,130,246,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-blue-500/30 bg-blue-50/95 dark:bg-[#0e1726] dark:border-blue-500/30 text-blue-950 dark:text-white backdrop-blur-sm select-none";
           if (toastIconContainer) {
             toastIconContainer.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="16" x2="12" y2="12"></line>
                 <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -1221,20 +1620,20 @@ const pageIcon = currentPage.icon;
           }
           if (toastTitle) {
             toastTitle.className =
-              "text-[13px] font-medium tracking-tight text-blue-950 leading-none whitespace-nowrap";
+              "text-[13px] font-medium tracking-tight text-blue-950 dark:text-white leading-none whitespace-nowrap";
             toastTitle.textContent = message;
           }
           if (toastCloseBtn) {
             toastCloseBtn.className =
-              "text-blue-700/60 hover:text-blue-950 hover:bg-blue-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+              "text-blue-700/60 dark:text-blue-400/60 hover:text-blue-950 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-blue-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
           }
         } else {
           // ReUI c-alert-6 variant="success"
           toast.className =
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 text-emerald-950 backdrop-blur-sm select-none";
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 dark:bg-[#0f1c15] dark:border-emerald-500/30 text-emerald-950 dark:text-white backdrop-blur-sm select-none";
           if (toastIconContainer) {
             toastIconContainer.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 dark:text-emerald-400">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="m9 12 2 2 4-4"></path>
               </svg>
@@ -1242,12 +1641,12 @@ const pageIcon = currentPage.icon;
           }
           if (toastTitle) {
             toastTitle.className =
-              "text-[13px] font-medium tracking-tight text-emerald-950 leading-none whitespace-nowrap";
+              "text-[13px] font-medium tracking-tight text-emerald-950 dark:text-white leading-none whitespace-nowrap";
             toastTitle.textContent = message;
           }
           if (toastCloseBtn) {
             toastCloseBtn.className =
-              "text-emerald-700/60 hover:text-emerald-950 hover:bg-emerald-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
+              "text-emerald-700/60 dark:text-emerald-400/60 hover:text-emerald-950 dark:hover:text-white hover:bg-emerald-100/60 dark:hover:bg-emerald-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5";
           }
         }
 

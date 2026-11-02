@@ -25,7 +25,8 @@ const {
 
 <div class={`w-full shrink-0 ${compact ? 'px-4 pb-4' : 'max-w-3xl mx-auto px-8 pb-6'}`}>
     <div
-        class="relative flex flex-col p-2.5 rounded-[24px] bg-white border border-[#eaecf0] shadow-sm focus-within:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all"
+        id="ai-input-card"
+        class="relative flex flex-col p-2.5 rounded-2xl bg-white border border-[#eaecf0] shadow-sm focus-within:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all"
     >
         <!-- Input Area -->
         <div class="flex items-start gap-2 px-1 relative">
@@ -176,7 +177,7 @@ const {
                 <div class="relative">
                     <button
                         id="btn-references"
-                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none"
+                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737] text-[12px] font-medium text-[#344054] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] dark:hover:text-white transition-all cursor-pointer select-none"
                         data-tooltip="Add References"
                     >
                         <i class="ti ti-plus text-[14px]"></i>
@@ -185,25 +186,25 @@ const {
                     <!-- References Dropdown Menu -->
                     <div
                         id="references-dropdown"
-                        class="hidden absolute left-0 top-full mt-1.5 w-[200px] bg-white rounded-xl border border-[#eaecf0] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-top-1 duration-200 flex flex-col gap-0.5"
+                        class="hidden absolute left-0 top-full mt-1.5 w-[200px] bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-xl p-1.5 z-40 animate-in fade-in slide-in-from-top-1 duration-200 flex flex-col gap-0.5"
                     >
                         <button
                             id="btn-add-local"
-                            class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all flex items-center gap-2.5 cursor-pointer"
+                            class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#373737] hover:text-[#111827] dark:hover:text-white transition-all flex items-center gap-2.5 cursor-pointer"
                         >
                             <i class="ti ti-upload text-[15px] opacity-70"></i>
                             Add from local files
                         </button>
                         <button
                             id="btn-add-prod-ref"
-                            class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all flex items-center gap-2.5 cursor-pointer"
+                            class="w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#373737] hover:text-[#111827] dark:hover:text-white transition-all flex items-center gap-2.5 cursor-pointer"
                         >
                             <i class="ti ti-box text-[15px] opacity-70"></i>
                             Add product references
                         </button>
                         <button
                             id="btn-add-canvas-ref"
-                            class:list={["w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] hover:text-[#111827] transition-all flex items-center gap-2.5 cursor-pointer", compact ? '' : 'hidden']}
+                            class:list={["w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium text-[#344054] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#373737] hover:text-[#111827] dark:hover:text-white transition-all flex items-center gap-2.5 cursor-pointer", compact ? '' : 'hidden']}
                         >
                             <i class="ti ti-capture text-[15px] opacity-70"></i>
                             Select from canvas
@@ -214,29 +215,29 @@ const {
                 </div>
                 <button
                     id="btn-business-dna"
-                    class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                    class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737] text-[12px] font-medium text-[#344054] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] dark:hover:text-white transition-all cursor-pointer"
                     data-tooltip="Business DNA"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
+                        width="8.5"
+                        height="13"
+                        viewBox="0 0 12 18"
                         fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
                         class="flex-shrink-0"
                     >
-                        <path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
+                        <path d="M8.57112 5.7264L10.2856 5.72845V7.36354L12 7.36456V10.6368H10.2856V7.36456L8.5722 7.36354L8.57112 5.72743H3.42888V4.09131H1.71444V2.4552L0 2.45417V0H1.71444V2.45417L3.42888 2.4552V4.09131H8.57112L8.5722 2.4552L10.2856 2.45417V0H12V2.45417L10.2856 2.4552V4.09131H8.57112V5.7264Z" fill="currentColor"/>
+                        <path d="M8.57112 13.9098L3.42888 13.9088V15.5459H1.71444V18.0001H0V15.5459H1.71444V13.9098H3.42888V12.2726H1.71444V10.6365H0V7.36328H1.71444V10.6365H3.42888V12.2737L8.57112 12.2726L8.5722 13.9098H10.2856V15.5459H12V18.0001H10.2856V15.5459H8.5722L8.57112 13.9098Z" fill="currentColor"/>
+                        <path d="M7.71501 0H4.28613V1.63611H7.71501V0Z" fill="currentColor"/>
+                        <path d="M7.71501 8.18262H4.28613V9.81873H7.71501V8.18262Z" fill="currentColor"/>
+                        <path d="M7.71501 16.3633H4.28613V17.9994H7.71501V16.3633Z" fill="currentColor"/>
                     </svg>
                     Business DNA
                 </button>
                 <div class="relative">
                     <button
                         id="btn-aspect-ratio"
-                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] bg-white text-[12px] font-medium text-[#344054] hover:bg-[#F9FAFB] transition-all cursor-pointer"
+                        class="flex items-center gap-2 px-4 h-8 rounded-full border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737] text-[12px] font-medium text-[#344054] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] dark:hover:text-white transition-all cursor-pointer"
                         data-tooltip="Aspect Ratio"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" color="currentColor" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
@@ -272,7 +273,7 @@ const {
             <div class="flex items-center">
                 <button
                     id="btn-generate-ai"
-                    class="w-9 h-9 inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-100 cursor-pointer select-none whitespace-nowrap bg-[#111827] text-white border border-[#374151] shadow-[0_3px_0_0_#374151] hover:bg-black active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151]"
+                    class="w-9 h-9 inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-100 cursor-pointer select-none whitespace-nowrap bg-[#111827] dark:bg-white text-white dark:text-[#272727] border border-[#374151] dark:border-white shadow-[0_3px_0_0_#374151] dark:shadow-[0_3px_0_0_#d4d4d8] hover:bg-black dark:hover:bg-zinc-100 active:translate-y-[1px] active:shadow-[0_1px_0_0_#374151] dark:active:shadow-[0_1px_0_0_#d4d4d8]"
                     data-tooltip="Generate"
                 >
                     <i class="ti ti-arrow-right text-[16px]"></i>
@@ -607,7 +608,7 @@ const {
                     i.classList.add("border-[#eaecf0]", "bg-white");
                     i.querySelector(".check-badge")?.classList.add("hidden");
                 });
-                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>`;
+                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="8.5" height="13" viewBox="0 0 12 18" fill="none" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="M8.57112 5.7264L10.2856 5.72845V7.36354L12 7.36456V10.6368H10.2856V7.36456L8.5722 7.36354L8.57112 5.72743H3.42888V4.09131H1.71444V2.4552L0 2.45417V0H1.71444V2.45417L3.42888 2.4552V4.09131H8.57112L8.5722 2.4552L10.2856 2.45417V0H12V2.45417L10.2856 2.4552V4.09131H8.57112V5.7264Z" fill="currentColor"/><path d="M8.57112 13.9098L3.42888 13.9088V15.5459H1.71444V18.0001H0V15.5459H1.71444V13.9098H3.42888V12.2726H1.71444V10.6365H0V7.36328H1.71444V10.6365H3.42888V12.2737L8.57112 12.2726L8.5722 13.9098H10.2856V15.5459H12V18.0001H10.2856V15.5459H8.5722L8.57112 13.9098Z" fill="currentColor"/><path d="M7.71501 0H4.28613V1.63611H7.71501V0Z" fill="currentColor"/><path d="M7.71501 8.18262H4.28613V9.81873H7.71501V8.18262Z" fill="currentColor"/><path d="M7.71501 16.3633H4.28613V17.9994H7.71501V16.3633Z" fill="currentColor"/></svg>`;
                 btnBusinessDNA.innerHTML = `${dnaSvg} Business DNA`;
                 btnBusinessDNA.classList.remove(
                     "text-[#2563EB]",
@@ -646,7 +647,7 @@ const {
             });
 
             confirmBusinessDNA?.addEventListener("click", () => {
-                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>`;
+                const dnaSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="8.5" height="13" viewBox="0 0 12 18" fill="none" class="flex-shrink-0 inline-block align-middle mr-1.5"><path d="M8.57112 5.7264L10.2856 5.72845V7.36354L12 7.36456V10.6368H10.2856V7.36456L8.5722 7.36354L8.57112 5.72743H3.42888V4.09131H1.71444V2.4552L0 2.45417V0H1.71444V2.45417L3.42888 2.4552V4.09131H8.57112L8.5722 2.4552L10.2856 2.45417V0H12V2.45417L10.2856 2.4552V4.09131H8.57112V5.7264Z" fill="currentColor"/><path d="M8.57112 13.9098L3.42888 13.9088V15.5459H1.71444V18.0001H0V15.5459H1.71444V13.9098H3.42888V12.2726H1.71444V10.6365H0V7.36328H1.71444V10.6365H3.42888V12.2737L8.57112 12.2726L8.5722 13.9098H10.2856V15.5459H12V18.0001H10.2856V15.5459H8.5722L8.57112 13.9098Z" fill="currentColor"/><path d="M7.71501 0H4.28613V1.63611H7.71501V0Z" fill="currentColor"/><path d="M7.71501 8.18262H4.28613V9.81873H7.71501V8.18262Z" fill="currentColor"/><path d="M7.71501 16.3633H4.28613V17.9994H7.71501V16.3633Z" fill="currentColor"/></svg>`;
                 if (selectedDNAName) {
                     btnBusinessDNA.innerHTML = `${dnaSvg} ${selectedDNAName}`;
                     btnBusinessDNA.classList.add(

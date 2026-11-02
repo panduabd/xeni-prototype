@@ -78,7 +78,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
   class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200"
 >
   <div
-    class="bg-white w-full max-w-5xl h-[640px] rounded-[32px] shadow-2xl flex overflow-hidden animate-in zoom-in-95 duration-300 relative border border-[#eaecf0]"
+    class="bg-white dark:bg-[#272727] w-full max-w-5xl h-[640px] rounded-[32px] shadow-2xl flex overflow-hidden animate-in zoom-in-95 duration-300 relative border border-[#eaecf0] dark:border-[#28282c]"
   >
     <!-- Close Button (Top Right of Content Panel) -->
     <button
@@ -98,7 +98,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
           <!-- Profile Tab Button -->
           <button
             id="tab-btn-profile"
-            class="manage-account-tab-btn flex items-center gap-3 px-3 h-9 rounded-lg text-xs font-medium text-[#111827] bg-white shadow-xs transition-colors cursor-pointer text-left w-full"
+            class="manage-account-tab-btn active flex items-center gap-3 px-3 h-9 rounded-lg text-xs font-medium text-[#111827] bg-white shadow-xs transition-colors cursor-pointer text-left w-full"
             data-tab="profile"
           >
             <i class="ti ti-user-circle text-[16px]"></i>
@@ -314,17 +314,17 @@ import SocialIcon from "../icons/SocialIcon.astro";
           <!-- Usage History -->
           <div class="space-y-3 pt-1">
             <h4 class="text-sm font-semibold text-[#111827]">Usage History</h4>
-            <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+            <div class="border border-[#eaecf0] dark:border-[#28282c] rounded-xl overflow-hidden shadow-xs bg-white dark:bg-[#1a1a1d] text-xs">
               <table class="w-full text-left border-collapse">
                 <thead>
-                  <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                  <tr class="bg-[#fafafa] dark:bg-[#141414] border-b border-[#eaecf0] dark:border-[#28282c] text-[#71717a] dark:text-[#a1a1aa] text-[11px] font-medium uppercase tracking-wider">
                     <th class="px-4 py-2.5">Activity</th>
                     <th class="px-4 py-2.5">Date</th>
                     <th class="px-4 py-2.5 text-right">Amount</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
-                  <tr class="hover:bg-[#fafafa]/50 transition-colors">
+                <tbody class="divide-y divide-[#eaecf0] dark:divide-[#28282c] text-[#18181b]">
+                  <tr class="hover:bg-[#fafafa]/50 dark:hover:bg-[#222226] transition-colors">
                     <td class="px-4 py-3 font-medium text-[#111827]">Registration Welcome Bonus</td>
                     <td class="px-4 py-3 text-[#71717a]">2026-09-09 10:00</td>
                     <td class="px-4 py-3 text-right font-medium text-emerald-600">+30</td>
@@ -425,16 +425,16 @@ import SocialIcon from "../icons/SocialIcon.astro";
           <!-- Usage History -->
           <div class="space-y-3 pt-1">
             <h4 class="text-sm font-semibold text-[#111827]">Usage History</h4>
-            <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+            <div class="border border-[#eaecf0] dark:border-[#28282c] rounded-xl overflow-hidden shadow-xs bg-white dark:bg-[#1a1a1d] text-xs">
               <table class="w-full text-left border-collapse">
                 <thead>
-                  <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                  <tr class="bg-[#fafafa] dark:bg-[#141414] border-b border-[#eaecf0] dark:border-[#28282c] text-[#71717a] dark:text-[#a1a1aa] text-[11px] font-medium uppercase tracking-wider">
                     <th class="px-4 py-2.5">Activity</th>
                     <th class="px-4 py-2.5">Date</th>
                     <th class="px-4 py-2.5 text-right">Amount</th>
                   </tr>
                 </thead>
-                <tbody id="pro-usage-table-body" class="divide-y divide-[#eaecf0] text-[#18181b]">
+                <tbody id="pro-usage-table-body" class="divide-y divide-[#eaecf0] dark:divide-[#28282c] text-[#18181b]">
                   <tr class="hover:bg-[#fafafa]/50 transition-colors">
                     <td class="px-4 py-3 font-medium text-[#111827]">AI Social Studio Generation (8 Images)</td>
                     <td class="px-4 py-3 text-[#71717a]">2026-09-09 14:15</td>
@@ -492,10 +492,10 @@ import SocialIcon from "../icons/SocialIcon.astro";
             <span class="text-xs text-[#71717a]">All recorded transactions</span>
           </div>
 
-          <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+          <div class="border border-[#eaecf0] dark:border-[#28282c] rounded-xl overflow-hidden shadow-xs bg-white dark:bg-[#1a1a1d] text-xs">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                <tr class="bg-[#fafafa] dark:bg-[#141414] border-b border-[#eaecf0] dark:border-[#28282c] text-[#71717a] dark:text-[#a1a1aa] text-[11px] font-medium uppercase tracking-wider">
                   <th class="px-4 py-2.5">Invoice ID</th>
                   <th class="px-4 py-2.5">Date</th>
                   <th class="px-4 py-2.5">Description</th>
@@ -504,7 +504,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
                   <th class="px-4 py-2.5 text-right">Invoice</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
+              <tbody class="divide-y divide-[#eaecf0] dark:divide-[#28282c] text-[#18181b]">
                 <tr class="hover:bg-[#fafafa]/50 transition-colors">
                   <td class="px-4 py-3 font-medium text-[#111827] font-mono">INV-2026-009</td>
                   <td class="px-4 py-3 text-[#71717a]">Sep 09, 2026</td>
@@ -773,10 +773,10 @@ import SocialIcon from "../icons/SocialIcon.astro";
             <h4 class="text-sm font-semibold text-[#111827]">Recent Referral Activity</h4>
           </div>
 
-          <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+          <div class="border border-[#eaecf0] dark:border-[#28282c] rounded-xl overflow-hidden shadow-xs bg-white dark:bg-[#1a1a1d] text-xs">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+                <tr class="bg-[#fafafa] dark:bg-[#141414] border-b border-[#eaecf0] dark:border-[#28282c] text-[#71717a] dark:text-[#a1a1aa] text-[11px] font-medium uppercase tracking-wider">
                   <th class="px-4 py-2.5">User</th>
                   <th class="px-4 py-2.5">Plan</th>
                   <th class="px-4 py-2.5">Date</th>
@@ -784,7 +784,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
                   <th class="px-4 py-2.5 text-right">Commission (20%)</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
+              <tbody class="divide-y divide-[#eaecf0] dark:divide-[#28282c] text-[#18181b]">
                 <tr class="hover:bg-[#fafafa]/50 transition-colors">
                   <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">al***@gmail.com</td>
                   <td class="px-4 py-3">
@@ -1147,10 +1147,10 @@ import SocialIcon from "../icons/SocialIcon.astro";
     </div>
 
     <!-- History Table -->
-    <div class="border border-[#eaecf0] rounded-xl overflow-hidden shadow-xs bg-white text-xs">
+    <div class="border border-[#eaecf0] dark:border-[#28282c] rounded-xl overflow-hidden shadow-xs bg-white dark:bg-[#1a1a1d] text-xs">
       <table class="w-full text-left border-collapse">
         <thead>
-          <tr class="bg-[#fafafa] border-b border-[#eaecf0] text-[#71717a] text-[11px] font-medium uppercase tracking-wider">
+          <tr class="bg-[#fafafa] dark:bg-[#141414] border-b border-[#eaecf0] dark:border-[#28282c] text-[#71717a] dark:text-[#a1a1aa] text-[11px] font-medium uppercase tracking-wider">
             <th class="px-4 py-2.5">Reference</th>
             <th class="px-4 py-2.5">Date</th>
             <th class="px-4 py-2.5">Method</th>
@@ -1159,7 +1159,7 @@ import SocialIcon from "../icons/SocialIcon.astro";
             <th class="px-4 py-2.5 text-right">Receipt</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-[#eaecf0] text-[#18181b]">
+        <tbody class="divide-y divide-[#eaecf0] dark:divide-[#28282c] text-[#18181b]">
           <tr class="hover:bg-[#fafafa]/50 transition-colors">
             <td class="px-4 py-3 font-mono text-[11px] text-[#111827]">PAY-9481</td>
             <td class="px-4 py-3 text-[#71717a]">Sep 01, 2026</td>
@@ -1953,10 +1953,10 @@ import SocialIcon from "../icons/SocialIcon.astro";
     function switchTab(tabId) {
       tabButtons.forEach(btn => {
         if (btn.getAttribute("data-tab") === tabId) {
-          btn.classList.add("bg-white", "text-[#111827]", "shadow-xs");
+          btn.classList.add("active", "bg-white", "text-[#111827]", "shadow-xs");
           btn.classList.remove("text-[#475467]", "hover:bg-white/60", "hover:text-[#111827]");
         } else {
-          btn.classList.remove("bg-white", "text-[#111827]", "shadow-xs");
+          btn.classList.remove("active", "bg-white", "text-[#111827]", "shadow-xs");
           btn.classList.add("text-[#475467]", "hover:bg-white/60", "hover:text-[#111827]");
         }
       });

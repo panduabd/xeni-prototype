@@ -136,7 +136,7 @@ const activityLog = [
     >
       <!-- Left: Title -->
       <div class="flex items-center gap-2.5 shrink-0">
-        <h1 class="text-[20px] font-semibold text-[#18181b] tracking-tight">
+        <h1 class="text-[20px] font-semibold text-[#18181b] dark:text-white tracking-tight">
           Inbox
         </h1>
       </div>
@@ -145,20 +145,20 @@ const activityLog = [
     <!-- Controls Row: Tabs and Filters -->
     <div class="flex items-center justify-between mb-4 shrink-0">
       <!-- Navigation Tabs (Messages, Comments, Activity) -->
-      <div id="inbox-tabs-container" class="relative flex items-center gap-1 p-1 bg-white rounded-xl border border-[#eaecf0] shadow-xs w-fit">
+      <div id="inbox-tabs-container" class="relative flex items-center gap-1 p-1 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-xs w-fit">
         <!-- Sliding active indicator pill -->
         <div
           id="inbox-tabs-indicator"
-          class="absolute top-1 bottom-1 rounded-lg bg-[#18181b] shadow-xs pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          class="absolute top-1 bottom-1 rounded-lg bg-[#18181b] dark:bg-[#373737] shadow-xs pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style="left: 4px; width: 0px;"
         ></div>
         <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-white transition-colors duration-200 cursor-pointer" data-tab="messages">
           Messages
         </button>
-        <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] transition-colors duration-200 cursor-pointer" data-tab="comments">
+        <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-colors duration-200 cursor-pointer" data-tab="comments">
           Comments
         </button>
-        <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] transition-colors duration-200 cursor-pointer" data-tab="activity">
+        <button class="inbox-tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-colors duration-200 cursor-pointer" data-tab="activity">
           Activity
         </button>
       </div>
@@ -167,39 +167,39 @@ const activityLog = [
       <div class="flex items-center gap-2" id="inbox-filter-container">
         <!-- Social Media Platform Filter Dropdown -->
         <div class="relative" id="platform-filter-wrapper">
-          <button id="btn-platform-filter" class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer select-none">
+          <button id="btn-platform-filter" class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] dark:border-[#383838] bg-white dark:bg-[#373737] text-[12px] font-medium text-[#667085] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] transition-all cursor-pointer select-none">
             <span id="current-platform-icon-container" class="flex items-center justify-center shrink-0 w-4 h-4">
               <i class="ti ti-world text-[14px] text-[#98a2b3]"></i>
             </span>
             <span id="current-platform-label">All Channels</span>
             <i class="ti ti-chevron-down text-[12px] text-[#98a2b3]"></i>
           </button>
-          <div id="platform-filter-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 p-1 flex flex-col gap-0.5 animate-in fade-in slide-in-from-top-1 duration-200">
-            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-semibold text-[#111827] bg-[#F3F4F6] transition-colors cursor-pointer text-left" data-value="all">
+          <div id="platform-filter-dropdown" class="hidden absolute top-full left-0 mt-1.5 w-48 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 p-1 flex flex-col gap-0.5 animate-in fade-in slide-in-from-top-1 duration-200">
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-semibold text-[#111827] dark:text-white bg-[#F3F4F6] dark:bg-[#373737] transition-colors cursor-pointer text-left" data-value="all">
               <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
                 <i class="ti ti-world text-[14px] text-[#98a2b3]"></i>
               </span>
               All Channels
             </button>
-            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="facebook">
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] hover:text-[#111827] dark:hover:text-white transition-colors cursor-pointer text-left" data-value="facebook">
               <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
                 <SocialIcon platform="facebook" size="sm" />
               </span>
               Facebook
             </button>
-            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="threads">
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] hover:text-[#111827] dark:hover:text-white transition-colors cursor-pointer text-left" data-value="threads">
               <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
                 <SocialIcon platform="threads" size="sm" />
               </span>
               Threads
             </button>
-            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="instagram">
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] hover:text-[#111827] dark:hover:text-white transition-colors cursor-pointer text-left" data-value="instagram">
               <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
                 <SocialIcon platform="instagram" size="sm" />
               </span>
               Instagram
             </button>
-            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer text-left" data-value="tiktok">
+            <button class="platform-option w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] font-medium text-[#667085] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] hover:text-[#111827] dark:hover:text-white transition-colors cursor-pointer text-left" data-value="tiktok">
               <span class="platform-icon-holder flex items-center justify-center w-4 h-4 shrink-0">
                 <SocialIcon platform="tiktok" size="sm" />
               </span>
@@ -209,41 +209,41 @@ const activityLog = [
         </div>
 
         <!-- Status Filter Tabs -->
-        <div class="flex items-center h-9 rounded-xl border border-[#D0D5DD] bg-white overflow-hidden" id="status-filter-group">
-          <button class="status-filter-btn active px-3 h-full text-[12px] font-semibold text-[#111827] bg-[#F3F4F6] transition-all cursor-pointer border-r border-[#eaecf0]" data-status="all">All</button>
-          <button class="status-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-status="unread">Unread</button>
-          <button class="status-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-status="sent">Sent (AI)</button>
-          <button class="status-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer" data-status="failed">Failed</button>
+        <div class="flex items-center p-1 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-[#f4f4f5] dark:bg-[#373737] h-9" id="status-filter-group">
+          <button class="status-filter-btn active px-3 h-7 rounded-lg text-[12px] font-medium text-[#18181b] dark:text-white bg-white dark:bg-[#373737] shadow-xs transition-all cursor-pointer" data-status="all">All</button>
+          <button class="status-filter-btn px-3 h-7 rounded-lg text-[12px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer" data-status="unread">Unread</button>
+          <button class="status-filter-btn px-3 h-7 rounded-lg text-[12px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer" data-status="sent">Sent (AI)</button>
+          <button class="status-filter-btn px-3 h-7 rounded-lg text-[12px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer" data-status="failed">Failed</button>
         </div>
 
         <!-- Activity Filter Tabs -->
-        <div class="hidden items-center h-9 rounded-xl border border-[#D0D5DD] bg-white overflow-hidden" id="activity-filter-group">
-          <button class="activity-filter-btn active px-3 h-full text-[12px] font-semibold text-[#111827] bg-[#F3F4F6] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="all">All</button>
-          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="messages">Messages</button>
-          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="comments">Comments</button>
-          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer border-r border-[#eaecf0]" data-category="automations">Automations</button>
-          <button class="activity-filter-btn px-3 h-full text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer" data-category="systems">Systems</button>
+        <div class="hidden items-center p-1 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-[#f4f4f5] dark:bg-[#373737] h-9" id="activity-filter-group">
+          <button class="activity-filter-btn active px-3 h-7 rounded-lg text-[12px] font-medium text-[#18181b] dark:text-white bg-white dark:bg-[#373737] shadow-xs transition-all cursor-pointer" data-category="all">All</button>
+          <button class="activity-filter-btn px-3 h-7 rounded-lg text-[12px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer" data-category="messages">Messages</button>
+          <button class="activity-filter-btn px-3 h-7 rounded-lg text-[12px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer" data-category="comments">Comments</button>
+          <button class="activity-filter-btn px-3 h-7 rounded-lg text-[12px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer" data-category="automations">Automations</button>
+          <button class="activity-filter-btn px-3 h-7 rounded-lg text-[12px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer" data-category="systems">Systems</button>
         </div>
 
         <!-- Business Filter (Far Right) -->
         <div class="relative" id="business-filter-wrapper">
-          <button id="btn-business-filter" class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] bg-white text-[12px] font-medium text-[#667085] hover:bg-[#F9FAFB] transition-all cursor-pointer">
+          <button id="btn-business-filter" class="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-[#D0D5DD] dark:border-[#383838] bg-white dark:bg-[#373737] text-[12px] font-medium text-[#667085] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] transition-all cursor-pointer">
             <i class="ti ti-building text-[14px]"></i>
             <span id="current-business-label">All Business</span>
             <i class="ti ti-chevron-down text-[12px] text-[#98a2b3]"></i>
           </button>
-          <div id="business-filter-dropdown" class="hidden absolute top-full right-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 overflow-hidden flex flex-col">
+          <div id="business-filter-dropdown" class="hidden absolute top-full right-0 mt-1.5 w-56 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-[0_4px_24px_rgba(0,0,0,0.08)] z-50 overflow-hidden flex flex-col">
             <!-- Mini Search Bar for Filter -->
-            <div class="p-2 border-b border-[#eaecf0] bg-[#F9FAFB]">
+            <div class="p-2 border-b border-[#eaecf0] dark:border-[#383838] bg-[#F9FAFB] dark:bg-[#141414]">
               <div class="relative">
                 <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[11px]"></i>
-                <input type="text" class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border-[#111827] focus:ring-1 focus:ring-[#111827]" placeholder="Search..." />
+                <input type="text" class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white dark:bg-[#373737] border border-[#D0D5DD] dark:border-[#383838] rounded-lg focus:outline-none focus:border-[#111827] dark:focus:border-white focus:ring-1 focus:ring-[#111827] dark:focus:ring-white dark:text-white" placeholder="Search..." />
               </div>
             </div>
             <!-- Scrollable List -->
             <div class="flex flex-col p-1 max-h-[220px] overflow-y-auto custom-scrollbar biz-options-container">
               {dnaList.map(dna => (
-                <button class="business-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] hover:bg-[#F9FAFB] hover:text-[#111827] transition-colors cursor-pointer" data-id={dna.id}>
+                <button class="business-option w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-[#667085] dark:text-[#d1d5db] hover:bg-[#F9FAFB] dark:hover:bg-[#454545] hover:text-[#111827] dark:hover:text-white transition-colors cursor-pointer" data-id={dna.id}>
                   {dna.name}
                 </button>
               ))}
@@ -254,46 +254,46 @@ const activityLog = [
     </div>
 
     <!-- Content Container -->
-    <div class="flex-1 bg-white rounded-3xl border border-[#eaecf0] overflow-hidden shadow-sm flex flex-col relative min-h-0">
+    <div class="flex-1 bg-white dark:bg-[#272727] rounded-3xl border border-[#eaecf0] dark:border-[#383838] overflow-hidden shadow-sm flex flex-col relative min-h-0">
       
       <!-- ====================== TAB: MESSAGES ====================== -->
       <div id="content-messages" class="flex w-full h-full absolute inset-0 tab-pane-animate">
         <!-- Left Panel: Chat List -->
-        <div class="w-[320px] h-full border-r border-[#eaecf0] flex flex-col bg-[#F9FAFB]">
+        <div class="w-[320px] h-full border-r border-[#eaecf0] dark:border-[#383838] flex flex-col bg-[#F9FAFB] dark:bg-[#141414]">
           <!-- Search bar inside list -->
-          <div class="p-3 border-b border-[#eaecf0] bg-white">
+          <div class="p-3 border-b border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#272727]">
             <div class="relative">
               <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[13px]"></i>
-              <input id="search-messages" type="text" placeholder="Search messages..." class="w-full h-8 pl-8 pr-3 rounded-lg bg-[#F3F4F6] border-transparent text-[12px] placeholder:text-[#98a2b3] focus:bg-white focus:border-[#eaecf0] transition-all outline-none" />
+              <input id="search-messages" type="text" placeholder="Search messages..." class="w-full h-8 pl-8 pr-3 rounded-lg bg-[#F3F4F6] dark:bg-[#373737] border-transparent text-[12px] placeholder:text-[#98a2b3] dark:placeholder:text-[#71717a] dark:text-white focus:bg-white dark:focus:bg-[#373737] focus:border-[#eaecf0] dark:focus:border-[#444444] transition-all outline-none" />
             </div>
           </div>
           <!-- Chat List Scrollable -->
           <div class="flex-1 overflow-y-auto custom-scrollbar" id="message-list-container">
             {mockMessages.map((msg, index) => (
               <div 
-                class={`message-item p-3.5 border-b border-[#eaecf0] flex items-start gap-3 cursor-pointer transition-colors hover:bg-white relative ${index === 0 ? 'bg-white' : ''}`}
+                class={`message-item p-3.5 border-b border-[#eaecf0] dark:border-[#383838] flex items-start gap-3 cursor-pointer transition-colors hover:bg-white dark:hover:bg-[#454545] relative ${index === 0 ? 'bg-white dark:bg-[#373737]' : ''}`}
                 data-id={msg.id}
                 data-business={msg.businessId}
                 data-status={msg.status}
                 data-platform={msg.platform}
               >
-                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827]"></div>}
+                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827] dark:bg-[#facc15]"></div>}
                 <div class="relative shrink-0">
-                  <img src={msg.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] bg-white" />
-                  <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white flex items-center justify-center shadow-sm border border-[#f3f4f6]">
+                  <img src={msg.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737]" />
+                  <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white dark:bg-[#272727] flex items-center justify-center shadow-sm border border-[#f3f4f6] dark:border-[#444444]">
                     <SocialIcon platform={msg.platform} size="sm" />
                   </div>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center justify-between mb-0.5">
-                    <h4 class="text-[13px] font-bold text-[#111827] truncate">{msg.user}</h4>
-                    <span class="text-[10px] text-[#98a2b3] font-medium">{msg.time}</span>
+                    <h4 class="text-[13px] font-bold text-[#111827] dark:text-white truncate">{msg.user}</h4>
+                    <span class="text-[10px] text-[#98a2b3] dark:text-[#71717a] font-medium">{msg.time}</span>
                   </div>
-                  <p class={`text-[12px] truncate ${msg.status === 'unread' ? 'font-semibold text-[#111827]' : 'text-[#667085]'} ${msg.status === 'failed' ? 'text-red-500' : ''}`}>
+                  <p class={`text-[12px] truncate ${msg.status === 'unread' ? 'font-semibold text-[#111827] dark:text-white' : 'text-[#667085] dark:text-[#9ca3af]'} ${msg.status === 'failed' ? 'text-red-500' : ''}`}>
                     {msg.lastMessage}
                   </p>
                   <div class="flex items-center gap-1.5 mt-1">
-                    <span class="text-[10px] px-1.5 py-0.5 rounded-md bg-[#F3F4F6] text-[#667085] font-medium">
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-md bg-[#F3F4F6] dark:bg-[#373737] text-[#667085] dark:text-[#9ca3af] font-medium">
                       {dnaList.find(d => d.id === msg.businessId)?.name || 'Business'}
                     </span>
                     {msg.status === 'unread' && <div class="w-1.5 h-1.5 rounded-full bg-[#2563EB]"></div>}
@@ -306,14 +306,14 @@ const activityLog = [
         </div>
 
         <!-- Right Panel: Chatbox -->
-        <div class="flex-1 h-full flex flex-col bg-white">
+        <div class="flex-1 h-full flex flex-col bg-white dark:bg-[#272727]">
           <!-- Chat Header -->
-          <div class="h-16 border-b border-[#eaecf0] flex items-center justify-between px-6 shrink-0">
+          <div class="h-16 border-b border-[#eaecf0] dark:border-[#383838] flex items-center justify-between px-6 shrink-0">
             <div class="flex items-center gap-3">
-              <img id="active-chat-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-9 h-9 rounded-full border border-[#eaecf0]" />
+              <img id="active-chat-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-9 h-9 rounded-full border border-[#eaecf0] dark:border-[#444444]" />
               <div>
-                <h3 class="text-[14px] font-bold text-[#111827]" id="active-chat-name">Alex Johnson</h3>
-                <p class="text-[11px] text-[#667085] flex items-center gap-1.5" id="active-chat-platform-info">
+                <h3 class="text-[14px] font-bold text-[#111827] dark:text-white" id="active-chat-name">Alex Johnson</h3>
+                <p class="text-[11px] text-[#667085] dark:text-[#9ca3af] flex items-center gap-1.5" id="active-chat-platform-info">
                   <span id="active-chat-platform-icon" class="inline-flex items-center justify-center">
                     <SocialIcon platform="instagram" size="sm" />
                   </span>
@@ -324,33 +324,33 @@ const activityLog = [
           </div>
 
           <!-- Chat Messages Area -->
-          <div class="flex-1 p-6 overflow-y-auto flex flex-col gap-4 custom-scrollbar bg-[#FDFDFD]" id="chat-messages-scroll">
+          <div class="flex-1 p-6 overflow-y-auto flex flex-col gap-4 custom-scrollbar bg-[#FDFDFD] dark:bg-[#141414]" id="chat-messages-scroll">
             <!-- Date break -->
             <div class="flex justify-center my-2">
-              <span class="text-[10px] font-bold text-[#98a2b3] uppercase tracking-wider px-2 py-1 rounded-md bg-[#F3F4F6]">Today</span>
+              <span class="text-[10px] font-bold text-[#98a2b3] dark:text-[#71717a] uppercase tracking-wider px-2 py-1 rounded-md bg-[#F3F4F6] dark:bg-[#373737]">Today</span>
             </div>
 
             <div class="flex items-start gap-3 max-w-[80%] self-start">
-              <div class="w-8 h-8 rounded-full bg-[#F3F4F6] border border-[#eaecf0] shrink-0 mt-1 overflow-hidden">
+              <div class="w-8 h-8 rounded-full bg-[#F3F4F6] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] shrink-0 mt-1 overflow-hidden">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-full h-full"/>
               </div>
               <div class="flex flex-col gap-1 items-start">
-                <div class="px-4 py-2.5 rounded-2xl rounded-tl-none bg-white border border-[#eaecf0] text-[13px] text-[#111827] shadow-sm leading-relaxed">
+                <div class="px-4 py-2.5 rounded-2xl rounded-tl-none bg-white dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] text-[13px] text-[#111827] dark:text-white shadow-sm leading-relaxed">
                   Hello! I saw your post about the new detox juice.
                 </div>
-                <span class="text-[10px] text-[#98a2b3] ml-1">10:30 AM</span>
+                <span class="text-[10px] text-[#98a2b3] dark:text-[#71717a] ml-1">10:30 AM</span>
               </div>
             </div>
 
             <div class="flex items-start gap-3 max-w-[80%] self-start">
-              <div class="w-8 h-8 rounded-full bg-[#F3F4F6] border border-[#eaecf0] shrink-0 mt-1 overflow-hidden">
+              <div class="w-8 h-8 rounded-full bg-[#F3F4F6] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] shrink-0 mt-1 overflow-hidden">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" class="w-full h-full"/>
               </div>
               <div class="flex flex-col gap-1 items-start">
-                <div class="px-4 py-2.5 rounded-2xl rounded-tl-none bg-white border border-[#eaecf0] text-[13px] text-[#111827] shadow-sm leading-relaxed">
+                <div class="px-4 py-2.5 rounded-2xl rounded-tl-none bg-white dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] text-[13px] text-[#111827] dark:text-white shadow-sm leading-relaxed">
                   Is this still available in stock?
                 </div>
-                <span class="text-[10px] text-[#98a2b3] ml-1">10:31 AM</span>
+                <span class="text-[10px] text-[#98a2b3] dark:text-[#71717a] ml-1">10:31 AM</span>
               </div>
             </div>
 
@@ -358,16 +358,16 @@ const activityLog = [
           </div>
 
           <!-- Chat Input -->
-          <div class="p-4 border-t border-[#eaecf0] bg-white shrink-0">
-            <div class="relative bg-[#F9FAFB] rounded-xl border border-[#eaecf0] focus-within:border-[#2563EB] focus-within:ring-2 focus-within:ring-[#2563EB1A] transition-all flex flex-col">
-              <textarea placeholder="Type your reply..." class="w-full bg-transparent border-none outline-none p-3 text-[13px] text-[#111827] resize-none h-20 placeholder:text-[#98a2b3]"></textarea>
-              <div class="flex items-center justify-between p-2 border-t border-[#eaecf0]">
+          <div class="p-4 border-t border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#272727] shrink-0">
+            <div class="relative bg-[#F9FAFB] dark:bg-[#373737] rounded-xl border border-[#eaecf0] dark:border-[#383838] focus-within:border-[#2563EB] focus-within:ring-2 focus-within:ring-[#2563EB1A] transition-all flex flex-col">
+              <textarea placeholder="Type your reply..." class="w-full bg-transparent border-none outline-none p-3 text-[13px] text-[#111827] dark:text-white resize-none h-20 placeholder:text-[#98a2b3] dark:placeholder:text-[#71717a]"></textarea>
+              <div class="flex items-center justify-between p-2 border-t border-[#eaecf0] dark:border-[#383838]">
                 <div class="flex items-center gap-1">
-                  <button class="w-8 h-8 flex items-center justify-center rounded-lg text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all"><i class="ti ti-photo text-[16px]"></i></button>
-                  <button class="w-8 h-8 flex items-center justify-center rounded-lg text-[#667085] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all"><i class="ti ti-mood-smile text-[16px]"></i></button>
+                  <button class="w-8 h-8 flex items-center justify-center rounded-lg text-[#667085] dark:text-[#9ca3af] hover:bg-[#F3F4F6] dark:hover:bg-[#454545] hover:text-[#111827] dark:hover:text-white transition-all"><i class="ti ti-photo text-[16px]"></i></button>
+                  <button class="w-8 h-8 flex items-center justify-center rounded-lg text-[#667085] dark:text-[#9ca3af] hover:bg-[#F3F4F6] dark:hover:bg-[#454545] hover:text-[#111827] dark:hover:text-white transition-all"><i class="ti ti-mood-smile text-[16px]"></i></button>
                 </div>
                 <div class="flex items-center gap-2">
-                  <button class="h-8 px-4 bg-[#111827] text-white rounded-lg text-[12px] font-medium hover:bg-black transition-all flex items-center gap-1.5 shadow-sm">
+                  <button class="h-8 px-4 bg-[#111827] dark:bg-white text-white dark:text-[#272727] rounded-lg text-[12px] font-medium hover:bg-black dark:hover:bg-[#f4f4f5] transition-all flex items-center gap-1.5 shadow-sm">
                     Send
                     <i class="ti ti-send text-[12px]"></i>
                   </button>
@@ -381,35 +381,35 @@ const activityLog = [
       <!-- ====================== TAB: COMMENTS ====================== -->
       <div id="content-comments" class="hidden w-full h-full absolute inset-0 flex">
         <!-- Left Panel: Comments Notifications List -->
-        <div class="w-[340px] h-full border-r border-[#eaecf0] flex flex-col bg-[#F9FAFB]">
-          <div class="p-3 border-b border-[#eaecf0] bg-white">
+        <div class="w-[340px] h-full border-r border-[#eaecf0] dark:border-[#383838] flex flex-col bg-[#F9FAFB] dark:bg-[#141414]">
+          <div class="p-3 border-b border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#272727]">
             <div class="relative">
               <i class="ti ti-search absolute left-3 top-1/2 -translate-y-1/2 text-[#98a2b3] text-[13px]"></i>
-              <input type="text" placeholder="Search comments..." class="w-full h-8 pl-8 pr-3 rounded-lg bg-[#F3F4F6] border-transparent text-[12px] focus:bg-white focus:border-[#eaecf0] outline-none" />
+              <input type="text" placeholder="Search comments..." class="w-full h-8 pl-8 pr-3 rounded-lg bg-[#F3F4F6] dark:bg-[#373737] border-transparent text-[12px] placeholder:text-[#98a2b3] dark:placeholder:text-[#71717a] dark:text-white focus:bg-white dark:focus:bg-[#373737] focus:border-[#eaecf0] dark:focus:border-[#444444] outline-none" />
             </div>
           </div>
           
           <div class="flex-1 overflow-y-auto custom-scrollbar" id="comment-list-container">
             {mockComments.map((item, index) => (
-              <div class={`comment-item p-4 border-b border-[#eaecf0] hover:bg-white cursor-pointer transition-colors flex items-start gap-3 relative ${index === 0 ? 'bg-white' : ''}`} data-id={item.id} data-business={item.businessId} data-status={item.status}>
-                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827]"></div>}
+              <div class={`comment-item p-4 border-b border-[#eaecf0] dark:border-[#383838] hover:bg-white dark:hover:bg-[#454545] cursor-pointer transition-colors flex items-start gap-3 relative ${index === 0 ? 'bg-white dark:bg-[#373737]' : ''}`} data-id={item.id} data-business={item.businessId} data-status={item.status}>
+                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827] dark:bg-[#facc15]"></div>}
                 <div class="relative shrink-0">
-                  <img src={item.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] bg-white" />
+                  <img src={item.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737]" />
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p class="text-[12px] text-[#111827] mb-1 leading-relaxed">
+                  <p class="text-[12px] text-[#111827] dark:text-white mb-1 leading-relaxed">
                     <span class="font-bold">{item.user}</span> commented on your post
                   </p>
-                  <div class="bg-[#F3F4F6] p-2 rounded-lg border border-[#eaecf0] text-[11px] text-[#667085] mb-2 italic truncate">
+                  <div class="bg-[#F3F4F6] dark:bg-[#373737] p-2 rounded-lg border border-[#eaecf0] dark:border-[#444444] text-[11px] text-[#667085] dark:text-[#9ca3af] mb-2 italic truncate">
                     "{item.comment}"
                   </div>
                   <div class="flex items-center justify-between">
                     <div class="flex items-center gap-1.5">
                       <SocialIcon platform={item.platform} size="sm" />
-                      <span class="text-[10px] text-[#98a2b3]">{item.time}</span>
+                      <span class="text-[10px] text-[#98a2b3] dark:text-[#71717a]">{item.time}</span>
                     </div>
                     <div class="flex items-center gap-1">
-                       {item.status === 'sent' && <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#ECFDF3] text-[#12B76A] font-bold border border-[#D1FADF]">Replied by AI</span>}
+                       {item.status === 'sent' && <span class="text-[9px] px-1.5 py-0.5 rounded bg-[#ECFDF3] dark:bg-emerald-950/50 text-[#12B76A] dark:text-emerald-400 font-bold border border-[#D1FADF] dark:border-emerald-800/50">Replied by AI</span>}
                        {item.status === 'unread' && <div class="w-2 h-2 bg-[#2563EB] rounded-full"></div>}
                     </div>
                   </div>
@@ -420,54 +420,54 @@ const activityLog = [
         </div>
 
         <!-- Right Panel: Detail View -->
-        <div class="flex-1 h-full flex bg-white overflow-hidden">
+        <div class="flex-1 h-full flex bg-white dark:bg-[#272727] overflow-hidden">
           <!-- Layout split: Post preview (left) + comment reply chain (right) -->
           <div class="flex-1 flex flex-col h-full">
             <!-- Post context bar -->
-            <div class="p-4 bg-[#F9FAFB] border-b border-[#eaecf0] flex items-center gap-3">
-              <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&q=80&w=100" class="w-12 h-12 rounded-lg object-cover border border-[#eaecf0] shadow-sm" />
+            <div class="p-4 bg-[#F9FAFB] dark:bg-[#141414] border-b border-[#eaecf0] dark:border-[#383838] flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&q=80&w=100" class="w-12 h-12 rounded-lg object-cover border border-[#eaecf0] dark:border-[#444444] shadow-sm" />
               <div>
-                <span class="text-[10px] font-bold text-[#667085] uppercase tracking-wider">Originating Post</span>
-                <h4 class="text-[13px] font-bold text-[#111827]">Summer Smoothie Ad Campaign</h4>
+                <span class="text-[10px] font-bold text-[#667085] dark:text-[#71717a] uppercase tracking-wider">Originating Post</span>
+                <h4 class="text-[13px] font-bold text-[#111827] dark:text-white">Summer Smoothie Ad Campaign</h4>
               </div>
-              <button class="ml-auto h-8 px-3 rounded-lg border border-[#eaecf0] bg-white text-[11px] font-medium text-[#667085] hover:text-[#111827] transition-colors flex items-center gap-1.5">
+              <button class="ml-auto h-8 px-3 rounded-lg border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737] text-[11px] font-medium text-[#667085] dark:text-[#d1d5db] hover:text-[#111827] dark:hover:text-white transition-colors flex items-center gap-1.5">
                 View Post <i class="ti ti-external-link"></i>
               </button>
             </div>
 
             <!-- Conversation Flow for Comments -->
-            <div class="flex-1 p-6 overflow-y-auto flex flex-col gap-5 custom-scrollbar">
+            <div class="flex-1 p-6 overflow-y-auto flex flex-col gap-5 custom-scrollbar bg-white dark:bg-[#272727]">
               <!-- Original Comment -->
               <div class="flex items-start gap-3">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Michael" class="w-8 h-8 rounded-full border border-[#eaecf0]" />
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Michael" class="w-8 h-8 rounded-full border border-[#eaecf0] dark:border-[#444444]" />
                 <div class="flex-1 flex flex-col gap-1">
-                  <div class="bg-[#F3F4F6] p-3 rounded-xl rounded-tl-none inline-block w-fit border border-[#E5E7EB]">
-                    <p class="text-[12px] font-bold text-[#111827] mb-0.5">Michael Brown</p>
-                    <p class="text-[13px] text-[#374151]">Looks delicious! Highly recommended.</p>
+                  <div class="bg-[#F3F4F6] dark:bg-[#373737] p-3 rounded-xl rounded-tl-none inline-block w-fit border border-[#E5E7EB] dark:border-[#444444]">
+                    <p class="text-[12px] font-bold text-[#111827] dark:text-white mb-0.5">Michael Brown</p>
+                    <p class="text-[13px] text-[#374151] dark:text-[#d1d5db]">Looks delicious! Highly recommended.</p>
                   </div>
-                  <div class="flex items-center gap-3 text-[11px] text-[#98a2b3] ml-1 font-medium">
+                  <div class="flex items-center gap-3 text-[11px] text-[#98a2b3] dark:text-[#71717a] ml-1 font-medium">
                     <span>20m ago</span>
-                    <button class="hover:text-[#111827] transition-colors">Like</button>
-                    <button class="hover:text-[#111827] transition-colors">Reply</button>
+                    <button class="hover:text-[#111827] dark:hover:text-white transition-colors">Like</button>
+                    <button class="hover:text-[#111827] dark:hover:text-white transition-colors">Reply</button>
                   </div>
                 </div>
               </div>
 
               <!-- Divider representing depth -->
               <div class="flex items-center gap-2 ml-11">
-                <div class="h-px flex-1 bg-[#eaecf0]"></div>
-                <span class="text-[10px] font-bold text-[#98a2b3] uppercase tracking-widest">Replies</span>
-                <div class="h-px flex-1 bg-[#eaecf0]"></div>
+                <div class="h-px flex-1 bg-[#eaecf0] dark:bg-[#28282c]"></div>
+                <span class="text-[10px] font-bold text-[#98a2b3] dark:text-[#71717a] uppercase tracking-widest">Replies</span>
+                <div class="h-px flex-1 bg-[#eaecf0] dark:bg-[#28282c]"></div>
               </div>
 
 
             </div>
 
             <!-- Reply Box for manual intervention -->
-            <div class="p-4 border-t border-[#eaecf0] bg-white">
+            <div class="p-4 border-t border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#272727]">
               <div class="relative flex items-center gap-2">
-                <input type="text" placeholder="Write a comment reply..." class="flex-1 h-10 px-4 rounded-xl bg-[#F9FAFB] border border-[#eaecf0] outline-none focus:border-[#111827] transition-all text-[13px]" />
-                <button class="h-10 w-10 rounded-xl bg-[#111827] text-white flex items-center justify-center hover:bg-black transition-colors shadow-sm"><i class="ti ti-send"></i></button>
+                <input type="text" placeholder="Write a comment reply..." class="flex-1 h-10 px-4 rounded-xl bg-[#F9FAFB] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#383838] outline-none focus:border-[#111827] dark:focus:border-white text-[13px] text-[#111827] dark:text-white placeholder:text-[#98a2b3] dark:placeholder:text-[#71717a] transition-all" />
+                <button class="h-10 w-10 rounded-xl bg-[#111827] dark:bg-white text-white dark:text-[#111827] flex items-center justify-center hover:bg-black dark:hover:bg-[#e4e4e7] transition-colors shadow-sm"><i class="ti ti-send"></i></button>
               </div>
             </div>
           </div>
@@ -475,27 +475,27 @@ const activityLog = [
       </div>
 
       <!-- ====================== TAB: ACTIVITY ====================== -->
-      <div id="content-activity" class="hidden w-full h-full absolute inset-0 bg-white overflow-y-auto custom-scrollbar">
+      <div id="content-activity" class="hidden w-full h-full absolute inset-0 bg-white dark:bg-[#272727] overflow-y-auto custom-scrollbar">
         <div class="w-full flex flex-col">
           <!-- Sub-header for internal tab context -->
-          <div class="h-14 px-6 border-b border-[#eaecf0] flex items-center bg-[#FDFDFD]">
-            <h2 class="text-[14px] font-bold text-[#111827] flex items-center gap-2">
+          <div class="h-14 px-6 border-b border-[#eaecf0] dark:border-[#383838] flex items-center bg-[#FDFDFD] dark:bg-[#141414]">
+            <h2 class="text-[14px] font-bold text-[#111827] dark:text-white flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
               Activity Log
             </h2>
           </div>
 
           <!-- Full layout row items - Minimalistic Black & White with Shadcn / Lucide SVG Icons -->
-          <div class="flex flex-col divide-y divide-[#eaecf0]" id="activity-log-container">
+          <div class="flex flex-col divide-y divide-[#eaecf0] dark:divide-[#383838]" id="activity-log-container">
             {activityLog.map(log => (
-              <div class="activity-item flex items-center gap-4 px-6 py-4 hover:bg-[#F9FAFB] transition-colors" data-business={log.businessId} data-category={log.category}>
-                <div class="w-9 h-9 rounded-lg border border-[#eaecf0] bg-white flex items-center justify-center shrink-0 text-[#111827] shadow-sm">
+              <div class="activity-item flex items-center gap-4 px-6 py-4 hover:bg-[#F9FAFB] dark:hover:bg-[#373737] transition-colors" data-business={log.businessId} data-category={log.category}>
+                <div class="w-9 h-9 rounded-lg border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737] flex items-center justify-center shrink-0 text-[#111827] dark:text-white shadow-sm">
                   <Fragment set:html={log.icon} />
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-2">
-                     <p class="text-[13px] font-medium text-[#111827]">{log.desc}</p>
-                     <span class="text-[10px] px-1.5 py-0.5 bg-[#F3F4F6] text-[#667085] font-medium rounded border border-[#e5e7eb]">
+                     <p class="text-[13px] font-medium text-[#111827] dark:text-white">{log.desc}</p>
+                     <span class="text-[10px] px-1.5 py-0.5 bg-[#F3F4F6] dark:bg-[#373737] text-[#667085] dark:text-[#9ca3af] font-medium rounded border border-[#e5e7eb] dark:border-[#444444]">
                        {dnaList.find(d => d.id === log.businessId)?.name || 'System'}
                      </span>
                   </div>
@@ -678,11 +678,11 @@ const activityLog = [
       statusBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           statusBtns.forEach(b => {
-            b.classList.remove('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
-            b.classList.add('text-[#667085]', 'font-medium');
+            b.classList.remove('active', 'bg-white', 'dark:bg-[#373737]', 'text-[#18181b]', 'dark:text-white', 'shadow-xs');
+            b.classList.add('text-[#71717a]', 'dark:text-[#a1a1aa]');
           });
-          btn.classList.add('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
-          btn.classList.remove('text-[#667085]', 'font-medium');
+          btn.classList.add('active', 'bg-white', 'dark:bg-[#373737]', 'text-[#18181b]', 'dark:text-white', 'shadow-xs');
+          btn.classList.remove('text-[#71717a]', 'dark:text-[#a1a1aa]');
           
           activeStatus = btn.getAttribute('data-status');
           filterItems();
@@ -696,11 +696,11 @@ const activityLog = [
       activityBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           activityBtns.forEach(b => {
-            b.classList.remove('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
-            b.classList.add('text-[#667085]', 'font-medium');
+            b.classList.remove('active', 'bg-white', 'dark:bg-[#373737]', 'text-[#18181b]', 'dark:text-white', 'shadow-xs');
+            b.classList.add('text-[#71717a]', 'dark:text-[#a1a1aa]');
           });
-          btn.classList.add('active', 'bg-[#F3F4F6]', 'text-[#111827]', 'font-semibold');
-          btn.classList.remove('text-[#667085]', 'font-medium');
+          btn.classList.add('active', 'bg-white', 'dark:bg-[#373737]', 'text-[#18181b]', 'dark:text-white', 'shadow-xs');
+          btn.classList.remove('text-[#71717a]', 'dark:text-[#a1a1aa]');
           
           activeActivityCategory = btn.getAttribute('data-category');
           filterItems();

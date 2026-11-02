@@ -3,6 +3,15 @@
 @import "shadcn/tailwind.css";
 @import "@heroui/styles/css";
 
+@font-face {
+  font-family: "MonoForge";
+  src: url("/fonts/MonoForge-Regular.otf") format("opentype"),
+       url("/image/MonoForge-Regular.otf") format("opentype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @keyframes light-swipe {
   0% {
     transform: translateX(-100%) skewX(-15deg);
@@ -31,6 +40,7 @@
   --font-fraunces: "Poppins", sans-serif;
   --font-geist: "Poppins", sans-serif;
   --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", sans-serif;
+  --font-monoforge: "MonoForge", monospace;
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -347,3 +357,3437 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   @apply border-border dark:border-border/10;
   border-width: 0 0 var(--line-width, 1px);
 }
+
+/* ==========================================================================
+   Mobbin-inspired Dark Mode Theme
+   ========================================================================== */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark,
+html.dark body {
+  background-color: #141414 !important;
+  color: #f4f4f5 !important;
+}
+
+/* Prevent native default white scrollbar on root */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* App Outer Shell */
+html.dark .app-layout-wrapper {
+  background-color: #141414 !important;
+  color: #f4f4f5 !important;
+}
+
+/* Sidebar Shell */
+html.dark #app-sidebar {
+  background-color: #141414 !important;
+  border-right: none !important;
+  border-right-color: transparent !important;
+}
+
+/* Sidebar Nav Items in Dark Mode */
+html.dark #app-sidebar .sidebar-nav-btn.btn-active-plate {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+  border-color: #383838 !important;
+  border-bottom-color: #38383e !important;
+  box-shadow: none !important;
+}
+html.dark #app-sidebar .sidebar-nav-btn.btn-active-plate svg {
+  color: #ffffff !important;
+}
+html.dark #app-sidebar .sidebar-nav-btn.btn-active-plate .sidebar-active-indicator,
+html.dark #app-sidebar .sidebar-nav-btn.btn-active-plate div[class*="bg-[#111827]"] {
+  background-color: #facc15 !important;
+}
+
+html.dark #app-sidebar .sidebar-nav-btn:not(.btn-active-plate) {
+  color: #9ca3af !important;
+}
+html.dark #app-sidebar .sidebar-nav-btn:not(.btn-active-plate) svg {
+  color: #9ca3af !important;
+}
+html.dark #app-sidebar .sidebar-nav-btn:not(.btn-active-plate):hover {
+  background-color: #18181c !important;
+  color: #ffffff !important;
+}
+html.dark #app-sidebar .sidebar-nav-btn:not(.btn-active-plate):hover svg {
+  color: #ffffff !important;
+}
+
+html.dark #app-sidebar .sidebar-heading {
+  color: #71717a !important;
+}
+html.dark #app-sidebar .sidebar-divider {
+  background-color: #26262a !important;
+}
+
+/* Sidebar Collapse & Open Buttons */
+html.dark #btn-collapse-sidebar {
+  color: #9ca3af !important;
+}
+html.dark #btn-collapse-sidebar:hover {
+  background-color: #18181c !important;
+  color: #ffffff !important;
+}
+html.dark #btn-open-sidebar {
+  color: #9ca3af !important;
+}
+html.dark #btn-open-sidebar:hover {
+  background-color: #1f1f23 !important;
+  color: #ffffff !important;
+}
+
+/* Sidebar Plan & Credits Card */
+html.dark #sidebar-plan-card {
+  background-color: #272727 !important;
+  border-color: #26262a !important;
+}
+html.dark #sidebar-plan-card.plan-pro-active {
+  background: linear-gradient(135deg, #1c1913 0%, #151518 100%) !important;
+  border-color: #3d3319 !important;
+}
+html.dark #sidebar-plan-card .plan-label-free,
+html.dark #sidebar-plan-card .plan-label-pro span {
+  color: #ffffff !important;
+}
+html.dark #sidebar-plan-card .btn-plan-action {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+html.dark #sidebar-plan-card.plan-pro-active .btn-plan-action {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+  border-color: #3e3e46 !important;
+}
+html.dark #sidebar-plan-card.plan-pro-active .btn-plan-action:hover {
+  background-color: #454545 !important;
+}
+html.dark #sidebar-plan-divider {
+  border-color: #26262a !important;
+}
+html.dark #sidebar-plan-card.plan-pro-active #sidebar-plan-divider {
+  border-color: #2e2a1d !important;
+}
+html.dark #sidebar-credits-value {
+  color: #ffffff !important;
+}
+html.dark #btn-credit span.text-\[\#344054\] {
+  color: #d1d5db !important;
+}
+html.dark .sidebar-plan-collapsed button {
+  border-color: #26262a !important;
+  color: #9ca3af !important;
+  background-color: transparent !important;
+}
+html.dark .sidebar-plan-collapsed button:hover {
+  background-color: #18181c !important;
+  color: #ffffff !important;
+}
+
+/* Tone down white glare sweep in Dark Mode */
+html.dark .animate-shine::after {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  ) !important;
+}
+
+/* Profile Trigger & Dropdown */
+html.dark #btn-profile {
+  border-color: #26262a !important;
+  background-color: transparent !important;
+}
+html.dark #btn-profile:hover {
+  background-color: #18181c !important;
+}
+html.dark #btn-profile .profile-info span:first-child {
+  color: #ffffff !important;
+}
+html.dark #btn-profile .profile-info span:last-child {
+  color: #71717a !important;
+}
+html.dark #btn-profile div[class*="rounded-full"] {
+  border-color: #2a2a2e !important;
+}
+
+html.dark #profile-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #profile-dropdown p.font-bold {
+  color: #ffffff !important;
+}
+html.dark #profile-dropdown p.text-\[\#98a2b3\] {
+  color: #71717a !important;
+}
+html.dark #profile-dropdown div[class*="rounded-full"] {
+  border-color: #2a2a2e !important;
+}
+html.dark #profile-dropdown button,
+html.dark #profile-dropdown a {
+  color: #d1d5db !important;
+}
+html.dark #profile-dropdown button:hover,
+html.dark #profile-dropdown a:hover {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+html.dark #profile-dropdown div[class*="bg-\[\#eaecf0\]"] {
+  background-color: #272727 !important;
+}
+html.dark #profile-dropdown .group\/lang > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #profile-dropdown .group\/lang > div button {
+  color: #d1d5db !important;
+}
+html.dark #profile-dropdown .group\/lang > div button:first-child {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #profile-dropdown .group\/lang > div button:hover {
+  background-color: #26262a !important;
+}
+html.dark #btn-logout {
+  color: #f87171 !important;
+}
+html.dark #btn-logout:hover {
+  background-color: rgba(220, 38, 38, 0.15) !important;
+}
+
+/* Main Area Container */
+html.dark .main-app-container {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+
+/* Main Header & Titles */
+html.dark header span,
+html.dark header h1,
+html.dark header h2,
+html.dark header h3 {
+  color: #ffffff !important;
+}
+
+/* All Headings across Pages */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: #ffffff !important;
+}
+html.dark h1.text-\[\#18181b\],
+html.dark h2.text-\[\#18181b\],
+html.dark h1.text-\[\#111827\],
+html.dark h2.text-\[\#111827\],
+html.dark h3.text-\[\#111827\],
+html.dark h4.text-\[\#111827\],
+html.dark span.text-\[\#111827\],
+html.dark p.text-\[\#111827\] {
+  color: #ffffff !important;
+}
+html.dark h3.text-\[\#344054\],
+html.dark span.text-\[\#344054\],
+html.dark p.text-\[\#344054\] {
+  color: #e4e7ec !important;
+}
+html.dark p.text-\[\#667085\],
+html.dark span.text-\[\#667085\],
+html.dark div.text-\[\#667085\] {
+  color: #9ca3af !important;
+}
+
+/* Studio Hero Section */
+@keyframes border-glow-flow {
+  0% {
+    background-position: 0 0, 150% center;
+  }
+  100% {
+    background-position: 0 0, -150% center;
+  }
+}
+
+html.dark .draft-border-shine {
+  background: linear-gradient(to right, #272727, #272727), linear-gradient(135deg, #28282c 35%, #F59E0B 50%, #28282c 65%) !important;
+  background-clip: padding-box, border-box !important;
+  background-origin: padding-box, border-box !important;
+  border: 1.5px solid transparent !important;
+  background-size: 100% 100%, 200% 100% !important;
+  animation: border-glow-flow 4s linear infinite !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4) !important;
+}
+html.dark .draft-border-shine span.text-\[\#111827\] {
+  color: #ffffff !important;
+}
+html.dark .draft-border-shine span.text-\[\#475467\] {
+  color: #9ca3af !important;
+}
+html.dark .draft-border-shine div[class*="bg-\[\#F2F4F7\]"] {
+  background-color: #272727 !important;
+  color: #e4e7ec !important;
+}
+html.dark .draft-border-shine div.rounded-full[class*="bg-\[\#F59E0B\]"] {
+  border-color: #272727 !important;
+}
+
+/* Studio Carousel Overlays & Chevrons */
+html.dark #categories-left-gradient,
+html.dark #projects-left-gradient {
+  background: linear-gradient(to right, #141414 0%, transparent 100%) !important;
+}
+html.dark #categories-right-gradient,
+html.dark #projects-right-gradient {
+  background: linear-gradient(to left, #141414 0%, transparent 100%) !important;
+}
+html.dark #scroll-categories-right,
+html.dark #scroll-categories-left,
+html.dark #scroll-projects-right,
+html.dark #scroll-projects-left {
+  background-color: #373737 !important;
+  border-color: #444444 !important;
+  color: #d1d5db !important;
+}
+html.dark #scroll-categories-right:hover,
+html.dark #scroll-categories-left:hover,
+html.dark #scroll-projects-right:hover,
+html.dark #scroll-projects-left:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+
+/* Studio AI Input Section */
+html.dark #ai-input-card {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+html.dark #ai-input {
+  color: #ffffff !important;
+}
+html.dark #placeholder-anim {
+  color: #71717a !important;
+}
+html.dark #btn-references,
+html.dark #btn-business-dna,
+html.dark #btn-aspect-ratio {
+  background-color: #373737 !important;
+  border-color: #444444 !important;
+  color: #d1d5db !important;
+}
+html.dark #btn-references:hover,
+html.dark #btn-business-dna:hover,
+html.dark #btn-aspect-ratio:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+  border-color: #555555 !important;
+}
+html.dark #btn-generate-ai {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-generate-ai:hover {
+  background-color: #f4f4f5 !important;
+  color: #18181b !important;
+}
+html.dark #references-dropdown,
+html.dark #aspect-ratio-dropdown,
+html.dark #custom-ratio-modal > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #references-dropdown button,
+html.dark #aspect-ratio-dropdown button {
+  color: #d1d5db !important;
+}
+html.dark #references-dropdown button:hover,
+html.dark #aspect-ratio-dropdown button:hover {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+
+/* Studio Categories */
+html.dark .category-pill {
+  background-color: #373737 !important;
+  border-color: #444444 !important;
+  color: #d1d5db !important;
+}
+html.dark .category-pill:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+  border-color: #555555 !important;
+}
+html.dark .category-pill.active {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+  border-color: #ffffff !important;
+}
+
+/* Project Cards & New Project Card */
+html.dark .project-card,
+html.dark #card-new-project,
+html.dark a[href="/canvas"][class*="rounded-\[24px\]"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark .project-card:hover,
+html.dark #card-new-project:hover,
+html.dark a[href="/canvas"][class*="rounded-\[24px\]"]:hover {
+  border-color: #38383e !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+}
+html.dark #card-new-project i.ti-plus,
+html.dark a[href="/canvas"][class*="rounded-\[24px\]"] i.ti-plus {
+  color: #9ca3af !important;
+}
+html.dark #card-new-project div[class*="rounded-full"],
+html.dark a[href="/canvas"][class*="rounded-\[24px\]"] div[class*="rounded-full"] {
+  background-color: #373737 !important;
+  border-color: #444444 !important;
+}
+html.dark #card-new-project span,
+html.dark a[href="/canvas"][class*="rounded-\[24px\]"] span {
+  color: #d1d5db !important;
+}
+
+html.dark .project-card h4 {
+  color: #ffffff !important;
+}
+html.dark .project-card p,
+html.dark .project-card span {
+  color: #9ca3af !important;
+}
+html.dark .project-card div[class*="bg-\[\#F3F4F6\]"],
+html.dark .project-card div[class*="bg-\[\#F9FAFB\]"] {
+  background-color: #373737 !important;
+  border-color: #444444 !important;
+}
+html.dark .project-card i.ti-photo {
+  color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Projects Page Controls */
+html.dark #btn-filter-favorites,
+html.dark #btn-dna-filter,
+html.dark #project-search,
+html.dark input.biz-search-input {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-filter-favorites:hover,
+html.dark #btn-dna-filter:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+html.dark #dna-filter-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #dna-filter-dropdown div[class*="bg-\[\#F9FAFB\]"] {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #dna-filter-dropdown button {
+  color: #d1d5db !important;
+}
+html.dark #dna-filter-dropdown button:hover {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+
+/* Inbox Page Overhaul */
+html.dark #inbox-tabs-container {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #inbox-tabs-indicator {
+  background-color: #373737 !important;
+}
+html.dark #inbox-tabs-container button {
+  color: #71717a !important;
+  background-color: transparent !important;
+}
+html.dark #inbox-tabs-container button:hover {
+  color: #ffffff !important;
+}
+html.dark #inbox-tabs-container button.text-white,
+html.dark #inbox-tabs-container button[class*="text-white"] {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+html.dark #btn-platform-filter,
+html.dark #btn-business-filter {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #d1d5db !important;
+}
+html.dark #status-filter-group,
+html.dark #activity-filter-group {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+}
+html.dark #status-filter-group button,
+html.dark #activity-filter-group button {
+  color: #a1a1aa !important;
+}
+html.dark #status-filter-group button.active,
+html.dark #activity-filter-group button.active {
+  background-color: #4a4a4a !important;
+  color: #ffffff !important;
+}
+html.dark #platform-filter-dropdown,
+html.dark #business-filter-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #platform-filter-dropdown button,
+html.dark #business-filter-dropdown button {
+  color: #d1d5db !important;
+}
+html.dark #platform-filter-dropdown button:hover,
+html.dark #business-filter-dropdown button:hover {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+
+/* Inbox Message Panel & Chat Area */
+html.dark div[class*="bg-white rounded-3xl border border-[#eaecf0]"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #search-messages {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+  border-color: #383838 !important;
+}
+html.dark .message-item {
+  border-color: #383838 !important;
+  background-color: transparent !important;
+}
+html.dark .message-item:hover,
+html.dark .message-item.hover\:bg-white:hover {
+  background-color: #1f1f23 !important;
+}
+html.dark .message-item.bg-white,
+html.dark .message-item.active {
+  background-color: #272727 !important;
+}
+html.dark .message-item span.font-bold,
+html.dark .message-item p.font-bold {
+  color: #ffffff !important;
+}
+html.dark .message-item span,
+html.dark .message-item p {
+  color: #9ca3af !important;
+}
+html.dark div[class*="flex-1 h-full flex flex-col bg-white"] {
+  background-color: #272727 !important;
+  border-left-color: #242428 !important;
+}
+html.dark div[class*="border-b border-[#eaecf0] bg-white"],
+html.dark div[class*="border-t border-[#eaecf0] bg-white"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark div[class*="rounded-2xl rounded-tl-none bg-white border border-[#eaecf0]"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #content-activity {
+  background-color: #272727 !important;
+}
+
+/* Content Automation Overhaul */
+/* ══════════════════════════════════════════════════
+   Xeni Modern Table (HeroUI Image 2 & 3 style)
+   ══════════════════════════════════════════════════ */
+.table-root {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 6px 6px 10px 6px;
+}
+
+.table__header {
+  background-color: transparent !important;
+  border-bottom: none !important;
+}
+
+.table__header tr,
+.table__header th {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: none !important;
+}
+
+.table__column {
+  color: #71717a !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  padding: 10px 20px !important;
+}
+
+/* Ensure no bottom border line directly under header row */
+.table-root table thead,
+.table-root thead tr {
+  border-bottom: none !important;
+}
+
+/* Dark mode overrides for table */
+html.dark .table-root {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+
+html.dark thead.table__header,
+html.dark thead.table__header tr,
+html.dark thead.table__header th {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+html.dark .table__column {
+  color: #a1a1aa !important;
+}
+html.dark button[class*="border-[#eaecf0] bg-white"],
+html.dark input[class*="border-[#eaecf0] bg-white"],
+html.dark button[class*="border-[#D0D5DD] bg-white"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+/* Business DNA Empty State & Workspace */
+html.dark #dna-empty-state h2 {
+  color: #ffffff !important;
+}
+html.dark #dna-workspace aside,
+html.dark #dna-workspace main {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #dna-workspace main > div,
+html.dark #dna-workspace aside > div {
+  background-color: transparent !important;
+}
+html.dark #dna-workspace .bg-white {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #dna-workspace button.bg-white,
+html.dark #dna-workspace label.bg-white {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #d1d5db !important;
+}
+html.dark #dna-workspace button.bg-white:hover,
+html.dark #dna-workspace label.bg-white:hover {
+  background-color: #454545 !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #dna-workspace textarea,
+html.dark #dna-workspace input[type="text"] {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #dna-workspace textarea:focus,
+html.dark #dna-workspace input[type="text"]:focus {
+  background-color: #373737 !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #dna-workspace label {
+  color: #d1d5db !important;
+}
+html.dark #dna-workspace h2,
+html.dark #dna-workspace h3,
+html.dark #dna-workspace h4 {
+  color: #ffffff !important;
+}
+html.dark #dna-workspace .dna-tab-btn {
+  color: #a1a1aa !important;
+  border-bottom-color: transparent !important;
+}
+html.dark #dna-workspace .dna-tab-btn:hover {
+  color: #ffffff !important;
+}
+html.dark #dna-workspace .dna-tab-btn.active,
+html.dark #dna-workspace .dna-tab-btn.font-semibold {
+  color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
+}
+html.dark #dna-workspace .border-b {
+  border-color: #383838 !important;
+}
+html.dark #dna-cards-container .dna-card-item {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #dna-cards-container .dna-card-item:hover {
+  background-color: #272727 !important;
+}
+html.dark #dna-cards-container .dna-card-item[class*="bg-[#F4F4F6]"] {
+  background-color: #272727 !important;
+  border-color: #38383e !important;
+}
+html.dark #btn-sidebar-create-brand-kit {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #d1d5db !important;
+}
+html.dark #btn-sidebar-create-brand-kit:hover {
+  background-color: #26262c !important;
+  color: #ffffff !important;
+}
+html.dark #btn-import-dna-banner {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #btn-import-dna-banner:hover {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #btn-import-dna-banner > div:first-child {
+  background-color: #272727 !important;
+}
+html.dark #btn-dna-menu svg path {
+  stroke: #ffffff !important;
+}
+html.dark #dna-dropdown-menu {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #dna-dropdown-menu button {
+  color: #d1d5db !important;
+}
+html.dark #dna-dropdown-menu button:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-empty-create {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+html.dark #btn-empty-create:hover {
+  background-color: #e4e7ec !important;
+}
+
+/* ========================================================
+   MODALS COMPREHENSIVE DARK THEME (MOBBIN AESTHETICS)
+   ======================================================== */
+
+/* Universal Modal Backdrop (Semi-transparent blur, never solid opaque) */
+html.dark .backdrop-blur-xs,
+html.dark .backdrop-blur-sm,
+html.dark .backdrop-blur-md,
+html.dark [class*="backdrop-blur"],
+html.dark [id*="modal"] > div[class*="backdrop"],
+html.dark [id*="modal"] > div[class*="bg-black"],
+html.dark div[id^="modal-"] > div[class*="backdrop"],
+html.dark div[id^="modal-"] > div[class*="bg-black"] {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* Modal flex container wrapper (Must be transparent so backdrop is visible) */
+html.dark [id*="modal"] > div[class*="flex"][class*="items-center"],
+html.dark [id*="modal"] > div.absolute.inset-0.flex,
+html.dark div[id^="modal-"] > div[class*="flex"][class*="items-center"],
+html.dark div[id^="modal-"] > div.absolute.inset-0.flex {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+/* Universal Modal Root & Card */
+html.dark [id*="modal"] > div:not([class*="backdrop"]):not([class*="bg-black"]):not([class*="inset-0"]),
+html.dark .modal-card,
+html.dark div[id^="modal-"] > div:not([class*="backdrop"]):not([class*="bg-black"]):not([class*="inset-0"]),
+html.dark [role="dialog"] > div:not([class*="backdrop"]):not([class*="bg-black"]):not([class*="inset-0"]),
+html.dark [role="dialog"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #f4f4f5 !important;
+}
+
+/* Modal Headers & Text */
+html.dark [id*="modal"] h1,
+html.dark [id*="modal"] h2,
+html.dark [id*="modal"] h3,
+html.dark [id*="modal"] h4,
+html.dark [id*="modal"] h5,
+html.dark [id*="modal"] .font-semibold,
+html.dark [id*="modal"] .font-bold,
+html.dark .modal-card h1,
+html.dark .modal-card h2,
+html.dark .modal-card h3,
+html.dark .modal-card h4,
+html.dark .modal-card h5 {
+  color: #ffffff !important;
+}
+
+html.dark [id*="modal"] p,
+html.dark [id*="modal"] label,
+html.dark .modal-card p,
+html.dark .modal-card label {
+  color: #d1d5db !important;
+}
+
+html.dark [id*="modal"] .text-\[\#71717a\],
+html.dark [id*="modal"] .text-\[\#667085\],
+html.dark [id*="modal"] .text-\[\#475467\],
+html.dark [id*="modal"] .text-\[\#98a2b3\],
+html.dark [id*="modal"] .text-\[\#a1a1aa\],
+html.dark [id*="modal"] .text-\[\#9CA3AF\],
+html.dark .modal-card .text-\[\#71717a\],
+html.dark .modal-card .text-\[\#667085\],
+html.dark .modal-card .text-\[\#475467\] {
+  color: #9ca3af !important;
+}
+
+/* Modal Inner Cards & Containers */
+html.dark [id*="modal"] .bg-white,
+html.dark [id*="modal"] .bg-\[\#fafafa\],
+html.dark [id*="modal"] .bg-\[\#f4f4f5\],
+html.dark [id*="modal"] .bg-\[\#f9fafb\],
+html.dark [id*="modal"] .bg-\[\#F8F9FB\],
+html.dark [id*="modal"] .bg-\[\#F3F4F6\],
+html.dark [id*="modal"] .bg-\[\#FDFDFD\],
+html.dark .modal-card .bg-white,
+html.dark .modal-card .bg-\[\#fafafa\],
+html.dark .modal-card .bg-\[\#f4f4f5\],
+html.dark .modal-card .bg-\[\#f9fafb\] {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #d1d5db !important;
+}
+
+/* Modal Borders & Separators */
+html.dark [id*="modal"] [class*="border-[#eaecf0]"],
+html.dark [id*="modal"] [class*="border-[#e4e4e7]"],
+html.dark [id*="modal"] [class*="border-[#D0D5DD]"],
+html.dark [id*="modal"] [class*="border-[#d0d5dd]"],
+html.dark [id*="modal"] [class*="border-[#d4d4d8]"],
+html.dark .modal-card [class*="border-[#eaecf0]"],
+html.dark .modal-card [class*="border-[#e4e4e7]"] {
+  border-color: #383838 !important;
+}
+
+/* Modal Inputs, Textareas & Selects */
+html.dark [id*="modal"] input:not([type="checkbox"]):not([type="radio"]),
+html.dark [id*="modal"] textarea,
+html.dark [id*="modal"] select,
+html.dark .modal-card input:not([type="checkbox"]):not([type="radio"]),
+html.dark .modal-card textarea,
+html.dark .modal-card select {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark [id*="modal"] input::placeholder,
+html.dark [id*="modal"] textarea::placeholder,
+html.dark .modal-card input::placeholder,
+html.dark .modal-card textarea::placeholder {
+  color: #71717a !important;
+}
+
+/* Modal Buttons */
+html.dark [id*="modal"] button.bg-white,
+html.dark .modal-card button.bg-white {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark [id*="modal"] button.bg-white:hover,
+html.dark .modal-card button.bg-white:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+
+html.dark [id*="modal"] button.bg-\[\#111827\],
+html.dark [id*="modal"] button.bg-\[\#18181b\],
+html.dark [id*="modal"] button.btn-active-dark,
+html.dark .modal-card button.bg-\[\#18181b\] {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+html.dark [id*="modal"] button.bg-\[\#111827\]:hover,
+html.dark [id*="modal"] button.bg-\[\#18181b\]:hover,
+html.dark [id*="modal"] button.btn-active-dark:hover,
+html.dark .modal-card button.bg-\[\#18181b\]:hover {
+  background-color: #e4e4e7 !important;
+}
+
+html.dark [id*="modal"] button[class*="hover:bg-gray-100"]:hover,
+html.dark [id*="modal"] button[class*="hover:bg-[#f4f4f5]"]:hover,
+html.dark [id*="modal"] button[class*="hover:bg-[#f2f4f7]"]:hover,
+html.dark .modal-card button[class*="hover:bg-[#f4f4f5]"]:hover {
+  background-color: #26262a !important;
+  color: #ffffff !important;
+}
+
+/* Manage Account Modal & Sub-modals */
+html.dark #manage-account-modal > div,
+html.dark #modal-payout-setup > div,
+html.dark #modal-renew-early > div,
+html.dark #modal-topup-credits > div,
+html.dark #modal-manage-plan > div,
+html.dark #modal-topup-detail > div,
+html.dark #modal-attachment-preview > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+html.dark #manage-account-modal aside {
+  background-color: #111113 !important;
+  border-right-color: #222226 !important;
+}
+html.dark #manage-account-modal aside h2 {
+  color: #9ca3af !important;
+}
+html.dark #manage-account-modal aside .manage-account-tab-btn,
+html.dark #manage-account-modal aside .manage-account-tab-btn:not(.active) {
+  color: #9ca3af !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+html.dark #manage-account-modal aside .manage-account-tab-btn:not(.active):hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+html.dark #manage-account-modal aside .manage-account-tab-btn.active {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+}
+html.dark #manage-account-modal #manage-account-content {
+  background-color: #272727 !important;
+}
+
+/* Headings in Manage Account & Sub-modals */
+html.dark #manage-account-modal h2,
+html.dark #manage-account-modal h3,
+html.dark #manage-account-modal h4,
+html.dark #manage-account-modal h5,
+html.dark #modal-payout-setup h2, html.dark #modal-payout-setup h3, html.dark #modal-payout-setup h4,
+html.dark #modal-renew-early h2, html.dark #modal-renew-early h3, html.dark #modal-renew-early h4,
+html.dark #modal-topup-credits h2, html.dark #modal-topup-credits h3, html.dark #modal-topup-credits h4,
+html.dark #modal-manage-plan h2, html.dark #modal-manage-plan h3, html.dark #modal-manage-plan h4,
+html.dark #modal-topup-detail h2, html.dark #modal-topup-detail h3, html.dark #modal-topup-detail h4,
+html.dark #modal-attachment-preview h2, html.dark #modal-attachment-preview h3, html.dark #modal-attachment-preview h4 {
+  color: #ffffff !important;
+}
+
+/* Text in Manage Account & Sub-modals */
+html.dark #manage-account-modal .text-\[\#111827\],
+html.dark #manage-account-modal .text-\[\#18181b\],
+html.dark #modal-payout-setup .text-\[\#111827\],
+html.dark #modal-payout-setup .text-\[\#18181b\],
+html.dark #modal-renew-early .text-\[\#111827\],
+html.dark #modal-renew-early .text-\[\#18181b\],
+html.dark #modal-topup-credits .text-\[\#111827\],
+html.dark #modal-topup-credits .text-\[\#18181b\],
+html.dark #modal-manage-plan .text-\[\#111827\],
+html.dark #modal-manage-plan .text-\[\#18181b\],
+html.dark #modal-topup-detail .text-\[\#111827\],
+html.dark #modal-topup-detail .text-\[\#18181b\],
+html.dark #modal-attachment-preview .text-\[\#111827\],
+html.dark #modal-attachment-preview .text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+
+html.dark #manage-account-modal .text-\[\#71717a\],
+html.dark #manage-account-modal .text-\[\#667085\],
+html.dark #manage-account-modal .text-\[\#475467\],
+html.dark #manage-account-modal .text-\[\#3f3f46\],
+html.dark #modal-payout-setup .text-\[\#71717a\],
+html.dark #modal-payout-setup .text-\[\#667085\],
+html.dark #modal-renew-early .text-\[\#71717a\],
+html.dark #modal-topup-credits .text-\[\#71717a\],
+html.dark #modal-manage-plan .text-\[\#71717a\],
+html.dark #modal-topup-detail .text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+
+/* Borders & Dividers in Manage Account & Sub-modals */
+html.dark #manage-account-modal .border-\[\#eaecf0\],
+html.dark #manage-account-modal .border-\[\#e4e4e7\],
+html.dark #manage-account-modal .divide-\[\#eaecf0\],
+html.dark #modal-payout-setup .border-\[\#eaecf0\],
+html.dark #modal-payout-setup .border-\[\#e4e4e7\],
+html.dark #modal-renew-early .border-\[\#eaecf0\],
+html.dark #modal-topup-credits .border-\[\#eaecf0\],
+html.dark #modal-topup-credits .border-\[\#e4e4e7\],
+html.dark #modal-manage-plan .border-\[\#eaecf0\],
+html.dark #modal-manage-plan .border-\[\#e4e4e7\],
+html.dark #modal-topup-detail .border-\[\#eaecf0\],
+html.dark #modal-topup-detail .border-\[\#e4e4e7\],
+html.dark #modal-attachment-preview .border-\[\#eaecf0\] {
+  border-color: #383838 !important;
+}
+
+/* Cards & Containers */
+html.dark #manage-account-modal #manage-account-content .bg-white,
+html.dark #manage-account-modal #manage-account-content .rounded-xl,
+html.dark #manage-account-modal #manage-account-content .rounded-2xl,
+html.dark #modal-payout-setup .bg-white,
+html.dark #modal-renew-early .bg-white,
+html.dark #modal-topup-credits .bg-white,
+html.dark #modal-manage-plan .bg-white,
+html.dark #modal-topup-detail .bg-white,
+html.dark #modal-attachment-preview .bg-white {
+  background-color: #1a1a1d !important;
+  border-color: #383838 !important;
+}
+
+html.dark #manage-account-modal #manage-account-content .bg-\[\#fafafa\],
+html.dark #manage-account-modal #manage-account-content .bg-\[\#f4f4f5\],
+html.dark #modal-topup-detail .bg-\[\#fafafa\],
+html.dark #modal-attachment-preview .bg-\[\#fafafa\] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+
+/* Table styles & row/column dividers */
+html.dark #manage-account-modal table,
+html.dark #manage-account-modal table *,
+html.dark #manage-account-modal thead,
+html.dark #manage-account-modal thead tr,
+html.dark #manage-account-modal tbody,
+html.dark #manage-account-modal tbody tr,
+html.dark #manage-account-modal tbody > tr,
+html.dark #manage-account-modal .divide-y > *,
+html.dark #manage-account-modal th,
+html.dark #manage-account-modal td,
+html.dark #modal-topup-credits table,
+html.dark #modal-topup-credits table *,
+html.dark #modal-topup-credits thead tr,
+html.dark #modal-topup-credits tbody tr,
+html.dark #modal-topup-credits tbody > tr,
+html.dark #modal-topup-credits .divide-y > *,
+html.dark #modal-payout-setup table,
+html.dark #modal-payout-setup table *,
+html.dark #modal-payout-setup thead tr,
+html.dark #modal-payout-setup tbody tr,
+html.dark #modal-payout-setup tbody > tr,
+html.dark #modal-payout-setup .divide-y > * {
+  border-color: #383838 !important;
+}
+
+html.dark #manage-account-modal thead tr,
+html.dark #manage-account-modal tr.bg-\[\#fafafa\],
+html.dark #modal-topup-credits thead tr,
+html.dark #modal-payout-setup thead tr {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark #manage-account-modal tbody tr:hover,
+html.dark #modal-topup-credits tbody tr:hover,
+html.dark #modal-payout-setup tbody tr:hover {
+  background-color: #272727 !important;
+}
+
+/* Buttons inside Manage Account & Sub-modals */
+html.dark #manage-account-modal button.border-\[\#e4e4e7\],
+html.dark #manage-account-modal button.border-\[\#eaecf0\],
+html.dark #modal-payout-setup button.border-\[\#e4e4e7\],
+html.dark #modal-renew-early button.border-\[\#e4e4e7\],
+html.dark #modal-topup-credits button.border-\[\#e4e4e7\],
+html.dark #modal-manage-plan button.border-\[\#e4e4e7\],
+html.dark #modal-topup-detail button.border-\[\#e4e4e7\] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+html.dark #manage-account-modal button.border-\[\#e4e4e7\]:hover,
+html.dark #manage-account-modal button.border-\[\#eaecf0\]:hover,
+html.dark #modal-payout-setup button.border-\[\#e4e4e7\]:hover,
+html.dark #modal-renew-early button.border-\[\#e4e4e7\]:hover,
+html.dark #modal-topup-credits button.border-\[\#e4e4e7\]:hover,
+html.dark #modal-manage-plan button.border-\[\#e4e4e7\]:hover,
+html.dark #modal-topup-detail button.border-\[\#e4e4e7\]:hover {
+  background-color: #2c2c33 !important;
+  color: #ffffff !important;
+}
+
+html.dark #manage-account-modal button.bg-\[\#18181b\],
+html.dark #modal-payout-setup button.bg-\[\#18181b\],
+html.dark #modal-renew-early button.bg-\[\#18181b\],
+html.dark #modal-topup-credits button.bg-\[\#18181b\],
+html.dark #modal-manage-plan button.bg-\[\#18181b\] {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+
+html.dark #manage-account-modal button.bg-\[\#18181b\]:hover,
+html.dark #modal-payout-setup button.bg-\[\#18181b\]:hover,
+html.dark #modal-renew-early button.bg-\[\#18181b\]:hover,
+html.dark #modal-topup-credits button.bg-\[\#18181b\]:hover,
+html.dark #modal-manage-plan button.bg-\[\#18181b\]:hover {
+  background-color: #f4f4f5 !important;
+}
+
+html.dark #close-manage-account {
+  color: #a1a1aa !important;
+}
+html.dark #close-manage-account:hover {
+  color: #ffffff !important;
+  background-color: #26262a !important;
+}
+
+/* Inputs & Textareas */
+html.dark #manage-account-modal input,
+html.dark #manage-account-modal textarea,
+html.dark #manage-account-modal select,
+html.dark #modal-payout-setup input,
+html.dark #modal-payout-setup select,
+html.dark #modal-topup-credits input {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+html.dark #manage-account-modal input::placeholder,
+html.dark #manage-account-modal textarea::placeholder,
+html.dark #modal-payout-setup input::placeholder {
+  color: #71717a !important;
+}
+
+/* Plan switcher dev */
+html.dark #btn-switch-plan-free,
+html.dark #btn-switch-plan-pro {
+  color: #a1a1aa !important;
+}
+html.dark #btn-switch-plan-free.bg-white,
+html.dark #btn-switch-plan-pro.bg-white {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+
+/* Pricing in Get Credits Modal */
+html.dark #get-credits-content {
+  background-color: transparent !important;
+}
+html.dark div[data-plan] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark div[data-plan="Pro"] {
+  background-color: #272727 !important;
+  border-color: rgba(250, 204, 21, 0.45) !important;
+}
+html.dark #pricing-toggle-monthly,
+html.dark #pricing-toggle-annual {
+  color: #9ca3af !important;
+}
+html.dark #pricing-toggle-monthly[class*="bg-background"],
+html.dark #pricing-toggle-annual[class*="bg-background"],
+html.dark #pricing-toggle-monthly.bg-background,
+html.dark #pricing-toggle-annual.bg-background {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+
+/* Integrations Settings Modal & Sub-modals */
+html.dark #automation-settings-modal .modal-card,
+html.dark #save-template-modal > div > div,
+html.dark #load-template-modal > div > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+html.dark #automation-settings-modal .modal-card > div,
+html.dark #automation-settings-modal .modal-card header {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+
+html.dark #automation-settings-modal h2,
+html.dark #automation-settings-modal h3,
+html.dark #automation-settings-modal h4,
+html.dark #save-template-modal h3,
+html.dark #load-template-modal h3 {
+  color: #ffffff !important;
+}
+
+html.dark #automation-settings-modal label,
+html.dark #save-template-modal label {
+  color: #e4e4e7 !important;
+}
+
+html.dark #automation-settings-modal .overflow-y-auto > div:first-child {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+
+html.dark #automation-settings-modal .automation-row {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+
+html.dark #automation-settings-modal .card-header:hover {
+  background-color: #373737 !important;
+}
+
+html.dark #automation-settings-modal .subsettings {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+
+html.dark #automation-settings-modal input,
+html.dark #automation-settings-modal textarea,
+html.dark #automation-settings-modal select,
+html.dark #automation-settings-modal .tag-input-container,
+html.dark #save-template-name-input {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+html.dark #automation-settings-modal input::placeholder,
+html.dark #automation-settings-modal textarea::placeholder,
+html.dark #save-template-name-input::placeholder {
+  color: #71717a !important;
+}
+
+html.dark #automation-settings-modal .p-2\.5,
+html.dark #automation-settings-modal .p-3.bg-white,
+html.dark #automation-settings-modal .keyword-matching-content,
+html.dark #load-template-modal .bg-\[\#fafafa\] {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+
+html.dark #automation-settings-modal .p-2\.5 span,
+html.dark #automation-settings-modal .p-3 span,
+html.dark #automation-settings-modal .keyword-matching-content span,
+html.dark #load-template-modal span {
+  color: #ffffff !important;
+}
+
+html.dark #automation-settings-modal .w-8\.5.h-8\.5 {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+html.dark #automation-settings-modal .filter-mode-pills,
+html.dark #automation-settings-modal .dm-mode-switcher-pills {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+}
+
+html.dark #automation-settings-modal .filter-mode-pills button,
+html.dark #automation-settings-modal .dm-mode-switcher-pills button {
+  color: #a1a1aa !important;
+}
+
+html.dark #automation-settings-modal .filter-mode-pills button[class*="bg-[#18181b]"],
+html.dark #automation-settings-modal .dm-mode-switcher-pills button[class*="bg-[#18181b]"] {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+
+html.dark #modal-settings-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-settings-dropdown button {
+  color: #ffffff !important;
+}
+html.dark #modal-settings-dropdown button:hover {
+  background-color: #272727 !important;
+}
+
+html.dark #automation-settings-modal button.border-\[\#e4e4e7\],
+html.dark #save-template-modal button.border-\[\#e4e4e7\],
+html.dark #load-template-modal button.border-\[\#e4e4e7\] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+html.dark #automation-settings-modal button.border-\[\#e4e4e7\]:hover,
+html.dark #save-template-modal button.border-\[\#e4e4e7\]:hover,
+html.dark #load-template-modal button.border-\[\#e4e4e7\]:hover {
+  background-color: #272727 !important;
+}
+
+html.dark #automation-settings-modal button[class*="bg-[#18181b]"],
+html.dark #save-template-modal button[class*="bg-[#18181b]"] {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+
+html.dark #automation-settings-modal button[class*="bg-[#18181b]"]:hover,
+html.dark #save-template-modal button[class*="bg-[#18181b]"]:hover {
+  background-color: #f4f4f5 !important;
+}
+/* Add Account Modal Unified Background (#272727 throughout) */
+html.dark #add-account-modal .relative,
+html.dark #add-account-modal header,
+html.dark #add-account-modal .px-6,
+html.dark #add-account-modal #modal-step-platform,
+html.dark #add-account-modal #modal-step-dna,
+html.dark #add-account-modal .border-b,
+html.dark #add-account-modal .border-t,
+html.dark #add-account-modal div[class*="bg-white"],
+html.dark #add-account-modal div[class*="dark:bg-[#272727]"], html.dark #add-account-modal div[class*="dark:bg-[#272727]"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+
+html.dark #add-account-modal .modal-platform-item,
+html.dark #add-account-modal .modal-dna-item {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #add-account-modal .modal-platform-item:hover,
+html.dark #add-account-modal .modal-dna-item:hover {
+  border-color: #52525b !important;
+  background-color: #272727 !important;
+}
+html.dark #add-account-modal .modal-platform-item div.w-10 {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+
+html.dark #add-account-modal .border-t button:first-child {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #add-account-modal .border-t button:first-child:hover {
+  background-color: #28282d !important;
+}
+
+html.dark #add-account-modal #btn-connect:not(:disabled) {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #add-account-modal #btn-connect:not(:disabled):hover {
+  background-color: #e4e4e7 !important;
+}
+html.dark #add-account-modal #btn-connect:disabled {
+  background-color: #272727 !important;
+  color: #71717a !important;
+  opacity: 0.6 !important;
+}
+
+/* Social Icons in Dark Mode (Threads, TikTok, X) */
+html.dark [data-platform="threads"] svg,
+html.dark [data-platform="tiktok"] svg,
+html.dark [data-platform="x"] svg,
+html.dark .modal-platform-item[data-platform="threads"] svg,
+html.dark .modal-platform-item[data-platform="tiktok"] svg,
+html.dark [data-handle*="threads"] svg,
+html.dark [data-handle*="tiktok"] svg,
+html.dark .ti-brand-threads,
+html.dark .ti-brand-tiktok {
+  color: #ffffff !important;
+}
+
+/* Global Tab Bars & Indicators */
+html.dark #inbox-tabs-container,
+html.dark #main-tabs-container {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #inbox-tabs-indicator,
+html.dark #main-tabs-indicator {
+  background-color: #373737 !important;
+}
+html.dark #inbox-tabs-container button,
+html.dark #main-tabs-container button {
+  color: #71717a !important;
+}
+html.dark #inbox-tabs-container button:hover,
+html.dark #main-tabs-container button:hover {
+  color: #ffffff !important;
+}
+html.dark #inbox-tabs-container button[class*="text-white"],
+html.dark #main-tabs-container button[class*="text-white"] {
+  color: #ffffff !important;
+}
+
+/* Global Badges in Table Rows */
+html.dark .table__cell span[class*="bg-[#f4f4f5]"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #d1d5db !important;
+}
+
+/* Custom Scrollbar in Dark Mode */
+html.dark .custom-scrollbar {
+  scrollbar-color: #2a2a2e transparent !important;
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2a2a2e !important;
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #3a3a40 !important;
+}
+
+/* Global Tooltip in Dark Mode */
+html.dark #xeni-global-tooltip {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+  border: 1px solid #333338 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ========================================================
+   CANVAS PAGE & WORKSPACE DARK THEME (MOBBIN OBSIDIAN)
+   ======================================================== */
+html.dark #canvas-container {
+  background-color: #141414 !important;
+}
+
+/* Canvas Floating Badges & Toolbars */
+html.dark #canvas-container .top-4.left-4 > div,
+html.dark #canvas-container #btn-credit,
+html.dark #canvas-container .bottom-6 {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #f4f4f5 !important;
+}
+html.dark #canvas-container .top-4.left-4 a,
+html.dark #canvas-container .top-4.left-4 button,
+html.dark #canvas-container #btn-credit svg,
+html.dark #canvas-container #canvas-credits-badge-val,
+html.dark #canvas-container #zoom-level {
+  color: #f4f4f5 !important;
+}
+html.dark #canvas-container .top-4.left-4 div[class*="bg-[#eaecf0]"],
+html.dark #canvas-container #image-context-menu div[class*="bg-[#eaecf0]"] {
+  background-color: #272727 !important;
+}
+
+/* Credit Dropdown */
+html.dark #credit-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #f4f4f5 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #credit-dropdown .plan-label-free,
+html.dark #credit-dropdown span.text-\[\#111827\],
+html.dark #credit-dropdown #btn-nav-usage-details {
+  color: #ffffff !important;
+}
+html.dark #credit-dropdown .btn-upgrade-trigger {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #credit-dropdown .btn-upgrade-trigger:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* Canvas Selection / Hand Dropdown */
+html.dark #dropdown-select > div,
+html.dark #image-context-menu,
+html.dark #dropdown-upscale,
+html.dark #dropdown-threedot {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+}
+html.dark #btn-select-action {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-select-action svg {
+  color: #ffffff !important;
+}
+html.dark #btn-hand-action {
+  color: #a1a1aa !important;
+}
+html.dark #btn-hand-action:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-select-tool {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-select-tool svg {
+  color: #ffffff !important;
+}
+html.dark #btn-media-tool {
+  color: #a1a1aa !important;
+}
+html.dark #btn-media-tool:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-media-tool:hover svg {
+  color: #ffffff !important;
+}
+
+/* Image Context Menu Buttons */
+html.dark #image-context-menu button {
+  color: #d4d4d8 !important;
+}
+html.dark #image-context-menu button:hover {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+html.dark #image-context-menu button svg {
+  color: #d4d4d8 !important;
+}
+html.dark #image-context-menu button:hover svg {
+  color: #ffffff !important;
+}
+html.dark #dropdown-upscale button,
+html.dark #dropdown-threedot button {
+  color: #d4d4d8 !important;
+}
+html.dark #dropdown-upscale button:hover,
+html.dark #dropdown-threedot button:hover {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-delete-menu-item {
+  color: #f87171 !important;
+}
+html.dark #btn-delete-menu-item:hover {
+  background-color: rgba(220, 38, 38, 0.15) !important;
+  color: #f87171 !important;
+}
+
+/* Canvas Frames */
+html.dark .canvas-frame {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #btn-show-chat {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+/* Right Panel (Chat Sidebar) */
+html.dark #right-panel {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #right-panel > div:first-child {
+  background-color: #272727 !important;
+  border-bottom-color: #28282c !important;
+}
+html.dark #btn-business-dna-badge,
+html.dark #btn-case-option-badge {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #f4f4f5 !important;
+}
+html.dark #btn-business-dna-badge:hover,
+html.dark #btn-case-option-badge:hover {
+  background-color: #454545 !important;
+  border-color: #383840 !important;
+}
+html.dark #dropdown-business-dna-badge,
+html.dark #dropdown-case-option-badge {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #dropdown-business-dna-badge label {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #business-dna-search {
+  color: #f4f4f5 !important;
+}
+html.dark .business-dna-option {
+  color: #d4d4d8 !important;
+}
+html.dark .business-dna-option:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+html.dark .case-option-item:hover {
+  background-color: #454545 !important;
+}
+html.dark .case-option-item span:first-child {
+  color: #ffffff !important;
+}
+html.dark #btn-hide-chat {
+  color: #a1a1aa !important;
+}
+html.dark #btn-hide-chat:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+
+/* Chat Messages */
+html.dark #chat-history-container [class*="bg-[#F4F4F5]"] {
+  background-color: #272727 !important;
+  color: #f4f4f5 !important;
+}
+html.dark #chat-history-container .text-\[\#111827\],
+html.dark #chat-history-container .text-\[\#18181b\] {
+  color: #f4f4f5 !important;
+}
+html.dark #chat-history-container svg[class*="text-[#111827]"] {
+  color: #ffffff !important;
+}
+html.dark #chat-history-container .border-zinc-200\/80 {
+  border-color: #383838 !important;
+}
+html.dark #chat-history-container .text-\[\#3f3f46\],
+html.dark #chat-history-container .text-\[\#52525b\],
+html.dark #chat-history-container .text-\[\#667085\] {
+  color: #a1a1aa !important;
+}
+html.dark .rating-wrapper .text-\[\#344054\] {
+  color: #d1d5db !important;
+}
+
+/* Chat Generated Images Border Removal */
+html.dark #chat-history-container [onclick*="previewImage"],
+html.dark #chat-history-container img[alt="Generated Image"],
+#chat-history-container [onclick*="previewImage"],
+#chat-history-container img[alt="Generated Image"] {
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+/* AI Input Card */
+html.dark #right-panel > div:last-child {
+  background-color: #272727 !important;
+}
+html.dark #canvas-ai-input-card {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+html.dark #canvas-ai-input-card:hover {
+  border-color: #383840 !important;
+}
+html.dark #canvas-ai-input-card:focus-within {
+  border-color: #484852 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+}
+html.dark #ai-input-canvas {
+  color: #f4f4f5 !important;
+}
+html.dark #placeholder-canvas {
+  color: #71717a !important;
+}
+html.dark #btn-canvas-ref,
+html.dark #btn-canvas-skills {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark #btn-canvas-ref:hover,
+html.dark #btn-canvas-skills:hover {
+  background-color: #2c2c33 !important;
+  border-color: #44444c !important;
+  color: #ffffff !important;
+}
+html.dark #dropdown-canvas-ref,
+html.dark #dropdown-canvas-skills {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #dropdown-canvas-ref button {
+  color: #d4d4d8 !important;
+}
+html.dark #dropdown-canvas-ref button:hover {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+html.dark .skill-tab-btn {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark .skill-tab-btn:hover {
+  background-color: #2a2a30 !important;
+  color: #ffffff !important;
+}
+html.dark .skill-tab-btn[class*="border-[#111827]"] {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark .skill-tab-btn[class*="border-[#111827]"]:hover {
+  background-color: #f4f4f5 !important;
+  color: #272727 !important;
+}
+html.dark .skill-item-clickable:hover {
+  background-color: #454545 !important;
+}
+html.dark .skill-item-clickable .text-\[\#111827\] {
+  color: #ffffff !important;
+}
+html.dark .skill-item-clickable .text-\[\#667085\] {
+  color: #a1a1aa !important;
+}
+html.dark #btn-send-canvas {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #btn-send-canvas svg {
+  color: #272727 !important;
+  stroke: #272727 !important;
+}
+html.dark #btn-send-canvas:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* Reference Badges & Border Shine in Dark Mode */
+html.dark .ref-badge {
+  background: #222226 !important;
+  border-color: #383838 !important;
+}
+html.dark .ref-badge .ref-circle,
+html.dark .ref-badge .ref-thumb {
+  background-color: #272727 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+html.dark .ref-badge .ref-text {
+  color: #f4f4f5 !important;
+}
+html.dark .ref-badge .remove-ref-badge:hover {
+  color: #ffffff !important;
+  background-color: #454545 !important;
+}
+html.dark .draft-border-shine-overlay {
+  background:
+    linear-gradient(to right, #1c1c20, #1c1c20),
+    linear-gradient(135deg, #28282c 35%, #facc15 50%, #28282c 65%) !important;
+}
+html.dark .skill-list-container,
+html.dark .business-dna-options-scrollbar,
+html.dark .chat-table-scroll {
+  scrollbar-color: #2e2e34 transparent !important;
+}
+html.dark .skill-list-container::-webkit-scrollbar-thumb,
+html.dark .business-dna-options-scrollbar::-webkit-scrollbar-thumb,
+html.dark .chat-table-scroll::-webkit-scrollbar-thumb {
+  background: #2e2e34 !important;
+}
+html.dark .skill-list-container::-webkit-scrollbar-thumb:hover,
+html.dark .business-dna-options-scrollbar::-webkit-scrollbar-thumb:hover,
+html.dark .chat-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46 !important;
+}
+
+/* Feedback Popover */
+html.dark #feedback-popover {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #feedback-popover h3 {
+  color: #ffffff !important;
+}
+html.dark #feedback-popover .text-\[\#344054\] {
+  color: #d1d5db !important;
+}
+html.dark #feedback-textarea {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #f4f4f5 !important;
+}
+html.dark #feedback-popover button {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #feedback-popover button:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* ========================================================
+   CANVAS MODALS DARK THEME
+   ======================================================== */
+/* 1. Schedule Modal (#modal-schedule) */
+html.dark #modal-schedule > div {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-schedule .md\:w-\[300px\] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #schedule-post-type-badge {
+  background-color: #454545 !important;
+  border-color: #383838 !important;
+  color: #d4d4d8 !important;
+}
+html.dark #modal-schedule .aspect-\[3\/4\] {
+  border-color: #383838 !important;
+}
+html.dark #modal-schedule .border-t {
+  border-color: #383838 !important;
+}
+html.dark #modal-schedule .border-b {
+  border-color: #383838 !important;
+}
+html.dark #modal-schedule label {
+  color: #e4e4e7 !important;
+}
+html.dark #schedule-caption-input,
+html.dark #select-business-dna,
+html.dark #schedule-tz-select,
+html.dark #schedule-date-input,
+html.dark #schedule-time-input,
+html.dark #schedule-select-period {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+html.dark #schedule-caption-input:focus,
+html.dark #select-business-dna:focus,
+html.dark #schedule-tz-select:focus,
+html.dark #schedule-date-input:focus,
+html.dark #schedule-time-input:focus,
+html.dark #schedule-select-period:focus {
+  border-color: #ffffff !important;
+}
+html.dark #schedule-caption-input::placeholder {
+  color: #71717a !important;
+}
+html.dark #schedule-caption-skeleton {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #schedule-caption-skeleton > div {
+  background-color: #454545 !important;
+}
+html.dark #social-accounts-container label {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #social-accounts-container label:hover {
+  background-color: #454545 !important;
+  border-color: #383840 !important;
+}
+html.dark #social-accounts-container label:has(input:checked) {
+  border-color: #ffffff !important;
+  background-color: #454545 !important;
+}
+html.dark #social-accounts-container label div[class*="bg-[#f4f4f5]"] {
+  background-color: #28282f !important;
+}
+html.dark #social-accounts-container label span.text-\[\#18181b\] {
+  color: #f4f4f5 !important;
+}
+html.dark #social-accounts-container label span.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #btn-schedule-generate-caption {
+  color: #a1a1aa !important;
+}
+html.dark #btn-schedule-generate-caption:hover {
+  color: #ffffff !important;
+  background-color: #454545 !important;
+}
+html.dark #cancel-schedule-modal {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #e4e4e7 !important;
+}
+html.dark #cancel-schedule-modal:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+html.dark #confirm-schedule-modal {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #confirm-schedule-modal:hover {
+  background-color: #e4e4e7 !important;
+}
+
+/* 2. Regenerate Modal (#modal-regenerate-canvas) */
+html.dark #modal-regenerate-canvas > div {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-regenerate-canvas h4 {
+  color: #ffffff !important;
+}
+html.dark #modal-regenerate-canvas label {
+  color: #e4e4e7 !important;
+}
+html.dark #regenerate-prompt-canvas {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #regenerate-prompt-canvas::placeholder {
+  color: #71717a !important;
+}
+html.dark #regenerate-prompt-canvas:focus {
+  border-color: #ffffff !important;
+}
+html.dark #btn-submit-regenerate-canvas {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #btn-submit-regenerate-canvas:hover {
+  background-color: #e4e4e7 !important;
+}
+
+/* 3. Bulk Schedule Modal (#modal-bulk-schedule) */
+html.dark #modal-bulk-schedule > div {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-bulk-schedule .px-6.pt-6 {
+  background-color: #141414 !important;
+}
+html.dark #modal-bulk-schedule h2 {
+  color: #ffffff !important;
+}
+html.dark #modal-bulk-schedule .p-1.bg-\[\#f4f4f5\] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-bulk-schedule .bulk-schedule-tab {
+  color: #a1a1aa !important;
+}
+html.dark #modal-bulk-schedule .bulk-schedule-tab:hover {
+  color: #ffffff !important;
+  background-color: #272727 !important;
+}
+html.dark #modal-bulk-schedule .bulk-schedule-tab.bg-white,
+html.dark #modal-bulk-schedule .bulk-schedule-tab[class*="bg-white"] {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-bulk-schedule label {
+  color: #e4e4e7 !important;
+}
+html.dark #modal-bulk-schedule select,
+html.dark #modal-bulk-schedule input[type="date"],
+html.dark #modal-bulk-schedule input[type="time"],
+html.dark #modal-bulk-schedule input[type="number"],
+html.dark #bulk-publish-trigger {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+html.dark #btn-adjust-bulk-daily-minus,
+html.dark #btn-adjust-bulk-daily-plus {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-adjust-bulk-daily-minus:hover,
+html.dark #btn-adjust-bulk-daily-plus:hover {
+  background-color: #454545 !important;
+}
+html.dark #bulk-publish-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #bulk-publish-dropdown .bg-\[\#fafafa\] {
+  background-color: #272727 !important;
+  color: #a1a1aa !important;
+}
+html.dark #modal-bulk-schedule .absolute.bottom-0 {
+  background-color: #141414 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #modal-bulk-schedule .absolute.bottom-0 button:first-child {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #e4e4e7 !important;
+}
+html.dark #modal-bulk-schedule .absolute.bottom-0 button:first-child:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-bulk-schedule .absolute.bottom-0 button:last-child {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #modal-bulk-schedule .absolute.bottom-0 button:last-child:hover {
+  background-color: #e4e4e7 !important;
+}
+
+/* Chat Table Dark Mode Overrides */
+html.dark .chat-table-scroll table {
+  border-color: #383838 !important;
+  background-color: #141414 !important;
+}
+html.dark .chat-table-scroll thead tr {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+}
+html.dark .chat-table-scroll th {
+  color: #ffffff !important;
+  border-color: #383838 !important;
+  background-color: #373737 !important;
+}
+html.dark .chat-table-scroll td {
+  border-color: #383838 !important;
+  color: #d1d5db !important;
+  background-color: transparent !important;
+}
+html.dark .chat-table-scroll td.font-semibold,
+html.dark .chat-table-scroll td.font-bold {
+  color: #ffffff !important;
+}
+
+html.dark [data-shimmer="chat"],
+html.dark [data-shimmer="frame"] {
+  background-image: linear-gradient(90deg, #9ca3af 35%, #ffffff 50%, #9ca3af 65%) !important;
+}
+
+/* ========================================================
+   CONTENT AUTOMATION: SCHEDULED & OUTPUTS MODALS DARK THEME
+   ======================================================== */
+
+/* Manual Schedule Button in Scheduled Tab */
+html.dark #btn-open-manual-schedule {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-open-manual-schedule:hover {
+  background-color: #f4f4f5 !important;
+  color: #272727 !important;
+}
+html.dark #btn-open-manual-schedule i,
+html.dark #btn-open-manual-schedule svg {
+  color: #272727 !important;
+}
+
+/* 1. Outputs: Review / Preview Modal (#modal-preview) */
+html.dark #modal-preview #preview-panel {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-preview div[class*="md:w-[310px]"] {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-preview #preview-title-header {
+  color: #ffffff !important;
+}
+html.dark #modal-preview h4 {
+  color: #a1a1aa !important;
+}
+html.dark #modal-preview #btn-regenerate-caption {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #e4e4e7 !important;
+}
+html.dark #modal-preview #btn-regenerate-caption:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-preview #preview-caption-input {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-preview #preview-caption-input::placeholder {
+  color: #71717a !important;
+}
+html.dark #modal-preview #preview-caption-input:focus {
+  border-color: #ffffff !important;
+}
+html.dark #modal-preview .divide-y {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-preview .divide-y > div {
+  border-color: #383838 !important;
+}
+html.dark #modal-preview .divide-y span.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #modal-preview .divide-y span.font-medium,
+html.dark #modal-preview #preview-type,
+html.dark #modal-preview #preview-pillar,
+html.dark #modal-preview #preview-brand {
+  color: #ffffff !important;
+}
+html.dark #modal-preview div[class*="md:w-[330px]"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-preview div[class*="md:w-[330px]"] > div {
+  background-color: #272727 !important;
+}
+html.dark #modal-preview #preview-draft-counter {
+  color: #ffffff !important;
+}
+html.dark #modal-preview #close-preview-modal {
+  color: #a1a1aa !important;
+}
+html.dark #modal-preview #close-preview-modal:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-preview #preview-footer-wrapper {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #modal-preview #btn-reject {
+  background-color: #272727 !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #f87171 !important;
+}
+html.dark #modal-preview #btn-reject:hover {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+html.dark #modal-preview #btn-approve {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+html.dark #modal-preview #btn-approve:hover {
+  background-color: #1d4ed8 !important;
+}
+html.dark #modal-preview #preview-approved-actions button:first-child {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-preview #preview-approved-actions button:first-child:hover {
+  background-color: #272727 !important;
+}
+html.dark #modal-preview #preview-approved-actions button:last-child,
+html.dark #modal-preview #btn-recover-draft {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #modal-preview #preview-approved-actions button:last-child:hover,
+html.dark #modal-preview #btn-recover-draft:hover {
+  background-color: #f4f4f5 !important;
+}
+html.dark #modal-preview #btn-preview-cancel-schedule {
+  background-color: #272727 !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #f87171 !important;
+}
+
+/* 2. Outputs: Regenerate Caption Modal (#modal-regenerate) */
+html.dark #modal-regenerate > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-regenerate h4 {
+  color: #ffffff !important;
+}
+html.dark #modal-regenerate #close-regenerate-modal {
+  color: #a1a1aa !important;
+}
+html.dark #modal-regenerate #close-regenerate-modal:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-regenerate label {
+  color: #e4e4e7 !important;
+}
+html.dark #modal-regenerate #regenerate-prompt {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-regenerate #regenerate-prompt::placeholder {
+  color: #71717a !important;
+}
+html.dark #modal-regenerate #regenerate-prompt:focus {
+  border-color: #ffffff !important;
+}
+html.dark #modal-regenerate #btn-submit-regenerate {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #modal-regenerate #btn-submit-regenerate:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* 3. Outputs: Batch Review Finalized Summary Modal (#modal-approval-summary) */
+html.dark #modal-approval-summary > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-approval-summary .px-6.sm\:px-8.pt-6.pb-2,
+html.dark #modal-approval-summary .px-6.sm\:px-8.py-4 {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-approval-summary #summary-title {
+  color: #ffffff !important;
+}
+html.dark #modal-approval-summary #btn-close-summary {
+  color: #a1a1aa !important;
+}
+html.dark #modal-approval-summary #btn-close-summary:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-approval-summary .flex-1.overflow-y-auto {
+  background-color: #141414 !important;
+}
+html.dark #modal-approval-summary #summary-grid > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-approval-summary #summary-grid > div:hover {
+  border-color: #3f3f46 !important;
+}
+html.dark #modal-approval-summary label[class*="bg-white"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-approval-summary #summary-btn-later {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark #modal-approval-summary #summary-btn-later:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-approval-summary #summary-btn-publish {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-approval-summary #summary-btn-publish:hover {
+  background-color: #454545 !important;
+}
+html.dark #modal-approval-summary #summary-btn-schedule {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #modal-approval-summary #summary-btn-schedule:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* 4. Scheduled: Single Schedule Modal (#modal-single-schedule) */
+html.dark #modal-single-schedule > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-single-schedule .px-7.pt-7.pb-3 {
+  background-color: #272727 !important;
+}
+html.dark #modal-single-schedule h2 {
+  color: #ffffff !important;
+}
+html.dark #modal-single-schedule button[onclick="closeSingleScheduleModal()"] {
+  color: #a1a1aa !important;
+}
+html.dark #modal-single-schedule button[onclick="closeSingleScheduleModal()"]:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-single-schedule label {
+  color: #e4e4e7 !important;
+}
+html.dark #modal-single-schedule select,
+html.dark #modal-single-schedule input[type="date"],
+html.dark #modal-single-schedule input[type="time"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+html.dark #modal-single-schedule select:focus,
+html.dark #modal-single-schedule input:focus {
+  border-color: #ffffff !important;
+}
+html.dark #modal-single-schedule div[class*="border border-[#eaecf0] bg-white"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-single-schedule div[class*="border border-[#eaecf0] bg-white"] p.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark #modal-single-schedule div[class*="border border-[#eaecf0] bg-white"] p.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #modal-single-schedule div[class*="bg-[#f4f4f5]"] {
+  background-color: #272727 !important;
+  border-color: #38383e !important;
+  color: #ffffff !important;
+}
+html.dark #modal-single-schedule button[onclick="openEngagementFromSingleSchedule()"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-single-schedule .absolute.bottom-0 {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #modal-single-schedule .absolute.bottom-0 button:first-child {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark #modal-single-schedule .absolute.bottom-0 button:first-child:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-single-schedule .absolute.bottom-0 button:last-child {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #modal-single-schedule .absolute.bottom-0 button:last-child:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* 5. Scheduled: Preview Schedule Modal (#modal-preview-schedule) */
+html.dark #modal-preview-schedule > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-preview-schedule div[class*="md:w-[300px]"] {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-preview-schedule div[class*="md:w-[300px]"] span.text-\[\#344054\] {
+  color: #ffffff !important;
+}
+html.dark #preview-schedule-post-type-badge {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #d4d4d8 !important;
+}
+html.dark #modal-preview-schedule h2 {
+  color: #ffffff !important;
+}
+html.dark #modal-preview-schedule button[onclick="closePreviewScheduleModal()"] {
+  color: #a1a1aa !important;
+}
+html.dark #modal-preview-schedule button[onclick="closePreviewScheduleModal()"]:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-preview-schedule label {
+  color: #e4e4e7 !important;
+}
+html.dark #modal-preview-schedule textarea,
+html.dark #modal-preview-schedule select,
+html.dark #modal-preview-schedule input[type="date"],
+html.dark #modal-preview-schedule input[type="time"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+html.dark #modal-preview-schedule textarea::placeholder {
+  color: #71717a !important;
+}
+html.dark #modal-preview-schedule textarea:focus,
+html.dark #modal-preview-schedule select:focus,
+html.dark #modal-preview-schedule input:focus {
+  border-color: #ffffff !important;
+}
+html.dark #preview-social-accounts-container label {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #preview-social-accounts-container label:hover {
+  background-color: #454545 !important;
+  border-color: #383840 !important;
+}
+html.dark #preview-social-accounts-container label:has(input:checked) {
+  border-color: #ffffff !important;
+  background-color: #454545 !important;
+}
+html.dark #preview-social-accounts-container label span.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark #preview-social-accounts-container label span.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #preview-social-accounts-container label div[class*="bg-[#f4f4f5]"] {
+  background-color: #272727 !important;
+}
+html.dark #modal-preview-schedule .px-5.pb-5.pt-1\.5 {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #modal-preview-schedule .px-5.pb-5.pt-1\.5 button:first-child {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark #modal-preview-schedule .px-5.pb-5.pt-1\.5 button:first-child:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-preview-schedule .px-5.pb-5.pt-1\.5 button:last-child {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #modal-preview-schedule .px-5.pb-5.pt-1\.5 button:last-child:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* 6. Scheduled: Setup Manual Schedule Modal (#modal-manual-schedule) */
+html.dark #modal-manual-schedule > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-manual-schedule div[class*="w-[65%]"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-manual-schedule div[class*="w-[65%]"] .px-6.py-5 {
+  background-color: #272727 !important;
+  border-bottom: 1px solid #28282c !important;
+}
+html.dark #modal-manual-schedule h2 {
+  color: #ffffff !important;
+}
+html.dark #modal-manual-schedule div[class*="w-[65%]"] .flex-1.overflow-y-auto {
+  background-color: #272727 !important;
+}
+html.dark #modal-manual-schedule label {
+  color: #e4e4e7 !important;
+}
+html.dark #modal-manual-schedule select,
+html.dark #modal-manual-schedule textarea,
+html.dark #modal-manual-schedule input[type="date"],
+html.dark #modal-manual-schedule input[type="time"] {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+  color-scheme: dark !important;
+}
+html.dark #modal-manual-schedule select:focus,
+html.dark #modal-manual-schedule textarea:focus,
+html.dark #modal-manual-schedule input:focus {
+  border-color: #ffffff !important;
+}
+html.dark #modal-manual-schedule textarea::placeholder {
+  color: #71717a !important;
+}
+html.dark #manual-platform-tabs {
+  background-color: #272727 !important;
+  border: 1px solid #28282c !important;
+}
+html.dark #manual-platform-tabs button {
+  background-color: #272727 !important;
+  border-color: #38383e !important;
+  color: #ffffff !important;
+}
+html.dark #manual-post-type-container label > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark #manual-post-type-container label:hover > div {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+html.dark #manual-post-type-container input:checked + div {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #manual-media-dropzone {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+html.dark #manual-media-dropzone:hover {
+  background-color: #454545 !important;
+  border-color: #ffffff !important;
+}
+html.dark #manual-media-dropzone > div {
+  background-color: #272727 !important;
+  border-color: #38383e !important;
+}
+html.dark #manual-media-dropzone span {
+  color: #ffffff !important;
+}
+html.dark #modal-manual-schedule div[class*="w-[65%]"] .px-6.py-4 {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #btn-manual-post-now {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-manual-post-now:hover {
+  background-color: #454545 !important;
+}
+html.dark #btn-manual-confirm-schedule {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+}
+html.dark #btn-manual-confirm-schedule:hover {
+  background-color: #f4f4f5 !important;
+}
+html.dark #btn-manual-confirm-schedule svg {
+  color: #272727 !important;
+}
+/* Right simulator column */
+html.dark #modal-manual-schedule div[class*="w-[35%]"] {
+  background-color: #141414 !important;
+  border-left: 1px solid #28282c !important;
+}
+html.dark #sim-preview-title {
+  color: #ffffff !important;
+}
+html.dark #btn-close-manual-schedule {
+  color: #a1a1aa !important;
+}
+html.dark #btn-close-manual-schedule:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #sim-preview-card {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+}
+html.dark #sim-header-feed {
+  border-color: #383838 !important;
+}
+html.dark #sim-brand-name {
+  color: #ffffff !important;
+}
+html.dark #sim-preview-canvas {
+  background-color: #141414 !important;
+}
+html.dark #sim-footer-feed {
+  background-color: #272727 !important;
+}
+html.dark #sim-footer-feed i {
+  color: #d1d5db !important;
+}
+html.dark #sim-brand-body {
+  color: #ffffff !important;
+}
+html.dark #sim-caption-text {
+  color: #d1d5db !important;
+}
+/* Submodal: AI Caption Helper inside Manual Schedule */
+html.dark #manual-ai-prompt-modal > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #manual-ai-prompt-modal .px-5.py-4 {
+  background-color: #272727 !important;
+  border-bottom: 1px solid #28282c !important;
+}
+html.dark #manual-ai-prompt-modal span.text-\[\#111827\] {
+  color: #ffffff !important;
+}
+html.dark #btn-close-ai-prompt {
+  color: #a1a1aa !important;
+}
+html.dark #btn-close-ai-prompt:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #manual-ai-prompt-modal label {
+  color: #e4e4e7 !important;
+}
+html.dark #ai-additional-prompt-input {
+  background-color: #373737 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #ai-additional-prompt-input::placeholder {
+  color: #71717a !important;
+}
+html.dark #ai-additional-prompt-input:focus {
+  border-color: #ffffff !important;
+}
+html.dark #btn-manual-ai-generate-final {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  box-shadow: none !important;
+}
+html.dark #btn-manual-ai-generate-final:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* 7. Scheduled: Calendar Day Modal (#modal-calendar-day) */
+html.dark #modal-calendar-day > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-calendar-day .px-4.py-3\.5 {
+  background-color: #272727 !important;
+  border-bottom: 1px solid #28282c !important;
+}
+html.dark #cal-day-modal-title {
+  color: #ffffff !important;
+}
+html.dark #modal-calendar-day button[onclick*="modal-calendar-day"] {
+  color: #a1a1aa !important;
+}
+html.dark #modal-calendar-day button[onclick*="modal-calendar-day"]:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #cal-day-items-container {
+  background-color: #141414 !important;
+}
+html.dark #cal-day-items-container > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #cal-day-items-container p.text-\[\#18181b\],
+html.dark #cal-day-items-container span.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark #cal-day-items-container span.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #modal-calendar-day .p-3.bg-white {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #modal-calendar-day .p-3.bg-white button {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #modal-calendar-day .p-3.bg-white button:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* 8. Automations: Details & Confirmation Modals */
+html.dark #modal-preview-automation > div,
+html.dark #modal-confirm-resume-automation > div,
+html.dark #modal-confirm-pause-automation > div,
+html.dark #modal-confirm-delete-automation > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #preview-auto-title,
+html.dark #modal-confirm-resume-automation h3,
+html.dark #modal-confirm-pause-automation h3,
+html.dark #modal-confirm-delete-automation h3 {
+  color: #ffffff !important;
+}
+html.dark #modal-preview-automation .px-6.py-4 {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #btn-close-preview-auto {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-close-preview-auto:hover {
+  background-color: #272727 !important;
+}
+html.dark #modal-confirm-resume-automation p,
+html.dark #modal-confirm-pause-automation p,
+html.dark #modal-confirm-delete-automation p {
+  color: #a1a1aa !important;
+}
+html.dark #modal-confirm-resume-automation p span,
+html.dark #modal-confirm-pause-automation p span,
+html.dark #modal-confirm-delete-automation p span {
+  color: #ffffff !important;
+}
+html.dark #modal-confirm-resume-automation button[id*="cancel"],
+html.dark #modal-confirm-pause-automation button[id*="cancel"],
+html.dark #modal-confirm-delete-automation button[id*="cancel"] {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* CONTENT AUTOMATION: CREATE & EDIT AUTOMATION WIZARD MODAL          */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* Modal Frame */
+html.dark #modal-add-automation > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Close Button */
+html.dark #close-add-modal {
+  color: #a1a1aa !important;
+}
+html.dark #close-add-modal:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+
+/* Header & Title */
+html.dark #modal-add-automation .px-7.pt-7.pb-3 {
+  background-color: #272727 !important;
+  border-bottom: 1px solid #28282c !important;
+}
+html.dark #wizard-title {
+  color: #ffffff !important;
+}
+
+/* Step Indicator */
+html.dark #modal-add-automation .step-dot div {
+  background-color: #272727 !important;
+  border-color: #38383e !important;
+  color: #71717a !important;
+}
+html.dark #modal-add-automation .step-dot span {
+  color: #71717a !important;
+}
+html.dark #modal-add-automation .step-dot div[class*="bg-[#111827]"],
+html.dark #modal-add-automation .step-dot div[class*="bg-[#18181b]"] {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #modal-add-automation .step-dot span[class*="text-[#111827]"],
+html.dark #modal-add-automation .step-dot span[class*="text-[#18181b]"] {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+html.dark #modal-add-automation .w-6.h-px {
+  background-color: #272727 !important;
+}
+
+/* Scrollable Content Container */
+html.dark #wizard-content {
+  background-color: #272727 !important;
+}
+
+/* Step 1: General Setup */
+html.dark #modal-add-automation label {
+  color: #ffffff !important;
+}
+html.dark #input-name {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #input-name::placeholder {
+  color: #71717a !important;
+}
+html.dark #input-name:focus {
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Business DNA Selector */
+html.dark #btn-select-dna {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #btn-select-dna:hover {
+  background-color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #dna-selected-icon-container {
+  background-color: #272727 !important;
+  border-color: #38383e !important;
+  color: #ffffff !important;
+}
+html.dark #dna-selected-icon {
+  color: #ffffff !important;
+}
+html.dark #dna-selected-name {
+  color: #ffffff !important;
+}
+html.dark #dna-selected-desc {
+  color: #a1a1aa !important;
+}
+html.dark #btn-select-dna .ti-chevron-right {
+  color: #a1a1aa !important;
+}
+
+/* DNA Dropdown */
+html.dark #dna-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark .dna-option:hover {
+  background-color: #454545 !important;
+}
+html.dark .dna-option p.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark .dna-option p.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark .dna-option img {
+  border-color: #38383e !important;
+}
+
+/* Draft Mode Banner */
+html.dark #step-1 .rounded-xl.bg-\[\#fafafa\] {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #step-1 .ti-file-check {
+  color: #ffffff !important;
+}
+html.dark #step-1 .rounded-xl.bg-\[\#fafafa\] p.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark #step-1 .rounded-xl.bg-\[\#fafafa\] p.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+
+/* Step 2: Schedule & Calendar */
+html.dark #step-2 .flex.items-center.p-1.bg-\[\#f4f4f5\] {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #step-2 .schedule-mode-btn {
+  color: #a1a1aa !important;
+}
+html.dark #step-2 .schedule-mode-btn:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark #step-2 .schedule-mode-btn.bg-white,
+html.dark #step-2 .schedule-mode-btn[class*="bg-white"] {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+}
+html.dark #btn-ai-suggestion,
+html.dark #btn-ai-suggestion-weekly {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-ai-suggestion:hover,
+html.dark #btn-ai-suggestion-weekly:hover {
+  background-color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-ai-suggestion i,
+html.dark #btn-ai-suggestion-weekly i {
+  color: #ffffff !important;
+}
+html.dark #selected-dates-count,
+html.dark #selected-weekly-dates-count {
+  color: #a1a1aa !important;
+}
+
+/* Calendar Card */
+html.dark #monthly-calendar > div:last-child,
+html.dark #weekly-calendar > div:last-child {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #cal-month-year,
+html.dark #wizard-cal-week-label {
+  color: #ffffff !important;
+}
+html.dark #cal-prev,
+html.dark #cal-next,
+html.dark #wizard-cal-week-prev,
+html.dark #wizard-cal-week-next {
+  color: #a1a1aa !important;
+}
+html.dark #cal-prev:hover,
+html.dark #cal-next:hover,
+html.dark #wizard-cal-week-prev:hover,
+html.dark #wizard-cal-week-next:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #monthly-calendar .grid-cols-7 > div.text-center,
+html.dark #weekly-calendar .grid-cols-7 > div.text-center {
+  color: #a1a1aa !important;
+}
+
+/* Calendar Days */
+html.dark #cal-grid .cal-day,
+html.dark #wizard-cal-week-grid .cal-day {
+  color: #ffffff !important;
+}
+html.dark #cal-grid .cal-day:hover,
+html.dark #wizard-cal-week-grid .cal-day:hover {
+  background-color: #272727 !important;
+}
+html.dark #cal-grid .cal-day[class*="text-[#D92D20]"],
+html.dark #wizard-cal-week-grid .cal-day[class*="text-[#D92D20]"] {
+  color: #f87171 !important;
+}
+html.dark #cal-grid .cal-day[class*="text-[#D92D20]"]:hover,
+html.dark #wizard-cal-week-grid .cal-day[class*="text-[#D92D20]"]:hover {
+  background-color: #381a1d !important;
+}
+html.dark #cal-grid .cal-day[class*="bg-[#111827]"],
+html.dark #wizard-cal-week-grid .cal-day[class*="bg-[#111827]"] {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  font-weight: 700 !important;
+}
+html.dark .cal-counter {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* Step 3: Review & Repeat */
+html.dark #step-3 h3,
+html.dark #step-3 h4 {
+  color: #ffffff !important;
+}
+html.dark #step-3 .rounded-xl.bg-\[\#fafafa\] {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #step-3 .rounded-xl.bg-\[\#fafafa\] span.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #review-name,
+html.dark #review-dna {
+  color: #ffffff !important;
+}
+html.dark #review-dna-logo {
+  border-color: #38383e !important;
+}
+
+/* Repeat Options */
+html.dark #step-3 label div.border {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+  color: #a1a1aa !important;
+}
+html.dark #step-3 label:hover div.border {
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+html.dark #step-3 label input:checked + div {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+  font-weight: 600 !important;
+}
+html.dark #recurring-mode-info,
+html.dark #recurring-info,
+html.dark #repeat-for-wrapper span {
+  color: #a1a1aa !important;
+}
+html.dark #repeat-for-select {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #repeat-for-select:focus {
+  border-color: #ffffff !important;
+}
+html.dark #weekly-days-info {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+  color: #a1a1aa !important;
+}
+
+/* Recurring Preview Cards */
+html.dark #recurring-preview-grid > div {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #recurring-preview-grid > div > div:first-child {
+  color: #ffffff !important;
+}
+html.dark #recurring-preview-grid span[class*="bg-[#EFF6FF]"] {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #recurring-preview-grid span[class*="text-[#98a2b3]"] {
+  color: #a1a1aa !important;
+}
+
+/* Schedule Review Cards */
+html.dark #review-schedule-cards > div {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #review-schedule-cards span.text-\[\#111827\] {
+  color: #ffffff !important;
+}
+html.dark #review-schedule-cards span.text-\[\#667085\],
+html.dark #review-schedule-cards i {
+  color: #a1a1aa !important;
+}
+
+/* Wizard Footer */
+html.dark #modal-add-automation .bottom-0 {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #modal-add-automation .bottom-0 span.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #modal-add-automation .bottom-0 div.rounded-full.bg-\[\#f4f4f5\] {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+}
+html.dark #modal-add-automation .bottom-0 svg.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark #footer-credit {
+  color: #ffffff !important;
+}
+html.dark #modal-add-automation .bottom-0 .ti-info-circle {
+  color: #a1a1aa !important;
+}
+html.dark #modal-add-automation .bottom-0 .group:hover > div {
+  background-color: #272727 !important;
+  border: 1px solid #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-wizard-back {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-wizard-back:hover {
+  background-color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-wizard-next,
+html.dark #btn-start-automation {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-wizard-next:hover,
+html.dark #btn-start-automation:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* CONTENT AUTOMATION: AUTOMATION FORM POPOVER & DATE DETAIL POPOVER  */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* Automation Form Popover */
+html.dark #automation-popover {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+}
+html.dark #automation-popover-date {
+  color: #ffffff !important;
+}
+html.dark #close-automation-popover {
+  color: #a1a1aa !important;
+}
+html.dark #close-automation-popover:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #automation-popover label {
+  color: #ffffff !important;
+}
+html.dark #automation-content-type,
+html.dark #automation-category,
+html.dark #automation-prompt,
+html.dark #automation-variations {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #automation-content-type option,
+html.dark #automation-category option {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #automation-prompt::placeholder {
+  color: #71717a !important;
+}
+html.dark #automation-content-type:focus,
+html.dark #automation-category:focus,
+html.dark #automation-prompt:focus,
+html.dark #automation-variations:focus {
+  border-color: #ffffff !important;
+}
+html.dark #content-type-desc,
+html.dark #automation-popover p.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+html.dark #btn-auto-generate-prompt {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-auto-generate-prompt:hover {
+  background-color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-auto-generate-prompt i {
+  color: #ffffff !important;
+}
+html.dark #btn-automation-references {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-automation-references:hover {
+  background-color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #automation-references-dropdown {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #btn-automation-add-local,
+html.dark #btn-automation-add-catalog {
+  color: #ffffff !important;
+}
+html.dark #btn-automation-add-local:hover,
+html.dark #btn-automation-add-catalog:hover {
+  background-color: #454545 !important;
+}
+html.dark #btn-automation-add-local i,
+html.dark #btn-automation-add-catalog i {
+  color: #a1a1aa !important;
+}
+html.dark #btn-var-minus,
+html.dark #btn-var-plus {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-var-minus:hover,
+html.dark #btn-var-plus:hover {
+  background-color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #automation-remaining {
+  color: #a1a1aa !important;
+}
+html.dark #btn-add-automation-popover {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-add-automation-popover:hover {
+  background-color: #f4f4f5 !important;
+}
+html.dark #automation-ref-tags span {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+
+/* Date Detail Popover */
+html.dark #date-detail-popover {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+}
+html.dark #date-detail-date {
+  color: #ffffff !important;
+}
+html.dark #close-date-detail-popover {
+  color: #a1a1aa !important;
+}
+html.dark #close-date-detail-popover:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #date-detail-list > div {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #date-detail-list > div:hover {
+  border-color: #3f3f46 !important;
+}
+html.dark #date-detail-list i {
+  color: #ffffff !important;
+}
+html.dark #date-detail-list .text-\[\#111827\] {
+  color: #ffffff !important;
+}
+html.dark #date-detail-list .text-\[\#667085\] {
+  color: #a1a1aa !important;
+}
+html.dark #date-detail-list button {
+  color: #a1a1aa !important;
+}
+html.dark #date-detail-list button:hover {
+  background-color: #272727 !important;
+}
+html.dark #date-detail-list button:first-child:hover {
+  color: #60a5fa !important;
+}
+html.dark #date-detail-list button:last-child:hover {
+  color: #f87171 !important;
+}
+html.dark #btn-add-new-automation {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-add-new-automation:hover {
+  background-color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-add-new-automation i {
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* CONTENT AUTOMATION: AUTO ENGAGEMENT & TEMPLATE MODALS               */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* Modal Auto Engagement */
+html.dark #modal-auto-engagement > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #btn-back-engagement,
+html.dark #btn-eng-template-trigger {
+  color: #a1a1aa !important;
+}
+html.dark #btn-back-engagement:hover,
+html.dark #btn-eng-template-trigger:hover {
+  background-color: #272727 !important;
+  color: #ffffff !important;
+}
+html.dark #modal-auto-engagement h2 {
+  color: #ffffff !important;
+}
+html.dark #dropdown-eng-template {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important;
+}
+html.dark #btn-eng-save-tmpl,
+html.dark #btn-eng-load-tmpl {
+  color: #ffffff !important;
+}
+html.dark #btn-eng-save-tmpl:hover,
+html.dark #btn-eng-load-tmpl:hover {
+  background-color: #454545 !important;
+}
+html.dark #btn-eng-save-tmpl i,
+html.dark #btn-eng-load-tmpl i {
+  color: #a1a1aa !important;
+}
+html.dark #modal-auto-engagement .px-6.py-4 > div {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-auto-engagement .px-6.py-4 > div:hover {
+  border-color: #3f3f46 !important;
+}
+html.dark #modal-auto-engagement .px-6.py-4 .w-8.h-8 {
+  background-color: #272727 !important;
+  border-color: #38383e !important;
+  color: #ffffff !important;
+}
+html.dark #modal-auto-engagement .px-6.py-4 .w-8.h-8 i {
+  color: #ffffff !important;
+}
+html.dark #modal-auto-engagement .px-6.py-4 span.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark #modal-auto-engagement .p-6.bg-white {
+  background-color: #272727 !important;
+  border-top: 1px solid #28282c !important;
+}
+html.dark #btn-save-engagement {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #btn-save-engagement:hover {
+  background-color: #f4f4f5 !important;
+}
+
+/* Engagement Template Modals (Save & Load) */
+html.dark #modal-eng-save-tmpl > div,
+html.dark #modal-eng-load-tmpl > div {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark #modal-eng-save-tmpl h3,
+html.dark #modal-eng-load-tmpl h3 {
+  color: #ffffff !important;
+}
+html.dark #modal-eng-save-tmpl .p-5.bg-white,
+html.dark #modal-eng-save-tmpl .p-4.bg-white,
+html.dark #modal-eng-load-tmpl .p-3.bg-white {
+  background-color: #272727 !important;
+}
+html.dark #modal-eng-save-tmpl label {
+  color: #ffffff !important;
+}
+html.dark #inp-eng-tmpl-name {
+  background-color: #141414 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #inp-eng-tmpl-name:focus {
+  border-color: #ffffff !important;
+}
+html.dark #btn-close-eng-save-tmpl {
+  background-color: #272727 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-close-eng-save-tmpl:hover {
+  background-color: #272727 !important;
+}
+html.dark #btn-confirm-eng-save-tmpl {
+  background-color: #ffffff !important;
+  color: #272727 !important;
+  border-color: #ffffff !important;
+}
+html.dark #modal-eng-load-tmpl label {
+  background-color: #141414 !important;
+  border-color: #383838 !important;
+}
+html.dark #modal-eng-load-tmpl label:hover {
+  border-color: #3f3f46 !important;
+}
+html.dark #modal-eng-load-tmpl label p.text-\[\#18181b\] {
+  color: #ffffff !important;
+}
+html.dark #modal-eng-load-tmpl label p.text-\[\#71717a\] {
+  color: #a1a1aa !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* TOAST NOTIFICATION / ALERT (DARK MODE)                             */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* Success Variant */
+html.dark #toast[class*="emerald"],
+html.dark #xeni-toast[class*="emerald"],
+html.dark div[data-slot="alert"][class*="emerald"] {
+  background-color: #0f1c15 !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* Error / Destructive Variant */
+html.dark #toast[class*="red"],
+html.dark #xeni-toast[class*="red"],
+html.dark div[data-slot="alert"][class*="red"] {
+  background-color: #1e1113 !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(239, 68, 68, 0.15) !important;
+}
+
+/* Warning Variant */
+html.dark #toast[class*="amber"],
+html.dark #xeni-toast[class*="amber"],
+html.dark div[data-slot="alert"][class*="amber"] {
+  background-color: #1f170a !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(245, 158, 11, 0.15) !important;
+}
+
+/* Info Variant */
+html.dark #toast[class*="blue"],
+html.dark #xeni-toast[class*="blue"],
+html.dark div[data-slot="alert"][class*="blue"] {
+  background-color: #0e1726 !important;
+  border-color: rgba(59, 130, 246, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Default / Neutral Toast fallback */
+html.dark #toast,
+html.dark #xeni-toast,
+html.dark #toast-template {
+  background-color: #272727 !important;
+  border-color: #383838 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Toast Title / Message Text */
+html.dark #toast [data-slot="alert-title"],
+html.dark #toast #toast-title,
+html.dark #xeni-toast [data-slot="alert-title"],
+html.dark #xeni-toast #xeni-toast-title,
+html.dark #toast-container .toast-message,
+html.dark #toast-container span {
+  color: #ffffff !important;
+}
+
+/* Toast Close Button */
+html.dark #toast #toast-close-btn,
+html.dark #xeni-toast #xeni-toast-close {
+  color: #a1a1aa !important;
+}
+html.dark #toast #toast-close-btn:hover,
+html.dark #xeni-toast #xeni-toast-close:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+
+
+

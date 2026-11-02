@@ -126,7 +126,7 @@ const dnaList = [
     >
       <!-- Left: Title + Info -->
       <div class="flex items-center gap-2.5 shrink-0">
-        <h1 class="text-[20px] font-semibold text-[#18181b] tracking-tight">
+        <h1 class="text-[20px] font-semibold text-[#18181b] dark:text-white tracking-tight">
           Content Automation
         </h1>
         <i
@@ -175,12 +175,12 @@ const dnaList = [
     <div class="w-full mb-6 flex items-center gap-4">
       <div
         id="main-tabs-container"
-        class="relative flex items-center gap-1 p-1 bg-white rounded-xl border border-[#eaecf0] shadow-xs w-fit"
+        class="relative flex items-center gap-1 p-1 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-xs w-fit"
       >
         <!-- Sliding active indicator pill -->
         <div
           id="main-tabs-indicator"
-          class="absolute top-1 bottom-1 rounded-lg bg-[#18181b] shadow-xs pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          class="absolute top-1 bottom-1 rounded-lg bg-[#18181b] dark:bg-[#373737] shadow-xs pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style="left: 4px; width: 0px;"
         >
         </div>
@@ -194,7 +194,7 @@ const dnaList = [
         </button>
         <button
           id="tab-generated"
-          class="tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] transition-colors duration-200 cursor-pointer"
+          class="tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-colors duration-200 cursor-pointer"
           data-tab="generated"
         >
           Outputs
@@ -206,7 +206,7 @@ const dnaList = [
         </button>
         <button
           id="tab-scheduled"
-          class="tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] transition-colors duration-200 cursor-pointer"
+          class="tab-btn relative z-10 px-4 h-8 rounded-lg text-[13px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-colors duration-200 cursor-pointer"
           data-tab="scheduled"
         >
           Scheduled
@@ -227,7 +227,7 @@ const dnaList = [
           <div class="relative" id="business-filter-wrapper">
             <button
               id="btn-business-filter"
-              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] hover:bg-[#fafafa] shadow-2xs transition-all cursor-pointer"
+              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-[#d1d5db] hover:bg-[#fafafa] dark:hover:bg-[#454545] shadow-2xs transition-all cursor-pointer"
             >
               <i class="ti ti-building text-[14px]"></i>
               <span id="business-filter-label">All Business</span>
@@ -235,17 +235,17 @@ const dnaList = [
             </button>
             <div
               id="business-filter-dropdown"
-              class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl border border-[#e4e4e7] shadow-lg z-30 overflow-hidden flex flex-col p-1"
+              class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white dark:bg-[#272727] rounded-xl border border-[#e4e4e7] dark:border-[#383838] shadow-lg z-30 overflow-hidden flex flex-col p-1"
             >
               <!-- Mini Search -->
-              <div class="p-2 border-b border-[#eaecf0] bg-[#fafafa]">
+              <div class="p-2 border-b border-[#eaecf0] dark:border-[#383838] bg-[#fafafa] dark:bg-[#141414]">
                 <div class="relative">
                   <i
                     class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#a1a1aa] text-[11px]"
                   ></i>
                   <input
                     type="text"
-                    class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#e4e4e7] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#18181b]/10 focus:border-[#18181b] transition-all"
+                    class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white dark:bg-[#373737] border border-[#e4e4e7] dark:border-[#383838] dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#18181b]/10 focus:border-[#18181b] dark:focus:border-white transition-all"
                     placeholder="Search..."
                   />
                 </div>
@@ -257,19 +257,19 @@ const dnaList = [
                 {
                   dnaList.map((item) => (
                     <button
-                      class="business-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer flex items-center gap-2.5"
+                      class="business-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#d1d5db] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer flex items-center gap-2.5"
                       data-brand={item.id}
                       data-logo={item.logo}
                     >
                       {item.id === "all" ? (
-                        <div class="w-5 h-5 rounded-md bg-[#f4f4f5] border border-[#eaecf0] flex items-center justify-center shrink-0 text-[#71717a]">
+                        <div class="w-5 h-5 rounded-md bg-[#f4f4f5] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] flex items-center justify-center shrink-0 text-[#71717a]">
                           <i class="ti ti-building text-[12px]"></i>
                         </div>
                       ) : (
                         <img
                           src={item.logo}
                           alt={item.name}
-                          class="w-5 h-5 rounded-md object-cover border border-[#eaecf0] shrink-0"
+                          class="w-5 h-5 rounded-md object-cover border border-[#eaecf0] dark:border-[#444444] shrink-0"
                         />
                       )}
                       <span class="truncate">{item.name}</span>
@@ -289,7 +289,7 @@ const dnaList = [
               id="automation-search"
               type="text"
               placeholder="Search by campaign or business..."
-              class="w-80 h-9 pl-8 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] placeholder:text-[#a1a1aa] outline-none focus:ring-2 focus:ring-[#18181b]/10 focus:border-[#18181b] shadow-2xs transition-all"
+              class="w-80 h-9 pl-8 pr-3 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-white placeholder:text-[#a1a1aa] dark:placeholder:text-[#71717a] outline-none focus:ring-2 focus:ring-[#18181b]/10 focus:border-[#18181b] dark:focus:border-white shadow-2xs transition-all"
             />
           </div>
         </div>
@@ -297,7 +297,7 @@ const dnaList = [
         <!-- Create Button (only for Automations tab) -->
         <button
           id="btn-add-automation"
-          class="px-4 h-9 rounded-xl bg-[#18181b] hover:bg-black text-white text-[13px] font-medium shadow-xs active:scale-98 transition-all cursor-pointer flex items-center gap-2 border-0"
+          class="px-4 h-9 rounded-xl bg-[#18181b] dark:bg-white hover:bg-black dark:hover:bg-[#e4e4e7] text-white dark:text-[#272727] text-[13px] font-medium shadow-xs active:scale-98 transition-all cursor-pointer flex items-center gap-2 border-0"
         >
           <i class="ti ti-plus text-[14px]"></i>
           Create Automation
@@ -338,47 +338,80 @@ const dnaList = [
       <!-- Table (HeroUI Table format) -->
       <div id="automations-table" class="w-full hidden">
         <div
-          class="table-root w-full overflow-clip rounded-2xl border border-[#eaecf0] bg-white shadow-xs"
+          class="table-root w-full rounded-2xl border border-[#e5e5e5] dark:border-[#383838] bg-white dark:bg-[#141414] p-1.5 pb-2.5 shadow-2xs"
         >
           <div class="table__scroll-container overflow-x-auto custom-scrollbar">
-            <table
-              class="table__content w-full min-w-[760px] text-left border-separate border-spacing-0 text-sm"
-            >
-              <thead class="table__header bg-[#fafafa]">
-                <tr class="border-b border-[#eaecf0]">
-                  <th
-                    class="table__column px-5 py-3 text-[11px] font-semibold text-[#71717a] uppercase tracking-wider border-b border-[#eaecf0]"
-                    >Business</th
+            <div class="min-w-[760px]">
+              <table class="w-full text-left table-fixed text-sm">
+                <colgroup>
+                  <col class="w-[180px]" />
+                  <col class="w-auto" />
+                  <col class="w-[160px]" />
+                  <col class="w-[170px]" />
+                  <col class="w-[120px]" />
+                  <col class="w-[120px]" />
+                </colgroup>
+                <thead class="table__header">
+                  <tr>
+                    <th
+                      class="table__column px-5 py-3 text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] whitespace-nowrap relative border-none"
+                    >
+                      Business
+                      <span class="absolute right-0 top-1/2 -translate-y-1/2 h-3.5 w-[1px] bg-[#d4d4d8] dark:bg-[#3f3f46]"></span>
+                    </th>
+                    <th
+                      class="table__column px-5 py-3 text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] whitespace-nowrap relative border-none"
+                    >
+                      Task Name
+                      <span class="absolute right-0 top-1/2 -translate-y-1/2 h-3.5 w-[1px] bg-[#d4d4d8] dark:bg-[#3f3f46]"></span>
+                    </th>
+                    <th
+                      class="table__column px-5 py-3 text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] whitespace-nowrap relative border-none"
+                    >
+                      Schedule
+                      <span class="absolute right-0 top-1/2 -translate-y-1/2 h-3.5 w-[1px] bg-[#d4d4d8] dark:bg-[#3f3f46]"></span>
+                    </th>
+                    <th
+                      class="table__column px-5 py-3 text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] whitespace-nowrap relative border-none"
+                    >
+                      Content Types
+                      <span class="absolute right-0 top-1/2 -translate-y-1/2 h-3.5 w-[1px] bg-[#d4d4d8] dark:bg-[#3f3f46]"></span>
+                    </th>
+                    <th
+                      class="table__column px-5 py-3 text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] whitespace-nowrap relative border-none"
+                    >
+                      Status
+                      <span class="absolute right-0 top-1/2 -translate-y-1/2 h-3.5 w-[1px] bg-[#d4d4d8] dark:bg-[#3f3f46]"></span>
+                    </th>
+                    <th
+                      class="table__column px-5 py-3 text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] whitespace-nowrap text-right border-none"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+
+              <!-- Inner Table Row Card -->
+              <div class="bg-white dark:bg-[#272727] rounded-xl border border-[#e5e5e5] dark:border-[#383838] overflow-hidden shadow-2xs">
+                <table class="w-full text-left table-fixed border-collapse text-sm">
+                  <colgroup>
+                    <col class="w-[180px]" />
+                    <col class="w-auto" />
+                    <col class="w-[160px]" />
+                    <col class="w-[170px]" />
+                    <col class="w-[120px]" />
+                    <col class="w-[120px]" />
+                  </colgroup>
+                  <tbody
+                    id="automations-tbody"
+                    class="table__body divide-y divide-[#f0f0f0] dark:divide-[#28282c]"
                   >
-                  <th
-                    class="table__column px-5 py-3 text-[11px] font-semibold text-[#71717a] uppercase tracking-wider border-b border-[#eaecf0]"
-                    >Task Name</th
-                  >
-                  <th
-                    class="table__column px-5 py-3 text-[11px] font-semibold text-[#71717a] uppercase tracking-wider border-b border-[#eaecf0]"
-                    >Schedule</th
-                  >
-                  <th
-                    class="table__column px-5 py-3 text-[11px] font-semibold text-[#71717a] uppercase tracking-wider border-b border-[#eaecf0]"
-                    >Content Types</th
-                  >
-                  <th
-                    class="table__column px-5 py-3 text-[11px] font-semibold text-[#71717a] uppercase tracking-wider border-b border-[#eaecf0]"
-                    >Status</th
-                  >
-                  <th
-                    class="table__column px-5 py-3 text-[11px] font-semibold text-[#71717a] uppercase tracking-wider border-b border-[#eaecf0] text-right"
-                    >Actions</th
-                  >
-                </tr>
-              </thead>
-              <tbody
-                id="automations-tbody"
-                class="table__body divide-y divide-[#eaecf0]"
-              >
-                <!-- Rows injected via JS -->
-              </tbody>
-            </table>
+                    <!-- Rows injected via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -396,25 +429,25 @@ const dnaList = [
           <div class="relative">
             <button
               id="btn-output-business-filter"
-              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] hover:bg-[#fafafa] shadow-2xs transition-all cursor-pointer"
+              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-[#d1d5db] hover:bg-[#fafafa] dark:hover:bg-[#454545] shadow-2xs transition-all cursor-pointer"
             >
               <i class="ti ti-building text-[14px]"></i>
               <span id="output-business-filter-label">All Business</span>
-              <i class="ti ti-chevron-down text-[12px] text-[#71717a]"></i>
+              <i class="ti ti-chevron-down text-[12px] text-[#71717a] dark:text-[#a1a1aa]"></i>
             </button>
             <div
               id="output-business-filter-dropdown"
-              class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-lg z-30 overflow-hidden flex flex-col p-1"
+              class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-lg z-30 overflow-hidden flex flex-col p-1"
             >
               <!-- Mini Search -->
-              <div class="p-2 border-b border-[#eaecf0] bg-[#fafafa]">
+              <div class="p-2 border-b border-[#eaecf0] dark:border-[#383838] bg-[#fafafa] dark:bg-[#141414]">
                 <div class="relative">
                   <i
                     class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#a1a1aa] text-[11px]"
                   ></i>
                   <input
                     type="text"
-                    class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#eaecf0] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#18181b] focus:border-[#18181b] transition-all"
+                    class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white dark:bg-[#373737] border border-[#eaecf0] dark:border-[#383838] text-[#18181b] dark:text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-[#18181b] dark:focus:ring-white focus:border-[#18181b] dark:focus:border-white transition-all"
                     placeholder="Search..."
                   />
                 </div>
@@ -426,19 +459,19 @@ const dnaList = [
                 {
                   dnaList.map((item) => (
                     <button
-                      class="output-business-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer flex items-center gap-2.5"
+                      class="output-business-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer flex items-center gap-2.5"
                       data-brand={item.id}
                       data-logo={item.logo}
                     >
                       {item.id === "all" ? (
-                        <div class="w-5 h-5 rounded-md bg-[#f4f4f5] border border-[#eaecf0] flex items-center justify-center shrink-0 text-[#71717a]">
+                        <div class="w-5 h-5 rounded-md bg-[#f4f4f5] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#383838] flex items-center justify-center shrink-0 text-[#71717a] dark:text-[#a1a1aa]">
                           <i class="ti ti-building text-[12px]"></i>
                         </div>
                       ) : (
                         <img
                           src={item.logo}
                           alt={item.name}
-                          class="w-5 h-5 rounded-md object-cover border border-[#eaecf0] shrink-0"
+                          class="w-5 h-5 rounded-md object-cover border border-[#eaecf0] dark:border-[#383838] shrink-0"
                         />
                       )}
                       <span class="truncate">{item.name}</span>
@@ -458,7 +491,7 @@ const dnaList = [
               id="output-search"
               type="text"
               placeholder="Search outputs..."
-              class="w-full h-9 pl-8.5 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] placeholder:text-[#a1a1aa] outline-none focus:ring-1 focus:ring-[#18181b] focus:border-[#18181b] shadow-2xs transition-all"
+              class="w-full h-9 pl-8.5 pr-3 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-white placeholder:text-[#a1a1aa] outline-none focus:ring-1 focus:ring-[#18181b] dark:focus:ring-white focus:border-[#18181b] dark:focus:border-white shadow-2xs transition-all"
             />
           </div>
         </div>
@@ -468,13 +501,13 @@ const dnaList = [
           <div id="approved-bulk-header" class="hidden items-center gap-2">
             <span
               id="selected-count"
-              class="text-[12px] font-medium text-[#18181b] bg-[#f4f4f5] px-2.5 h-9 rounded-lg border border-[#e4e4e7] flex items-center justify-center"
+              class="text-[12px] font-medium text-[#18181b] dark:text-white bg-[#f4f4f5] dark:bg-[#373737] px-2.5 h-9 rounded-lg border border-[#e4e4e7] dark:border-[#383838] flex items-center justify-center"
               >0 selected</span
             >
 
             <button
               onclick="bulkPublishSelected()"
-              class="h-9 px-3 rounded-lg border border-[#eaecf0] bg-white text-[#18181b] text-[12px] font-medium hover:bg-[#fafafa] transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs"
+              class="h-9 px-3 rounded-lg border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[#18181b] dark:text-white text-[12px] font-medium hover:bg-[#fafafa] dark:hover:bg-[#454545] transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs"
             >
               <i class="ti ti-send text-[12px]"></i>
               Publish Now
@@ -482,7 +515,7 @@ const dnaList = [
 
             <button
               onclick="bulkDeleteSelected()"
-              class="h-9 w-9 rounded-lg border border-[#eaecf0] bg-white text-[#71717a] hover:text-[#ef4444] hover:bg-[#fef2f2] transition-all cursor-pointer flex items-center justify-center shadow-2xs"
+              class="h-9 w-9 rounded-lg border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[#71717a] dark:text-[#a1a1aa] hover:text-[#ef4444] hover:bg-[#fef2f2] dark:hover:bg-[#450a0a] transition-all cursor-pointer flex items-center justify-center shadow-2xs"
               title="Delete Selected"
             >
               <i class="ti ti-trash text-[14px]"></i>
@@ -508,23 +541,23 @@ const dnaList = [
           <div class="relative shrink-0">
             <button
               id="btn-output-status-filter"
-              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] hover:bg-[#fafafa] shadow-2xs transition-all cursor-pointer"
+              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-[#d1d5db] hover:bg-[#fafafa] dark:hover:bg-[#454545] shadow-2xs transition-all cursor-pointer"
             >
               <i class="ti ti-filter text-[14px]"></i>
               <span id="output-status-filter-label">Approved</span>
-              <i class="ti ti-chevron-down text-[12px] text-[#71717a]"></i>
+              <i class="ti ti-chevron-down text-[12px] text-[#71717a] dark:text-[#a1a1aa]"></i>
             </button>
             <div
               id="output-status-filter-dropdown"
-              class="hidden absolute top-full right-0 mt-1.5 w-40 bg-white rounded-xl border border-[#eaecf0] shadow-lg z-30 overflow-hidden p-1"
+              class="hidden absolute top-full right-0 mt-1.5 w-40 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-lg z-30 overflow-hidden p-1"
             >
               <div class="flex flex-col">
                 <button
-                  class="output-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer"
+                  class="output-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer"
                   data-status="approved">Approved</button
                 >
                 <button
-                  class="output-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer"
+                  class="output-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer"
                   data-status="rejected">Rejected</button
                 >
               </div>
@@ -540,7 +573,7 @@ const dnaList = [
           <div class="flex items-center justify-between px-1 h-8">
             <div class="flex items-center gap-2">
               <h3
-                class="text-[13px] font-semibold text-[#18181b] tracking-tight"
+                class="text-[13px] font-semibold text-[#18181b] dark:text-white tracking-tight"
               >
                 Draft
               </h3>
@@ -565,7 +598,7 @@ const dnaList = [
           >
             <button
               id="btn-draft-show-more"
-              class="w-full h-8 rounded-xl border border-[#eaecf0] bg-white text-[11px] font-medium text-[#18181b] hover:bg-[#fafafa] transition-all cursor-pointer flex items-center justify-center gap-1 shadow-2xs"
+              class="w-full h-8 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[11px] font-medium text-[#18181b] dark:text-white hover:bg-[#fafafa] dark:hover:bg-[#454545] transition-all cursor-pointer flex items-center justify-center gap-1 shadow-2xs"
             >
               <i class="ti ti-chevron-down text-[12px]"></i>
               Show More
@@ -671,25 +704,25 @@ const dnaList = [
           <div class="relative">
             <button
               id="btn-scheduled-business-filter"
-              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] hover:bg-[#fafafa] shadow-2xs transition-all cursor-pointer"
+              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-[#d1d5db] hover:bg-[#fafafa] dark:hover:bg-[#454545] shadow-2xs transition-all cursor-pointer"
             >
               <i class="ti ti-building text-[14px]"></i>
               <span id="scheduled-business-filter-label">All Business</span>
-              <i class="ti ti-chevron-down text-[12px] text-[#71717a]"></i>
+              <i class="ti ti-chevron-down text-[12px] text-[#71717a] dark:text-[#a1a1aa]"></i>
             </button>
             <div
               id="scheduled-business-filter-dropdown"
-              class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white rounded-xl border border-[#eaecf0] shadow-lg z-30 overflow-hidden flex flex-col p-1"
+              class="hidden absolute top-full left-0 mt-1.5 w-56 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-lg z-30 overflow-hidden flex flex-col p-1"
             >
               <!-- Mini Search -->
-              <div class="p-2 border-b border-[#eaecf0] bg-[#fafafa]">
+              <div class="p-2 border-b border-[#eaecf0] dark:border-[#383838] bg-[#fafafa] dark:bg-[#141414]">
                 <div class="relative">
                   <i
                     class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-[#a1a1aa] text-[11px]"
                   ></i>
                   <input
                     type="text"
-                    class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white border border-[#eaecf0] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#18181b] focus:border-[#18181b] transition-all"
+                    class="biz-search-input w-full h-8 pl-7 pr-2 text-[12px] bg-white dark:bg-[#373737] border border-[#eaecf0] dark:border-[#383838] text-[#18181b] dark:text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-[#18181b] dark:focus:ring-white focus:border-[#18181b] dark:focus:border-white transition-all"
                     placeholder="Search..."
                   />
                 </div>
@@ -701,19 +734,19 @@ const dnaList = [
                 {
                   dnaList.map((item) => (
                     <button
-                      class="scheduled-business-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer flex items-center gap-2.5"
+                      class="scheduled-business-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#d1d5db] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer flex items-center gap-2.5"
                       data-brand={item.id}
                       data-logo={item.logo}
                     >
                       {item.id === "all" ? (
-                        <div class="w-5 h-5 rounded-md bg-[#f4f4f5] border border-[#eaecf0] flex items-center justify-center shrink-0 text-[#71717a]">
+                        <div class="w-5 h-5 rounded-md bg-[#f4f4f5] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] flex items-center justify-center shrink-0 text-[#71717a] dark:text-[#a1a1aa]">
                           <i class="ti ti-building text-[12px]"></i>
                         </div>
                       ) : (
                         <img
                           src={item.logo}
                           alt={item.name}
-                          class="w-5 h-5 rounded-md object-cover border border-[#eaecf0] shrink-0"
+                          class="w-5 h-5 rounded-md object-cover border border-[#eaecf0] dark:border-[#444444] shrink-0"
                         />
                       )}
                       <span class="truncate">{item.name}</span>
@@ -728,27 +761,27 @@ const dnaList = [
           <div class="relative">
             <button
               id="btn-scheduled-status-filter"
-              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] hover:bg-[#fafafa] shadow-2xs transition-all cursor-pointer"
+              class="flex items-center gap-1.5 px-4 h-9 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-[#d1d5db] hover:bg-[#fafafa] dark:hover:bg-[#454545] shadow-2xs transition-all cursor-pointer"
             >
               <i class="ti ti-filter text-[14px]"></i>
               <span id="scheduled-status-filter-label">All Status</span>
-              <i class="ti ti-chevron-down text-[12px] text-[#71717a]"></i>
+              <i class="ti ti-chevron-down text-[12px] text-[#71717a] dark:text-[#a1a1aa]"></i>
             </button>
             <div
               id="scheduled-status-filter-dropdown"
-              class="hidden absolute top-full left-0 mt-1.5 w-40 bg-white rounded-xl border border-[#eaecf0] shadow-lg z-30 overflow-hidden p-1"
+              class="hidden absolute top-full left-0 mt-1.5 w-40 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] shadow-lg z-30 overflow-hidden p-1"
             >
               <div class="flex flex-col">
                 <button
-                  class="scheduled-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer"
+                  class="scheduled-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#d1d5db] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer"
                   data-status="all">All Status</button
                 >
                 <button
-                  class="scheduled-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer"
+                  class="scheduled-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#d1d5db] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer"
                   data-status="scheduled">Scheduled</button
                 >
                 <button
-                  class="scheduled-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] hover:bg-[#f4f4f5] hover:text-[#18181b] transition-colors cursor-pointer"
+                  class="scheduled-status-filter-option w-full text-left px-3 py-1.5 rounded-lg text-[13px] font-medium text-[#71717a] dark:text-[#d1d5db] hover:bg-[#f4f4f5] dark:hover:bg-[#454545] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer"
                   data-status="published">Published</button
                 >
               </div>
@@ -764,18 +797,18 @@ const dnaList = [
               id="scheduled-search"
               type="text"
               placeholder="Search scheduled content..."
-              class="w-full h-9 pl-8.5 pr-3 rounded-xl border border-[#eaecf0] bg-white text-[13px] font-medium text-[#18181b] placeholder:text-[#a1a1aa] outline-none focus:ring-1 focus:ring-[#18181b] focus:border-[#18181b] shadow-2xs transition-all"
+              class="w-full h-9 pl-8.5 pr-3 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#373737] text-[13px] font-medium text-[#18181b] dark:text-white placeholder:text-[#a1a1aa] dark:placeholder:text-[#71717a] outline-none focus:ring-1 focus:ring-[#18181b] dark:focus:ring-white focus:border-[#18181b] dark:focus:border-white shadow-2xs transition-all"
             />
           </div>
         </div>
         <div class="flex items-center gap-2">
           <!-- View Toggle: Monthly / Weekly / Daily -->
           <div
-            class="flex items-center p-1 rounded-xl border border-[#eaecf0] bg-[#f4f4f5] h-9"
+            class="flex items-center p-1 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-[#f4f4f5] dark:bg-[#373737] h-9"
           >
             <button
               id="view-scheduled-monthly"
-              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium bg-white text-[#18181b] shadow-xs transition-all cursor-pointer"
+              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white shadow-xs transition-all cursor-pointer"
               data-view="monthly"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 text-current shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -788,7 +821,7 @@ const dnaList = [
             </button>
             <button
               id="view-scheduled-weekly"
-              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] hover:text-[#18181b] transition-all cursor-pointer"
+              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer"
               data-view="weekly"
             >
               <i class="ti ti-calendar-week text-[13px]"></i>
@@ -796,7 +829,7 @@ const dnaList = [
             </button>
             <button
               id="view-scheduled-list"
-              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] hover:text-[#18181b] transition-all cursor-pointer"
+              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer"
               data-view="daily"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 text-current shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -814,7 +847,7 @@ const dnaList = [
             <button
               id="btn-open-manual-schedule"
               type="button"
-              class="inline-flex items-center gap-2 rounded-xl font-medium transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-4 h-9 text-[13px] bg-[#18181b] hover:bg-black text-white shadow-xs active:scale-98 border-0"
+              class="inline-flex items-center gap-2 rounded-xl font-medium transition-all duration-100 cursor-pointer select-none whitespace-nowrap justify-center px-4 h-9 text-[13px] bg-[#18181b] hover:bg-black text-white dark:bg-white dark:text-[#272727] dark:hover:bg-[#f4f4f5] shadow-xs active:scale-98 border-0"
             >
               <i class="ti ti-plus text-[14px]"></i>
               Manual Schedule
@@ -831,48 +864,48 @@ const dnaList = [
       <!-- VIEW: Monthly Calendar -->
       <div
         id="scheduled-monthly"
-        class="hidden bg-white rounded-xl border border-[#eaecf0] p-6 shadow-2xs"
+        class="hidden bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] p-6 shadow-2xs"
       >
         <!-- Calendar Header -->
         <div class="flex items-center justify-between mb-6">
           <button
             id="cal-month-prev"
-            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] flex items-center justify-center text-[#71717a] hover:text-[#18181b] cursor-pointer transition-colors"
+            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] dark:hover:bg-[#454545] flex items-center justify-center text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white cursor-pointer transition-colors"
           >
             <i class="ti ti-chevron-left text-[16px]"></i>
           </button>
           <span
             id="cal-month-label"
-            class="text-[16px] font-semibold text-[#18181b]">May 2026</span
+            class="text-[16px] font-semibold text-[#18181b] dark:text-white">May 2026</span
           >
           <button
             id="cal-month-next"
-            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] flex items-center justify-center text-[#71717a] hover:text-[#18181b] cursor-pointer transition-colors"
+            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] dark:hover:bg-[#454545] flex items-center justify-center text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white cursor-pointer transition-colors"
           >
             <i class="ti ti-chevron-right text-[16px]"></i>
           </button>
         </div>
         <!-- Weekday Headers -->
         <div class="grid grid-cols-7 gap-2 mb-2">
-          <div class="text-center text-[11px] font-medium text-[#71717a] py-2">
+          <div class="text-center text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] py-2">
             Sun
           </div>
-          <div class="text-center text-[11px] font-medium text-[#71717a] py-2">
+          <div class="text-center text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] py-2">
             Mon
           </div>
-          <div class="text-center text-[11px] font-medium text-[#71717a] py-2">
+          <div class="text-center text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] py-2">
             Tue
           </div>
-          <div class="text-center text-[11px] font-medium text-[#71717a] py-2">
+          <div class="text-center text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] py-2">
             Wed
           </div>
-          <div class="text-center text-[11px] font-medium text-[#71717a] py-2">
+          <div class="text-center text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] py-2">
             Thu
           </div>
-          <div class="text-center text-[11px] font-medium text-[#71717a] py-2">
+          <div class="text-center text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] py-2">
             Fri
           </div>
-          <div class="text-center text-[11px] font-medium text-[#71717a] py-2">
+          <div class="text-center text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] py-2">
             Sat
           </div>
         </div>
@@ -885,24 +918,24 @@ const dnaList = [
       <!-- VIEW: Weekly Calendar -->
       <div
         id="scheduled-weekly"
-        class="hidden bg-white rounded-xl border border-[#eaecf0] p-6 shadow-2xs"
+        class="hidden bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] p-6 shadow-2xs"
       >
         <!-- Week Header -->
         <div class="flex items-center justify-between mb-4">
           <button
             id="cal-week-prev"
-            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] flex items-center justify-center text-[#71717a] hover:text-[#18181b] cursor-pointer transition-colors"
+            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] dark:hover:bg-[#454545] flex items-center justify-center text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white cursor-pointer transition-colors"
           >
             <i class="ti ti-chevron-left text-[16px]"></i>
           </button>
           <span
             id="cal-week-label"
-            class="text-[16px] font-semibold text-[#18181b]"
+            class="text-[16px] font-semibold text-[#18181b] dark:text-white"
             >May 4 – May 10, 2026</span
           >
           <button
             id="cal-week-next"
-            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] flex items-center justify-center text-[#71717a] hover:text-[#18181b] cursor-pointer transition-colors"
+            class="w-8 h-8 rounded-lg hover:bg-[#f4f4f5] dark:hover:bg-[#454545] flex items-center justify-center text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white cursor-pointer transition-colors"
           >
             <i class="ti ti-chevron-right text-[16px]"></i>
           </button>
@@ -4459,16 +4492,18 @@ const dnaList = [
                 <svg
                   id="bulk-dna-select-icon"
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
+                  width="11"
                   height="16"
-                  viewBox="0 0 24 24"
+                  viewBox="0 0 12 18"
                   fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
                   class="text-[#71717a] shrink-0"
-                ><path d="m10 16l1.5 1.5M14 8l-1.5-1.5M15 2c-1.798 1.998-2.518 3.995-2.807 5.993M16.5 10.5l1 1M17 6l-2.891-2.891M2 15c6.667-6 13.333 0 20-6m-2 0l.891.891M3.109 14.109L4 15m2.5-2.5l1 1M7 18l2.891 2.891M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/></svg>
+                >
+                  <path d="M8.57112 5.7264L10.2856 5.72845V7.36354L12 7.36456V10.6368H10.2856V7.36456L8.5722 7.36354L8.57112 5.72743H3.42888V4.09131H1.71444V2.4552L0 2.45417V0H1.71444V2.45417L3.42888 2.4552V4.09131H8.57112L8.5722 2.4552L10.2856 2.45417V0H12V2.45417L10.2856 2.4552V4.09131H8.57112V5.7264Z" fill="currentColor"/>
+                  <path d="M8.57112 13.9098L3.42888 13.9088V15.5459H1.71444V18.0001H0V15.5459H1.71444V13.9098H3.42888V12.2726H1.71444V10.6365H0V7.36328H1.71444V10.6365H3.42888V12.2737L8.57112 12.2726L8.5722 13.9098H10.2856V15.5459H12V18.0001H10.2856V15.5459H8.5722L8.57112 13.9098Z" fill="currentColor"/>
+                  <path d="M7.71501 0H4.28613V1.63611H7.71501V0Z" fill="currentColor"/>
+                  <path d="M7.71501 8.18262H4.28613V9.81873H7.71501V8.18262Z" fill="currentColor"/>
+                  <path d="M7.71501 16.3633H4.28613V17.9994H7.71501V16.3633Z" fill="currentColor"/>
+                </svg>
               </div>
               <i
                 class="ti ti-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[#71717a] pointer-events-none text-[13px]"
@@ -5182,39 +5217,39 @@ const dnaList = [
       const variants = {
         success: {
           toast:
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 text-emerald-950 backdrop-blur-sm select-none",
-          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`,
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-emerald-500/30 bg-emerald-50/95 dark:bg-[#0f1c15] dark:border-emerald-500/30 text-emerald-950 dark:text-white backdrop-blur-sm select-none",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 dark:text-emerald-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`,
           title:
-            "text-[13px] font-medium tracking-tight text-emerald-950 leading-none whitespace-nowrap",
+            "text-[13px] font-medium tracking-tight text-emerald-950 dark:text-white leading-none whitespace-nowrap",
           close:
-            "text-emerald-700/60 hover:text-emerald-950 hover:bg-emerald-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
+            "text-emerald-700/60 dark:text-emerald-400/60 hover:text-emerald-950 dark:hover:text-white hover:bg-emerald-100/60 dark:hover:bg-emerald-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
         },
         error: {
           toast:
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(239,68,68,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-red-500/30 bg-red-50/95 text-red-950 backdrop-blur-sm select-none",
-          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(239,68,68,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-red-500/30 bg-red-50/95 dark:bg-[#1e1113] dark:border-red-500/30 text-red-950 dark:text-white backdrop-blur-sm select-none",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 dark:text-red-400"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
           title:
-            "text-[13px] font-medium tracking-tight text-red-950 leading-none whitespace-nowrap",
+            "text-[13px] font-medium tracking-tight text-red-950 dark:text-white leading-none whitespace-nowrap",
           close:
-            "text-red-700/60 hover:text-red-950 hover:bg-red-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
+            "text-red-700/60 dark:text-red-400/60 hover:text-red-950 dark:hover:text-white hover:bg-red-100/60 dark:hover:bg-red-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
         },
         warning: {
           toast:
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-amber-500/30 bg-amber-50/95 text-amber-950 backdrop-blur-sm select-none",
-          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-amber-500/30 bg-amber-50/95 dark:bg-[#1f170a] dark:border-amber-500/30 text-amber-950 dark:text-white backdrop-blur-sm select-none",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
           title:
-            "text-[13px] font-medium tracking-tight text-amber-950 leading-none whitespace-nowrap",
+            "text-[13px] font-medium tracking-tight text-amber-950 dark:text-white leading-none whitespace-nowrap",
           close:
-            "text-amber-700/60 hover:text-amber-950 hover:bg-amber-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
+            "text-amber-700/60 dark:text-amber-400/60 hover:text-amber-950 dark:hover:text-white hover:bg-amber-100/60 dark:hover:bg-amber-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
         },
         info: {
           toast:
-            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(59,130,246,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-blue-500/30 bg-blue-50/95 text-blue-950 backdrop-blur-sm select-none",
-          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
+            "fixed bottom-6 right-6 transition-all duration-300 ease-out z-[9999] flex items-center gap-2.5 rounded-xl px-4 py-2.5 shadow-[0_10px_30px_-10px_rgba(59,130,246,0.2),0_4px_12px_rgba(0,0,0,0.05)] border border-blue-500/30 bg-blue-50/95 dark:bg-[#0e1726] dark:border-blue-500/30 text-blue-950 dark:text-white backdrop-blur-sm select-none",
+          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
           title:
-            "text-[13px] font-medium tracking-tight text-blue-950 leading-none whitespace-nowrap",
+            "text-[13px] font-medium tracking-tight text-blue-950 dark:text-white leading-none whitespace-nowrap",
           close:
-            "text-blue-700/60 hover:text-blue-950 hover:bg-blue-100/60 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
+            "text-blue-700/60 dark:text-blue-400/60 hover:text-blue-950 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-blue-950/40 p-1 rounded-md transition-colors cursor-pointer shrink-0 ml-1.5",
         },
       };
 
@@ -5725,15 +5760,15 @@ const dnaList = [
       const logoUrl = getDnaLogo(item.brand);
 
       return `
-    <div class="group flex items-start gap-3 p-3 rounded-xl bg-white border border-[#eaecf0] hover:border-[#18181b] hover:shadow-2xs transition-all cursor-pointer" onclick="openPreviewModal('${item.id}')">
-      <div class="w-9 h-9 rounded-lg overflow-hidden border border-[#eaecf0] flex items-center justify-center bg-[#f4f4f5] shrink-0">
+    <div class="group flex items-start gap-3 p-3 rounded-xl bg-white dark:bg-[#272727] border border-[#eaecf0] dark:border-[#383838] hover:border-[#18181b] dark:hover:border-zinc-400 hover:shadow-2xs transition-all cursor-pointer" onclick="openPreviewModal('${item.id}')">
+      <div class="w-9 h-9 rounded-lg overflow-hidden border border-[#eaecf0] dark:border-[#383838] flex items-center justify-center bg-[#f4f4f5] dark:bg-[#373737] shrink-0">
         <img src="${logoUrl}" alt="${escapeHtml(brandName)}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='${DEFAULT_DNA_LOGO}';" />
       </div>
       <div class="flex-1 min-w-0 space-y-1">
-        <p class="text-[12px] font-medium text-[#18181b] truncate leading-tight">${escapeHtml(item.automationName)}</p>
+        <p class="text-[12px] font-medium text-[#18181b] dark:text-white truncate leading-tight">${escapeHtml(item.automationName)}</p>
         <div class="flex items-center gap-1.5">
-          <span class="px-1.5 py-0.5 rounded-md bg-[#f4f4f5] border border-[#eaecf0] text-[10px] font-medium text-[#71717a]">${escapeHtml(brandName)}</span>
-          <span class="text-[10px] text-[#71717a]">${dateStr}</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-[#f4f4f5] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#383838] text-[10px] font-medium text-[#71717a] dark:text-[#a1a1aa]">${escapeHtml(brandName)}</span>
+          <span class="text-[10px] text-[#71717a] dark:text-[#a1a1aa]">${dateStr}</span>
         </div>
       </div>
     </div>
@@ -5769,11 +5804,11 @@ const dnaList = [
           const isSelected = selectedApprovedIds.includes(item.id);
           const activeBorderClass = isSelected
             ? "border-[#2563EB] ring-2 ring-[#2563EB]/10"
-            : "border-[#eaecf0] hover:border-[#d4d4d8]";
+            : "border-[#eaecf0] dark:border-[#383838] hover:border-[#d4d4d8] dark:hover:border-[#38383e]";
 
           return `
       <div class="inline-block w-full break-inside-avoid mb-3">
-        <div id="card-approved-${item.id}" class="group relative bg-white rounded-2xl border ${activeBorderClass} p-3 flex flex-col gap-3 cursor-pointer shadow-2xs hover:shadow-xs transition-all" onclick="openPreviewModal('${item.id}')">
+        <div id="card-approved-${item.id}" class="group relative bg-white dark:bg-[#272727] rounded-2xl border ${activeBorderClass} p-3 flex flex-col gap-3 cursor-pointer shadow-2xs hover:shadow-xs transition-all" onclick="openPreviewModal('${item.id}')">
           <!-- Image Container -->
           <div class="relative w-full ${aspectClass} rounded-xl bg-[#18181b] flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
             <img 
@@ -5808,13 +5843,13 @@ const dnaList = [
           <div class="px-1 flex flex-col gap-2">
             <div class="flex flex-wrap items-center gap-1.5">
               <!-- When generated -->
-              <span class="inline-flex items-center gap-1 px-2 h-5 rounded-md bg-[#f4f4f5] text-[10px] font-medium text-[#71717a]">
+              <span class="inline-flex items-center gap-1 px-2 h-5 rounded-md bg-[#f4f4f5] dark:bg-[#202024] text-[10px] font-medium text-[#71717a] dark:text-[#a1a1aa]">
                 <i class="ti ti-clock text-[10px]"></i>
                 ${dateStr}
               </span>
               
               <!-- Content Type -->
-              <span class="inline-flex items-center px-2 h-5 rounded-md bg-[#f4f4f5] text-[10px] font-medium text-[#18181b] border border-[#eaecf0]">
+              <span class="inline-flex items-center px-2 h-5 rounded-md bg-[#f4f4f5] dark:bg-[#202024] text-[10px] font-medium text-[#18181b] dark:text-white border border-[#eaecf0] dark:border-[#383838]">
                 ${escapeHtml(item.contentType)}
               </span>
 
@@ -5976,8 +6011,8 @@ const dnaList = [
           return `
         <div class="pb-5 last:pb-0">
           <div class="flex items-center gap-3 mb-2">
-            <h3 class="text-[13px] font-semibold text-[#18181b]">${dateLabel}</h3>
-            ${isToday ? `<span class="px-2 h-4.5 rounded-md bg-purple-50 text-purple-700 text-[10px] font-medium flex items-center border border-purple-200">Today</span>` : ""}
+            <h3 class="text-[13px] font-semibold text-[#18181b] dark:text-white">${dateLabel}</h3>
+            ${isToday ? `<span class="px-2 h-4.5 rounded-md bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-[10px] font-medium flex items-center border border-purple-200 dark:border-purple-800">Today</span>` : ""}
           </div>
           <div class="space-y-2">
             ${items
@@ -6003,22 +6038,22 @@ const dnaList = [
                 const aspectClass = isStory ? "aspect-[9/16]" : "aspect-[3/4]";
 
                 return `
-              <div class="group flex items-center gap-3 bg-white rounded-xl border border-[#eaecf0] p-2.5 hover:shadow-2xs hover:border-[#18181b] transition-all cursor-pointer relative" onclick="openPreviewModal('${item.id}')">
+              <div class="group flex items-center gap-3 bg-white dark:bg-[#272727] rounded-xl border border-[#eaecf0] dark:border-[#383838] p-2.5 hover:shadow-2xs hover:border-[#18181b] dark:hover:border-zinc-400 transition-all cursor-pointer relative" onclick="openPreviewModal('${item.id}')">
                 <!-- Tiny Image Placeholder -->
-                <div class="w-10 h-10 shrink-0 bg-[#18181b] rounded-lg flex items-center justify-center overflow-hidden">
+                <div class="w-10 h-10 shrink-0 bg-[#18181b] dark:bg-[#373737] rounded-lg flex items-center justify-center overflow-hidden">
                    <i class="ti ${typeIcon} text-[16px] text-white/50"></i>
                 </div>
                 
                 <!-- Info -->
                 <div class="flex-1 min-w-0 flex flex-col justify-center gap-0.5">
                   <div class="flex items-center gap-2">
-                     <span class="text-[12px] font-semibold text-[#18181b] truncate">${escapeHtml(item.brand)}</span>
-                     <span class="w-1 h-1 rounded-full bg-[#eaecf0]"></span>
-                     <span class="text-[11px] font-medium text-[#71717a] flex items-center gap-1">
+                     <span class="text-[12px] font-semibold text-[#18181b] dark:text-white truncate">${escapeHtml(item.brand)}</span>
+                     <span class="w-1 h-1 rounded-full bg-[#eaecf0] dark:bg-[#38383e]"></span>
+                     <span class="text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa] flex items-center gap-1">
                        <i class="ti ${platformIcon} text-[12px]"></i> ${item.platform}
                      </span>
-                     <span class="w-1 h-1 rounded-full bg-[#eaecf0]"></span>
-                     <span class="text-[11px] font-medium text-[#71717a]">${escapeHtml(item.contentType)}</span>
+                     <span class="w-1 h-1 rounded-full bg-[#eaecf0] dark:bg-[#38383e]"></span>
+                     <span class="text-[11px] font-medium text-[#71717a] dark:text-[#a1a1aa]">${escapeHtml(item.contentType)}</span>
                      ${
                        item.autoEngagement &&
                        Object.values(item.autoEngagement).some((v) => v)
@@ -6030,26 +6065,26 @@ const dnaList = [
                          : ""
                      }
                   </div>
-                  <p class="text-[11px] text-[#71717a] line-clamp-1">${escapeHtml(item.caption || "No caption")}</p>
+                  <p class="text-[11px] text-[#71717a] dark:text-[#a1a1aa] line-clamp-1">${escapeHtml(item.caption || "No caption")}</p>
                 </div>
                 
                 <!-- Right Actions: Time on left, buttons on hover -->
                 <div class="flex items-center gap-2 shrink-0">
                   <div class="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button class="w-7 h-7 rounded-lg border border-[#eaecf0] bg-white text-[#71717a] hover:text-[#18181b] hover:bg-[#f4f4f5] flex items-center justify-center transition-all cursor-pointer shadow-2xs" onclick="event.stopPropagation(); openPreviewModal('${item.id}')" title="Preview">
+                    <button class="w-7 h-7 rounded-lg border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737] text-[#71717a] dark:text-[#a1a1aa] hover:text-[#18181b] dark:hover:text-white hover:bg-[#f4f4f5] dark:hover:bg-[#28282c] flex items-center justify-center transition-all cursor-pointer shadow-2xs" onclick="event.stopPropagation(); openPreviewModal('${item.id}')" title="Preview">
                       <i class="ti ti-eye text-[14px]"></i>
                     </button>
                     ${
                       !isPublished
                         ? `
-                    <button class="w-7 h-7 rounded-lg border border-[#eaecf0] bg-white text-[#71717a] hover:text-red-600 hover:bg-red-50 hover:border-red-200 flex items-center justify-center transition-all cursor-pointer shadow-2xs" onclick="event.stopPropagation(); cancelScheduleItem('${item.id}')" title="Cancel Schedule">
+                    <button class="w-7 h-7 rounded-lg border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737] text-[#71717a] dark:text-[#a1a1aa] hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-200 dark:hover:border-red-900 flex items-center justify-center transition-all cursor-pointer shadow-2xs" onclick="event.stopPropagation(); cancelScheduleItem('${item.id}')" title="Cancel Schedule">
                       <i class="ti ti-x text-[14px]"></i>
                     </button>
                     `
                         : ""
                     }
                   </div>
-                  <span class="text-[11px] font-medium text-[#18181b] whitespace-nowrap">${timeItem}</span>
+                  <span class="text-[11px] font-medium text-[#18181b] dark:text-white whitespace-nowrap">${timeItem}</span>
                 </div>
               </div>
             `;
@@ -6112,9 +6147,9 @@ const dnaList = [
         const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
         html += `
-        <div class="aspect-square p-2 rounded-xl border ${isToday ? "border-[#18181b] bg-[#fafafa]" : "border-[#eaecf0] bg-white"} flex flex-col gap-1 cursor-pointer hover:shadow-2xs hover:border-[#18181b] transition-all" onclick="event.preventDefault(); event.stopPropagation(); openCalendarDayModal('${dateKey}'); return false;">
+        <div class="aspect-square p-2 rounded-xl border ${isToday ? "border-[#18181b] dark:border-white bg-[#fafafa] dark:bg-[#373737]" : "border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#272727]"} flex flex-col gap-1 cursor-pointer hover:shadow-2xs hover:border-[#18181b] dark:hover:border-zinc-400 transition-all" onclick="event.preventDefault(); event.stopPropagation(); openCalendarDayModal('${dateKey}'); return false;">
           <div class="flex items-center justify-between">
-            <span class="text-[13px] font-semibold ${isToday ? "text-[#18181b]" : "text-[#71717a]"}">${day}</span>
+            <span class="text-[13px] font-semibold ${isToday ? "text-[#18181b] dark:text-white" : "text-[#71717a] dark:text-[#a1a1aa]"}">${day}</span>
             ${
               hasItems
                 ? (() => {
@@ -6123,7 +6158,7 @@ const dnaList = [
                     );
                     const dotColor = allPublished
                       ? "bg-emerald-500"
-                      : "bg-[#18181b]";
+                      : "bg-[#18181b] dark:bg-white";
                     return `<span class="w-2 h-2 rounded-full ${dotColor}"></span>`;
                   })()
                 : ""
@@ -6134,13 +6169,13 @@ const dnaList = [
             .map((item) => {
               const isPublished = item.status === "published";
               return `
-            <div class="px-1.5 py-0.5 rounded-md ${isPublished ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-[#18181b] text-white border border-[#18181b]"} text-[9px] font-medium truncate leading-tight">
+            <div class="px-1.5 py-0.5 rounded-md ${isPublished ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800" : "bg-[#18181b] dark:bg-[#373737] text-white border border-[#18181b] dark:border-[#38383e]"} text-[9px] font-medium truncate leading-tight">
               ${escapeHtml(item.title)}
             </div>
           `;
             })
             .join("")}
-          ${dayItems.length > 2 ? `<div class="px-1.5 py-0.5 text-[9px] text-[#71717a]">+${dayItems.length - 2} more</div>` : ""}
+          ${dayItems.length > 2 ? `<div class="px-1.5 py-0.5 text-[9px] text-[#71717a] dark:text-[#a1a1aa]">+${dayItems.length - 2} more</div>` : ""}
         </div>
       `;
       }
@@ -6197,9 +6232,9 @@ const dnaList = [
         html += `
         <div class="flex flex-col gap-2">
           <!-- Date Header -->
-          <div class="text-center p-3 rounded-xl bg-white border ${isToday ? "border-[#18181b] ring-1 ring-[#18181b]" : "border-[#eaecf0]"} ${isPast ? "opacity-70" : ""} cursor-pointer hover:bg-[#fafafa] hover:border-[#18181b] hover:shadow-2xs transition-all active:scale-[0.98]" onclick="event.preventDefault(); event.stopPropagation(); openCalendarDayModal('${dateKey}'); return false;">
-            <div class="text-[11px] font-medium ${isToday ? "text-[#18181b]" : "text-[#71717a]"}">${dayNames[i]}</div>
-            <div class="text-[18px] font-semibold text-[#18181b]">${dayDate.getDate()}</div>
+          <div class="text-center p-3 rounded-xl bg-white dark:bg-[#272727] border ${isToday ? "border-[#18181b] dark:border-white ring-1 ring-[#18181b] dark:ring-white" : "border-[#eaecf0] dark:border-[#383838]"} ${isPast ? "opacity-70" : ""} cursor-pointer hover:bg-[#fafafa] dark:hover:bg-[#454545] hover:border-[#18181b] dark:hover:border-zinc-400 hover:shadow-2xs transition-all active:scale-[0.98]" onclick="event.preventDefault(); event.stopPropagation(); openCalendarDayModal('${dateKey}'); return false;">
+            <div class="text-[11px] font-medium ${isToday ? "text-[#18181b] dark:text-white" : "text-[#71717a] dark:text-[#a1a1aa]"}">${dayNames[i]}</div>
+            <div class="text-[18px] font-semibold text-[#18181b] dark:text-white">${dayDate.getDate()}</div>
           </div>
           <!-- Items column -->
           <div class="flex flex-col gap-2 min-h-[200px]">
@@ -6223,10 +6258,10 @@ const dnaList = [
                         ) < new Date();
                       const isPublished = item.status === "published";
                       const cardStyle = isPublished
-                        ? "bg-[#f4f4f5] border-[#eaecf0]"
-                        : "bg-white border-[#eaecf0] shadow-2xs";
+                        ? "bg-[#f4f4f5] dark:bg-[#202024] border-[#eaecf0] dark:border-[#383838]"
+                        : "bg-white dark:bg-[#272727] border-[#eaecf0] dark:border-[#383838] shadow-2xs";
                       return `
-                <div class="group p-2.5 rounded-xl ${cardStyle} border hover:border-[#18181b] hover:shadow-2xs transition-all cursor-pointer ${isItemPast ? "opacity-60 grayscale-[0.3]" : ""}" onclick="openPreviewModal('${item.id}')">
+                <div class="group p-2.5 rounded-xl ${cardStyle} border hover:border-[#18181b] dark:hover:border-zinc-400 hover:shadow-2xs transition-all cursor-pointer ${isItemPast ? "opacity-60 grayscale-[0.3]" : ""}" onclick="openPreviewModal('${item.id}')">
                   <!-- Unified Dark Image Thumbnail -->
                   <div class="w-full ${item.contentType === "Story" ? "aspect-[9/16]" : "aspect-[3/4]"} bg-[#18181b] rounded-lg flex items-center justify-center mb-2 relative overflow-hidden shadow-inner">
                     <img 
@@ -6241,15 +6276,15 @@ const dnaList = [
                   </div>
                   
                   <!-- Info -->
-                  <div class="text-[10px] font-medium ${isPublished ? "text-[#71717a]" : "text-[#18181b]"} mb-1 flex items-center gap-1">
+                  <div class="text-[10px] font-medium ${isPublished ? "text-[#71717a] dark:text-[#a1a1aa]" : "text-[#18181b] dark:text-white"} mb-1 flex items-center gap-1">
                     <i class="ti ${PLATFORM_ICONS[item.platform] || "ti-brand-instagram"} text-[10px]"></i>
                     <span>${timeStr}</span>
                   </div>
                   
-                  <div class="text-[11px] font-medium text-[#18181b] truncate leading-tight mb-1">${escapeHtml(item.brand)}</div>
+                  <div class="text-[11px] font-medium text-[#18181b] dark:text-white truncate leading-tight mb-1">${escapeHtml(item.brand)}</div>
                   
                   <div class="flex items-center gap-1 mb-1">
-                    <span class="px-1.5 h-4 rounded-md ${isPublished ? "bg-[#f4f4f5] text-[#71717a] border-[#eaecf0]" : "bg-[#f4f4f5] text-[#18181b] border-[#eaecf0]"} text-[8px] font-medium border flex items-center">
+                    <span class="px-1.5 h-4 rounded-md ${isPublished ? "bg-[#f4f4f5] dark:bg-[#202024] text-[#71717a] dark:text-[#a1a1aa] border-[#eaecf0] dark:border-[#383838]" : "bg-[#f4f4f5] dark:bg-[#202024] text-[#18181b] dark:text-[#d1d5db] border-[#eaecf0] dark:border-[#383838]"} text-[8px] font-medium border flex items-center">
                       ${escapeHtml(item.contentType)}
                     </span>
                     ${
@@ -7666,7 +7701,7 @@ const dnaList = [
           ];
           const typeLabels = contentTypes
             .map((t) => {
-              return `<span class="inline-flex items-center px-2 h-5 rounded-md bg-[#f4f4f5] border border-[#eaecf0] text-[11px] font-medium text-[#71717a]">
+              return `<span class="inline-flex items-center px-2 h-5 rounded-md bg-[#f4f4f5] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] text-[11px] font-medium text-[#71717a] dark:text-[#d1d5db]">
                 ${t}
               </span>`;
             })
@@ -7675,18 +7710,18 @@ const dnaList = [
           const logoUrl = auto.dna?.logo || getDnaLogo(auto.dna?.name);
 
           return `
-        <tr class="table__row border-b border-[#eaecf0] last:border-b-0 hover:bg-[#f4f4f5]/60 transition-colors group">
+        <tr class="table__row bg-white dark:bg-[#272727] hover:bg-[#fafafa] dark:hover:bg-[#202024] transition-colors group">
           <td class="table__cell px-5 py-3.5 align-middle">
             <div class="flex items-center gap-3">
-              <img src="${logoUrl}" alt="${escapeHtml(auto.dna?.name || "")}" class="w-8 h-8 rounded-lg object-cover border border-[#eaecf0] shrink-0 shadow-2xs" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=100&auto=format&fit=crop&q=80';" />
-              <span class="text-xs font-semibold text-[#18181b]">${escapeHtml(auto.dna?.name || "-")}</span>
+              <img src="${logoUrl}" alt="${escapeHtml(auto.dna?.name || "")}" class="w-8 h-8 rounded-lg object-cover border border-[#eaecf0] dark:border-[#444444] shrink-0 shadow-2xs" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=100&auto=format&fit=crop&q=80';" />
+              <span class="text-xs font-semibold text-[#18181b] dark:text-white">${escapeHtml(auto.dna?.name || "-")}</span>
             </div>
           </td>
           <td class="table__cell px-5 py-3.5 align-middle">
-            <span class="text-xs font-medium text-[#18181b]">${escapeHtml(auto.name)}</span>
+            <span class="text-xs font-medium text-[#18181b] dark:text-white">${escapeHtml(auto.name)}</span>
           </td>
           <td class="table__cell px-5 py-3.5 align-middle">
-            <span class="text-xs text-[#71717a]">${dateCount} ${dateCount === 1 ? "date" : "dates"} · ${recurringLabel(auto.recurring)}</span>
+            <span class="text-xs text-[#71717a] dark:text-[#9ca3af]">${dateCount} ${dateCount === 1 ? "date" : "dates"} · ${recurringLabel(auto.recurring)}</span>
           </td>
           <td class="table__cell px-5 py-3.5 align-middle">
             <div class="flex items-center gap-1.5 flex-wrap">
@@ -7707,14 +7742,14 @@ const dnaList = [
           <td class="table__cell px-5 py-3.5 align-middle">
             <div class="flex items-center justify-end gap-1">
               <button
-                class="action-btn w-8 h-8 rounded-lg hover:bg-[#f4f4f5] flex items-center justify-center text-[#71717a] hover:text-[#18181b] transition-colors cursor-pointer"
+                class="action-btn w-8 h-8 rounded-lg hover:bg-[#f4f4f5] dark:hover:bg-[#242428] flex items-center justify-center text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-colors cursor-pointer"
                 title="View details"
                 onclick="openPreviewAutomation('${auto.id}')"
               >
                 <i class="ti ti-eye text-[15px]"></i>
               </button>
               <button
-                class="action-btn w-8 h-8 rounded-lg ${auto.status === "active" ? "hover:bg-amber-50 hover:text-amber-700" : "hover:bg-emerald-50 hover:text-emerald-700"} flex items-center justify-center text-[#71717a] transition-colors cursor-pointer"
+                class="action-btn w-8 h-8 rounded-lg ${auto.status === "active" ? "hover:bg-amber-50 hover:text-amber-700 dark:hover:bg-amber-950/40 dark:hover:text-amber-400" : "hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-400"} flex items-center justify-center text-[#71717a] transition-colors cursor-pointer"
                 title="${auto.status === "active" ? "Pause automation" : "Resume automation"}"
                 onclick="toggleAutomationStatus('${auto.id}')"
               >

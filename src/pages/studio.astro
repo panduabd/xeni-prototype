@@ -85,7 +85,7 @@ const recentProjects = [
         <div
           class="flex items-center gap-6 overflow-hidden relative group/categories ml-[5px]"
         >
-          <h3 class="text-[14px] font-bold text-[#344054] shrink-0">
+          <h3 class="text-[14px] font-bold text-[#344054] dark:text-[#d1d5db] shrink-0">
             Get started with
           </h3>
 
@@ -131,11 +131,11 @@ const recentProjects = [
             <!-- Left Gradient & Arrow -->
             <div
               id="categories-left-gradient"
-              class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-start opacity-0 transition-opacity z-10"
+              class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#F3F4F6] to-transparent dark:from-[#141414] dark:to-transparent pointer-events-none flex items-center justify-start opacity-0 transition-opacity z-10"
             >
               <button
                 id="scroll-categories-left"
-                class="w-6 h-6 rounded-full bg-white shadow-sm border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-colors mt-[-8px]"
+                class="w-6 h-6 rounded-full bg-white dark:bg-[#373737] shadow-sm border border-[#eaecf0] dark:border-[#444444] flex items-center justify-center text-[#667085] dark:text-[#d1d5db] hover:text-[#111827] dark:hover:text-white pointer-events-auto transition-colors mt-[-8px]"
               >
                 <i class="ti ti-chevron-left text-[14px]"></i>
               </button>
@@ -144,11 +144,11 @@ const recentProjects = [
             <!-- Right Gradient & Arrow -->
             <div
               id="categories-right-gradient"
-              class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-end z-10 transition-opacity"
+              class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#F3F4F6] to-transparent dark:from-[#141414] dark:to-transparent pointer-events-none flex items-center justify-end z-10 transition-opacity"
             >
               <button
                 id="scroll-categories-right"
-                class="w-6 h-6 rounded-full bg-white shadow-sm border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-colors mr-1 mt-[-8px]"
+                class="w-6 h-6 rounded-full bg-white dark:bg-[#373737] shadow-sm border border-[#eaecf0] dark:border-[#444444] flex items-center justify-center text-[#667085] dark:text-[#d1d5db] hover:text-[#111827] dark:hover:text-white pointer-events-auto transition-colors mr-1 mt-[-8px]"
               >
                 <i class="ti ti-chevron-right text-[14px]"></i>
               </button>
@@ -185,11 +185,11 @@ const recentProjects = [
           <!-- Left Scroll Button -->
           <div
             id="projects-left-gradient"
-            class="absolute left-0 top-0 bottom-4 w-20 bg-gradient-to-r from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-start z-20 opacity-0 transition-opacity"
+            class="absolute left-0 top-0 h-[190px] w-16 bg-gradient-to-r from-[#F3F4F6] to-transparent dark:from-[#141414] dark:to-transparent pointer-events-none flex items-center justify-start z-20 opacity-0 transition-opacity"
           >
             <button
               id="scroll-projects-left"
-              class="w-7 h-7 rounded-full bg-white shadow-md border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-all active:scale-95 cursor-pointer"
+              class="w-7 h-7 rounded-full bg-white dark:bg-[#373737] shadow-md border border-[#eaecf0] dark:border-[#444444] flex items-center justify-center text-[#667085] dark:text-[#d1d5db] hover:text-[#111827] dark:hover:text-white pointer-events-auto transition-all active:scale-95 cursor-pointer"
             >
               <i class="ti ti-chevron-left text-[15px]"></i>
             </button>
@@ -198,11 +198,11 @@ const recentProjects = [
           <!-- Right Scroll Button -->
           <div
             id="projects-right-gradient"
-            class="absolute right-0 top-0 bottom-4 w-20 bg-gradient-to-l from-[#F3F4F6] via-[#F3F4F6]/90 to-transparent pointer-events-none flex items-center justify-end z-20 transition-opacity"
+            class="absolute right-0 top-0 h-[190px] w-16 bg-gradient-to-l from-[#F3F4F6] to-transparent dark:from-[#141414] dark:to-transparent pointer-events-none flex items-center justify-end z-20 transition-opacity"
           >
             <button
               id="scroll-projects-right"
-              class="w-7 h-7 rounded-full bg-white shadow-md border border-[#eaecf0] flex items-center justify-center text-[#667085] hover:text-[#111827] pointer-events-auto transition-all active:scale-95 cursor-pointer"
+              class="w-7 h-7 rounded-full bg-white dark:bg-[#373737] shadow-md border border-[#eaecf0] dark:border-[#444444] flex items-center justify-center text-[#667085] dark:text-[#d1d5db] hover:text-[#111827] dark:hover:text-white pointer-events-auto transition-all active:scale-95 cursor-pointer"
             >
               <i class="ti ti-chevron-right text-[15px]"></i>
             </button>
@@ -217,17 +217,17 @@ const recentProjects = [
               <!-- Card: Create New (Reference Style) -->
               <a
                 href="/canvas"
-                class="w-[250px] self-stretch flex flex-col items-center justify-center rounded-[24px] bg-white border border-[#eaecf0] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent transition-all group shrink-0 relative cursor-pointer"
+                class="w-[250px] self-stretch flex flex-col items-center justify-center rounded-[24px] bg-white dark:bg-[#272727] border border-[#eaecf0] dark:border-[#383838] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent dark:hover:border-[#444444] transition-all group shrink-0 relative cursor-pointer"
               >
                 <div class="flex flex-col items-center justify-center gap-4">
                   <i
-                    class="ti ti-plus text-[48px] text-[#4b4b4f] opacity-80 group-hover:scale-110 transition-transform"
+                    class="ti ti-plus text-[48px] text-[#4b4b4f] dark:text-[#9ca3af] opacity-80 group-hover:scale-110 transition-transform"
                   ></i>
                   <div
-                    class="px-3 py-1 rounded-full bg-[#f9fafb] border border-[#eaecf0] shadow-sm flex items-center gap-1.5 select-none"
+                    class="px-3 py-1 rounded-full bg-[#f9fafb] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] shadow-sm flex items-center gap-1.5 select-none"
                   >
                     <span
-                      class="text-[10px] font-bold text-[#6b6b6f] opacity-80"
+                      class="text-[10px] font-bold text-[#6b6b6f] dark:text-[#d1d5db] opacity-80"
                       >New Project</span
                     >
                   </div>
@@ -437,13 +437,13 @@ const recentProjects = [
           cardsContainer.innerHTML = data
             .map(
               (item) => `
-          <div class="sub-card flex items-center justify-between p-4 rounded-[16px] border border-[#eaecf0] bg-white hover:border-[#eaecf0] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all cursor-pointer group" data-skill="${item.title}" data-icon="${item.icon}" data-desc="${item.desc}">
+          <div class="sub-card flex items-center justify-between p-4 rounded-[16px] border border-[#eaecf0] dark:border-[#28282c] bg-white dark:bg-[#272727] hover:border-[#eaecf0] dark:hover:border-[#38383e] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] dark:hover:bg-[#202024] transition-all cursor-pointer group" data-skill="${item.title}" data-icon="${item.icon}" data-desc="${item.desc}">
             <div class="flex-1 min-w-0 pr-4">
               <div class="flex items-center gap-2 mb-1.5">
-                <h4 class="text-[14px] font-bold text-[#111827] truncate">${item.title}</h4>
-                <i class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#667085] transition-colors"></i>
+                <h4 class="text-[14px] font-bold text-[#111827] dark:text-white truncate">${item.title}</h4>
+                <i class="ti ti-chevron-right text-[14px] text-[#98a2b3] group-hover:text-[#667085] dark:group-hover:text-white transition-colors"></i>
               </div>
-              <p class="text-[12px] text-[#667085] line-clamp-2 leading-relaxed">${item.desc}</p>
+              <p class="text-[12px] text-[#667085] dark:text-[#a1a1aa] line-clamp-2 leading-relaxed">${item.desc}</p>
             </div>
             <div class="w-[72px] h-[72px] rounded-xl shrink-0 flex items-center justify-center ${item.color} text-white shadow-sm relative overflow-hidden group-hover:scale-[1.02] transition-transform">
                <i class="ti ${item.icon} text-[28px] text-white"></i>

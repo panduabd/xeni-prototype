@@ -7,15 +7,15 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const pricingColumnVariants = cva(
-  "relative flex flex-col gap-6 rounded-2xl p-6 lg:p-7 border border-gray-200/90 transition-all font-poppins shadow-none",
+  "relative flex flex-col gap-6 rounded-2xl p-6 lg:p-7 border border-gray-200/90 dark:border-[#28282c] transition-all font-poppins shadow-none",
   {
     variants: {
       variant: {
-        default: "bg-[#F8F9FB] border-gray-200/90",
-        agency: "bg-[#F8F9FB] border-gray-200/90",
-        glow: "bg-[#F8F9FB] border-gray-200/90",
+        default: "bg-[#F8F9FB] dark:bg-[#272727] border-gray-200/90 dark:border-[#28282c]",
+        agency: "bg-[#F8F9FB] dark:bg-[#272727] border-gray-200/90 dark:border-[#28282c]",
+        glow: "bg-[#F8F9FB] dark:bg-[#272727] border-gray-200/90 dark:border-[#28282c]",
         "glow-brand":
-          "bg-white border-orange-500/40 hover:border-orange-500/60",
+          "bg-white dark:bg-[#1c1c20] border-orange-500/40 dark:border-[#facc15]/50 hover:border-orange-500/60",
       },
     },
     defaultVariants: {
@@ -193,8 +193,8 @@ export function PricingColumn({
             href={cta.href}
             className={cn(
               "w-full h-10 rounded-xl font-poppins font-medium text-[13px] inline-flex items-center justify-center transition-all cursor-pointer select-none relative overflow-hidden shrink-0",
-              cta.variant === "outline" && "bg-white text-[#111827] border border-gray-300 hover:bg-gray-50 shadow-2xs hover:text-black",
-              cta.variant === "default" && "bg-[#111827] text-white hover:bg-black shadow-xs",
+              cta.variant === "outline" && "bg-white dark:bg-[#242428] text-[#111827] dark:text-white border border-gray-300 dark:border-[#38383e] hover:bg-gray-50 dark:hover:bg-[#2e2e34] shadow-2xs hover:text-black dark:hover:text-white",
+              cta.variant === "default" && "bg-[#111827] dark:bg-white text-white dark:text-[#111827] hover:bg-black dark:hover:bg-[#e4e4e7] shadow-xs",
             )}
           >
             <span className="relative z-10">{cta.label}</span>
