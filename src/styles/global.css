@@ -1870,31 +1870,60 @@ html.dark #dropdown-threedot {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
 }
 html.dark #btn-select-action {
-  background-color: #272727 !important;
+  color: #a1a1aa !important;
+  background-color: transparent !important;
+}
+html.dark #btn-select-action.active-tool,
+html.dark #btn-select-action[class*="bg-[#F3F4F6]"] {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-select-action:hover {
+  background-color: #454545 !important;
   color: #ffffff !important;
 }
 html.dark #btn-select-action svg {
-  color: #ffffff !important;
+  color: inherit !important;
 }
 html.dark #btn-hand-action {
   color: #a1a1aa !important;
+  background-color: transparent !important;
+}
+html.dark #btn-hand-action.active-tool,
+html.dark #btn-hand-action[class*="bg-[#F3F4F6]"] {
+  background-color: #373737 !important;
+  color: #ffffff !important;
 }
 html.dark #btn-hand-action:hover {
-  background-color: #272727 !important;
+  background-color: #454545 !important;
   color: #ffffff !important;
+}
+html.dark #btn-hand-action i {
+  color: inherit !important;
 }
 html.dark #btn-select-tool {
-  background-color: #272727 !important;
+  background-color: #373737 !important;
   color: #ffffff !important;
 }
-html.dark #btn-select-tool svg {
+html.dark #btn-select-tool:hover {
+  background-color: #454545 !important;
+  color: #ffffff !important;
+}
+html.dark #btn-select-tool svg,
+html.dark #btn-select-tool i,
+html.dark #active-tool-icon svg,
+html.dark #active-tool-icon i {
   color: #ffffff !important;
 }
 html.dark #btn-media-tool {
+  background-color: transparent !important;
+  color: #a1a1aa !important;
+}
+html.dark #btn-media-tool svg {
   color: #a1a1aa !important;
 }
 html.dark #btn-media-tool:hover {
-  background-color: #272727 !important;
+  background-color: #373737 !important;
   color: #ffffff !important;
 }
 html.dark #btn-media-tool:hover svg {
@@ -2134,10 +2163,16 @@ html.dark .ref-badge .remove-ref-badge:hover {
   color: #ffffff !important;
   background-color: #454545 !important;
 }
+html.dark #ai-input-border-glow,
 html.dark .draft-border-shine-overlay {
-  background:
-    linear-gradient(to right, #1c1c20, #1c1c20),
-    linear-gradient(135deg, #28282c 35%, #facc15 50%, #28282c 65%) !important;
+  border-radius: 17.5px !important;
+  background: linear-gradient(
+    135deg,
+    #383838 35%,
+    #eef007 50%,
+    #383838 65%
+  ) !important;
+  background-size: 200% 100% !important;
 }
 html.dark .skill-list-container,
 html.dark .business-dna-options-scrollbar,

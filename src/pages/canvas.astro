@@ -209,21 +209,26 @@ import LoadingState from "../components/ui/loading-state";
         background-color: #f3f4f6 !important;
       }
 
-      /* Dashboard-style Outline Wipe Light Animation around shape (matching draft-border-shine) */
+      /* Outline Wipe Light Animation around shape (matching rounded-2xl chatbox) */
+      #ai-input-border-glow,
       .draft-border-shine-overlay {
         position: absolute;
         inset: -1.5px;
-        border-radius: 24.5px;
+        border-radius: 17.5px !important;
         pointer-events: none;
-        background:
-          linear-gradient(to right, white, white),
-          linear-gradient(135deg, #eaecf0 35%, #111827 50%, #eaecf0 65%);
-        background-clip: padding-box, border-box;
-        background-origin: padding-box, border-box;
-        border: 1.5px solid transparent;
+        padding: 1.5px;
+        background: linear-gradient(135deg, #eaecf0 35%, #111827 50%, #eaecf0 65%);
         background-size: 200% 100%;
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask-composite: exclude;
         box-shadow: none;
-        z-index: 0;
+        z-index: 10;
         opacity: 0;
         will-change: background-position, opacity;
         transform: translateZ(0);
@@ -657,13 +662,13 @@ import LoadingState from "../components/ui/loading-state";
               >
                 <button
                   id="btn-select-action"
-                  class="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#F3F4F6] dark:bg-[#373737] text-[13px] font-medium text-[#111827] dark:text-[#f4f4f5] cursor-pointer transition-colors"
+                  class="active-tool w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#F3F4F6] dark:bg-[#373737] text-[13px] font-medium text-[#111827] dark:text-white cursor-pointer transition-colors"
                 >
                   <div class="flex items-center gap-2.5">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
-                      class="w-4 h-4 text-[#111827] dark:text-[#f4f4f5] shrink-0"
+                      class="w-4 h-4 text-[#111827] dark:text-white shrink-0"
                     >
                       <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="m9.803 4.63l6.033 2.36c3.48 1.362 5.22 2.043 5.163 3.123c-.058 1.08-1.874 1.576-5.506 2.566c-1.081.295-1.622.442-1.997.817s-.522.916-.817 1.997c-.99 3.632-1.486 5.448-2.566 5.506s-1.76-1.683-3.122-5.163L4.63 9.803C3.204 6.159 2.49 4.338 3.414 3.414c.924-.923 2.745-.21 6.389 1.216Z"/>
                     </svg>
@@ -686,7 +691,7 @@ import LoadingState from "../components/ui/loading-state";
 
             <button
               id="btn-select-tool"
-              class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#F3F4F6] dark:bg-[#373737] text-[#111827] dark:text-[#f4f4f5] font-medium text-[13px] hover:bg-[#E5E7EB] dark:hover:bg-[#323238] transition-colors cursor-pointer"
+              class="flex items-center justify-center w-9 h-9 rounded-lg bg-[#F3F4F6] dark:bg-[#373737] text-[#111827] dark:text-white font-medium text-[13px] hover:bg-[#E5E7EB] dark:hover:bg-[#454545] transition-colors cursor-pointer"
             >
               <span
                 id="active-tool-icon"
@@ -695,7 +700,7 @@ import LoadingState from "../components/ui/loading-state";
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  class="w-[15px] h-[15px] text-[#111827] dark:text-[#f4f4f5] shrink-0"
+                  class="w-[15px] h-[15px] text-[#111827] dark:text-white shrink-0"
                 >
                   <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="m9.803 4.63l6.033 2.36c3.48 1.362 5.22 2.043 5.163 3.123c-.058 1.08-1.874 1.576-5.506 2.566c-1.081.295-1.622.442-1.997.817s-.522.916-.817 1.997c-.99 3.632-1.486 5.448-2.566 5.506s-1.76-1.683-3.122-5.163L4.63 9.803C3.204 6.159 2.49 4.338 3.414 3.414c.924-.923 2.745-.21 6.389 1.216Z"/>
                 </svg>
@@ -713,10 +718,10 @@ import LoadingState from "../components/ui/loading-state";
             />
             <button
               id="btn-media-tool"
-              class="flex items-center justify-center w-9 h-9 rounded-lg text-[#667085] dark:text-[#a1a1aa] hover:text-[#111827] dark:hover:text-white hover:bg-[#F3F4F6] dark:hover:bg-[#454545] transition-colors cursor-pointer group"
+              class="flex items-center justify-center w-9 h-9 rounded-lg text-[#667085] dark:text-[#a1a1aa] hover:text-[#111827] dark:hover:text-white hover:bg-[#F3F4F6] dark:hover:bg-[#373737] transition-colors cursor-pointer group"
               data-tooltip="Upload Image"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[17px] h-[17px] text-[#667085] group-hover:text-[#111827] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[17px] h-[17px] text-[#667085] dark:text-[#a1a1aa] group-hover:text-[#111827] dark:group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 16L7.46967 11.5303C7.80923 11.1908 8.26978 11 8.75 11C9.23022 11 9.69077 11.1908 10.0303 11.5303L14 15.5M15.5 17L14 15.5M21 16L18.5303 13.5303C18.1908 13.1908 17.7302 13 17.25 13C16.7698 13 16.3092 13.1908 15.9697 13.5303L14 15.5"></path>
                 <path d="M12 2.5C7.77027 2.5 5.6554 2.5 4.25276 3.69797C4.05358 3.86808 3.86808 4.05358 3.69797 4.25276C2.5 5.6554 2.5 7.77027 2.5 12C2.5 16.2297 2.5 18.3446 3.69797 19.7472C3.86808 19.9464 4.05358 20.1319 4.25276 20.302C5.6554 21.5 7.77027 21.5 12 21.5C16.2297 21.5 18.3446 21.5 19.7472 20.302C19.9464 20.1319 20.1319 19.9464 20.302 19.7472C21.5 18.3446 21.5 16.2297 21.5 12"></path>
                 <path d="M15.5 5.5C16.0898 4.89316 17.6597 2.5 18.5 2.5C19.3403 2.5 20.9102 4.89316 21.5 5.5M18.5 3V9.5"></path>
@@ -1751,10 +1756,10 @@ import LoadingState from "../components/ui/loading-state";
             id="canvas-ai-input-card"
             class="relative flex flex-col p-2.5 rounded-2xl bg-white border border-black/[0.08] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06),0_2px_6px_-1px_rgba(0,0,0,0.03)] hover:border-black/15 focus-within:border-black/20 focus-within:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03)] transition-all duration-200"
           >
-            <!-- Flowing Border Shine Overlay (matching Dashboard draft-border-shine) -->
+            <!-- Flowing Border Shine Overlay (matching chatbox rounded-2xl) -->
             <div
               id="ai-input-border-glow"
-              class="pointer-events-none absolute -inset-[1.5px] rounded-[16.5px] draft-border-shine-overlay"
+              class="pointer-events-none absolute -inset-[1.5px] rounded-[17.5px] draft-border-shine-overlay"
             >
             </div>
 
@@ -4306,22 +4311,25 @@ import LoadingState from "../components/ui/loading-state";
           if (tool === "hand") {
             if (btnHandAction) {
               btnHandAction.classList.add(
+                "active-tool",
                 "bg-[#F3F4F6]",
                 "text-[#111827]",
+                "dark:text-white",
                 "font-medium",
               );
-              btnHandAction.classList.remove("text-[#667085]", "font-medium");
+              btnHandAction.classList.remove("text-[#667085]", "dark:text-[#a1a1aa]");
             }
             if (btnSelectAction) {
               btnSelectAction.classList.remove(
+                "active-tool",
                 "bg-[#F3F4F6]",
                 "text-[#111827]",
-                "font-medium",
+                "dark:text-white",
               );
-              btnSelectAction.classList.add("text-[#667085]", "font-medium");
+              btnSelectAction.classList.add("text-[#667085]", "dark:text-[#a1a1aa]");
             }
             if (activeToolIcon) {
-              activeToolIcon.innerHTML = `<i class="ti ti-hand-stop text-[15px] text-[#111827]"></i>`;
+              activeToolIcon.innerHTML = `<i class="ti ti-hand-stop text-[15px] text-[#111827] dark:text-white"></i>`;
             }
             if (canvasContainer) {
               canvasContainer.style.cursor = "grab";
@@ -4329,23 +4337,26 @@ import LoadingState from "../components/ui/loading-state";
           } else {
             if (btnSelectAction) {
               btnSelectAction.classList.add(
+                "active-tool",
                 "bg-[#F3F4F6]",
                 "text-[#111827]",
+                "dark:text-white",
                 "font-medium",
               );
-              btnSelectAction.classList.remove("text-[#667085]", "font-medium");
+              btnSelectAction.classList.remove("text-[#667085]", "dark:text-[#a1a1aa]");
             }
             if (btnHandAction) {
               btnHandAction.classList.remove(
+                "active-tool",
                 "bg-[#F3F4F6]",
                 "text-[#111827]",
-                "font-medium",
+                "dark:text-white",
               );
-              btnHandAction.classList.add("text-[#667085]", "font-medium");
+              btnHandAction.classList.add("text-[#667085]", "dark:text-[#a1a1aa]");
             }
             if (activeToolIcon) {
               activeToolIcon.innerHTML = `
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[15px] h-[15px] text-[#111827] shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[15px] h-[15px] text-[#111827] dark:text-white shrink-0">
                 <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="m9.803 4.63l6.033 2.36c3.48 1.362 5.22 2.043 5.163 3.123c-.058 1.08-1.874 1.576-5.506 2.566c-1.081.295-1.622.442-1.997.817s-.522.916-.817 1.997c-.99 3.632-1.486 5.448-2.566 5.506s-1.76-1.683-3.122-5.163L4.63 9.803C3.204 6.159 2.49 4.338 3.414 3.414c.924-.923 2.745-.21 6.389 1.216Z"/>
               </svg>`;
             }
