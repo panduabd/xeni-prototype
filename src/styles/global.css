@@ -500,7 +500,7 @@ html.dark .sidebar-plan-collapsed button:hover {
   color: #ffffff !important;
 }
 
-/* Tone down white glare sweep in Dark Mode */
+/* Glare sweep styling for sidebar plan card */
 html.dark .animate-shine::after {
   background: linear-gradient(
     to right,
@@ -508,6 +508,24 @@ html.dark .animate-shine::after {
     rgba(255, 255, 255, 0.08),
     transparent
   ) !important;
+}
+
+html.dark #sidebar-plan-card.plan-pro-active.animate-shine::after {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(245, 158, 11, 0.15),
+    transparent
+  ) !important;
+}
+
+#sidebar-plan-card.plan-pro-active.animate-shine::after {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(245, 158, 11, 0.25),
+    transparent
+  );
 }
 
 /* Profile Trigger & Dropdown */
@@ -1137,6 +1155,12 @@ html.dark [role="dialog"] {
   background-color: #272727 !important;
   border-color: #383838 !important;
   color: #f4f4f5 !important;
+}
+
+/* Product References Modal Unified Background */
+html.dark #references-modal #ref-main-content,
+#references-modal #ref-main-content {
+  background-color: transparent !important;
 }
 
 /* Modal Headers & Text */

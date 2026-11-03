@@ -277,7 +277,7 @@ const activityLog = [
                 data-status={msg.status}
                 data-platform={msg.platform}
               >
-                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827] dark:bg-[#facc15]"></div>}
+                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827] dark:bg-white"></div>}
                 <div class="relative shrink-0">
                   <img src={msg.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737]" />
                   <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white dark:bg-[#272727] flex items-center justify-center shadow-sm border border-[#f3f4f6] dark:border-[#444444]">
@@ -392,7 +392,7 @@ const activityLog = [
           <div class="flex-1 overflow-y-auto custom-scrollbar" id="comment-list-container">
             {mockComments.map((item, index) => (
               <div class={`comment-item p-4 border-b border-[#eaecf0] dark:border-[#383838] hover:bg-white dark:hover:bg-[#454545] cursor-pointer transition-colors flex items-start gap-3 relative ${index === 0 ? 'bg-white dark:bg-[#373737]' : ''}`} data-id={item.id} data-business={item.businessId} data-status={item.status}>
-                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827] dark:bg-[#facc15]"></div>}
+                {index === 0 && <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827] dark:bg-white"></div>}
                 <div class="relative shrink-0">
                   <img src={item.avatar} class="w-10 h-10 rounded-full border border-[#eaecf0] dark:border-[#444444] bg-white dark:bg-[#373737]" />
                 </div>
@@ -821,15 +821,15 @@ const activityLog = [
         item.addEventListener('click', () => {
           // Remove highlight from all
           messageItems.forEach(i => {
-            i.classList.remove('bg-white');
+            i.classList.remove('bg-white', 'dark:bg-[#373737]');
             const border = i.querySelector('.absolute.left-0');
             if (border) border.remove();
           });
           
           // Apply highlights to clicked
-          item.classList.add('bg-white');
+          item.classList.add('bg-white', 'dark:bg-[#373737]');
           const borderDiv = document.createElement('div');
-          borderDiv.className = 'absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827]';
+          borderDiv.className = 'absolute left-0 top-0 bottom-0 w-[3px] bg-[#111827] dark:bg-white';
           item.appendChild(borderDiv);
 
           // Mock content switch in right panel (chatbox)

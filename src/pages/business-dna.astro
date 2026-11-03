@@ -1184,6 +1184,13 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
       loadDataFromStorage();
       bindEventListeners();
       renderUI();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const tabParam = urlParams.get("tab");
+      if (tabParam) {
+        const targetBtn = document.querySelector(`.dna-tab-btn[data-tab="${tabParam}"]`);
+        if (targetBtn) targetBtn.click();
+      }
     }
 
     // ─── LocalStorage Persistence ───
@@ -2369,11 +2376,11 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
         container.innerHTML = `
           <div class="py-16 text-center flex flex-col items-center justify-center">
             <svg class="w-8 h-8 text-[#98a2b3] mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
-            <p class="text-[13px] font-bold text-[#111827]">No connected accounts yet</p>
+            <p class="text-[13px] font-bold text-[#111827] dark:text-white">No connected accounts yet</p>
             <p class="text-[11.5px] text-[#98a2b3] mt-0.5 max-w-sm leading-relaxed">Connect Instagram, TikTok, or social channels to sync content.</p>
             <a
               href="/integrations"
-              class="mt-4 inline-flex items-center justify-center h-8.5 px-4 rounded-xl bg-[#111827] hover:bg-black text-white text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
+              class="mt-4 inline-flex items-center justify-center h-8.5 px-4 rounded-xl bg-[#111827] hover:bg-black text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-[#111827] text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
             >
               Manage Integrations
             </a>
@@ -2385,19 +2392,19 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
       container.innerHTML = `
         <div class="space-y-2.5">
           ${accounts.map((acc) => `
-            <div class="p-3.5 rounded-2xl border border-[#eaecf0] bg-white flex items-center justify-between gap-3 shadow-xs">
+            <div class="p-3.5 rounded-2xl border border-[#eaecf0] dark:border-[#383838] bg-white dark:bg-[#272727] flex items-center justify-between gap-3 shadow-xs">
               <div class="flex items-center gap-3 min-w-0">
-                <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-[#F9FAFB] border border-[#eaecf0] shadow-2xs text-[#111827]">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-[#F9FAFB] dark:bg-[#373737] border border-[#eaecf0] dark:border-[#444444] shadow-2xs text-[#111827] dark:text-white">
                   <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </div>
                 <div class="min-w-0 flex-1">
-                  <p class="text-[12.5px] font-bold text-[#111827] truncate">${escapeHtml(acc.handle)}</p>
-                  <p class="text-[11px] text-[#667085]">${escapeHtml(acc.platform)}</p>
+                  <p class="text-[12.5px] font-bold text-[#111827] dark:text-white truncate">${escapeHtml(acc.handle)}</p>
+                  <p class="text-[11px] text-[#667085] dark:text-[#9ca3af]">${escapeHtml(acc.platform)}</p>
                 </div>
               </div>
 
               <div class="flex items-center gap-3 shrink-0">
-                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                   Active
                 </span>
               </div>
@@ -2406,7 +2413,7 @@ import BusinessDnaBucket from "../components/business-dna/BusinessDnaBucket.astr
           <div class="pt-2 flex justify-start">
             <a
               href="/integrations"
-              class="inline-flex items-center justify-center h-8.5 px-4 rounded-xl bg-[#111827] hover:bg-black text-white text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
+              class="inline-flex items-center justify-center h-8.5 px-4 rounded-xl bg-[#111827] hover:bg-black text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-[#111827] text-[12px] font-medium shadow-xs transition-all cursor-pointer active:scale-[0.98]"
             >
               Manage Integrations
             </a>

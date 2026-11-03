@@ -300,11 +300,20 @@ const pageIcon = currentPage.icon;
 
       @keyframes shine-sweep {
         0% {
-          transform: translateX(-200%) skewX(-15deg);
+          transform: translateX(-200%) skewX(-20deg);
+          opacity: 0;
         }
-        25%,
+        2% {
+          opacity: 1;
+        }
+        28% {
+          transform: translateX(550%) skewX(-20deg);
+          opacity: 1;
+        }
+        29%,
         100% {
-          transform: translateX(300%) skewX(-15deg);
+          transform: translateX(550%) skewX(-20deg);
+          opacity: 0;
         }
       }
       .animate-shine {
@@ -324,8 +333,9 @@ const pageIcon = currentPage.icon;
           rgba(255, 255, 255, 0.6),
           transparent
         );
-        transform: skewX(-15deg);
-        animation: shine-sweep 4s infinite;
+        transform: translateX(-200%) skewX(-20deg);
+        opacity: 0;
+        animation: shine-sweep 4.5s ease-in-out infinite;
         pointer-events: none;
       }
 
@@ -803,54 +813,54 @@ const pageIcon = currentPage.icon;
               <!-- Action Items -->
               <button
                 id="btn-nav-account"
-                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] dark:text-[#e4e4e7] hover:bg-[#f9fafb] dark:hover:bg-[#373737] rounded-lg transition-colors cursor-pointer text-left"
               >
-                <i class="ti ti-user-circle text-[15px] text-[#98a2b3]"></i>
+                <i class="ti ti-user-circle text-[15px] text-[#98a2b3] dark:text-[#a1a1aa]"></i>
                 Account
               </button>
               <button
-                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] dark:text-[#e4e4e7] hover:bg-[#f9fafb] dark:hover:bg-[#373737] rounded-lg transition-colors cursor-pointer text-left"
                 onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'affiliate' } }))"
               >
-                <i class="ti ti-users text-[15px] text-[#98a2b3]"></i>
+                <i class="ti ti-users text-[15px] text-[#98a2b3] dark:text-[#a1a1aa]"></i>
                 Affiliate
               </button>
 
               <div class="relative group/lang">
                 <button
-                  class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer"
+                  class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] dark:text-[#e4e4e7] hover:bg-[#f9fafb] dark:hover:bg-[#373737] rounded-lg transition-colors cursor-pointer"
                 >
                   <div class="flex items-center gap-2.5">
-                    <i class="ti ti-world text-[15px] text-[#98a2b3]"></i>
+                    <i class="ti ti-world text-[15px] text-[#98a2b3] dark:text-[#a1a1aa]"></i>
                     Language
                   </div>
-                  <i class="ti ti-chevron-right text-[12px] text-[#98a2b3]"></i>
+                  <i class="ti ti-chevron-right text-[12px] text-[#98a2b3] dark:text-[#a1a1aa]"></i>
                 </button>
                 <div
-                  class="absolute left-full top-0 ml-1 w-36 bg-white border border-[#eaecf0] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-1 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all z-50 flex flex-col gap-0.5"
+                  class="absolute left-full top-0 ml-1 w-36 bg-white dark:bg-[#272727] border border-[#eaecf0] dark:border-[#383838] rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-1 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all z-50 flex flex-col gap-0.5"
                 >
                   <button
-                    class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#111827] bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
+                    class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#111827] dark:text-white bg-[#F3F4F6] dark:bg-[#373737] rounded-lg transition-colors cursor-pointer"
                   >
                     English
                     <i class="ti ti-check text-[14px] text-[#2563EB]"></i>
                   </button>
                   <button
-                    class="w-full flex items-center px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#F3F4F6] rounded-lg transition-colors cursor-pointer"
+                    class="w-full flex items-center px-3 py-2 text-[13px] font-medium text-[#344054] dark:text-[#e4e4e7] hover:bg-[#F3F4F6] dark:hover:bg-[#373737] rounded-lg transition-colors cursor-pointer"
                   >
                     Indonesia
                   </button>
                 </div>
               </div>
 
-              <div class="h-[1px] w-full bg-[#eaecf0] my-0.5"></div>
+              <div class="h-[1px] w-full bg-[#eaecf0] dark:bg-[#383838] my-0.5"></div>
 
               <button
-                class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+                class="w-full flex items-center justify-between px-3 py-2 text-[13px] font-medium text-[#344054] dark:text-[#e4e4e7] hover:bg-[#f9fafb] dark:hover:bg-[#373737] rounded-lg transition-colors cursor-pointer text-left"
                 onclick="window.dispatchEvent(new CustomEvent('open-manage-account', { detail: { tab: 'feedback' } }))"
               >
                 <div class="flex items-center gap-2.5">
-                  <i class="ti ti-message-dots text-[15px] text-[#98a2b3]"></i>
+                  <i class="ti ti-message-dots text-[15px] text-[#98a2b3] dark:text-[#a1a1aa]"></i>
                   Feedback
                 </div>
                 <span class="flex items-center justify-center">
@@ -858,7 +868,8 @@ const pageIcon = currentPage.icon;
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
                     height="12"
-                    fill="#111827"
+                    fill="currentColor"
+                    class="text-[#111827] dark:text-white"
                     viewBox="0 0 256 256"
                     ><path
                       d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"
@@ -868,16 +879,16 @@ const pageIcon = currentPage.icon;
               </button>
               <a
                 href="/help-center"
-                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] rounded-lg transition-colors cursor-pointer text-left"
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#344054] dark:text-[#e4e4e7] hover:bg-[#f9fafb] dark:hover:bg-[#373737] rounded-lg transition-colors cursor-pointer text-left"
               >
-                <i class="ti ti-help-circle text-[15px] text-[#98a2b3]"></i>
+                <i class="ti ti-help-circle text-[15px] text-[#98a2b3] dark:text-[#a1a1aa]"></i>
                 Get Help
               </a>
 
-              <div class="h-[1px] w-full bg-[#eaecf0] my-0.5"></div>
+              <div class="h-[1px] w-full bg-[#eaecf0] dark:bg-[#383838] my-0.5"></div>
               <button
                 id="btn-logout"
-                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#d92d20] hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                class="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium text-[#d92d20] hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg transition-colors cursor-pointer"
               >
                 <i class="ti ti-logout text-[15px]"></i>
                 Log Out

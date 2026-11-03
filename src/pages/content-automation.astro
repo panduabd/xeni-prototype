@@ -804,11 +804,11 @@ const dnaList = [
         <div class="flex items-center gap-2">
           <!-- View Toggle: Monthly / Weekly / Daily -->
           <div
-            class="flex items-center p-1 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-[#f4f4f5] dark:bg-[#373737] h-9"
+            class="flex items-center p-1 rounded-xl border border-[#eaecf0] dark:border-[#383838] bg-[#f4f4f5] dark:bg-[#202020] h-9"
           >
             <button
               id="view-scheduled-monthly"
-              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white shadow-xs transition-all cursor-pointer"
+              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer"
               data-view="monthly"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 text-current shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -821,7 +821,7 @@ const dnaList = [
             </button>
             <button
               id="view-scheduled-weekly"
-              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer"
+              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent"
               data-view="weekly"
             >
               <i class="ti ti-calendar-week text-[13px]"></i>
@@ -829,7 +829,7 @@ const dnaList = [
             </button>
             <button
               id="view-scheduled-list"
-              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] hover:text-[#18181b] dark:hover:text-white transition-all cursor-pointer"
+              class="scheduled-view-btn px-3 h-7 rounded-lg flex items-center justify-center gap-1.5 text-[12px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent"
               data-view="daily"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 text-current shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1177,22 +1177,22 @@ const dnaList = [
         <div id="step-2" class="step-panel hidden space-y-5">
           <!-- Schedule Mode Toggle -->
           <div class="flex items-center justify-between">
-            <label class="text-[13px] font-medium text-[#18181b]"
+            <label class="text-[13px] font-medium text-[#18181b] dark:text-white"
               >Select Dates</label
             >
             <div
-              class="flex items-center p-1 bg-[#f4f4f5] rounded-xl border border-[#eaecf0]"
+              class="flex items-center p-1 bg-[#f4f4f5] dark:bg-[#202020] rounded-xl border border-[#eaecf0] dark:border-[#383838]"
             >
               <button
                 id="btn-mode-monthly"
-                class="schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white text-[#18181b] shadow-xs transition-all cursor-pointer"
+                class="schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer"
                 data-mode="monthly"
               >
                 Monthly
               </button>
               <button
                 id="btn-mode-weekly"
-                class="schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] hover:text-[#18181b] hover:bg-white/60 transition-all cursor-pointer"
+                class="schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent"
                 data-mode="weekly"
               >
                 Weekly
@@ -7878,14 +7878,14 @@ const dnaList = [
       if (els.btnModeMonthly && els.btnModeWeekly) {
         if (isMonthly) {
           els.btnModeMonthly.className =
-            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white text-[#18181b] shadow-xs transition-all cursor-pointer";
+            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer";
           els.btnModeWeekly.className =
-            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] hover:text-[#18181b] hover:bg-white/60 transition-all cursor-pointer";
+            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent";
         } else {
           els.btnModeWeekly.className =
-            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white text-[#18181b] shadow-xs transition-all cursor-pointer";
+            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer";
           els.btnModeMonthly.className =
-            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] hover:text-[#18181b] hover:bg-white/60 transition-all cursor-pointer";
+            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent";
         }
       }
 
@@ -9790,23 +9790,51 @@ const dnaList = [
             (view === "daily" && scheduledViewMode === "list") ||
             (view === "list" && scheduledViewMode === "daily");
           if (isActive) {
-            btn.classList.add("bg-white", "text-[#18181b]", "shadow-xs");
+            btn.classList.add(
+              "bg-white",
+              "dark:bg-[#373737]",
+              "text-[#18181b]",
+              "dark:text-white",
+              "border",
+              "border-transparent",
+              "dark:border-[#4a4a4a]",
+              "shadow-xs"
+            );
             btn.classList.remove(
               "text-[#71717a]",
+              "dark:text-[#9ca3af]",
+              "hover:text-[#18181b]",
+              "dark:hover:text-white",
+              "hover:bg-white/60",
+              "dark:hover:bg-[#282828]",
               "bg-[#F3F4F6]",
               "text-[#111827]",
               "text-[#667085]",
-              "hover:bg-[#F9FAFB]",
+              "hover:bg-[#F9FAFB]"
             );
           } else {
             btn.classList.remove(
               "bg-white",
+              "dark:bg-[#373737]",
               "text-[#18181b]",
+              "dark:text-white",
+              "border",
+              "border-transparent",
+              "dark:border-[#4a4a4a]",
               "shadow-xs",
               "bg-[#F3F4F6]",
-              "text-[#111827]",
+              "text-[#111827]"
             );
-            btn.classList.add("text-[#71717a]", "hover:text-[#18181b]");
+            btn.classList.add(
+              "text-[#71717a]",
+              "dark:text-[#9ca3af]",
+              "hover:text-[#18181b]",
+              "dark:hover:text-white",
+              "hover:bg-white/60",
+              "dark:hover:bg-[#282828]",
+              "border",
+              "border-transparent"
+            );
           }
         });
       }
