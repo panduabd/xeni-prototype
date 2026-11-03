@@ -54,15 +54,15 @@ const {
   }
   @keyframes border-glow-flow {
     0% {
-      background-position: 0 0, 150% center;
+      background-position: 0 0, 200% center;
     }
     100% {
-      background-position: 0 0, -150% center;
+      background-position: 0 0, -200% center;
     }
   }
   .draft-border-shine {
     position: relative;
-    background: linear-gradient(to right, white, white), linear-gradient(135deg, #eaecf0 35%, #F59E0B 50%, #eaecf0 65%);
+    background-image: linear-gradient(to right, white, white), linear-gradient(135deg, #eaecf0 35%, #F59E0B 50%, #eaecf0 65%);
     background-clip: padding-box, border-box;
     background-origin: padding-box, border-box;
     border: 1.5px solid transparent;
@@ -70,7 +70,7 @@ const {
     animation: border-glow-flow 4s linear infinite;
   }
   :global(html.dark) .draft-border-shine {
-    background: linear-gradient(to right, #272727, #272727), linear-gradient(135deg, #383838 35%, #F59E0B 50%, #383838 65%);
+    background-image: linear-gradient(to right, #272727, #272727), linear-gradient(135deg, #383838 35%, #F59E0B 50%, #383838 65%);
     background-clip: padding-box, border-box;
     background-origin: padding-box, border-box;
     border: 1.5px solid transparent;

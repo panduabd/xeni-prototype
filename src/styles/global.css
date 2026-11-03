@@ -641,15 +641,15 @@ html.dark div.text-\[\#667085\] {
 /* Studio Hero Section */
 @keyframes border-glow-flow {
   0% {
-    background-position: 0 0, 150% center;
+    background-position: 0 0, 200% center;
   }
   100% {
-    background-position: 0 0, -150% center;
+    background-position: 0 0, -200% center;
   }
 }
 
 html.dark .draft-border-shine {
-  background: linear-gradient(to right, #272727, #272727), linear-gradient(135deg, #28282c 35%, #F59E0B 50%, #28282c 65%) !important;
+  background-image: linear-gradient(to right, #272727, #272727), linear-gradient(135deg, #28282c 35%, #F59E0B 50%, #28282c 65%) !important;
   background-clip: padding-box, border-box !important;
   background-origin: padding-box, border-box !important;
   border: 1.5px solid transparent !important;
