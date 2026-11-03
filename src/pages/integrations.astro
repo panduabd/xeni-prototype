@@ -230,8 +230,8 @@ const totalError = accounts.filter((a) => a.status === "error").length;
         </div>
 
         <!-- Status Tabs -->
-        <div class="flex items-center gap-1 p-1 h-10 rounded-xl border border-[#e4e4e7] dark:border-[#383838] bg-[#fafafa] dark:bg-[#373737] shrink-0 shadow-xs">
-          <button class="status-tab active px-3.5 h-full rounded-lg text-[13px] font-medium transition-all cursor-pointer bg-white dark:bg-[#373737] text-[#18181b] dark:text-white shadow-xs" data-status="all">All</button>
+        <div class="flex items-center gap-1 p-1 h-10 rounded-xl border border-[#e4e4e7] dark:border-[#383838] bg-[#fafafa] dark:bg-[#202020] shrink-0 shadow-xs">
+          <button class="status-tab active px-3.5 h-full rounded-lg text-[13px] font-medium transition-all cursor-pointer bg-white dark:bg-[#373737] text-[#18181b] dark:text-white shadow-xs dark:border dark:border-[#4a4a4a]" data-status="all">All</button>
           <button class="status-tab px-3.5 h-full rounded-lg text-[13px] font-medium transition-all cursor-pointer text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white" data-status="connected">Connected</button>
           <button class="status-tab px-3.5 h-full rounded-lg text-[13px] font-medium transition-all cursor-pointer text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white" data-status="error">Error</button>
         </div>
@@ -546,11 +546,11 @@ const totalError = accounts.filter((a) => a.status === "error").length;
     statusTabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         statusTabs.forEach((t) => {
-          t.classList.remove('active', 'bg-white', 'text-[#18181b]', 'shadow-xs');
-          t.classList.add('text-[#71717a]');
+          t.classList.remove('active', 'bg-white', 'dark:bg-[#373737]', 'text-[#18181b]', 'dark:text-white', 'shadow-xs', 'dark:border', 'dark:border-[#4a4a4a]');
+          t.classList.add('text-[#71717a]', 'dark:text-[#9ca3af]');
         });
-        tab.classList.add('active', 'bg-white', 'text-[#18181b]', 'shadow-xs');
-        tab.classList.remove('text-[#71717a]');
+        tab.classList.add('active', 'bg-white', 'dark:bg-[#373737]', 'text-[#18181b]', 'dark:text-white', 'shadow-xs', 'dark:border', 'dark:border-[#4a4a4a]');
+        tab.classList.remove('text-[#71717a]', 'dark:text-[#9ca3af]');
         activeStatus = tab.dataset.status || 'all';
         applyFilters();
       });
@@ -3134,3 +3134,21 @@ const totalError = accounts.filter((a) => a.status === "error").length;
     </div>
   </div>
 </AppLayout>
+
+<style is:global>
+  html.dark .status-tab.active {
+    background-color: #373737 !important;
+    color: #ffffff !important;
+    border: 1px solid #4a4a4a !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25) !important;
+  }
+  html.dark .status-tab:not(.active) {
+    background-color: transparent !important;
+    color: #9ca3af !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+  html.dark .status-tab:not(.active):hover {
+    color: #ffffff !important;
+  }
+</style>
