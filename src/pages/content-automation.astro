@@ -1008,7 +1008,7 @@ const dnaList = [
             </div>
             <span class="text-[12px] font-medium text-[#18181b]">General</span>
           </div>
-          <div class="w-6 h-px bg-[#eaecf0]"></div>
+          <div class="step-line w-6 h-px bg-[#eaecf0] dark:bg-[#52525b]"></div>
           <div class="step-dot flex items-center gap-2" data-step="2">
             <div
               class="w-6 h-6 rounded-full bg-[#f4f4f5] text-[#71717a] border border-[#e4e4e7] text-[11px] font-medium flex items-center justify-center"
@@ -1017,7 +1017,7 @@ const dnaList = [
             </div>
             <span class="text-[12px] font-medium text-[#71717a]">Schedule</span>
           </div>
-          <div class="w-6 h-px bg-[#eaecf0]"></div>
+          <div class="step-line w-6 h-px bg-[#eaecf0] dark:bg-[#52525b]"></div>
           <div class="step-dot flex items-center gap-2" data-step="3">
             <div
               class="w-6 h-6 rounded-full bg-[#f4f4f5] text-[#71717a] border border-[#e4e4e7] text-[11px] font-medium flex items-center justify-center"
@@ -1181,12 +1181,13 @@ const dnaList = [
               >Select Dates</label
             >
             <div
-              class="flex items-center p-1 bg-[#f4f4f5] dark:bg-[#202020] rounded-xl border border-[#eaecf0] dark:border-[#383838]"
+              class="schedule-mode-toggle-wrap flex items-center p-1 bg-[#f4f4f5] dark:bg-[#202020] rounded-xl border border-[#eaecf0] dark:border-[#383838]"
             >
               <button
                 id="btn-mode-monthly"
-                class="schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer"
+                class="schedule-mode-btn active px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer"
                 data-mode="monthly"
+                data-active="true"
               >
                 Monthly
               </button>
@@ -1194,6 +1195,7 @@ const dnaList = [
                 id="btn-mode-weekly"
                 class="schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent"
                 data-mode="weekly"
+                data-active="false"
               >
                 Weekly
               </button>
@@ -7827,6 +7829,19 @@ const dnaList = [
         }
       });
 
+      const stepLines = document.querySelectorAll("#modal-add-automation .step-line");
+      stepLines.forEach((line, idx) => {
+        if (step > idx + 1) {
+          line.classList.add("active");
+          line.classList.remove("bg-[#eaecf0]");
+          line.classList.add("bg-[#18181b]");
+        } else {
+          line.classList.remove("active");
+          line.classList.add("bg-[#eaecf0]");
+          line.classList.remove("bg-[#18181b]");
+        }
+      });
+
       els.btnBack.classList.toggle("hidden", step === 1);
       els.btnNext.classList.toggle("hidden", step === 3);
       els.btnStart.classList.toggle("hidden", step !== 3);
@@ -7878,14 +7893,20 @@ const dnaList = [
       if (els.btnModeMonthly && els.btnModeWeekly) {
         if (isMonthly) {
           els.btnModeMonthly.className =
-            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer";
+            "schedule-mode-btn active px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer";
+          els.btnModeMonthly.setAttribute("data-active", "true");
+
           els.btnModeWeekly.className =
             "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent";
+          els.btnModeWeekly.setAttribute("data-active", "false");
         } else {
           els.btnModeWeekly.className =
-            "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer";
+            "schedule-mode-btn active px-3 h-7 rounded-lg text-[11px] font-medium bg-white dark:bg-[#373737] text-[#18181b] dark:text-white border border-transparent dark:border-[#4a4a4a] shadow-xs transition-all cursor-pointer";
+          els.btnModeWeekly.setAttribute("data-active", "true");
+
           els.btnModeMonthly.className =
             "schedule-mode-btn px-3 h-7 rounded-lg text-[11px] font-medium text-[#71717a] dark:text-[#9ca3af] hover:text-[#18181b] dark:hover:text-white hover:bg-white/60 dark:hover:bg-[#282828] transition-all cursor-pointer border border-transparent";
+          els.btnModeMonthly.setAttribute("data-active", "false");
         }
       }
 
