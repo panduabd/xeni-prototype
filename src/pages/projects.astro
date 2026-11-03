@@ -140,13 +140,14 @@ const projectsData = [
     <div class="w-full flex-1 pb-16">
       <div
         id="projects-grid"
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+        class="grid gap-4"
+        style="grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));"
       >
         <!-- New Project Card -->
         <a
           href="/canvas"
           id="card-new-project"
-          class="group relative flex flex-col items-center justify-center rounded-[24px] bg-white dark:bg-[#272727] border border-[#eaecf0] dark:border-[#383838] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent dark:hover:border-[#38383e] transition-all cursor-pointer w-full h-full"
+          class="group relative flex flex-col items-center justify-center rounded-[24px] bg-white dark:bg-[#272727] border border-[#eaecf0] dark:border-[#383838] hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:border-transparent dark:hover:border-[#38383e] transition-all cursor-pointer w-full h-full min-h-[180px]"
         >
           <div class="flex flex-col items-center justify-center gap-4">
             <i
